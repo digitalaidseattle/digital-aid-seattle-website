@@ -3,6 +3,8 @@ import 'styles/global.css'
 import { IBM_Plex_Mono, Inter, PT_Serif } from '@next/font/google'
 import { AppProps } from 'next/app'
 
+import Layout from '../components/Layout'
+
 const mono = IBM_Plex_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
@@ -25,17 +27,9 @@ const serif = PT_Serif({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <style jsx global>
-        {`
-          :root {
-            --font-mono: ${mono.style.fontFamily};
-            --font-sans: ${sans.style.fontFamily};
-            --font-serif: ${serif.style.fontFamily};
-          }
-        `}
-      </style>
-
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
