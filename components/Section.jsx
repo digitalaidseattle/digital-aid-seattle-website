@@ -54,17 +54,19 @@ export default function Section({
             'pr-6 pl-6  md:w-2/3 lg:w-1/2'
           )}
         >
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">
+          <p className="font-body text-base font-semibold leading-7 text-indigo-600">
             {overline}
-          </h2>
-          <p className="mt-2 text-4xl font-bold tracking-tight text-black">
-            {heading}
           </p>
-          <p className="mt-6 text-base leading-7 text-gray-900">{body}</p>
+          <h2 className="mt-2 font-heading text-5xl font-bold tracking-wide text-black">
+            {heading}
+          </h2>
+          <p className="mt-6 font-body text-base leading-7 text-gray-900">
+            {body}
+          </p>
           <div className="mt-8">
             <a
               href={linkUrl}
-              className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {linkText}
             </a>
