@@ -18,7 +18,7 @@ const features = [
 
 export default function Header() {
   return (
-    <Popover className="relative bg-slate-200 text-black shadow">
+    <Popover className="relative bg-gray-100 text-black shadow">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-center justify-between py-2 md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -29,7 +29,7 @@ export default function Header() {
           </div>
 
           <div className="-my-2 -mr-2 md:hidden">
-            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-slate-200 p-2 text-gray-600 hover:bg-slate-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <span className="sr-only">Open menu</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
@@ -61,14 +61,14 @@ export default function Header() {
           focus
           className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden"
         >
-          <div className="divide-y-2 divide-gray-50 rounded-lg bg-slate-200 shadow-lg ring-1 ring-black ring-opacity-5">
+          <div className="divide-y-2 divide-gray-50 rounded-lg bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
                 <div>
                   <img className="h-12 w-auto" src="/OS_logo.svg" alt="" />
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-slate-200 p-2 text-gray-600 hover:bg-slate-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -80,7 +80,7 @@ export default function Header() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-m-3 flex items-center rounded-md p-3 hover:bg-slate-100"
+                      className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-100"
                     >
                       <span className="ml-3 text-base font-medium text-gray-900">
                         {item.name}

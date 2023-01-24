@@ -11,7 +11,7 @@ export default function Section({
   flipLayout = false,
 }) {
   return (
-    <div className="relative bg-slate-200">
+    <div className="relative bg-gray-100">
       <div
         className={clsx(
           flipLayout ? 'md:right-0' : 'md:left-0',
