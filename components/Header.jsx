@@ -2,6 +2,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Fragment } from 'react'
+import OSLogoIcon from './OSLogoIcon'
 
 const features = [
   {
@@ -24,8 +25,8 @@ export default function Header() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/" className="">
               <span className="sr-only">Open Seattle</span>
-              <img
-                className="h-12 w-auto rounded-sm p-1 dark:bg-gray-200 sm:h-14 md:h-16"
+              <OSLogoIcon
+                className="h-12 w-auto rounded-sm fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
                 src="/OS_logo.svg"
                 alt=""
               />
@@ -69,8 +70,8 @@ export default function Header() {
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-12 w-auto rounded-sm p-1 dark:bg-gray-200 sm:h-14 md:h-16"
+                  <OSLogoIcon
+                    className="h-12 w-auto fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
                     src="/OS_logo.svg"
                     alt=""
                   />
