@@ -11,16 +11,15 @@ export default function Section({
   flipLayout = false,
 }) {
   return (
-    <div className="relative bg-gray-100">
+    <div className="relative">
       <div
         className={clsx(
           flipLayout ? 'md:right-0' : 'md:left-0',
-          'relative h-80 overflow-hidden bg-indigo-600 md:absolute md:h-full md:w-1/3 lg:w-1/2'
+          'relative h-80 overflow-hidden md:absolute md:h-full md:w-1/3 lg:w-1/2'
         )}
       >
         <img className="h-full w-full object-cover" src={imgsrc} alt="" />
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 926 676"
           aria-hidden="true"
           className="absolute left-24 -bottom-24 w-[57.875rem] transform-gpu blur-[118px]"
@@ -45,7 +44,7 @@ export default function Section({
           </defs>
         </svg>
       </div>
-      <div className="relative mx-auto max-w-7xl py-24 sm:py-32 lg:py-40 lg:px-8">
+      <div className="relative mx-auto max-w-7xl py-16 sm:py-24 lg:py-32 lg:px-8">
         <div
           className={clsx(
             flipLayout
@@ -54,19 +53,19 @@ export default function Section({
             'pr-6 pl-6  md:w-2/3 lg:w-1/2'
           )}
         >
-          <p className="font-body text-base font-semibold leading-7 text-indigo-600">
+          <p className="font-body text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-200">
             {overline}
           </p>
-          <h2 className="mt-2 font-heading text-5xl font-bold tracking-wide text-black">
+          <h2 className="mt-2 font-heading text-5xl font-bold tracking-wider dark:text-indigo-100">
             {heading}
           </h2>
-          <p className="mt-6 font-body text-base leading-7 text-gray-900">
+          <p className="mt-6 font-body text-base leading-7 text-gray-900 dark:text-gray-200">
             {body}
           </p>
           <div className="mt-8">
             <a
               href={linkUrl}
-              className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:bg-indigo-500/80 hover:dark:bg-indigo-600 hover:dark:shadow-lg"
             >
               {linkText}
             </a>
