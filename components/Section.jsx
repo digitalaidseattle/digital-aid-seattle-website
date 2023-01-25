@@ -15,12 +15,11 @@ export default function Section({
       <div
         className={clsx(
           flipLayout ? 'md:right-0' : 'md:left-0',
-          'relative h-80 overflow-hidden bg-indigo-600 md:absolute md:h-full md:w-1/3 lg:w-1/2'
+          'relative h-80 overflow-hidden md:absolute md:h-full md:w-1/3 lg:w-1/2'
         )}
       >
         <img className="h-full w-full object-cover" src={imgsrc} alt="" />
         <svg
-          xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 926 676"
           aria-hidden="true"
           className="absolute left-24 -bottom-24 w-[57.875rem] transform-gpu blur-[118px]"
