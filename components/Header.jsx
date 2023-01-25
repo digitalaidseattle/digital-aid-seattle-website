@@ -27,7 +27,7 @@ export default function Header() {
             <Link href="/" className="">
               <span className="sr-only">Open Seattle</span>
               <OSLogoIcon
-                className="h-12 w-auto rounded-sm fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
+                className="h-12 w-auto rounded-sm fill-black dark:fill-gray-100 sm:h-14 md:h-16"
                 src="/OS_logo.svg"
                 alt=""
               />
@@ -72,7 +72,7 @@ export default function Header() {
               <div className="flex items-center justify-between">
                 <div>
                   <OSLogoIcon
-                    className="h-12 w-auto fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
+                    className="h-12 w-auto fill-black dark:fill-gray-100 sm:h-14 md:h-16"
                     src="/OS_logo.svg"
                     alt=""
                   />
