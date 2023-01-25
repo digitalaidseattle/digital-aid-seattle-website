@@ -1,11 +1,7 @@
 const navigation = {
   main: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Accessibility', href: '#' },
-    { name: 'Partners', href: '#' },
+    { name: 'Volunteer', href: 'https://airtable.com/shrU3QaEEyYH427HP' },
+    { name: 'Partner', href: 'https://airtable.com/shrHFwLdWCuIErqT5' },
   ],
   social: [
     {
@@ -91,7 +87,7 @@ export default function Footer() {
             </div>
           ))}
         </nav>
-        <div className="mt-10 flex justify-center space-x-10">
+        {/* <div className="mt-10 flex justify-center space-x-10">
           {navigation.social.map((item) => (
             <a
               key={item.name}
@@ -102,7 +98,7 @@ export default function Footer() {
               <item.icon className="h-6 w-6" aria-hidden="true" />
             </a>
           ))}
-        </div>
+        </div> */}
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
           &copy; 2023 Open Seattle
         </p>

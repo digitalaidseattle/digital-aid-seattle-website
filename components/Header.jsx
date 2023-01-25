@@ -2,17 +2,18 @@ import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { Fragment } from 'react'
+
 import OSLogoIcon from './OSLogoIcon'
 
 const features = [
   {
     name: 'Volunteer',
-    href: '/volunteer',
+    href: 'https://airtable.com/shrU3QaEEyYH427HP',
     description: '',
   },
   {
     name: 'Partner',
-    href: '/partner',
+    href: 'https://airtable.com/shrHFwLdWCuIErqT5',
     description: '',
   },
 ]
