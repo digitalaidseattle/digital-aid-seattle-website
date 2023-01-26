@@ -101,15 +101,16 @@ export default function VolunteerForm() {
               />
 
               <TextFormGroup
-                label="State / Province"
-                name="fld7yj5Eit1VWf1u3"
-                autoComplete="address-level-1"
-                register={register}
-              />
-              <TextFormGroup
                 label="City"
                 name="fldpXLyy7S6JjzNKN"
                 autoComplete="address-level-2"
+                register={register}
+              />
+
+              <TextFormGroup
+                label="State / Province"
+                name="fld7yj5Eit1VWf1u3"
+                autoComplete="address-level-1"
                 register={register}
               />
 
