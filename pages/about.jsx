@@ -7,7 +7,7 @@ export default function Example() {
           aria-hidden="true"
         >
           <svg
-            className="absolute top-12 left-full translate-x-32 transform"
+            className="absolute top-1/4 left-full translate-x-32 transform"
             width={404}
             height={384}
             fill="none"
@@ -39,7 +39,7 @@ export default function Example() {
             />
           </svg>
           <svg
-            className="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+            className="absolute top-1/4 right-full  -translate-x-32 transform"
             width={404}
             height={384}
             fill="none"
