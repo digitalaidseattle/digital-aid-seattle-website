@@ -138,24 +138,6 @@ export default function PartnerForm() {
                 expand
                 register={register}
               />
-              <SelectInputGroup
-                label="Disciplines"
-                name="fld0O8yi9hpbZIwc7"
-                options={[
-                  'UX/UI Design',
-                  'Program Management',
-                  'Content Writing',
-                  'Product',
-                  'Software Development',
-                  'Research',
-                  'Graphic Design',
-                  'Data Science',
-                  'Marketing/Community Engagement',
-                ]}
-                multiple
-                helperText="What disciplines do you anticipate needing help with?"
-                register={register}
-              />
             </div>
           </div>
         </div>

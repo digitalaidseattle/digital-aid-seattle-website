@@ -150,7 +150,7 @@ export default function VolunteerForm() {
                   'Marketing/Community Engagment',
                 ]}
                 multiple
-                helperText="What skills do you have that could benefit Open Seattle or another project? You may select more than one."
+                helperText="What skills do you have that could benefit Open Seattle or another project? You may select more than one. (hold ctrl -> click)"
                 register={register}
               />
               <NumberFormGroup
