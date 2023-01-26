@@ -6,7 +6,7 @@ const sections = [
     heading: 'Volunteer',
     body: 'Are you an individual eager to solve complex civic problems with your technical or non-technical chops? Open Seattle can connect you with projects that fit your unique skills and interests.',
     linkText: 'Apply',
-    linkUrl: '/about',
+    linkUrl: '/volunteer',
     imgsrc: 'seattle_2.jpg',
     flipLayout: true,
   },
