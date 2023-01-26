@@ -11,6 +11,7 @@ export default function TextFormGroup({
   errors,
   expand,
   addon,
+  required,
 }) {
   return (
     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5 sm:dark:border-gray-500">
@@ -19,6 +20,12 @@ export default function TextFormGroup({
         className="block text-sm font-medium sm:mt-px sm:pt-2"
       >
         {label}
+        {required && (
+          <p className="text-xs text-gray-700/80 dark:text-gray-300/80">
+            {' '}
+            *Required
+          </p>
+        )}
       </label>
       <div className="mt-1 sm:col-span-2 sm:mt-0">
         <div className="flex max-w-lg rounded-md shadow-sm">
@@ -36,6 +43,7 @@ export default function TextFormGroup({
               'block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 text-gray-900 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm',
               !expand && 'sm:max-w-xs'
             )}
+            {...register(name, { required })}
           />
         </div>
         {helperText && (

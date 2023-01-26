@@ -1,7 +1,13 @@
+import Link from 'next/link'
+
 const navigation = {
   main: [
-    { name: 'Volunteer', href: 'https://airtable.com/shrU3QaEEyYH427HP' },
-    { name: 'Partner', href: 'https://airtable.com/shrHFwLdWCuIErqT5' },
+    { name: 'Volunteer', href: '/volunteer' },
+    { name: 'Partner', href: '/partner' },
+    {
+      name: 'About',
+      href: '/about',
+    },
   ],
   social: [
     {
@@ -78,25 +84,25 @@ export default function Footer() {
         >
           {navigation.main.map((item) => (
             <div key={item.name} className="pb-6 text-center">
-              <a
+              <Link
                 href={item.href}
                 className="font-body text-sm leading-6 text-gray-300 hover:text-gray-100"
               >
                 {item.name}
-              </a>
+              </Link>
             </div>
           ))}
         </nav>
         {/* <div className="mt-10 flex justify-center space-x-10">
           {navigation.social.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
               className="font-body text-gray-300 hover:text-gray-400"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
-            </a>
+            </Link>
           ))}
         </div> */}
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">

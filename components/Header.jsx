@@ -7,13 +7,18 @@ import OSLogoIcon from './OSLogoIcon'
 
 const features = [
   {
+    name: 'About',
+    href: '/about',
+    description: '',
+  },
+  {
     name: 'Volunteer',
-    href: 'https://airtable.com/shrU3QaEEyYH427HP',
+    href: '/volunteer',
     description: '',
   },
   {
     name: 'Partner',
-    href: 'https://airtable.com/shrHFwLdWCuIErqT5',
+    href: '/partner',
     description: '',
   },
 ]
@@ -87,7 +92,7 @@ export default function Header() {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {features.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="-m-3 flex items-center rounded-md p-3 font-body hover:bg-indigo-400/10"
@@ -95,7 +100,7 @@ export default function Header() {
                       <span className="ml-3 text-base font-medium text-gray-900 dark:text-gray-100">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>

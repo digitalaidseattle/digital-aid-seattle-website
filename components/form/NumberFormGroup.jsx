@@ -1,14 +1,12 @@
 import clsx from 'clsx'
 
-export default function TextFormGroup({
+export default function NumberFormGroup({
   name,
+  min,
+  max,
   defaultValue,
-  minLength,
-  maxLength,
   helperText,
   label = name,
-  autoComplete,
-  placeholder,
   register,
   errors,
   expand,
@@ -30,14 +28,12 @@ export default function TextFormGroup({
       </label>
       <div className="mt-1 sm:col-span-2 sm:mt-0">
         <input
-          type="text"
-          placeholder={placeholder}
-          minLength={minLength}
-          maxLength={maxLength}
+          type="number"
+          min={min}
+          max={max}
           defaultValue={defaultValue}
           name={name}
           id={name}
-          autoComplete={autoComplete}
           className={clsx(
             'block w-full max-w-lg rounded-md border-gray-300 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm',
             !expand && 'sm:max-w-xs'

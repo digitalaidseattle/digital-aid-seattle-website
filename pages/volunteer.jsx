@@ -1,17 +1,51 @@
+import { useForm } from 'react-hook-form'
+
+import Container from '../components/Container'
 import SelectInputGroup from '../components/form/SelectInputGroup'
 import TextAreaFormGroup from '../components/form/TextAreaFormGroup'
 import TextFormGroup from '../components/form/TextFormGroup'
 import TextFormGroupWithAddon from '../components/form/TextFormGroupWithAddon'
-import Container from '../components/Container'
+import NumberFormGroup from '../components/form/NumberFormGroup'
 
 export default function VolunteerForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  async function onSubmit(data) {
+    try {
+      const endpoint = 'api/volunteer'
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+      const response = await fetch(endpoint, options)
+      const result = await response.json()
+      if (result.data) {
+        alert(`Thank you for your application!`)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <Container>
-      <form className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500"
+      >
         <div className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500 sm:space-y-5">
           <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
             <div>
-              <h3 className="text-lg font-medium leading-6">Volunteer</h3>
+              <h3 className="text-lg font-medium leading-6">
+                Volunteer Interest Form
+              </h3>
               <p className="mt-1 max-w-prose text-sm text-gray-500 dark:text-gray-300">
                 You&apos;re one step closer to becoming an Open Seattle
                 volunteer! Our goal is to match you with projects that align
@@ -25,69 +59,84 @@ export default function VolunteerForm() {
             <div className="space-y-6 sm:space-y-5">
               <TextFormGroup
                 label="First Name"
-                name="first-name"
+                name="fldxfCtWrtqY0xvhb"
                 autoComplete="given-name"
+                register={register}
+                maxLength={80}
+                required
               />
 
               <TextFormGroup
                 label="Last Name"
-                name="last-name"
+                name="fldLZZyHB1CReg5rB"
                 autoComplete="family-name"
+                register={register}
+                maxLength={80}
+                required
               />
 
               <TextFormGroup
                 label="Email Address"
-                name="email"
+                name="fldcHyXbNRrlaydaA"
                 autoComplete="email"
                 placeholder="example@example.com"
+                register={register}
+                maxLength={80}
                 expand
+                required
               />
               <TextFormGroup
                 label="Phone Number"
-                name="phone"
+                name="fldNeCS6DUJQzrn08"
                 autoComplete="phone"
                 placeholder="555-123-4567"
+                register={register}
               />
               <SelectInputGroup
                 label="Country"
-                name="country"
+                name="fldX2HlFnILQhy198"
                 autoComplete="country-name"
                 options={['United States', 'Canada', 'Mexico']}
-              />
-
-              <TextFormGroup
-                label="City"
-                name="city"
-                autoComplete="address-level-2"
+                register={register}
               />
 
               <TextFormGroup
                 label="State / Province"
-                name="state-province"
+                name="fld7yj5Eit1VWf1u3"
                 autoComplete="address-level-1"
+                register={register}
+              />
+              <TextFormGroup
+                label="City"
+                name="fldpXLyy7S6JjzNKN"
+                autoComplete="address-level-2"
+                register={register}
               />
 
               <TextFormGroup
                 label="Zip / Postal Code"
-                name="postal-code"
+                name="fldQ5IfVLlnzOA7sU"
                 autoComplete="postal-code"
+                register={register}
               />
               <TextFormGroupWithAddon
                 label="LinkedIn Profile"
-                name="linkedin"
+                name="fldeWyimMJAzbrsNv"
                 addon="https://"
                 expand
                 placeholder="linkedin.com/in/your-profile"
+                register={register}
               />
               <TextAreaFormGroup
                 label="About"
-                name="about"
+                name="fldhaLAhMWfsIVpyJ"
                 helperText="Why are you interested in volunteering?"
                 expand
+                register={register}
               />
               <SelectInputGroup
                 label="Disciplines"
-                name="disciplines"
+                name="flddDkCfgabv3PsiS"
                 options={[
                   'UX/UI Design',
                   'Program Management',
@@ -101,37 +150,28 @@ export default function VolunteerForm() {
                 ]}
                 multiple
                 helperText="What skills do you have that could benefit Open Seattle or another project? You may select more than one."
+                register={register}
               />
-              <TextFormGroup
+              <NumberFormGroup
                 label="Weekly Commitment"
-                name="commitment"
+                name="fldGtErVFJm2V6l5b"
                 helperText="How many hours per week could you commit to Open Seattle or another project?"
+                register={register}
+                min={0}
+                max={40}
+                required
               />
               <SelectInputGroup
                 label="Duration"
-                name="duration"
+                name="fld9zk0f14ojcVPFj"
                 options={['Yes', 'No']}
                 helperText="Can you commit to helping regularly for at least three (3) months?"
+                register={register}
               />
             </div>
           </div>
         </div>
-        <div className="pt-5">
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Save
-            </button>
-          </div>
-        </div>
+
         <div className="pt-5 pb-5">
           <div className="flex justify-end space-x-3">
             <button

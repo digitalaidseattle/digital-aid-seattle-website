@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 import SelectInputGroup from '../components/form/SelectInputGroup'
 import TextAreaFormGroup from '../components/form/TextAreaFormGroup'
 import TextFormGroup from '../components/form/TextFormGroup'
@@ -5,13 +7,43 @@ import TextFormGroupWithAddon from '../components/form/TextFormGroupWithAddon'
 import Container from '../components/Container'
 
 export default function PartnerForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  async function onSubmit(data) {
+    try {
+      const endpoint = 'api/partner'
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+      const response = await fetch(endpoint, options)
+      const result = await response.json()
+      if (result.data) {
+        alert(`Thank you for your application!`)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
   return (
     <Container>
-      <form className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500"
+      >
         <div className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500 sm:space-y-5">
           <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
             <div>
-              <h3 className="text-lg font-medium leading-6">Partner</h3>
+              <h3 className="text-lg font-medium leading-6">
+                Partner Interest Form
+              </h3>
               <p className="mt-1 max-w-prose text-sm text-gray-500 dark:text-gray-300">
                 Thank you for your interest in Open Seattle! We are excited to
                 learn more about your needs to determine if we can lend a hand.
@@ -24,70 +56,91 @@ export default function PartnerForm() {
             <div className="space-y-6 sm:space-y-5">
               <TextFormGroup
                 label="First Name"
-                name="first-name"
+                name="fldey7E1oWw918Hzf"
                 autoComplete="given-name"
+                register={register}
+                required
               />
 
               <TextFormGroup
                 label="Last Name"
-                name="last-name"
+                name="fldLtpSgtaU6Mlwkt"
                 autoComplete="family-name"
+                register={register}
+                required
               />
 
               <TextFormGroup
                 label="Email Address"
-                name="email"
+                name="fldeQMuz3Xhpwsz7l"
                 autoComplete="email"
                 placeholder="example@example.com"
                 expand
+                register={register}
+                required
               />
               <TextFormGroup
                 label="Phone Number"
-                name="phone"
+                name="fldJVwNWaCfP7KiHi"
                 autoComplete="phone"
                 placeholder="555-123-4567"
+                register={register}
               />
 
               <TextFormGroup
                 label="Organization"
-                name="organization"
+                name="fld7zzcuREp0DTvMp"
                 autoComplete="organization"
                 helperText="Which organization or department do you represent?"
                 expand
+                register={register}
+              />
+
+              <TextFormGroup
+                label="Role"
+                name="fld7fFxMvnxXUMxcd"
+                autoComplete="role"
+                helperText="What is your role within the organization?"
+                expand
+                register={register}
               />
 
               <SelectInputGroup
                 label="Organization Type"
-                name="organization-type"
+                name="fldjgeS16ABXj2Zvu"
                 options={[
-                  'Government Agency',
                   'Nonprofit',
+                  'Government Agency',
                   'Community Organization',
                   'For-profit Company',
                 ]}
+                register={register}
               />
 
               <TextFormGroupWithAddon
                 label="Organization Website"
-                name="website"
+                name="fldoEGHOEL3oi4Ucb"
                 addon="https://"
                 expand
+                register={register}
               />
 
               <TextFormGroup
                 label="Project Title"
-                name="project-title"
+                name="fldndoyRHbb5GnSCm"
                 helperText="If the proposed project has a name, please place it here."
+                register={register}
               />
               <TextAreaFormGroup
                 label="Project Details"
-                name="project-details"
+                name="fldKBGnuGaq2VlIoN"
                 helperText="Please provide any details about the project that you can provide. This will help us determine whether we can support your project and the types of volunteers we may provide."
                 expand
+                register={register}
               />
               <SelectInputGroup
                 label="Disciplines"
-                name="disciplines"
+                name="fld0O8yi9hpbZIwc7"
                 options={[
                   'UX/UI Design',
                   'Program Management',
@@ -97,10 +150,11 @@ export default function PartnerForm() {
                   'Research',
                   'Graphic Design',
                   'Data Science',
-                  'Marketing/Community Engagment',
+                  'Marketing/Community Engagement',
                 ]}
                 multiple
                 helperText="What disciplines do you anticipate needing help with?"
+                register={register}
               />
             </div>
           </div>
