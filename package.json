@@ -21,11 +21,13 @@
     "@sanity/vision": "^3.1.4",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
+    "airtable": "^0.11.6",
     "clsx": "^1.2.1",
     "next": "^13.1.1",
     "next-sanity": "^3.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.42.1",
     "sanity": "^3.1.4",
     "styled-components": "^5.3.6"
   },

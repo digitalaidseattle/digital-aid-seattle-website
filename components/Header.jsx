@@ -7,13 +7,18 @@ import OSLogoIcon from './OSLogoIcon'
 
 const features = [
   {
+    name: 'About',
+    href: '/about',
+    description: '',
+  },
+  {
     name: 'Volunteer',
-    href: 'https://airtable.com/shrU3QaEEyYH427HP',
+    href: '/volunteer',
     description: '',
   },
   {
     name: 'Partner',
-    href: 'https://airtable.com/shrHFwLdWCuIErqT5',
+    href: '/partner',
     description: '',
   },
 ]
@@ -27,7 +32,7 @@ export default function Header() {
             <Link href="/" className="">
               <span className="sr-only">Open Seattle</span>
               <OSLogoIcon
-                className="h-12 w-auto rounded-sm fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
+                className="h-12 w-auto rounded-sm fill-black dark:fill-gray-100 sm:h-14 md:h-16"
                 src="/OS_logo.svg"
                 alt=""
               />
@@ -72,7 +77,7 @@ export default function Header() {
               <div className="flex items-center justify-between">
                 <div>
                   <OSLogoIcon
-                    className="h-12 w-auto fill-black p-1 dark:fill-gray-100 sm:h-14 md:h-16"
+                    className="h-12 w-auto fill-black dark:fill-gray-100 sm:h-14 md:h-16"
                     src="/OS_logo.svg"
                     alt=""
                   />
@@ -87,7 +92,7 @@ export default function Header() {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {features.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="-m-3 flex items-center rounded-md p-3 font-body hover:bg-indigo-400/10"
@@ -95,7 +100,7 @@ export default function Header() {
                       <span className="ml-3 text-base font-medium text-gray-900 dark:text-gray-100">
                         {item.name}
                       </span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
