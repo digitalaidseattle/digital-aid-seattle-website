@@ -1,4 +1,5 @@
 import Link from 'next/link'
+
 import OSLogoIcon from '../components/OSLogoIcon'
 export default function Example() {
   return (

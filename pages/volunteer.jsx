@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 
 import Container from '../components/Container'
+import NumberFormGroup from '../components/form/NumberFormGroup'
 import SelectInputGroup from '../components/form/SelectInputGroup'
 import TextAreaFormGroup from '../components/form/TextAreaFormGroup'
 import TextFormGroup from '../components/form/TextFormGroup'
 import TextFormGroupWithAddon from '../components/form/TextFormGroupWithAddon'
-import NumberFormGroup from '../components/form/NumberFormGroup'
 
 export default function VolunteerForm() {
   const {
