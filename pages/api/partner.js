@@ -10,7 +10,6 @@ export default function handler(req, res) {
       return
     }
 
-    console.log(record)
     res.status(200).json({ data: { record }, error: err })
     return
   })

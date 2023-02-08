@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import Container from '../components/Container'
@@ -8,6 +9,8 @@ import TextFormGroup from '../components/form/TextFormGroup'
 import TextFormGroupWithAddon from '../components/form/TextFormGroupWithAddon'
 
 export default function VolunteerForm() {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -27,7 +30,7 @@ export default function VolunteerForm() {
       const response = await fetch(endpoint, options)
       const result = await response.json()
       if (result.data) {
-        alert(`Thank you for your application!`)
+        router.push('/submitted')
       }
     } catch (err) {
       console.error(err)
@@ -178,6 +181,7 @@ export default function VolunteerForm() {
             <button
               type="button"
               className="inline-flex rounded-md bg-gray-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:bg-gray-500/60 hover:dark:bg-gray-600 hover:dark:shadow-lg"
+              onClick={() => router.back()}
             >
               Cancel
             </button>
