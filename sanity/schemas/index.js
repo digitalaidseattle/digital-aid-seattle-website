@@ -1,13 +1,19 @@
+import formPage from './formPage'
 import hero from './hero'
-import landingPage from './landingPage'
-import link from './link'
-import textWithIllustration from './textWithIllustration'
 import infoPage from './infoPage'
+import landingPage from './landingPage'
+import selectableLink, { externalLink, internalLink } from './link'
+import portableText from './portableText'
+import textWithIllustration from './textWithIllustration'
 
 export const schemaTypes = [
   textWithIllustration,
   landingPage,
-  link,
+  selectableLink,
   hero,
   infoPage,
+  portableText,
+  formPage,
+  internalLink,
+  externalLink,
 ]

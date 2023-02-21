@@ -3,8 +3,8 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { isUniqueAcrossAllDocuments } from '../lib/helpers'
 
 export default defineType({
-  title: 'Info Page',
-  name: 'infoPage',
+  title: 'Form Page',
+  name: 'formPage',
   type: 'document',
   fields: [
     defineField({
@@ -25,7 +25,8 @@ export default defineType({
     defineField({
       title: 'Content',
       name: 'content',
-      type: 'portableText',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
   ],
 })

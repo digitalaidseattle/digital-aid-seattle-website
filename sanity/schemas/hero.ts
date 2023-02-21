@@ -37,8 +37,8 @@ export default defineType({
     }),
     defineField({
       name: 'link',
-      type: 'link',
-      title: 'link',
+      type: 'selectableLink',
+      title: 'Link',
     }),
   ],
 })
