@@ -1,17 +1,15 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
-
-import selectableLink from './link'
+import { defineType } from 'sanity'
 
 export default defineType({
   name: 'portableText',
   type: 'array',
   title: 'Content',
   of: [
-    defineArrayMember({
+    {
       type: 'block',
       marks: {
-        annotations: [selectableLink],
+        annotations: [{ type: 'selectableLink' }],
       },
-    }),
+    },
   ],
 })

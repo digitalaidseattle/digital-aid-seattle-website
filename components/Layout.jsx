@@ -6,7 +6,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <main className="flex-grow">{children}</main>
+      <main className="flex flex-grow flex-row justify-center">{children}</main>
       <Footer />
     </div>
   )
