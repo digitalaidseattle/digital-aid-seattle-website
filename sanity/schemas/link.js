@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
 
-export const link = defineType({
+export default defineType({
   name: 'link',
   type: 'object',
   title: 'Link',
