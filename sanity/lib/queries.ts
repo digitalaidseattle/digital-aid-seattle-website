@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity'
 
 export const pagePaths = groq`
-  *[_type match "*Page" && slug.current != null].slug.current
+  *[_type match "*Page" && _type != "formPage" && slug.current != null].slug.current
 `
 
 export const linkParseQuery = groq`
