@@ -3,7 +3,7 @@ import { createClient } from 'next-sanity'
 import { apiVersion, dataset, projectId, useCdn } from '../env'
 import { homePageQuery, pagePaths, pagesBySlugQuery } from './queries'
 
-export const sanityClient = (token?: string) => {
+export const sanityClient = (token?: string, useCdn?: boolean) => {
   return projectId
     ? createClient({ projectId, dataset, apiVersion, useCdn, token })
     : null
