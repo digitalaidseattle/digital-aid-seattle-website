@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { useNextSanityImage } from 'next-sanity-image'
 import { sanityClient } from '../sanity/lib/client'
 
-/* This example requires Tailwind CSS v3.0+ */
-export default function Section({
+export default function TextWithIllustration({
   heading,
   body,
   link,

@@ -1,3 +1,4 @@
+import Layout from '../components/Layout'
 import InfoPage from '../components/pageTypes/InfoPage'
 import LandingPage from '../components/pageTypes/LandingPage'
 import { getPageBySlug, getPagePaths } from '../sanity/lib/client'

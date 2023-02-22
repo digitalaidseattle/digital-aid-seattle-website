@@ -1,13 +1,14 @@
-import Section from 'components/Section'
+import TextWithIllustration from 'components/TextWithIllustration'
+import Layout from 'components/Layout'
 
 export default function LandingPage({ content }) {
   return (
-    <>
-      <div className="w-full max-w-7xl">
+    <Layout>
+      <div className="mx-auto max-w-7xl lg:px-6 xl:px-8">
         {content.slots.map((slot) => (
-          <Section key={slot._key} {...slot} />
+          <TextWithIllustration key={slot._key} {...slot} />
         ))}
       </div>
-    </>
+    </Layout>
   )
 }

@@ -10,6 +10,10 @@ export const externalLink = defineType({
       name: 'href',
       type: 'url',
       title: 'URL',
+      validation: (Rule) =>
+        Rule.uri({
+          scheme: ['http', 'https', 'mailto', 'tel'],
+        }),
     }),
     defineField({
       title: 'Open in new tab',
