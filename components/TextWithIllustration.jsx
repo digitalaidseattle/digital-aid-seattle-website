@@ -24,8 +24,8 @@ export default function TextWithIllustration({
         {/* <img className="h-full w-full object-cover" src={imgsrc} alt="" /> */}
         <Image
           alt="Seattle Skyline"
-          src={imageProps.src}
-          loader={imageProps.loader}
+          src={imageProps?.src}
+          loader={imageProps?.loader}
           fill
           style={{ objectFit: 'cover' }}
           sizes="(max-width: 768px) 100vw, 800px"
