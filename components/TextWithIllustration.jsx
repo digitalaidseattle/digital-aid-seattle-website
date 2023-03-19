@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useNextSanityImage } from 'next-sanity-image'
+
 import { sanityClient } from '../sanity/lib/client'
 
 export default function TextWithIllustration({
@@ -12,6 +13,7 @@ export default function TextWithIllustration({
   tagline,
   flipLayout = false,
 }) {
+  console.log('LINK', link)
   const imageProps = useNextSanityImage(sanityClient(), image)
   return (
     <div className="relative">
@@ -21,15 +23,17 @@ export default function TextWithIllustration({
           'relative h-80 overflow-hidden md:absolute md:h-full md:w-1/3 lg:w-1/2'
         )}
       >
-        {/* <img className="h-full w-full object-cover" src={imgsrc} alt="" /> */}
-        <Image
-          alt="Seattle Skyline"
-          src={imageProps.src}
-          loader={imageProps.loader}
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, 800px"
-        />
+        {imageProps && (
+          <Image
+            alt="Seattle Skyline"
+            src={imageProps?.src}
+            loader={imageProps?.loader}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 800px"
+          />
+        )}
+
         <svg
           viewBox="0 0 926 676"
           aria-hidden="true"
@@ -74,12 +78,14 @@ export default function TextWithIllustration({
             {body}
           </p>
           <div className="mt-8">
-            <Link
-              href={link.href}
-              className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:bg-indigo-500/80 hover:dark:bg-indigo-600 hover:dark:shadow-lg"
-            >
-              {link.linkText}
-            </Link>
+            {link.href && (
+              <Link
+                href={link.href}
+                className="inline-flex rounded-md bg-indigo-800/80 px-3.5 py-1.5 font-body text-base font-semibold leading-7 text-white shadow-sm transition-all hover:bg-indigo-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:bg-indigo-500/80 hover:dark:bg-indigo-600 hover:dark:shadow-lg"
+              >
+                {link.linkText}
+              </Link>
+            )}
           </div>
         </div>
       </div>
