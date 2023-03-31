@@ -126,3 +126,10 @@ The website is built using **Next.js**, a React-based framework for server-side 
     ```
 
 8. Create pull request and ask for review
+
+## Notes
+
+### Working With Airtable
+
+- [Airtable API Reference](https://airtable.com/developers/web/api/introduction)
+- For work with specific fields, see the [custom API guide for our workspace](https://airtable.com/apprZrgVYuYaUHuhk/api/docs#curl/introduction)
