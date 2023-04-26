@@ -85,17 +85,9 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 3. In order to work on Sanity components, request to be added to Sanity.io as an administrator, and then populate the respective fields in the .env.local file.
 
->//Question: can we store these in the example file or is that not secure?
-
 4. In order to work on Airtable forms, request access to Airtable and create a personal access token
 
 ## Contributing
-
->//Question: Do we want to standardize feature branch naming:
->Category/Reference/Description: feature/issue-17/form-updates
->Reference/Description + Category in commit: issue-17/form-updates  git commit -m 'feat: Updated onSubmit to post to both Airtable and Google Sheets'
->//Question: Commits:
->Would we like to establish a convention of squashing commits to a single commit for each feature branch?
 
 1. Set up local environment.
 2. Ensure access to appropriate accounts:
@@ -104,10 +96,10 @@ The website is built using **Next.js**, a React-based framework for server-side 
     - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Open Seattle Sanity Dashboard can be accessed here](https://www.openseattle.org/studio)
     - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
 3. Get issue from group Asana board.
-4. Create a branch with the following convention: Reference/Description eg: issue-17/form-updates
+4. Create a branch with the following convention: username/feature-name
 
     ```bash
-    git checkout -b <feature-branch-name>
+    git checkout -b <username/feature-name>
     ```
 
 5. Make desired updates.
