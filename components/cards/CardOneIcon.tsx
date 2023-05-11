@@ -1,22 +1,19 @@
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import IconContainer from './IconContainer';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import { ReactNode } from 'react';
+import Button from '@mui/material/Button';
 
 type CardIconProps = {
-    title: string,
+    title?: string,
     description: string,
-    icon: ReactNode
+    icon: ReactNode,
+    buttonText?: string,
 }
 
-const CardIcon = ({title, description, icon}: CardIconProps) => {
+const CardOneIcon = ({title, description, icon, buttonText}: CardIconProps) => {
     return (
         <Card sx={{ }}>
             <CardContent sx={{ 
@@ -27,15 +24,13 @@ const CardIcon = ({title, description, icon}: CardIconProps) => {
                 alignItems: 'center',
                 textAlign: 'center'
                 }}>
-                <IconContainer>
-                    {icon}
-                    {/* <AccessibilityIcon fontSize="large" sx={{color:"white"}}/> */}
-                </IconContainer>
-                <Typography variant='h5'>{title}</Typography>
+                <IconContainer>{icon}</IconContainer>
+                {title ? <Typography variant='h5'>{title}</Typography> : ''}
                 <Typography>{description}</Typography>
+                {buttonText ? <Button>{buttonText}</Button> : ''}
             </CardContent>
         </Card>
     );
 }
 
-export default CardIcon;
+export default CardOneIcon;

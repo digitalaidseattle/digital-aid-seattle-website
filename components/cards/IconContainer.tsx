@@ -17,7 +17,6 @@ const IconContainer = ( {children} : Props ) => {
             alignItems: 'center'
             }}>
                 {children}
-            {/* <AccessibilityIcon fontSize="large" sx={{color:"white"}}/> */}
         </Box>
     )
 }
