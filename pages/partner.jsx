@@ -7,6 +7,12 @@ import TextAreaFormGroup from '../components/form/TextAreaFormGroup'
 import TextFormGroup from '../components/form/TextFormGroup'
 import TextFormGroupWithAddon from '../components/form/TextFormGroupWithAddon'
 import Layout from '../components/Layout'
+import CardIcon from '../components/cards/CardIcon'
+import Stack from '@mui/material/Stack'
+
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 export default function PartnerForm() {
   const router = useRouter()
@@ -46,6 +52,22 @@ export default function PartnerForm() {
           <div className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500 sm:space-y-5">
             <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
               <div>
+                {/* TEST CODE FOR CARD 1! */}
+                <Stack direction="row">
+                  <CardIcon
+                    title="Excellence"
+                    description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
+                  <CardIcon
+                    title="Efficacy"
+                    description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+                    icon={<AllInclusiveIcon fontSize="large" sx={{color:"white"}}/>}/>
+                  <CardIcon
+                    title="Efficiency"
+                    description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
+                    icon={<AddTaskIcon fontSize="large" sx={{color:"white"}}/>}/>
+                </Stack>
+                {/* END OF TEST CODE */}
                 <h3 className="text-lg font-medium leading-6">
                   Partner Interest Form
                 </h3>
