@@ -13,9 +13,15 @@ type CardIconProps = {
     buttonText?: string,
 }
 
+// TODO: have card colors/styles defined in the theme file instead of here
 const CardOneIcon = ({title, description, icon, buttonText}: CardIconProps) => {
     return (
-        <Card sx={{ }}>
+        <Card sx={{ 
+            borderRadius: '12px',
+            background: '#F7FAFA',
+            border: '3px solid #FFFFFF',
+            boxShadow: '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
+        }}>
             <CardContent sx={{ 
                 display: 'flex',
                 flexDirection: 'column',

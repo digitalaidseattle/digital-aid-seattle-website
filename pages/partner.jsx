@@ -53,7 +53,7 @@ export default function PartnerForm() {
             <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
               <div>
                 {/* TEST CODE FOR CARD 1! */}
-                <Stack direction="row">
+                <Stack direction="row" spacing={2} sx={{ padding: '2rem' }}>
                   <CardOneIcon
                     title="Excellence"
                     description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
@@ -67,7 +67,6 @@ export default function PartnerForm() {
                     description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
                     icon={<AddTaskIcon fontSize="large" sx={{color:"white"}}/>}
                     buttonText="Volunteer with us"/>
-                    
                 </Stack>
                 {/* END OF TEST CODE */}
                 <h3 className="text-lg font-medium leading-6">
