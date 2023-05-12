@@ -14,11 +14,8 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
-    "@mui/material": "^5.12.3",
     "@next/font": "^13.1.1",
     "@portabletext/react": "^2.0.1",
     "@sanity/demo": "^1.0.1",
@@ -26,7 +23,6 @@
     "@sanity/vision": "^3.1.4",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
-    "@types/material-ui": "^0.21.12",
     "airtable": "^0.11.6",
     "clsx": "^1.2.1",
     "next": "^13.1.1",
