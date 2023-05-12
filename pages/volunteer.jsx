@@ -1,3 +1,4 @@
+import { Button, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
@@ -11,7 +12,6 @@ import Layout from '../components/Layout'
 
 export default function VolunteerForm() {
   const router = useRouter()
-
   const {
     register,
     handleSubmit,
@@ -41,6 +41,15 @@ export default function VolunteerForm() {
   return (
     <Layout>
       <Container>
+        <Button variant='contained'>
+          Volunteer With Us
+        </Button>
+        <Typography color={'primary.light'} variant="h1">Volunteer</Typography>
+        <Typography variant="displayLarge">Volunteer</Typography>
+        <Typography variant="headlineLarge">Volunteer</Typography>
+        <Typography variant="titleLarge">Volunteer</Typography>
+        <Typography variant="labelLarge">Volunteer</Typography>
+        <Typography color={'primary'} variant="bodyLarge">Volunteer</Typography>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500"
