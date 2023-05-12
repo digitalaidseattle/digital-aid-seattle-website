@@ -6,7 +6,7 @@ import IconContainer from './IconContainer';
 import { ReactNode } from 'react';
 import Button from '@mui/material/Button';
 
-type CardIconProps = {
+type CardOneProps = {
     title?: string,
     description: string,
     icon: ReactNode,
@@ -14,7 +14,7 @@ type CardIconProps = {
 }
 
 // TODO: have card colors/styles defined in the theme file instead of here
-const CardOneIcon = ({title, description, icon, buttonText}: CardIconProps) => {
+const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
     return (
         <Card sx={{ 
             borderRadius: '12px',
@@ -39,4 +39,4 @@ const CardOneIcon = ({title, description, icon, buttonText}: CardIconProps) => {
     );
 }
 
-export default CardOneIcon;
+export default CardOne;
