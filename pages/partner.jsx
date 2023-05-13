@@ -14,6 +14,8 @@ import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
+import CardRowContainer from '../components/cards/CardRowContainer';
+
 export default function PartnerForm() {
   const router = useRouter()
 
@@ -53,21 +55,45 @@ export default function PartnerForm() {
             <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
               <div>
                 {/* TEST CODE FOR CARD 1! */}
-                <Stack direction="row" spacing={2} sx={{ padding: '2rem' }}>
+                <CardRowContainer>
                   <CardOne
-                    title="Excellence"
-                    description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+                    title="Nonprofits"
+                    description="We strive to bring enterprise-level operational maturity to nonprofits in need."
                     icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
                   <CardOne
-                    title="Efficacy"
-                    description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
-                    icon={<AllInclusiveIcon fontSize="large" sx={{color:"white"}}/>}
-                    buttonText="Learn more"/>
-                  <CardOne
-                    description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
-                    icon={<AddTaskIcon fontSize="large" sx={{color:"white"}}/>}
-                    buttonText="Volunteer with us"/>
-                </Stack>
+                    title="Governments"
+                    description="Local governmental organizations aimed at building a better community deserve a helping hand."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
+                    <CardOne
+                    title="Open Source"
+                    description="Whenever possible, we will cooperate using open source assets that can be leveraged by anyone."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
+                    <CardOne
+                    title="Maintainability"
+                    description="When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
+                </CardRowContainer>
+
+                <CardRowContainer sx={{pt: '2rem'}}>
+                <CardOne
+                    title="Make a Donation"
+                    description="A tax-deductible donation below helps us provide our Partners with the tools they need."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}
+                    buttonText="Donate"
+                    />
+                <CardOne
+                    title="Sponsor Us"
+                    description="Help our Partners increase their nonprofit’s impact by becoming an ally and offering support."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}
+                    buttonText="Sponsor"
+                    />
+                <CardOne
+                    title="Share Our Mission"
+                    description="Spread the word with your friends, coworkers, and social media, to help continue our mission."
+                    icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}
+                    buttonText="Share"
+                    />
+                </CardRowContainer>
                 {/* END OF TEST CODE */}
                 <h3 className="text-lg font-medium leading-6">
                   Partner Interest Form
