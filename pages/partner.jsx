@@ -73,8 +73,8 @@ export default function PartnerForm() {
                     description="When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale."
                     icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}/>
                 </CardRowContainer>
-
-                <CardRowContainer sx={{pt: '2rem'}}>
+{/* 
+                <CardRowContainer>
                 <CardOne
                     title="Make a Donation"
                     description="A tax-deductible donation below helps us provide our Partners with the tools they need."
@@ -93,7 +93,7 @@ export default function PartnerForm() {
                     icon={<AccessibilityIcon fontSize="large" sx={{color:"white"}}/>}
                     buttonText="Share"
                     />
-                </CardRowContainer>
+                </CardRowContainer> */}
                 {/* END OF TEST CODE */}
                 <h3 className="text-lg font-medium leading-6">
                   Partner Interest Form
