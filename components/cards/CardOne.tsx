@@ -17,6 +17,7 @@ type CardOneProps = {
 const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
     return (
         <Card sx={{ 
+            flex: '1',
             borderRadius: '12px',
             background: '#F7FAFA',
             border: '3px solid #FFFFFF',
@@ -26,14 +27,15 @@ const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
-                padding: '2rem',
                 alignItems: 'center',
-                textAlign: 'center'
+                textAlign: 'center',
+                height: '100%'
                 }}>
                 <IconContainer>{icon}</IconContainer>
-                {title ? <Typography variant='h5'>{title}</Typography> : ''}
-                <Typography>{description}</Typography>
-                {buttonText ? <Button>{buttonText}</Button> : ''}
+                {/* typography styles here are for testing purposes only-- can be set to a variant defined in theme! */}
+                {title && <Typography sx={{fontSize: '1rem', fontWeight: '700'}}>{title}</Typography>}
+                <Typography sx={{fontSize: '0.875rem', lineHeight: '28px'}}>{description}</Typography>
+                {buttonText && <Button sx={{mt: 'auto'}}>{buttonText}</Button>}
             </CardContent>
         </Card>
     );
