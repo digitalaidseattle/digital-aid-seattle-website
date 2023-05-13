@@ -13,7 +13,6 @@ export default function TextWithIllustration({
   tagline,
   flipLayout = false,
 }) {
-  console.log('LINK', link)
   const imageProps = useNextSanityImage(sanityClient(), image)
   return (
     <div className="relative">
