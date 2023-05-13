@@ -17,7 +17,8 @@ type CardOneProps = {
 const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
     return (
         <Card sx={{ 
-            flex: '1',
+            // minWidth: '12rem',
+            // gridRow: '1',
             borderRadius: '12px',
             backgroundColor: '#F7FAFA',
             border: '3px solid #FFFFFF',
@@ -29,7 +30,7 @@ const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
                 gap: '1.5rem',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: {xs: '2rem', sm: '1rem'}
+                padding: {xs: '2rem', sm: '0.5rem', md: '1rem'}
                 }}>
                 <IconContainer>{icon}</IconContainer>
                 {/* typography styles here are for testing purposes only-- can be replaced with a variant defined in theme! */}

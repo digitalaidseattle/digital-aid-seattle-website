@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { ReactNode } from 'react';
 
@@ -7,15 +8,16 @@ type Props = {
 
 const CardRowContainer = ( {children} : Props ) => {
     return (
-        // margins for testing purposes, feel free to remove
-        <Stack direction={{xs: "column", sm: "row"}} spacing={4} sx={{
-            flexWrap: 'wrap',
-            // mr: '200px',
-            // ml: '200px', 
-            // mt: '100px',
-            }}>
+        <Box sx={{ 
+            display: 'grid',
+            gridTemplateColumns:  {xs: 'repeat(auto-fit, 1fr)', md: 'repeat(auto-fit, minmax(10rem, 1fr))',},
+            gap: '1rem',
+            width: '100%',
+            justifyContent: 'center',
+
+        }}>
             {children}
-        </Stack>
+        </Box>
     )
 }
 // TODO: a mobile friendly version
