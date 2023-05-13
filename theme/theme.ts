@@ -200,7 +200,6 @@ export const theme = createTheme({
           borderRadius: '100px',
           padding: '10px 24px 10px 24px',
           textTransform: 'none',
-          backgroundColor: designColor.green.main,
         },
       },
     },

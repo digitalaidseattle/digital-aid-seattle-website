@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Oswald:wght@400;500&display=swap"
