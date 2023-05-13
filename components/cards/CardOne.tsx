@@ -19,7 +19,7 @@ const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
         <Card sx={{ 
             flex: '1',
             borderRadius: '12px',
-            background: '#F7FAFA',
+            backgroundColor: '#F7FAFA',
             border: '3px solid #FFFFFF',
             boxShadow: '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
         }}>
@@ -29,10 +29,10 @@ const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
                 gap: '1.5rem',
                 alignItems: 'center',
                 textAlign: 'center',
-                height: '100%'
+                padding: {xs: '2rem', sm: '1rem'}
                 }}>
                 <IconContainer>{icon}</IconContainer>
-                {/* typography styles here are for testing purposes only-- can be set to a variant defined in theme! */}
+                {/* typography styles here are for testing purposes only-- can be replaced with a variant defined in theme! */}
                 {title && <Typography sx={{fontSize: '1rem', fontWeight: '700'}}>{title}</Typography>}
                 <Typography sx={{fontSize: '0.875rem', lineHeight: '28px'}}>{description}</Typography>
                 {buttonText && <Button sx={{mt: 'auto'}}>{buttonText}</Button>}
