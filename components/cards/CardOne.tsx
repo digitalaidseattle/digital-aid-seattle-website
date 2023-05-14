@@ -6,19 +6,21 @@ import IconContainer from './IconContainer';
 import { ReactNode } from 'react';
 import Button from '@mui/material/Button';
 
+
 type CardOneProps = {
     title?: string,
     description: string,
     icon: ReactNode,
     buttonText?: string,
+    buttonLink?: string
 }
 
 // TODO: have card colors/styles defined in the theme file instead of here
-const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
+const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProps) => {
     return (
         <Card sx={{ 
             flex: '1',
-            minWidth: {xs: '100%', md:'min-content'},
+            minWidth: {xs: '100%', sm:'min-content'},
             borderRadius: '12px',
             backgroundColor: '#F7FAFA',
             border: '3px solid #FFFFFF',
@@ -30,13 +32,13 @@ const CardOne = ({title, description, icon, buttonText}: CardOneProps) => {
                 gap: '1.5rem',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: {xs: '2rem', md: '1rem'}
+                padding: {xs: '2rem', sm: '1rem'}
                 }}>
                 <IconContainer>{icon}</IconContainer>
                 {/* typography styles here are for testing purposes only-- can be replaced with a variant defined in theme! */}
                 {title && <Typography sx={{fontSize: '1rem', fontWeight: '700'}}>{title}</Typography>}
                 <Typography sx={{fontSize: '0.875rem', lineHeight: '28px'}}>{description}</Typography>
-                {buttonText && <Button sx={{mt: 'auto'}}>{buttonText}</Button>}
+                {buttonText && <Button sx={{mt: 'auto'}} href={buttonLink}>{buttonText}</Button>}
             </CardContent>
         </Card>
     );
