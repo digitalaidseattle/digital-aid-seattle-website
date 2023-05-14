@@ -9,12 +9,11 @@ type Props = {
 const CardRowContainer = ( {children} : Props ) => {
     return (
         <Box sx={{ 
-            display: 'grid',
-            gridTemplateColumns:  {xs: 'repeat(auto-fit, 1fr)', md: 'repeat(auto-fit, minmax(10rem, 1fr))',},
-            gap: '1rem',
-            width: '100%',
-            justifyContent: 'center',
-
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '2rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
         }}>
             {children}
         </Box>
