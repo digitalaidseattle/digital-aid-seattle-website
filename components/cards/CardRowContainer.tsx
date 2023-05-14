@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { ReactNode } from 'react';
 
 type Props = {
@@ -19,6 +18,5 @@ const CardRowContainer = ( {children} : Props ) => {
         </Box>
     )
 }
-// TODO: a mobile friendly version
 
 export default CardRowContainer;
