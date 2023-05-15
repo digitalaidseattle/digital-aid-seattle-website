@@ -27,12 +27,12 @@ const Home: NextPage<Props> = () => {
             <Typography
               color={'text.secondary'}
               sx={{ paddingBottom: '56px' }}
-              variantMapping={{ h1: 'displayLarge' }}
+              variant="displayLarge"
             >
               Connecting Puget Sound nonprofits with free tech solutions.
             </Typography>
             <Box>
-              <Button variant="outlined" color="secondary">
+              <Button variant="contained" color="secondary">
                 Get Help
               </Button>
               <Button variant="contained" color="primary">
@@ -61,8 +61,30 @@ const Home: NextPage<Props> = () => {
           </Box>
         </Box>
       </Container>
-      <Container>
-        <Typography variant="h1">Hello World</Typography>
+      <Container sx={{backgroundColor:'background'}}>
+        <Box
+          sx={{
+            height: '536px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            marginLeft: '200px',
+            marginRight: '200px',
+          }}
+        >
+          <Typography variant="headlineLarge">Our Mission</Typography>
+          <Typography variant="bodyLarge">
+            We believe community organizations are the heart of Seattle, and
+            deserve the same tools and advantages enjoyed by our largest tech
+            companies. Our mission is to create scalable, customized solutions
+            to enable other nonprofits to reach their full potential and achieve
+            their own mission-driven goals.
+          </Typography>
+          <Button variant="contained" color="primary">
+            Learn About Us
+          </Button>
+        </Box>
       </Container>
     </>
   )
