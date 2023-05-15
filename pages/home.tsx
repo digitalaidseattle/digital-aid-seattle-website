@@ -25,9 +25,9 @@ const Home: NextPage<Props> = () => {
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <Box sx={{ flex: 1 }}>
             <Typography
-              variant="displayLarge"
               color={'text.secondary'}
               sx={{ paddingBottom: '56px' }}
+              variantMapping={{ h1: 'displayLarge' }}
             >
               Connecting Puget Sound nonprofits with free tech solutions.
             </Typography>
@@ -53,7 +53,7 @@ const Home: NextPage<Props> = () => {
               <Image
                 src="/seattle_4.jpg"
                 loader={loader}
-                fill="responsive"
+                fill={true}
                 objectFit="cover"
                 alt="Seattle skyline by Stephen Plopper"
               />
