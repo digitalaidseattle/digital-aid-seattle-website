@@ -1,6 +1,5 @@
 import { loadEnvConfig } from '@next/env'
 import { defineCliConfig } from 'sanity/cli'
-import sanityClient from '@sanity/client'
 
 const dev = process.env.NODE_ENV !== 'production'
 loadEnvConfig(__dirname, dev, { info: () => null, error: console.error })
@@ -11,12 +10,7 @@ loadEnvConfig(__dirname, dev, { info: () => null, error: console.error })
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 
-export const client = sanityClient({
-  projectId,
-  dataset,
-  apiVersion: '2023-05-12',
-  useCdn: false,
-})
+
 
 const config = defineCliConfig({ api: { projectId, dataset } })
 
