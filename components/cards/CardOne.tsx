@@ -21,9 +21,9 @@ const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProp
         <Card sx={{ 
             flex: '1',
             minWidth: {xs: '100%', sm:'min-content'},
-            borderRadius: '12px',
-            backgroundColor: '#F7FAFA',
-            border: '3px solid #FFFFFF',
+            // borderRadius: '12px',
+            // backgroundColor: '#F7FAFA',
+            // border: '3px solid #FFFFFF',
             boxShadow: '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
         }}>
             <CardContent sx={{ 
@@ -38,7 +38,7 @@ const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProp
                 {/* typography styles here are for testing purposes only-- can be replaced with a variant defined in theme! */}
                 {title && <Typography sx={{fontSize: '1rem', fontWeight: '700'}}>{title}</Typography>}
                 <Typography sx={{fontSize: '0.875rem', lineHeight: '28px'}}>{description}</Typography>
-                {buttonText && <Button sx={{mt: 'auto'}} href={buttonLink}>{buttonText}</Button>}
+                {buttonText && <Button variant='card' href={buttonLink}>{buttonText}</Button>}
             </CardContent>
         </Card>
     );
