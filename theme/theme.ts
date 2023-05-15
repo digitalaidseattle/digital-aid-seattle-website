@@ -30,6 +30,27 @@ declare module '@mui/material/styles/createTypography' {
   }
 }
 
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    displayLarge?: true
+    displayMedium?: true
+    displaySmall?: true
+    headlineLarge?: true
+    headlineMedium?: true
+    headlineSmall?: true
+    titleLarge?: true
+    titleMedium?: true
+    titleSmall?: true
+    labelLarge?: true
+    labelMedium?: true
+    labelSmall?: true
+    bodyLarge?: true
+    bodyMedium?: true
+    bodySmall?: true
+  }
+}
+
 const greenPalette = {
   0: '#000000',
   10: '#00201B',
@@ -236,6 +257,13 @@ export const theme = createTheme({
           borderRadius: '100px',
           padding: '10px 24px 10px 24px',
           textTransform: 'none',
+        },
+      },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          displayLarge: 'h1',
         },
       },
     },
