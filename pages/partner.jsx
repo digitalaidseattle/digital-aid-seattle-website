@@ -43,33 +43,6 @@ export default function PartnerForm() {
   return (
     <Layout>
       <Container>
-      <CardRowContainer>
-
-<CardOne
-  title="Make a Donation"
-  description="A tax-deductible donation below helps us provide our Partners with the tools they need."
-  icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }} />}
-  buttonText="Donate"
-  buttonLink="#"
-/>
-
-<CardOne
-  title="Sponsor Us"
-  description="Help our Partners increase their nonprofit’s impact by becoming an ally and offering support."
-  icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }} />}
-  buttonText="Sponsor"
-  buttonLink="#"
-/>
-
-<CardOne
-  title="Share Our Mission"
-  description="Spread the word with your friends, coworkers, and social media, to help continue our mission."
-  icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }} />}
-  buttonText="Share"
-  buttonLink="#"
-/>
-
-</CardRowContainer>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-8 divide-y divide-gray-200 dark:divide-gray-500"

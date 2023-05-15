@@ -15,15 +15,11 @@ type CardOneProps = {
     buttonLink?: string
 }
 
-// TODO: have card colors/styles defined in the theme file instead of here
 const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProps) => {
     return (
         <Card sx={{ 
             flex: '1',
             minWidth: {xs: '100%', sm:'min-content'},
-            // borderRadius: '12px',
-            // backgroundColor: '#F7FAFA',
-            // border: '3px solid #FFFFFF',
             boxShadow: '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
         }}>
             <CardContent sx={{ 
@@ -32,12 +28,13 @@ const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProp
                 gap: '1.5rem',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: {xs: '2rem', sm: '1rem'}
+                padding: {xs: '2rem', sm: '1rem'},
+                justifyContent: 'space-between',
+                height: '100%',
                 }}>
                 <IconContainer>{icon}</IconContainer>
-                {/* typography styles here are for testing purposes only-- can be replaced with a variant defined in theme! */}
-                {title && <Typography sx={{fontSize: '1rem', fontWeight: '700'}}>{title}</Typography>}
-                <Typography sx={{fontSize: '0.875rem', lineHeight: '28px'}}>{description}</Typography>
+                {title && <Typography variant='titleLarge'>{title}</Typography>}
+                <Typography variant='bodyMedium'>{description}</Typography>
                 {buttonText && <Button variant='card' href={buttonLink}>{buttonText}</Button>}
             </CardContent>
         </Card>

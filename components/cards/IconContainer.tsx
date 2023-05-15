@@ -8,7 +8,7 @@ type Props = {
 const IconContainer = ( {children} : Props ) => {
     return (
         <Box sx={{ 
-            backgroundColor: '#005045', 
+            backgroundColor: 'primary.light', 
             borderRadius: '50%',
             width: '5rem',
             height: '5rem',
