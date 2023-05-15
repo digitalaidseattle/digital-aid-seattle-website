@@ -1,5 +1,35 @@
 import { createTheme } from '@mui/material'
 
+interface FontProperties {
+  fontFamily?: string
+  fontWeight?: number
+  fontSize?: string
+  lineHeight?: string
+  letterSpacing?: string
+  fontStyle?: string
+}
+
+declare module '@mui/material/styles/createTypography' {
+  // allow configuration using `createTheme`
+  interface TypographyOptions {
+    displayLarge?: FontProperties
+    displayMedium?: FontProperties
+    displaySmall?: FontProperties
+    headlineLarge?: FontProperties
+    headlineMedium?: FontProperties
+    headlineSmall?: FontProperties
+    titleLarge?: FontProperties
+    titleMedium?: FontProperties
+    titleSmall?: FontProperties
+    labelLarge?: FontProperties
+    labelMedium?: FontProperties
+    labelSmall?: FontProperties
+    bodyLarge?: FontProperties
+    bodyMedium?: FontProperties
+    bodySmall?: FontProperties
+  }
+}
+
 const greenPalette = {
   0: '#000000',
   10: '#00201B',
