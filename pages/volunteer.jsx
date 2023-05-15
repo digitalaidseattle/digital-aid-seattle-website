@@ -11,7 +11,6 @@ import Layout from '../components/Layout'
 
 export default function VolunteerForm() {
   const router = useRouter()
-
   const {
     register,
     handleSubmit,

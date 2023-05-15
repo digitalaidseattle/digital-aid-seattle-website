@@ -10,4 +10,8 @@ loadEnvConfig(__dirname, dev, { info: () => null, error: console.error })
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 
-export default defineCliConfig({ api: { projectId, dataset } })
+
+
+const config = defineCliConfig({ api: { projectId, dataset } })
+
+export default config
