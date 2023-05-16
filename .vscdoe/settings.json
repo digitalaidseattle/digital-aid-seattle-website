@@ -1,0 +1,23 @@
+{
+  /**
+   * Editor
+   */
+
+   "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ],
+
+   "editor.formatOnSave": true,
+   "editor.codeActionsOnSave": {
+     "source.fixAll.eslint": true
+   },
+   "editor.insertSpaces": true,
+   "editor.tabSize": 2,
+   "editor.rulers": [80],
+
+   "prettier.singleQuote": true,
+   "prettier.semi": false,
+   "prettier.trailingComma": "all"
+}
