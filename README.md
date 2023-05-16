@@ -40,10 +40,10 @@ The website is built using **Next.js**, a React-based framework for server-side 
 1. Setup the frontend environment
 
    ```bash
-   git clone https://github.com/openseattle/open-seattle-website 
+   git clone https://github.com/openseattle/open-seattle-website
    cd open-seattle-website
    git checkout main
-   npm install
+   yarn install
    ```
 
 ### Configure Environmental Variables
@@ -77,9 +77,9 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 1. Start development server
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   yarn dev
+   ```
 
 2. Open local instance in browser: <http://localhost:3000>. Note: Pages populated by Sanity.io will return 404 until Sanity is properly configured.
 
