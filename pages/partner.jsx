@@ -147,7 +147,7 @@ export default function PartnerForm() {
               </div>
             </div>
           </div>
-          <div className="pt-5 pb-5">
+          <div className="pb-5 pt-5">
             <div className="flex justify-end space-x-3">
               <button
                 type="button"
