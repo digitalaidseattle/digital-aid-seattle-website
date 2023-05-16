@@ -1,5 +1,5 @@
-import TextWithIllustration from 'components/TextWithIllustration'
 import Layout from 'components/Layout'
+import TextWithIllustration from 'components/TextWithIllustration'
 
 export default function LandingPage({ content }) {
   return (
