@@ -1,5 +1,56 @@
 import { createTheme } from '@mui/material'
 
+interface FontProperties {
+  fontFamily?: string
+  fontWeight?: number
+  fontSize?: string
+  lineHeight?: string
+  letterSpacing?: string
+  fontStyle?: string
+}
+
+declare module '@mui/material/styles/createTypography' {
+  // allow configuration using `createTheme`
+  interface TypographyOptions {
+    displayLarge?: FontProperties
+    displayMedium?: FontProperties
+    displaySmall?: FontProperties
+    headlineLarge?: FontProperties
+    headlineMedium?: FontProperties
+    headlineSmall?: FontProperties
+    titleLarge?: FontProperties
+    titleMedium?: FontProperties
+    titleSmall?: FontProperties
+    labelLarge?: FontProperties
+    labelMedium?: FontProperties
+    labelSmall?: FontProperties
+    bodyLarge?: FontProperties
+    bodyMedium?: FontProperties
+    bodySmall?: FontProperties
+  }
+}
+
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    displayLarge?: true
+    displayMedium?: true
+    displaySmall?: true
+    headlineLarge?: true
+    headlineMedium?: true
+    headlineSmall?: true
+    titleLarge?: true
+    titleMedium?: true
+    titleSmall?: true
+    labelLarge?: true
+    labelMedium?: true
+    labelSmall?: true
+    bodyLarge?: true
+    bodyMedium?: true
+    bodySmall?: true
+  }
+}
+
 const greenPalette = {
   0: '#000000',
   10: '#00201B',
@@ -200,6 +251,13 @@ export const theme = createTheme({
           borderRadius: '100px',
           padding: '10px 24px 10px 24px',
           textTransform: 'none',
+        },
+      },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          displayLarge: 'h1',
         },
       },
     },

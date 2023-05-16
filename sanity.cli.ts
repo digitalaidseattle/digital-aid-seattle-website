@@ -17,7 +17,6 @@ export const client = sanityClient({
   apiVersion: '2023-05-12',
   useCdn: false,
 })
-
 const config = defineCliConfig({ api: { projectId, dataset } })
 
 export default config
