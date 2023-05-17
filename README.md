@@ -47,6 +47,12 @@ The website is built using **Next.js**, a React-based framework for server-side 
    yarn install
    ```
 
+2. Setup VSCode for auto formatting
+
+- Install extensions: ESLint and Prettier
+- Go to VSCode setting `Settings` > `Text Editor` > `Formatting` > `Format On Save`
+- In the same setting window, look up `Default Formatter` and set to Prettier.
+
 ### Configure Environmental Variables
 
 1. Create .env.local file:
