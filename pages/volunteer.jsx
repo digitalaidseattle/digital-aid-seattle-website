@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 export default function VolunteerForm() {
   return (
     <Layout>
-        <Container >
+      <Container>
         <iframe
           class="airtable-embed airtable-dynamic-height"
           src="https://airtable.com/embed/shr1lbcr3qmkoIbNW?backgroundColor=purpleLight"
@@ -17,7 +17,7 @@ export default function VolunteerForm() {
             overflow: 'hidden',
           }}
         ></iframe>
-        </Container>
+      </Container>
     </Layout>
   )
 }

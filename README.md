@@ -23,6 +23,7 @@ Seattle is world-renowned as a hub for technology talent, full of motivated buil
 This website is for organizations that want to [learn more about partnering with Open Seattle](https://www.openseattle.org/partner) and for passionate, skilled Seattlites who want to [learn more about volunteering!](https://www.openseattle.org/volunteer)
 
 ## Technology Stack
+
 The website is built using **Next.js**, a React-based framework for server-side rendering and static site generation. Learn more about Next.js [here](https://nextjs.org/docs/getting-started).
 
 **Airtable** is integrated to create forms for volunteers and partners to sign up, providing a database for storing and managing their information. Explore Airtable's documentation [here](https://airtable.com/developers/docs).
@@ -40,46 +41,52 @@ The website is built using **Next.js**, a React-based framework for server-side 
 1. Setup the frontend environment
 
    ```bash
-   git clone https://github.com/openseattle/open-seattle-website 
+   git clone https://github.com/openseattle/open-seattle-website
    cd open-seattle-website
    git checkout main
-   npm install
+   yarn install
    ```
+
+2. Setup VSCode for auto formatting
+
+- Install extensions: ESLint and Prettier
+- Go to VSCode setting `Settings` > `Text Editor` > `Formatting` > `Format On Save`
+- In the same setting window, look up `Default Formatter` and set to Prettier.
 
 ### Configure Environmental Variables
 
 1. Create .env.local file:
 
-    ```bash
-    touch .env.local
-    ```
+   ```bash
+   touch .env.local
+   ```
 
 2. Paste the following into this file and save:
 
-    ```.env
-    # Defaults, used by ./intro-template and can be deleted if the component is removed
-    NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER="sanity-io"
-    NEXT_PUBLIC_VERCEL_GIT_PROVIDER="github"
-    NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG="template-nextjs-clean"
+   ```.env
+   # Defaults, used by ./intro-template and can be deleted if the component is removed
+   NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER="sanity-io"
+   NEXT_PUBLIC_VERCEL_GIT_PROVIDER="github"
+   NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG="template-nextjs-clean"
 
-    # Required, find them on https://manage.sanity.io
-    NEXT_PUBLIC_SANITY_PROJECT_ID=
-    NEXT_PUBLIC_SANITY_DATASET=
+   # Required, find them on https://manage.sanity.io
+   NEXT_PUBLIC_SANITY_PROJECT_ID=
+   NEXT_PUBLIC_SANITY_DATASET=
 
-    # see https://www.sanity.io/docs/api-versioning for how versioning works
-    NEXT_PUBLIC_SANITY_API_VERSION="2022-11-28"
+   # see https://www.sanity.io/docs/api-versioning for how versioning works
+   NEXT_PUBLIC_SANITY_API_VERSION="2022-11-28"
 
-    # Required for making form requests.
-    AIRTABLE_API_KEY=
-    ```
+   # Required for making form requests.
+   AIRTABLE_API_KEY=
+   ```
 
 ### Run locally
 
 1. Start development server
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   yarn dev
+   ```
 
 2. Open local instance in browser: <http://localhost:3000>. Note: Pages populated by Sanity.io will return 404 until Sanity is properly configured.
 
@@ -91,31 +98,31 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 1. Set up local environment.
 2. Ensure access to appropriate accounts:
-    - Github: Must be member of [Open Seattle Github Org](https://github.com/openseattle) in order to push changes to the repo.
-    - Vercel: Must be a member of [Open Seattle Group on Vercel](https://vercel.com/openseattle/open-seattle-website)to approve staged changes to production.
-    - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Open Seattle Sanity Dashboard can be accessed here](https://www.openseattle.org/studio)
-    - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
+   - Github: Must be member of [Open Seattle Github Org](https://github.com/openseattle) in order to push changes to the repo.
+   - Vercel: Must be a member of [Open Seattle Group on Vercel](https://vercel.com/openseattle/open-seattle-website)to approve staged changes to production.
+   - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Open Seattle Sanity Dashboard can be accessed here](https://www.openseattle.org/studio)
+   - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
 3. Get issue from group Asana board.
 4. Create a branch with the following convention: username/feature-name
 
-    ```bash
-    git checkout -b <username/feature-name>
-    ```
+   ```bash
+   git checkout -b <username/feature-name>
+   ```
 
 5. Make desired updates.
 6. Commit changes with the following convention: category: Description
 
-    ```bash
-    git add --all
-    git commit -m 'feat: Updated project layout to include project contributors'  
-    ```
+   ```bash
+   git add --all
+   git commit -m 'feat: Updated project layout to include project contributors'
+   ```
 
 7. Squash branch commits to a single commit. In this example, the contributor made three commits:
 
-    ```bash
-    git reset --soft @~3
-    git commit -m 'feat: Updated project layout to include project contributors'
-    ```
+   ```bash
+   git reset --soft @~3
+   git commit -m 'feat: Updated project layout to include project contributors'
+   ```
 
 8. Create pull request and ask for review
 
