@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 
 
 type CardOneProps = {
-    title?: string,
+    title: string,
     description: string,
     icon: ReactNode,
     buttonText?: string,
@@ -33,9 +33,9 @@ const CardOne = ({title, description, icon, buttonText, buttonLink}: CardOneProp
                 height: '100%',
                 }}>
                 <IconContainer>{icon}</IconContainer>
-                {title && <Typography variant='titleLarge'>{title}</Typography>}
+                <Typography variant='titleLarge'>{title}</Typography>
                 <Typography variant='bodyMedium'>{description}</Typography>
-                {buttonText && <Button variant='card' href={buttonLink}>{buttonText}</Button>}
+                {buttonText && <Button variant='contained' color='secondary' href={buttonLink}>{buttonText}</Button>}
             </CardContent>
         </Card>
     );
