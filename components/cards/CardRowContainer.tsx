@@ -1,22 +1,24 @@
-import Box from '@mui/material/Box';
-import { ReactNode } from 'react';
+import Box from '@mui/material/Box'
+import { ReactNode } from 'react'
 
 type Props = {
-    children: ReactNode
+  children: ReactNode
 }
 
-const CardRowContainer = ( {children} : Props ) => {
-    return (
-        <Box sx={{ 
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '2rem',
-            flexWrap: 'wrap',
-            justifyContent: 'center'
-        }}>
-            {children}
-        </Box>
-    )
+const CardRowContainer = ({ children }: Props) => {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '2rem',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
+      {children}
+    </Box>
+  )
 }
 
-export default CardRowContainer;
+export default CardRowContainer
