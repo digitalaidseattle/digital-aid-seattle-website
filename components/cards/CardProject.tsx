@@ -36,7 +36,7 @@ const CardProject =
                     {/* TODO: figure out images.. */}
                     {/* <img src='../../assets/placeholder-project-img.jpg'/> */}
                 </Box>
-                <Stack spacing={1}>
+                <Stack spacing="1rem">
                     <Typography variant="titleLarge">{title}</Typography>
                     <Typography variant="labelLarge">{partner}</Typography>
                     <Typography variant="labelMedium">{programAreas.join(', ')}</Typography>
@@ -44,9 +44,7 @@ const CardProject =
                 <Typography variant="bodyMedium">{description}</Typography>
                 <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
                     <Button variant="contained">View Project</Button>
-                    <Stack spacing={1} sx={{maxWidth: 'min-content'}}>
-                        {/* TODO: replace this button with the state components */}
-                        {/* <Button variant="contained" color="secondary">Active</Button> */}
+                    <Stack spacing="1rem">
                         <StateButton state={status}/>
                         <Typography variant="labelMedium">Jun 1 - Jul 15</Typography>
                     </Stack>

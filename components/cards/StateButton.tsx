@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography/Typography";
 
 type StateButtonProps = {
     state: "active" | "recruiting" | "complete"
@@ -7,14 +8,18 @@ type StateButtonProps = {
 const StateButton = ({state}: StateButtonProps) => {
     const bgColor = state === "active" ? "#FFFAD8" : state === "recruiting" ? "#DDFFAF" : "#FFF0EE";
     return (
-        <Button sx={{
+        <Box sx={{ 
+            color: '#343D3E',
             textTransform: "capitalize", 
-            backgroundColor: bgColor,
             padding: "10px 12px",
-            fontSize: "14px"
+            borderRadius: "100px",
+            backgroundColor: bgColor,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
             }}>
-            {state}
-        </Button>
+            <Typography variant="titleSmall" sx={{ fontWeight: "600"}}>{state}</Typography>
+        </Box>
     );
 }
 
