@@ -12,10 +12,12 @@ export default function VolunteerForm() {
     <Layout>
       {/* test */}
       <CardGridContainer>
-      <CardProject/>
-      <CardProject/>
-      <CardProject/>
-      <CardProject/>
+      <CardProject 
+        title="Seattle Humane Society"
+        partner="City of Bellevue"
+        programAreas={["Animals", "Equity"]}
+        description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
+        />
       </CardGridContainer>
       {/* end test */}
       <Container>

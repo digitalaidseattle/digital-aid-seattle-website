@@ -13,13 +13,14 @@ type CardProjectProps = {
   partner: string
   programAreas: string[]
   description: string
-  status: string
-  buttonLink: string
+//   status: string
+//   buttonLink: string
 //   startDate?: string
 //   endDate?: string 
 }
 
-const CardProject = () => {
+const CardProject = 
+({title, partner, programAreas, description}: CardProjectProps) => {
     return (
         <Card>
             <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '2rem'}}>
@@ -35,11 +36,11 @@ const CardProject = () => {
                     {/* <img src='../../assets/placeholder-project-img.jpg'/> */}
                 </Box>
                 <Stack spacing={1}>
-                    <Typography variant="titleLarge">Title</Typography>
-                    <Typography variant="labelLarge">Partner</Typography>
-                    <Typography variant="labelMedium">Program areas</Typography>
+                    <Typography variant="titleLarge">{title}</Typography>
+                    <Typography variant="labelLarge">{partner}</Typography>
+                    <Typography variant="labelMedium">{programAreas.join(', ')}</Typography>
                 </Stack>
-                <Typography variant="bodyMedium">Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</Typography>
+                <Typography variant="bodyMedium">{description}</Typography>
                 <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
                     <Button variant="contained">View Project</Button>
                     <Stack spacing={1} sx={{maxWidth: 'min-content'}}>
