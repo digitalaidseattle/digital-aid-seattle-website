@@ -2,7 +2,6 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 
-import IconContainer from './IconContainer'
 import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
@@ -23,13 +22,14 @@ type CardProjectProps = {
 const CardProject = () => {
     return (
         <Card>
-            <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+            <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '2rem'}}>
                 <Box sx={{
                     width: '100%',
-                    height: 'auto',
-                    aspectRatio: '1/1', // browser support for this is iffy
+                    paddingBottom: '100%',
+                    height: '0',
+                    border: '2px solid #EAF1F1', // move to theme.ts?
                     borderRadius: '8px',
-                    backgroundColor: 'grey'
+                    backgroundColor: '#fff'
                 }}>
                     {/* TODO: figure out images.. */}
                     {/* <img src='../../assets/placeholder-project-img.jpg'/> */}
