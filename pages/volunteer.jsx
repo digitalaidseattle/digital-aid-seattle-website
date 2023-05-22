@@ -17,7 +17,20 @@ export default function VolunteerForm() {
         partner="City of Bellevue"
         programAreas={["Animals", "Equity"]}
         description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
-        />
+        status="active"/>
+              <CardProject 
+        title="Seattle Humane Society"
+        partner="City of Bellevue"
+        programAreas={["Animals", "Equity"]}
+        description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
+        status="recruiting"/>
+              <CardProject 
+        title="Seattle Humane Society"
+        partner="City of Bellevue"
+        programAreas={["Animals", "Equity"]}
+        description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
+        status="complete"/>
+        
       </CardGridContainer>
       {/* end test */}
       <Container>

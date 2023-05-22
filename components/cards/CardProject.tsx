@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
+import StateButton from './StateButton'
 // const placeholder = require('../../assets/placeholder-project-img.jpg')
 
 type CardProjectProps = {
@@ -13,14 +14,14 @@ type CardProjectProps = {
   partner: string
   programAreas: string[]
   description: string
-//   status: string
+  status: "active" | "recruiting" | "complete"
 //   buttonLink: string
 //   startDate?: string
 //   endDate?: string 
 }
 
 const CardProject = 
-({title, partner, programAreas, description}: CardProjectProps) => {
+({title, partner, programAreas, description, status}: CardProjectProps) => {
     return (
         <Card>
             <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '2rem'}}>
@@ -45,7 +46,8 @@ const CardProject =
                     <Button variant="contained">View Project</Button>
                     <Stack spacing={1} sx={{maxWidth: 'min-content'}}>
                         {/* TODO: replace this button with the state components */}
-                        <Button variant="contained" color="secondary">Active</Button>
+                        {/* <Button variant="contained" color="secondary">Active</Button> */}
+                        <StateButton state={status}/>
                         <Typography variant="labelMedium">Jun 1 - Jul 15</Typography>
                     </Stack>
                 </Stack>
