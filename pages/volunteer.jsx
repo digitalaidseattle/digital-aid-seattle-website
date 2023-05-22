@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 
 // test
 import CardProject from '../components/cards/CardProject'
-import CardRowContainer from '../components/cards/CardRowContainer'
+import CardGridContainer from '../components/cards/CardGridContainer'
 
 //
 
@@ -11,8 +11,10 @@ export default function VolunteerForm() {
   return (
     <Layout>
       {/* test */}
+      <CardGridContainer>
       <CardProject/>
       <CardProject/>
+      </CardGridContainer>
       {/* end test */}
       <Container>
         <iframe
