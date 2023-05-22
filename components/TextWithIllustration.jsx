@@ -13,7 +13,7 @@ export default function TextWithIllustration({
   tagline,
   flipLayout = false,
 }) {
-  const imageProps = useNextSanityImage(sanityClient({useCdn: false}), image)
+  const imageProps = useNextSanityImage(sanityClient({ useCdn: false }), image)
   return (
     <div className="relative">
       <div
@@ -36,7 +36,7 @@ export default function TextWithIllustration({
         <svg
           viewBox="0 0 926 676"
           aria-hidden="true"
-          className="absolute left-24 -bottom-24 w-[57.875rem] transform-gpu blur-[118px]"
+          className="absolute -bottom-24 left-24 w-[57.875rem] transform-gpu blur-[118px]"
         >
           <path
             fill="url(#60c3c621-93e0-4a09-a0e6-4c228a0116d8)"
@@ -58,13 +58,13 @@ export default function TextWithIllustration({
           </defs>
         </svg>
       </div>
-      <div className="relative mx-auto max-w-7xl py-16 sm:py-24 lg:py-32 lg:px-8">
+      <div className="relative mx-auto max-w-7xl py-16 sm:py-24 lg:px-8 lg:py-32">
         <div
           className={clsx(
             flipLayout
-              ? 'md:mr-auto md:pr-16 lg:pr-24 lg:pl-0 xl:pr-32'
+              ? 'md:mr-auto md:pr-16 lg:pl-0 lg:pr-24 xl:pr-32'
               : 'md:ml-auto md:pl-16 lg:pl-24 lg:pr-0 xl:pl-32',
-            'pr-6 pl-6  md:w-2/3 lg:w-1/2'
+            'pl-6 pr-6  md:w-2/3 lg:w-1/2'
           )}
         >
           <p className="font-body text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-200">

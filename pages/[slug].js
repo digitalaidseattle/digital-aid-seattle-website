@@ -9,7 +9,6 @@ const pageTypes = {
 }
 
 export default function DynamicPage({ page }) {
-  console.log(page)
   const PageType = pageTypes[page._type]
   return <PageType content={page} />
 }
@@ -34,7 +33,6 @@ export async function getStaticProps(ctx) {
 
 export async function getStaticPaths() {
   const paths = await getPagePaths()
-  console.log('PATHS', paths)
 
   return {
     paths: paths?.map((slug) => `/${slug}`) || [],
