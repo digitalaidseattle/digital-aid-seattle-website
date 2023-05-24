@@ -1,7 +1,15 @@
 import { NextPage } from 'next'
-import { Box, Button, Container, Typography, useTheme } from '@mui/material'
 import Image from 'next/image'
+
+import { Box, Button, Container, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
+
+import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
+import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
+import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
+
+import CardRowContainer from 'components/cards/CardRowContainer'
+import CardOne from 'components/cards/CardOne'
 
 interface Props {}
 
@@ -39,8 +47,8 @@ const Home: NextPage<Props> = () => {
           <Box
             sx={{
               flex: 1,
-              width: isMediumScreen ? '350px':'480px',
-              height: isMediumScreen ? '350px':'480px',
+              width: isMediumScreen ? '350px' : '480px',
+              height: isMediumScreen ? '350px' : '480px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -69,8 +77,8 @@ const Home: NextPage<Props> = () => {
           <Box
             sx={{
               flex: 1,
-              width: isMediumScreen ? '350px':'480px',
-              height: isMediumScreen ? '350px':'480px',
+              width: isMediumScreen ? '350px' : '480px',
+              height: isMediumScreen ? '350px' : '480px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -90,8 +98,8 @@ const Home: NextPage<Props> = () => {
                   position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  width: isMediumScreen ? '325px': '424px',
-                  height: isMediumScreen ? '325px': '424px',
+                  width: isMediumScreen ? '325px' : '424px',
+                  height: isMediumScreen ? '325px' : '424px',
                 }}
               >
                 <Image
@@ -106,8 +114,8 @@ const Home: NextPage<Props> = () => {
                 sx={{
                   position: 'absolute',
                   borderRadius: '50%',
-                  width: isMediumScreen ? '350px' :'480px',
-                  height: isMediumScreen ? '350px' :'480px',
+                  width: isMediumScreen ? '350px' : '480px',
+                  height: isMediumScreen ? '350px' : '480px',
                   border: '4px solid rgba(248, 248, 248, 0.3)',
                 }}
               />
@@ -143,6 +151,43 @@ const Home: NextPage<Props> = () => {
             Learn About Us
           </Button>
         </Box>
+      </Container>
+      <Container
+        sx={{ backgroundColor: palette.background.default, paddingTop: '120px', paddingBottom: '120px' }}
+        maxWidth={false}
+      >
+        <CardRowContainer>
+          <CardOne
+            description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
+            buttonText="Partner With Us"
+            icon={
+              <HandshakeOutlinedIcon
+                fontSize="large"
+                sx={{ color: palette.text.secondary }}
+              />
+            }
+          />
+          <CardOne
+            description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
+            buttonText="Volunteer With Us"
+            icon={
+              <Groups2OutlinedIcon
+                fontSize="large"
+                sx={{ color: palette.text.secondary }}
+              />
+            }
+          />
+          <CardOne
+            description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating."
+            buttonText="Support Us"
+            icon={
+              <VolunteerActivismOutlinedIcon
+                fontSize="large"
+                sx={{ color: palette.text.secondary }}
+              />
+            }
+          />
+        </CardRowContainer>
       </Container>
     </>
   )
