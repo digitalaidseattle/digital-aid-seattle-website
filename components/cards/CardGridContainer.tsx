@@ -11,10 +11,9 @@ const CardGridContainer = ({ children }: Props) => {
       sx={{
         display: 'grid',
         gridTemplateColumns: {xs: '1fr', sm: 'repeat(2, 1fr)'},
-        gap: '2rem',
-        // probably move these margin styles to the overall container?
-        ml: {xs: '0', sm: '50px', lg: '200px'},
-        mr: {xs: '0', sm: '50px',  lg: '200px'}
+        gap: {xs: '1rem', lg: '2rem'},
+        // probably move these margin styles to the parent container?
+        margin: {xs: '0 1rem', lg: '0 200px'},
       }}
     >
       {children}

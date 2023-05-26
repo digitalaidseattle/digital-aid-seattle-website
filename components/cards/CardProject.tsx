@@ -15,16 +15,15 @@ type CardProjectProps = {
   programAreas: string[]
   description: string
   status: "active" | "recruiting" | "complete"
-//   buttonLink: string
-//   startDate?: string
-//   endDate?: string 
+  projectLink: string
+  duration: {start: string, end: string} // unsure how to handle dates at this point
 }
 
 const CardProject = 
-({title, partner, programAreas, description, status}: CardProjectProps) => {
+({title, partner, programAreas, description, status, projectLink, duration}: CardProjectProps) => {
     return (
         <Card>
-            <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '2rem'}}>
+            <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: {xs: '1rem', lg: '2rem'}}}>
                 <Box sx={{
                     width: '100%',
                     paddingBottom: '100%',
@@ -43,10 +42,10 @@ const CardProject =
                 </Stack>
                 <Typography variant="bodyMedium">{description}</Typography>
                 <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
-                    <Button variant="contained">View Project</Button>
+                    <Button variant="contained" href={projectLink}>View Project</Button>
                     <Stack spacing="1rem">
                         <StateButton state={status}/>
-                        <Typography variant="labelMedium">Jun 1 - Jul 15</Typography>
+                        <Typography variant="labelMedium">{duration.start} - {duration.end}</Typography>
                     </Stack>
                 </Stack>
             </CardContent>
