@@ -20,13 +20,17 @@ const CardThree = (props: CardThreeProps) => {
             minWidth: { xs: '100%', sm: 'min-content' },
             boxShadow: '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)'}}>
             <CardContent sx={{ 
-                padding: '2rem',
-                display: 'flex', 
-                gap: '2rem', 
-                flexDirection: 'column', 
-                alignItems: 'center'}}>
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2rem',
+                alignItems: 'center',
+                textAlign: 'center',
+                padding: { xs: '2rem', sm: '1rem' },
+                justifyContent: 'space-between',
+                height: '100%',
+                }}>
                 <IconContainer>{props.icon}</IconContainer>
-                <Typography variant="bodyLarge" sx={{ textAlign: 'center'}}>
+                <Typography variant="bodyLarge">
                     {props.description}
                 </Typography>
                 <Button variant="contained" color="secondary">{props.buttonText}</Button>

@@ -17,9 +17,22 @@ export default function VolunteerForm() {
       
       {/* test */}
       <CardRowContainer>
-        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
-        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
-        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
+        <CardThree 
+          icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} 
+          description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
+          buttonText="Partner With Us"
+          />
+        <CardThree 
+          icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} 
+          description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available." 
+          buttonText="Volunteer With Us"
+          />        
+        <CardThree 
+          icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} 
+          description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating." 
+          buttonText="Support Us"
+          />
+
       </CardRowContainer>
 
       <Container>
