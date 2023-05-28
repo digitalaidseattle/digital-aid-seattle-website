@@ -5,43 +5,22 @@ import Layout from '../components/Layout'
 import CardProject from '../components/cards/CardProject'
 import CardGridContainer from '../components/cards/CardGridContainer'
 
+import CardRowContainer from '../components/cards/CardRowContainer';
+import CardOne from '../components/cards/CardOne'
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 //
+import CardThree from '../components/cards/CardThree'
 
 export default function VolunteerForm() {
   return (
     <Layout>
       
       {/* test */}
-      <CardGridContainer>
-        <CardProject 
-          title="Seattle Humane Society"
-          partner="City of Bellevue"
-          programAreas={["Animals", "Equity"]}
-          description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
-          status="active"
-          projectLink="#"
-          duration={{start: "Jun 1", end: "Jun 30"}}
-          />
-        <CardProject 
-          title="Seattle Humane Society"
-          partner="City of Bellevue"
-          programAreas={["Animals", "Equity"]}
-          description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
-          status="recruiting"
-          projectLink="#"
-          duration={{start: "Jun 1", end: "Jun 30"}}
-        />
-        <CardProject 
-          title="Seattle Humane Society"
-          partner="City of Bellevue"
-          programAreas={["Animals", "Equity"]}
-          description="Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them."
-          status="complete"
-          projectLink="#"
-          duration={{start: "Jun 1", end: "Jun 30"}}
-        />
-      </CardGridContainer>
-      {/* end test */}
+      <CardRowContainer>
+        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
+        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
+        <CardThree icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} description={"test"} buttonText="text"/>
+      </CardRowContainer>
 
       <Container>
         <iframe
