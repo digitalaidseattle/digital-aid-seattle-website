@@ -16,6 +16,16 @@ export default function VolunteerForm() {
     <Layout>
       
       {/* test */}
+      <CardGridContainer>
+        <CardProject
+          title= "Seattle Humane Society"
+          partner="City of Bellevue"
+          programAreas={["Animals"]}
+          description= "Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+          status= "active"
+          projectLink= "#"
+          duration= {{start: "Jun 1", end: "Jul 15"}}/>
+      </CardGridContainer>
       <CardRowContainer>
         <CardThree 
           icon={<AccessibilityIcon fontSize="large" sx={{ color: "white" }}/>} 
@@ -32,7 +42,6 @@ export default function VolunteerForm() {
           description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating." 
           buttonText="Support Us"
           />
-
       </CardRowContainer>
 
       <Container>

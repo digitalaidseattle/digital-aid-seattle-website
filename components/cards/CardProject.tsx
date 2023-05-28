@@ -16,6 +16,7 @@ type CardProjectProps = {
   status: "active" | "recruiting" | "complete"
   projectLink: string
   duration: {start: string, end: string} // unsure how to handle dates at this point
+//   imageSrc: string
 }
 
 const CardProject = 
@@ -40,9 +41,18 @@ const CardProject =
                     <Typography variant="labelMedium">{programAreas.join(', ')}</Typography>
                 </Stack>
                 <Typography variant="bodyMedium">{description}</Typography>
-                <Stack direction="row" justifyContent="space-between" alignItems="flex-end">
+                <Stack 
+                    direction={{xs: 'column-reverse', md: 'row'}} 
+                    alignItems={{xs: "auto", md: "flex-end"}}
+                    justifyContent="space-between"
+                    spacing="1rem">
                     <Button variant="contained" href={projectLink}>View Project</Button>
-                    <Stack spacing="1rem">
+                    <Stack 
+                        direction={{xs: 'row-reverse', md: 'column'}} 
+                        justifyContent={{xs: "space-between", md: 'auto'}}
+                        alignItems={{xs: "center", md: 'auto'}}
+                        spacing="1rem"
+                        sx={{ paddingLeft: {xs:'2rem', md: '0'} }}>
                         <StateButton state={status}/>
                         <Typography variant="labelMedium">{duration.start} - {duration.end}</Typography>
                     </Stack>
