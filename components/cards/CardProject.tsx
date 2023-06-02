@@ -6,9 +6,10 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import StateButton from './StateButton'
-// const placeholder = require('../../assets/placeholder-project-img.jpg')
+import Placeholder from '../../assets/placeholder-img.png'
 
-type CardProjectProps = {
+
+type CardProjectProps = {  
   title: string
   partner: string
   programAreas: string[]
@@ -16,24 +17,32 @@ type CardProjectProps = {
   status: "active" | "recruiting" | "complete"
   projectLink: string
   duration: {start: string, end: string} // unsure how to handle dates at this point
-//   imageSrc: string
 }
+
 
 const CardProject = 
 ({title, partner, programAreas, description, status, projectLink, duration}: CardProjectProps) => {
+    
+  
+      
     return (
         <Card>
-            <CardContent sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: {xs: '1rem', lg: '2rem'}}}>
+            <CardContent sx={{padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
                 <Box sx={{
                     width: '100%',
-                    paddingBottom: '100%',
                     height: '0',
-                    border: '2px solid #EAF1F1', // move to theme.ts?
+                    border: '2px solid #EAF1F1',
                     borderRadius: '8px',
-                    backgroundColor: '#fff'
+                    display: {xs: 'none', md: 'block'}
                 }}>
-                    {/* TODO: figure out images.. */}
-                    {/* <img src='../../assets/placeholder-project-img.jpg'/> */}
+                    {/* TODO: use an image prop so we can customize the image for different cards. below is just a placeholder for testing purposes. */}                   
+                    <img
+                    src={Placeholder.src}
+                    style={{
+                        height: '100%',
+                        width: '100%',
+                    }}
+                    />
                 </Box>
                 <Stack spacing="1rem">
                     <Typography variant="titleLarge">{title}</Typography>
