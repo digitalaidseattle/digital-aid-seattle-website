@@ -33,3 +33,5 @@ const StateButton = ({ state }: StateButtonProps) => {
 }
 
 export default StateButton
+
+export default StateButton;
