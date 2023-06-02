@@ -11,17 +11,21 @@ import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivism
 import CardRowContainer from 'components/cards/CardRowContainer'
 import CardOne from 'components/cards/CardOne'
 
+import HeroLines from '../assets/homeHeroLines.svg'
+
 interface Props {}
 
 const Home: NextPage<Props> = () => {
   const theme = useTheme()
   const palette = theme.palette
 
-  const loader = ({ src }) => {
-    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}`
+  const loader = ({ src, width, quality }) => {
+    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}\?w=${width}&q=${
+      quality || 75
+    }`
   }
 
-  const isMediumScreen = useMediaQuery('(max-Width:960px)')
+  const isMediumScreen = useMediaQuery('(max-Width:900px)')
 
   return (
     <>
@@ -31,36 +35,56 @@ const Home: NextPage<Props> = () => {
           overflow: 'auto',
           backgroundColor: palette.primary.dark,
           display: 'flex',
-          width: '100%',
+          width: '100vw',
           flexDirection: 'column',
           alignItems: 'center',
         }}
         maxWidth={false}
       >
         <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            overflow: 'hidden',
+            transform: {
+              xs: 'rotate(90deg) translate(-25%,80%)',
+              md: 'translate(-50%, -50%)',
+            },
+          }}
+        >
+          <Image
+            src={HeroLines}
+            loader={loader}
+            alt="Hero Lines"
+            priority={false}
+            style={{ opacity: 0.4 }}
+          ></Image>
+        </Box>
+        <Box
           mt={10}
           sx={{
             display: 'flex',
-            flexDirection: isMediumScreen ? 'column' : 'row',
+            flexDirection: { xs: 'column', md: 'row' },
           }}
         >
           <Box
             sx={{
               flex: 1,
-              width: isMediumScreen ? '350px' : '480px',
-              height: isMediumScreen ? '350px' : '480px',
+              width: { md: '480px', xs: '350px' },
+              height: { md: '480px', xs: '350px' },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               gap: '24px',
-              alignItems: isMediumScreen ? 'center' : 'flex-start',
-              textAlign: isMediumScreen ? 'center' : 'left',
-              marginBottom: isMediumScreen ? 10 : 0,
+              alignItems: { xs: 'center', md: 'flex-start' },
+              textAlign: { xs: 'center', md: 'left' },
+              marginBottom: { xs: 5, md: 0 },
             }}
           >
             <Typography
               color={'text.secondary'}
-              sx={{ maxWidth: isMediumScreen ? '90%' : '450px' }}
+              sx={{ maxWidth: { xs: '90%', md: '450px' } }}
               variant={isMediumScreen ? 'displaySmall' : 'displayLarge'}
             >
               Connecting Puget Sound nonprofits with free tech solutions.
@@ -77,8 +101,8 @@ const Home: NextPage<Props> = () => {
           <Box
             sx={{
               flex: 1,
-              width: isMediumScreen ? '350px' : '480px',
-              height: isMediumScreen ? '350px' : '480px',
+              width: { md: '480px', xs: '350px' },
+              height: { md: '480px', xs: '350px' },
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -98,8 +122,8 @@ const Home: NextPage<Props> = () => {
                   position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  width: isMediumScreen ? '325px' : '424px',
-                  height: isMediumScreen ? '325px' : '424px',
+                  width: { md: '424px', xs: '325px' },
+                  height: { md: '424px', xs: '325px' },
                 }}
               >
                 <Image
@@ -108,18 +132,56 @@ const Home: NextPage<Props> = () => {
                   fill={true}
                   alt="Seattle skyline by Stephen Plopper"
                   priority={true}
+                  style={{ zIndex: 1 }}
                 />
               </Box>
               <Box
                 sx={{
                   position: 'absolute',
                   borderRadius: '50%',
-                  width: isMediumScreen ? '350px' : '480px',
-                  height: isMediumScreen ? '350px' : '480px',
+                  width: { md: '480px', xs: '350px' },
+                  height: { md: '480px', xs: '350px' },
                   border: '4px solid rgba(248, 248, 248, 0.3)',
                 }}
               />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  width: '125%',
+                  height: '50%',
+                  borderRadius: '50%',
+                  background: 'rgba(184, 233, 122, 0.32)',
+                  top: '55%',
+                  filter: 'blur(100px)',
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  width: '75%',
+                  height: '25%',
+                  borderRadius: '50%',
+                  background: 'rgba(184, 233, 122, 0.32)',
+                  top: '65%',
+                  left: '-15%',
+                  filter: 'blur(100px)',
+                  transform: 'rotate(45deg)',
+                }}
+              />
             </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '75%',
+                height: '25%',
+                borderRadius: '50%',
+                background: 'rgba(184, 233, 122, 0.32)',
+                top: '65%',
+                left: '40%',
+                filter: 'blur(100px)',
+                transform: 'rotate(-45deg)',
+              }}
+            />
           </Box>
         </Box>
       </Container>
@@ -129,7 +191,7 @@ const Home: NextPage<Props> = () => {
       >
         <Box
           sx={{
-            height: isMediumScreen ? '450px' : '536px',
+            height: { xs: '450px', md: '536px' },
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around',
@@ -153,7 +215,11 @@ const Home: NextPage<Props> = () => {
         </Box>
       </Container>
       <Container
-        sx={{ backgroundColor: palette.background.default, paddingTop: '120px', paddingBottom: '120px' }}
+        sx={{
+          backgroundColor: palette.background.default,
+          paddingTop: '120px',
+          paddingBottom: '120px',
+        }}
         maxWidth={false}
       >
         <CardRowContainer>
