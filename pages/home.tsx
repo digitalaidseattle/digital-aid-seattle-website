@@ -11,7 +11,8 @@ import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivism
 import CardRowContainer from 'components/cards/CardRowContainer'
 import CardOne from 'components/cards/CardOne'
 
-import HeroLines from '../assets/homeHeroLines.svg'
+import HeroLines from '../public/images/homeHeroLines.svg'
+import HeroImage from '../public/images/seattle_4.jpg'
 
 interface Props {}
 
@@ -46,7 +47,6 @@ const Home: NextPage<Props> = () => {
             isMediumScreen
               ? {
                   position: 'absolute',
-                  // overflow: 'hidden',
                   height: '80vw',
                   transform: {
                     xs: 'rotate(90deg)',
@@ -69,7 +69,7 @@ const Home: NextPage<Props> = () => {
             src={HeroLines}
             loader={loader}
             alt="Hero Lines"
-            priority={false}
+            priority={true}
             style={{ opacity: 0.4, objectFit: 'contain' }}
           />
         </Box>
@@ -105,7 +105,7 @@ const Home: NextPage<Props> = () => {
               <Button variant="contained" color="secondary">
                 Get Help
               </Button>
-              <Button variant="contained" color="primary">
+              <Button variant='contained' color='primary'>
                 Volunteer With Us
               </Button>
             </Box>
@@ -139,7 +139,7 @@ const Home: NextPage<Props> = () => {
                 }}
               >
                 <Image
-                  src={'/seattle_4.jpg'}
+                  src={HeroImage}
                   loader={loader}
                   fill={true}
                   alt="Seattle skyline by Stephen Plopper"
