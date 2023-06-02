@@ -42,24 +42,36 @@ const Home: NextPage<Props> = () => {
         maxWidth={false}
       >
         <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            overflow: 'hidden',
-            transform: {
-              xs: 'rotate(90deg) translate(-25%,80%)',
-              md: 'translate(-50%, -50%)',
-            },
-          }}
+          sx={
+            isMediumScreen
+              ? {
+                  position: 'absolute',
+                  // overflow: 'hidden',
+                  height: '80vw',
+                  transform: {
+                    xs: 'rotate(90deg)',
+                  },
+                }
+              : {
+                  width: '100vw',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  overflow: 'hidden',
+                  transform: {
+                    xs: 'rotate(90deg) translate(-50%,-50%)',
+                    md: 'translate(-50%, -50%)',
+                  },
+                }
+          }
         >
           <Image
             src={HeroLines}
             loader={loader}
             alt="Hero Lines"
             priority={false}
-            style={{ opacity: 0.4 }}
-          ></Image>
+            style={{ opacity: 0.4, objectFit: 'contain' }}
+          />
         </Box>
         <Box
           mt={10}
@@ -76,10 +88,10 @@ const Home: NextPage<Props> = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: '24px',
+              gap: 5,
               alignItems: { xs: 'center', md: 'flex-start' },
               textAlign: { xs: 'center', md: 'left' },
-              marginBottom: { xs: 5, md: 0 },
+              marginBottom: { xs: 7, md: 0 },
             }}
           >
             <Typography
@@ -89,7 +101,7 @@ const Home: NextPage<Props> = () => {
             >
               Connecting Puget Sound nonprofits with free tech solutions.
             </Typography>
-            <Box sx={{ display: 'flex', gap: '24px' }}>
+            <Box sx={{ display: 'flex', gap: 4 }}>
               <Button variant="contained" color="secondary">
                 Get Help
               </Button>
@@ -122,12 +134,12 @@ const Home: NextPage<Props> = () => {
                   position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  width: { md: '424px', xs: '325px' },
-                  height: { md: '424px', xs: '325px' },
+                  width: { md: '424px', xs: '315px' },
+                  height: { md: '424px', xs: '315px' },
                 }}
               >
                 <Image
-                  src="/seattle_4.jpg"
+                  src={'/seattle_4.jpg'}
                   loader={loader}
                   fill={true}
                   alt="Seattle skyline by Stephen Plopper"
@@ -139,8 +151,8 @@ const Home: NextPage<Props> = () => {
                 sx={{
                   position: 'absolute',
                   borderRadius: '50%',
-                  width: { md: '480px', xs: '350px' },
-                  height: { md: '480px', xs: '350px' },
+                  width: { md: '480px', xs: '335px' },
+                  height: { md: '480px', xs: '335px' },
                   border: '4px solid rgba(248, 248, 248, 0.3)',
                 }}
               />
@@ -201,7 +213,7 @@ const Home: NextPage<Props> = () => {
           <Typography variant="headlineLarge">Our Mission</Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
-            sx={{ width: '80%', maxWidth: '880' }}
+            sx={{ width: '80%', maxWidth: '880px' }}
           >
             We believe community organizations are the heart of Seattle, and
             deserve the same tools and advantages enjoyed by our largest tech
