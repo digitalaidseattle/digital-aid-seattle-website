@@ -32,7 +32,6 @@ const CardProject =
                     width: '100%',
                     height: '0',
                     border: '2px solid #EAF1F1',
-                    borderRadius: '8px',
                     display: {xs: 'none', md: 'block'}
                 }}>
                     {/* TODO: use an image prop so we can customize the image for different cards. below is just a placeholder for testing purposes. */}                   
@@ -41,6 +40,7 @@ const CardProject =
                     style={{
                         height: '100%',
                         width: '100%',
+                        borderRadius: '8px',
                     }}
                     />
                 </Box>
@@ -51,17 +51,17 @@ const CardProject =
                 </Stack>
                 <Typography variant="bodyMedium">{description}</Typography>
                 <Stack 
-                    direction={{xs: 'column-reverse', md: 'row'}} 
-                    alignItems={{xs: "auto", md: "flex-end"}}
+                    direction={{xs: 'column-reverse', sm: 'row'}} 
+                    alignItems={{xs: "auto", sm: "flex-end"}}
                     justifyContent="space-between"
                     spacing="1rem">
                     <Button variant="contained" href={projectLink}>View Project</Button>
                     <Stack 
-                        direction={{xs: 'row-reverse', md: 'column'}} 
-                        justifyContent={{xs: "space-between", md: 'auto'}}
-                        alignItems={{xs: "center", md: 'auto'}}
+                        direction={{xs: 'row-reverse', sm: 'column'}} 
+                        justifyContent={{xs: "space-between", sm: 'auto'}}
+                        alignItems={{xs: "center", sm: 'auto'}}
                         spacing="1rem"
-                        sx={{ paddingLeft: {xs:'2rem', md: '0'} }}>
+                        sx={{ paddingLeft: {xs:'2rem', sm: '0'} }}>
                         <StateButton state={status}/>
                         <Typography variant="labelMedium">{duration.start} - {duration.end}</Typography>
                     </Stack>
