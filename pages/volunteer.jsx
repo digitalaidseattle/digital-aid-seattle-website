@@ -7,12 +7,6 @@ export default function VolunteerForm() {
     <Layout>
       <Container>
         <CardEvent/>
-        {/* <CardOne
-          title="h"
-          description='h'
-          buttonText='click'
-          buttonLink='#'
-          /> */}
         <iframe
           class="airtable-embed airtable-dynamic-height"
           src="https://airtable.com/embed/shr1lbcr3qmkoIbNW?backgroundColor=purpleLight"

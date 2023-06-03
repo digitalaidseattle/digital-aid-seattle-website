@@ -1,5 +1,6 @@
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography'
 
 import { ReactNode } from 'react'
@@ -21,24 +22,30 @@ type CardEventProps = {
 const CardEvent = () => {
     return (
         <Card>
-            <CardContent sx={{padding: "2rem", paddingBottom: "2rem !important"}}>
-                <Stack direction="row" spacing="1.5rem">
-                    <Box sx={{
-                        width: "20rem",
-                        height: "20rem",
-                        border: "2px solid #EAF1F1",
-                        flexShrink: "0"
-                    }}>
-                        <img
-                            src={Placeholder.src}
-                            style={{
-                            height: '100%',
-                            width: '100%',
-                            borderRadius: '8px',
-                            objectFit: 'cover',
-                            }}
-                        />
-                    </Box>
+            <Stack direction={{xs: "column", sm: "row"}} spacing="1.5rem">
+                <Box sx={{
+                    height: {xs: '0', sm: '20rem'},
+                    width: {xs: '100%', sm: '20rem'},
+                    paddingBottom: {xs: "100%", sm: '0'},
+                    position: "relative",
+                    border: "2px solid #EAF1F1",
+                    borderRadius: "8px",
+                    flexShrink: "0",
+                    margin: {xs: "0", sm: "2rem 0 2rem 2rem"}
+                }}>
+                    <CardMedia
+                        component="img"
+                        alt="green iguana"
+                        image={Placeholder.src}
+                        sx={{ 
+                            position: {xs:"absolute", sm: 'static'},
+                            height: "100%"
+                        }}
+                    />
+                </Box>
+            <CardContent sx={{
+                padding: {xs: "1rem", sm: "2rem 2rem 2rem 0"}, 
+                paddingBottom: "2rem !important"}}>
                     <Stack spacing="1.5rem" justifyContent="center">
                         <Stack spacing="1rem">
                             <Typography variant="titleLarge">Earth-a-thon</Typography>
@@ -50,10 +57,11 @@ const CardEvent = () => {
                         </Stack>
 
                         <Typography variant="bodyMedium">Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</Typography>
-                        <Button variant="contained" sx={{ maxWidth: "min-content" }}>RVSP</Button>
+                        <Button variant="contained" sx={{ maxWidth: {xs: "100%", sm: "min-content"} }}>RVSP</Button>
                     </Stack>
-                </Stack>
             </CardContent>
+            </Stack>
+
         </Card>
     )
 }
