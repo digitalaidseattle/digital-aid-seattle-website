@@ -22,7 +22,7 @@ type CardEventProps = {
 const CardEvent = () => {
     return (
         <Card>
-            <Stack direction={{xs: "column", sm: "row"}} spacing="1.5rem">
+            <Stack direction={{xs: "column", sm: "row"}} spacing={{xs: "0", sm: "1.5rem"}}>
                 <Box sx={{
                     height: {xs: '0', sm: '20rem'},
                     width: {xs: '100%', sm: '20rem'},
@@ -44,9 +44,9 @@ const CardEvent = () => {
                     />
                 </Box>
             <CardContent sx={{
-                padding: {xs: "1rem", sm: "2rem 2rem 2rem 0"}, 
-                paddingBottom: "2rem !important"}}>
-                    <Stack spacing="1.5rem" justifyContent="center">
+                padding: {xs: "2rem 1rem 1rem 1rem", sm: "2rem 2rem 2rem 0"}, 
+                paddingBottom: {xs: "1rem !important", sm:"2rem !important"} }}>
+                    <Stack spacing="1.5rem" justifyContent="center" sx={{height: "100%"}}>
                         <Stack spacing="1rem">
                             <Typography variant="titleLarge">Earth-a-thon</Typography>
                             <Stack direction="row" spacing="1rem">
@@ -61,7 +61,6 @@ const CardEvent = () => {
                     </Stack>
             </CardContent>
             </Stack>
-
         </Card>
     )
 }
