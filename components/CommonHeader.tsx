@@ -17,7 +17,7 @@ import OSLogo from '../assets/darkThemeLogo.svg'
 
 const pages = ['About', 'Projects', 'Partner', 'Volunteer', 'Events']
 
-function CommonHeader() {
+const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
