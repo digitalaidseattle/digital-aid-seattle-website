@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
+import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
@@ -110,7 +111,15 @@ const CommonHeader = () => {
                 }}
                 disableRipple={true}
               >
-                {page}
+                <Link
+                  underline="hover"
+                  sx={{
+                    color: theme.palette.primary.contrastText,
+                    'text-underline-offset': '0.5rem',
+                  }}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
