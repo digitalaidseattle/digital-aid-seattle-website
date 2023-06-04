@@ -33,17 +33,20 @@ const CommonHeader = () => {
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
       <Container maxWidth="xl">
         <Toolbar sx={{ height: '50px' }}>
-          {/* LOGO */}
-          <img
-            src={OSLogo.src}
-            style={{
-              height: '80%',
-              width: '120px',
-              margin: '0px 60px 0px 0px',
-            }}
-          />
           {/* Hamburger menu when the screen is small. */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            justifyContent="center"
+          >
+            {/* LOGO */}
+            <img
+              src={OSLogo.src}
+              style={{
+                height: '80%',
+                width: '120px',
+                margin: '0px 60px 0px 0px',
+              }}
+            />
             <IconButton
               size="large"
               aria-label="page-info"
@@ -84,7 +87,19 @@ const CommonHeader = () => {
             </Menu>
           </Box>
           {/* Menu items that are shown on desktop */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+            justifyContent="center"
+          >
+            {/* LOGO */}
+            <img
+              src={OSLogo.src}
+              style={{
+                height: '80%',
+                width: '120px',
+                margin: '0px 60px 0px 0px',
+              }}
+            />
             {pages.map((page) => (
               <Button
                 key={page}
