@@ -5,13 +5,9 @@ type StateButtonProps = {
   state: 'active' | 'recruiting' | 'complete'
 }
 
+const stateColors = {'active': '#FFFAD8', 'recruiting': '#DDFFAF', 'complete': '#FFF0EE'}
 const StateButton = ({ state }: StateButtonProps) => {
-  const bgColor =
-    state === 'active'
-      ? '#FFFAD8'
-      : state === 'recruiting'
-      ? '#DDFFAF'
-      : '#FFF0EE'
+
   return (
     <Box
       sx={{
@@ -19,7 +15,7 @@ const StateButton = ({ state }: StateButtonProps) => {
         textTransform: 'capitalize',
         padding: '10px 12px',
         borderRadius: '100px',
-        backgroundColor: bgColor,
+        backgroundColor: stateColors[state],
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
