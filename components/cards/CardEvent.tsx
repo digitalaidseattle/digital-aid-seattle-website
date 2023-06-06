@@ -24,14 +24,14 @@ const CardEvent = () => {
         <Card>
             <Stack direction={{xs: "column", sm: "row"}} spacing={{xs: "0", sm: "1.5rem"}}>
                 <Box sx={{
+                    position: "relative",
+                    border: "2px solid #EAF1F1",
                     height: {xs: '0', sm: '20rem'},
                     width: {xs: '100%', sm: '20rem'},
                     paddingBottom: {xs: "100%", sm: '0'},
-                    position: "relative",
-                    border: "2px solid #EAF1F1",
-                    borderRadius: "8px",
-                    flexShrink: "0",
-                    margin: {xs: "0", sm: "2rem 0 2rem 2rem"}
+                    flexShrink: {xs: "0", sm: "1", md: "0"},
+                    margin: {xs: "0", sm: "2rem 0 2rem 2rem"},
+                    minWidth: {xs: "0", sm: "50%", md: "0"}
                 }}>
                     <CardMedia
                         component="img"
@@ -39,7 +39,8 @@ const CardEvent = () => {
                         image={Placeholder.src}
                         sx={{ 
                             position: {xs:"absolute", sm: 'static'},
-                            height: "100%"
+                            height: "100%",
+                            borderRadius: "8px",
                         }}
                     />
                 </Box>
