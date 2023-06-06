@@ -10,13 +10,20 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import * as React from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
+import { useRouter } from 'next/router'
+import { Typography } from '@mui/material'
 
-const pages = ['About', 'Projects', 'Partner', 'Volunteer', 'Events']
+const page_mapping = {
+  About: '/about_new',
+  Projects: '/projects_new',
+  Partners: '/partners_new',
+  Volunteer: '/volunteers_new',
+  Events: '/events_new',
+}
 
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
@@ -29,6 +36,9 @@ const CommonHeader = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
+
+  const router = useRouter()
+  const currentRoute = router.route
 
   return (
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
@@ -76,13 +86,21 @@ const CommonHeader = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {Object.keys(page_mapping).map((name) => (
                 <MenuItem
-                  key={page}
+                  key={name}
                   onClick={handleCloseNavMenu}
                   style={{ borderRadius: '0px' }}
                 >
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link
+                    underline="hover"
+                    sx={{
+                      color: theme.palette.primary.dark,
+                    }}
+                    href={page_mapping[name]}
+                  >
+                    {name}
+                  </Link>{' '}
                 </MenuItem>
               ))}
             </Menu>
@@ -101,9 +119,9 @@ const CommonHeader = () => {
                 margin: '0px 60px 0px 0px',
               }}
             />
-            {pages.map((page) => (
+            {Object.keys(page_mapping).map((name) => (
               <Button
-                key={page}
+                key={name}
                 onClick={handleCloseNavMenu}
                 sx={{
                   color: theme.palette.primary.contrastText,
@@ -116,9 +134,14 @@ const CommonHeader = () => {
                   sx={{
                     color: theme.palette.primary.contrastText,
                     'text-underline-offset': '0.5rem',
+                    textDecoration:
+                      currentRoute === page_mapping[name]
+                        ? 'underline'
+                        : 'none',
                   }}
+                  href={page_mapping[name]}
                 >
-                  {page}
+                  {name}
                 </Link>
               </Button>
             ))}
