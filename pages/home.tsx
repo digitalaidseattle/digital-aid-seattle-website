@@ -1,7 +1,14 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
 
-import { Box, Button, Container, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
@@ -13,6 +20,8 @@ import CardOne from 'components/cards/CardOne'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroImage from '../public/images/seattle_4.jpg'
+
+/* eslint-disable @next/next/no-img-element */
 
 interface Props {}
 
@@ -32,13 +41,13 @@ const Home: NextPage<Props> = () => {
     <>
       <Container
         sx={{
-          height: isMediumScreen ? 'fit-content' : '100vh',
-          overflow: 'auto',
-          backgroundColor: palette.primary.dark,
+          height: isMediumScreen ? 'fit-content' : '95vh',
+          minHeight: '575px',
+          backgroundColor: palette.primary.light,
           display: 'flex',
-          width: '100vw',
           flexDirection: 'column',
           alignItems: 'center',
+          overflowX: 'hidden',
         }}
         maxWidth={false}
       >
@@ -46,14 +55,18 @@ const Home: NextPage<Props> = () => {
           sx={
             isMediumScreen
               ? {
-                  position: 'absolute',
-                  height: '80vw',
-                  transform: {
-                    xs: 'rotate(90deg)',
-                  },
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '1200px',
+                  height: 'auto',
+                  objectFit: 'cover',
+                  transform: 'rotate(90deg)translate(20%, 50%)',
                 }
               : {
                   width: '100vw',
+                  minWidth: '1200px',
+                  height: 'auto',
                   position: 'absolute',
                   top: '50%',
                   left: '50%',
@@ -65,12 +78,10 @@ const Home: NextPage<Props> = () => {
                 }
           }
         >
-          <Image
-            src={HeroLines}
-            loader={loader}
+          <img
+            src={HeroLines.src}
             alt="Hero Lines"
-            priority={true}
-            style={{ opacity: 0.4, objectFit: 'contain' }}
+            style={{ opacity: 0.4, objectFit: 'cover' }}
           />
         </Box>
         <Box
@@ -105,7 +116,7 @@ const Home: NextPage<Props> = () => {
               <Button variant="contained" color="secondary">
                 Get Help
               </Button>
-              <Button variant='contained' color='primary'>
+              <Button variant="contained" color="primary">
                 Volunteer With Us
               </Button>
             </Box>
@@ -138,13 +149,15 @@ const Home: NextPage<Props> = () => {
                   height: { md: '424px', xs: '315px' },
                 }}
               >
-                <Image
-                  src={HeroImage}
-                  loader={loader}
-                  fill={true}
+                <img
+                  src={HeroImage.src}
                   alt="Seattle skyline by Stephen Plopper"
-                  priority={true}
-                  style={{ zIndex: 1 }}
+                  style={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 2,
+                  }}
                 />
               </Box>
               <Box
@@ -165,6 +178,7 @@ const Home: NextPage<Props> = () => {
                   background: 'rgba(184, 233, 122, 0.32)',
                   top: '55%',
                   filter: 'blur(100px)',
+                  zIndex: 1,
                 }}
               />
               <Box
@@ -178,6 +192,7 @@ const Home: NextPage<Props> = () => {
                   left: '-15%',
                   filter: 'blur(100px)',
                   transform: 'rotate(45deg)',
+                  zIndex: 1,
                 }}
               />
             </Box>
@@ -192,6 +207,7 @@ const Home: NextPage<Props> = () => {
                 left: '40%',
                 filter: 'blur(100px)',
                 transform: 'rotate(-45deg)',
+                zIndex: 1,
               }}
             />
           </Box>
