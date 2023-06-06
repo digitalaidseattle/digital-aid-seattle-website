@@ -13,13 +13,13 @@ import Placeholder from '../../assets/event-placeholder.png'
 type CardEventProps = {
   title: string
   date: string
-  time: {"start": string, "end": string}
+  time: {start: string, end: string}
   location: string
   description: string
   buttonLink: string
 }
 
-const CardEvent = () => {
+const CardEvent = ({title, date, time, location, description, buttonLink}: CardEventProps) => {
     return (
         <Card>
             <Stack direction={{xs: "column", sm: "row"}} spacing={{xs: "0", sm: "1.5rem"}}>
@@ -49,16 +49,16 @@ const CardEvent = () => {
                 paddingBottom: {xs: "1rem !important", sm:"2rem !important"} }}>
                     <Stack spacing="1.5rem" justifyContent="center" sx={{height: "100%"}}>
                         <Stack spacing="1rem">
-                            <Typography variant="titleLarge">Earth-a-thon</Typography>
+                            <Typography variant="titleLarge">{title}</Typography>
                             <Stack direction="row" spacing="1rem">
-                                <Typography variant="labelLarge">March 27, 2023</Typography>
-                                <Typography variant="labelLarge">6:00 - 8:00 PM</Typography>
+                                <Typography variant="labelLarge">{date}</Typography>
+                                <Typography variant="labelLarge">{time.start} - {time.end}</Typography>
                             </Stack>
-                            <Typography variant="labelMedium">123 ABC Street, Seattle, WA</Typography>
+                            <Typography variant="labelMedium">{location}</Typography>
                         </Stack>
 
-                        <Typography variant="bodyMedium">Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</Typography>
-                        <Button variant="contained" sx={{ maxWidth: {xs: "100%", sm: "min-content"} }}>RVSP</Button>
+                        <Typography variant="bodyMedium">{description}</Typography>
+                        <Button variant="contained" href={buttonLink} sx={{ maxWidth: {xs: "100%", sm: "min-content"} }}>RVSP</Button>
                     </Stack>
             </CardContent>
             </Stack>
