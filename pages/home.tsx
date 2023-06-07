@@ -21,6 +21,8 @@ import CardOne from 'components/cards/CardOne'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroImage from '../public/images/seattle_4.jpg'
 
+import CommonHeader from 'components/CommonHeader'
+
 /* eslint-disable @next/next/no-img-element */
 
 interface Props {}
@@ -39,6 +41,7 @@ const Home: NextPage<Props> = () => {
 
   return (
     <>
+      <CommonHeader />
       <Container
         sx={{
           height: isMediumScreen ? 'fit-content' : '95vh',
@@ -147,6 +150,7 @@ const Home: NextPage<Props> = () => {
                   overflow: 'hidden',
                   width: { md: '424px', xs: '315px' },
                   height: { md: '424px', xs: '315px' },
+                  zIndex: 1,
                 }}
               >
                 <img
@@ -156,7 +160,6 @@ const Home: NextPage<Props> = () => {
                     objectFit: 'cover',
                     width: '100%',
                     height: '100%',
-                    zIndex: 2,
                   }}
                 />
               </Box>
@@ -178,7 +181,7 @@ const Home: NextPage<Props> = () => {
                   background: 'rgba(184, 233, 122, 0.32)',
                   top: '55%',
                   filter: 'blur(100px)',
-                  zIndex: 1,
+                  zIndex: 0,
                 }}
               />
               <Box
@@ -192,7 +195,7 @@ const Home: NextPage<Props> = () => {
                   left: '-15%',
                   filter: 'blur(100px)',
                   transform: 'rotate(45deg)',
-                  zIndex: 1,
+                  zIndex: 0,
                 }}
               />
             </Box>
@@ -207,7 +210,7 @@ const Home: NextPage<Props> = () => {
                 left: '40%',
                 filter: 'blur(100px)',
                 transform: 'rotate(-45deg)',
-                zIndex: 1,
+                zIndex: 0,
               }}
             />
           </Box>
