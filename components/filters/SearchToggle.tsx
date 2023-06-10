@@ -1,13 +1,14 @@
 import { useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 const SearchToggle = () => {
     const [displayInput, setDisplayInput] = useState(false);
+    const [query, setQuery] = useState('');
+
     return (
-        <>
-    
         <Box color="primary" sx={{
             backgroundColor: displayInput ? "white" : "transparent",
             borderRadius: "28px",
@@ -20,17 +21,37 @@ const SearchToggle = () => {
             onClick={()=>setDisplayInput(!displayInput)}/>
         <TextField variant="standard"  
             sx={{ 
-                marginRight: "1rem",
                 display: displayInput ? "block" : "none"
             }}
             InputProps={{
                 disableUnderline: true,
             }}
+            value={query}
+            onChange={(e)=>setQuery(e.target.value)}
         />
+        <CloseIcon fontSize="medium" color="primary"
+            sx={{ 
+                display: displayInput ? "block" : "none",
+                visibility: query.length > 0 ? "visible" : "hidden",
+                marginRight: "1rem",
+            }} 
+            onClick={()=>{
+                setQuery('');
+                setDisplayInput(false);
+                }
+            }/>
+        {/* {query.length > 0 &&
+            <CloseIcon fontSize="medium" color="primary"
+                sx={{ 
+                    marginRight: "1rem",
+                }} 
+                onClick={()=>{
+                    setQuery('');
+                    setDisplayInput(false);
+                    }
+                }/>
+        } */}
         </Box> 
-        
-
-        </>
     );
 }
 
