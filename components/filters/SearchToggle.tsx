@@ -3,12 +3,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import Button from "@mui/material/Button/Button";
 // TODO
-// 1. autofocus input after clicking icon
-// 2. style the filters
-// 3. filter container spacing
-// 4. filter container mobile view
+// [x] autofocus input after clicking icon
+// [ ] style the filters
+// [ ] filter container spacing
+// [ ] filter container mobile view
 
 const SearchToggle = () => {
     const [displayInput, setDisplayInput] = useState(false);
@@ -38,14 +38,10 @@ const SearchToggle = () => {
             borderRadius: "28px",
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem",
-            paddingLeft: "1rem",
             }}>
-        <SearchIcon fontSize="medium" color="primary" 
-            onClick={()=>{
-                setDisplayInput(!displayInput)
-                }
-            }/>
+            <Button disableRipple onClick={()=>setDisplayInput(!displayInput)}>
+                <SearchIcon fontSize="medium" color="primary"/>
+            </Button>
         {displayInput &&
             <>
             <TextField variant="standard" 
@@ -56,17 +52,16 @@ const SearchToggle = () => {
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
             />
-            <CloseIcon fontSize="medium" color="primary"
-                sx={{ 
-                    opacity: query.length > 0 ? "100%" : "0",
-                    marginRight: "1rem",
-                    transition: "opacity 0.1s ease-in-out"
-                }} 
+            <Button disableRipple sx={{ 
+                    visibility: query.length > 0 ? "visible" : "hidden",
+                }}
                 onClick={()=>{
                     setQuery('');
                     setDisplayInput(false);
                     }
-                }/>
+                }>
+                <CloseIcon fontSize="medium" color="primary"/>
+            </Button>
             </>
         }
         </Box> 
