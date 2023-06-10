@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
@@ -13,11 +13,28 @@ import TextField from '@mui/material/TextField';
 const SearchToggle = () => {
     const [displayInput, setDisplayInput] = useState(false);
     const [query, setQuery] = useState('');
+
+    // useRef to target the TextField input, so we can make it auto-focus.
     const textInput = useRef(null);
+
+    // For setting the ref to the TextField when it appears in the DOM.
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        if (displayInput) {
+          timeout = setTimeout(() => {
+            textInput.current?.focus();
+          });
+        }
+        return () => {
+          if (timeout) {
+            clearTimeout(timeout);
+          }
+        };
+      }, [displayInput]);
 
     return (
         <Box color="primary" sx={{
-            backgroundColor: "white",
+            backgroundColor: displayInput ? "white" : "transparent",
             borderRadius: "28px",
             display: "flex",
             alignItems: "center",
@@ -26,32 +43,32 @@ const SearchToggle = () => {
             }}>
         <SearchIcon fontSize="medium" color="primary" 
             onClick={()=>{
-                textInput.current.focus();
                 setDisplayInput(!displayInput)
                 }
             }/>
-        <TextField variant="standard" 
-            inputRef={textInput}
-            sx={{ 
-                // display: displayInput ? "block" : "none"
-            }}
-            InputProps={{
-                disableUnderline: true,
-            }}
-            value={query}
-            onChange={(e)=>setQuery(e.target.value)}
-        />
-        {/* <CloseIcon fontSize="medium" color="primary"
-            sx={{ 
-                display: displayInput ? "block" : "none",
-                visibility: query.length > 0 ? "visible" : "hidden",
-                marginRight: "1rem",
-            }} 
-            onClick={()=>{
-                setQuery('');
-                setDisplayInput(false);
-                }
-            }/> */}
+        {displayInput &&
+            <>
+            <TextField variant="standard" 
+                inputRef={textInput}
+                InputProps={{
+                    disableUnderline: true,
+                }}
+                value={query}
+                onChange={(e)=>setQuery(e.target.value)}
+            />
+            <CloseIcon fontSize="medium" color="primary"
+                sx={{ 
+                    opacity: query.length > 0 ? "100%" : "0",
+                    marginRight: "1rem",
+                    transition: "opacity 0.1s ease-in-out"
+                }} 
+                onClick={()=>{
+                    setQuery('');
+                    setDisplayInput(false);
+                    }
+                }/>
+            </>
+        }
         </Box> 
     );
 }
