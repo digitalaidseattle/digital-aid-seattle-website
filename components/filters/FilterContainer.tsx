@@ -8,7 +8,7 @@ type Props = {
 const FilterContainer = ({ children }: Props) => {
   
     return (
-      <Box sx={{ backgroundColor: 'white', padding: '2rem', display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ backgroundColor: '#F7FAFA', padding: '2rem', display: 'flex', justifyContent: 'center' }}>
         {children}
       </Box>
     );

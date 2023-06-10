@@ -2,12 +2,14 @@ import Container from '../components/Container'
 import Layout from '../components/Layout'
 import FilterDropdown from '../components/filters/FilterDropdown'
 import FilterContainer from '../components/filters/FilterContainer'
+import SearchToggle from '../components/filters/SearchToggle'
 
 export default function VolunteerForm() {
   return (
     <Layout>
       <Container>
         <FilterContainer>
+          <SearchToggle/>
           <FilterDropdown name="Role" options={["Design", "Engineering", "Project Management"]}/>
           <FilterDropdown name="Program Area" options={["Civic equity", "Environment", "Animals", "LGBTQIA+"]}/>
         </FilterContainer>
