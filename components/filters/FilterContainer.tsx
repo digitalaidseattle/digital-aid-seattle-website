@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 type Props = {
     children: ReactNode
@@ -8,9 +8,9 @@ type Props = {
 const FilterContainer = ({ children }: Props) => {
   
     return (
-      <Box sx={{ backgroundColor: '#F7FAFA', padding: '2rem', display: 'flex', justifyContent: 'center' }}>
+      <Stack direction="row" spacing={{xs: "1rem", md: "2rem"}}>
         {children}
-      </Box>
+      </Stack>
     );
 }
 

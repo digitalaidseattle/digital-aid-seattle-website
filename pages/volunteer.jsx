@@ -1,6 +1,7 @@
 import Container from '../components/Container'
 import Layout from '../components/Layout'
 import FilterDropdown from '../components/filters/FilterDropdown'
+import FilterContainer from '../components/filters/FilterContainer'
 import SearchContainer from '../components/filters/SearchContainer'
 import SearchToggle from '../components/filters/SearchToggle'
 
@@ -10,8 +11,10 @@ export default function VolunteerForm() {
       <Container>
         <SearchContainer>
           <SearchToggle/>
-          <FilterDropdown name="Role" options={["Design", "Engineering", "Project Management"]}/>
-          <FilterDropdown name="Program Area" options={["Civic equity", "Environment", "Animals", "LGBTQIA+"]}/>
+          <FilterContainer>
+            <FilterDropdown name="Role" options={["Design", "Engineering", "Project Management"]}/>
+            <FilterDropdown name="Program Area" options={["Civic equity", "Environment", "Animals", "LGBTQIA+"]}/>
+          </FilterContainer>
         </SearchContainer>
         <iframe
           class="airtable-embed airtable-dynamic-height"

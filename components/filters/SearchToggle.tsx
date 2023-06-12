@@ -11,7 +11,8 @@ import Button from "@mui/material/Button/Button";
 // [ ] filter container mobile view
 
 const SearchToggle = () => {
-    const [displayInput, setDisplayInput] = useState(false);
+    const MOBILE_BREAKPOINT = 600;
+    const [displayInput, setDisplayInput] = useState(window.innerWidth < MOBILE_BREAKPOINT);
     const [query, setQuery] = useState('');
 
     // useRef to target the TextField input, so we can make it auto-focus.
@@ -34,7 +35,7 @@ const SearchToggle = () => {
 
       // For making the search bar visible on small screens.
       const handleResize = () => {
-        if (window.innerWidth < 720) {
+        if (window.innerWidth < MOBILE_BREAKPOINT) {
             setDisplayInput(true)
         } else {
             setDisplayInput(false)
@@ -52,7 +53,7 @@ const SearchToggle = () => {
             display: "flex",
             alignItems: "center",
             }}>
-            <Button disableRipple onClick={()=>setDisplayInput(!displayInput)}>
+            <Button onClick={()=>setDisplayInput(!displayInput)}>
                 <SearchIcon fontSize="medium" color="primary"/>
             </Button>
         {displayInput &&
@@ -65,7 +66,7 @@ const SearchToggle = () => {
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
             />
-            <Button disableRipple sx={{ 
+            <Button sx={{ 
                     visibility: query.length > 0 ? "visible" : "hidden",
                 }}
                 onClick={()=>{
