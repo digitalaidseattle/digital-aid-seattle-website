@@ -32,6 +32,19 @@ const SearchToggle = () => {
         };
       }, [displayInput]);
 
+      // For making the search bar visible on small screens.
+      const handleResize = () => {
+        if (window.innerWidth < 720) {
+            setDisplayInput(true)
+        } else {
+            setDisplayInput(false)
+        }
+      }
+  
+      useEffect(() => {
+        window.addEventListener("resize", handleResize)
+      })
+
     return (
         <Box color="primary" sx={{
             backgroundColor: displayInput ? "white" : "transparent",
