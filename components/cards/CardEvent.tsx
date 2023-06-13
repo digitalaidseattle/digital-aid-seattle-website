@@ -26,35 +26,35 @@ const CardEvent = ({title, date, time, location, description, buttonLink}: CardE
     const smallScreen = useMediaQuery(theme.breakpoints.only('sm'));
     const mediumScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-    if (extraSmallScreen) {
+    if (extraSmallScreen || mediumScreen) {
         return (
             <Card>
-            <Stack direction="column" spacing="0">
-                <Box sx={{
-                    position: "relative",
-                    border: "2px solid #EAF1F1",
-                    height: '0',
-                    width: '100%',
-                    paddingBottom: "100%",
-                    flexShrink: "0",
-                    margin: "0",
-                    minWidth: "0"
-                }}>
-                    <CardMedia
-                        component="img"
-                        alt="green iguana"
-                        image={Placeholder.src}
-                        sx={{ 
-                            position: "absolute",
-                            height: "100%",
-                            borderRadius: "8px",
-                        }}
-                    />
-                </Box>
-            <CardContent sx={{
-                padding: "2rem 1rem 1rem 1rem", 
-                paddingBottom: "1rem !important", }}>
-                    <Stack spacing="1.5rem" justifyContent="center" sx={{height: "100%"}}>
+                <Stack direction={{xs: "column", sm: "row"}} spacing={{xs: "0", sm: "1.5rem"}}>
+                    <Box sx={{
+                        position: "relative",
+                        border: "2px solid #EAF1F1",
+                        height: {xs: '0', sm: '20rem'},
+                        width: {xs: '100%', sm: '20rem'},
+                        paddingBottom: {xs: "100%", sm: '0'},
+                        flexShrink: {xs: "0", sm: "1", md: "0"},
+                        margin: {xs: "0", sm: "2rem 0 2rem 2rem"},
+                        minWidth: {xs: "0", sm: "50%", md: "0"}
+                    }}>
+                        <CardMedia
+                            component="img"
+                            alt="green iguana"
+                            image={Placeholder.src}
+                            sx={{ 
+                                position: {xs:"absolute", sm: 'static'},
+                                height: "100%",
+                                borderRadius: "8px",
+                            }}
+                        />
+                    </Box>
+                <CardContent sx={{
+                    padding: {xs: "2rem 1rem 1rem 1rem", sm: "2rem 2rem 2rem 0"}, 
+                    paddingBottom: {xs: "1rem !important", sm:"2rem !important"} }}>
+                        <Stack justifyContent="center" sx={{height: "100%"}}>
                         <Stack spacing="1rem">
                             <Typography variant="titleLarge">{title}</Typography>
                             <Stack direction="row" spacing="1rem">
@@ -64,18 +64,22 @@ const CardEvent = ({title, date, time, location, description, buttonLink}: CardE
                             <Typography variant="labelMedium">{location}</Typography>
                         </Stack>
 
-                        <Typography variant="bodyMedium">{description}</Typography>
-                        <Button variant="contained" href={buttonLink} sx={{ maxWidth: "100%" }}>RVSP</Button>
-                    </Stack>
-            </CardContent> 
-            </Stack>
-        </Card>
+                        <Typography variant="bodyMedium" sx={{ marginTop: "1.5rem" }}>{description}</Typography>
+                        <Button variant="contained" sx={{ 
+                            marginTop: {xs: "2rem", md: "2.5rem"}, 
+                            textAlign: "center", 
+                            maxWidth: {xs: "100%", sm: "min-content"} 
+                            }} 
+                            href={buttonLink}>RVSP</Button>
+                        </Stack>
+                </CardContent>
+                </Stack>
+            </Card>
         )
     } 
-    else if (smallScreen) {
+    else { // smallScreen (tablet)
         return (
             <Card>
-
                 <CardContent>
                     <Stack direction="row">
                         <Box sx={{
@@ -110,52 +114,7 @@ const CardEvent = ({title, date, time, location, description, buttonLink}: CardE
             </Card>
         )
     } 
-    else { //mediumScreen +
-        return (
-            <Card>
-                <Stack direction="row" spacing="1.5rem">
-                    <Box sx={{
-                        position: "relative",
-                        border: "2px solid #EAF1F1",
-                        height: '20rem',
-                        width: '20rem',
-                        paddingBottom: '0',
-                        flexShrink: "0",
-                        margin: "2rem 0 2rem 2rem",
-                        minWidth: "0"
-                    }}>
-                        <CardMedia
-                            component="img"
-                            alt="green iguana"
-                            image={Placeholder.src}
-                            sx={{ 
-                                position: 'static',
-                                height: "100%",
-                                borderRadius: "8px",
-                            }}
-                        />
-                    </Box>
-                <CardContent sx={{
-                    padding: "2rem 2rem 2rem 0", 
-                    paddingBottom: "2rem !important" }}>
-                        <Stack spacing="1.5rem" justifyContent="center" sx={{height: "100%"}}>
-                            <Stack spacing="1rem">
-                                <Typography variant="titleLarge">{title}</Typography>
-                                <Stack direction="row" spacing="1rem">
-                                    <Typography variant="labelLarge">{date}</Typography>
-                                    <Typography variant="labelLarge">{time.start} - {time.end}</Typography>
-                                </Stack>
-                                <Typography variant="labelMedium">{location}</Typography>
-                            </Stack>
 
-                            <Typography variant="bodyMedium">{description}</Typography>
-                            <Button variant="contained" href={buttonLink} sx={{ maxWidth: "min-content" }}>RVSP</Button>
-                        </Stack>
-                </CardContent>
-                </Stack>
-            </Card>
-        )
-    } 
 }
 
 export default CardEvent;
