@@ -30,10 +30,10 @@ const CardEvent = ({
 }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const smallScreen = useMediaQuery(theme.breakpoints.only('sm'))
   const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
-  if (extraSmallScreen || mediumScreen) {
+  if (extraSmallScreen || largeScreen) {
     return (
       <Card>
         <Stack
