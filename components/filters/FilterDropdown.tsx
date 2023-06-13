@@ -18,20 +18,20 @@ const FilterDropdown = ({name, options}: Props) => {
     const handleChange = (event: SelectChangeEvent) => {
       setSelection(event.target.value as string);
     };
-  
+    
     return (
       <Box sx={{ minWidth: 200 }}>
         <FormControl size="small" sx={{width: '100%'}}>
           <InputLabel id={`select-${name}-label`}>
             <Typography variant="labelLarge" sx={{textTransform: 'capitalize'}}>
-              {name === "role" ? "role needed" : name}
+              {name}
             </Typography>
           </InputLabel>
           <Select
             labelId={`select-${name}-label`}
             id={`select-${name}-label`}
             value={selection}
-            label={name === "role" ? "role needed" : name}
+            label={name}
             onChange={handleChange}>
               {
                 options.map(val => <MenuItem value={val}>{val}</MenuItem>)

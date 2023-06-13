@@ -7,8 +7,9 @@ import Button from "@mui/material/Button/Button";
 // TODO
 // [x] autofocus input after clicking icon
 // [ ] style the filters
-// [ ] filter container spacing
-// [ ] filter container mobile view
+// [x] filter container spacing
+// [x] filter container mobile view
+// optional? [ ] make filter components controlled
 
 const SearchToggle = () => {
     const MOBILE_BREAKPOINT = 600;

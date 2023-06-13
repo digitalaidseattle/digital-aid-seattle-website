@@ -12,7 +12,7 @@ export default function VolunteerForm() {
         <SearchContainer>
           <SearchToggle/>
           <FilterContainer>
-            <FilterDropdown name="Role" options={["Design", "Engineering", "Project Management"]}/>
+            <FilterDropdown name="Role Needed" options={["Design", "Engineering", "Project Management"]}/>
             <FilterDropdown name="Program Area" options={["Civic equity", "Environment", "Animals", "LGBTQIA+"]}/>
           </FilterContainer>
         </SearchContainer>
