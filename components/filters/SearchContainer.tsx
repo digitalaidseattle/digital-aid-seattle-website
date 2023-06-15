@@ -14,7 +14,8 @@ const SearchContainer = ({ children }: Props) => {
         display: 'flex',
         flexDirection: {xs: 'column', md: 'row'}, 
         justifyContent: 'center',
-        gap: '2rem' }}>
+        gap: '2rem',
+}}>
         {children}
       </Box>
     );

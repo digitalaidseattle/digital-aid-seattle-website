@@ -20,7 +20,7 @@ const FilterDropdown = ({name, options}: Props) => {
     };
     
     return (
-      <Box sx={{ minWidth: 200 }}>
+      <Box sx={{ width: {xs: '100%', md: 200} }}>
         <FormControl size="small" sx={{width: '100%'}}>
           <InputLabel id={`select-${name}-label`}>
             <Typography variant="labelLarge" sx={{textTransform: 'capitalize'}}>
@@ -38,7 +38,7 @@ const FilterDropdown = ({name, options}: Props) => {
               }
           </Select>
         </FormControl>
-      </Box>
+        </Box>
     );
 }
 
