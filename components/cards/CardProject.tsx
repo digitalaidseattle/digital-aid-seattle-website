@@ -27,6 +27,7 @@ const CardProject = ({
   projectLink,
   duration,
 }: CardProjectProps) => {
+  return (
   <Card>
     <CardContent
       sx={{
@@ -36,30 +37,30 @@ const CardProject = ({
         gap: '1.5rem',
       }}
     >
-      <Box
-        sx={{
-          width: '100%',
-          height: '0',
-          border: '2px solid #EAF1F1',
-          display: { xs: 'none', md: 'block' },
-        }}
-      >
-        {/* TODO: use an image prop so we can customize the image for different cards. below is just a placeholder for testing purposes. */}
-        <img
-          src={Placeholder.src}
-          style={{
-            height: '100%',
-            width: '100%',
-            borderRadius: '8px',
-          }}
-        />
-      </Box>
-      <Stack spacing="1rem">
-        <Typography variant="titleLarge">{title}</Typography>
-        <Typography variant="labelLarge">{partner}</Typography>
-        <Typography variant="labelMedium">
-          {programAreas.join(', ')}
-        </Typography>
+      <Stack direction={{xs: "row", lg: "column"}} gap="1.5rem">
+        <Box
+          sx={{
+            width: {md: '7rem', lg: '100%'},
+            height: '0',
+            border: '2px solid #EAF1F1',
+            display: { xs: 'none', md: 'block' },
+          }}>
+          <img
+            src={Placeholder.src}
+            style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '8px',
+            }}
+          />
+        </Box>
+        <Stack spacing="1rem">
+          <Typography variant="titleLarge">{title}</Typography>
+          <Typography variant="labelLarge">{partner}</Typography>
+          <Typography variant="labelMedium">
+            {programAreas.join(', ')}
+          </Typography>
+        </Stack>
       </Stack>
       <Typography variant="bodyMedium">{description}</Typography>
       <Stack
@@ -86,6 +87,7 @@ const CardProject = ({
       </Stack>
     </CardContent>
   </Card>
+  )
 }
 
 export default CardProject
