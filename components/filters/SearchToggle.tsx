@@ -4,16 +4,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button/Button";
-// TODO
-// [x] autofocus input after clicking icon
-// [ ] style the filters
-// [x] filter container spacing
-// [x] filter container mobile view
-// optional? [ ] make filter components controlled
+
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const SearchToggle = () => {
-    const MOBILE_BREAKPOINT = 600;
-    const [displayInput, setDisplayInput] = useState(window.innerWidth < MOBILE_BREAKPOINT);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+    const [displayInput, setDisplayInput] = useState(isMobile);
     const [query, setQuery] = useState('');
 
     // useRef to target the TextField input, so we can make it auto-focus.
@@ -34,13 +33,9 @@ const SearchToggle = () => {
         };
       }, [displayInput]);
 
-      // For making the search bar visible on small screens.
+      // For making the search bar automatically visible on small screens.
       const handleResize = () => {
-        if (window.innerWidth < MOBILE_BREAKPOINT) {
-            setDisplayInput(true)
-        } else {
-            setDisplayInput(false)
-        }
+        isMobile ? setDisplayInput(true) : setDisplayInput(false);
       }
   
       useEffect(() => {
@@ -54,27 +49,25 @@ const SearchToggle = () => {
             display: "flex",
             alignItems: "center",
             }}>
+            
             <Button onClick={()=>setDisplayInput(!displayInput)}>
                 <SearchIcon fontSize="medium" color="primary"/>
             </Button>
-        {displayInput &&
-            <>
-            <TextField variant="standard" 
-                inputRef={textInput}
-                InputProps={{
-                    disableUnderline: true,
-                }}
-                value={query}
-                onChange={(e)=>setQuery(e.target.value)}
-            />
-            <Button sx={{ 
-                    visibility: query.length > 0 ? "visible" : "hidden",
-                }}
-                onClick={()=>{
-                    setQuery('');
-                    setDisplayInput(false);
-                    }
-                }>
+            {displayInput &&
+                <>
+                <TextField variant="standard" 
+                    inputRef={textInput}
+                    InputProps={{
+                        disableUnderline: true,
+                    }}
+                    value={query}
+                    onChange={(e)=>setQuery(e.target.value)}
+                    sx={{ width: "100%" }}
+                />
+              <Button sx={{ 
+                      visibility: query.length > 0 ? "visible" : "hidden",
+                  }}
+                  onClick={()=>{ setQuery('') }}>
                 <CloseIcon fontSize="medium" color="primary"/>
             </Button>
             </>
