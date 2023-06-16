@@ -1,5 +1,6 @@
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
 import Button from '@mui/material/Button'
@@ -38,22 +39,18 @@ const CardProject = ({
       }}
     >
       <Stack direction={{xs: "row", lg: "column"}} gap="1.5rem">
-        <Box
-          sx={{
-            width: {md: '7rem', lg: '100%'},
-            height: '0',
-            border: '2px solid #EAF1F1',
-            display: { xs: 'none', md: 'block' },
-          }}>
-          <img
-            src={Placeholder.src}
-            style={{
-              height: '100%',
-              width: '100%',
-              borderRadius: '8px',
-            }}
-          />
-        </Box>
+            <CardMedia
+              component='img'
+              alt='placeholder'
+              image={Placeholder.src}
+              sx={{
+                width: {md: '7rem', lg: '100%'},
+                aspectRatio: '1 / 1',
+                border: '2px solid #EAF1F1',
+                borderRadius: '8px',
+                display: { xs: 'none', md: 'block' },
+              }}
+            />
         <Stack spacing="1rem">
           <Typography variant="titleLarge">{title}</Typography>
           <Typography variant="labelLarge">{partner}</Typography>
