@@ -251,8 +251,17 @@ export const theme = createTheme({
           borderRadius: '12px',
           backgroundColor: '#F7FAFA',
           border: '3px solid #FFFFFF',
-        }
-      }
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          backgroundColor: '#F7FAFA',
+          border: '2px solid #FFFFFF',
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {
@@ -264,18 +273,18 @@ export const theme = createTheme({
         },
       },
       variants: [
-          {
-            props: { variant: "card" },
-            style: {
-              color: 'primary.dark', 
-              backgroundColor: designColor.yellow.main, 
-              mt: 'auto',
-              '&:hover': {
-                  backgroundColor: designColor.yellow.light
-              },
-            }
+        {
+          props: { variant: 'card' },
+          style: {
+            color: 'primary.dark',
+            backgroundColor: designColor.yellow.main,
+            mt: 'auto',
+            '&:hover': {
+              backgroundColor: designColor.yellow.light,
+            },
           },
-      ]
+        },
+      ],
     },
     MuiTypography: {
       defaultProps: {
@@ -289,6 +298,6 @@ export const theme = createTheme({
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
-    card: true;
+    card: true
   }
 }
