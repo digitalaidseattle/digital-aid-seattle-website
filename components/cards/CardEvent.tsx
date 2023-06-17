@@ -9,7 +9,6 @@ import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 
-import Placeholder from '../../assets/event-placeholder.png'
 
 type CardEventProps = {
   title: string
@@ -18,6 +17,8 @@ type CardEventProps = {
   location: string
   description: string
   buttonLink: string
+  imageSrc: string
+  imageAlt: string
 }
 
 const CardEvent = ({
@@ -27,6 +28,8 @@ const CardEvent = ({
   location,
   description,
   buttonLink,
+  imageSrc,
+  imageAlt
 }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -54,8 +57,8 @@ const CardEvent = ({
           >
             <CardMedia
               component='img'
-              alt='placeholder'
-              image={Placeholder.src}
+              alt={imageAlt}
+              image={imageSrc}
               sx={{
                 position: { xs: 'absolute', sm: 'static' },
                 height: '100%',
@@ -119,8 +122,8 @@ const CardEvent = ({
             >
               <CardMedia
                 component='img'
-                alt='green iguana'
-                image={Placeholder.src}
+                alt={imageAlt}
+                image={imageSrc}
                 sx={{
                   position: 'static',
                   height: '100%',
