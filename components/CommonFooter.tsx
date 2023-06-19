@@ -9,13 +9,6 @@ import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
-const Item = styled(Container)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.dark,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  color: theme.palette.primary.contrastText,
-}))
-
 const GridItem = styled(Grid)(() => ({
   item: true,
   justify: 'center',
@@ -39,7 +32,7 @@ const LinkSubItem = (props: { url: string; name: string }) => (
     underline="hover"
     href={props.url}
   >
-    <Typography>{props.name}</Typography>
+    <Typography fontSize={'1rem'}>{props.name}</Typography>
   </Link>
 )
 
@@ -50,8 +43,8 @@ const SubText = styled(Typography)(({ theme }) => ({
 
 const CommonFooter = () => {
   return (
-    <Container maxWidth="md" sx={{ padding: '1rem 0rem' }}>
-      <Grid container spacing={5} alignItems="center">
+    <Container maxWidth="md" sx={{ padding: '2rem 0rem' }}>
+      <Grid container spacing={5} direction="row" justifyContent="center">
         {/* LOGO */}
         <GridItem xs={3}>
           <img
@@ -59,49 +52,50 @@ const CommonFooter = () => {
             style={{
               height: '80%',
               width: '120px',
-              margin: '0rem 0rem 1rem',
             }}
           />
+        </GridItem>
+
+        <GridItem xs={4}>
+          <FooterItemTitle>Contact us</FooterItemTitle>
+          <FooterSubItem>
+            <a href="mailto:name@email.com">info@openseattle.org</a>
+          </FooterSubItem>
+        </GridItem>
+
+        <GridItem xs={4}>
+          <FooterItemTitle>Work with us</FooterItemTitle>
+          <LinkSubItem url="/volunteers_new" name="Volunteers" />
+          <LinkSubItem url="/partners_new" name="Partners" />
+        </GridItem>
+
+        <GridItem xs={1}>
+          <a href="https://github.com/openseattle">
+            <GitHubIcon sx={{ color: theme.palette.primary.contrastText }} />
+          </a>
+        </GridItem>
+
+        <GridItem xs={3}>
           <SubText>Illustration by: Kylie Melendez</SubText>
           <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
         </GridItem>
 
         <GridItem xs={4}>
-          <FooterItemTitle>Contact us</FooterItemTitle>
-          <a href="mailto:name@email.com">
-            <FooterSubItem>info@openseattle.org</FooterSubItem>
-          </a>
+          <FooterItemTitle>Support us</FooterItemTitle>
+          <FooterSubItem>
+            <a href="mailto:name@email.com">How can you help</a>
+          </FooterSubItem>
         </GridItem>
+
         <GridItem xs={4}>
-          <Stack direction="column" spacing={2}>
-            <Item>
-              <FooterItemTitle>Work with us</FooterItemTitle>
-              <LinkSubItem url="/volunteers_new" name="Volunteers" />
-              <LinkSubItem url="/partners_new" name="Partners" />
-            </Item>
-            <Item>
-              <FooterItemTitle>About</FooterItemTitle>
-              <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
-            </Item>
-          </Stack>
+          <FooterItemTitle>About</FooterItemTitle>
+          <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
         </GridItem>
+
         <GridItem xs={1}>
-          <Stack direction="column" spacing={2}>
-            <Item>
-              <a href="https://github.com/openseattle">
-                <GitHubIcon
-                  sx={{ color: theme.palette.primary.contrastText }}
-                />
-              </a>
-            </Item>
-            <Item>
-              <a href="https://www.linkedin.com/company/open-seattle/">
-                <LinkedInIcon
-                  sx={{ color: theme.palette.primary.contrastText }}
-                />
-              </a>
-            </Item>
-          </Stack>
+          <a href="https://www.linkedin.com/company/open-seattle/">
+            <LinkedInIcon sx={{ color: theme.palette.primary.contrastText }} />
+          </a>
         </GridItem>
       </Grid>
     </Container>
