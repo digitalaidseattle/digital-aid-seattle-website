@@ -38,7 +38,7 @@ const FilterDropdown = ({
           onChange={handleChange}
         >
           {options.map((val) => (
-            <MenuItem value={val}>{val}</MenuItem>
+            <MenuItem key={val} value={val}>{val}</MenuItem>
           ))}
         </Select>
       </FormControl>
