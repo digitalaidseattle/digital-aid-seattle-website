@@ -48,7 +48,7 @@ const CommonFooter = () => {
     <Container maxWidth="md" sx={{ padding: '2rem 0rem' }}>
       <Grid container spacing={5} direction="row">
         {/* LOGO */}
-        <GridItem xs={3}>
+        <GridItem md={3}>
           <img
             src={OSLogo.src}
             style={{
@@ -58,20 +58,20 @@ const CommonFooter = () => {
           />
         </GridItem>
 
-        <GridItem xs={4}>
+        <GridItem md={4}>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
             <a href="mailto:name@email.com">info@openseattle.org</a>
           </FooterSubItem>
         </GridItem>
 
-        <GridItem xs={4}>
+        <GridItem md={4}>
           <FooterItemTitle>Work with us</FooterItemTitle>
           <LinkSubItem url="/volunteers_new" name="Volunteers" />
           <LinkSubItem url="/partners_new" name="Partners" />
         </GridItem>
 
-        <GridItem xs={1} display='flex'>
+        <GridItem md={1} display='flex'>
           <a href="https://github.com/openseattle">
             <GitHubIcon
               sx={{ color: theme.palette.primary.contrastText }}
@@ -80,24 +80,24 @@ const CommonFooter = () => {
           </a>
         </GridItem>
 
-        <GridItem xs={3}>
+        <GridItem md={3}>
           <SubText>Illustration by: Kylie Melendez</SubText>
           <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
         </GridItem>
 
-        <GridItem xs={4}>
+        <GridItem md={4}>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
             <a href="mailto:name@email.com">How can you help</a>
           </FooterSubItem>
         </GridItem>
 
-        <GridItem xs={4}>
+        <GridItem md={4}>
           <FooterItemTitle>About</FooterItemTitle>
           <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
         </GridItem>
 
-        <GridItem xs={1} display='flex'>
+        <GridItem md={1} display='flex'>
           <a href="https://www.linkedin.com/company/open-seattle/">
             <LinkedInIcon
               sx={{ color: theme.palette.primary.contrastText }}
