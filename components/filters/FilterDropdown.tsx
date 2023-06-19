@@ -9,16 +9,11 @@ import Typography from '@mui/material/Typography';
 type Props = {
   name: string
   options: string[]
+  currentValue: string | undefined
+  handleChange: (event: SelectChangeEvent<string>, child: React.ReactNode) => void
 }
 
-const FilterDropdown = ({name, options}: Props) => {
-
-    const [selection, setSelection] = React.useState('');
-
-    const handleChange = (event: SelectChangeEvent) => {
-      setSelection(event.target.value as string);
-    };
-    
+const FilterDropdown = ({name, options, currentValue, handleChange}: Props) => {
     return (
       <Box sx={{ width: {xs: '100%', md: 200} }}>
         <FormControl size="small" sx={{width: '100%'}}>
@@ -30,7 +25,7 @@ const FilterDropdown = ({name, options}: Props) => {
           <Select
             labelId={`select-${name}-label`}
             id={`select-${name}-label`}
-            value={selection}
+            value={currentValue}
             label={name}
             onChange={handleChange}>
               {
