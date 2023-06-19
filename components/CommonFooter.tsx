@@ -11,7 +11,9 @@ import OSLogo from '../assets/darkThemeLogo.svg'
 
 const GridItem = styled(Grid)(() => ({
   item: true,
-  justify: 'center',
+  padding: '0.5rem',
+  justifyContent: "left",
+  alignItems: "center"
 }))
 
 const FooterItemTitle = styled(Typography)(({ theme }) => ({
@@ -44,7 +46,7 @@ const SubText = styled(Typography)(({ theme }) => ({
 const CommonFooter = () => {
   return (
     <Container maxWidth="md" sx={{ padding: '2rem 0rem' }}>
-      <Grid container spacing={5} direction="row" justifyContent="center">
+      <Grid container spacing={5} direction="row">
         {/* LOGO */}
         <GridItem xs={3}>
           <img
@@ -69,9 +71,12 @@ const CommonFooter = () => {
           <LinkSubItem url="/partners_new" name="Partners" />
         </GridItem>
 
-        <GridItem xs={1}>
+        <GridItem xs={1} display='flex'>
           <a href="https://github.com/openseattle">
-            <GitHubIcon sx={{ color: theme.palette.primary.contrastText }} />
+            <GitHubIcon
+              sx={{ color: theme.palette.primary.contrastText }}
+              fontSize="large"
+            />
           </a>
         </GridItem>
 
@@ -92,9 +97,12 @@ const CommonFooter = () => {
           <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
         </GridItem>
 
-        <GridItem xs={1}>
+        <GridItem xs={1} display='flex'>
           <a href="https://www.linkedin.com/company/open-seattle/">
-            <LinkedInIcon sx={{ color: theme.palette.primary.contrastText }} />
+            <LinkedInIcon
+              sx={{ color: theme.palette.primary.contrastText }}
+              fontSize="large"
+            />
           </a>
         </GridItem>
       </Grid>
