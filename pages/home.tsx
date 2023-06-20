@@ -1,6 +1,3 @@
-import { NextPage } from 'next'
-import Image from 'next/image'
-
 import {
   Box,
   Button,
@@ -21,13 +18,13 @@ import CardOne from 'components/cards/CardOne'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroImage from '../public/images/seattle_4.jpg'
 
-import CommonHeader from 'components/CommonHeader'
+import { withBasicLayout } from 'components/layouts'
 
 /* eslint-disable @next/next/no-img-element */
 
 interface Props {}
 
-const Home: NextPage<Props> = () => {
+const Home = () => {
   const theme = useTheme()
   const palette = theme.palette
 
@@ -37,49 +34,40 @@ const Home: NextPage<Props> = () => {
     }`
   }
 
-  const isMediumScreen = useMediaQuery('(max-Width:900px)')
+  const isMediumScreen = useMediaQuery('(max-Width:600px)')
 
   return (
     <>
-      <CommonHeader />
-      <Container
+      {/* Hero Container */}
+      <Container 
         sx={{
-          height: isMediumScreen ? 'fit-content' : '95vh',
-          minHeight: '575px',
           backgroundColor: palette.primary.light,
           display: 'flex',
+          minHeight: '650px',
           flexDirection: 'column',
           alignItems: 'center',
-          overflowX: 'hidden',
+          overflow: 'hidden',
+          position: 'relative',
+          padding: { xs: '1rem 0 1rem 0', md: '4rem 0 4rem 0' },
         }}
         maxWidth={false}
       >
+        {/* SVG Linework Container */}
         <Box
-          sx={
-            isMediumScreen
-              ? {
-                  position: 'fixed',
-                  top: 0,
-                  left: 0,
-                  width: '1200px',
-                  height: 'auto',
-                  objectFit: 'cover',
-                  transform: 'rotate(90deg)translate(20%, 50%)',
-                }
-              : {
-                  width: '100vw',
-                  minWidth: '1200px',
-                  height: 'auto',
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  overflow: 'hidden',
-                  transform: {
-                    xs: 'rotate(90deg) translate(-50%,-50%)',
-                    md: 'translate(-50%, -50%)',
-                  },
-                }
-          }
+          sx={{
+            position: 'absolute',
+            width: { xs: '200vh', sm: '100vw' },
+            maxWidth: '1150px',
+            height: 'auto',
+            overflow: 'hidden',
+            objectFit: 'cover',
+            left: { xs: 0, sm: '50%' },
+            top: { xs: 0, sm: '50%' },
+            transform: {
+              xs: 'rotate(90deg)translate(0, 50%)',
+              sm: 'translate(-50%, -50%)',
+            },
+          }}
         >
           <img
             src={HeroLines.src}
@@ -87,53 +75,58 @@ const Home: NextPage<Props> = () => {
             style={{ opacity: 0.4, objectFit: 'cover' }}
           />
         </Box>
+        {/* Hero Content */}
         <Box
-          mt={10}
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: 4, md: 12 },
+            alignItems: 'center',
           }}
         >
+          {/* Heading and CTA Buttons */}
           <Box
             sx={{
-              flex: 1,
-              width: { md: '480px', xs: '350px' },
-              height: { md: '480px', xs: '350px' },
+              width: { xs: '100%', md: '480px' },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: 5,
-              alignItems: { xs: 'center', md: 'flex-start' },
-              textAlign: { xs: 'center', md: 'left' },
-              marginBottom: { xs: 7, md: 0 },
+              gap: { xs: 3, sm: 5 },
+              alignItems: { xs: 'center', sm: 'flex-start' },
+              textAlign: { xs: 'center', sm: 'left' },
             }}
           >
             <Typography
               color={'text.secondary'}
-              sx={{ maxWidth: { xs: '90%', md: '450px' } }}
+              sx={{}}
               variant={isMediumScreen ? 'displaySmall' : 'displayLarge'}
             >
               Connecting Puget Sound nonprofits with free tech solutions.
             </Typography>
-            <Box sx={{ display: 'flex', gap: 4 }}>
-              <Button variant="contained" color="secondary">
+            <Box
+              sx={{
+                display: 'flex',
+                gap: { xs: 2, sm: 4 },
+                flexDirection: { xs: 'column', sm: 'row' },
+              }}
+            >
+              <Button variant="contained" color="secondary" size="small">
                 Get Help
               </Button>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" size="small">
                 Volunteer With Us
               </Button>
             </Box>
           </Box>
+          {/* Box for Image, circle, and shadows */}
           <Box
             sx={{
-              flex: 1,
-              width: { md: '480px', xs: '350px' },
-              height: { md: '480px', xs: '350px' },
+              height: '100%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              marginBottom: isMediumScreen ? 10 : 0,
+              marginBottom: { xs: 2, sm: 0 },
             }}
           >
             <Box
@@ -143,13 +136,14 @@ const Home: NextPage<Props> = () => {
                 justifyContent: 'center',
               }}
             >
+              {/* Image Container */}
               <Box
                 sx={{
                   position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  width: { md: '424px', xs: '315px' },
-                  height: { md: '424px', xs: '315px' },
+                  width: { xs: '275px', md: '424px' },
+                  height: { xs: '275px', md: '424px' },
                   zIndex: 1,
                 }}
               >
@@ -167,11 +161,12 @@ const Home: NextPage<Props> = () => {
                 sx={{
                   position: 'absolute',
                   borderRadius: '50%',
-                  width: { md: '480px', xs: '335px' },
-                  height: { md: '480px', xs: '335px' },
+                  width: { xs: '295px', md: '480px' },
+                  height: { xs: '295px', md: '480px' },
                   border: '4px solid rgba(248, 248, 248, 0.3)',
                 }}
               />
+              {/* Shading for image */}
               <Box
                 sx={{
                   position: 'absolute',
@@ -184,6 +179,7 @@ const Home: NextPage<Props> = () => {
                   zIndex: 0,
                 }}
               />
+              {/* Shading for image */}
               <Box
                 sx={{
                   position: 'absolute',
@@ -199,6 +195,7 @@ const Home: NextPage<Props> = () => {
                 }}
               />
             </Box>
+            {/* Shading for image */}
             <Box
               sx={{
                 position: 'absolute',
@@ -220,13 +217,12 @@ const Home: NextPage<Props> = () => {
         sx={{ backgroundColor: palette.background.default }}
         maxWidth={false}
       >
-        <Box
+        <Stack
           sx={{
-            height: { xs: '450px', md: '536px' },
-            display: 'flex',
-            flexDirection: 'column',
+            gap: { xs: 3, md: 5 },
             justifyContent: 'space-around',
             alignItems: 'center',
+            padding: '3rem 0 3rem 0',
           }}
         >
           <Typography variant="headlineLarge">Our Mission</Typography>
@@ -243,51 +239,42 @@ const Home: NextPage<Props> = () => {
           <Button variant="contained" color="primary">
             Learn About Us
           </Button>
-        </Box>
-      </Container>
-      <Container
-        sx={{
-          backgroundColor: palette.background.default,
-          paddingTop: '120px',
-          paddingBottom: '120px',
-        }}
-        maxWidth={false}
-      >
-        <CardRowContainer>
-          <CardOne
-            description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
-            buttonText="Partner With Us"
-            icon={
-              <HandshakeOutlinedIcon
-                fontSize="large"
-                sx={{ color: palette.text.secondary }}
-              />
-            }
-          />
-          <CardOne
-            description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
-            buttonText="Volunteer With Us"
-            icon={
-              <Groups2OutlinedIcon
-                fontSize="large"
-                sx={{ color: palette.text.secondary }}
-              />
-            }
-          />
-          <CardOne
-            description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating."
-            buttonText="Support Us"
-            icon={
-              <VolunteerActivismOutlinedIcon
-                fontSize="large"
-                sx={{ color: palette.text.secondary }}
-              />
-            }
-          />
-        </CardRowContainer>
+          <CardRowContainer>
+            <CardOne
+              description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
+              buttonText="Partner With Us"
+              icon={
+                <HandshakeOutlinedIcon
+                  fontSize="large"
+                  sx={{ color: palette.text.secondary }}
+                />
+              }
+            />
+            <CardOne
+              description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
+              buttonText="Volunteer With Us"
+              icon={
+                <Groups2OutlinedIcon
+                  fontSize="large"
+                  sx={{ color: palette.text.secondary }}
+                />
+              }
+            />
+            <CardOne
+              description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating."
+              buttonText="Support Us"
+              icon={
+                <VolunteerActivismOutlinedIcon
+                  fontSize="large"
+                  sx={{ color: palette.text.secondary }}
+                />
+              }
+            />
+          </CardRowContainer>
+        </Stack>
       </Container>
     </>
   )
 }
 
-export default Home
+export default withBasicLayout(Home)
