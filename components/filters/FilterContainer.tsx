@@ -16,7 +16,7 @@ const FilterContainer = () => {
   }
 
   return (
-    <Stack direction="row" spacing={{ xs: '1rem', md: '2rem' }}>
+    <Stack direction={{xs: "column", sm: "row"}} spacing={{ xs: '1rem', md: '2rem' }}>
       <FilterDropdown
         name="Role Needed"
         options={['Design', 'Engineering', 'Project Management']}
