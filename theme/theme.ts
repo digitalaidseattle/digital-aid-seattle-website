@@ -284,24 +284,6 @@ export const theme = createTheme({
         },
       },
     },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-        },
-      },
-      // variants: [
-      //     {
-      //       props: { variant: "standard" },
-      //       style: {
-      //         border: '1.5px solid #899393',
-      //         borderRadius: '8px',
-      //         paddingLeft: '16px',
-      //         paddingTop: '6px',
-      //         paddingBottom: '6px',
-      //         },
-      //     }
-      // ]
-    },
   },
 })
 

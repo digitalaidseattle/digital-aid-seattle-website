@@ -6,23 +6,17 @@ import IconContainer from './IconContainer'
 import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
 
-type CardOneProps = {
+type CardLeftProps = {
   title: string
   description: string
   icon: ReactNode
-  left: boolean
-  buttonText?: string
-  buttonLink?: string
 }
 
-const CardOne = ({
+const CardLeft = ({
   title,
   description,
   icon,
-  left,
-  buttonText,
-  buttonLink,
-}: CardOneProps) => {
+}: CardLeftProps) => {
   return (
     <Card
       sx={{
@@ -37,24 +31,17 @@ const CardOne = ({
           display: 'flex',
           flexDirection: 'column',
           gap: '1.5rem',
-          alignItems: 'center',
-          textAlign: 'center',
-          padding: { xs: '2rem', sm: '1rem' },
-          justifyContent: 'space-between',
-          height: '100%',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          padding: '2rem',
         }}
       >
         <IconContainer>{icon}</IconContainer>
-        <Typography variant="titleLarge">{title}</Typography>
+        <Typography variant="titleMedium">{title}</Typography>
         <Typography variant="bodyMedium">{description}</Typography>
-        {buttonText && (
-          <Button variant="contained" color="secondary" href={buttonLink}>
-            {buttonText}
-          </Button>
-        )}
       </CardContent>
     </Card>
   )
 }
 
-export default CardOne
+export default CardLeft
