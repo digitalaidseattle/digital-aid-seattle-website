@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography'
 
 import IconContainer from './IconContainer'
 import { ReactNode } from 'react'
-import Button from '@mui/material/Button'
 
 type CardLeftProps = {
   title: string
@@ -22,8 +21,7 @@ const CardLeft = ({
       sx={{
         flex: '1',
         minWidth: { xs: '100%', sm: 'min-content' },
-        boxShadow:
-          '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
+        boxShadow: '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)'
       }}
     >
       <CardContent
