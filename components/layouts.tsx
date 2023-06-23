@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header``
 
 export const MainContainer = styled.main`
   position: relative;
-  padding: 5rem;
+  // padding: 5rem;
   text-align: center;
 `
 
