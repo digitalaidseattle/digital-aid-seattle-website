@@ -5,9 +5,12 @@ type StateButtonProps = {
   state: 'active' | 'recruiting' | 'complete'
 }
 
-const stateColors = {'active': '#FFFAD8', 'recruiting': '#DDFFAF', 'complete': '#FFF0EE'}
+const stateColors = {
+  active: '#FFFAD8',
+  recruiting: '#DDFFAF',
+  complete: '#FFF0EE',
+}
 const StateButton = ({ state }: StateButtonProps) => {
-
   return (
     <Box
       sx={{

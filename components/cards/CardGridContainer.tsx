@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode,
+  children: ReactNode
   columns?: number
 }
 

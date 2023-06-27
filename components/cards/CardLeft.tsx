@@ -11,17 +11,14 @@ type CardLeftProps = {
   icon: ReactNode
 }
 
-const CardLeft = ({
-  title,
-  description,
-  icon,
-}: CardLeftProps) => {
+const CardLeft = ({ title, description, icon }: CardLeftProps) => {
   return (
     <Card
       sx={{
         flex: '1',
         minWidth: { xs: '100%', sm: 'min-content' },
-        boxShadow: '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)'
+        boxShadow:
+          '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
       }}
     >
       <CardContent
