@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { Typography } from '@mui/material'
 import React from 'react'
 import { theme } from 'theme/theme'
 
+import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
 
 export const HeaderContainer = styled.header``
@@ -20,7 +20,6 @@ export const FooterContainer = styled.footer`
   // bottom: 0;
   // width: 100%;
   padding: 2.5rem;
-  text-align: center;
 `
 
 // eslint-disable-next-line react/display-name
@@ -34,9 +33,7 @@ export const withBasicLayout = (Page: () => JSX.Element) => () =>
         <Page />
       </MainContainer>
       <FooterContainer>
-        <Typography sx={{ color: 'white' }}>
-          I am a footer! To be replaced with a component here.
-        </Typography>
+        <CommonFooter/> 
       </FooterContainer>
     </>
   )

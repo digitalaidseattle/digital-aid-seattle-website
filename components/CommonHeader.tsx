@@ -10,12 +10,11 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
+import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
-import { useRouter } from 'next/router'
-import { Typography } from '@mui/material'
 
 const page_mapping = {
   About: '/about_new',
@@ -100,7 +99,7 @@ const CommonHeader = () => {
                     href={page_mapping[name]}
                   >
                     {name}
-                  </Link>{' '}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
