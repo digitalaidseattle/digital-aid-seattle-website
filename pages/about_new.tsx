@@ -3,7 +3,11 @@ import CardOne from 'components/cards/CardOne'
 import { withBasicLayout } from 'components/layouts'
 import PageSection from 'components/PageSection'
 import { designColor } from 'theme/theme'
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
+import {
+  MilitaryTechOutlined,
+  AutoGraphOutlined,
+  AccessAlarmOutlined,
+} from '@mui/icons-material'
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -73,17 +77,17 @@ const AboutPage = () => {
           <CardOne
             title="Excellence"
             description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-            icon={<AccessAlarmIcon style={{ color: designColor.white }} />}
+            icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
           />
           <CardOne
             title="Efficacy"
             description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
-            icon={<AccessAlarmIcon style={{ color: designColor.white }} />}
+            icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
           />
           <CardOne
             title="Efficiency"
             description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
-            icon={<AccessAlarmIcon style={{ color: designColor.white }} />}
+            icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
         </div>
       </PageSection>

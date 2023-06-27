@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header``
 
 // bottom padding is to compensate for footer
 export const MainContainer = styled.main`
-  padding-bottom: 20rem;
+  padding-bottom: 15rem;
 `
 
 export const FooterContainer = styled.footer`
