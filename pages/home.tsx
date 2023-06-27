@@ -1,3 +1,6 @@
+import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
+import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
+import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
 import {
   Box,
   Button,
@@ -7,22 +10,14 @@ import {
   useTheme,
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
-import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
-import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
-import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
-
-import CardRowContainer from 'components/cards/CardRowContainer'
 import CardOne from 'components/cards/CardOne'
+import CardRowContainer from 'components/cards/CardRowContainer'
+import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroImage from '../public/images/seattle_4.jpg'
 
-import { withBasicLayout } from 'components/layouts'
-
 /* eslint-disable @next/next/no-img-element */
-
-interface Props {}
 
 const Home = () => {
   const theme = useTheme()
