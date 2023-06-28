@@ -9,15 +9,16 @@ export const HeaderContainer = styled.header``
 
 export const MainContainer = styled.main`
   position: relative;
-  padding: 5rem;
+  // padding: 5rem;
+  // width: 100%;
   text-align: center;
 `
 
 export const FooterContainer = styled.footer`
   background: ${theme.palette.primary.dark};
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  // position: absolute;
+  // bottom: 0;
+  // width: 100%;
   padding: 2.5rem;
 `
 

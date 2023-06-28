@@ -1,4 +1,5 @@
 import 'styles/global.css'
+import 'styles/preflight.css'
 
 import { ThemeProvider } from '@mui/material'
 import { AppProps } from 'next/app'
