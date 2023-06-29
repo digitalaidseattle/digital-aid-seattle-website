@@ -2,6 +2,8 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 type CardWithPhotoProps = {
   title: string
@@ -16,6 +18,9 @@ const CardWithPhoto = ({
   image,
   imageHeight = 196,
 }: CardWithPhotoProps) => {
+  const theme = useTheme()
+  const isViewportSmall = useMediaQuery(theme.breakpoints.down('sm'))
+
   return (
     <Card
       sx={{
@@ -25,12 +30,14 @@ const CardWithPhoto = ({
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <CardMedia
-        sx={{
-          height: imageHeight,
-        }}
-        image={image}
-      />
+      {!isViewportSmall && (
+        <CardMedia
+          sx={{
+            height: imageHeight,
+          }}
+          image={image}
+        />
+      )}
       <CardContent
         sx={{
           display: 'flex',
