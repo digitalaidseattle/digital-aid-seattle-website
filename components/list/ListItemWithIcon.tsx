@@ -3,7 +3,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
-import { designColor } from 'theme/theme'
+import { useTheme } from '@mui/material'
 
 type ListItemWithIconProps = {
   listIcon: ReactNode
@@ -11,6 +11,9 @@ type ListItemWithIconProps = {
 }
 
 const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
+  const theme = useTheme()
+  const palette = theme.palette
+
   return (
     <ListItem
       sx={{
@@ -18,12 +21,15 @@ const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <ListItemIcon sx={{ color: designColor.green.light }}>
+      <ListItemIcon sx={{ color: palette.primary.light }}>
         {listIcon}
       </ListItemIcon>
       <ListItemText
         primary={
-          <Typography variant="labelMedium" color={designColor.black}>
+          <Typography
+            variant="labelMedium"
+            color={palette.secondary.contrastText}
+          >
             {listText}
           </Typography>
         }
