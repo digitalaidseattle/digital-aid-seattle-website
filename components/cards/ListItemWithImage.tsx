@@ -3,7 +3,7 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import { designColor } from 'theme/theme'
+import { useTheme } from '@mui/material'
 
 type ListItemWithImageProps = {
   listText: string
@@ -16,6 +16,9 @@ const ListItemWithImage = ({
   listImage,
   listImageAltText = 'decorative',
 }: ListItemWithImageProps) => {
+  const theme = useTheme()
+  const palette = theme.palette
+
   return (
     <ListItem
       sx={{
@@ -23,12 +26,15 @@ const ListItemWithImage = ({
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <ListItemAvatar sx={{ color: designColor.green.light }}>
+      <ListItemAvatar sx={{ color: palette.primary.light }}>
         <Avatar alt={listImageAltText} src={listImage} />
       </ListItemAvatar>
       <ListItemText
         primary={
-          <Typography variant="labelMedium" color={designColor.black}>
+          <Typography
+            variant="labelMedium"
+            color={palette.secondary.contrastText}
+          >
             {listText}
           </Typography>
         }
