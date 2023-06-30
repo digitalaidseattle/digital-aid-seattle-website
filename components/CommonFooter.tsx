@@ -19,12 +19,12 @@ const GridItem = styled(Grid)(() => ({
 const FooterItemTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   color: theme.palette.primary.contrastText,
-  fontSize: '0.875rem'
+  fontSize: '0.875rem',
 }))
 
 const FooterSubItem = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
-  fontSize: '1rem'
+  fontSize: '1rem',
 }))
 
 const LinkSubItem = (props: { url: string; name: string }) => (

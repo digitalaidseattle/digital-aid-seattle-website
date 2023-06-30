@@ -7,18 +7,16 @@ import CommonHeader from './CommonHeader'
 
 export const HeaderContainer = styled.header``
 
+// bottom padding is to compensate for footer
 export const MainContainer = styled.main`
   position: relative;
-  // padding: 5rem;
-  // width: 100%;
-  text-align: center;
+  width: 100%;
 `
 
 export const FooterContainer = styled.footer`
   background: ${theme.palette.primary.dark};
-  // position: absolute;
-  // bottom: 0;
-  // width: 100%;
+  bottom: 0;
+  width: 100%;
   padding: 2.5rem;
 `
 
@@ -33,7 +31,7 @@ export const withBasicLayout = (Page: () => JSX.Element) => () =>
         <Page />
       </MainContainer>
       <FooterContainer>
-        <CommonFooter/> 
+        <CommonFooter />
       </FooterContainer>
     </>
   )
