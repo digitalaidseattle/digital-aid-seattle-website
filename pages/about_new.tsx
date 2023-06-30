@@ -4,19 +4,25 @@ import {
   AutoGraphOutlined,
   MilitaryTechOutlined,
 } from '@mui/icons-material'
-import { Box, Container, Grid, styled, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  Grid,
+  styled,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
-
 
 // TODO - use theme instead of designColor
 const SectionContainer = styled(Container)(({ theme }) => ({
   backgroundColor: designColor.white,
   color: designColor.black,
   textAlign: 'center',
-  padding: '2rem'
+  padding: '2rem',
 }))
 
 const AboutPage = () => {
@@ -72,7 +78,7 @@ const AboutPage = () => {
           backgroundColor: designColor.white,
         }}
       >
-        <Box sx={{gap: "2rem", display: 'grid' }}>
+        <Box sx={{ gap: '2rem', display: 'grid' }}>
           <Typography variant="headlineMedium">What we do</Typography>
           <Typography variant="bodyLarge">
             Open Seattle partners with other nonprofits in order to amplifying
@@ -86,9 +92,9 @@ const AboutPage = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-         <Box sx={{gap: "1rem", display: 'grid' }}>
+        <Box sx={{ gap: '1rem', display: 'grid' }}>
           <Typography variant="headlineMedium">Our values</Typography>
-        
+        </Box>
         <CardRowContainer>
           <CardOne
             title="Excellence"
@@ -105,9 +111,7 @@ const AboutPage = () => {
             description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
-          
         </CardRowContainer>
-        </Box>
       </SectionContainer>
 
       <SectionContainer
@@ -115,7 +119,7 @@ const AboutPage = () => {
           backgroundColor: designColor.white,
         }}
       >
-        <Box sx={{gap: "2rem", display: 'grid' }}>
+        <Box sx={{ gap: '2rem', display: 'grid' }}>
           <Typography variant="headlineMedium">Our vision</Typography>
           <Typography variant="bodyLarge" align="center" display="block">
             We envision a network of highly functional non-profits in the Puget
@@ -131,7 +135,7 @@ const AboutPage = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <Box sx={{gap: "2rem", display: 'grid' }}>
+        <Box sx={{ gap: '2rem', display: 'grid' }}>
           <Typography variant="headlineMedium">Our team</Typography>
           <Typography variant="bodyLarge" align="center" display="block">
             The Open Seattle cadre is made up of highly skilled and committed
