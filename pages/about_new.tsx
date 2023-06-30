@@ -4,11 +4,20 @@ import {
   AutoGraphOutlined,
   MilitaryTechOutlined,
 } from '@mui/icons-material'
-import { Container, Grid, Typography, useTheme } from '@mui/material'
+import { Container, Grid, styled, Typography, useTheme } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
+
+
+// TODO - use theme instead of designColor
+const SectionContainer = styled(Container)(({ theme }) => ({
+  backgroundColor: designColor.white,
+  color: designColor.black,
+  textAlign: 'center',
+  padding: '2rem'
+}))
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -19,7 +28,7 @@ const AboutPage = () => {
       <Container
         sx={{
           backgroundColor: palette.primary.light,
-          padding: { xs: '2rem', md: '2rem' },
+          padding: { md: '2rem' },
         }}
         maxWidth={false}
       >
@@ -31,7 +40,6 @@ const AboutPage = () => {
                   variant="displayMedium"
                   sx={{ color: theme.palette.primary.contrastText }}
                 >
-                  {' '}
                   About us
                 </Typography>
               </div>
@@ -59,11 +67,9 @@ const AboutPage = () => {
         </Grid>
       </Container>
 
-      <Container
+      <SectionContainer
         style={{
           backgroundColor: designColor.white,
-          color: designColor.black,
-          textAlign: 'center',
         }}
       >
         <div>
@@ -75,13 +81,11 @@ const AboutPage = () => {
             their impact, and to uplift communities with technology.
           </Typography>
         </div>
-      </Container>
+      </SectionContainer>
 
-      <Container
+      <SectionContainer
         style={{
           backgroundColor: theme.palette.background.default,
-          color: designColor.black,
-          textAlign: 'center',
         }}
       >
         <div>
@@ -105,13 +109,11 @@ const AboutPage = () => {
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
         </CardRowContainer>
-      </Container>
+      </SectionContainer>
 
-      <Container
+      <SectionContainer
         style={{
           backgroundColor: designColor.white,
-          color: designColor.black,
-          textAlign: 'center',
         }}
       >
         <div>
@@ -125,13 +127,11 @@ const AboutPage = () => {
             public service.
           </Typography>
         </div>
-      </Container>
+      </SectionContainer>
 
-      <Container
+      <SectionContainer
         style={{
           backgroundColor: theme.palette.background.default,
-          color: designColor.black,
-          textAlign: 'center',
         }}
       >
         <div>
@@ -143,7 +143,7 @@ const AboutPage = () => {
             volunteers, dedicated to serving the greater Seattle area.
           </Typography>
         </div>
-      </Container>
+      </SectionContainer>
     </div>
   )
 }
