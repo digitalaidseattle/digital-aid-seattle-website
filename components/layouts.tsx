@@ -9,12 +9,12 @@ export const HeaderContainer = styled.header``
 
 // bottom padding is to compensate for footer
 export const MainContainer = styled.main`
-  padding-bottom: 15rem;
+  position: relative;
+  width: 100%;
 `
 
 export const FooterContainer = styled.footer`
   background: ${theme.palette.primary.dark};
-  position: fixed;
   bottom: 0;
   width: 100%;
   padding: 2.5rem;

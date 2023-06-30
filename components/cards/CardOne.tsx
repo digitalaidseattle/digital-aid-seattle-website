@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
 
 type CardOneProps = {
-  title: string
+  title?: string
   description: string
   icon: ReactNode
   buttonText?: string
@@ -29,6 +29,7 @@ const CardOne = ({
         minWidth: { xs: '100%', sm: 'min-content' },
         boxShadow:
           '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
+        height: '100%',
       }}
     >
       <CardContent
@@ -40,11 +41,11 @@ const CardOne = ({
           textAlign: 'center',
           padding: { xs: '2rem', sm: '1rem' },
           justifyContent: 'space-between',
-          height: '100%',
+          marginBottom: '3rem',
         }}
       >
         <IconContainer>{icon}</IconContainer>
-        <Typography variant="titleLarge">{title}</Typography>
+        {title && <Typography variant="titleLarge">{title}</Typography>}
         <Typography variant="bodyMedium">{description}</Typography>
         {buttonText && (
           <Button variant="contained" color="secondary" href={buttonLink}>

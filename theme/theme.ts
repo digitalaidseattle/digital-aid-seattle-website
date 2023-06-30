@@ -89,13 +89,13 @@ const yellowPalette = {
 const neutralPalette = {
   25: '#343D3E',
   98: '#F7FAFA',
-  197: '#F2F7F7',
+  97: '#F2F7F7',
 }
 
 export const designColor = {
   white: '#F7FAFA',
   black: '#00211F',
-  background: neutralPalette[197],
+  background: neutralPalette[97],
   green: {
     main: greenPalette[17],
     light: greenPalette[30],
@@ -104,6 +104,7 @@ export const designColor = {
   yellow: {
     main: yellowPalette[92],
     light: yellowPalette[98],
+    dark: yellowPalette[80],
   },
 }
 
@@ -118,11 +119,16 @@ export const theme = createTheme({
     },
     secondary: {
       main: designColor.yellow.main,
-      contrastText: designColor.black,
       light: designColor.yellow.light,
+      dark: designColor.yellow.dark,
+      contrastText: designColor.black,
     },
     background: {
       default: '#F2F7F7',
+    },
+    text: {
+      primary: designColor.black,
+      secondary: neutralPalette[97],
     },
   },
   typography: {
@@ -251,8 +257,17 @@ export const theme = createTheme({
           borderRadius: '12px',
           backgroundColor: '#F7FAFA',
           border: '3px solid #FFFFFF',
-        }
-      }
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          backgroundColor: '#F7FAFA',
+          border: '2px solid #FFFFFF',
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {
@@ -264,18 +279,18 @@ export const theme = createTheme({
         },
       },
       variants: [
-          {
-            props: { variant: "card" },
-            style: {
-              color: 'primary.dark', 
-              backgroundColor: designColor.yellow.main, 
-              mt: 'auto',
-              '&:hover': {
-                  backgroundColor: designColor.yellow.light
-              },
-            }
+        {
+          props: { variant: 'card' },
+          style: {
+            color: 'primary.dark',
+            backgroundColor: designColor.yellow.main,
+            mt: 'auto',
+            '&:hover': {
+              backgroundColor: designColor.yellow.light,
+            },
           },
-      ]
+        },
+      ],
     },
     MuiTypography: {
       defaultProps: {
@@ -307,6 +322,6 @@ export const theme = createTheme({
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
-    card: true;
+    card: true
   }
 }
