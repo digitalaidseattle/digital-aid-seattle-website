@@ -4,7 +4,7 @@ import {
   AutoGraphOutlined,
   MilitaryTechOutlined,
 } from '@mui/icons-material'
-import { Container, Grid, styled, Typography, useTheme } from '@mui/material'
+import { Box, Container, Grid, styled, Typography, useTheme } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
@@ -72,15 +72,13 @@ const AboutPage = () => {
           backgroundColor: designColor.white,
         }}
       >
-        <div>
+        <Box sx={{gap: "2rem", display: 'grid' }}>
           <Typography variant="headlineMedium">What we do</Typography>
-        </div>
-        <div>
           <Typography variant="bodyLarge">
             Open Seattle partners with other nonprofits in order to amplifying
             their impact, and to uplift communities with technology.
           </Typography>
-        </div>
+        </Box>
       </SectionContainer>
 
       <SectionContainer
@@ -88,9 +86,8 @@ const AboutPage = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <div>
+         <Box sx={{gap: "1rem", display: 'grid' }}>
           <Typography variant="headlineMedium">Our values</Typography>
-        </div>
         
         <CardRowContainer>
           <CardOne
@@ -108,7 +105,9 @@ const AboutPage = () => {
             description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
+          
         </CardRowContainer>
+        </Box>
       </SectionContainer>
 
       <SectionContainer
@@ -116,17 +115,15 @@ const AboutPage = () => {
           backgroundColor: designColor.white,
         }}
       >
-        <div>
+        <Box sx={{gap: "2rem", display: 'grid' }}>
           <Typography variant="headlineMedium">Our vision</Typography>
-        </div>
-        <div>
           <Typography variant="bodyLarge" align="center" display="block">
             We envision a network of highly functional non-profits in the Puget
             Sound area, working in tandem with one another and with the
             municipal government in order to enable the highest echelon of
             public service.
           </Typography>
-        </div>
+        </Box>
       </SectionContainer>
 
       <SectionContainer
@@ -134,15 +131,13 @@ const AboutPage = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <div>
+        <Box sx={{gap: "2rem", display: 'grid' }}>
           <Typography variant="headlineMedium">Our team</Typography>
-        </div>
-        <div>
           <Typography variant="bodyLarge" align="center" display="block">
             The Open Seattle cadre is made up of highly skilled and committed
             volunteers, dedicated to serving the greater Seattle area.
           </Typography>
-        </div>
+        </Box>
       </SectionContainer>
     </div>
   )
