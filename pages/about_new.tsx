@@ -74,11 +74,12 @@ const AboutPage = () => {
       </Container>
 
       <SectionContainer
-        style={{
+        sx={{
           backgroundColor: designColor.white,
         }}
+        maxWidth={false}
       >
-        <Box sx={{ gap: '2rem', display: 'grid' }}>
+        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">What we do</Typography>
           <Typography variant="bodyLarge">
             Open Seattle partners with other nonprofits in order to amplifying
@@ -91,35 +92,48 @@ const AboutPage = () => {
         style={{
           backgroundColor: theme.palette.background.default,
         }}
+        maxWidth={false}
       >
-        <Box sx={{ gap: '1rem', display: 'grid' }}>
+       <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">Our values</Typography>
+       
+        <Grid container spacing={2}>
+          <Grid item md={4}>
+            <CardOne
+              title="Excellence"
+              description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+              icon={
+                <MilitaryTechOutlined style={{ color: designColor.white }} />
+              }
+            />
+          </Grid>
+          <Grid item md={4}>
+            <CardOne
+              title="Efficacy"
+              description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+              icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
+            />
+          </Grid>
+          <Grid item md={4}>
+            <CardOne
+              title="Efficiency"
+              description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
+              icon={
+                <AccessAlarmOutlined style={{ color: designColor.white }} />
+              }
+            />
+          </Grid>
+        </Grid>
         </Box>
-        <CardRowContainer>
-          <CardOne
-            title="Excellence"
-            description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-            icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
-          />
-          <CardOne
-            title="Efficacy"
-            description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
-            icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
-          />
-          <CardOne
-            title="Efficiency"
-            description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
-            icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
-          />
-        </CardRowContainer>
       </SectionContainer>
 
       <SectionContainer
         style={{
           backgroundColor: designColor.white,
         }}
+        maxWidth={false}
       >
-        <Box sx={{ gap: '2rem', display: 'grid' }}>
+        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">Our vision</Typography>
           <Typography variant="bodyLarge" align="center" display="block">
             We envision a network of highly functional non-profits in the Puget
@@ -134,8 +148,9 @@ const AboutPage = () => {
         style={{
           backgroundColor: theme.palette.background.default,
         }}
+        maxWidth={false}
       >
-        <Box sx={{ gap: '2rem', display: 'grid' }}>
+       <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">Our team</Typography>
           <Typography variant="bodyLarge" align="center" display="block">
             The Open Seattle cadre is made up of highly skilled and committed
