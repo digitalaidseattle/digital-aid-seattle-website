@@ -6,6 +6,7 @@ import {
 } from '@mui/icons-material'
 import { Container, Grid, Typography, useTheme } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
+import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 
@@ -62,14 +63,14 @@ const AboutPage = () => {
         style={{
           backgroundColor: designColor.white,
           color: designColor.black,
-          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
         <div>
           <Typography variant="headlineMedium">What we do</Typography>
         </div>
-        <div style={{ marginTop: 20, maxWidth: 500 }}>
-          <Typography variant="bodyLarge" align="center" display="block">
+        <div>
+          <Typography variant="bodyLarge">
             Open Seattle partners with other nonprofits in order to amplifying
             their impact, and to uplift communities with technology.
           </Typography>
@@ -80,13 +81,14 @@ const AboutPage = () => {
         style={{
           backgroundColor: theme.palette.background.default,
           color: designColor.black,
-          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
         <div>
           <Typography variant="headlineMedium">Our values</Typography>
         </div>
-        <div style={{ marginTop: 20, maxWidth: 500 }}>
+        
+        <CardRowContainer>
           <CardOne
             title="Excellence"
             description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
@@ -102,20 +104,20 @@ const AboutPage = () => {
             description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
-        </div>
+        </CardRowContainer>
       </Container>
 
       <Container
         style={{
           backgroundColor: designColor.white,
           color: designColor.black,
-          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
         <div>
           <Typography variant="headlineMedium">Our vision</Typography>
         </div>
-        <div style={{ marginTop: 20, maxWidth: 500 }}>
+        <div>
           <Typography variant="bodyLarge" align="center" display="block">
             We envision a network of highly functional non-profits in the Puget
             Sound area, working in tandem with one another and with the
@@ -129,13 +131,13 @@ const AboutPage = () => {
         style={{
           backgroundColor: theme.palette.background.default,
           color: designColor.black,
-          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
         <div>
           <Typography variant="headlineMedium">Our team</Typography>
         </div>
-        <div style={{ marginTop: 20, maxWidth: 500 }}>
+        <div>
           <Typography variant="bodyLarge" align="center" display="block">
             The Open Seattle cadre is made up of highly skilled and committed
             volunteers, dedicated to serving the greater Seattle area.
