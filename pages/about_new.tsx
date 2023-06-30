@@ -1,51 +1,64 @@
-import { Typography, useTheme } from '@mui/material'
+/* eslint-disable @next/next/no-img-element */
+import {
+  AccessAlarmOutlined,
+  AutoGraphOutlined,
+  MilitaryTechOutlined,
+} from '@mui/icons-material'
+import { Container, Grid, Typography, useTheme } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import { withBasicLayout } from 'components/layouts'
-import PageSection from 'components/PageSection'
 import { designColor } from 'theme/theme'
-import {
-  MilitaryTechOutlined,
-  AutoGraphOutlined,
-  AccessAlarmOutlined,
-} from '@mui/icons-material'
 
 const AboutPage = () => {
   const theme = useTheme()
+  const palette = theme.palette
 
   return (
     <div>
-      <PageSection
-        style={{
-          backgroundColor: theme.palette.primary.main,
-          color: designColor.white,
+      <Container
+        sx={{
+          backgroundColor: palette.primary.light,
+          padding: { xs: '2rem', md: '2rem' },
         }}
+        maxWidth={false}
       >
-        <div className="flow-row md:flex">
-          <div>
-            <div>
-              <Typography variant="displayMedium">About us</Typography>
-            </div>
-            <div style={{ marginTop: 20 }}>
-              <Typography variant="bodyLarge">
-                Open Seattle comprises a group of seasoned professionals with
-                experience in web development, software engineering, digital
-                strategy, visual and content design, and more. We leverage this
-                vast experience to transform the nonprofit sector—to make it
-                more efficient, effective, and accessible to all.
-              </Typography>
-            </div>
-          </div>
-          <div className="md:shrink-0">
+        <Grid container spacing={20}>
+          <Grid item xs={6}>
+            <Container sx={{ margin: '10rem' }}>
+              <div>
+                <Typography
+                  variant="displayMedium"
+                  sx={{ color: theme.palette.primary.contrastText }}
+                >
+                  {' '}
+                  About us
+                </Typography>
+              </div>
+              <div>
+                <Typography
+                  variant="bodyLarge"
+                  sx={{ color: theme.palette.primary.contrastText }}
+                >
+                  Open Seattle comprises a group of seasoned professionals with
+                  experience in web development, software engineering, digital
+                  strategy, visual and content design, and more. We leverage
+                  this vast experience to transform the nonprofit sector—to make
+                  it more efficient, effective, and accessible to all.
+                </Typography>
+              </div>
+            </Container>
+          </Grid>
+          <Grid item xs={6}>
             <img
               className="w-200 md:w-500 lg:w-700 object-contain"
               src="rafiki.png"
               alt=""
             />
-          </div>
-        </div>
-      </PageSection>
+          </Grid>
+        </Grid>
+      </Container>
 
-      <PageSection
+      <Container
         style={{
           backgroundColor: designColor.white,
           color: designColor.black,
@@ -61,9 +74,9 @@ const AboutPage = () => {
             their impact, and to uplift communities with technology.
           </Typography>
         </div>
-      </PageSection>
+      </Container>
 
-      <PageSection
+      <Container
         style={{
           backgroundColor: theme.palette.background.default,
           color: designColor.black,
@@ -90,9 +103,9 @@ const AboutPage = () => {
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
         </div>
-      </PageSection>
+      </Container>
 
-      <PageSection
+      <Container
         style={{
           backgroundColor: designColor.white,
           color: designColor.black,
@@ -110,9 +123,9 @@ const AboutPage = () => {
             public service.
           </Typography>
         </div>
-      </PageSection>
+      </Container>
 
-      <PageSection
+      <Container
         style={{
           backgroundColor: theme.palette.background.default,
           color: designColor.black,
@@ -128,7 +141,7 @@ const AboutPage = () => {
             volunteers, dedicated to serving the greater Seattle area.
           </Typography>
         </div>
-      </PageSection>
+      </Container>
     </div>
   )
 }
