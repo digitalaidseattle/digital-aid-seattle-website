@@ -100,7 +100,7 @@ const ProjectsPage = () => {
       width: '100%',
       backgroundColor: theme.palette.primary.contrastText,
       padding: {
-        xs: '1rem', md: '2rem', lg: '2.5rem 12.5rem' 
+        xs: '2.5rem 1rem 4rem 1rem', md: '2.5rem 2rem 4rem 2rem', lg: '2.5rem 12.5rem 7.5rem 12.5rem' 
       }
       }}>
 
