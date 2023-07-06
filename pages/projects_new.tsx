@@ -66,7 +66,6 @@ const ProjectsPage = () => {
     <>
       <Stack
         sx={{
-          marginBottom: '2.5rem',
           backgroundColor: theme.palette.primary.main,
           color: theme.palette.primary.contrastText,
         }}
@@ -96,13 +95,15 @@ const ProjectsPage = () => {
         )}
       </Stack>
 
-      <Stack
-        gap="2.5rem"
-        sx={{
-          mx: { xs: '1rem', md: '2rem', lg: '12.5rem' },
-          paddingBottom: '2.5rem',
-        }}
-      >
+    <Stack 
+    sx={{
+      width: '100%',
+      backgroundColor: theme.palette.primary.contrastText,
+      padding: {
+        xs: '1rem', md: '2rem', lg: '2.5rem 12.5rem' 
+      }
+      }}>
+
         <CardGridContainer>
           {projectData.map((project) => (
             <CardProject
