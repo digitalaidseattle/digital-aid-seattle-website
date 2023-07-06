@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography/Typography'
+import Typography from '@mui/material/Typography'
 
 type StateButtonProps = {
   state: 'active' | 'recruiting' | 'complete'
