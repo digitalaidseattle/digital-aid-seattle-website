@@ -38,6 +38,8 @@ const CardProject = ({
         display: 'flex',
         flexDirection: 'column',
         gap: '1.5rem',
+        justifyContent: 'space-between',
+        height: '100%'
       }}
     >
       <Stack direction={{xs: "row", lg: "column"}} gap="1.5rem">
