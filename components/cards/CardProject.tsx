@@ -4,10 +4,8 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 
 import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import StateButton from './StateButton'
-import Placeholder from '../../assets/placeholder-img.png'
 
 type CardProjectProps = {
   title: string
@@ -17,6 +15,8 @@ type CardProjectProps = {
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
   duration: { start: string; end: string } 
+  imageSrc: string
+  imageAlt: string
 }
 
 const CardProject = ({
@@ -27,6 +27,8 @@ const CardProject = ({
   status,
   projectLink,
   duration,
+  imageSrc,
+  imageAlt
 }: CardProjectProps) => {
   return (
   <Card>
@@ -41,8 +43,8 @@ const CardProject = ({
       <Stack direction={{xs: "row", lg: "column"}} gap="1.5rem">
             <CardMedia
               component='img'
-              alt='placeholder'
-              image={Placeholder.src}
+              alt={imageAlt}
+              image={imageSrc}
               sx={{
                 width: {md: '7rem', lg: '100%'},
                 aspectRatio: '1 / 1',
