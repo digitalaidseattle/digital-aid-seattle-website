@@ -1,0 +1,180 @@
+import {
+  Typography,
+  useTheme,
+  Container,
+  Stack,
+  styled,
+  Box,
+  Button,
+} from '@mui/material'
+import { withBasicLayout } from 'components/layouts'
+import StateButton from 'components/cards/StateButton'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
+import ListItemWithIcon from 'components/list/ListItemWithIcon'
+
+// imports for placeholders-- delete as needed
+import Placeholder from 'assets/placeholder-person.png'
+import DataObjectIcon from '@mui/icons-material/DataObject'
+
+const ProjectIndividualPage = () => {
+  const theme = useTheme()
+
+  const Subheader = styled(Typography)(({ theme }) => ({
+    color: theme.palette.primary.main,
+    marginBottom: '2rem',
+  }))
+
+  const Section = styled(Stack)(({ theme }) => ({
+    marginBottom: '4rem',
+  }))
+
+  return (
+    <>
+      <Container
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          padding: { xs: '4rem 1rem', md: '2rem' },
+          color: theme.palette.primary.contrastText,
+        }}
+        maxWidth={false}
+      >
+        <Stack spacing="2rem">
+          <Stack>
+            <Typography variant="displayMedium">Project Title</Typography>
+            <Typography variant="headlineMedium">Partner Name</Typography>
+          </Stack>
+          <Stack spacing="1rem">
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Project Status:</Typography>
+              <StateButton state="active" />
+            </Stack>
+            <Typography variant="labelLarge">
+              Expected Timeline: Ongoing
+            </Typography>
+          </Stack>
+        </Stack>
+      </Container>
+
+      <Container
+        sx={{
+          backgroundColor: theme.palette.primary.contrastText,
+          color: theme.palette.primary.main,
+          padding: { xs: '4rem 1rem' },
+        }}
+        maxWidth={false}
+      >
+        <Section>
+          <Subheader variant="headlineMedium">Problem</Subheader>
+          <Typography variant="bodyLarge">
+            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
+            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
+            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
+            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
+            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
+            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
+            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
+            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+            elementum tellus.
+          </Typography>
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">Solution</Subheader>
+          <Typography variant="bodyLarge">
+            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
+            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
+            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
+            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
+            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
+            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
+            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
+            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+            elementum tellus.
+          </Typography>
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">Impact</Subheader>
+          <Typography variant="bodyLarge">
+            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
+            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
+            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
+            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
+            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
+            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
+            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
+            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
+            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
+            elementum tellus.
+          </Typography>
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">Current Team</Subheader>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', lg: 'repeat(4, 1fr)' },
+              gap: '2rem',
+            }}
+          >
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+          </Box>
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">Roles Needed</Subheader>
+          <ListItemWithIcon
+            listIcon={<DataObjectIcon />}
+            listText="UX Designer"
+          />
+          <ListItemWithIcon
+            listIcon={<DataObjectIcon />}
+            listText="Marketing Director"
+          />
+          <ListItemWithIcon
+            listIcon={<DataObjectIcon />}
+            listText="Backend Engineer"
+          />
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">
+            Questions about this project?
+          </Subheader>
+          <Button variant="outlined">Contact us</Button>
+        </Section>
+
+        <Section>
+          <Subheader variant="headlineMedium">
+            Interested in volunteering with Open Seattle?
+          </Subheader>
+          <Button variant="contained">Apply to volunteer</Button>
+        </Section>
+      </Container>
+    </>
+  )
+}
+
+export default withBasicLayout(ProjectIndividualPage)
