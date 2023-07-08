@@ -1,22 +1,4 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Container,
-  Grid,
-  List,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material'
-
-import { withBasicLayout } from 'components/layouts'
-// import { ListItemWithIcon } from 'components/list/ListItemWithIcon'
-
-import VolunteerImage from '../assets/volunteerWithUs.png'
-import {
   AddOutlined,
   Campaign,
   Code,
@@ -30,9 +12,25 @@ import {
   Storage,
   WorkHistoryOutlined,
 } from '@mui/icons-material'
-
-import CardRowContainer from 'components/cards/CardRowContainer'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import CardOne from 'components/cards/CardOne'
+import CardRowContainer from 'components/cards/CardRowContainer'
+import { withBasicLayout } from 'components/layouts'
+import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import Link from 'next/link'
+
+import VolunteerImage from '../assets/volunteerWithUs.png'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -48,11 +46,14 @@ const gridContent = [
 ]
 
 const oathContent = [
-  { label: 'Assume positive intent.', content: 'test' },
-  { label: 'Bring out the best in others.', content: 'test' },
-  { label: 'Start with the partner.', content: 'test' },
-  { label: 'Focus on the problems not the solutions.', content: 'test' },
-  { label: 'Sense of urgency and teamwork', content: 'test' },
+  { label: 'Assume positive intent.', content: 'Needs Content' },
+  { label: 'Bring out the best in others.', content: 'Needs Content' },
+  { label: 'Start with the partner.', content: 'Needs Content' },
+  {
+    label: 'Focus on the problems not the solutions.',
+    content: 'Needs Content',
+  },
+  { label: 'Sense of urgency and teamwork', content: 'Needs Content' },
 ]
 
 const processContent = [
@@ -61,6 +62,7 @@ const processContent = [
   'If you are accepted, the next step is to complete your onboarding and select a project to work on.',
   'Contribute weekly to your project, and make a difference for your community!',
 ]
+
 const VolunteerPage = () => {
   const theme = useTheme()
   const palette = theme.palette
@@ -75,7 +77,7 @@ const VolunteerPage = () => {
           flexDirection: 'column',
           paddingY: '5rem',
         }}
-        maxWidth={false}
+        maxWidth="xl"
       >
         <Box
           sx={{
@@ -108,23 +110,19 @@ const VolunteerPage = () => {
           </Box>
         </Box>
       </Container>
-      <Container>
-        <Stack gap={8} sx={{ textAlign: 'center', padding: 1, paddingY: 8 }}>
+      {/* Volunteer Roles Section */}
+      <Container maxWidth="md">
+        <Stack gap={8} sx={{ textAlign: 'center', paddingY: 8 }}>
           <Typography variant="headlineLarge">
             How you can participate
           </Typography>
-          {/* <Grid columns={{ xs: 1, md: 2 }}> */}
-          {/* <List>
-          <ListItemWithIcon listIcon={<CodeBracketIcon />} listText="Front-end Development" />
-        </List> */}
-          {/* {gridContent.map((item) => (
-            <ListItemWithIcon
-              key={item.label}
-              listIcon={item.icon}
-              listText={item.label}
-            />
-          ))} */}
-          {/* </Grid> */}
+          <Grid container spacing={2}>
+            {gridContent.map((item) => (
+              <Grid item xs={12} sm={6} key={item.label}>
+                <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+              </Grid>
+            ))}
+          </Grid>
           <Typography variant="bodyLarge">
             All of our volunteers are vetted for experience, and sign a
             volunteer agreement before commencing work with Open Seattle.
@@ -166,8 +164,21 @@ const VolunteerPage = () => {
           </CardRowContainer>
         </Stack>
       </Container>
-      <Container sx={{ backgroundColor: 'white' }}>
-        <Stack gap={8} sx={{ textAlign: 'center', padding: 1, paddingY: 8 }}>
+      {/* Oath & Values Section */}
+      <Container
+        sx={{ backgroundColor: 'white' }}
+        maxWidth={false}
+        disableGutters
+      >
+        <Stack
+          gap={8}
+          sx={{
+            textAlign: 'center',
+            paddingY: 8,
+            maxWidth: 'md',
+            marginX: 'auto',
+          }}
+        >
           <Typography variant="headlineLarge">Our Oath</Typography>
           <Typography variant="bodyLarge">
             We champion these values and ask you as a volunteer to adopt them,
@@ -189,32 +200,58 @@ const VolunteerPage = () => {
               </Accordion>
             ))}
           </Box>
-          <Button variant="contained" color="primary">
-            Read Our Volunteer Agreement
-          </Button>
+          <Link href="/volunteer-agreement" passHref>
+            <Button variant="contained" color="primary">
+              Read Our Volunteer Agreement
+            </Button>
+          </Link>
         </Stack>
       </Container>
-      <Container>
-        <Typography variant="headlineLarge">The Process</Typography>
-        <ol>
-          {processContent.map((item, index) => (
-            <li key={index + 1}>
-              <Typography variant="titleLarge" color={palette.primary.main}>{`${
-                index + 1
-              }. `}</Typography>
-              <Typography variant="bodyLarge">{item}</Typography>
-            </li>
-          ))}
-        </ol>
+      {/* Process Section */}
+      <Container maxWidth={false}>
+        <Stack
+          gap={8}
+          sx={{
+            paddingY: 8,
+            maxWidth: 'md',
+            marginX: 'auto',
+          }}
+        >
+          <Typography variant="headlineLarge">The Process</Typography>
+          <ol>
+            {processContent.map((item, index) => (
+              <li key={index + 1}>
+                <Typography
+                  variant="titleLarge"
+                  color={palette.primary.main}
+                >{`${index + 1}.`}</Typography>
+                <Typography variant="bodyLarge" mx={2}>
+                  {item}
+                </Typography>
+              </li>
+            ))}
+          </ol>
+        </Stack>
       </Container>
-      <Container sx={{ backgroundColor: 'white' }}>
-        <Stack gap={8} sx={{ paddingY: 8 }}>
+      {/* Volunteer Application */}
+      <Container sx={{ backgroundColor: 'white' }} maxWidth={false}>
+        <Stack
+          gap={8}
+          sx={{
+            textAlign: 'center',
+            paddingY: 8,
+            maxWidth: 'md',
+            marginX: 'auto',
+          }}
+        >
           <Typography variant="headlineLarge">
-            Interested in volunteering with OpenSeattle?
+            Interested in volunteering with Open Seattle?
           </Typography>
-          <Button variant="contained" color="primary">
-            Apply to Volunteer
-          </Button>
+          <Link href="/volunteer-application" passHref>
+            <Button variant="contained" color="primary">
+              Apply to Volunteer
+            </Button>
+          </Link>
         </Stack>
       </Container>
     </>
