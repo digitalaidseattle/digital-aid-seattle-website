@@ -15,6 +15,7 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
 import DataObjectIcon from '@mui/icons-material/DataObject'
+import ProjectPlaceholder from 'assets/project-image.png'
 
 const ProjectIndividualPage = () => {
   const theme = useTheme()
@@ -35,8 +36,9 @@ const ProjectIndividualPage = () => {
       <Container
         sx={{
           backgroundColor: theme.palette.primary.main,
-          padding: { xs: '4rem 1rem', md: '2rem' },
+          padding: { xs: '4rem 1rem 10rem 1rem', md: '2rem' },
           color: theme.palette.primary.contrastText,
+          position: 'relative',
         }}
         maxWidth={false}
       >
@@ -55,6 +57,19 @@ const ProjectIndividualPage = () => {
             </Typography>
           </Stack>
         </Stack>
+        <img
+          src={ProjectPlaceholder.src}
+          style={{
+            position: 'absolute',
+            bottom: '-10rem',
+            left: '0',
+            right: '0',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            width: '18rem',
+            height: '18rem',
+          }}
+        />
       </Container>
 
       <Container
@@ -65,7 +80,7 @@ const ProjectIndividualPage = () => {
         }}
         maxWidth={false}
       >
-        <Section>
+        <Section sx={{ paddingTop: '12rem' }}>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
             Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
