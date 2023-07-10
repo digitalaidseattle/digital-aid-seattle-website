@@ -25,7 +25,9 @@ const ProjectIndividualPage = () => {
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
-    marginBottom: '4rem',
+    paddingTop: '4rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
   }))
 
   return (
@@ -59,7 +61,7 @@ const ProjectIndividualPage = () => {
         sx={{
           backgroundColor: theme.palette.primary.contrastText,
           color: theme.palette.primary.main,
-          padding: { xs: '4rem 1rem' },
+          padding: '0',
         }}
         maxWidth={false}
       >
@@ -112,7 +114,9 @@ const ProjectIndividualPage = () => {
         </Section>
 
         <Section>
-          <Subheader variant="headlineMedium">Current Team</Subheader>
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+            Current Team
+          </Subheader>
           <Box
             sx={{
               display: 'grid',
@@ -144,34 +148,55 @@ const ProjectIndividualPage = () => {
         </Section>
 
         <Section>
-          <Subheader variant="headlineMedium">Roles Needed</Subheader>
-          <ListItemWithIcon
-            listIcon={<DataObjectIcon />}
-            listText="UX Designer"
-          />
-          <ListItemWithIcon
-            listIcon={<DataObjectIcon />}
-            listText="Marketing Director"
-          />
-          <ListItemWithIcon
-            listIcon={<DataObjectIcon />}
-            listText="Backend Engineer"
-          />
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+            Roles Needed
+          </Subheader>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', lg: 'row' },
+              gap: '2rem',
+            }}
+          >
+            <ListItemWithIcon
+              listIcon={<DataObjectIcon />}
+              listText="UX Designer"
+            />
+            <ListItemWithIcon
+              listIcon={<DataObjectIcon />}
+              listText="Marketing Director"
+            />
+            <ListItemWithIcon
+              listIcon={<DataObjectIcon />}
+              listText="Backend Engineer"
+            />
+          </Box>
         </Section>
 
-        <Section>
-          <Subheader variant="headlineMedium">
+        <Stack
+          sx={{
+            alignItems: 'center',
+            padding: '4rem 1rem',
+          }}
+        >
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Questions about this project?
           </Subheader>
           <Button variant="outlined">Contact us</Button>
-        </Section>
+        </Stack>
 
-        <Section>
-          <Subheader variant="headlineMedium">
+        <Stack
+          sx={{
+            alignItems: 'center',
+            backgroundColor: '#ffffff',
+            padding: '4rem 1rem',
+          }}
+        >
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Interested in volunteering with Open Seattle?
           </Subheader>
           <Button variant="contained">Apply to volunteer</Button>
-        </Section>
+        </Stack>
       </Container>
     </>
   )
