@@ -90,15 +90,15 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
-            paddingTop: '14.5rem',
-            paddingBottom: '2.5rem',
+            // paddingTop: '6rem',
+            // paddingBottom: '2.5rem',
+            height: '25rem',
             color: theme.palette.primary.contrastText,
           }}
         >
           <Box
             sx={{
               position: 'relative',
-              border: '1px solid red',
               margin: '0 12.5rem',
             }}
           >
@@ -110,7 +110,7 @@ const ProjectIndividualPage = () => {
                 justifyContent: 'space-between',
                 position: 'absolute',
                 width: '100%',
-                bottom: '-8rem',
+                top: '6rem',
               }}
             >
               <Stack spacing="2rem">
@@ -143,6 +143,10 @@ const ProjectIndividualPage = () => {
                 style={{
                   width: '25rem',
                   height: '25rem',
+                  display: 'block',
+                  borderRadius: '20px',
+                  boxShadow:
+                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
                 }}
               />
             </Box>
