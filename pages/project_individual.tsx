@@ -21,8 +21,6 @@ import ProjectPlaceholder from 'assets/project-image.png'
 const ProjectIndividualPage = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
-  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const Subheader = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
@@ -34,6 +32,10 @@ const ProjectIndividualPage = () => {
     [theme.breakpoints.up('xs')]: {
       paddingLeft: '1rem',
       paddingRight: '1rem',
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: '2rem',
+      paddingRight: '2rem',
     },
     [theme.breakpoints.up('lg')]: {
       paddingLeft: '12.5rem',
@@ -90,8 +92,6 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
-            // paddingTop: '6rem',
-            // paddingBottom: '2.5rem',
             height: '25rem',
             color: theme.palette.primary.contrastText,
           }}
@@ -99,7 +99,7 @@ const ProjectIndividualPage = () => {
           <Box
             sx={{
               position: 'relative',
-              margin: '0 12.5rem',
+              margin: { sm: '0 2rem', lg: '0 12.5rem' },
             }}
           >
             <Box
