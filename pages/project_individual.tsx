@@ -11,6 +11,7 @@ import { withBasicLayout } from 'components/layouts'
 import StateButton from 'components/cards/StateButton'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
@@ -19,6 +20,9 @@ import ProjectPlaceholder from 'assets/project-image.png'
 
 const ProjectIndividualPage = () => {
   const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const Subheader = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
@@ -27,16 +31,22 @@ const ProjectIndividualPage = () => {
 
   const Section = styled(Stack)(({ theme }) => ({
     paddingTop: '4rem',
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
+    [theme.breakpoints.up('xs')]: {
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: '12.5rem',
+      paddingRight: '12.5rem',
+    },
   }))
 
-  return (
-    <>
+  function MobileHeader() {
+    return (
       <Container
         sx={{
           backgroundColor: theme.palette.primary.main,
-          padding: { xs: '4rem 1rem 10rem 1rem', md: '2rem' },
+          padding: { xs: '4rem 1rem 12rem 1rem', md: '2rem' },
           color: theme.palette.primary.contrastText,
           position: 'relative',
         }}
@@ -61,7 +71,7 @@ const ProjectIndividualPage = () => {
           src={ProjectPlaceholder.src}
           style={{
             position: 'absolute',
-            bottom: '-10rem',
+            bottom: '-8rem',
             left: '0',
             right: '0',
             marginLeft: 'auto',
@@ -71,16 +81,74 @@ const ProjectIndividualPage = () => {
           }}
         />
       </Container>
+    )
+  }
 
-      <Container
+  function DesktopHeader() {
+    return (
+      <>
+        <Box
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            paddingTop: '14.5rem',
+            paddingBottom: '2.5rem',
+            paddingLeft: '12.5rem',
+            paddingRight: '12.5rem',
+            color: theme.palette.primary.contrastText,
+            position: 'relative',
+          }}
+        >
+          <Stack spacing="2rem">
+            <Stack>
+              <Typography variant="displayMedium">Project Title</Typography>
+              <Typography variant="headlineMedium">Partner Name</Typography>
+            </Stack>
+          </Stack>
+          <img
+            src={ProjectPlaceholder.src}
+            style={{
+              position: 'absolute',
+              bottom: '-8rem',
+              left: 'auto',
+              right: '12.5rem',
+              width: '25rem',
+              height: '25rem',
+            }}
+          />
+        </Box>
+
+        <Stack
+          spacing="1rem"
+          sx={{
+            backgroundColor: theme.palette.primary.contrastText,
+            color: theme.palette.primary.main,
+            paddingLeft: '12.5rem',
+            paddingTop: '1.5rem',
+          }}
+        >
+          <Stack direction="row" alignItems="center" spacing="1.5rem">
+            <Typography variant="labelLarge">Project Status:</Typography>
+            <StateButton state="active" />
+          </Stack>
+          <Typography variant="labelLarge">
+            Expected Timeline: Ongoing
+          </Typography>
+        </Stack>
+      </>
+    )
+  }
+
+  return (
+    <>
+      {extraSmallScreen ? <MobileHeader /> : <DesktopHeader />}
+
+      <Box
         sx={{
           backgroundColor: theme.palette.primary.contrastText,
           color: theme.palette.primary.main,
-          padding: '0',
         }}
-        maxWidth={false}
       >
-        <Section sx={{ paddingTop: '12rem' }}>
+        <Section sx={{ paddingTop: '10rem' }}>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
             Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -212,7 +280,7 @@ const ProjectIndividualPage = () => {
           </Subheader>
           <Button variant="contained">Apply to volunteer</Button>
         </Stack>
-      </Container>
+      </Box>
     </>
   )
 }
