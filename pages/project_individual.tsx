@@ -45,48 +45,58 @@ const ProjectIndividualPage = () => {
 
   function MobileHeader() {
     return (
-      <Container
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          padding: { xs: '4rem 1rem 12rem 1rem', md: '2rem' },
-          color: theme.palette.primary.contrastText,
-          position: 'relative',
-        }}
-        maxWidth={false}
-      >
-        <Stack spacing="2rem">
-          <Stack>
-            <Typography variant="displayMedium">Project Title</Typography>
-            <Typography variant="headlineMedium">Partner Name</Typography>
-          </Stack>
-          <Stack spacing="1rem">
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">Project Status:</Typography>
-              <StateButton state="active" />
-            </Stack>
-            <Typography variant="labelLarge">
-              Expected Timeline: Ongoing
-            </Typography>
-          </Stack>
-        </Stack>
-        <img
-          src={ProjectPlaceholder.src}
-          style={{
-            position: 'absolute',
-            bottom: '-8rem',
-            left: '0',
-            right: '0',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            width: '18rem',
-            height: '18rem',
-            display: 'block',
-            borderRadius: '20px',
-            boxShadow:
-              '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+      <>
+        <Box
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            height: '28.75rem',
+            color: theme.palette.primary.contrastText,
           }}
-        />
-      </Container>
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              margin: '0 1rem',
+              height: '20rem',
+            }}
+          >
+            <Stack
+              spacing="2rem"
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                top: '4rem',
+              }}
+            >
+              <Stack>
+                <Typography variant="displayMedium">Project Title</Typography>
+                <Typography variant="headlineMedium">Partner Name</Typography>
+              </Stack>
+              <Stack spacing="1rem">
+                <Stack direction="row" alignItems="center" spacing="1.5rem">
+                  <Typography variant="labelLarge">Project Status:</Typography>
+                  <StateButton state="active" />
+                </Stack>
+                <Typography variant="labelLarge">
+                  Expected Timeline: Ongoing
+                </Typography>
+              </Stack>
+
+              <img
+                src={ProjectPlaceholder.src}
+                style={{
+                  width: '100%',
+                  aspectRatio: '1 / 1',
+                  display: 'block',
+                  borderRadius: '20px',
+                  boxShadow:
+                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                }}
+              />
+            </Stack>
+          </Box>
+        </Box>
+      </>
     )
   }
 
@@ -171,7 +181,7 @@ const ProjectIndividualPage = () => {
           color: theme.palette.primary.main,
         }}
       >
-        <Section sx={{ paddingTop: '10rem' }}>
+        <Section>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
             Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
