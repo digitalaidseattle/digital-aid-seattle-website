@@ -80,6 +80,10 @@ const ProjectIndividualPage = () => {
             marginRight: 'auto',
             width: '18rem',
             height: '18rem',
+            display: 'block',
+            borderRadius: '20px',
+            boxShadow:
+              '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
           }}
         />
       </Container>
@@ -107,13 +111,15 @@ const ProjectIndividualPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'flex-end',
+                gap: ' 2rem',
                 justifyContent: 'space-between',
                 position: 'absolute',
                 width: '100%',
                 top: '6rem',
+                minHeight: '25rem',
               }}
             >
-              <Stack spacing="2rem">
+              <Stack spacing="3rem">
                 <Stack>
                   <Typography variant="displayMedium">Project Title</Typography>
                   <Typography variant="headlineMedium">Partner Name</Typography>
@@ -142,7 +148,6 @@ const ProjectIndividualPage = () => {
                 src={ProjectPlaceholder.src}
                 style={{
                   width: '25rem',
-                  height: '25rem',
                   display: 'block',
                   borderRadius: '20px',
                   boxShadow:
