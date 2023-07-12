@@ -1,12 +1,4 @@
-import {
-  Typography,
-  useTheme,
-  Container,
-  Stack,
-  styled,
-  Box,
-  Button,
-} from '@mui/material'
+import { Typography, useTheme, Stack, styled, Box, Button } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
 import StateButton from 'components/cards/StateButton'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
@@ -28,16 +20,18 @@ const ProjectIndividualPage = () => {
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
-    paddingTop: '4rem',
     [theme.breakpoints.up('xs')]: {
+      paddingTop: '4rem',
       paddingLeft: '1rem',
       paddingRight: '1rem',
     },
     [theme.breakpoints.up('sm')]: {
+      paddingTop: '4rem',
       paddingLeft: '2rem',
       paddingRight: '2rem',
     },
     [theme.breakpoints.up('lg')]: {
+      paddingTop: '5rem',
       paddingLeft: '12.5rem',
       paddingRight: '12.5rem',
     },
@@ -281,30 +275,30 @@ const ProjectIndividualPage = () => {
           </Box>
         </Section>
 
-        <Stack
+        <Section
           sx={{
             alignItems: 'center',
-            padding: '4rem 1rem',
+            paddingBottom: { xs: '4rem', lg: '5rem' },
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Questions about this project?
           </Subheader>
           <Button variant="outlined">Contact us</Button>
-        </Stack>
+        </Section>
 
-        <Stack
+        <Section
           sx={{
             alignItems: 'center',
             backgroundColor: '#ffffff',
-            padding: '4rem 1rem',
+            paddingBottom: { xs: '4rem', lg: '5rem' },
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Interested in volunteering with Open Seattle?
           </Subheader>
           <Button variant="contained">Apply to volunteer</Button>
-        </Stack>
+        </Section>
       </Box>
     </>
   )
