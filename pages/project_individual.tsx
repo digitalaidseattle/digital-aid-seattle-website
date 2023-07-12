@@ -49,53 +49,46 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
+            width: '100%',
             height: '28.75rem',
             color: theme.palette.primary.contrastText,
+            position: 'absolute',
+            zIndex: '0',
+          }}
+        ></Box>
+        <Stack
+          spacing="2rem"
+          sx={{
+            position: 'relative',
+            padding: '4rem 1rem 0rem 1rem',
           }}
         >
-          <Box
-            sx={{
-              position: 'relative',
-              margin: '0 1rem',
-              height: '20rem',
-            }}
-          >
-            <Stack
-              spacing="2rem"
-              sx={{
-                position: 'absolute',
-                width: '100%',
-                top: '4rem',
-              }}
-            >
-              <Stack>
-                <Typography variant="displayMedium">Project Title</Typography>
-                <Typography variant="headlineMedium">Partner Name</Typography>
-              </Stack>
-              <Stack spacing="1rem">
-                <Stack direction="row" alignItems="center" spacing="1.5rem">
-                  <Typography variant="labelLarge">Project Status:</Typography>
-                  <StateButton state="active" />
-                </Stack>
-                <Typography variant="labelLarge">
-                  Expected Timeline: Ongoing
-                </Typography>
-              </Stack>
-
-              <img
-                src={ProjectPlaceholder.src}
-                style={{
-                  width: '100%',
-                  aspectRatio: '1 / 1',
-                  display: 'block',
-                  borderRadius: '20px',
-                  boxShadow:
-                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-                }}
-              />
+          <Stack>
+            <Typography variant="displayMedium">Project Title</Typography>
+            <Typography variant="headlineMedium">Partner Name</Typography>
+          </Stack>
+          <Stack spacing="1rem">
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Project Status:</Typography>
+              <StateButton state="active" />
             </Stack>
-          </Box>
-        </Box>
+            <Typography variant="labelLarge">
+              Expected Timeline: Ongoing
+            </Typography>
+          </Stack>
+
+          <img
+            src={ProjectPlaceholder.src}
+            style={{
+              width: '100%',
+              aspectRatio: '1 / 1',
+              display: 'block',
+              borderRadius: '20px',
+              boxShadow:
+                '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+            }}
+          />
+        </Stack>
       </>
     )
   }

@@ -9,6 +9,7 @@ export const HeaderContainer = styled.header``
 
 // bottom padding is to compensate for footer
 export const MainContainer = styled.main`
+  background: ${theme.palette.primary.contrastText};
   position: relative;
   width: 100%;
 `
