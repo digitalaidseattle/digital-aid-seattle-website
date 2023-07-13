@@ -10,7 +10,6 @@ type CardOneProps = {
   title?: string
   description: string
   icon: ReactNode
-  left: boolean
   buttonText?: string
   buttonLink?: string
 }
@@ -19,7 +18,6 @@ const CardOne = ({
   title,
   description,
   icon,
-  left,
   buttonText,
   buttonLink,
 }: CardOneProps) => {
