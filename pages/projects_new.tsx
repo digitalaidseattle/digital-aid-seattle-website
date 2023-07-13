@@ -1,4 +1,4 @@
-import { Typography, Stack, useTheme } from '@mui/material'
+import { Typography, Stack, useTheme, styled } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
@@ -6,12 +6,36 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Placeholder from '../assets/placeholder-img.png'
 
+type CardProjectProps = {
+  title: string
+  partner: string
+  programAreas: string[]
+  description: string
+  status: 'active' | 'recruiting' | 'complete'
+  projectLink: string
+  duration: { start: string; end: string }
+  imageSrc: string
+  imageAlt: string
+}
+
+const MobileHeader = styled(Typography)(({ theme }) => ({
+  padding: '4rem 0',
+  width: '100%',
+  textAlign: 'center',
+}))
+
+const DesktopHeader = styled(Typography)(({ theme }) => ({
+  padding: '5rem 0',
+  width: '100%',
+  textAlign: 'center',
+}))
+
 const ProjectsPage = () => {
   const theme = useTheme()
 
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
-  const projectData = [
+  const projectData: CardProjectProps[] = [
     {
       title: 'Seattle Humane Society',
       partner: 'City of Bellevue',
@@ -71,27 +95,9 @@ const ProjectsPage = () => {
         }}
       >
         {extraSmallScreen ? (
-          <Typography
-            variant="displayMedium"
-            sx={{
-              padding: '4rem 0',
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            Projects
-          </Typography>
+          <MobileHeader variant="displayMedium">Projects</MobileHeader>
         ) : (
-          <Typography
-            variant="displayLarge"
-            sx={{
-              padding: '5rem 0',
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            Projects
-          </Typography>
+          <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
 

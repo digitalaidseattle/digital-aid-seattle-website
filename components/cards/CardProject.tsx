@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import StateButton from './StateButton'
+import StateBadge from './StateBadge'
 
 type CardProjectProps = {
   title: string
@@ -80,7 +80,7 @@ const CardProject = ({
             alignItems={{ xs: 'center', sm: 'auto' }}
             spacing="1rem"
           >
-            <StateButton state={status} />
+            <StateBadge state={status} />
             <Typography variant="labelMedium">
               {duration.start} - {duration.end}
             </Typography>
