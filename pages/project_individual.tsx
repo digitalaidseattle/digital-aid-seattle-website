@@ -174,10 +174,10 @@ const ProjectIndividualPage = () => {
         <Section>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
-            Nonprofits that try to adopt new tech can't staff for their digital
-            needs. They grapple with efficiency and face operational burdens
-            without proper digital tools, leading to funding shortages and lost
-            volunteers.
+            Nonprofits that try to adopt new tech can&apos;t staff for their
+            digital needs. They grapple with efficiency and face operational
+            burdens without proper digital tools, leading to funding shortages
+            and lost volunteers.
             <br />
             <br />
             77% of nonprofits say that skilled volunteers could majorly impact
