@@ -1,16 +1,21 @@
-import { ReactNode } from 'react'
 import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material'
 
-type ListItemWithIconProps = {
-  listIcon: ReactNode
+type ListItemWithImageProps = {
   listText: string
+  listImage: string
+  listImageAltText?: string
 }
 
-const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
+const ListItemWithImage = ({
+  listText,
+  listImage,
+  listImageAltText = 'decorative',
+}: ListItemWithImageProps) => {
   const theme = useTheme()
   const palette = theme.palette
 
@@ -21,9 +26,9 @@ const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <ListItemIcon sx={{ color: palette.primary.light }}>
-        {listIcon}
-      </ListItemIcon>
+      <ListItemAvatar sx={{ color: palette.primary.light }}>
+        <Avatar alt={listImageAltText} src={listImage} />
+      </ListItemAvatar>
       <ListItemText
         primary={
           <Typography
@@ -38,4 +43,4 @@ const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
   )
 }
 
-export default ListItemWithIcon
+export default ListItemWithImage
