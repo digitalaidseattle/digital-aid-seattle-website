@@ -222,7 +222,13 @@ const ProjectIndividualPage = () => {
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', lg: 'repeat(4, 1fr)' },
+              gridTemplateColumns: {
+                xs: '1fr',
+                sm: 'min-content auto',
+                lg: 'repeat(4, 1fr)',
+              },
+              alignItems: 'center',
+              justifyContent: 'center',
               gap: '2rem',
             }}
           >
