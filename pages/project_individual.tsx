@@ -58,8 +58,8 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">Project Title</Typography>
-            <Typography variant="headlineMedium">Partner Name</Typography>
+            <Typography variant="displayMedium">The Cadre</Typography>
+            <Typography variant="headlineMedium">Open Seattle</Typography>
           </Stack>
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
@@ -120,8 +120,8 @@ const ProjectIndividualPage = () => {
           >
             <Stack spacing="3rem">
               <Stack>
-                <Typography variant="displayMedium">Project Title</Typography>
-                <Typography variant="headlineMedium">Partner Name</Typography>
+                <Typography variant="displayLarge">The Cadre</Typography>
+                <Typography variant="headlineLarge">Open Seattle</Typography>
               </Stack>
 
               <Stack
@@ -135,9 +135,13 @@ const ProjectIndividualPage = () => {
                   <Typography variant="labelLarge">Project Status:</Typography>
                   <StateButton state="active" />
                 </Stack>
-                <Typography variant="labelLarge">
-                  Expected Timeline: Ongoing
-                </Typography>
+
+                <Stack direction="row" alignItems="center" spacing="1.5rem">
+                  <Typography variant="labelLarge">
+                    Expected Timeline:
+                  </Typography>
+                  <Typography variant="labelLarge">Ongoing</Typography>
+                </Stack>
               </Stack>
             </Stack>
 
@@ -170,48 +174,44 @@ const ProjectIndividualPage = () => {
         <Section>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
+            Nonprofits that try to adopt new tech can't staff for their digital
+            needs. They grapple with efficiency and face operational burdens
+            without proper digital tools, leading to funding shortages and lost
+            volunteers.
+            <br />
+            <br />
+            77% of nonprofits say that skilled volunteers could majorly impact
+            their mission, but only 12% actually utilize them. Most software
+            projects will fail, even with financial backing. And—during the
+            pandemic, Covid-related drops in volunteer hours nationwide reached
+            19%.
+            <br />
+            <br />
+            Washington state needs a more structured tech volunteering model.
           </Typography>
         </Section>
 
         <Section>
           <Subheader variant="headlineMedium">Solution</Subheader>
           <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
+            The state of Washington boasts over 70,000 technologists, more than
+            55,000 residing in greater Seattle. Meanwhile, statistics show that
+            30% of professionals will volunteer if given the chance. SO, how can
+            we utilize this resource?
+            <br />
+            <br />
+            OPEN SEATTLE fosters connections between volunteers and the orgs
+            that can utilize their talents and provides nonprofits with digital
+            systems and tools that boost their efforts.
           </Typography>
         </Section>
 
         <Section>
           <Subheader variant="headlineMedium">Impact</Subheader>
           <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
+            Open Seattle helps nonprofits build the structure essential for
+            success in any technology project, acting as a force multiplier to
+            help organizations create lasting impact.
           </Typography>
         </Section>
 
@@ -226,6 +226,21 @@ const ProjectIndividualPage = () => {
               gap: '2rem',
             }}
           >
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
+            <CardWithPhoto
+              title="Jeffrey"
+              description="Program Manager"
+              image={Placeholder.src}
+            />
             <CardWithPhoto
               title="Jeffrey"
               description="Program Manager"
