@@ -1,6 +1,6 @@
 import { Typography, useTheme, Stack, styled, Box, Button } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
-import StateButton from 'components/cards/StateButton'
+import StateBadge from 'components/cards/StateBadge'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -64,7 +64,7 @@ const ProjectIndividualPage = () => {
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
-              <StateButton state="active" />
+              <StateBadge state="active" />
             </Stack>
             <Typography variant="labelLarge">
               Expected Timeline: Ongoing
@@ -133,7 +133,7 @@ const ProjectIndividualPage = () => {
               >
                 <Stack direction="row" alignItems="center" spacing="1.5rem">
                   <Typography variant="labelLarge">Project Status:</Typography>
-                  <StateButton state="active" />
+                  <StateBadge state="active" />
                 </Stack>
 
                 <Stack direction="row" alignItems="center" spacing="1.5rem">
