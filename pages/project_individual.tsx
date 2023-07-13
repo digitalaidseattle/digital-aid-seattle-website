@@ -1,5 +1,4 @@
 import { Typography, useTheme, Stack, styled, Box, Button } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
 import StateButton from 'components/cards/StateButton'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
@@ -10,7 +9,29 @@ import Placeholder from 'assets/placeholder-person.png'
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import ProjectPlaceholder from 'assets/project-image.png'
 
-const ProjectIndividualPage = () => {
+type ProjectProps = {
+  title: string
+  partner: string
+  status: 'active' | 'recruiting' | 'complete'
+  duration: string
+  problemDesc: string
+  solutionDesc: string
+  impactDesc: string
+  team: { name: string; title: string }
+  rolesNeeded: { role: string }
+}
+
+const ProjectTemplate = ({
+  title,
+  partner,
+  status,
+  duration,
+  problemDesc,
+  solutionDesc,
+  impactDesc,
+  team,
+  rolesNeeded,
+}: ProjectProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
@@ -58,16 +79,16 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">Project Title</Typography>
-            <Typography variant="headlineMedium">Partner Name</Typography>
+            <Typography variant="displayMedium">{title}</Typography>
+            <Typography variant="headlineMedium">{partner}</Typography>
           </Stack>
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
-              <StateButton state="active" />
+              <StateButton state={status} />
             </Stack>
             <Typography variant="labelLarge">
-              Expected Timeline: Ongoing
+              Expected Timeline: {duration.toString()}
             </Typography>
           </Stack>
 
@@ -120,8 +141,8 @@ const ProjectIndividualPage = () => {
           >
             <Stack spacing="3rem">
               <Stack>
-                <Typography variant="displayMedium">Project Title</Typography>
-                <Typography variant="headlineMedium">Partner Name</Typography>
+                <Typography variant="displayMedium">{title}</Typography>
+                <Typography variant="headlineMedium">{partner}</Typography>
               </Stack>
 
               <Stack
@@ -133,10 +154,10 @@ const ProjectIndividualPage = () => {
               >
                 <Stack direction="row" alignItems="center" spacing="1.5rem">
                   <Typography variant="labelLarge">Project Status:</Typography>
-                  <StateButton state="active" />
+                  <StateButton state={status} />
                 </Stack>
                 <Typography variant="labelLarge">
-                  Expected Timeline: Ongoing
+                  Expected Timeline: {duration}
                 </Typography>
               </Stack>
             </Stack>
@@ -169,50 +190,17 @@ const ProjectIndividualPage = () => {
       >
         <Section>
           <Subheader variant="headlineMedium">Problem</Subheader>
-          <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
-          </Typography>
+          <Typography variant="bodyLarge">{problemDesc}</Typography>
         </Section>
 
         <Section>
           <Subheader variant="headlineMedium">Solution</Subheader>
-          <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
-          </Typography>
+          <Typography variant="bodyLarge">{solutionDesc}</Typography>
         </Section>
 
         <Section>
           <Subheader variant="headlineMedium">Impact</Subheader>
-          <Typography variant="bodyLarge">
-            Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-            turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-            nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-            tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-            feugiat lectus. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus
-            enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex.
-            Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum
-            lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in
-            elementum tellus.
-          </Typography>
+          <Typography variant="bodyLarge">{impactDesc}</Typography>
         </Section>
 
         <Section>
@@ -304,4 +292,4 @@ const ProjectIndividualPage = () => {
   )
 }
 
-export default withBasicLayout(ProjectIndividualPage)
+export default ProjectTemplate
