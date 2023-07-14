@@ -24,7 +24,7 @@ const SectionContainer = styled(Container)(({ theme }) => ({
   backgroundColor: designColor.white,
   color: designColor.black,
   textAlign: 'center',
-  padding: '2rem',
+  padding: "2rem 12rem 2rem 12rem",
 }))
 
 const AboutPage = () => {
@@ -32,7 +32,11 @@ const AboutPage = () => {
 
   return (
     <div>
-      
+      <AboutUsHeroSection theme={theme}/>
+      <WhatWeDoSection theme={theme}/>
+      <OurValueSection theme={theme}/>
+      <OurVisionSection theme={theme}/>
+      <OurTeamSection theme={theme}/>
     </div>
   )
 }
@@ -75,10 +79,11 @@ const AboutUsHeroSection = ({ theme }) => (
   </Container>
 )
 
-const WhatWeDoSection = ({ theme }) => {
-  ;<SectionContainer
+const WhatWeDoSection = ({ theme }) => (
+  <SectionContainer
     sx={{
       backgroundColor: designColor.white,
+      padding: "2rem 12rem 2rem 12rem",
     }}
     maxWidth={false}
   >
@@ -90,42 +95,34 @@ const WhatWeDoSection = ({ theme }) => {
       </Typography>
     </Box>
   </SectionContainer>
-}
+)
 
 const OurValueSection = ({ theme }) => (
   <SectionContainer
     style={{
       backgroundColor: theme.palette.background.default,
+      padding: "2rem 12rem 2rem 12rem",
     }}
     maxWidth={false}
   >
-    <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
       <Typography variant="headlineMedium">Our values</Typography>
-
-      <Grid container spacing={2}>
-        <Grid item md={4}>
+      <CardRowContainer>
           <CardOne
             title="Excellence"
             description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
             icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
           />
-        </Grid>
-        <Grid item md={4}>
           <CardOne
             title="Efficacy"
             description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
             icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
           />
-        </Grid>
-        <Grid item md={4}>
           <CardOne
             title="Efficiency"
             description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
             icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
           />
-        </Grid>
-      </Grid>
-    </Box>
+      </CardRowContainer>
   </SectionContainer>
 )
 
@@ -133,6 +130,7 @@ const OurVisionSection = ({ theme }) => (
   <SectionContainer
     style={{
       backgroundColor: designColor.white,
+      padding: "2rem 12rem 2rem 12rem",
     }}
     maxWidth={false}
   >
@@ -151,6 +149,7 @@ const OurTeamSection = ({ theme }) => (
   <SectionContainer
     style={{
       backgroundColor: theme.palette.background.default,
+      padding: "2rem 12rem 2rem 12rem",
     }}
     maxWidth={false}
   >
