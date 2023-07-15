@@ -223,7 +223,7 @@ const VolunteerPage = () => {
           <Typography variant="headlineLarge">The Process</Typography>
           <ol>
             {processContent.map((item, index) => (
-              <li key={index + 1}>
+              <li key={index + 1} style={{ marginBottom: '2rem' }}>
                 <Typography
                   variant="titleLarge"
                   color={palette.primary.main}

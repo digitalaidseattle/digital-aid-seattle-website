@@ -1,4 +1,4 @@
-import { AccessAlarmOutlined } from '@mui/icons-material'
+import { Code, DataObject, Storage } from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -14,6 +14,61 @@ import PartnerImage from '../assets/partnerWithUs.png'
 import { withBasicLayout } from 'components/layouts'
 
 /* eslint-disable @next/next/no-img-element */
+
+const processContent = [
+  'Apply for help using the “Get Help” button.',
+  'You will receive an invitation for an interview within a few days.',
+  'If accepted, complete your onboarding and gather a team for your project.',
+  'Once work has begun, you will get weekly updates on the progress.',
+]
+
+const provideContent = [
+  {
+    title: 'Internal tools',
+    description:
+      'Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too.',
+    icon: <Code style={{ color: designColor.white }} />,
+  },
+  {
+    title: 'External tools',
+    description:
+      'The organizations we support serve individuals in need. Those folks often do not have access to resources and our aim is to streamline and facilitate success, whatever shape that takes.',
+    icon: <Storage style={{ color: designColor.white }} />,
+  },
+  {
+    title: 'Technical problems',
+    description:
+      'No matter the size, any organization in business today is bound to face technical challenges. Open Seattle partners with non-profits and other organizations to navigate these challenges.',
+    icon: <DataObject style={{ color: designColor.white }} />,
+  },
+]
+
+const criteriaContent = [
+  {
+    title: 'Nonprofits',
+    description:
+      'We strive to bring enterprise-level operational maturity to nonprofits in need.',
+    icon: <Code style={{ color: designColor.white }} />,
+  },
+  {
+    title: 'Governments',
+    description:
+      'Local governmental organizations aimed at building a better community deserve a helping hand.',
+    icon: <Storage style={{ color: designColor.white }} />,
+  },
+  {
+    title: 'Open Source',
+    description:
+      'Whenever possible, we will cooperate using open source assets that can be leveraged by anyone.',
+    icon: <DataObject style={{ color: designColor.white }} />,
+  },
+  {
+    title: 'Maintainability',
+    description:
+      "When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.",
+    icon: <DataObject style={{ color: designColor.white }} />,
+  },
+]
 
 const PartnersPage = () => {
   const theme = useTheme()
@@ -81,37 +136,25 @@ const PartnersPage = () => {
         }}
         maxWidth={false}
       >
-        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
-          <Typography variant="headlineLarge">How we can help</Typography>
+        <Box
+          sx={{
+            gap: '2rem',
+            display: 'grid',
+            margin: '2rem',
+          }}
+        >
+          <Typography variant="headlineLarge">Our criteria</Typography>
 
           <Grid container spacing={2}>
-            <Grid item md={4}>
-              <CardOne
-                title="Internal tools"
-                description="Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
-            <Grid item md={4}>
-              <CardOne
-                title="External tools"
-                description="The organizations we support serve individuals in need. Those folks often do not have access to resources and our aim is to streamline and facilitate success, whatever shape that takes."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
-            <Grid item md={4}>
-              <CardOne
-                title="Technical problems"
-                description="No matter the size, any organization in business today is bound to face technical challenges. Open Seattle partners with non-profits and other organizations to navigate these challenges."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
+            {criteriaContent.map((item, index) => (
+              <Grid item md={3} key={index}>
+                <CardOne
+                  title={item.title}
+                  description={item.description}
+                  icon={item.icon}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
         <Box
@@ -122,45 +165,18 @@ const PartnersPage = () => {
             marginTop: '5rem',
           }}
         >
-          <Typography variant="headlineLarge">Our criteria</Typography>
+          <Typography variant="headlineLarge">How we can help</Typography>
 
           <Grid container spacing={2}>
-            <Grid item md={3}>
-              <CardOne
-                title="Nonprofits"
-                description="We strive to bring enterprise-level operational maturity to nonprofits in need."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
-            <Grid item md={3}>
-              <CardOne
-                title="Governments"
-                description="Local governmental organizations aimed at building a better community deserve a helping hand."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
-            <Grid item md={3}>
-              <CardOne
-                title="Open Source"
-                description="Whenever possible, we will cooperate using open source assets that can be leveraged by anyone."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
-            <Grid item md={3}>
-              <CardOne
-                title="Maintainability"
-                description="When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale."
-                icon={
-                  <AccessAlarmOutlined style={{ color: designColor.white }} />
-                }
-              />
-            </Grid>
+            {provideContent.map((item, index) => (
+              <Grid item md={4} key={index}>
+                <CardOne
+                  title={item.title}
+                  description={item.description}
+                  icon={item.icon}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Container>
@@ -174,10 +190,26 @@ const PartnersPage = () => {
       >
         <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineLarge">The process</Typography>
-          <Typography variant="bodyLarge">
-            Open Seattle partners with other nonprofits in order to amplifying
-            their impact, and to uplift communities with technology.
-          </Typography>
+          <ol>
+            {processContent.map((item, index) => (
+              <li key={index + 1} style={{ marginBottom: '2rem' }}>
+                <Typography
+                  variant="titleLarge"
+                  color={palette.primary.main}
+                >{`${index + 1}.`}</Typography>
+                <Typography variant="bodyLarge" mx={2}>
+                  {item}
+                </Typography>
+              </li>
+            ))}
+          </ol>
+          <div style={{ margin: '2rem' }}>
+            <Link href="/partner-application" passHref>
+              <Button variant="contained" color="primary">
+                Partner with us
+              </Button>
+            </Link>
+          </div>
           <Typography variant="headlineLarge">Partner expectations</Typography>
           <Typography variant="bodyLarge">
             Partners should plan to maintain projects after handoff, and to
