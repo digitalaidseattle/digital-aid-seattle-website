@@ -46,7 +46,7 @@ const CardOne = ({
       >
         <IconContainer>{icon}</IconContainer>
         {title && <Typography variant="titleLarge">{title}</Typography>}
-        <Typography variant="bodyMedium">{description}</Typography>
+        <Typography variant="bodyLarge">{description}</Typography>
         {buttonText && (
           <Button variant="contained" color="secondary" href={buttonLink}>
             {buttonText}
