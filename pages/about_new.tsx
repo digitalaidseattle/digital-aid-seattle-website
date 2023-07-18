@@ -34,7 +34,7 @@ const AboutPage = () => {
 
   return (
     <div>
-      <AboutUsHeroSection theme={theme} />
+      <AboutUsHeroSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <WhatWeDoSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <OurValueSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <OurVisionSection theme={theme} extraSmallScreen={extraSmallScreen} />
@@ -45,19 +45,19 @@ const AboutPage = () => {
 
 export default withBasicLayout(AboutPage)
 
-const AboutUsHeroSection = ({ theme }) => (
+const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
   <Container
     sx={{
       backgroundColor: theme.palette.primary.main,
-      padding: '5rem',
+      padding: extraSmallScreen ? '1rem': '2rem',
     }}
     maxWidth="xl"
   >
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item md={4} xs={12}>
-        <>
+        <Box sx={{ gap: '2.5rem', display: 'grid', margin: '2rem' }}>
           <Typography
-            variant="displayLarge"
+            variant={extraSmallScreen ? "displayMedium" : "displayLarge"}
             sx={{ color: theme.palette.primary.contrastText }}
           >
             About us
@@ -72,7 +72,7 @@ const AboutUsHeroSection = ({ theme }) => (
             experience to transform the nonprofit sector—to make it more
             efficient, effective, and accessible to all.
           </Typography>
-        </>
+        </Box>
       </Grid>
       <Grid item md={4} xs={12}>
         <img src={AboutUsImage.src} alt="About Us page graphic"></img>
