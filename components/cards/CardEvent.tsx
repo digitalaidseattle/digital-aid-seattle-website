@@ -9,7 +9,6 @@ import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 
-
 type CardEventProps = {
   title: string
   date: string
@@ -29,7 +28,7 @@ const CardEvent = ({
   description,
   buttonLink,
   imageSrc,
-  imageAlt
+  imageAlt,
 }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -56,7 +55,7 @@ const CardEvent = ({
             }}
           >
             <CardMedia
-              component='img'
+              component="img"
               alt={imageAlt}
               image={imageSrc}
               sx={{
@@ -72,26 +71,26 @@ const CardEvent = ({
               paddingBottom: { xs: '1rem !important', sm: '2rem !important' },
             }}
           >
-            <Stack justifyContent='center' sx={{ height: '100%' }}>
-              <Stack spacing='1rem'>
-                <Typography variant='titleLarge'>{title}</Typography>
-                <Stack direction='row' spacing='1rem'>
-                  <Typography variant='labelLarge'>{date}</Typography>
-                  <Typography variant='labelLarge'>
+            <Stack justifyContent="center" sx={{ height: '100%' }}>
+              <Stack spacing="1rem">
+                <Typography variant="titleLarge">{title}</Typography>
+                <Stack direction="row" spacing="1rem">
+                  <Typography variant="labelLarge">{date}</Typography>
+                  <Typography variant="labelLarge">
                     {time.start} - {time.end}
                   </Typography>
                 </Stack>
-                <Typography variant='labelMedium'>{location}</Typography>
+                <Typography variant="labelMedium">{location}</Typography>
               </Stack>
 
               <Typography
-                variant='bodyMedium'
+                variant="bodyMedium"
                 sx={{ display: 'block', marginTop: '1.5rem' }}
               >
                 {description}
               </Typography>
               <Button
-                variant='contained'
+                variant="contained"
                 sx={{
                   marginTop: { xs: '2rem', md: '2.5rem' },
                   textAlign: 'center',
@@ -111,7 +110,7 @@ const CardEvent = ({
     return (
       <Card>
         <CardContent>
-          <Stack direction='row'>
+          <Stack direction="row">
             <Box
               sx={{
                 position: 'relative',
@@ -121,7 +120,7 @@ const CardEvent = ({
               }}
             >
               <CardMedia
-                component='img'
+                component="img"
                 alt={imageAlt}
                 image={imageSrc}
                 sx={{
@@ -132,28 +131,28 @@ const CardEvent = ({
               />
             </Box>
             <Stack
-              spacing='1rem'
-              justifyContent='center'
+              spacing="1rem"
+              justifyContent="center"
               sx={{ marginLeft: '1.5rem' }}
             >
-              <Typography variant='titleLarge'>{title}</Typography>
-              <Stack direction='row' spacing='1rem'>
-                <Typography variant='labelLarge'>{date}</Typography>
-                <Typography variant='labelLarge'>
+              <Typography variant="titleLarge">{title}</Typography>
+              <Stack direction="row" spacing="1rem">
+                <Typography variant="labelLarge">{date}</Typography>
+                <Typography variant="labelLarge">
                   {time.start} - {time.end}
                 </Typography>
               </Stack>
-              <Typography variant='labelMedium'>{location}</Typography>
+              <Typography variant="labelMedium">{location}</Typography>
             </Stack>
           </Stack>
           <Typography
-            variant='bodyMedium'
+            variant="bodyMedium"
             sx={{ display: 'block', marginTop: '1rem !important' }}
           >
             {description}
           </Typography>
           <Button
-            variant='contained'
+            variant="contained"
             href={buttonLink}
             sx={{
               maxWidth: 'min-content',

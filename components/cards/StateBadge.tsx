@@ -1,13 +1,16 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography/Typography'
+import Typography from '@mui/material/Typography'
 
-type StateButtonProps = {
+type StateBadgeProps = {
   state: 'active' | 'recruiting' | 'complete'
 }
 
-const stateColors = {'active': '#FFFAD8', 'recruiting': '#DDFFAF', 'complete': '#FFF0EE'}
-const StateButton = ({ state }: StateButtonProps) => {
-
+const stateColors = {
+  active: '#FFFAD8',
+  recruiting: '#DDFFAF',
+  complete: '#FFF0EE',
+}
+const StateBadge = ({ state }: StateBadgeProps) => {
   return (
     <Box
       sx={{
@@ -28,4 +31,4 @@ const StateButton = ({ state }: StateButtonProps) => {
   )
 }
 
-export default StateButton
+export default StateBadge

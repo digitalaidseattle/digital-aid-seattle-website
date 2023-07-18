@@ -3,14 +3,15 @@ import { ReactNode } from 'react'
 
 type Props = {
   children: ReactNode
+  columns?: number
 }
 
-const CardGridContainer = ({ children }: Props) => {
+const CardGridContainer = ({ children, columns = 2 }: Props) => {
   return (
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' },
+        gridTemplateColumns: { xs: '1fr', lg: `repeat(${columns}, 1fr)` },
         gap: '2rem',
       }}
     >
