@@ -10,6 +10,7 @@ import {
   Grid,
   styled,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
@@ -19,24 +20,25 @@ import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
 
-// TODO - use theme instead of designColor
-const SectionContainer = styled(Container)(({ theme }) => ({
+const SectionContainer = styled(Container)(() => ({
   backgroundColor: designColor.white,
   color: designColor.black,
   textAlign: 'center',
-  padding: "2rem 12rem 2rem 12rem",
+  padding: '2rem 12rem 2rem 12rem',
 }))
+
 
 const AboutPage = () => {
   const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
     <div>
-      <AboutUsHeroSection theme={theme}/>
-      <WhatWeDoSection theme={theme}/>
-      <OurValueSection theme={theme}/>
-      <OurVisionSection theme={theme}/>
-      <OurTeamSection theme={theme}/>
+      <AboutUsHeroSection theme={theme} />
+      <WhatWeDoSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <OurValueSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <OurVisionSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <OurTeamSection theme={theme} extraSmallScreen={extraSmallScreen} />
     </div>
   )
 }
@@ -52,7 +54,7 @@ const AboutUsHeroSection = ({ theme }) => (
     maxWidth="xl"
   >
     <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item md={4} xs={6}>
+      <Grid item md={4} xs={12}>
         <>
           <Typography
             variant="displayLarge"
@@ -72,18 +74,18 @@ const AboutUsHeroSection = ({ theme }) => (
           </Typography>
         </>
       </Grid>
-      <Grid item md={4} xs={6}>
+      <Grid item md={4} xs={12}>
         <img src={AboutUsImage.src} alt="About Us page graphic"></img>
       </Grid>
     </Grid>
   </Container>
 )
 
-const WhatWeDoSection = ({ theme }) => (
+const WhatWeDoSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
     sx={{
       backgroundColor: designColor.white,
-      padding: "2rem 12rem 2rem 12rem",
+      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
     }}
     maxWidth={false}
   >
@@ -97,40 +99,40 @@ const WhatWeDoSection = ({ theme }) => (
   </SectionContainer>
 )
 
-const OurValueSection = ({ theme }) => (
+const OurValueSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
     style={{
       backgroundColor: theme.palette.background.default,
-      padding: "2rem 12rem 2rem 12rem",
+      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
     }}
     maxWidth={false}
   >
-      <Typography variant="headlineMedium">Our values</Typography>
-      <CardRowContainer>
-          <CardOne
-            title="Excellence"
-            description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-            icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
-          />
-          <CardOne
-            title="Efficacy"
-            description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
-            icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
-          />
-          <CardOne
-            title="Efficiency"
-            description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
-            icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
-          />
-      </CardRowContainer>
+    <Typography variant="headlineMedium">Our values</Typography>
+    <CardRowContainer>
+      <CardOne
+        title="Excellence"
+        description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+        icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
+      />
+      <CardOne
+        title="Efficacy"
+        description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+        icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
+      />
+      <CardOne
+        title="Efficiency"
+        description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
+        icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
+      />
+    </CardRowContainer>
   </SectionContainer>
 )
 
-const OurVisionSection = ({ theme }) => (
+const OurVisionSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
     style={{
       backgroundColor: designColor.white,
-      padding: "2rem 12rem 2rem 12rem",
+      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
     }}
     maxWidth={false}
   >
@@ -145,11 +147,11 @@ const OurVisionSection = ({ theme }) => (
   </SectionContainer>
 )
 
-const OurTeamSection = ({ theme }) => (
+const OurTeamSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
     style={{
       backgroundColor: theme.palette.background.default,
-      padding: "2rem 12rem 2rem 12rem",
+      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
     }}
     maxWidth={false}
   >
