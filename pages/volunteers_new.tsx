@@ -68,16 +68,21 @@ const VolunteerPage = () => {
   const palette = theme.palette
 
   return (
-    <>
-      <Container
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
+          width: '100%',
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'column',
-          paddingY: '5rem',
+          paddingY: { xs: 0, md: '5rem' },
+          paddingTop: { xs: '2rem', md: 0 },
         }}
-        maxWidth="xl"
       >
         <Box
           sx={{
@@ -86,10 +91,13 @@ const VolunteerPage = () => {
             alignItems: 'center',
           }}
         >
-          <Box sx={{ width: '50%', textAlign: 'left' }} maxWidth={'422px'}>
+          <Box
+            sx={{ width: { xs: '100%', md: '50%' }, textAlign: 'left' }}
+            maxWidth={{ md: '422px' }}
+          >
             <Typography
               variant="displayLarge"
-              sx={{ color: theme.palette.primary.contrastText }}
+              sx={{ color: theme.palette.primary.contrastText, mb: 4 }}
             >
               Volunteer With Us
             </Typography>
@@ -101,80 +109,77 @@ const VolunteerPage = () => {
               have a wide range of volunteer opportunities available.
             </Typography>
           </Box>
-          <Box sx={{ width: '50%' }} maxWidth={'422px'}>
+          <Box
+            sx={{ width: { xs: '100%', sm: '75%', md: '50%' } }}
+            maxWidth={{ md: '422px' }}
+          >
             <img
               src={VolunteerImage.src}
               alt="Volunteer page graphic"
-              style={{ objectFit: 'cover' }}
+              // style={{ objectFit: 'cover' }}
             ></img>
           </Box>
         </Box>
-      </Container>
+      </Box>
       {/* Volunteer Roles Section */}
-      <Container maxWidth="md">
-        <Stack gap={8} sx={{ textAlign: 'center', paddingY: 8 }}>
-          <Typography variant="headlineLarge">
-            How you can participate
-          </Typography>
-          <Grid container spacing={2}>
-            {gridContent.map((item) => (
-              <Grid item xs={12} sm={6} key={item.label}>
-                <ListItemWithIcon listIcon={item.icon} listText={item.label} />
-              </Grid>
-            ))}
-          </Grid>
-          <Typography variant="bodyLarge">
-            All of our volunteers are vetted for experience, and sign a
-            volunteer agreement before commencing work with Open Seattle.
-          </Typography>
-          <Typography variant="headlineLarge">
-            Volunteer Expectations
-          </Typography>
-          <CardRowContainer>
-            <CardOne
-              title="Skill"
-              icon={
-                <StarsOutlined
-                  sx={{ color: palette.text.secondary }}
-                  fontSize="large"
-                />
-              }
-              description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
-            />
-            <CardOne
-              title="Experience"
-              icon={
-                <WorkHistoryOutlined
-                  sx={{ color: palette.text.secondary }}
-                  fontSize="large"
-                />
-              }
-              description="You are a seasoned professional, capable of leading yourself and others in your discipline."
-            />
-            <CardOne
-              title="Availability"
-              icon={
-                <EventAvailableOutlined
-                  sx={{ color: palette.text.secondary }}
-                  fontSize="large"
-                />
-              }
-              description="You dedicate the time you need to accomplish your committed tasks with Open Seattle."
-            />
-          </CardRowContainer>
-        </Stack>
-      </Container>
-      {/* Oath & Values Section */}
-      <Container
-        sx={{ backgroundColor: 'white' }}
-        maxWidth={false}
-        disableGutters
+      <Stack
+        gap={{ xs: 4, md: 8 }}
+        sx={{ textAlign: 'center', paddingY: { xs: 4, md: 8 } }}
+        maxWidth={'md'}
       >
+        <Typography variant="headlineLarge">How you can participate</Typography>
+        <Grid container spacing={2}>
+          {gridContent.map((item) => (
+            <Grid item xs={12} sm={6} key={item.label}>
+              <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+            </Grid>
+          ))}
+        </Grid>
+        <Typography variant="bodyLarge">
+          All of our volunteers are vetted for experience, and sign a volunteer
+          agreement before commencing work with Open Seattle.
+        </Typography>
+        <Typography variant="headlineLarge">Volunteer Expectations</Typography>
+        <CardRowContainer>
+          <CardOne
+            title="Skill"
+            icon={
+              <StarsOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
+          />
+          <CardOne
+            title="Experience"
+            icon={
+              <WorkHistoryOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You are a seasoned professional, capable of leading yourself and others in your discipline."
+          />
+          <CardOne
+            title="Availability"
+            icon={
+              <EventAvailableOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You dedicate the time you need to accomplish your committed tasks with Open Seattle."
+          />
+        </CardRowContainer>
+      </Stack>
+      {/* Oath & Values Section */}
+      <Box sx={{ backgroundColor: 'white', width: '100%' }}>
         <Stack
-          gap={8}
+          gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'center',
-            paddingY: 8,
+            paddingY: { xs: 4, md: 8 },
             maxWidth: 'md',
             marginX: 'auto',
           }}
@@ -206,13 +211,13 @@ const VolunteerPage = () => {
             </Button>
           </Link>
         </Stack>
-      </Container>
+      </Box>
       {/* Process Section */}
-      <Container maxWidth={false}>
+      <Box>
         <Stack
-          gap={8}
+          gap={{ xs: 4, md: 8 }}
           sx={{
-            paddingY: 8,
+            paddingY: { xs: 4, md: 8 },
             maxWidth: 'md',
             marginX: 'auto',
           }}
@@ -232,14 +237,14 @@ const VolunteerPage = () => {
             ))}
           </ol>
         </Stack>
-      </Container>
+      </Box>
       {/* Volunteer Application */}
-      <Container sx={{ backgroundColor: 'white' }} maxWidth={false}>
+      <Box sx={{ backgroundColor: 'white', width: '100%' }}>
         <Stack
-          gap={8}
+          gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'center',
-            paddingY: 8,
+            paddingY: { xs: 4, md: 8 },
             maxWidth: 'md',
             marginX: 'auto',
           }}
@@ -253,8 +258,8 @@ const VolunteerPage = () => {
             </Button>
           </Link>
         </Stack>
-      </Container>
-    </>
+      </Box>
+    </Container>
   )
 }
 
