@@ -1,37 +1,68 @@
-import { withBasicLayout } from 'components/layouts'
+/*
+* @2023 Open Seattle
+*/
+
+import { useEffect, useState } from 'react'
 import {
   Container,
   Typography,
   useTheme,
 } from '@mui/material'
+import { withBasicLayout } from 'components/layouts'
 import CardEvent from 'components/cards/CardEvent'
-import EventPlaceholder from '../assets/event-placeholder.png'
+import CardRowContainer from 'components/cards/CardRowContainer'
+import { osEventsService } from './api/EventsService'
+
+type MastheadProps = {
+  title: string
+}
+
+// REVIEW: Consider promoting
+
+const Masthead = ({ title }: MastheadProps) => {
+  const theme = useTheme()
+
+  return (
+    <Container
+      sx={{
+        backgroundColor: theme.palette.primary.main,
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingY: '5rem'
+      }}
+      maxWidth={false}
+    >
+      <Typography
+        variant="displayMedium"
+        sx={{
+          color: theme.palette.primary.contrastText,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {title}
+      </Typography>
+    </Container>
+  )
+
+}
 
 const EventsPage = () => {
   const theme = useTheme()
   const palette = theme.palette
 
+  const title = 'Events';
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    setEvents(osEventsService.getActiveEvents());
+  }, []);
+
   return (
     <div>
-      <Container
-        sx={{
-          backgroundColor: palette.primary.light,
-          padding: { md: '2rem' },
-        }}
-        maxWidth={false}
-      >
-        <Typography
-          variant="displayMedium"
-          sx={{
-            color: theme.palette.primary.contrastText,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          Events
-        </Typography>
-      </Container>
+      <Masthead title="Events" />
       <Container
         sx={{
           backgroundColor: palette.primary.contrastText,
@@ -39,37 +70,9 @@ const EventsPage = () => {
         }}
         maxWidth={false}
       >
-        <CardEvent
-          title='Earth-a-thon'
-          date='March 27th, 2023'
-          time={{ start: '6:00', end: '8:00PM' }}
-          location='123 ABC Street, Seattle, WA'
-          description='Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.'
-          imageSrc={EventPlaceholder.src}
-          imageAlt=''
-          buttonLink=''
-        ></CardEvent>
-
-        <CardEvent
-          title='Event Title'
-          date='March 27th, 2023'
-          time={{ start: '6:00', end: '8:00PM' }}
-          location='123 ABC Street, Seattle, WA'
-          description='Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.'
-          imageSrc=''
-          imageAlt=''
-          buttonLink=''
-        ></CardEvent>
-        <CardEvent
-          title='Event Title'
-          date='March 27th, 2023'
-          time={{ start: '6:00', end: '8:00PM' }}
-          location='123 ABC Street, Seattle, WA'
-          description='Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.'
-          imageSrc=''
-          imageAlt=''
-          buttonLink=''
-        ></CardEvent>
+        <CardRowContainer>
+          {events.map(event => <CardEvent key={event.title} event={event} />)}
+        </CardRowContainer>
       </Container>
     </div >
   )

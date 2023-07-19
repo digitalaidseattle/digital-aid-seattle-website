@@ -8,27 +8,14 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import { OSEvent } from 'pages/api/EventsService'
 
 type CardEventProps = {
-  title: string
-  date: string
-  time: { start: string; end: string }
-  location: string
-  description: string
-  buttonLink: string
-  imageSrc: string
-  imageAlt: string
+  event: OSEvent
 }
 
 const CardEvent = ({
-  title,
-  date,
-  time,
-  location,
-  description,
-  buttonLink,
-  imageSrc,
-  imageAlt,
+  event
 }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -56,8 +43,8 @@ const CardEvent = ({
           >
             <CardMedia
               component="img"
-              alt={imageAlt}
-              image={imageSrc}
+              alt={event.imageAlt}
+              image={event.imageSrc}
               sx={{
                 position: { xs: 'absolute', sm: 'static' },
                 height: '100%',
@@ -73,21 +60,21 @@ const CardEvent = ({
           >
             <Stack justifyContent="center" sx={{ height: '100%' }}>
               <Stack spacing="1rem">
-                <Typography variant="titleLarge">{title}</Typography>
+                <Typography variant="titleLarge">{event.title}</Typography>
                 <Stack direction="row" spacing="1rem">
-                  <Typography variant="labelLarge">{date}</Typography>
+                  <Typography variant="labelLarge">{event.date}</Typography>
                   <Typography variant="labelLarge">
-                    {time.start} - {time.end}
+                    {event.time.start} - {event.time.end}
                   </Typography>
                 </Stack>
-                <Typography variant="labelMedium">{location}</Typography>
+                <Typography variant="labelMedium">{event.location}</Typography>
               </Stack>
 
               <Typography
                 variant="bodyMedium"
                 sx={{ display: 'block', marginTop: '1.5rem' }}
               >
-                {description}
+                {event.description}
               </Typography>
               <Button
                 variant="contained"
@@ -96,7 +83,7 @@ const CardEvent = ({
                   textAlign: 'center',
                   maxWidth: { xs: '100%', sm: 'min-content' },
                 }}
-                href={buttonLink}
+                href={event.buttonLink}
               >
                 RVSP
               </Button>
@@ -121,8 +108,8 @@ const CardEvent = ({
             >
               <CardMedia
                 component="img"
-                alt={imageAlt}
-                image={imageSrc}
+                alt={event.imageAlt}
+                image={event.imageSrc}
                 sx={{
                   position: 'static',
                   height: '100%',
@@ -135,25 +122,25 @@ const CardEvent = ({
               justifyContent="center"
               sx={{ marginLeft: '1.5rem' }}
             >
-              <Typography variant="titleLarge">{title}</Typography>
+              <Typography variant="titleLarge">{event.title}</Typography>
               <Stack direction="row" spacing="1rem">
-                <Typography variant="labelLarge">{date}</Typography>
+                <Typography variant="labelLarge">{event.date}</Typography>
                 <Typography variant="labelLarge">
-                  {time.start} - {time.end}
+                  {event.time.start} - {event.time.end}
                 </Typography>
               </Stack>
-              <Typography variant="labelMedium">{location}</Typography>
+              <Typography variant="labelMedium">{event.location}</Typography>
             </Stack>
           </Stack>
           <Typography
             variant="bodyMedium"
             sx={{ display: 'block', marginTop: '1rem !important' }}
           >
-            {description}
+            {event.description}
           </Typography>
           <Button
             variant="contained"
-            href={buttonLink}
+            href={event.buttonLink}
             sx={{
               maxWidth: 'min-content',
               display: 'block',
