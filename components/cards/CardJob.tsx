@@ -7,10 +7,15 @@ type CardJobProps = {
   title: string
   description: string
   imageSrc: string
-  imageAlt: string
+  imageAlt?: string
 }
 
-const CardJob = ({ title, description, imageSrc, imageAlt }: CardJobProps) => {
+const CardJob = ({
+  title,
+  description,
+  imageSrc,
+  imageAlt = 'decorative',
+}: CardJobProps) => {
   return (
     <Card
       sx={{

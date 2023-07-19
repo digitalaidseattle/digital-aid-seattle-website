@@ -13,7 +13,6 @@ import {
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 
@@ -43,8 +42,11 @@ const AboutPage = () => {
             <Container sx={{ margin: '10rem' }}>
               <div>
                 <Typography
-                  variant="displayMedium"
-                  sx={{ color: theme.palette.primary.contrastText }}
+                  variant="displayLarge"
+                  sx={{
+                    color: theme.palette.primary.contrastText,
+                    marginBottom: '2rem',
+                  }}
                 >
                   About us
                 </Typography>
@@ -94,36 +96,38 @@ const AboutPage = () => {
         }}
         maxWidth={false}
       >
-       <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
+        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">Our values</Typography>
-       
-        <Grid container spacing={2}>
-          <Grid item md={4}>
-            <CardOne
-              title="Excellence"
-              description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-              icon={
-                <MilitaryTechOutlined style={{ color: designColor.white }} />
-              }
-            />
+
+          <Grid container spacing={2}>
+            <Grid item md={4}>
+              <CardOne
+                title="Excellence"
+                description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+                icon={
+                  <MilitaryTechOutlined style={{ color: designColor.white }} />
+                }
+              />
+            </Grid>
+            <Grid item md={4}>
+              <CardOne
+                title="Efficacy"
+                description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+                icon={
+                  <AutoGraphOutlined style={{ color: designColor.white }} />
+                }
+              />
+            </Grid>
+            <Grid item md={4}>
+              <CardOne
+                title="Efficiency"
+                description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
+                icon={
+                  <AccessAlarmOutlined style={{ color: designColor.white }} />
+                }
+              />
+            </Grid>
           </Grid>
-          <Grid item md={4}>
-            <CardOne
-              title="Efficacy"
-              description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
-              icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
-            />
-          </Grid>
-          <Grid item md={4}>
-            <CardOne
-              title="Efficiency"
-              description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
-              icon={
-                <AccessAlarmOutlined style={{ color: designColor.white }} />
-              }
-            />
-          </Grid>
-        </Grid>
         </Box>
       </SectionContainer>
 
@@ -150,7 +154,7 @@ const AboutPage = () => {
         }}
         maxWidth={false}
       >
-       <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
+        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
           <Typography variant="headlineMedium">Our team</Typography>
           <Typography variant="bodyLarge" align="center" display="block">
             The Open Seattle cadre is made up of highly skilled and committed

@@ -116,11 +116,13 @@ const VolunteerPage = () => {
               variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
               sx={{ color: theme.palette.primary.contrastText, mb: '40px' }}
             >
-              Volunteer With Us
+              Volunteer with us
             </Typography>
             <Typography
               variant="headlineLarge"
-              sx={{ color: theme.palette.primary.contrastText }}
+              sx={{
+                color: theme.palette.primary.contrastText,
+              }}
             >
               Join Open Seattle to make a difference in the lives of others! We
               have a wide range of volunteer opportunities available.
@@ -240,7 +242,7 @@ const VolunteerPage = () => {
           <Typography variant="headlineLarge">The Process</Typography>
           <ol>
             {processContent.map((item, index) => (
-              <li key={index + 1}>
+              <li key={index + 1} style={{ marginBottom: '2rem' }}>
                 <Typography
                   variant="titleLarge"
                   color={palette.primary.main}
@@ -269,7 +271,7 @@ const VolunteerPage = () => {
           </Typography>
           <Link href="/volunteer-application" passHref>
             <Button variant="contained" color="primary">
-              Apply to Volunteer
+              Apply to volunteer
             </Button>
           </Link>
         </Stack>
