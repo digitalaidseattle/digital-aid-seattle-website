@@ -5,6 +5,13 @@ import Typography from '@mui/material/Typography'
 import IconContainer from './IconContainer'
 import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
+import { designColor } from 'theme/theme'
+
+export const ICON_STYLE = {
+  color: designColor.white,
+  height: '100%',
+  width: '100%',
+}
 
 type CardOneProps = {
   title?: string

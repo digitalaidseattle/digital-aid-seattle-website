@@ -13,6 +13,7 @@ const IconContainer = ({ children }: Props) => {
         borderRadius: '50%',
         width: '5rem',
         height: '5rem',
+        padding: '1.2rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

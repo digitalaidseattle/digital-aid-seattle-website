@@ -1,4 +1,12 @@
-import { Code, DataObject, Storage } from '@mui/icons-material'
+import {
+  AccountBalanceOutlined,
+  VolunteerActivismOutlined,
+  DataObjectOutlined,
+  ConstructionOutlined,
+  AdminPanelSettingsOutlined,
+  DevicesOutlined,
+  HandymanOutlined,
+} from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -7,9 +15,8 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-import CardOne from 'components/cards/CardOne'
+import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
 import { designColor } from 'theme/theme'
-import Link from 'next/link'
 import PartnerImage from '../assets/partnerWithUs.png'
 import { withBasicLayout } from 'components/layouts'
 
@@ -27,19 +34,19 @@ const provideContent = [
     title: 'Internal tools',
     description:
       'Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too.',
-    icon: <Code style={{ color: designColor.white }} />,
+    icon: <AdminPanelSettingsOutlined style={ICON_STYLE} />,
   },
   {
     title: 'External tools',
     description:
       'The organizations we support serve individuals in need. Those folks often do not have access to resources and our aim is to streamline and facilitate success, whatever shape that takes.',
-    icon: <Storage style={{ color: designColor.white }} />,
+    icon: <DevicesOutlined style={ICON_STYLE} />,
   },
   {
     title: 'Technical problems',
     description:
       'No matter the size, any organization in business today is bound to face technical challenges. Open Seattle partners with non-profits and other organizations to navigate these challenges.',
-    icon: <DataObject style={{ color: designColor.white }} />,
+    icon: <HandymanOutlined style={ICON_STYLE} />,
   },
 ]
 
@@ -48,25 +55,25 @@ const criteriaContent = [
     title: 'Nonprofits',
     description:
       'We strive to bring enterprise-level operational maturity to nonprofits in need.',
-    icon: <Code style={{ color: designColor.white }} />,
+    icon: <VolunteerActivismOutlined style={ICON_STYLE} />,
   },
   {
     title: 'Governments',
     description:
       'Local governmental organizations aimed at building a better community deserve a helping hand.',
-    icon: <Storage style={{ color: designColor.white }} />,
+    icon: <AccountBalanceOutlined style={ICON_STYLE} />,
   },
   {
     title: 'Open Source',
     description:
       'Whenever possible, we will cooperate using open source assets that can be leveraged by anyone.',
-    icon: <DataObject style={{ color: designColor.white }} />,
+    icon: <DataObjectOutlined style={ICON_STYLE} />,
   },
   {
     title: 'Maintainability',
     description:
       "When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.",
-    icon: <DataObject style={{ color: designColor.white }} />,
+    icon: <ConstructionOutlined style={ICON_STYLE} />,
   },
 ]
 
@@ -111,11 +118,14 @@ const PartnersPage = () => {
               customized digital solutions for their needs, for free.
             </Typography>
             <div style={{ margin: '2rem' }}>
-              <Link href="/partner-application" passHref>
-                <Button variant="contained" color="secondary">
-                  Partner with us
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                color="secondary"
+                href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+                target="_blank"
+              >
+                Partner with us
+              </Button>
             </div>
           </Box>
           <Box sx={{ width: '50%' }} maxWidth={'700px'}>
@@ -130,7 +140,7 @@ const PartnersPage = () => {
       <Container
         style={{
           backgroundColor: theme.palette.background.default,
-          color: designColor.black,
+          color: theme.palette.primary.main,
           textAlign: 'center',
           padding: '2rem',
         }}
@@ -183,7 +193,7 @@ const PartnersPage = () => {
       <Container
         sx={{
           backgroundColor: designColor.white,
-          color: designColor.black,
+          color: theme.palette.primary.main,
           padding: '2rem',
         }}
         maxWidth={false}
@@ -204,11 +214,14 @@ const PartnersPage = () => {
             ))}
           </ol>
           <div style={{ margin: '2rem' }}>
-            <Link href="/partner-application" passHref>
-              <Button variant="contained" color="primary">
-                Partner with us
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+              target="_blank"
+            >
+              Partner with us
+            </Button>
           </div>
           <Typography variant="headlineLarge">Partner expectations</Typography>
           <Typography variant="bodyLarge">
@@ -229,7 +242,7 @@ const PartnersPage = () => {
       <Container
         style={{
           backgroundColor: theme.palette.background.default,
-          color: designColor.black,
+          color: theme.palette.primary.main,
           textAlign: 'center',
           padding: '5rem',
         }}
@@ -239,11 +252,14 @@ const PartnersPage = () => {
           Interested in partnering with Open Seattle?
         </Typography>
         <div style={{ margin: '2rem' }}>
-          <Link href="/partner-application" passHref>
-            <Button variant="contained" color="secondary">
-              Partner with us
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="secondary"
+            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            target="_blank"
+          >
+            Partner with us
+          </Button>
         </div>
       </Container>
     </div>
