@@ -5,6 +5,13 @@ import Typography from '@mui/material/Typography'
 import IconContainer from './IconContainer'
 import { ReactNode } from 'react'
 import Button from '@mui/material/Button'
+import { designColor } from 'theme/theme'
+
+export const ICON_STYLE = {
+  color: designColor.white,
+  height: '100%',
+  width: '100%',
+}
 
 type CardOneProps = {
   title?: string
@@ -46,7 +53,7 @@ const CardOne = ({
       >
         <IconContainer>{icon}</IconContainer>
         {title && <Typography variant="titleLarge">{title}</Typography>}
-        <Typography variant="bodyMedium">{description}</Typography>
+        <Typography variant="bodyLarge">{description}</Typography>
         {buttonText && (
           <Button variant="contained" color="secondary" href={buttonLink}>
             {buttonText}
