@@ -30,9 +30,9 @@ import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import Link from 'next/link'
+import SectionContainer from 'components/layout/SectionContainer'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import styled from '@emotion/styled'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -65,16 +65,16 @@ const processContent = [
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
-const SectionContainer = styled(Box)(({ backgroundColor }) => ({
-  backgroundColor: backgroundColor,
-  width: '100%',
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  // padding: '1rem'
-  paddingX: { xs: '1rem', md: '2rem', lg: 0 },
+// const SectionContainer = styled(Box)(({ backgroundColor }) => ({
+//   backgroundColor: backgroundColor,
+//   width: '100%',
+//   alignItems: 'center',
+//   display: 'flex',
+//   flexDirection: 'column',
+//   // padding: '1rem'
+//   paddingX: { xs: '1rem', md: '2rem', lg: 0 },
 
-}))
+// }))
 
 const VolunteerPage = () => {
   const theme = useTheme()
@@ -87,7 +87,7 @@ const VolunteerPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <Box
+      {/* <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
           width: '100%',
@@ -98,8 +98,8 @@ const VolunteerPage = () => {
           paddingTop: { xs: '2rem', md: 0 },
           paddingX: { xs: '1rem', md: '2rem', lg: 0 },
         }}
-      >
-      {/* <SectionContainer backgroundColor={theme.palette.primary.main}> */}
+      > */}
+      <SectionContainer backgroundColor={theme.palette.primary.main}>
         <Box
           sx={{
             display: 'flex',
@@ -109,12 +109,12 @@ const VolunteerPage = () => {
           }}
         >
           <Box
-            sx={{  textAlign: 'left'}}
-            maxWidth={{ md: '422px' }}
+            sx={{  textAlign: 'left', width: '100%', maxWidth: '418px'}}
+            // maxWidth={{ md: '422px' }}
           >
             <Typography
-              variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
-              sx={{ color: theme.palette.primary.contrastText, mb: '40px' }}
+              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+              sx={{ color: theme.palette.primary.contrastText, mb: '2rem' }}
             >
               Volunteer with us
             </Typography>
@@ -135,8 +135,8 @@ const VolunteerPage = () => {
             // style={{ objectFit: 'cover' }}
           />
         </Box>
-      {/* </SectionContainer> */}
-      </Box>
+      {/* </Box> */}
+      </SectionContainer>
       {/* Volunteer Roles Section */}
       <Stack
         gap={{ xs: 4, md: 8 }}
