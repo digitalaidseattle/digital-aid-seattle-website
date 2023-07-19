@@ -22,6 +22,7 @@ import {
   Grid,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
@@ -31,6 +32,7 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import Link from 'next/link'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
+import styled from '@emotion/styled'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -63,9 +65,21 @@ const processContent = [
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
+const SectionContainer = styled(Box)(({ backgroundColor }) => ({
+  backgroundColor: backgroundColor,
+  width: '100%',
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  // padding: '1rem'
+  paddingX: { xs: '1rem', md: '2rem', lg: 0 },
+
+}))
+
 const VolunteerPage = () => {
   const theme = useTheme()
   const palette = theme.palette
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   return (
     <Container
@@ -82,22 +96,25 @@ const VolunteerPage = () => {
           flexDirection: 'column',
           paddingY: { xs: 0, md: '5rem' },
           paddingTop: { xs: '2rem', md: 0 },
+          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
         }}
       >
+      {/* <SectionContainer backgroundColor={theme.palette.primary.main}> */}
         <Box
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
+            gap: { xs: 4, md: '40px' },
           }}
         >
           <Box
-            sx={{ width: { xs: '100%', md: '50%' }, textAlign: 'left' }}
+            sx={{  textAlign: 'left'}}
             maxWidth={{ md: '422px' }}
           >
             <Typography
-              variant="displayLarge"
-              sx={{ color: theme.palette.primary.contrastText, mb: 4 }}
+              variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
+              sx={{ color: theme.palette.primary.contrastText, mb: '40px' }}
             >
               Volunteer With Us
             </Typography>
@@ -109,22 +126,20 @@ const VolunteerPage = () => {
               have a wide range of volunteer opportunities available.
             </Typography>
           </Box>
-          <Box
-            sx={{ width: { xs: '100%', sm: '75%', md: '50%' } }}
-            maxWidth={{ md: '422px' }}
-          >
-            <img
-              src={VolunteerImage.src}
-              alt="Volunteer page graphic"
-              // style={{ objectFit: 'cover' }}
-            ></img>
-          </Box>
+          <img
+            src={VolunteerImage.src}
+            alt="Volunteer page graphic"
+            width="418px"
+            // style={{ objectFit: 'cover' }}
+          />
         </Box>
+      {/* </SectionContainer> */}
       </Box>
       {/* Volunteer Roles Section */}
       <Stack
         gap={{ xs: 4, md: 8 }}
-        sx={{ textAlign: 'center', paddingY: { xs: 4, md: 8 } }}
+          
+        sx={{ textAlign: 'center', paddingY: { xs: 4, md: 8 },paddingX: { xs: '1rem', md: '2rem', lg: 0 } }}
         maxWidth={'md'}
       >
         <Typography variant="headlineLarge">How you can participate</Typography>
