@@ -3,7 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Container, Grid, Stack, styled, Typography } from '@mui/material'
+import { Container, Grid, Box, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
@@ -45,7 +45,7 @@ const SubText = styled(Typography)(({ theme }) => ({
 }))
 
 const CommonFooterMidScreen = () => (
-  <Grid container spacing={5} direction="row">
+  <Grid container direction="row">
     {/* LOGO */}
     <GridItem md={3}>
       <img
@@ -70,17 +70,24 @@ const CommonFooterMidScreen = () => (
       <LinkSubItem url="/partners_new" name="Partners" />
     </GridItem>
 
-    <GridItem md={1} display="flex">
-      <a href="https://www.linkedin.com/company/open-seattle/">
-        <LinkedInIcon
-          sx={{ color: theme.palette.primary.contrastText }}
-          fontSize="large"
-        />
-      </a>
+    <GridItem md={1} display="flex" flexDirection="row">
+      <Box
+        sx={{
+          marginLeft: 'auto',
+          alignSelf: 'flex-end',
+        }}
+      >
+        <a href="https://www.linkedin.com/company/open-seattle/">
+          <LinkedInIcon
+            sx={{ color: theme.palette.primary.contrastText }}
+            fontSize="large"
+          />
+        </a>
+      </Box>
     </GridItem>
 
     <GridItem md={3}>
-      <SubText>Illustration by: Kylie Melendez</SubText>
+      <SubText>Illustrations by: Storyset by Freepik</SubText>
       <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
     </GridItem>
 
@@ -96,13 +103,15 @@ const CommonFooterMidScreen = () => (
       <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
     </GridItem>
 
-    <GridItem md={1} display="flex">
-      <a href="https://github.com/openseattle">
-        <GitHubIcon
-          sx={{ color: theme.palette.primary.contrastText }}
-          fontSize="large"
-        />
-      </a>
+    <GridItem md={1} display="flex" flexDirection="column">
+      <Box sx={{ alignSelf: 'flex-end' }}>
+        <a href="https://github.com/openseattle">
+          <GitHubIcon
+            sx={{ color: theme.palette.primary.contrastText }}
+            fontSize="large"
+          />
+        </a>
+      </Box>
     </GridItem>
   </Grid>
 )
@@ -178,14 +187,18 @@ const CommonFooter = () => {
   return (
     <>
       <Container
-        maxWidth="md"
-        sx={{ padding: '2rem 0rem', display: { md: 'flex', xs: 'none' } }}
+        sx={{
+          padding: '5rem 0rem',
+          display: {
+            md: 'flex',
+            xs: 'none',
+          },
+        }}
       >
         <CommonFooterMidScreen />
       </Container>
 
       <Container
-        maxWidth="lg"
         sx={{ padding: '2rem 0rem', display: { md: 'none', xs: 'flex' } }}
       >
         <CommonFooterSmallScreen />
