@@ -41,83 +41,94 @@ const CommonHeader = () => {
 
   return (
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
-      <Toolbar sx={{ height: '50px' }}>
-        <Container>
+      <Toolbar
+        sx={{
+          height: '50px',
+          width: '100vw',
+          padding: '0',
+        }}
+      >
+        <Container
+          sx={{
+            flexGrow: 1,
+            display: { xs: 'flex', lg: 'none' },
+            justifyContent: 'space-between',
+          }}
+        >
           {/* Hamburger menu when the screen is small. */}
-          <Box
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-            justifyContent="center"
+          {/* LOGO */}
+          <img
+            src={OSLogo.src}
+            style={{
+              height: '80%',
+              width: '120px',
+            }}
+          />
+          <IconButton
+            size="large"
+            aria-label="page-info"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            sx={{ color: theme.palette.primary.contrastText }}
           >
-            {/* LOGO */}
-            <img
-              src={OSLogo.src}
-              style={{
-                height: '80%',
-                width: '120px',
-                // margin: '0px 60px 0px 0px',
-              }}
-            />
-            <IconButton
-              size="large"
-              aria-label="page-info"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              sx={{ color: theme.palette.primary.contrastText }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {Object.keys(page_mapping).map((name) => (
-                <MenuItem
-                  key={name}
-                  onClick={handleCloseNavMenu}
-                  style={{ borderRadius: '0px' }}
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
+            {Object.keys(page_mapping).map((name) => (
+              <MenuItem
+                key={name}
+                onClick={handleCloseNavMenu}
+                style={{ borderRadius: '0px' }}
+              >
+                <Link
+                  underline="hover"
+                  sx={{
+                    color: theme.palette.primary.dark,
+                  }}
+                  href={page_mapping[name]}
                 >
-                  <Link
-                    underline="hover"
-                    sx={{
-                      color: theme.palette.primary.dark,
-                    }}
-                    href={page_mapping[name]}
-                  >
-                    {name}
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          {/* Menu items that are shown on desktop */}
-          <Box
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-            justifyContent="space-between"
-          >
-            {/* LOGO */}
-            <img
-              src={OSLogo.src}
-              style={{
-                height: '80%',
-                width: '120px',
-                // margin: '0px 60px 0px 0px',
-              }}
-            />
+                  {name}
+                </Link>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Container>
+        {/* Menu items that are shown on desktop */}
+        <Container
+          sx={{
+            flexGrow: 1,
+            display: { xs: 'none', lg: 'flex' },
+            justifyContent: 'space-between',
+          }}
+        >
+          {/* LOGO */}
+          <img
+            src={OSLogo.src}
+            style={{
+              height: '80%',
+              width: '120px',
+              // margin: '0px 60px 0px 0px',
+            }}
+          />
+          <Box>
             {Object.keys(page_mapping).map((name) => (
               <Button
                 key={name}
