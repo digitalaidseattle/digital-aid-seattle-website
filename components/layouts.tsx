@@ -16,7 +16,7 @@ export const MainContainer = styled.main`
 `
 
 export const FooterContainer = styled.footer`
-  background: ${theme.palette.primary.dark};
+  background: ${theme.palette.secondary.contrastText};
   bottom: 0;
   width: 100%;
 `

@@ -20,11 +20,13 @@ const FooterItemTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   color: theme.palette.primary.contrastText,
   fontSize: '0.875rem',
+  marginBottom: '1rem',
 }))
 
 const FooterSubItem = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontSize: '1rem',
+  lineHeight: '2rem',
 }))
 
 const LinkSubItem = (props: { url: string; name: string }) => (
@@ -45,7 +47,7 @@ const SubText = styled(Typography)(({ theme }) => ({
 }))
 
 const CommonFooterMidScreen = () => (
-  <Grid container direction="row">
+  <Grid container direction="row" rowGap="2.5rem">
     {/* LOGO */}
     <GridItem md={3}>
       <img
