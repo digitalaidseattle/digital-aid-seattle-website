@@ -42,7 +42,7 @@ const CommonHeader = () => {
   return (
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
       <Toolbar sx={{ height: '50px' }}>
-        <Container sx={{ width: '910px' }}>
+        <Container>
           {/* Hamburger menu when the screen is small. */}
           <Box
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
