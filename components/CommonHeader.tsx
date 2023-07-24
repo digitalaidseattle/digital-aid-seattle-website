@@ -41,8 +41,8 @@ const CommonHeader = () => {
 
   return (
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
-      <Container maxWidth="xl">
-        <Toolbar sx={{ height: '50px' }}>
+      <Toolbar sx={{ height: '50px' }}>
+        <Container sx={{ width: '910px' }}>
           {/* Hamburger menu when the screen is small. */}
           <Box
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
@@ -54,7 +54,7 @@ const CommonHeader = () => {
               style={{
                 height: '80%',
                 width: '120px',
-                margin: '0px 60px 0px 0px',
+                // margin: '0px 60px 0px 0px',
               }}
             />
             <IconButton
@@ -107,7 +107,7 @@ const CommonHeader = () => {
           {/* Menu items that are shown on desktop */}
           <Box
             sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-            justifyContent="center"
+            justifyContent="space-between"
           >
             {/* LOGO */}
             <img
@@ -115,7 +115,7 @@ const CommonHeader = () => {
               style={{
                 height: '80%',
                 width: '120px',
-                margin: '0px 60px 0px 0px',
+                // margin: '0px 60px 0px 0px',
               }}
             />
             {Object.keys(page_mapping).map((name) => (
@@ -145,8 +145,8 @@ const CommonHeader = () => {
               </Button>
             ))}
           </Box>
-        </Toolbar>
-      </Container>
+        </Container>
+      </Toolbar>
     </AppBar>
   )
 }
