@@ -41,14 +41,8 @@ const CommonHeader = () => {
 
   return (
     <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
-      <Toolbar
-        sx={{
-          height: '50px',
-          width: '100vw',
-          padding: '0',
-        }}
-      >
-        <Container
+      <Toolbar>
+        <Box
           sx={{
             flexGrow: 1,
             display: { xs: 'flex', lg: 'none' },
@@ -110,7 +104,7 @@ const CommonHeader = () => {
               </MenuItem>
             ))}
           </Menu>
-        </Container>
+        </Box>
         {/* Menu items that are shown on desktop */}
         <Container
           sx={{
