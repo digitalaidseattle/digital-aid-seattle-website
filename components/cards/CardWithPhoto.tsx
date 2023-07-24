@@ -9,14 +9,14 @@ type CardWithPhotoProps = {
   title: string
   description: string
   image: string
-  imageHeight?: number
+  imageWidth?: number
 }
 
 const CardWithPhoto = ({
   title,
   description,
   image,
-  imageHeight = 196,
+  imageWidth = 196,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('sm'))
@@ -25,7 +25,6 @@ const CardWithPhoto = ({
     <Card
       sx={{
         flex: '1',
-        minWidth: { xs: '100%', sm: 'min-content' },
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
@@ -33,7 +32,8 @@ const CardWithPhoto = ({
       {!isViewportSmall && (
         <CardMedia
           sx={{
-            height: imageHeight,
+            minWidth: imageWidth,
+            aspectRatio: '1/1',
           }}
           image={image}
         />
@@ -42,10 +42,10 @@ const CardWithPhoto = ({
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
+          gap: '0.5rem',
         }}
       >
-        <Typography variant="titleLarge">{title}</Typography>
+        <Typography variant="titleMedium">{title}</Typography>
         <Typography variant="bodyMedium">{description}</Typography>
       </CardContent>
     </Card>
