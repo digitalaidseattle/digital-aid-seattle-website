@@ -16,10 +16,9 @@ export const MainContainer = styled.main`
 `
 
 export const FooterContainer = styled.footer`
-  background: ${theme.palette.primary.dark};
+  background: ${theme.palette.secondary.contrastText};
   bottom: 0;
   width: 100%;
-  padding: 2.5rem;
 `
 
 // eslint-disable-next-line react/display-name
