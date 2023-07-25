@@ -1,0 +1,19 @@
+[
+    {
+        "title": "Earth-a-thon",
+        "date": "March 27th, 2023",
+        "start": "6:00",
+        "end": "8:00PM",
+        "location": "123 ABC Street, Seattle, WA",
+        "description": "Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+        "imageAlt": "Earth-a-thon"
+    },
+    {
+        "title": "Event Title",
+        "date": "March 27th, 2023",
+        "start": "6:00",
+        "end": "8:00PM",
+        "location": "123 ABC Street, Seattle, WA",
+        "description": "Qorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+    }
+]
