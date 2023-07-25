@@ -20,20 +20,21 @@ const FooterItemTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
   color: theme.palette.primary.contrastText,
   fontSize: '0.875rem',
-  marginBottom: '1rem',
 }))
 
 const FooterSubItem = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontSize: '1rem',
-  lineHeight: '2rem',
-  fontWeight: '500',
+  marginTop: '1rem',
+  display: 'block',
 }))
 
 const LinkSubItem = (props: { url: string; name: string }) => (
   <Link
     sx={{
       color: theme.palette.primary.contrastText,
+      marginTop: '1rem',
+      display: 'block',
     }}
     underline="hover"
     href={props.url}
@@ -164,9 +165,8 @@ const CommonFooterMidScreen = () => (
       >
         <Box>
           <FooterItemTitle>Work with us</FooterItemTitle>
-          <Box sx={{ marginBottom: '1rem' }}>
-            <LinkSubItem url="/partners_new" name="Partner" />
-          </Box>
+
+          <LinkSubItem url="/partners_new" name="Partner" />
 
           <LinkSubItem url="/volunteers_new" name="Volunteer" />
         </Box>
