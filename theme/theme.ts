@@ -286,6 +286,8 @@ export const theme = createTheme({
           padding: '10px 24px 10px 24px',
           textTransform: 'none',
           boxShadow: 'none',
+          whiteSpace: 'nowrap',
+          minWidth: 'auto'
         },
       },
       variants: [

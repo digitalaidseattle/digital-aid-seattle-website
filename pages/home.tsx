@@ -15,7 +15,8 @@ import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
-import HeroImage from '../public/images/seattle_4.jpg'
+import HeroImage from '../public/images/SeattleSkyline.png'
+import SectionContainer from 'components/layout/SectionContainer'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -34,9 +35,9 @@ const Home = () => {
   return (
     <>
       {/* Hero Container */}
-      <Container 
+      <Container
         sx={{
-          backgroundColor: palette.primary.light,
+          backgroundColor: palette.primary.main,
           display: 'flex',
           minHeight: '650px',
           flexDirection: 'column',
@@ -60,7 +61,7 @@ const Home = () => {
             top: { xs: 0, sm: '50%' },
             transform: {
               xs: 'rotate(90deg)translate(0, 50%)',
-              sm: 'translate(-50%, -50%)',
+              md: 'translate(-50%, -50%)',
             },
           }}
         >
@@ -74,21 +75,25 @@ const Home = () => {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: { xs: 'column', lg: 'row' },
             gap: { xs: 4, md: 12 },
             alignItems: 'center',
+            textAlign: { xs: 'center', lg: 'left' },
+            paddingX: { xs: '16px', md: '32px', lg: 0 },
+            paddingY: { xs: '64px', lg: '80px' },
           }}
+          maxWidth={'880px'}
         >
           {/* Heading and CTA Buttons */}
           <Box
             sx={{
-              width: { xs: '100%', md: '480px' },
+              width: { xs: '100%' },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               gap: { xs: 3, sm: 5 },
-              alignItems: { xs: 'center', sm: 'flex-start' },
-              textAlign: { xs: 'center', sm: 'left' },
+              alignItems: { xs: 'center', lg: 'flex-start' },
+              textAlign: { xs: 'center', lg: 'left' },
             }}
           >
             <Typography
@@ -102,13 +107,18 @@ const Home = () => {
               sx={{
                 display: 'flex',
                 gap: { xs: 2, sm: 4 },
-                flexDirection: { xs: 'column', sm: 'row' },
+                flexDirection: { xs: 'column', lg: 'row' },
               }}
             >
               <Button variant="contained" color="secondary" size="small">
-                Get Help
+                Partner With Us
               </Button>
-              <Button variant="contained" color="primary" size="small">
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                sx={{ backgroundColor: '#004138' }}
+              >
                 Volunteer With Us
               </Button>
             </Box>
@@ -208,23 +218,17 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
-      <Container
-        sx={{ backgroundColor: palette.background.default }}
-        maxWidth={false}
-      >
+      <SectionContainer backgroundColor={palette.background.default}>
         <Stack
           sx={{
             gap: { xs: 3, md: 5 },
             justifyContent: 'space-around',
             alignItems: 'center',
-            padding: '3rem 0 3rem 0',
           }}
+          maxWidth={'880px'}
         >
           <Typography variant="headlineLarge">Our Mission</Typography>
-          <Typography
-            variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
-            sx={{ width: '80%', maxWidth: '880px' }}
-          >
+          <Typography variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}>
             We believe community organizations are the heart of Seattle, and
             deserve the same tools and advantages enjoyed by our largest tech
             companies. Our mission is to create scalable, customized solutions
@@ -267,7 +271,7 @@ const Home = () => {
             />
           </CardRowContainer>
         </Stack>
-      </Container>
+      </SectionContainer>
     </>
   )
 }
