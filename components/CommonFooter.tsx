@@ -27,6 +27,7 @@ const FooterSubItem = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontSize: '1rem',
   lineHeight: '2rem',
+  fontWeight: '500',
 }))
 
 const LinkSubItem = (props: { url: string; name: string }) => (
@@ -46,7 +47,7 @@ const SubText = styled(Typography)(({ theme }) => ({
   fontSize: '0.75rem',
 }))
 
-const CommonFooterMidScreen = () => (
+const CommonFooterLargeScreen = () => (
   <Grid container direction="row" rowGap="2.5rem">
     {/* LOGO */}
     <GridItem md={3}>
@@ -68,8 +69,8 @@ const CommonFooterMidScreen = () => (
 
     <GridItem md={4}>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/volunteers_new" name="Volunteers" />
-      <LinkSubItem url="/partners_new" name="Partners" />
+      <LinkSubItem url="/partners_new" name="Partner" />
+      <LinkSubItem url="/volunteers_new" name="Volunteer" />
     </GridItem>
 
     <GridItem md={1} display="flex" flexDirection="row">
@@ -118,6 +119,97 @@ const CommonFooterMidScreen = () => (
   </Grid>
 )
 
+const CommonFooterMidScreen = () => (
+  <Grid container direction="column" columns={3}>
+    {/* LOGO */}
+    <GridItem md={4}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '100%',
+        }}
+      >
+        <img
+          src={OSLogo.src}
+          style={{
+            height: 'auto',
+            width: '120px',
+          }}
+        />
+
+        <Box>
+          <FooterItemTitle>Contact us</FooterItemTitle>
+          <FooterSubItem>
+            <a href="mailto:name@email.com">info@openseattle.org</a>
+          </FooterSubItem>
+        </Box>
+
+        <Box>
+          <SubText>Illustrations by: Storyset by Freepik</SubText>
+          <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+        </Box>
+      </Box>
+    </GridItem>
+
+    <GridItem md={4}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '100%',
+        }}
+      >
+        <Box>
+          <FooterItemTitle>Work with us</FooterItemTitle>
+          <Box sx={{ marginBottom: '1rem' }}>
+            <LinkSubItem url="/partners_new" name="Partner" />
+          </Box>
+
+          <LinkSubItem url="/volunteers_new" name="Volunteer" />
+        </Box>
+
+        <Box>
+          <FooterItemTitle>Support us</FooterItemTitle>
+          <FooterSubItem>
+            <a href="mailto:name@email.com">How can you help</a>
+          </FooterSubItem>
+        </Box>
+
+        <Box>
+          <FooterItemTitle>About Open Seattle</FooterItemTitle>
+          <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+        </Box>
+      </Box>
+    </GridItem>
+
+    <GridItem md={4} display="flex">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem',
+        }}
+      >
+        <a href="https://www.linkedin.com/company/open-seattle/">
+          <LinkedInIcon
+            sx={{ color: theme.palette.primary.contrastText }}
+            fontSize="large"
+          />
+        </a>
+        <a href="https://github.com/openseattle">
+          <GitHubIcon
+            sx={{ color: theme.palette.primary.contrastText }}
+            fontSize="large"
+          />
+        </a>
+      </Box>
+    </GridItem>
+  </Grid>
+)
+
 const CommonFooterSmallScreen = () => (
   <Grid
     container
@@ -130,16 +222,16 @@ const CommonFooterSmallScreen = () => (
       <img
         src={OSLogo.src}
         style={{
-          height: '100%',
-          width: '120px',
+          height: '3rem',
+          width: 'auto',
         }}
       />
     </GridItem>
 
     <GridItem>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/volunteers_new" name="Volunteers" />
-      <LinkSubItem url="/partners_new" name="Partners" />
+      <LinkSubItem url="/partners_new" name="Partner" />
+      <LinkSubItem url="/volunteers_new" name="Volunteer" />
     </GridItem>
 
     <GridItem>
@@ -190,16 +282,26 @@ const CommonFooter = () => {
         sx={{
           padding: '5rem 0rem',
           display: {
-            md: 'flex',
+            lg: 'flex',
             xs: 'none',
           },
+        }}
+      >
+        <CommonFooterLargeScreen />
+      </Container>
+
+      <Container
+        sx={{
+          padding: '4rem 2rem',
+          display: { xs: 'none', md: 'flex', lg: 'none' },
+          height: '29rem',
         }}
       >
         <CommonFooterMidScreen />
       </Container>
 
       <Container
-        sx={{ padding: '4rem 0rem', display: { md: 'none', xs: 'flex' } }}
+        sx={{ padding: '4rem 0rem', display: { xs: 'flex', md: 'none' } }}
       >
         <CommonFooterSmallScreen />
       </Container>
