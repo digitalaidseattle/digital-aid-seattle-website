@@ -101,7 +101,7 @@ const CommonFooterMidScreen = () => (
     </GridItem>
 
     <GridItem md={4}>
-      <FooterItemTitle>About</FooterItemTitle>
+      <FooterItemTitle>About Open Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
     </GridItem>
 
@@ -119,68 +119,66 @@ const CommonFooterMidScreen = () => (
 )
 
 const CommonFooterSmallScreen = () => (
-  <Grid container spacing={5} direction="row">
+  <Grid
+    container
+    direction="column"
+    columns={1}
+    sx={{ alignItems: 'center', textAlign: 'center', gap: '4rem' }}
+  >
     {/* LOGO */}
-    <GridItem xs={5}>
+    <GridItem>
       <img
         src={OSLogo.src}
         style={{
-          height: '80%',
+          height: '100%',
           width: '120px',
         }}
       />
     </GridItem>
 
-    <GridItem xs={5}>
+    <GridItem>
       <FooterItemTitle>Work with us</FooterItemTitle>
       <LinkSubItem url="/volunteers_new" name="Volunteers" />
       <LinkSubItem url="/partners_new" name="Partners" />
     </GridItem>
 
-    <GridItem xs={2} display="flex">
-      <></>
-    </GridItem>
-
-    <GridItem xs={5}>
+    <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
         <a href="mailto:name@email.com">info@openseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
-    <GridItem xs={5}>
+    <GridItem>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         <a href="mailto:name@email.com">How can you help</a>
       </FooterSubItem>
     </GridItem>
 
-    <GridItem xs={2} display="flex">
+    <GridItem>
+      <FooterItemTitle>About Open Seattle</FooterItemTitle>
+      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+    </GridItem>
+
+    <GridItem display="flex" sx={{ gap: '1rem' }}>
       <a href="https://www.linkedin.com/company/open-seattle/">
         <LinkedInIcon
           sx={{ color: theme.palette.primary.contrastText }}
           fontSize="large"
         />
       </a>
-    </GridItem>
-
-    <GridItem xs={5}>
-      <SubText>Illustration by: Kylie Melendez</SubText>
-      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
-    </GridItem>
-
-    <GridItem xs={5}>
-      <FooterItemTitle>About</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
-    </GridItem>
-
-    <GridItem xs={2} display="flex">
       <a href="https://github.com/openseattle">
         <GitHubIcon
           sx={{ color: theme.palette.primary.contrastText }}
           fontSize="large"
         />
       </a>
+    </GridItem>
+
+    <GridItem display="flex" flexDirection="column" sx={{ gap: '1rem' }}>
+      <SubText>Illustrations by: Storyset by Freepik</SubText>
+      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
     </GridItem>
   </Grid>
 )
@@ -201,7 +199,7 @@ const CommonFooter = () => {
       </Container>
 
       <Container
-        sx={{ padding: '2rem 0rem', display: { md: 'none', xs: 'flex' } }}
+        sx={{ padding: '4rem 0rem', display: { md: 'none', xs: 'flex' } }}
       >
         <CommonFooterSmallScreen />
       </Container>
