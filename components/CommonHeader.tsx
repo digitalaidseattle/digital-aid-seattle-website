@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
@@ -27,6 +28,8 @@ const page_mapping = {
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+
+  const isSmallScreen = useMediaQuery('(max-width:700px)')
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -115,7 +118,7 @@ const CommonHeader = () => {
               style={{
                 height: '80%',
                 width: '120px',
-                margin: '0px 60px 0px 0px',
+                margin: isSmallScreen ? '0px 20px 0px 0px' : '0px 60px 0px 0px',
               }}
             />
             {Object.keys(page_mapping).map((name) => (

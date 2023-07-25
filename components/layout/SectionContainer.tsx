@@ -8,7 +8,8 @@ const SectionContainer = ({ backgroundColor, children }) => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingX: { xs: '16px', md: '32rem', lg: 0 },
+        paddingX: { xs: '16px', md: '32px', lg: 0 },
+        paddingY: { xs: '64px', lg: '80px' },
       }}
     >
       {children}

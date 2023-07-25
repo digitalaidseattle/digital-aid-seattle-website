@@ -33,6 +33,7 @@ import Link from 'next/link'
 import SectionContainer from 'components/layout/SectionContainer'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
+import { designColor } from 'theme/theme'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -61,20 +62,9 @@ const oathContent = [
 const processContent = [
   'Read our volunteer agreement, then apply to volunteer using the button below.',
   'You will receive an invitation for an interview within a few days.',
-  'If you are accepted, the next step is to complete your onboarding and select a project to work on.',
+  'If accepted, complete onboarding and choose a project to work on.',
   'Contribute weekly to your project, and make a difference for your community!',
 ]
-
-// const SectionContainer = styled(Box)(({ backgroundColor }) => ({
-//   backgroundColor: backgroundColor,
-//   width: '100%',
-//   alignItems: 'center',
-//   display: 'flex',
-//   flexDirection: 'column',
-//   // padding: '1rem'
-//   paddingX: { xs: '1rem', md: '2rem', lg: 0 },
-
-// }))
 
 const VolunteerPage = () => {
   const theme = useTheme()
@@ -87,34 +77,29 @@ const VolunteerPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      {/* <Box
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          width: '100%',
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          paddingY: { xs: 0, md: '5rem' },
-          paddingTop: { xs: '2rem', md: 0 },
-          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
-        }}
-      > */}
       <SectionContainer backgroundColor={theme.palette.primary.main}>
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: { xs: 'column', lg: 'row' },
             alignItems: 'center',
             gap: { xs: 4, md: '40px' },
           }}
+          maxWidth={'880px'}
         >
           <Box
-            sx={{  textAlign: 'left', width: '100%', maxWidth: '418px'}}
-            // maxWidth={{ md: '422px' }}
+            sx={{
+              textAlign: 'left',
+              width: '100%',
+              maxWidth: '418px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2rem  ',
+            }}
           >
             <Typography
-              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
-              sx={{ color: theme.palette.primary.contrastText, mb: '2rem' }}
+              variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
+              sx={{ color: theme.palette.primary.contrastText }}
             >
               Volunteer with us
             </Typography>
@@ -132,22 +117,24 @@ const VolunteerPage = () => {
             src={VolunteerImage.src}
             alt="Volunteer page graphic"
             width="418px"
-            // style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover' }}
           />
         </Box>
-      {/* </Box> */}
       </SectionContainer>
       {/* Volunteer Roles Section */}
       <Stack
-        gap={{ xs: 4, md: 8 }}
-          
-        sx={{ textAlign: 'center', paddingY: { xs: 4, md: 8 },paddingX: { xs: '1rem', md: '2rem', lg: 0 } }}
-        maxWidth={'md'}
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+          paddingY: { xs: 4, md: 8 },
+          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
+        }}
+        maxWidth={'880px'}
       >
         <Typography variant="headlineLarge">How you can participate</Typography>
         <Grid container spacing={2}>
           {gridContent.map((item) => (
-            <Grid item xs={12} sm={6} key={item.label}>
+            <Grid item xs={12} md={6} key={item.label}>
               <ListItemWithIcon listIcon={item.icon} listText={item.label} />
             </Grid>
           ))}
@@ -191,14 +178,13 @@ const VolunteerPage = () => {
         </CardRowContainer>
       </Stack>
       {/* Oath & Values Section */}
-      <Box sx={{ backgroundColor: 'white', width: '100%' }}>
+      <SectionContainer backgroundColor={designColor.white}>
         <Stack
           gap={{ xs: 4, md: 8 }}
           sx={{
-            textAlign: 'center',
-            paddingY: { xs: 4, md: 8 },
-            maxWidth: 'md',
-            marginX: 'auto',
+            textAlign: 'left',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
           }}
         >
           <Typography variant="headlineLarge">Our Oath</Typography>
@@ -210,7 +196,7 @@ const VolunteerPage = () => {
             {oathContent.map((item, index) => (
               <Accordion key={index}>
                 <AccordionSummary
-                  expandIcon={<AddOutlined />}
+                  expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                   aria-controls={`volunteer-values${index}-content`}
                   id={`volunteer-values${index}-header`}
                 >
@@ -228,15 +214,14 @@ const VolunteerPage = () => {
             </Button>
           </Link>
         </Stack>
-      </Box>
+      </SectionContainer>
       {/* Process Section */}
-      <Box>
+      <SectionContainer backgroundColor={designColor.background}>
         <Stack
           gap={{ xs: 4, md: 8 }}
           sx={{
-            paddingY: { xs: 4, md: 8 },
-            maxWidth: 'md',
-            marginX: 'auto',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
           }}
         >
           <Typography variant="headlineLarge">The Process</Typography>
@@ -254,19 +239,20 @@ const VolunteerPage = () => {
             ))}
           </ol>
         </Stack>
-      </Box>
+      </SectionContainer>
       {/* Volunteer Application */}
-      <Box sx={{ backgroundColor: 'white', width: '100%' }}>
+      <SectionContainer backgroundColor={designColor.white}>
         <Stack
           gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'center',
-            paddingY: { xs: 4, md: 8 },
-            maxWidth: 'md',
+            maxWidth: '880px',
             marginX: 'auto',
           }}
         >
-          <Typography variant="headlineLarge">
+          <Typography
+            variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
+          >
             Interested in volunteering with Open Seattle?
           </Typography>
           <Link href="/volunteer-application" passHref>
@@ -275,7 +261,7 @@ const VolunteerPage = () => {
             </Button>
           </Link>
         </Stack>
-      </Box>
+      </SectionContainer>
     </Container>
   )
 }
