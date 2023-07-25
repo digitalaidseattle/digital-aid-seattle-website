@@ -8,6 +8,7 @@ import {
   Box,
   Container,
   Grid,
+  Stack,
   styled,
   Typography,
   useMediaQuery,
@@ -46,12 +47,11 @@ const AboutPage = () => {
 export default withBasicLayout(AboutPage)
 
 const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
-  <Container
+  <Stack
     sx={{
       backgroundColor: theme.palette.primary.main,
       padding: extraSmallScreen ? '1rem': '2rem',
     }}
-    maxWidth="xl"
   >
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item md={4} xs={12}>
@@ -78,7 +78,7 @@ const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
         <img src={AboutUsImage.src} alt="About Us page graphic"></img>
       </Grid>
     </Grid>
-  </Container>
+  </Stack>
 )
 
 const WhatWeDoSection = ({ theme, extraSmallScreen }) => (
