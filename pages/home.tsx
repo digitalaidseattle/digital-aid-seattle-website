@@ -68,7 +68,7 @@ const Home = () => {
           <img
             src={HeroLines.src}
             alt="Hero Lines"
-            style={{ opacity: 0.4, objectFit: 'cover' }}
+            style={{ opacity: 0.3, objectFit: 'cover', mixBlendMode: 'overlay' }}
           />
         </Box>
         {/* Hero Content */}
@@ -169,6 +169,7 @@ const Home = () => {
                   width: { xs: '295px', md: '480px' },
                   height: { xs: '295px', md: '480px' },
                   border: '4px solid rgba(248, 248, 248, 0.3)',
+                  mixBlendMode: 'overlay',
                 }}
               />
               {/* Shading for image */}
