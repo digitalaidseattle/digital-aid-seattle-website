@@ -1,20 +1,14 @@
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
+import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.png'
 import SectionContainer from 'components/layout/SectionContainer'
 
@@ -35,7 +29,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Container */}
-      <Container
+      <Box
         sx={{
           backgroundColor: palette.primary.main,
           display: 'flex',
@@ -46,30 +40,42 @@ const Home = () => {
           position: 'relative',
           padding: { xs: '1rem 0 1rem 0', md: '4rem 0 4rem 0' },
         }}
-        maxWidth={false}
       >
         {/* SVG Linework Container */}
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '200vh', sm: '100vw' },
-            maxWidth: '1150px',
+            width: { xs: '1800px', lg: '1280px' },
             height: 'auto',
-            overflow: 'hidden',
-            objectFit: 'cover',
             left: { xs: 0, sm: '50%' },
             top: { xs: 0, sm: '50%' },
             transform: {
-              xs: 'rotate(90deg)translate(0, 50%)',
+              sm: 'rotate(90deg)translate(15%, 125%)',
               md: 'translate(-50%, -50%)',
             },
           }}
         >
-          <img
-            src={HeroLines.src}
-            alt="Hero Lines"
-            style={{ opacity: 0.3, objectFit: 'cover', mixBlendMode: 'overlay' }}
-          />
+          {isMediumScreen ? (
+            <img
+              src={HeroLinesMobile.src}
+              alt="Hero Lines"
+              style={{
+                opacity: 0.3,
+                objectFit: 'cover',
+                mixBlendMode: 'overlay',
+              }}
+            />
+          ) : (
+            <img
+              src={HeroLines.src}
+              alt="Hero Lines"
+              style={{
+                opacity: 0.3,
+                objectFit: 'cover',
+                mixBlendMode: 'overlay',
+              }}
+            />
+          )}
         </Box>
         {/* Hero Content */}
         <Box
@@ -218,7 +224,7 @@ const Home = () => {
             />
           </Box>
         </Box>
-      </Container>
+      </Box>
       <SectionContainer backgroundColor={palette.background.default}>
         <Stack
           sx={{
