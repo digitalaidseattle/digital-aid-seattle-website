@@ -70,7 +70,7 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={4}>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners_new" name="Partner" />
+      <LinkSubItem url="/partners" name="Partner" />
       <LinkSubItem url="/volunteers_new" name="Volunteer" />
     </GridItem>
 
@@ -166,7 +166,7 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Work with us</FooterItemTitle>
 
-          <LinkSubItem url="/partners_new" name="Partner" />
+          <LinkSubItem url="/partners" name="Partner" />
 
           <LinkSubItem url="/volunteers_new" name="Volunteer" />
         </Box>
@@ -230,7 +230,7 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners_new" name="Partner" />
+      <LinkSubItem url="/partners" name="Partner" />
       <LinkSubItem url="/volunteers_new" name="Volunteer" />
     </GridItem>
 

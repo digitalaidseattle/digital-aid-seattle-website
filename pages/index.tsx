@@ -7,7 +7,6 @@ export default function DynamicPage({ page }) {
 
 export async function getStaticProps() {
   const page = await getHomePage()
-
   if (!page) {
     return {
       notFound: true,

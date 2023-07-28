@@ -17,11 +17,11 @@ import { theme } from 'theme/theme'
 import OSLogo from '../assets/darkThemeLogo.svg'
 
 const page_mapping = {
-  About: '/about_new',
-  Projects: '/projects_new',
-  Partners: '/partners_new',
+  About: '/about',
+  Projects: '/projects',
+  Partners: '/partners',
   Volunteer: '/volunteers_new',
-  Events: '/events_new',
+  Events: '/events',
 }
 
 const CommonHeader = () => {
