@@ -48,7 +48,7 @@ const CardOne = ({
           textAlign: 'center',
           padding: { xs: '2rem', sm: '1rem' },
           justifyContent: 'space-between',
-          marginBottom: '3rem',
+          // marginBottom: '3rem',
         }}
       >
         <IconContainer>{icon}</IconContainer>
