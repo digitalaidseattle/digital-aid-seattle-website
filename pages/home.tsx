@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Container */}
-      <Container 
+      <Container
         sx={{
           backgroundColor: palette.primary.light,
           display: 'flex',
@@ -210,7 +210,7 @@ const Home = () => {
       </Container>
       <Container
         sx={{ backgroundColor: palette.background.default }}
-        maxWidth={false}
+        // maxWidth={false}
       >
         <Stack
           sx={{
@@ -234,7 +234,13 @@ const Home = () => {
           <Button variant="contained" color="primary">
             Learn About Us
           </Button>
-          <CardRowContainer>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+              gap: '2rem',
+            }}
+          >
             <CardOne
               description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
@@ -265,7 +271,7 @@ const Home = () => {
                 />
               }
             />
-          </CardRowContainer>
+          </Box>
         </Stack>
       </Container>
     </>
