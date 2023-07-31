@@ -46,7 +46,8 @@ const CardOne = ({
           alignItems: 'center',
           textAlign: 'center',
           padding: '2rem',
-          justifyContent: 'space-between',
+          // only do space-between when a button is used:
+          justifyContent: buttonText && 'space-between',
           height: '100%',
         }}
       >
