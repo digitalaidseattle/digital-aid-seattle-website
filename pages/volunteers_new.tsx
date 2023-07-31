@@ -98,7 +98,7 @@ const VolunteerPage = () => {
             }}
           >
             <Typography
-              variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
+              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
               sx={{ color: theme.palette.primary.contrastText }}
             >
               Volunteer with us
@@ -143,7 +143,7 @@ const VolunteerPage = () => {
           All of our volunteers are vetted for experience, and sign a volunteer
           agreement before commencing work with Open Seattle.
         </Typography>
-        <Typography variant="headlineLarge">Volunteer Expectations</Typography>
+        <Typography variant="headlineLarge">Our Expectations</Typography>
         <CardRowContainer>
           <CardOne
             title="Skill"
