@@ -1,13 +1,13 @@
-import { ReactNode } from 'react'
+import { Box, useTheme } from '@mui/material'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
-import { Box, useTheme } from '@mui/material'
+import { ReactNode } from 'react'
 
 type ListItemWithIconProps = {
-  listIcon: ReactNode
-  listText: string
+  listIcon?: ReactNode
+  listText?: string
 }
 
 const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
@@ -19,23 +19,25 @@ const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
       sx={{
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
-        height: '56px'
       }}
-      dense={true}
     >
-      <ListItemIcon sx={{ color: palette.primary.light }}>
-        {listIcon}
-      </ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography
-            variant="labelMedium"
-            color={palette.secondary.contrastText}
-          >
-            <Box sx={{ lineHeight: 1.5 }}>{listText}</Box>
-          </Typography>
-        }
-      />
+      {listIcon && (
+        <ListItemIcon sx={{ color: palette.primary.light }}>
+          {listIcon}
+        </ListItemIcon>
+      )}
+      {listText && (
+        <ListItemText
+          primary={
+            <Typography
+              variant="labelMedium"
+              color={palette.secondary.contrastText}
+            >
+              {listText}
+            </Typography>
+          }
+        />
+      )}
     </ListItem>
   )
 }

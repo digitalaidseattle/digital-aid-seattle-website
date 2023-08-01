@@ -65,7 +65,7 @@ const AboutPage = () => {
       <WhatWeDoSection theme={theme} />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
-      <OurTeamSection theme={theme} />
+      <OurTeamSection theme={theme} extraSmallScreen={extraSmallScreen} />
     </Container>
   )
 }
@@ -180,7 +180,7 @@ const OurVisionSection = ({ theme }) => (
   </AboutUsSection>
 )
 
-const OurTeamSection = ({ theme }) => (
+const OurTeamSection = ({ theme, extraSmallScreen }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>
     <Typography variant="headlineMedium">Our team</Typography>
     <Typography variant="bodyLarge" align="center" display="block">
@@ -193,7 +193,10 @@ const OurTeamSection = ({ theme }) => (
     <Grid container spacing={2}>
       {companiesList.map((item) => (
         <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+          <ListItemWithIcon
+            listIcon={item.icon}
+            listText={!extraSmallScreen && item.label}
+          />
         </Grid>
       ))}
     </Grid>
@@ -203,7 +206,10 @@ const OurTeamSection = ({ theme }) => (
     <Grid container spacing={2}>
       {experienceContent.map((item) => (
         <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+          <ListItemWithIcon
+            listIcon={!extraSmallScreen && item.icon}
+            listText={item.label}
+          />
         </Grid>
       ))}
     </Grid>
@@ -213,7 +219,10 @@ const OurTeamSection = ({ theme }) => (
     <Grid container spacing={2}>
       {degreeContent.map((item) => (
         <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+          <ListItemWithIcon
+            listIcon={!extraSmallScreen && item.icon}
+            listText={item.label}
+          />
         </Grid>
       ))}
     </Grid>
@@ -261,24 +270,26 @@ const experienceContent = [
     label: 'Executive, Admissions, & Marketing Directing',
     icon: <SupervisorAccountOutlined />,
   },
-  { label: 'Operations Management', icon: <ManageAccountsOutlined /> },
+  {
+    label: 'Business Management & Marketing',
+    icon: <Storefront />,
+  },
   { label: 'Technology Entrepreneurship', icon: <EmojiObjectsOutlined /> },
-  { label: 'Technology Leadership', icon: <Diversity3 /> },
-  { label: 'Volunteer Management', icon: <Diversity1Outlined /> },
   {
     label: 'Nonprofit Management',
     icon: (
       <img src={NonProfitManagementIcon.src} alt="NOAA logo" width="24px" />
     ),
   },
+  { label: 'Operations Management', icon: <ManageAccountsOutlined /> },
+  { label: 'Technology Leadership', icon: <Diversity3 /> },
+  { label: 'Volunteer Management', icon: <Diversity1Outlined /> },
+
   { label: 'Back-end Development', icon: <DataObjectOutlined /> },
   { label: 'UX Research & Design', icon: <ScreenSearchDesktopOutlined /> },
   { label: 'Graphic Design & Illustration', icon: <DrawOutlined /> },
   { label: 'Nonprofit Contribution', icon: <VolunteerActivismOutlined /> },
-  {
-    label: 'Business Management & Marketing',
-    icon: <Storefront />,
-  },
+
   { label: 'Front-end Development', icon: <Code /> },
 ]
 
@@ -287,12 +298,12 @@ const degreeContent = [
     label: 'BS in Informatics & Human Computer Interaction',
     icon: <img src={HCIIcon.src} alt="NOAA logo" width="24px" />,
   },
-  { label: 'BA in English Literature', icon: <MenuBook /> },
-  { label: 'BPS in Music Production', icon: <LibraryMusicOutlined /> },
   {
-    label: 'BS, MS in Computer Science/Engineering',
+    label: 'BS, MS in Computer Science / Engineering',
     icon: <TerminalOutlined />,
   },
+  { label: 'BA in English Literature', icon: <MenuBook /> },
+  { label: 'BPS in Music Production', icon: <LibraryMusicOutlined /> },
   { label: 'BA, MA in Architecture', icon: <Apartment /> },
   {
     label: 'BA, MS in Life Sciences',
