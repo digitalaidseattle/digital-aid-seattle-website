@@ -86,7 +86,7 @@ const Home = () => {
             alignItems: 'center',
             textAlign: { xs: 'center', lg: 'left' },
             paddingX: { xs: '16px', md: '32px', lg: 0 },
-            paddingY: { xs: '64px', lg: '80px' },
+            paddingBottom: { xs: '64px', lg: '8rem' },
           }}
           maxWidth={'880px'}
         >
@@ -105,7 +105,7 @@ const Home = () => {
             <Typography
               color={'text.secondary'}
               sx={{}}
-              variant={isMediumScreen ? 'displaySmall' : 'displayLarge'}
+              variant={isMediumScreen ? 'displayMedium' : 'displayLarge'}
             >
               Connecting Puget Sound nonprofits with free tech solutions.
             </Typography>
@@ -123,7 +123,10 @@ const Home = () => {
                 variant="contained"
                 color="primary"
                 size="small"
-                sx={{ backgroundColor: '#004138' }}
+                sx={{
+                  backgroundColor: '#004138',
+                  marginBottom: { xs: '32px', md: '0px'},
+                }}
               >
                 Volunteer With Us
               </Button>
@@ -235,14 +238,20 @@ const Home = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge">Our Mission</Typography>
-          <Typography variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}>
+          <Typography
+            variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
+            textAlign={'center'}
+          >
             We believe community organizations are the heart of Seattle, and
             deserve the same tools and advantages enjoyed by our largest tech
             companies. Our mission is to create scalable, customized solutions
             to enable other nonprofits to reach their full potential and achieve
             their own mission-driven goals.
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: palette.primary.dark }}
+          >
             Learn About Us
           </Button>
           <CardRowContainer>
