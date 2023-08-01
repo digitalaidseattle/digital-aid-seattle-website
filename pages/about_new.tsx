@@ -7,6 +7,7 @@ import {
 import {
   Box,
   Container,
+  Stack,
   Typography,
   useMediaQuery,
   useTheme,
@@ -92,11 +93,7 @@ const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
 
 const WhatWeDoSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
-    sx={{
-      backgroundColor: designColor.white,
-      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
-    }}
-    maxWidth={false}
+    backgroundColor={designColor.white}
   >
     <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
       <Typography variant="headlineMedium">What we do</Typography>
@@ -110,12 +107,15 @@ const WhatWeDoSection = ({ theme, extraSmallScreen }) => (
 
 const OurValueSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
-    style={{
-      backgroundColor: theme.palette.background.default,
-      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
-    }}
-    maxWidth={false}
+  backgroundColor={theme.palette.background.default}
   >
+    <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+        }}
+        maxWidth={'880px'}
+      >
     <Typography variant="headlineMedium">Our values</Typography>
     <CardRowContainer>
       <CardOne
@@ -125,25 +125,22 @@ const OurValueSection = ({ theme, extraSmallScreen }) => (
       />
       <CardOne
         title="Efficacy"
-        description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+        description="What we do have impact. We apply the pareto principle (and other frameworks) to ensure that we  optimize our efforts from engagement to delivery."
         icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
       />
       <CardOne
         title="Efficiency"
-        description="We work with an eye toward maintaining a steady and speedy cadence whenever possible. We don't sacrifice quality, but we work with an MLP (minimum loveable product) mindset."
+        description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
         icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
       />
     </CardRowContainer>
+    </Stack>
   </SectionContainer>
 )
 
 const OurVisionSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
-    style={{
-      backgroundColor: designColor.white,
-      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
-    }}
-    maxWidth={false}
+  backgroundColor={designColor.white}
   >
     <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
       <Typography variant="headlineMedium">Our vision</Typography>
@@ -158,11 +155,7 @@ const OurVisionSection = ({ theme, extraSmallScreen }) => (
 
 const OurTeamSection = ({ theme, extraSmallScreen }) => (
   <SectionContainer
-    style={{
-      backgroundColor: theme.palette.background.default,
-      padding: extraSmallScreen ? '1rem' : '2rem 12rem 2rem 12rem',
-    }}
-    maxWidth={false}
+  backgroundColor={theme.palette.background.default}
   >
     <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
       <Typography variant="headlineMedium">Our team</Typography>
