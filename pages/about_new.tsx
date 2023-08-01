@@ -7,78 +7,87 @@ import {
 import {
   Box,
   Container,
-  Grid,
-  Stack,
-  styled,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
+import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
-
-const SectionContainer = styled(Container)(() => ({
-  backgroundColor: designColor.white,
-  color: designColor.black,
-  textAlign: 'center',
-  padding: '2rem 12rem 2rem 12rem',
-}))
-
 
 const AboutPage = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
-    <div>
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <AboutUsHeroSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <WhatWeDoSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <OurValueSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <OurVisionSection theme={theme} extraSmallScreen={extraSmallScreen} />
       <OurTeamSection theme={theme} extraSmallScreen={extraSmallScreen} />
-    </div>
+    </Container>
   )
 }
 
 export default withBasicLayout(AboutPage)
 
 const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
-  <Stack
-    sx={{
-      backgroundColor: theme.palette.primary.main,
-      padding: extraSmallScreen ? '1rem': '2rem',
-    }}
-  >
-    <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Grid item md={4} xs={12}>
-        <Box sx={{ gap: '2.5rem', display: 'grid', margin: '2rem' }}>
-          <Typography
-            variant={extraSmallScreen ? "displayMedium" : "displayLarge"}
-            sx={{ color: theme.palette.primary.contrastText }}
-          >
-            About us
-          </Typography>
-          <Typography
-            variant="bodyLarge"
-            sx={{ color: theme.palette.primary.contrastText }}
-          >
-            Open Seattle comprises a group of seasoned professionals with
-            experience in web development, software engineering, digital
-            strategy, visual and content design, and more. We leverage this vast
-            experience to transform the nonprofit sector—to make it more
-            efficient, effective, and accessible to all.
-          </Typography>
-        </Box>
-      </Grid>
-      <Grid item md={4} xs={12}>
-        <img src={AboutUsImage.src} alt="About Us page graphic"></img>
-      </Grid>
-    </Grid>
-  </Stack>
+  <SectionContainer backgroundColor={theme.palette.primary.main}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', lg: 'row' },
+        alignItems: 'center',
+        gap: { xs: 4, md: '40px' },
+      }}
+      maxWidth={'880px'}
+    >
+      <Box
+        sx={{
+          textAlign: 'left',
+          width: '100%',
+          maxWidth: '418px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem  ',
+        }}
+      >
+        <Typography
+          variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+          sx={{ color: theme.palette.primary.contrastText }}
+        >
+          About us
+        </Typography>
+        <Typography
+          variant="bodyLarge"
+          sx={{
+            color: theme.palette.primary.contrastText,
+          }}
+        >
+          Open Seattle comprises a group of seasoned professionals with
+          experience in web development, software engineering, digital strategy,
+          visual and content design, and more. We leverage this vast experience
+          to transform the nonprofit sector—to make it more efficient,
+          effective, and accessible to all.
+        </Typography>
+      </Box>
+      <img
+        src={AboutUsImage.src}
+        alt="VAbout Us page graphic"
+        width="418px"
+        style={{ objectFit: 'cover' }}
+      />
+    </Box>
+  </SectionContainer>
 )
 
 const WhatWeDoSection = ({ theme, extraSmallScreen }) => (
