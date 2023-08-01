@@ -4,7 +4,6 @@ import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivism
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
@@ -257,7 +256,10 @@ const Home = () => {
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+              gridTemplateColumns: {
+                xs: '1fr',
+                lg: 'repeat(3, minmax(0, 1fr))',
+              },
               gap: '2rem',
             }}
           >
