@@ -5,8 +5,31 @@ import {
   MilitaryTechOutlined,
 } from '@mui/icons-material'
 import {
+  Apartment,
+  Code,
+  DataObjectOutlined,
+  Diversity1Outlined,
+  Diversity2Outlined,
+  Diversity3,
+  DrawOutlined,
+  EmojiObjectsOutlined,
+  Flare, // placeholder for astrophysics
+  Gavel,
+  LibraryMusicOutlined,
+  ManageAccountsOutlined,
+  MenuBook,
+  PsychologyOutlined, // placeholder for informatics, HCI
+  ScienceOutlined, // placeholder for genetics
+  ScreenSearchDesktopOutlined,
+  Storefront,
+  SupervisorAccountOutlined,
+  TerminalOutlined,
+  VolunteerActivismOutlined,
+} from '@mui/icons-material'
+import {
   Box,
   Container,
+  Grid,
   Stack,
   Typography,
   useMediaQuery,
@@ -16,6 +39,7 @@ import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
+import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
@@ -156,5 +180,63 @@ const OurTeamSection = ({ theme }) => (
       The Open Seattle cadre is made up of highly skilled and committed
       volunteers, dedicated to serving the greater Seattle area.
     </Typography>
+    <Typography variant="titleMedium" align="center" display="block">
+      We collectively hold experience in:
+    </Typography>
+    <Grid container spacing={2}>
+      {experienceContent.map((item) => (
+        <Grid item xs={6} md={4} key={item.label}>
+          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+        </Grid>
+      ))}
+    </Grid>
+    <Typography variant="titleMedium" align="center" display="block">
+      And we have degrees in::
+    </Typography>
+    <Grid container spacing={2}>
+      {degreeContent.map((item) => (
+        <Grid item xs={6} md={4} key={item.label}>
+          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+        </Grid>
+      ))}
+    </Grid>
   </AboutUsSection>
 )
+
+const experienceContent = [
+  {
+    label: 'Executive, Admissions, & Marketing Directing',
+    icon: <SupervisorAccountOutlined />,
+  },
+  { label: 'Operations Management', icon: <ManageAccountsOutlined /> },
+  { label: 'Technology Entrepreneurship', icon: <EmojiObjectsOutlined /> },
+  { label: 'Technology Leadership', icon: <Diversity3 /> },
+  { label: 'Volunteer Management', icon: <Diversity1Outlined /> },
+  { label: 'Nonprofit Management', icon: <Diversity2Outlined /> },
+  { label: 'Back-end Development', icon: <DataObjectOutlined /> },
+  { label: 'UX Research & Design', icon: <ScreenSearchDesktopOutlined /> },
+  { label: 'Graphic Design & Illustration', icon: <DrawOutlined /> },
+  { label: 'Nonprofit Contribution', icon: <VolunteerActivismOutlined /> },
+  {
+    label: 'Business Management & Marketing',
+    icon: <Storefront />,
+  },
+  { label: 'Front-end Development', icon: <Code /> },
+]
+
+const degreeContent = [
+  {
+    label: 'BS in Informatics & Human Computer Interaction',
+    icon: <PsychologyOutlined />,
+  },
+  { label: 'BA in English Literature', icon: <MenuBook /> },
+  { label: 'BPS in Music Production', icon: <LibraryMusicOutlined /> },
+  {
+    label: 'BS, MS in Computer Science/Engineering',
+    icon: <TerminalOutlined />,
+  },
+  { label: 'BA, MA in Architecture', icon: <Apartment /> },
+  { label: 'BA, MS in Life Sciences', icon: <ScienceOutlined /> },
+  { label: 'BA, MBA, JD in Law', icon: <Gavel /> },
+  { label: 'BA in Astrophysics', icon: <Flare /> },
+]
