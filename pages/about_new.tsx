@@ -24,6 +24,7 @@ import {
 } from '@mui/icons-material'
 import {
   Box,
+  Button,
   Container,
   Grid,
   Stack,
@@ -216,6 +217,15 @@ const OurTeamSection = ({ theme }) => (
         </Grid>
       ))}
     </Grid>
+    <Box textAlign="center">
+      <Button
+        variant="contained"
+        href={'/project_individual'}
+        sx={{ width: 'fit-content' }}
+      >
+        View our Cadre
+      </Button>
+    </Box>
   </AboutUsSection>
 )
 
