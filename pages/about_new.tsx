@@ -43,6 +43,12 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
+import AppleLogo from '../assets/aboutUsIcons/appleIcon.png'
+import GoogleLogo from '../assets/aboutUsIcons/google.png'
+import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.png'
+import NOAALogo from '../assets/aboutUsIcons/noaa.png'
+import StarbucksLogo from '../assets/aboutUsIcons/starbucks.png'
+import VerizonLogo from '../assets/aboutUsIcons/verizon.png'
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -121,7 +127,7 @@ const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
       </Box>
       <img
         src={AboutUsImage.src}
-        alt="VAbout Us page graphic"
+        alt="About Us page graphic"
         width="418px"
         style={{ objectFit: 'cover' }}
       />
@@ -181,6 +187,16 @@ const OurTeamSection = ({ theme }) => (
       volunteers, dedicated to serving the greater Seattle area.
     </Typography>
     <Typography variant="titleMedium" align="center" display="block">
+      We’ve worked in tech and management for companies like:
+    </Typography>
+    <Grid container spacing={2}>
+      {companiesList.map((item) => (
+        <Grid item xs={6} md={4} key={item.label}>
+          <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+        </Grid>
+      ))}
+    </Grid>
+    <Typography variant="titleMedium" align="center" display="block">
       We collectively hold experience in:
     </Typography>
     <Grid container spacing={2}>
@@ -202,6 +218,69 @@ const OurTeamSection = ({ theme }) => (
     </Grid>
   </AboutUsSection>
 )
+
+const companiesList = [
+  {
+    label: 'Apple',
+    icon: (
+      <img
+        src={AppleLogo.src}
+        alt="Apple logo"
+        width="40px"
+      />
+    ),
+  },
+  {
+    label: 'Google',
+    icon: (
+      <img
+        src={GoogleLogo.src}
+        alt="Google logo"
+        width="40px"
+      />
+    ),
+  },
+  {
+    label: 'Verizon',
+    icon: (
+      <img
+        src={VerizonLogo.src}
+        alt="Verizon logo"
+        width="40px"
+      />
+    ),
+  },
+  {
+    label: 'Microsoft',
+    icon: (
+      <img
+        src={MicrosoftLogo.src}
+        alt="Microsoft logo"
+        width="40px"
+      />
+    ),
+  },
+  {
+    label: 'Starbucks',
+    icon: (
+      <img
+        src={StarbucksLogo.src}
+        alt="Starbucks logo"
+        width="40px"
+      />
+    ),
+  },
+  {
+    label: 'NOAA',
+    icon: (
+      <img
+        src={NOAALogo.src}
+        alt="NOAA logo"
+        width="40px"
+      />
+    ),
+  },
+]
 
 const experienceContent = [
   {
