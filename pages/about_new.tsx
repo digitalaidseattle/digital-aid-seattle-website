@@ -39,16 +39,16 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
-import AppleLogo from '../assets/aboutUsIcons/appleIcon.png'
+import AppleLogo from '../assets/aboutUsIcons/apple.svg'
 import GeneticsIcon from '../assets/aboutUsIcons/genetics.svg'
-import GoogleLogo from '../assets/aboutUsIcons/google.png'
+import GoogleLogo from '../assets/aboutUsIcons/google.svg'
 import HCIIcon from '../assets/aboutUsIcons/hci.svg'
-import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.png'
-import NOAALogo from '../assets/aboutUsIcons/noaa.png'
+import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.svg'
+import NOAALogo from '../assets/aboutUsIcons/noaa.svg'
 import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_management.svg'
 import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
-import StarbucksLogo from '../assets/aboutUsIcons/starbucks.png'
-import VerizonLogo from '../assets/aboutUsIcons/verizon.png'
+import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
+import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -207,7 +207,7 @@ const OurTeamSection = ({ theme }) => (
       ))}
     </Grid>
     <Typography variant="titleMedium" align="center" display="block">
-      And we have degrees in::
+      And we have degrees in:
     </Typography>
     <Grid container spacing={2}>
       {degreeContent.map((item) => (
