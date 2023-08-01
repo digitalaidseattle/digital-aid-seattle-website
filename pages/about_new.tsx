@@ -9,17 +9,13 @@ import {
   Code,
   DataObjectOutlined,
   Diversity1Outlined,
-  Diversity2Outlined,
   Diversity3,
   DrawOutlined,
   EmojiObjectsOutlined,
-  Flare, // placeholder for astrophysics
   Gavel,
   LibraryMusicOutlined,
   ManageAccountsOutlined,
   MenuBook,
-  PsychologyOutlined, // placeholder for informatics, HCI
-  ScienceOutlined, // placeholder for genetics
   ScreenSearchDesktopOutlined,
   Storefront,
   SupervisorAccountOutlined,
@@ -44,9 +40,13 @@ import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
 import AppleLogo from '../assets/aboutUsIcons/appleIcon.png'
+import GeneticsIcon from '../assets/aboutUsIcons/genetics.svg'
 import GoogleLogo from '../assets/aboutUsIcons/google.png'
+import HCIIcon from '../assets/aboutUsIcons/hci.svg'
 import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.png'
 import NOAALogo from '../assets/aboutUsIcons/noaa.png'
+import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_management.svg'
+import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
 import StarbucksLogo from '../assets/aboutUsIcons/starbucks.png'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.png'
 
@@ -222,63 +222,27 @@ const OurTeamSection = ({ theme }) => (
 const companiesList = [
   {
     label: 'Apple',
-    icon: (
-      <img
-        src={AppleLogo.src}
-        alt="Apple logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={AppleLogo.src} alt="Apple logo" width="40px" />,
   },
   {
     label: 'Google',
-    icon: (
-      <img
-        src={GoogleLogo.src}
-        alt="Google logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={GoogleLogo.src} alt="Google logo" width="40px" />,
   },
   {
     label: 'Verizon',
-    icon: (
-      <img
-        src={VerizonLogo.src}
-        alt="Verizon logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={VerizonLogo.src} alt="Verizon logo" width="40px" />,
   },
   {
     label: 'Microsoft',
-    icon: (
-      <img
-        src={MicrosoftLogo.src}
-        alt="Microsoft logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={MicrosoftLogo.src} alt="Microsoft logo" width="40px" />,
   },
   {
     label: 'Starbucks',
-    icon: (
-      <img
-        src={StarbucksLogo.src}
-        alt="Starbucks logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={StarbucksLogo.src} alt="Starbucks logo" width="40px" />,
   },
   {
     label: 'NOAA',
-    icon: (
-      <img
-        src={NOAALogo.src}
-        alt="NOAA logo"
-        width="40px"
-      />
-    ),
+    icon: <img src={NOAALogo.src} alt="NOAA logo" width="40px" />,
   },
 ]
 
@@ -291,7 +255,12 @@ const experienceContent = [
   { label: 'Technology Entrepreneurship', icon: <EmojiObjectsOutlined /> },
   { label: 'Technology Leadership', icon: <Diversity3 /> },
   { label: 'Volunteer Management', icon: <Diversity1Outlined /> },
-  { label: 'Nonprofit Management', icon: <Diversity2Outlined /> },
+  {
+    label: 'Nonprofit Management',
+    icon: (
+      <img src={NonProfitManagementIcon.src} alt="NOAA logo" width="24px" />
+    ),
+  },
   { label: 'Back-end Development', icon: <DataObjectOutlined /> },
   { label: 'UX Research & Design', icon: <ScreenSearchDesktopOutlined /> },
   { label: 'Graphic Design & Illustration', icon: <DrawOutlined /> },
@@ -306,7 +275,7 @@ const experienceContent = [
 const degreeContent = [
   {
     label: 'BS in Informatics & Human Computer Interaction',
-    icon: <PsychologyOutlined />,
+    icon: <img src={HCIIcon.src} alt="NOAA logo" width="24px" />,
   },
   { label: 'BA in English Literature', icon: <MenuBook /> },
   { label: 'BPS in Music Production', icon: <LibraryMusicOutlined /> },
@@ -315,7 +284,13 @@ const degreeContent = [
     icon: <TerminalOutlined />,
   },
   { label: 'BA, MA in Architecture', icon: <Apartment /> },
-  { label: 'BA, MS in Life Sciences', icon: <ScienceOutlined /> },
+  {
+    label: 'BA, MS in Life Sciences',
+    icon: <img src={GeneticsIcon.src} alt="NOAA logo" width="24px" />,
+  },
   { label: 'BA, MBA, JD in Law', icon: <Gavel /> },
-  { label: 'BA in Astrophysics', icon: <Flare /> },
+  {
+    label: 'BA in Astrophysics',
+    icon: <img src={PhysicsIcon.src} alt="NOAA logo" width="24px" />,
+  },
 ]
