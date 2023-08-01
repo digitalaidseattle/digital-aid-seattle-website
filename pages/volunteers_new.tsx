@@ -23,6 +23,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
+  useMediaQuery,
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
@@ -31,8 +32,10 @@ import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import Link from 'next/link'
 import SectionContainer from 'components/layout/SectionContainer'
+import SectionContainer from 'components/layout/SectionContainer'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
+import { designColor } from 'theme/theme'
 import { designColor } from 'theme/theme'
 
 /* eslint-disable @next/next/no-img-element */
@@ -63,6 +66,7 @@ const processContent = [
   'Read our volunteer agreement, then apply to volunteer using the button below.',
   'You will receive an invitation for an interview within a few days.',
   'If accepted, complete onboarding and choose a project to work on.',
+  'If accepted, complete onboarding and choose a project to work on.',
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
@@ -70,8 +74,15 @@ const VolunteerPage = () => {
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   return (
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <SectionContainer backgroundColor={theme.palette.primary.main}>
     <Container
       maxWidth={false}
       disableGutters
@@ -82,9 +93,12 @@ const VolunteerPage = () => {
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', lg: 'row' },
+            flexDirection: { xs: 'column', lg: 'row' },
             alignItems: 'center',
             gap: { xs: 4, md: '40px' },
+            gap: { xs: 4, md: '40px' },
           }}
+          maxWidth={'880px'}
           maxWidth={'880px'}
         >
           <Box
@@ -97,8 +111,20 @@ const VolunteerPage = () => {
               gap: '2rem  ',
             }}
           >
+          <Box
+            sx={{
+              textAlign: 'left',
+              width: '100%',
+              maxWidth: '418px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2rem  ',
+            }}
+          >
             <Typography
               variant={isSmallScreen ? 'displaySmall' : 'displayLarge'}
+              sx={{ color: theme.palette.primary.contrastText }}
+              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
               sx={{ color: theme.palette.primary.contrastText }}
             >
               Volunteer with us
@@ -119,9 +145,71 @@ const VolunteerPage = () => {
             width="418px"
             style={{ objectFit: 'cover' }}
           />
+          <img
+            src={VolunteerImage.src}
+            alt="Volunteer page graphic"
+            width="418px"
+            style={{ objectFit: 'cover' }}
+          />
         </Box>
       </SectionContainer>
+      </SectionContainer>
       {/* Volunteer Roles Section */}
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+          paddingY: { xs: 4, md: 8 },
+          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
+        }}
+        maxWidth={'880px'}
+      >
+        <Typography variant="headlineLarge">How you can participate</Typography>
+        <Grid container spacing={2}>
+          {gridContent.map((item) => (
+            <Grid item xs={12} md={6} key={item.label}>
+              <ListItemWithIcon listIcon={item.icon} listText={item.label} />
+            </Grid>
+          ))}
+        </Grid>
+        <Typography variant="bodyLarge">
+          All of our volunteers are vetted for experience, and sign a volunteer
+          agreement before commencing work with Open Seattle.
+        </Typography>
+        <Typography variant="headlineLarge">Our Expectations</Typography>
+        <CardRowContainer>
+          <CardOne
+            title="Skill"
+            icon={
+              <StarsOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
+          />
+          <CardOne
+            title="Experience"
+            icon={
+              <WorkHistoryOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You are a seasoned professional, capable of leading yourself and others in your discipline."
+          />
+          <CardOne
+            title="Availability"
+            icon={
+              <EventAvailableOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You dedicate the time you need to accomplish your committed tasks with Open Seattle."
+          />
+        </CardRowContainer>
+      </Stack>
       <Stack
         gap={{ xs: '64px', md: '80px' }}
         sx={{
@@ -179,9 +267,14 @@ const VolunteerPage = () => {
       </Stack>
       {/* Oath & Values Section */}
       <SectionContainer backgroundColor={designColor.white}>
+      <SectionContainer backgroundColor={designColor.white}>
         <Stack
           gap={{ xs: 4, md: 8 }}
+          gap={{ xs: 4, md: 8 }}
           sx={{
+            textAlign: 'left',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
             textAlign: 'left',
             width: { xs: '100%', lg: '880px' },
             maxWidth: '880px',
@@ -196,6 +289,7 @@ const VolunteerPage = () => {
             {oathContent.map((item, index) => (
               <Accordion key={index}>
                 <AccordionSummary
+                  expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                   expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                   aria-controls={`volunteer-values${index}-content`}
                   id={`volunteer-values${index}-header`}
@@ -215,11 +309,16 @@ const VolunteerPage = () => {
           </Link>
         </Stack>
       </SectionContainer>
+      </SectionContainer>
       {/* Process Section */}
+      <SectionContainer backgroundColor={designColor.background}>
       <SectionContainer backgroundColor={designColor.background}>
         <Stack
           gap={{ xs: 4, md: 8 }}
+          gap={{ xs: 4, md: 8 }}
           sx={{
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
             width: { xs: '100%', lg: '880px' },
             maxWidth: '880px',
           }}
@@ -240,16 +339,23 @@ const VolunteerPage = () => {
           </ol>
         </Stack>
       </SectionContainer>
+      </SectionContainer>
       {/* Volunteer Application */}
       <SectionContainer backgroundColor={designColor.white}>
+      <SectionContainer backgroundColor={designColor.white}>
         <Stack
+          gap={{ xs: 4, md: 8 }}
           gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'center',
             maxWidth: '880px',
+            maxWidth: '880px',
             marginX: 'auto',
           }}
         >
+          <Typography
+            variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
+          >
           <Typography
             variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
           >
@@ -261,6 +367,8 @@ const VolunteerPage = () => {
             </Button>
           </Link>
         </Stack>
+      </SectionContainer>
+    </Container>
       </SectionContainer>
     </Container>
   )
