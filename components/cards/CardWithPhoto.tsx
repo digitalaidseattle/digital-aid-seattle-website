@@ -19,7 +19,7 @@ const CardWithPhoto = ({
   imageWidth = 196,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
-  const isViewportSmall = useMediaQuery(theme.breakpoints.down('sm'))
+  const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Card
@@ -43,6 +43,7 @@ const CardWithPhoto = ({
           display: 'flex',
           flexDirection: 'column',
           gap: '0.5rem',
+          paddingBottom: '1rem !important',
         }}
       >
         <Typography variant="titleMedium">{title}</Typography>

@@ -144,7 +144,13 @@ const VolunteerPage = () => {
           agreement before commencing work with Open Seattle.
         </Typography>
         <Typography variant="headlineLarge">Our Expectations</Typography>
-        <CardRowContainer>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+            gap: '2rem',
+          }}
+        >
           <CardOne
             title="Skill"
             icon={
@@ -175,7 +181,7 @@ const VolunteerPage = () => {
             }
             description="You dedicate the time you need to accomplish your committed tasks with Open Seattle."
           />
-        </CardRowContainer>
+        </Box>
       </Stack>
       {/* Oath & Values Section */}
       <SectionContainer backgroundColor={designColor.white}>

@@ -32,11 +32,9 @@ const CardOne = ({
     <Card
       sx={{
         flex: '1',
-        marginTop: 5,
         minWidth: { xs: '100%', sm: 'min-content' },
         boxShadow:
           '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
-        height: '100%',
       }}
     >
       <CardContent
@@ -46,9 +44,10 @@ const CardOne = ({
           gap: '1.5rem',
           alignItems: 'center',
           textAlign: 'center',
-          padding: { xs: '2rem', sm: '1rem' },
-          justifyContent: 'space-between',
-          marginBottom: '3rem',
+          padding: '2rem',
+          // only do space-between when a button is used:
+          justifyContent: buttonText && 'space-between',
+          height: '100%',
         }}
       >
         <IconContainer>{icon}</IconContainer>

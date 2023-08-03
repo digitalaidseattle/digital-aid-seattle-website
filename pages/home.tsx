@@ -4,13 +4,13 @@ import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivism
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.png'
 import SectionContainer from 'components/layout/SectionContainer'
+import CardRowContainer from 'components/cards/CardRowContainer'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -125,7 +125,7 @@ const Home = () => {
                 size="small"
                 sx={{
                   backgroundColor: '#004138',
-                  marginBottom: { xs: '32px', md: '0px'},
+                  marginBottom: { xs: '32px', md: '0px' },
                 }}
               >
                 Volunteer With Us
