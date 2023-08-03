@@ -10,6 +10,7 @@ import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.png'
 import SectionContainer from 'components/layout/SectionContainer'
+import CardRowContainer from 'components/cards/CardRowContainer'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -253,16 +254,7 @@ const Home = () => {
           >
             Learn About Us
           </Button>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                lg: 'repeat(3, minmax(0, 1fr))',
-              },
-              gap: '2rem',
-            }}
-          >
+          <CardRowContainer>
             <CardOne
               description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
@@ -293,7 +285,7 @@ const Home = () => {
                 />
               }
             />
-          </Box>
+          </CardRowContainer>
         </Stack>
       </SectionContainer>
     </>

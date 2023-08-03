@@ -33,6 +33,7 @@ import {
   useTheme,
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
+import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
@@ -148,16 +149,7 @@ const WhatWeDoSection = ({ theme }) => (
 const OurValueSection = ({ theme }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>
     <Typography variant="headlineMedium">Our values</Typography>
-    <Box
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: {
-          xs: '1fr',
-          lg: 'repeat(3, minmax(0, 1fr))',
-        },
-        gap: '2rem',
-      }}
-    >
+    <CardRowContainer>
       <CardOne
         title="Excellence"
         description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
@@ -173,7 +165,7 @@ const OurValueSection = ({ theme }) => (
         description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
         icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
       />
-    </Box>
+    </CardRowContainer>
   </AboutUsSection>
 )
 
