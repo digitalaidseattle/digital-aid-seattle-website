@@ -21,7 +21,7 @@ const page_mapping = {
   About: '/about',
   Projects: '/projects',
   Partners: '/partners',
-  Volunteer: '/volunteers_new',
+  Volunteer: '/volunteers',
   Events: '/events',
 }
 
