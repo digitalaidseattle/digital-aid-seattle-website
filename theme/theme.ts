@@ -90,10 +90,11 @@ const neutralPalette = {
   25: '#343D3E',
   98: '#F7FAFA',
   97: '#F2F7F7',
+  100: '#FFFFFF',
 }
 
 export const designColor = {
-  white: '#F7FAFA',
+  white: neutralPalette[100],
   black: '#00211F',
   background: neutralPalette[97],
   green: {
@@ -285,6 +286,8 @@ export const theme = createTheme({
           padding: '10px 24px 10px 24px',
           textTransform: 'none',
           boxShadow: 'none',
+          whiteSpace: 'nowrap',
+          minWidth: 'auto'
         },
       },
       variants: [
@@ -301,6 +304,13 @@ export const theme = createTheme({
         },
       ],
     },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        }
+      }
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
@@ -308,7 +318,7 @@ export const theme = createTheme({
         },
       },
     },
-  },
+  },  
 })
 
 declare module '@mui/material/Button' {
