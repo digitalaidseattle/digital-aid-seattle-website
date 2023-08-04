@@ -55,6 +55,7 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'flex', lg: 'none' },
             justifyContent: 'space-between',
+            padding: '1.25rem 0 !important',
           }}
         >
           {/* Hamburger menu when the screen is small. */}
@@ -63,9 +64,9 @@ const CommonHeader = () => {
             <img
               src={OSLogo.src}
               style={{
-                height: '80%',
                 width: '120px',
               }}
+              alt="Open Seattle Home"
             />
           </Link>
           <IconButton
@@ -121,17 +122,19 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            padding: '1.25rem 2.5rem !important',
           }}
         >
           {/* LOGO */}
-          <img
-            src={OSLogo.src}
-            style={{
-              height: '80%',
-              width: '120px',
-              // margin: '0px 60px 0px 0px',
-            }}
-          />
+          <Link href="/">
+            <img
+              src={OSLogo.src}
+              style={{
+                width: '120px',
+              }}
+              alt="Open Seattle Home"
+            />
+          </Link>
           <Box>
             {Object.keys(page_mapping).map((name) => (
               <Button
