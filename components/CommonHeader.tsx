@@ -43,7 +43,12 @@ const CommonHeader = () => {
   const currentRoute = router.route
 
   return (
-    <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
+    <AppBar
+      position="static"
+      sx={{
+        background: theme.palette.primary.main,
+      }}
+    >
       <Toolbar>
         <Box
           sx={{
@@ -54,13 +59,15 @@ const CommonHeader = () => {
         >
           {/* Hamburger menu when the screen is small. */}
           {/* LOGO */}
-          <img
-            src={OSLogo.src}
-            style={{
-              height: '80%',
-              width: '120px',
-            }}
-          />
+          <Link href="/">
+            <img
+              src={OSLogo.src}
+              style={{
+                height: '80%',
+                width: '120px',
+              }}
+            />
+          </Link>
           <IconButton
             size="large"
             aria-label="page-info"
