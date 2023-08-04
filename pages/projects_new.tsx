@@ -4,7 +4,7 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-import Placeholder from '../assets/placeholder-img.png'
+import ProjectCadreImage from 'assets/project-image.png'
 
 type CardProjectProps = {
   title: string
@@ -13,7 +13,7 @@ type CardProjectProps = {
   description: string
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
-  duration: { start: string; end: string }
+  duration?: { start: string; end: string }
   imageSrc: string
   imageAlt: string
 }
@@ -37,52 +37,15 @@ const ProjectsPage = () => {
 
   const projectData: CardProjectProps[] = [
     {
-      title: 'Seattle Humane Society',
-      partner: 'City of Bellevue',
-      programAreas: ['Animals'],
+      title: 'The Cadre',
+      partner: 'Open Seattle',
+      programAreas: ['Civic technology'],
       description:
-        'Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them.',
-      status: 'recruiting' as 'recruiting',
-      projectLink: '',
-      duration: { start: 'Jun 12', end: 'Nov 1' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'CiviForm',
-      partner: 'City of Seattle',
-      programAreas: ['Civic equity'],
-      description:
-        'A simpler way to access & administer government benefits: CiviForm makes it easier to access public assistance by consolidating applications and saving residents time.',
+        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
       status: 'active' as 'active',
-      projectLink: '',
-      duration: { start: 'Apr 2', end: 'Aug 10' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'Clearviction App',
-      partner: 'Clearviction',
-      programAreas: ['Civic equity'],
-      description:
-        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
-      status: 'complete' as 'complete',
-      projectLink: '',
-      duration: { start: 'Jan 1', end: 'Feb 15' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'Clearviction App',
-      partner: 'Clearviction',
-      programAreas: ['Civic equity'],
-      description:
-        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
-      status: 'complete' as 'complete',
-      projectLink: '',
-      duration: { start: 'Jan 1', end: 'Feb 15' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
+      projectLink: '/project_cadre',
+      imageSrc: ProjectCadreImage.src,
+      imageAlt: 'Open seattle logo',
     },
   ]
 

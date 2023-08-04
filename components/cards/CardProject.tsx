@@ -13,7 +13,7 @@ type CardProjectProps = {
   description: string
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
-  duration: { start: string; end: string }
+  duration?: { start: string; end: string }
   imageSrc: string
   imageAlt: string
 }
@@ -83,8 +83,9 @@ const CardProject = ({
             spacing="1rem"
           >
             <StateBadge state={status} />
+
             <Typography variant="labelMedium">
-              {duration.start} - {duration.end}
+              {duration ? `${duration.start} - ${duration.end}` : 'Ongoing'}
             </Typography>
           </Stack>
         </Stack>
