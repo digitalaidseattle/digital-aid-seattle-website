@@ -94,7 +94,7 @@ const CommonHeader = () => {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: 'block', lg: 'none' },
             }}
           >
             {Object.keys(page_mapping).map((name) => (
