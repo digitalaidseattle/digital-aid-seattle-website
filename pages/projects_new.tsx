@@ -5,6 +5,7 @@ import CardProject from 'components/cards/CardProject'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import ProjectCadreImage from 'assets/project-image.png'
+import SectionContainer from 'components/layout/SectionContainer'
 
 type CardProjectProps = {
   title: string
@@ -63,35 +64,35 @@ const ProjectsPage = () => {
           <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
-
-      <Stack
-        sx={{
-          width: '100%',
-          backgroundColor: theme.palette.primary.contrastText,
-          padding: {
-            xs: '2.5rem 1rem 4rem 1rem',
-            md: '2.5rem 2rem 4rem 2rem',
-            lg: '2.5rem 12.5rem 7.5rem 12.5rem',
-          },
-        }}
-      >
-        <CardGridContainer>
-          {projectData.map((project) => (
-            <CardProject
-              key={project.title}
-              title={project.title}
-              partner={project.partner}
-              programAreas={project.programAreas}
-              description={project.description}
-              status={project.status}
-              projectLink={project.projectLink}
-              duration={project.duration}
-              imageSrc={project.imageSrc}
-              imageAlt={project.imageAlt}
-            />
-          ))}
-        </CardGridContainer>
-      </Stack>
+      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
+        <Stack
+          sx={{
+            width: '100%',
+            padding: {
+              xs: '2.5rem 1rem 4rem 1rem',
+              md: '2.5rem 2rem 4rem 2rem',
+              lg: '2.5rem 12.5rem 7.5rem 12.5rem',
+            },
+          }}
+        >
+          <CardGridContainer>
+            {projectData.map((project) => (
+              <CardProject
+                key={project.title}
+                title={project.title}
+                partner={project.partner}
+                programAreas={project.programAreas}
+                description={project.description}
+                status={project.status}
+                projectLink={project.projectLink}
+                duration={project.duration}
+                imageSrc={project.imageSrc}
+                imageAlt={project.imageAlt}
+              />
+            ))}
+          </CardGridContainer>
+        </Stack>
+      </SectionContainer>
     </>
   )
 }

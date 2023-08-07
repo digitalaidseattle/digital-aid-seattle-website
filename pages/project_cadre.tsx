@@ -224,11 +224,6 @@ const ProjectIndividualPage = () => {
               display: 'grid',
               gridAutoFlow: 'columns',
               gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-              // gridTemplateColumns: {
-              //   xs: '1fr',
-              //   md: 'min-content auto',
-              //   lg: 'repeat(4, 1fr)',
-              // },
               alignItems: 'center',
               justifyContent: 'center',
               gap: '2rem',
