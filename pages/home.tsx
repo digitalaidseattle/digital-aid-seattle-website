@@ -45,7 +45,7 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '1800px', lg: '1280px' },
+            width: { xs: '1800px', lg: '2321px' },
             height: 'auto',
             left: { xs: 0, sm: '50%' },
             top: { xs: 0, sm: '50%' },
@@ -53,6 +53,11 @@ const Home = () => {
               sm: 'rotate(90deg)translate(15%, 125%)',
               md: 'translate(-50%, -50%)',
             },
+            opacity: 0.4,
+            mixBlendMode: 'overlay',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           {isMediumScreen ? (
@@ -60,9 +65,7 @@ const Home = () => {
               src={HeroLinesMobile.src}
               alt="Hero Lines"
               style={{
-                opacity: 0.3,
                 objectFit: 'cover',
-                mixBlendMode: 'overlay',
               }}
             />
           ) : (
@@ -70,9 +73,6 @@ const Home = () => {
               src={HeroLines.src}
               alt="Hero Lines"
               style={{
-                opacity: 0.3,
-                objectFit: 'cover',
-                mixBlendMode: 'overlay',
               }}
             />
           )}
