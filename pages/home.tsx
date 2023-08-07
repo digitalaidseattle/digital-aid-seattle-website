@@ -2,7 +2,6 @@ import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
-import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
 import { withBasicLayout } from 'components/layouts'
@@ -46,12 +45,12 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '1800px', lg: '2321px' },
+            width: { xs: '2400px', lg: '2321px' },
             height: 'auto',
             left: { xs: 0, sm: '50%' },
             top: { xs: 0, sm: '50%' },
             transform: {
-              sm: 'rotate(90deg)translate(15%, 125%)',
+              sm: 'rotate(90deg)translate(-15%, 175%)',
               md: 'translate(-50%, -50%)',
             },
             opacity: 0.4,
@@ -66,7 +65,7 @@ const Home = () => {
               src={HeroLinesMobile.src}
               alt="Hero Lines"
               style={{
-                objectFit: 'cover',
+                // objectFit: 'cover',
               }}
             />
           ) : (
@@ -85,6 +84,7 @@ const Home = () => {
             flexDirection: { xs: 'column', lg: 'row' },
             gap: { xs: 4, md: 12 },
             alignItems: 'center',
+            justifyContent: 'space-between',
             textAlign: { xs: 'center', lg: 'left' },
             paddingX: { xs: '16px', md: '32px', lg: 0 },
             paddingBottom: { xs: '64px', lg: '8rem' },
