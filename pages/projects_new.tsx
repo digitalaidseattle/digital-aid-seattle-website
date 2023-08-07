@@ -1,9 +1,9 @@
-import { Typography, Stack, useTheme, styled } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
+import { Stack, useTheme } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import { withBasicLayout } from 'components/layouts'
 
+import Masthead from 'components/Masthead'
 import Placeholder from '../assets/placeholder-img.png'
 
 type CardProjectProps = {
@@ -18,22 +18,9 @@ type CardProjectProps = {
   imageAlt: string
 }
 
-const MobileHeader = styled(Typography)(({ theme }) => ({
-  padding: '4rem 0',
-  width: '100%',
-  textAlign: 'center',
-}))
-
-const DesktopHeader = styled(Typography)(({ theme }) => ({
-  padding: '5rem 0',
-  width: '100%',
-  textAlign: 'center',
-}))
 
 const ProjectsPage = () => {
   const theme = useTheme()
-
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   const projectData: CardProjectProps[] = [
     {
@@ -88,19 +75,7 @@ const ProjectsPage = () => {
 
   return (
     <>
-      <Stack
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
-        }}
-      >
-        {extraSmallScreen ? (
-          <MobileHeader variant="displayMedium">Projects</MobileHeader>
-        ) : (
-          <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
-        )}
-      </Stack>
-
+      <Masthead title="Projects" />
       <Stack
         sx={{
           width: '100%',
