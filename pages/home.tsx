@@ -2,15 +2,16 @@ import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.png'
 import SectionContainer from 'components/layout/SectionContainer'
+import CardRowContainer from 'components/cards/CardRowContainer'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -117,6 +118,7 @@ const Home = () => {
               }}
             >
               <Button variant="contained" color="secondary" size="small">
+                Partner With Us
                 Partner With Us
               </Button>
               <Button
