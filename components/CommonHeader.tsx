@@ -49,13 +49,17 @@ const CommonHeader = () => {
         background: theme.palette.primary.main,
       }}
     >
-      <Toolbar>
+      <Toolbar sx={{ padding: '0 !important' }}>
         <Box
           sx={{
             flexGrow: 1,
             display: { xs: 'flex', lg: 'none' },
             justifyContent: 'space-between',
-            padding: '1.25rem 0 !important',
+            padding: {
+              xs: '1rem 1rem',
+              md: '1rem 2rem',
+              lg: '1.25rem 0',
+            },
           }}
         >
           {/* Hamburger menu when the screen is small. */}
