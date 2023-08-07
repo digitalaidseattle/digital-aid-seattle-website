@@ -64,7 +64,7 @@ const ProjectsPage = () => {
           <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
-      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
+      <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack
           sx={{
             width: '100%',

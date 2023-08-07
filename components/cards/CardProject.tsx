@@ -30,7 +30,12 @@ const CardProject = ({
   imageAlt,
 }: CardProjectProps) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        boxShadow:
+          '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
+      }}
+    >
       <CardContent
         sx={{
           padding: '2rem',
