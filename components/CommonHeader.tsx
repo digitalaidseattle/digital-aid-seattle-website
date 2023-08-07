@@ -43,24 +43,36 @@ const CommonHeader = () => {
   const currentRoute = router.route
 
   return (
-    <AppBar position="static" sx={{ background: theme.palette.primary.main }}>
-      <Toolbar>
+    <AppBar
+      position="static"
+      sx={{
+        background: theme.palette.primary.main,
+      }}
+    >
+      <Toolbar sx={{ padding: '0 !important' }}>
         <Box
           sx={{
             flexGrow: 1,
             display: { xs: 'flex', lg: 'none' },
             justifyContent: 'space-between',
+            padding: {
+              xs: '1rem 1rem',
+              md: '1rem 2rem',
+              lg: '1.25rem 0',
+            },
           }}
         >
           {/* Hamburger menu when the screen is small. */}
           {/* LOGO */}
-          <img
-            src={OSLogo.src}
-            style={{
-              height: '80%',
-              width: '120px',
-            }}
-          />
+          <Link href="/">
+            <img
+              src={OSLogo.src}
+              style={{
+                width: '120px',
+              }}
+              alt="Open Seattle Home"
+            />
+          </Link>
           <IconButton
             size="large"
             aria-label="page-info"
@@ -86,7 +98,7 @@ const CommonHeader = () => {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: 'block', lg: 'none' },
             }}
           >
             {Object.keys(page_mapping).map((name) => (
@@ -114,17 +126,19 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            padding: '1.25rem 2.5rem !important',
           }}
         >
           {/* LOGO */}
-          <img
-            src={OSLogo.src}
-            style={{
-              height: '80%',
-              width: '120px',
-              // margin: '0px 60px 0px 0px',
-            }}
-          />
+          <Link href="/">
+            <img
+              src={OSLogo.src}
+              style={{
+                width: '120px',
+              }}
+              alt="Open Seattle Home"
+            />
+          </Link>
           <Box>
             {Object.keys(page_mapping).map((name) => (
               <Button
