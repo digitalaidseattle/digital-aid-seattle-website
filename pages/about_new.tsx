@@ -153,17 +153,17 @@ const OurValueSection = ({ theme }) => (
       <CardOne
         title="Excellence"
         description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-        icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
+        icon={<MilitaryTechOutlined style={{ color: designColor.white,  fontSize: '40px' }} />}
       />
       <CardOne
         title="Efficacy"
         description="What we do have impact. We apply the pareto principle (and other frameworks) to ensure that we  optimize our efforts from engagement to delivery."
-        icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
+        icon={<AutoGraphOutlined style={{ color: designColor.white, fontSize: '40px' }} />}
       />
       <CardOne
         title="Efficiency"
         description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
-        icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
+        icon={<AccessAlarmOutlined style={{ color: designColor.white,  fontSize: '40px' }} />}
       />
     </CardRowContainer>
   </AboutUsSection>
