@@ -64,35 +64,34 @@ const ProjectsPage = () => {
           <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack
-          sx={{
-            width: '100%',
-            padding: {
-              xs: '2.5rem 1rem 4rem 1rem',
-              md: '2.5rem 2rem 4rem 2rem',
-              lg: '2.5rem 12.5rem 7.5rem 12.5rem',
-            },
-          }}
-        >
-          <CardGridContainer>
-            {projectData.map((project) => (
-              <CardProject
-                key={project.title}
-                title={project.title}
-                partner={project.partner}
-                programAreas={project.programAreas}
-                description={project.description}
-                status={project.status}
-                projectLink={project.projectLink}
-                duration={project.duration}
-                imageSrc={project.imageSrc}
-                imageAlt={project.imageAlt}
-              />
-            ))}
-          </CardGridContainer>
-        </Stack>
-      </SectionContainer>
+      <Stack
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          width: '100%',
+          padding: {
+            xs: '2.5rem 1rem 4rem 1rem',
+            md: '2.5rem 2rem 4rem 2rem',
+            lg: '2.5rem 12.5rem 7.5rem 12.5rem',
+          },
+        }}
+      >
+        <CardGridContainer>
+          {projectData.map((project) => (
+            <CardProject
+              key={project.title}
+              title={project.title}
+              partner={project.partner}
+              programAreas={project.programAreas}
+              description={project.description}
+              status={project.status}
+              projectLink={project.projectLink}
+              duration={project.duration}
+              imageSrc={project.imageSrc}
+              imageAlt={project.imageAlt}
+            />
+          ))}
+        </CardGridContainer>
+      </Stack>
     </>
   )
 }
