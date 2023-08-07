@@ -38,7 +38,7 @@ const CardProject = ({
     >
       <CardContent
         sx={{
-          padding: '2rem',
+          padding: { xs: '2rem 1rem', lg: '2rem' },
           display: 'flex',
           flexDirection: 'column',
           gap: '1.5rem',
