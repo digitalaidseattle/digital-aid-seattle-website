@@ -45,46 +45,39 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '2400px', lg: '2321px' },
+            width: { xs: '600px', md: '2321px' },
             height: 'auto',
-            left: { xs: 0, sm: '50%' },
+            left: { xs: '50%', sm: '50%' },
             top: { xs: 0, sm: '50%' },
             transform: {
-              sm: 'rotate(90deg)translate(-15%, 175%)',
+              sm: 'rotate(90deg)translate(-50%, 25%)',
               md: 'translate(-50%, -50%)',
             },
             opacity: 0.4,
             mixBlendMode: 'overlay',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
           }}
         >
           {isMediumScreen ? (
             <img
               src={HeroLinesMobile.src}
               alt="Hero Lines"
-              style={{
-                // objectFit: 'cover',
-              }}
+              style={
+                {
+                  // objectFit: 'cover',
+                }
+              }
             />
           ) : (
-            <img
-              src={HeroLines.src}
-              alt="Hero Lines"
-              style={{
-              }}
-            />
+            <img src={HeroLines.src} alt="Hero Lines" style={{}} />
           )}
         </Box>
         {/* Hero Content */}
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-            gap: { xs: 4, md: 12 },
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+            gap: { xs:'64px', md: '87px', lg: 4 },
             alignItems: 'center',
-            justifyContent: 'space-between',
             textAlign: { xs: 'center', lg: 'left' },
             paddingX: { xs: '16px', md: '32px', lg: 0 },
             paddingBottom: { xs: '64px', lg: '8rem' },
@@ -98,7 +91,7 @@ const Home = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: { xs: 3, sm: 5 },
+              gap: { xs: 3, sm: '64px' },
               alignItems: { xs: 'center', lg: 'flex-start' },
               textAlign: { xs: 'center', lg: 'left' },
             }}
@@ -119,7 +112,6 @@ const Home = () => {
             >
               <Button variant="contained" color="secondary" size="small">
                 Partner With Us
-                Partner With Us
               </Button>
               <Button
                 variant="contained"
@@ -127,7 +119,7 @@ const Home = () => {
                 size="small"
                 sx={{
                   backgroundColor: '#004138',
-                  marginBottom: { xs: '32px', md: '0px'},
+                  marginBottom: { xs: '32px', md: '0px' },
                 }}
               >
                 Volunteer With Us
@@ -155,7 +147,7 @@ const Home = () => {
               {/* Image Container */}
               <Box
                 sx={{
-                  position: 'relative',
+                  // position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   width: { xs: '275px', md: '424px' },
@@ -233,9 +225,10 @@ const Home = () => {
       <SectionContainer backgroundColor={palette.background.default}>
         <Stack
           sx={{
-            gap: { xs: 3, md: 5 },
+            gap: { xs: 3, lg: 10 },
             justifyContent: 'space-around',
             alignItems: 'center',
+            marginBottom: {sm: 4, lg: 10}
           }}
           maxWidth={'880px'}
         >
@@ -252,7 +245,7 @@ const Home = () => {
           </Typography>
           <Button
             variant="contained"
-            sx={{ backgroundColor: palette.primary.dark }}
+            sx={{ backgroundColor: palette.primary.dark, marginBottom: {sm: 4, lg: 10}}}
           >
             Learn About Us
           </Button>
