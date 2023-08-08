@@ -37,6 +37,7 @@ import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import { useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
@@ -65,7 +66,7 @@ const AboutPage = () => {
       <WhatWeDoSection theme={theme} />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
-      <OurTeamSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <OurTeamSection />
     </Container>
   )
 }
@@ -153,17 +154,29 @@ const OurValueSection = ({ theme }) => (
       <CardOne
         title="Excellence"
         description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-        icon={<MilitaryTechOutlined style={{ color: designColor.white,  fontSize: '40px' }} />}
+        icon={
+          <MilitaryTechOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
       <CardOne
         title="Efficacy"
         description="What we do have impact. We apply the pareto principle (and other frameworks) to ensure that we  optimize our efforts from engagement to delivery."
-        icon={<AutoGraphOutlined style={{ color: designColor.white, fontSize: '40px' }} />}
+        icon={
+          <AutoGraphOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
       <CardOne
         title="Efficiency"
         description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
-        icon={<AccessAlarmOutlined style={{ color: designColor.white,  fontSize: '40px' }} />}
+        icon={
+          <AccessAlarmOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
     </CardRowContainer>
   </AboutUsSection>
@@ -180,63 +193,76 @@ const OurVisionSection = ({ theme }) => (
   </AboutUsSection>
 )
 
-const OurTeamSection = ({ theme, extraSmallScreen }) => (
-  <AboutUsSection backgroundColor={theme.palette.background.default}>
-    <Typography variant="headlineMedium">Our team</Typography>
-    <Typography variant="bodyLarge" align="center" display="block">
-      The Open Seattle cadre is made up of highly skilled and committed
-      volunteers, dedicated to serving the greater Seattle area.
-    </Typography>
-    <Typography variant="titleMedium" align="center" display="block">
-      We’ve worked in tech and management for companies like:
-    </Typography>
-    <Grid container spacing={2}>
-      {companiesList.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={item.icon}
-            listText={!extraSmallScreen && item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Typography variant="titleMedium" align="center" display="block">
-      We collectively hold experience in:
-    </Typography>
-    <Grid container spacing={2}>
-      {experienceContent.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={!extraSmallScreen && item.icon}
-            listText={item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Typography variant="titleMedium" align="center" display="block">
-      And we have degrees in:
-    </Typography>
-    <Grid container spacing={2}>
-      {degreeContent.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={!extraSmallScreen && item.icon}
-            listText={item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Box textAlign="center">
-      <Button
-        variant="contained"
-        href={'/project_individual'}
-        sx={{ width: 'fit-content' }}
-      >
-        View our Cadre
-      </Button>
-    </Box>
-  </AboutUsSection>
-)
+const OurTeamSection = () => {
+  const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const smallScreen = useMediaQuery(theme.breakpoints.only('sm'))
+  const mediumScreen = useMediaQuery(theme.breakpoints.only('md'))
+  const [isMediumOrSmallerScreen, setMedOrSmall] = useState(false)
+  useEffect(() => {
+    setMedOrSmall(smallScreen || mediumScreen || extraSmallScreen)
+  }, [extraSmallScreen, smallScreen, mediumScreen])
+
+  return (
+    <AboutUsSection backgroundColor={theme.palette.background.default}>
+      <Typography variant="headlineMedium">Our team</Typography>
+      <Typography variant="bodyLarge" align="center" display="block">
+        The Open Seattle cadre is made up of highly skilled and committed
+        volunteers, dedicated to serving the greater Seattle area.
+      </Typography>
+      <Typography variant="titleMedium" align="center" display="block">
+        We’ve worked in tech and management for companies like:
+      </Typography>
+      <Grid container spacing={2}>
+        {companiesList.map((item) => (
+          <Grid item xs={6} md={4} key={item.label}>
+            <ListItemWithIcon
+              listIcon={item.icon}
+              listText={!extraSmallScreen && item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="titleMedium" align="center" display="block">
+        We collectively hold experience in:
+      </Typography>
+      <Grid container spacing={2}>
+        {experienceContent.map((item) => (
+          <Grid item xs={6} md={6} lg={4} key={item.label}>
+            <ListItemWithIcon
+              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              listIcon={!extraSmallScreen && item.icon}
+              listText={item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="titleMedium" align="center" display="block">
+        And we have degrees in:
+      </Typography>
+      <Grid container spacing={2}>
+        {degreeContent.map((item) => (
+          <Grid item xs={6} md={6} lg={4} key={item.label}>
+            <ListItemWithIcon
+              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              listIcon={!extraSmallScreen && item.icon}
+              listText={item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Box textAlign="center">
+        <Button
+          variant="contained"
+          href={'/project_individual'}
+          sx={{ width: 'fit-content' }}
+        >
+          View our Cadre
+        </Button>
+      </Box>
+    </AboutUsSection>
+  )
+}
 
 const companiesList = [
   {
