@@ -37,7 +37,6 @@ import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
-import { useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 
 import AboutUsImage from '../assets/aboutUs.png'
@@ -199,12 +198,7 @@ const OurVisionSection = ({ theme }) => (
 const OurTeamSection = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const smallScreen = useMediaQuery(theme.breakpoints.only('sm'))
-  const mediumScreen = useMediaQuery(theme.breakpoints.only('md'))
-  const [isMediumOrSmallerScreen, setMedOrSmall] = useState(false)
-  useEffect(() => {
-    setMedOrSmall(smallScreen || mediumScreen || extraSmallScreen)
-  }, [extraSmallScreen, smallScreen, mediumScreen])
+  const isMediumOrSmallerScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <AboutUsSection backgroundColor={theme.palette.background.default}>
