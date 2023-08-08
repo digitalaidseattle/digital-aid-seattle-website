@@ -86,9 +86,9 @@ const AboutUsSection = ({ backgroundColor, children }) => (
 )
 
 const AboutUsHeroSection = () => {
-  const theme = useTheme();
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'));
-  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
   return (
     <SectionContainer backgroundColor={theme.palette.primary.main}>
       <Box
@@ -164,7 +164,7 @@ const OurValueSection = ({ theme }) => (
       />
       <CardOne
         title="Efficacy"
-        description="What we do have impact. We apply the pareto principle (and other frameworks) to ensure that we  optimize our efforts from engagement to delivery."
+        description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
         icon={
           <AutoGraphOutlined
             style={{ color: designColor.white, fontSize: '40px' }}
