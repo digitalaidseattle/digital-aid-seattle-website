@@ -83,7 +83,7 @@ const CommonHeader = () => {
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' },
+              display: { xs: 'block', md: 'block', lg: 'none' },
             }}
           >
             {Object.keys(page_mapping).map((name) => (
@@ -109,7 +109,7 @@ const CommonHeader = () => {
         <Container disableGutters
           sx={{
             flexGrow: 1,
-            display: { xs: 'none', lg: 'flex' },
+            display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
             paddingLeft: '2rem',
             paddingRight: '2rem'
