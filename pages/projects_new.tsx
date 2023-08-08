@@ -1,11 +1,10 @@
-import { Typography, Stack, useTheme, styled } from '@mui/material'
+import { Typography, Stack, useTheme, styled, Box } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import ProjectCadreImage from 'assets/project-image.png'
-import SectionContainer from 'components/layout/SectionContainer'
 
 type CardProjectProps = {
   title: string
@@ -64,34 +63,44 @@ const ProjectsPage = () => {
           <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
-      <Stack
+      <Box
         sx={{
-          backgroundColor: theme.palette.background.default,
           width: '100%',
-          padding: {
-            xs: '2.5rem 1rem 4rem 1rem',
-            md: '2.5rem 2rem 4rem 2rem',
-            lg: '2.5rem 12.5rem 7.5rem 12.5rem',
-          },
+          backgroundColor: theme.palette.background.default,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <CardGridContainer>
-          {projectData.map((project) => (
-            <CardProject
-              key={project.title}
-              title={project.title}
-              partner={project.partner}
-              programAreas={project.programAreas}
-              description={project.description}
-              status={project.status}
-              projectLink={project.projectLink}
-              duration={project.duration}
-              imageSrc={project.imageSrc}
-              imageAlt={project.imageAlt}
-            />
-          ))}
-        </CardGridContainer>
-      </Stack>
+        <Stack
+          sx={{
+            paddingTop: '2.5rem',
+            paddingBottom: {
+              xs: '3rem',
+              md: '4rem',
+              lg: '7.5rem',
+            },
+          }}
+          maxWidth={'880px'}
+        >
+          <CardGridContainer>
+            {projectData.map((project) => (
+              <CardProject
+                key={project.title}
+                title={project.title}
+                partner={project.partner}
+                programAreas={project.programAreas}
+                description={project.description}
+                status={project.status}
+                projectLink={project.projectLink}
+                duration={project.duration}
+                imageSrc={project.imageSrc}
+                imageAlt={project.imageAlt}
+              />
+            ))}
+          </CardGridContainer>
+        </Stack>
+      </Box>
     </>
   )
 }
