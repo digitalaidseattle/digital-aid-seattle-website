@@ -1,23 +1,18 @@
 /*
-* @2023 Open Seattle
-*/
+ * @2023 Open Seattle
+ */
 
 import { useEffect, useState } from 'react'
-import {
-  Container,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Container, Stack, Typography, useTheme } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
 import CardEvent from 'components/cards/CardEvent'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { osEventsService } from './api/EventsService'
+import SectionContainer from 'components/layout/SectionContainer'
 
 type MastheadProps = {
   title: string
 }
-
-// REVIEW: Consider promoting
 
 const Masthead = ({ title }: MastheadProps) => {
   const theme = useTheme()
@@ -29,7 +24,7 @@ const Masthead = ({ title }: MastheadProps) => {
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
-        paddingY: '5rem'
+        paddingY: '5rem',
       }}
       maxWidth={false}
     >
@@ -46,35 +41,37 @@ const Masthead = ({ title }: MastheadProps) => {
       </Typography>
     </Container>
   )
-
 }
 
 const EventsPage = () => {
   const theme = useTheme()
   const palette = theme.palette
 
-  const title = 'Events';
-  const [events, setEvents] = useState([]);
+  const title = 'Events'
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
-    setEvents(osEventsService.getActiveEvents());
-  }, []);
+    setEvents(osEventsService.getActiveEvents())
+  }, [])
 
   return (
     <div>
       <Masthead title="Events" />
-      <Container
+      <SectionContainer
         sx={{
-          backgroundColor: palette.primary.contrastText,
-          padding: { md: '5rem' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
         maxWidth={false}
       >
-        <CardRowContainer>
-          {events.map(event => <CardEvent key={event.title} event={event} />)}
-        </CardRowContainer>
-      </Container>
-    </div >
+        <Stack gap={{ xs: '2rem', md: '2rem' }} maxWidth={'880px'}>
+          {events.map((event) => (
+            <CardEvent key={event.title} event={event} />
+          ))}
+        </Stack>
+      </SectionContainer>
+    </div>
   )
 }
 

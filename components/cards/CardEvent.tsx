@@ -14,9 +14,7 @@ type CardEventProps = {
   event: OSEvent
 }
 
-const CardEvent = ({
-  event
-}: CardEventProps) => {
+const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
