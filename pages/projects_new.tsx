@@ -5,6 +5,7 @@ import CardProject from 'components/cards/CardProject'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import ProjectCadreImage from 'assets/project-image.png'
+import SectionContainer from 'components/layout/SectionContainer'
 
 type CardProjectProps = {
   title: string
@@ -74,6 +75,11 @@ const ProjectsPage = () => {
       >
         <Stack
           sx={{
+            paddingX: {
+              xs: '1rem',
+              md: '2rem',
+              lg: '0',
+            },
             paddingTop: '2.5rem',
             paddingBottom: {
               xs: '3rem',
