@@ -54,7 +54,6 @@ import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 
 const AboutPage = () => {
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
     <Container
@@ -62,7 +61,7 @@ const AboutPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <AboutUsHeroSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <AboutUsHeroSection />
       <WhatWeDoSection theme={theme} />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
@@ -87,55 +86,59 @@ const AboutUsSection = ({ backgroundColor, children }) => (
   </SectionContainer>
 )
 
-const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
-  <SectionContainer backgroundColor={theme.palette.primary.main}>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', lg: 'row' },
-        alignItems: 'center',
-        gap: { xs: 4, md: '40px' },
-      }}
-      maxWidth={'880px'}
-    >
+const AboutUsHeroSection = () => {
+  const theme = useTheme();
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'));
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  return (
+    <SectionContainer backgroundColor={theme.palette.primary.main}>
       <Box
         sx={{
-          textAlign: 'left',
-          width: '100%',
-          maxWidth: '418px',
           display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
+          flexDirection: { xs: 'column', lg: 'row' },
+          alignItems: 'center',
+          gap: { xs: 4, md: '40px' },
         }}
       >
-        <Typography
-          variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
-          sx={{ color: theme.palette.primary.contrastText }}
-        >
-          About us
-        </Typography>
-        <Typography
-          variant="bodyLarge"
+        <Box
           sx={{
-            color: theme.palette.primary.contrastText,
+            textAlign: 'left',
+            width: '100%',
+            maxWidth: largeScreen ? '418px' : '950px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2rem',
           }}
         >
-          Open Seattle comprises a group of seasoned professionals with
-          experience in web development, software engineering, digital strategy,
-          visual and content design, and more. We leverage this vast experience
-          to transform the nonprofit sector—to make it more efficient,
-          effective, and accessible to all.
-        </Typography>
+          <Typography
+            variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            About us
+          </Typography>
+          <Typography
+            variant="bodyLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Open Seattle comprises a group of seasoned professionals with
+            experience in web development, software engineering, digital
+            strategy, visual and content design, and more. We leverage this vast
+            experience to transform the nonprofit sector—to make it more
+            efficient, effective, and accessible to all.
+          </Typography>
+        </Box>
+        <img
+          src={AboutUsImage.src}
+          alt="About Us page graphic"
+          width="418px"
+          style={{ objectFit: 'cover' }}
+        />
       </Box>
-      <img
-        src={AboutUsImage.src}
-        alt="About Us page graphic"
-        width="418px"
-        style={{ objectFit: 'cover' }}
-      />
-    </Box>
-  </SectionContainer>
-)
+    </SectionContainer>
+  )
+}
 
 const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
