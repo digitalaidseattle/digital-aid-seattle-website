@@ -21,6 +21,7 @@ type SectionHeadProps = {
 const SectionHead = ({ title }: SectionHeadProps) => {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery('(max-width:600px)')
+    
     return (
         <Typography
             variant={isSmallScreen ? 'headlineSmall' : 'headlineMedium'}
