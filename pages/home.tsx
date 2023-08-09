@@ -88,7 +88,7 @@ const Home = () => {
             paddingX: { xs: '16px', md: '32px', lg: 0 },
             paddingBottom: { xs: '64px', lg: '8rem' },
           }}
-          maxWidth={'880px'}
+          maxWidth={'1000px'}
         >
           {/* Heading and CTA Buttons */}
           <Box
@@ -235,7 +235,7 @@ const Home = () => {
             justifyContent: 'space-around',
             alignItems: 'center',
           }}
-          maxWidth={'880px'}
+          maxWidth={'1000px'}
         >
           <Typography variant="headlineLarge">Our Mission</Typography>
           <Typography

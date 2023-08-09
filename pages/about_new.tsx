@@ -79,7 +79,7 @@ const AboutUsSection = ({ backgroundColor, children }) => (
       sx={{
         textAlign: 'center',
       }}
-      maxWidth={'880px'}
+      maxWidth={'1000px'}
     >
       {children}
     </Stack>
@@ -95,7 +95,7 @@ const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
         alignItems: 'center',
         gap: { xs: 4, md: '40px' },
       }}
-      maxWidth={'880px'}
+      maxWidth={'1000px'}
     >
       <Box
         sx={{
