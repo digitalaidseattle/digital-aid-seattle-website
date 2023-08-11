@@ -1,10 +1,11 @@
-import { Typography, Stack, useTheme, styled } from '@mui/material'
+import { Typography, Stack, useTheme, styled, Box } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-import Placeholder from '../assets/placeholder-img.png'
+import ProjectCadreImage from 'assets/project-image.png'
+import SectionContainer from 'components/layout/SectionContainer'
 
 type CardProjectProps = {
   title: string
@@ -13,7 +14,7 @@ type CardProjectProps = {
   description: string
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
-  duration: { start: string; end: string }
+  duration?: { start: string; end: string }
   imageSrc: string
   imageAlt: string
 }
@@ -37,52 +38,15 @@ const ProjectsPage = () => {
 
   const projectData: CardProjectProps[] = [
     {
-      title: 'Seattle Humane Society',
-      partner: 'City of Bellevue',
-      programAreas: ['Animals'],
+      title: 'The Cadre',
+      partner: 'Open Seattle',
+      programAreas: ['Civic technology'],
       description:
-        'Seattle Humane has survived and thrived for over 125 years, always leading with compassion as we care for pets and the people who love them.',
-      status: 'recruiting' as 'recruiting',
-      projectLink: '',
-      duration: { start: 'Jun 12', end: 'Nov 1' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'CiviForm',
-      partner: 'City of Seattle',
-      programAreas: ['Civic equity'],
-      description:
-        'A simpler way to access & administer government benefits: CiviForm makes it easier to access public assistance by consolidating applications and saving residents time.',
+        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
       status: 'active' as 'active',
-      projectLink: '',
-      duration: { start: 'Apr 2', end: 'Aug 10' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'Clearviction App',
-      partner: 'Clearviction',
-      programAreas: ['Civic equity'],
-      description:
-        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
-      status: 'complete' as 'complete',
-      projectLink: '',
-      duration: { start: 'Jan 1', end: 'Feb 15' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
-    },
-    {
-      title: 'Clearviction App',
-      partner: 'Clearviction',
-      programAreas: ['Civic equity'],
-      description:
-        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
-      status: 'complete' as 'complete',
-      projectLink: '',
-      duration: { start: 'Jan 1', end: 'Feb 15' },
-      imageSrc: Placeholder.src,
-      imageAlt: 'placeholder',
+      projectLink: '/project_cadre',
+      imageSrc: ProjectCadreImage.src,
+      imageAlt: 'Open seattle logo',
     },
   ]
 
@@ -100,35 +64,49 @@ const ProjectsPage = () => {
           <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
         )}
       </Stack>
-
-      <Stack
+      <Box
         sx={{
           width: '100%',
-          backgroundColor: theme.palette.primary.contrastText,
-          padding: {
-            xs: '2.5rem 1rem 4rem 1rem',
-            md: '2.5rem 2rem 4rem 2rem',
-            lg: '2.5rem 12.5rem 7.5rem 12.5rem',
-          },
+          backgroundColor: theme.palette.background.default,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <CardGridContainer>
-          {projectData.map((project) => (
-            <CardProject
-              key={project.title}
-              title={project.title}
-              partner={project.partner}
-              programAreas={project.programAreas}
-              description={project.description}
-              status={project.status}
-              projectLink={project.projectLink}
-              duration={project.duration}
-              imageSrc={project.imageSrc}
-              imageAlt={project.imageAlt}
-            />
-          ))}
-        </CardGridContainer>
-      </Stack>
+        <Stack
+          sx={{
+            paddingX: {
+              xs: '1rem',
+              md: '2rem',
+              lg: '0',
+            },
+            paddingTop: '2.5rem',
+            paddingBottom: {
+              xs: '3rem',
+              md: '4rem',
+              lg: '7.5rem',
+            },
+          }}
+          maxWidth={'880px'}
+        >
+          <CardGridContainer>
+            {projectData.map((project) => (
+              <CardProject
+                key={project.title}
+                title={project.title}
+                partner={project.partner}
+                programAreas={project.programAreas}
+                description={project.description}
+                status={project.status}
+                projectLink={project.projectLink}
+                duration={project.duration}
+                imageSrc={project.imageSrc}
+                imageAlt={project.imageAlt}
+              />
+            ))}
+          </CardGridContainer>
+        </Stack>
+      </Box>
     </>
   )
 }
