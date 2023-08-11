@@ -4,7 +4,9 @@
 
 import { useEffect, useState } from 'react'
 import {
+  Box,
   Container,
+  Stack,
   Typography,
   useTheme,
 } from '@mui/material'
@@ -12,6 +14,7 @@ import { withBasicLayout } from 'components/layouts'
 import CardEvent from 'components/cards/CardEvent'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import { osEventsService } from './api/EventsService'
+import CardOne from 'components/cards/CardOne'
 
 type MastheadProps = {
   title: string
@@ -57,7 +60,7 @@ const EventsPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    setEvents(osEventsService.getActiveEvents());
+      setEvents(osEventsService.getActiveEvents());
   }, []);
 
   return (
@@ -70,9 +73,23 @@ const EventsPage = () => {
         }}
         maxWidth={false}
       >
-        <CardRowContainer>
-          {events.map(event => <CardEvent key={event.title} event={event} />)}
-        </CardRowContainer>
+        {(events.length > 0) &&
+          <CardRowContainer>
+            {events.map(event => <CardEvent key={event.title} event={event} />)}
+          </CardRowContainer>}
+        {(events.length === 0) &&
+          <Stack
+            sx={{
+              backgroundColor: theme.palette.primary.contrastText,
+              alignItems: 'center',
+              padding: {
+                xs: '2.5rem 1rem 4rem 1rem',
+                md: '2.5rem 2rem 4rem 2rem',
+                lg: '2.5rem 12.5rem 7.5rem 12.5rem',
+              },
+            }}>
+            There are currently no events scheduled, please check back in the future.
+          </Stack>}
       </Container>
     </div >
   )
