@@ -1,10 +1,10 @@
 /*
 * @2023 Open Seattle
 */
-import { Box, Container, Link, Stack, Typography, useTheme } from '@mui/material'
+import { Box, Container, Link, Typography, useTheme } from '@mui/material'
+import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ErrorImage from '../assets/404-error.png'
-import SectionContainer from 'components/layout/SectionContainer'
 
 function Page404() {
   const theme = useTheme()
@@ -37,13 +37,14 @@ function Page404() {
             >
               <img
                 src={ErrorImage.src}
+                title="Error - 404"
                 alt="404 Error graphic"
                 width="418px"
                 style={{ objectFit: 'cover' }}
               />
             </Box>
-            <Container id="aasd">
-              <Typography variant="bodyLarge">
+            <Container id="aasd" sx={{textAlign: 'center'}}>
+              <Typography variant="bodyLarge" >
                 {"The page you're trying to access couldn't be located. Please click here to return to our "}
                 <Link
                   href="/"
