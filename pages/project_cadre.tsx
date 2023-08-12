@@ -1,5 +1,5 @@
 import DataObjectIcon from '@mui/icons-material/DataObject'
-import { Box, Button,Stack, styled, Typography, useTheme } from '@mui/material'
+import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
@@ -11,7 +11,7 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
 const ProjectIndividualPage = () => {
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const Subheader = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
@@ -19,6 +19,7 @@ const ProjectIndividualPage = () => {
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
+    position: 'relative',
     [theme.breakpoints.up('xs')]: {
       paddingTop: '4rem',
       paddingLeft: '1rem',
@@ -31,8 +32,8 @@ const ProjectIndividualPage = () => {
     },
     [theme.breakpoints.up('lg')]: {
       paddingTop: '5rem',
-      paddingLeft: '12.5rem',
-      paddingRight: '12.5rem',
+      margin: '0 auto',
+      maxWidth: theme.breakpoints.values.lg,
     },
   }))
 
@@ -99,13 +100,7 @@ const ProjectIndividualPage = () => {
           }}
         ></Box>
 
-        <Box
-          sx={{
-            position: 'relative',
-            margin: { sm: '0 2rem', lg: '0 12.5rem' },
-            paddingTop: '6rem',
-          }}
-        >
+        <Section>
           <Box
             sx={{
               display: 'flex',
@@ -155,7 +150,7 @@ const ProjectIndividualPage = () => {
               }}
             />
           </Box>
-        </Box>
+        </Section>
       </>
     )
   }

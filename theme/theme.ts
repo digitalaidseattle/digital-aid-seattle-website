@@ -115,7 +115,7 @@ export const theme = createTheme({
       xs: 0,
       sm: 320,
       md: 600,
-      lg: 950,
+      lg: 960,
       xl: 1536, // currently unused
     },
   },
