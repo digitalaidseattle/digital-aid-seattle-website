@@ -3,11 +3,10 @@
 */
 
 import {
-  Box,
   Container,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
 import CardRowContainer from 'components/cards/CardRowContainer'
@@ -15,7 +14,6 @@ import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
 
 import { osEventsService } from './api/EventsService'
-import CardOne from 'components/cards/CardOne'
 
 type MastheadProps = {
   title: string
