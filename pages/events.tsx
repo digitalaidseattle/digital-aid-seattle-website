@@ -3,17 +3,18 @@
  */
 
 import {
+  Box,
   Container,
+  Stack,
   Typography,
   useTheme,
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
 
-import { osEventsService } from './api/EventsService'
 import SectionContainer from 'components/layout/SectionContainer'
+import { osEventsService } from './api/EventsService'
 
 type MastheadProps = {
   title: string
@@ -62,19 +63,21 @@ const EventsPage = () => {
   return (
     <div>
       <Masthead title="Events" />
-      <SectionContainer
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-        maxWidth={false}
-      >
-        <Stack gap={{ xs: '2rem', md: '2rem' }} maxWidth={'880px'}>
-          {events.map((event) => (
-            <CardEvent key={event.title} event={event} />
-          ))}
-        </Stack>
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          maxWidth={'880px'}
+        >
+          <Stack gap={{ xs: '2rem', md: '2rem' }} maxWidth={'880px'}>
+            {events.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
+          </Stack>
+        </Box>
       </SectionContainer>
     </div>
   )
