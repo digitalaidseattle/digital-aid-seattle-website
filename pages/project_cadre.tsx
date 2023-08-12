@@ -1,14 +1,13 @@
-import { Typography, useTheme, Stack, styled, Box, Button } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
-import StateBadge from 'components/cards/StateBadge'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
-import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import DataObjectIcon from '@mui/icons-material/DataObject'
+import { Box, Button,Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
-import DataObjectIcon from '@mui/icons-material/DataObject'
 import ProjectPlaceholder from 'assets/project-image.png'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
+import StateBadge from 'components/cards/StateBadge'
+import { withBasicLayout } from 'components/layouts'
+import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
 const ProjectIndividualPage = () => {
   const theme = useTheme()
@@ -224,11 +223,6 @@ const ProjectIndividualPage = () => {
               display: 'grid',
               gridAutoFlow: 'columns',
               gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-              // gridTemplateColumns: {
-              //   xs: '1fr',
-              //   md: 'min-content auto',
-              //   lg: 'repeat(4, 1fr)',
-              // },
               alignItems: 'center',
               justifyContent: 'center',
               gap: '2rem',

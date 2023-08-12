@@ -1,6 +1,7 @@
-import Stack from '@mui/material/Stack'
 import { SelectChangeEvent } from '@mui/material/Select'
+import Stack from '@mui/material/Stack'
 import { useState } from 'react'
+
 import FilterDropdown from './FilterDropdown'
 
 const FilterContainer = () => {
