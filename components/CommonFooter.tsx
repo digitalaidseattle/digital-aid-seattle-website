@@ -3,7 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Container, Grid, Box, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
