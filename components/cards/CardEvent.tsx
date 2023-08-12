@@ -1,13 +1,12 @@
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import Box from '@mui/material/Box'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { OSEvent } from 'pages/api/EventsService'
 
 type CardEventProps = {

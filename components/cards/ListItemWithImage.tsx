@@ -1,9 +1,9 @@
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import ListItem from '@mui/material/ListItem'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemText from '@mui/material/ListItemText'
+import Typography from '@mui/material/Typography'
 
 type ListItemWithImageProps = {
   listText: string

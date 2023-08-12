@@ -1,9 +1,10 @@
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+
 import StateBadge from './StateBadge'
 
 type CardProjectProps = {
@@ -13,7 +14,7 @@ type CardProjectProps = {
   description: string
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
-  duration: { start: string; end: string }
+  duration?: { start: string; end: string }
   imageSrc: string
   imageAlt: string
 }
@@ -30,10 +31,15 @@ const CardProject = ({
   imageAlt,
 }: CardProjectProps) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        boxShadow:
+          '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
+      }}
+    >
       <CardContent
         sx={{
-          padding: '2rem',
+          padding: { xs: '2rem 1rem', lg: '2rem' },
           display: 'flex',
           flexDirection: 'column',
           gap: '1.5rem',
@@ -83,8 +89,9 @@ const CardProject = ({
             spacing="1rem"
           >
             <StateBadge state={status} />
+
             <Typography variant="labelMedium">
-              {duration.start} - {duration.end}
+              {duration ? `${duration.start} - ${duration.end}` : 'Ongoing'}
             </Typography>
           </Stack>
         </Stack>
