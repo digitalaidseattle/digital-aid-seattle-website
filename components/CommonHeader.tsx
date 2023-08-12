@@ -10,10 +10,10 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
-import useMediaQuery from '@mui/material/useMediaQuery'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
