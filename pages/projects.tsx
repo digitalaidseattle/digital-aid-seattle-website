@@ -1,11 +1,10 @@
-import { Typography, Stack, useTheme, styled, Box } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
+import { Box,Stack, styled, Typography, useTheme } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import ProjectCadreImage from 'assets/project-image.png'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import useMediaQuery from '@mui/material/useMediaQuery'
-
-import ProjectCadreImage from 'assets/project-image.png'
 import SectionContainer from 'components/layout/SectionContainer'
+import { withBasicLayout } from 'components/layouts'
 
 type CardProjectProps = {
   title: string
