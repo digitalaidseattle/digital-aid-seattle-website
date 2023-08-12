@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
-import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
+import SearchIcon from '@mui/icons-material/Search'
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-
 import { useTheme } from '@mui/material/styles'
+import TextField from '@mui/material/TextField'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { useEffect, useRef,useState } from 'react'
 
 const SearchToggle = () => {
   const theme = useTheme()

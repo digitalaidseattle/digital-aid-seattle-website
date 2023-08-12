@@ -2,7 +2,10 @@
 * @2023 Open Seattle
 */
 
-import { Container, useTheme } from '@mui/material'
+import {
+  Container,
+  useTheme
+} from '@mui/material'
 import Masthead from 'components/Masthead'
 import CardEvent from 'components/cards/CardEvent'
 import CardRowContainer from 'components/cards/CardRowContainer'

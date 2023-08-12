@@ -3,7 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Container, Grid, Box, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
@@ -70,8 +70,8 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={4}>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners_new" name="Partner" />
-      <LinkSubItem url="/volunteers_new" name="Volunteer" />
+      <LinkSubItem url="/partners" name="Partner" />
+      <LinkSubItem url="/volunteers" name="Volunteer" />
     </GridItem>
 
     <GridItem md={1} display="flex" flexDirection="row">
@@ -166,9 +166,9 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Work with us</FooterItemTitle>
 
-          <LinkSubItem url="/partners_new" name="Partner" />
+          <LinkSubItem url="/partners" name="Partner" />
 
-          <LinkSubItem url="/volunteers_new" name="Volunteer" />
+          <LinkSubItem url="/volunteers" name="Volunteer" />
         </Box>
 
         <Box>
@@ -230,8 +230,8 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>
       <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners_new" name="Partner" />
-      <LinkSubItem url="/volunteers_new" name="Volunteer" />
+      <LinkSubItem url="/partners" name="Partner" />
+      <LinkSubItem url="/volunteers" name="Volunteer" />
     </GridItem>
 
     <GridItem>
