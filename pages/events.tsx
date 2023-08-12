@@ -2,7 +2,6 @@
 * @2023 Open Seattle
 */
 
-import { useEffect, useState } from 'react'
 import {
   Box,
   Container,
@@ -10,9 +9,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
 import CardEvent from 'components/cards/CardEvent'
 import CardRowContainer from 'components/cards/CardRowContainer'
+import { withBasicLayout } from 'components/layouts'
+import { useEffect, useState } from 'react'
+
 import { osEventsService } from './api/EventsService'
 import CardOne from 'components/cards/CardOne'
 

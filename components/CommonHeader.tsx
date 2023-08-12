@@ -10,19 +10,19 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
-import useMediaQuery from '@mui/material/useMediaQuery'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
 const page_mapping = {
-  About: '/about_new',
-  Projects: '/projects_new',
-  Partners: '/partners_new',
-  Volunteer: '/volunteers_new',
-  Events: '/events_new',
+  About: '/about',
+  Projects: '/projects',
+  Partners: '/partners',
+  Volunteer: '/volunteers',
+  Events: '/events',
 }
 
 const CommonHeader = () => {

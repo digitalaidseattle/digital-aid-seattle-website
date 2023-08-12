@@ -53,4 +53,4 @@ class OSEventService {
 
 const osEventsService = new OSEventService();
 
-export { OSEvent, OsEventTime, osEventsService };
+export { OSEvent, osEventsService,OsEventTime };
