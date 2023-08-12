@@ -16,10 +16,12 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
-import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
-import { withBasicLayout } from 'components/layouts'
-import SectionContainer from 'components/layout/SectionContainer'
 import CardGridContainer from 'components/cards/CardGridContainer'
+import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
+import SectionContainer from 'components/layout/SectionContainer'
+import { withBasicLayout } from 'components/layouts'
+import { designColor } from 'theme/theme'
+import PartnerImage from '../assets/partnerWithUs.png'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -158,6 +160,7 @@ const PartnersPage = () => {
           <CardGridContainer columns={4}>
             {criteriaContent.map((item) => (
               <CardOne
+                key={item.title}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
@@ -168,6 +171,7 @@ const PartnersPage = () => {
           <CardGridContainer columns={3}>
             {provideContent.map((item) => (
               <CardOne
+                key={item.title}
                 title={item.title}
                 description={item.description}
                 icon={item.icon}
