@@ -93,7 +93,7 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
-            height: '25rem',
+            height: { md: '13.625rem', lg: '25rem' },
             color: theme.palette.primary.contrastText,
             position: 'absolute',
             width: '100%',
@@ -109,7 +109,6 @@ const ProjectIndividualPage = () => {
               gap: '2rem',
               justifyContent: 'space-between',
               width: '100%',
-              minHeight: '25rem',
             }}
           >
             <Stack spacing="3rem">
@@ -139,16 +138,18 @@ const ProjectIndividualPage = () => {
               </Stack>
             </Stack>
 
-            <img
-              src={ProjectPlaceholder.src}
-              style={{
-                width: '25rem',
-                display: 'block',
-                borderRadius: '20px',
-                boxShadow:
-                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-              }}
-            />
+            <Box sx={{ minWidth: { md: '16.5rem', lg: '25rem' } }}>
+              <img
+                src={ProjectPlaceholder.src}
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  borderRadius: '20px',
+                  boxShadow:
+                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                }}
+              />
+            </Box>
           </Box>
         </Section>
       </>
