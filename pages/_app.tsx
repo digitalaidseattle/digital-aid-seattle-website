@@ -6,6 +6,7 @@ import { AppProps } from 'next/app'
 import { theme } from 'theme/theme'
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log(pageProps)
   return (
     <>
       <ThemeProvider theme={theme}>
