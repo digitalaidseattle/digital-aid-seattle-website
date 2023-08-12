@@ -1,14 +1,13 @@
-import { Typography, useTheme, Stack, styled, Box, Button } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
-import StateBadge from 'components/cards/StateBadge'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
-import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import DataObjectIcon from '@mui/icons-material/DataObject'
+import { Box, Button,Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
-import DataObjectIcon from '@mui/icons-material/DataObject'
 import ProjectPlaceholder from 'assets/project-image.png'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
+import StateBadge from 'components/cards/StateBadge'
+import { withBasicLayout } from 'components/layouts'
+import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
 const ProjectIndividualPage = () => {
   const theme = useTheme()

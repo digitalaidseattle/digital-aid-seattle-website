@@ -1,11 +1,11 @@
 import {
   AccountBalanceOutlined,
-  VolunteerActivismOutlined,
-  DataObjectOutlined,
-  ConstructionOutlined,
   AdminPanelSettingsOutlined,
+  ConstructionOutlined,
+  DataObjectOutlined,
   DevicesOutlined,
   HandymanOutlined,
+  VolunteerActivismOutlined,
 } from '@mui/icons-material'
 import {
   Box,
@@ -16,9 +16,10 @@ import {
   useTheme,
 } from '@mui/material'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
-import { designColor } from 'theme/theme'
-import PartnerImage from '../assets/partnerWithUs.png'
 import { withBasicLayout } from 'components/layouts'
+import { designColor } from 'theme/theme'
+
+import PartnerImage from '../assets/partnerWithUs.png'
 
 /* eslint-disable @next/next/no-img-element */
 

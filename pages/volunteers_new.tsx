@@ -27,13 +27,13 @@ import {
 } from '@mui/material'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
+import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import Link from 'next/link'
-import SectionContainer from 'components/layout/SectionContainer'
+import { designColor } from 'theme/theme'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { designColor } from 'theme/theme'
 
 /* eslint-disable @next/next/no-img-element */
 
