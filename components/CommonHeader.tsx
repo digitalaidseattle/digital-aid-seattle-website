@@ -29,8 +29,6 @@ const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
-  const isSmallScreen = useMediaQuery('(max-width:700px)')
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -122,9 +120,10 @@ const CommonHeader = () => {
         </Box>
         {/* Menu items that are shown on desktop */}
         <Container
+          disableGutters
           sx={{
             flexGrow: 1,
-            display: { xs: 'none', lg: 'flex' },
+            display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
             padding: '1.25rem 2.5rem !important',
           }}

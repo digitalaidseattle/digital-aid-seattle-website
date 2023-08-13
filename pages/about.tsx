@@ -53,7 +53,6 @@ import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 
 const AboutPage = () => {
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
     <Container
@@ -61,11 +60,11 @@ const AboutPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <AboutUsHeroSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <AboutUsHeroSection />
       <WhatWeDoSection theme={theme} />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
-      <OurTeamSection theme={theme} extraSmallScreen={extraSmallScreen} />
+      <OurTeamSection />
     </Container>
   )
 }
@@ -86,55 +85,59 @@ const AboutUsSection = ({ backgroundColor, children }) => (
   </SectionContainer>
 )
 
-const AboutUsHeroSection = ({ theme, extraSmallScreen }) => (
-  <SectionContainer backgroundColor={theme.palette.primary.main}>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', lg: 'row' },
-        alignItems: 'center',
-        gap: { xs: 4, md: '40px' },
-      }}
-      maxWidth={'880px'}
-    >
+const AboutUsHeroSection = () => {
+  const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
+  return (
+    <SectionContainer backgroundColor={theme.palette.primary.main}>
       <Box
         sx={{
-          textAlign: 'left',
-          width: '100%',
-          maxWidth: '418px',
           display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
+          flexDirection: { xs: 'column', lg: 'row' },
+          alignItems: 'center',
+          gap: { xs: 4, md: '40px' },
         }}
       >
-        <Typography
-          variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
-          sx={{ color: theme.palette.primary.contrastText }}
-        >
-          About us
-        </Typography>
-        <Typography
-          variant="bodyLarge"
+        <Box
           sx={{
-            color: theme.palette.primary.contrastText,
+            textAlign: 'left',
+            width: '100%',
+            maxWidth: largeScreen ? '418px' : '950px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2rem',
           }}
         >
-          Open Seattle comprises a group of seasoned professionals with
-          experience in web development, software engineering, digital strategy,
-          visual and content design, and more. We leverage this vast experience
-          to transform the nonprofit sector—to make it more efficient,
-          effective, and accessible to all.
-        </Typography>
+          <Typography
+            variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            About us
+          </Typography>
+          <Typography
+            variant="bodyLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Open Seattle comprises a group of seasoned professionals with
+            experience in web development, software engineering, digital
+            strategy, visual and content design, and more. We leverage this vast
+            experience to transform the nonprofit sector—to make it more
+            efficient, effective, and accessible to all.
+          </Typography>
+        </Box>
+        <img
+          src={AboutUsImage.src}
+          alt="About Us page graphic"
+          width="418px"
+          style={{ objectFit: 'cover' }}
+        />
       </Box>
-      <img
-        src={AboutUsImage.src}
-        alt="About Us page graphic"
-        width="418px"
-        style={{ objectFit: 'cover' }}
-      />
-    </Box>
-  </SectionContainer>
-)
+    </SectionContainer>
+  )
+}
 
 const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
@@ -153,17 +156,29 @@ const OurValueSection = ({ theme }) => (
       <CardOne
         title="Excellence"
         description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
-        icon={<MilitaryTechOutlined style={{ color: designColor.white }} />}
+        icon={
+          <MilitaryTechOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
       <CardOne
         title="Efficacy"
-        description="What we do have impact. We apply the pareto principle (and other frameworks) to ensure that we  optimize our efforts from engagement to delivery."
-        icon={<AutoGraphOutlined style={{ color: designColor.white }} />}
+        description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+        icon={
+          <AutoGraphOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
       <CardOne
         title="Efficiency"
         description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
-        icon={<AccessAlarmOutlined style={{ color: designColor.white }} />}
+        icon={
+          <AccessAlarmOutlined
+            style={{ color: designColor.white, fontSize: '40px' }}
+          />
+        }
       />
     </CardRowContainer>
   </AboutUsSection>
@@ -180,63 +195,71 @@ const OurVisionSection = ({ theme }) => (
   </AboutUsSection>
 )
 
-const OurTeamSection = ({ theme, extraSmallScreen }) => (
-  <AboutUsSection backgroundColor={theme.palette.background.default}>
-    <Typography variant="headlineMedium">Our team</Typography>
-    <Typography variant="bodyLarge" align="center" display="block">
-      The Open Seattle cadre is made up of highly skilled and committed
-      volunteers, dedicated to serving the greater Seattle area.
-    </Typography>
-    <Typography variant="titleMedium" align="center" display="block">
-      We’ve worked in tech and management for companies like:
-    </Typography>
-    <Grid container spacing={2}>
-      {companiesList.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={item.icon}
-            listText={!extraSmallScreen && item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Typography variant="titleMedium" align="center" display="block">
-      We collectively hold experience in:
-    </Typography>
-    <Grid container spacing={2}>
-      {experienceContent.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={!extraSmallScreen && item.icon}
-            listText={item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Typography variant="titleMedium" align="center" display="block">
-      And we have degrees in:
-    </Typography>
-    <Grid container spacing={2}>
-      {degreeContent.map((item) => (
-        <Grid item xs={6} md={4} key={item.label}>
-          <ListItemWithIcon
-            listIcon={!extraSmallScreen && item.icon}
-            listText={item.label}
-          />
-        </Grid>
-      ))}
-    </Grid>
-    <Box textAlign="center">
-      <Button
-        variant="contained"
-        href={'/project_individual'}
-        sx={{ width: 'fit-content' }}
-      >
-        View our Cadre
-      </Button>
-    </Box>
-  </AboutUsSection>
-)
+const OurTeamSection = () => {
+  const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const isMediumOrSmallerScreen = useMediaQuery(theme.breakpoints.down('md'))
+
+  return (
+    <AboutUsSection backgroundColor={theme.palette.background.default}>
+      <Typography variant="headlineMedium">Our team</Typography>
+      <Typography variant="bodyLarge" align="center" display="block">
+        The Open Seattle cadre is made up of highly skilled and committed
+        volunteers, dedicated to serving the greater Seattle area.
+      </Typography>
+      <Typography variant="titleMedium" align="center" display="block">
+        We’ve worked in tech and management for companies like:
+      </Typography>
+      <Grid container spacing={2}>
+        {companiesList.map((item) => (
+          <Grid item xs={6} md={4} key={item.label}>
+            <ListItemWithIcon
+              listIcon={item.icon}
+              listText={!extraSmallScreen && item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="titleMedium" align="center" display="block">
+        We collectively hold experience in:
+      </Typography>
+      <Grid container spacing={2}>
+        {experienceContent.map((item) => (
+          <Grid item xs={6} md={6} lg={4} key={item.label}>
+            <ListItemWithIcon
+              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              listIcon={!extraSmallScreen && item.icon}
+              listText={item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Typography variant="titleMedium" align="center" display="block">
+        And we have degrees in:
+      </Typography>
+      <Grid container spacing={2}>
+        {degreeContent.map((item) => (
+          <Grid item xs={6} md={6} lg={4} key={item.label}>
+            <ListItemWithIcon
+              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              listIcon={!extraSmallScreen && item.icon}
+              listText={item.label}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Box textAlign="center">
+        <Button
+          variant="contained"
+          href={'/project_individual'}
+          sx={{ width: 'fit-content' }}
+        >
+          View our Cadre
+        </Button>
+      </Box>
+    </AboutUsSection>
+  )
+}
 
 const companiesList = [
   {
