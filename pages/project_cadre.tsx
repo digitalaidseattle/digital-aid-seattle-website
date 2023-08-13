@@ -59,7 +59,7 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">Open Seattle</Typography>
+            <Typography variant="displayMedium">The Cadre</Typography>
             <Typography variant="headlineMedium">Open Seattle</Typography>
           </Stack>
           <Stack spacing="1rem">
@@ -95,7 +95,7 @@ const ProjectIndividualPage = () => {
           sx={{
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
-            paddingTop: '14.5rem',
+            paddingTop: { md: '5.5rem', lg: '14.5rem' },
             paddingBottom: '1rem',
             width: '100%',
           }}
@@ -112,18 +112,17 @@ const ProjectIndividualPage = () => {
               <Typography
                 variant="displayLarge"
                 sx={{
-                  // fontSize: '5vw',
-                  width: { md: '45vw', lg: '25rem' },
+                  width: { md: '40vw', lg: '25rem' },
                 }}
               >
-                Open Seattle
+                The Cadre
               </Typography>
               <Typography variant="headlineLarge">Open Seattle</Typography>
             </Stack>
 
             <Box
               sx={{
-                width: { md: '40vw', lg: '25rem' },
+                width: { md: 'min(40vw, 18rem)', lg: '25rem' },
                 position: 'absolute',
                 right: { xs: '1rem', md: '2rem', lg: '0' },
                 bottom: '-6rem',
