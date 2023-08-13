@@ -19,7 +19,6 @@ const ProjectIndividualPage = () => {
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
-    position: 'relative',
     [theme.breakpoints.up('xs')]: {
       paddingTop: '4rem',
       paddingLeft: '1rem',
@@ -27,11 +26,13 @@ const ProjectIndividualPage = () => {
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: '4rem',
-      paddingLeft: '2rem',
-      paddingRight: '2rem',
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
     },
     [theme.breakpoints.up('lg')]: {
       paddingTop: '5rem',
+      paddingLeft: '0rem',
+      paddingRight: '0rem',
       margin: '0 auto',
       maxWidth: theme.breakpoints.values.lg,
     },
@@ -58,7 +59,7 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">The Cadre</Typography>
+            <Typography variant="displayMedium">Open Seattle</Typography>
             <Typography variant="headlineMedium">Open Seattle</Typography>
           </Stack>
           <Stack spacing="1rem">
@@ -93,52 +94,42 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
-            height: { md: '13.625rem', lg: '25rem' },
             color: theme.palette.primary.contrastText,
-            position: 'absolute',
+            paddingTop: '14.5rem',
+            paddingBottom: '1rem',
             width: '100%',
           }}
-        ></Box>
-
-        <Section>
+        >
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              gap: '2rem',
-              justifyContent: 'space-between',
-              width: '100%',
+              position: 'relative',
+              margin: '0 auto',
+              maxWidth: theme.breakpoints.values.lg,
+              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
             }}
           >
-            <Stack spacing="3rem">
-              <Stack>
-                <Typography variant="displayLarge">The Cadre</Typography>
-                <Typography variant="headlineLarge">Open Seattle</Typography>
-              </Stack>
-
-              <Stack
-                spacing="1rem"
+            <Stack>
+              <Typography
+                variant="displayLarge"
                 sx={{
-                  backgroundColor: theme.palette.primary.contrastText,
-                  color: theme.palette.primary.main,
+                  // fontSize: '5vw',
+                  width: { md: '45vw', lg: '25rem' },
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing="1.5rem">
-                  <Typography variant="labelLarge">Project Status:</Typography>
-                  <StateBadge state="active" />
-                </Stack>
-
-                <Stack direction="row" alignItems="center" spacing="1.5rem">
-                  <Typography variant="labelLarge">
-                    Expected Timeline:
-                  </Typography>
-                  <Typography variant="labelLarge">Ongoing</Typography>
-                </Stack>
-              </Stack>
+                Open Seattle
+              </Typography>
+              <Typography variant="headlineLarge">Open Seattle</Typography>
             </Stack>
 
-            <Box sx={{ minWidth: { md: '16.5rem', lg: '25rem' } }}>
+            <Box
+              sx={{
+                width: { md: '40vw', lg: '25rem' },
+                position: 'absolute',
+                right: { xs: '1rem', md: '2rem', lg: '0' },
+                bottom: '-6rem',
+                zIndex: '2',
+              }}
+            >
               <img
                 src={ProjectPlaceholder.src}
                 style={{
@@ -151,7 +142,27 @@ const ProjectIndividualPage = () => {
               />
             </Box>
           </Box>
-        </Section>
+        </Box>
+
+        <Stack
+          spacing="1rem"
+          width={{ md: 'calc(50vw-2rem)', lg: theme.breakpoints.values.lg }}
+          sx={{
+            color: theme.palette.primary.main,
+            margin: '1rem auto',
+            paddingLeft: { md: '2rem', lg: '0' },
+          }}
+        >
+          <Stack direction="row" alignItems="center" spacing="1.5rem">
+            <Typography variant="labelLarge">Project Status:</Typography>
+            <StateBadge state="active" />
+          </Stack>
+
+          <Stack direction="row" alignItems="center" spacing="1.5rem">
+            <Typography variant="labelLarge">Expected Timeline:</Typography>
+            <Typography variant="labelLarge">Ongoing</Typography>
+          </Stack>
+        </Stack>
       </>
     )
   }
