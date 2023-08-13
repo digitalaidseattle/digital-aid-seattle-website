@@ -104,7 +104,7 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={4}>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem md={1} display="flex" flexDirection="column">
@@ -180,7 +180,7 @@ const CommonFooterMidScreen = () => (
 
         <Box>
           <FooterItemTitle>About Open Seattle</FooterItemTitle>
-          <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+          <LinkSubItem url="/privacy" name="Privacy Policy" />
         </Box>
       </Box>
     </GridItem>
@@ -250,7 +250,7 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem display="flex" sx={{ gap: '1rem' }}>

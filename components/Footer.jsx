@@ -10,7 +10,7 @@ const navigation = {
     },
     {
       name: 'Privacy Policy',
-      href: '/privacy-policy',
+      href: '/privacy',
     },
   ],
 }
