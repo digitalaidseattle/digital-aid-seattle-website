@@ -143,25 +143,33 @@ const ProjectIndividualPage = () => {
           </Box>
         </Box>
 
-        <Stack
-          spacing="1rem"
-          width={{ md: 'calc(50vw-2rem)', lg: theme.breakpoints.values.lg }}
+        <Box
           sx={{
-            color: theme.palette.primary.main,
-            margin: '1rem auto',
-            paddingLeft: { md: '2rem', lg: '0' },
+            backgroundColor: theme.palette.background.default,
+            width: '100%',
+            paddingY: '1rem',
           }}
         >
-          <Stack direction="row" alignItems="center" spacing="1.5rem">
-            <Typography variant="labelLarge">Project Status:</Typography>
-            <StateBadge state="active" />
-          </Stack>
+          <Stack
+            spacing="1rem"
+            width={{ md: 'calc(50vw-2rem)', lg: theme.breakpoints.values.lg }}
+            sx={{
+              color: theme.palette.primary.main,
+              margin: '0 auto',
+              paddingLeft: { md: '2rem', lg: '0' },
+            }}
+          >
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Project Status:</Typography>
+              <StateBadge state="active" />
+            </Stack>
 
-          <Stack direction="row" alignItems="center" spacing="1.5rem">
-            <Typography variant="labelLarge">Expected Timeline:</Typography>
-            <Typography variant="labelLarge">Ongoing</Typography>
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Expected Timeline:</Typography>
+              <Typography variant="labelLarge">Ongoing</Typography>
+            </Stack>
           </Stack>
-        </Stack>
+        </Box>
       </>
     )
   }
@@ -172,7 +180,7 @@ const ProjectIndividualPage = () => {
 
       <Box
         sx={{
-          backgroundColor: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.background.default,
           color: theme.palette.primary.main,
         }}
       >
@@ -310,18 +318,24 @@ const ProjectIndividualPage = () => {
           <Button variant="outlined">Contact us</Button>
         </Section>
 
-        <Section
+        <Box
           sx={{
-            alignItems: 'center',
-            backgroundColor: '#ffffff',
-            paddingBottom: { xs: '4rem', lg: '5rem' },
+            backgroundColor: theme.palette.primary.contrastText,
+            width: '100%',
           }}
         >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Interested in volunteering with Open Seattle?
-          </Subheader>
-          <Button variant="contained">Apply to volunteer</Button>
-        </Section>
+          <Section
+            sx={{
+              alignItems: 'center',
+              paddingBottom: { xs: '4rem', lg: '5rem' },
+            }}
+          >
+            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+              Interested in volunteering with Open Seattle?
+            </Subheader>
+            <Button variant="contained">Apply to volunteer</Button>
+          </Section>
+        </Box>
       </Box>
     </>
   )
