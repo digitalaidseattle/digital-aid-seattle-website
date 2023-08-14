@@ -5,6 +5,7 @@ import landingPage from './landingPage'
 import selectableLink, { externalLink, internalLink } from './link'
 import portableText from './portableText'
 import textWithIllustration from './textWithIllustration'
+import teamMember from './teamMember'
 
 export const schemaTypes = [
   textWithIllustration,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   formPage,
   internalLink,
   externalLink,
+  teamMember
 ]
