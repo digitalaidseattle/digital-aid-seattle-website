@@ -230,7 +230,10 @@ const ProjectIndividualPage = () => {
         </Section>
 
         <Section>
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+          <Subheader
+            variant="headlineMedium"
+            sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+          >
             Current Team
           </Subheader>
           <Box
@@ -283,7 +286,10 @@ const ProjectIndividualPage = () => {
         </Section>
 
         <Section>
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+          <Subheader
+            variant="headlineMedium"
+            sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+          >
             Roles Needed
           </Subheader>
           <Box
