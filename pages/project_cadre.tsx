@@ -9,6 +9,7 @@ import ProjectPlaceholder from 'assets/project-image.png'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
 
 const ProjectIndividualPage = () => {
   const [teamData, setTeamData] = useState(null)
@@ -19,7 +20,7 @@ const ProjectIndividualPage = () => {
       setTeamData(fetchedData)
     }
     getTeamData()
-  })
+  }, [])
 
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -239,13 +240,14 @@ const ProjectIndividualPage = () => {
               gap: '2rem',
             }}
           >
-            {/* <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            /> */}
             {teamData &&
-              teamData.map((person) => <p key={person._id}>{person.name}</p>)}
+              teamData.map((person) => (
+                <CardWithPhoto
+                  title={person.name}
+                  description="Program Manager"
+                  image={person.image}
+                />
+              ))}
           </Box>
         </Section>
 

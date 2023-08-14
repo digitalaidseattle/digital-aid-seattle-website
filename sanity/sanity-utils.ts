@@ -3,7 +3,8 @@ import { createClient, groq } from "next-sanity";
 type TeamMember = {
     _id: string,
     _createdAt: Date,
-    name: string
+    name: string,
+    image: string,
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
@@ -16,5 +17,6 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
         _id,
         _createdAt,
         name,
+        "image": image.asset->url,
     }`)
 }
