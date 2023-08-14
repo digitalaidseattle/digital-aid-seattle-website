@@ -5,8 +5,6 @@
 import {
   Container,
   Stack,
-  Typography,
-  useTheme
   useTheme
 } from '@mui/material'
 import Masthead from 'components/Masthead'
@@ -25,7 +23,7 @@ const EventsPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-      setEvents(osEventsService.getActiveEvents());
+    setEvents(osEventsService.getActiveEvents());
   }, []);
 
   return (
