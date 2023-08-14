@@ -15,7 +15,7 @@ const SectionContainer = ({ backgroundColor, children }) => {
       }}
     >
       <Stack
-        gap={{ xs: '16px', md: '32px', lg: '80px' }}
+        gap={{ xs: '64px', lg: '80px' }}
         maxWidth={theme.breakpoints.values.lg}
         margin="0 auto"
       >
