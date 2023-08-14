@@ -1,7 +1,9 @@
 import { createClient, groq } from "next-sanity";
 
 type TeamMember = {
-    name: String
+    _id: string,
+    _createdAt: Date,
+    name: string
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {

@@ -22,7 +22,7 @@ export const FooterContainer = styled.footer`
 `
 
 // eslint-disable-next-line react/display-name
-export const withBasicLayout = (Page: () => JSX.Element) => () =>
+export const withBasicLayout = (Page: () => any) => () =>
   (
     <>
       <HeaderContainer>

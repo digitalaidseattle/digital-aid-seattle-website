@@ -1,15 +1,17 @@
+import { getTeamMembers } from 'sanity/lib' // TODO: get this function from fetching data..
+
 import DataObjectIcon from '@mui/icons-material/DataObject'
-import { Box, Button,Stack, styled, Typography, useTheme } from '@mui/material'
+import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 // imports for placeholders-- delete as needed
-import Placeholder from 'assets/placeholder-person.png'
 import ProjectPlaceholder from 'assets/project-image.png'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
-const ProjectIndividualPage = () => {
+const ProjectIndividualPage = async () => {
+  const teamData = await getTeamMembers()
+
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
@@ -228,41 +230,14 @@ const ProjectIndividualPage = () => {
               gap: '2rem',
             }}
           >
-            <CardWithPhoto
+            {/* <CardWithPhoto
               title="Jeffrey"
               description="Program Manager"
               image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
+            /> */}
+            {teamData.map((person) => (
+              <p key={person._id}>{person.name}</p>
+            ))}
           </Box>
         </Section>
 
