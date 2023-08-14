@@ -243,6 +243,7 @@ const ProjectIndividualPage = () => {
             {teamData &&
               teamData.map((person) => (
                 <CardWithPhoto
+                  key={person._id}
                   title={person.name}
                   description={person.role}
                   image={person.image}
