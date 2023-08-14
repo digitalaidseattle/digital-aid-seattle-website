@@ -1,6 +1,7 @@
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import SectionContainer from 'components/layout/SectionContainer'
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
 import ProjectPlaceholder from 'assets/project-image.png'
@@ -19,23 +20,8 @@ const ProjectIndividualPage = () => {
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
-    [theme.breakpoints.up('xs')]: {
-      paddingTop: '4rem',
-      paddingLeft: '1rem',
-      paddingRight: '1rem',
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: '4rem',
-      paddingLeft: '1rem',
-      paddingRight: '1rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-      paddingTop: '5rem',
-      paddingLeft: '0rem',
-      paddingRight: '0rem',
-      margin: '0 auto',
-      maxWidth: theme.breakpoints.values.lg,
-    },
+    width: '100%',
+    color: theme.palette.primary.main,
   }))
 
   function MobileHeader() {
@@ -178,12 +164,7 @@ const ProjectIndividualPage = () => {
     <>
       {extraSmallScreen ? <MobileHeader /> : <DesktopHeader />}
 
-      <Box
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.primary.main,
-        }}
-      >
+      <SectionContainer backgroundColor={theme.palette.background.default}>
         <Section>
           <Subheader variant="headlineMedium">Problem</Subheader>
           <Typography variant="bodyLarge">
@@ -191,15 +172,17 @@ const ProjectIndividualPage = () => {
             digital needs. They grapple with efficiency and face operational
             burdens without proper digital tools, leading to funding shortages
             and lost volunteers.
-            <br />
-            <br />
+          </Typography>
+
+          <Typography variant="bodyLarge">
             77% of nonprofits say that skilled volunteers could majorly impact
             their mission, but only 12% actually utilize them. Most software
             projects will fail, even with financial backing. And—during the
             pandemic, Covid-related drops in volunteer hours nationwide reached
             19%.
-            <br />
-            <br />
+          </Typography>
+
+          <Typography variant="bodyLarge">
             Washington state needs a more structured tech volunteering model.
           </Typography>
         </Section>
@@ -211,8 +194,8 @@ const ProjectIndividualPage = () => {
             55,000 residing in greater Seattle. Meanwhile, statistics show that
             30% of professionals will volunteer if given the chance. SO, how can
             we utilize this resource?
-            <br />
-            <br />
+          </Typography>
+          <Typography variant="bodyLarge">
             OPEN SEATTLE fosters connections between volunteers and the orgs
             that can utilize their talents and provides nonprofits with digital
             systems and tools that boost their efforts.
@@ -240,6 +223,7 @@ const ProjectIndividualPage = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '2rem',
+              width: '100%',
             }}
           >
             <CardWithPhoto
@@ -309,7 +293,6 @@ const ProjectIndividualPage = () => {
         <Section
           sx={{
             alignItems: 'center',
-            paddingBottom: { xs: '4rem', lg: '5rem' },
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
@@ -317,26 +300,20 @@ const ProjectIndividualPage = () => {
           </Subheader>
           <Button variant="outlined">Contact us</Button>
         </Section>
+      </SectionContainer>
 
-        <Box
+      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
+        <Section
           sx={{
-            backgroundColor: theme.palette.primary.contrastText,
-            width: '100%',
+            alignItems: 'center',
           }}
         >
-          <Section
-            sx={{
-              alignItems: 'center',
-              paddingBottom: { xs: '4rem', lg: '5rem' },
-            }}
-          >
-            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-              Interested in volunteering with Open Seattle?
-            </Subheader>
-            <Button variant="contained">Apply to volunteer</Button>
-          </Section>
-        </Box>
-      </Box>
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+            Interested in volunteering with Open Seattle?
+          </Subheader>
+          <Button variant="contained">Apply to volunteer</Button>
+        </Section>
+      </SectionContainer>
     </>
   )
 }
