@@ -1,4 +1,5 @@
 import { createClient, groq } from "next-sanity";
+import { apiVersion, dataset, projectId } from './env'
 
 type TeamMember = {
     _id: string,
@@ -10,9 +11,9 @@ type TeamMember = {
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
     const client = createClient({
-        projectId: "7nfqvjpz",
-        dataset: "production",
-        apiVersion: "2023-08-13",
+        projectId,
+        dataset,
+        apiVersion
     })
     return client.fetch(groq`*[_type == "team-member"]{
         _id,
