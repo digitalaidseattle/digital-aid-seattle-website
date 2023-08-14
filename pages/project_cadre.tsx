@@ -1,4 +1,5 @@
-import { getTeamMembers } from 'sanity/lib' // TODO: get this function from fetching data..
+import { getTeamMembers } from '../sanity/sanity-utils' // TODO: get this function from fetching data..
+import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
@@ -9,8 +10,16 @@ import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
-const ProjectIndividualPage = async () => {
-  const teamData = await getTeamMembers()
+const ProjectIndividualPage = () => {
+  const [teamData, setTeamData] = useState(null)
+
+  useEffect(() => {
+    const getTeamData = async () => {
+      const fetchedData = await getTeamMembers()
+      setTeamData(fetchedData)
+    }
+    getTeamData()
+  })
 
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -235,9 +244,8 @@ const ProjectIndividualPage = async () => {
               description="Program Manager"
               image={Placeholder.src}
             /> */}
-            {teamData.map((person) => (
-              <p key={person._id}>{person.name}</p>
-            ))}
+            {teamData &&
+              teamData.map((person) => <p key={person._id}>{person.name}</p>)}
           </Box>
         </Section>
 
