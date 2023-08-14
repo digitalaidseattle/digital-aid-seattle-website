@@ -13,10 +13,16 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 const ProjectIndividualPage = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const Subheader = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
-    marginBottom: '2rem',
+    [theme.breakpoints.up('xs')]: {
+      marginBottom: '2rem',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginBottom: '2.5rem',
+    },
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
@@ -100,14 +106,18 @@ const ProjectIndividualPage = () => {
           >
             <Stack>
               <Typography
-                variant="displayLarge"
+                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
                 sx={{
                   width: { md: '40vw', lg: '25rem' },
                 }}
               >
                 The Cadre
               </Typography>
-              <Typography variant="headlineLarge">Open Seattle</Typography>
+              <Typography
+                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              >
+                Open Seattle
+              </Typography>
             </Stack>
 
             <Box
