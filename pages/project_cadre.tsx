@@ -4,7 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
 // imports for placeholders-- delete as needed
 import Placeholder from 'assets/placeholder-person.png'
-import ProjectPlaceholder from 'assets/project-image.png'
+import ProjectPlaceholder from 'assets/logo-light-icon.svg'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
