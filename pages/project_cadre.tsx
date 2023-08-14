@@ -244,7 +244,7 @@ const ProjectIndividualPage = () => {
               teamData.map((person) => (
                 <CardWithPhoto
                   title={person.name}
-                  description="Program Manager"
+                  description={person.role}
                   image={person.image}
                 />
               ))}
