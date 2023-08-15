@@ -289,6 +289,13 @@ export const theme = createTheme({
           whiteSpace: 'nowrap',
           minWidth: 'auto'
         },
+        outlined: {
+          borderWidth: '2px',
+          '&:hover': {
+            borderWidth: '2px',
+          }
+        }
+
       },
       variants: [
         {
