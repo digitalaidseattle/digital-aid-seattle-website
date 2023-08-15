@@ -100,7 +100,7 @@ const ProjectIndividualPage = () => {
             sx={{
               position: 'relative',
               margin: '0 auto',
-              maxWidth: theme.breakpoints.values.lg,
+              maxWidth: '880px',
               paddingX: { xs: '1rem', md: '2rem', lg: '0' },
             }}
           >
@@ -152,7 +152,7 @@ const ProjectIndividualPage = () => {
         >
           <Stack
             spacing="1rem"
-            width={{ md: 'calc(50vw-2rem)', lg: theme.breakpoints.values.lg }}
+            width={{ md: 'auto', lg: '880px' }}
             sx={{
               color: theme.palette.primary.main,
               margin: '0 auto',
@@ -181,7 +181,7 @@ const ProjectIndividualPage = () => {
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack
           gap={{ xs: '64px', lg: '80px' }}
-          maxWidth={theme.breakpoints.values.lg}
+          maxWidth="880px"
           margin="0 auto"
         >
           <Section>
