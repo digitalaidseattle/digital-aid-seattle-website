@@ -179,151 +179,158 @@ const ProjectIndividualPage = () => {
       {extraSmallScreen ? <MobileHeader /> : <DesktopHeader />}
 
       <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Section>
-          <Subheader variant="headlineMedium">Problem</Subheader>
-          <TextSection>
-            <Typography variant="bodyLarge">
-              Nonprofits that try to adopt new tech can&apos;t staff for their
-              digital needs. They grapple with efficiency and face operational
-              burdens without proper digital tools, leading to funding shortages
-              and lost volunteers.
-            </Typography>
-
-            <Typography variant="bodyLarge">
-              77% of nonprofits say that skilled volunteers could majorly impact
-              their mission, but only 12% actually utilize them. Most software
-              projects will fail, even with financial backing. And—during the
-              pandemic, Covid-related drops in volunteer hours nationwide
-              reached 19%.
-            </Typography>
-
-            <Typography variant="bodyLarge">
-              Washington state needs a more structured tech volunteering model.
-            </Typography>
-          </TextSection>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium">Solution</Subheader>
-          <TextSection>
-            <Typography variant="bodyLarge">
-              The state of Washington boasts over 70,000 technologists, more
-              than 55,000 residing in greater Seattle. Meanwhile, statistics
-              show that 30% of professionals will volunteer if given the chance.
-              SO, how can we utilize this resource?
-            </Typography>
-            <Typography variant="bodyLarge">
-              OPEN SEATTLE fosters connections between volunteers and the orgs
-              that can utilize their talents and provides nonprofits with
-              digital systems and tools that boost their efforts.
-            </Typography>
-          </TextSection>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium">Impact</Subheader>
-          <Typography variant="bodyLarge">
-            Open Seattle helps nonprofits build the structure essential for
-            success in any technology project, acting as a force multiplier to
-            help organizations create lasting impact.
-          </Typography>
-        </Section>
-
-        <Section>
-          <Subheader
-            variant="headlineMedium"
-            sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-          >
-            Current Team
-          </Subheader>
-          <Box
-            sx={{
-              display: 'grid',
-              gridAutoFlow: 'columns',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2rem',
-              width: '100%',
-            }}
-          >
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-            <CardWithPhoto
-              title="Jeffrey"
-              description="Program Manager"
-              image={Placeholder.src}
-            />
-          </Box>
-        </Section>
-
-        <Section>
-          <Subheader
-            variant="headlineMedium"
-            sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-          >
-            Roles Needed
-          </Subheader>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', lg: 'row' },
-              gap: '2rem',
-            }}
-          >
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="UX Designer"
-            />
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="Marketing Director"
-            />
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="Backend Engineer"
-            />
-          </Box>
-        </Section>
-
-        <Section
-          sx={{
-            alignItems: 'center',
-          }}
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth={theme.breakpoints.values.lg}
+          margin="0 auto"
         >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Questions about this project?
-          </Subheader>
-          <Button variant="outlined">Contact us</Button>
-        </Section>
+          <Section>
+            <Subheader variant="headlineMedium">Problem</Subheader>
+            <TextSection>
+              <Typography variant="bodyLarge">
+                Nonprofits that try to adopt new tech can&apos;t staff for their
+                digital needs. They grapple with efficiency and face operational
+                burdens without proper digital tools, leading to funding
+                shortages and lost volunteers.
+              </Typography>
+
+              <Typography variant="bodyLarge">
+                77% of nonprofits say that skilled volunteers could majorly
+                impact their mission, but only 12% actually utilize them. Most
+                software projects will fail, even with financial backing.
+                And—during the pandemic, Covid-related drops in volunteer hours
+                nationwide reached 19%.
+              </Typography>
+
+              <Typography variant="bodyLarge">
+                Washington state needs a more structured tech volunteering
+                model.
+              </Typography>
+            </TextSection>
+          </Section>
+
+          <Section>
+            <Subheader variant="headlineMedium">Solution</Subheader>
+            <TextSection>
+              <Typography variant="bodyLarge">
+                The state of Washington boasts over 70,000 technologists, more
+                than 55,000 residing in greater Seattle. Meanwhile, statistics
+                show that 30% of professionals will volunteer if given the
+                chance. SO, how can we utilize this resource?
+              </Typography>
+              <Typography variant="bodyLarge">
+                OPEN SEATTLE fosters connections between volunteers and the orgs
+                that can utilize their talents and provides nonprofits with
+                digital systems and tools that boost their efforts.
+              </Typography>
+            </TextSection>
+          </Section>
+
+          <Section>
+            <Subheader variant="headlineMedium">Impact</Subheader>
+            <Typography variant="bodyLarge">
+              Open Seattle helps nonprofits build the structure essential for
+              success in any technology project, acting as a force multiplier to
+              help organizations create lasting impact.
+            </Typography>
+          </Section>
+
+          <Section>
+            <Subheader
+              variant="headlineMedium"
+              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+            >
+              Current Team
+            </Subheader>
+            <Box
+              sx={{
+                display: 'grid',
+                gridAutoFlow: 'columns',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '2rem',
+                width: '100%',
+              }}
+            >
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+            </Box>
+          </Section>
+
+          <Section>
+            <Subheader
+              variant="headlineMedium"
+              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+            >
+              Roles Needed
+            </Subheader>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', lg: 'row' },
+                gap: '2rem',
+              }}
+            >
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="UX Designer"
+              />
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="Marketing Director"
+              />
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="Backend Engineer"
+              />
+            </Box>
+          </Section>
+
+          <Section
+            sx={{
+              alignItems: 'center',
+            }}
+          >
+            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+              Questions about this project?
+            </Subheader>
+            <Button variant="outlined">Contact us</Button>
+          </Section>
+        </Stack>
       </SectionContainer>
 
       <SectionContainer backgroundColor={theme.palette.primary.contrastText}>

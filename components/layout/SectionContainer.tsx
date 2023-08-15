@@ -1,7 +1,5 @@
-import { Box, Stack, useTheme } from '@mui/material'
+import { Box } from '@mui/material'
 const SectionContainer = ({ backgroundColor, children }) => {
-  const theme = useTheme()
-
   return (
     <Box
       sx={{
@@ -14,13 +12,7 @@ const SectionContainer = ({ backgroundColor, children }) => {
         paddingY: { xs: '64px', lg: '80px' },
       }}
     >
-      <Stack
-        gap={{ xs: '64px', lg: '80px' }}
-        maxWidth={theme.breakpoints.values.lg}
-        margin="0 auto"
-      >
-        {children}
-      </Stack>
+      {children}
     </Box>
   )
 }
