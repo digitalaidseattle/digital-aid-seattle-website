@@ -5,7 +5,7 @@
 
 import { ReactNode } from "react"
 import SectionContainer from "./layout/SectionContainer"
-import { Box, useTheme } from "@mui/material"
+import { Box, useMediaQuery, useTheme } from "@mui/material"
 
 
 type MastheadWithImageProps = {
@@ -16,6 +16,7 @@ type MastheadWithImageProps = {
 
 const MastheadWithImage = ({ children, imageSrc, imageText }: MastheadWithImageProps) => {
     const theme = useTheme()
+    const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
     return <SectionContainer backgroundColor={theme.palette.primary.main}>
         <Box
             sx={{
@@ -30,7 +31,7 @@ const MastheadWithImage = ({ children, imageSrc, imageText }: MastheadWithImageP
                 sx={{
                     textAlign: 'left',
                     width: '100%',
-                    maxWidth: '418px',
+                    maxWidth: largeScreen ? '418px' : '950px',
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '2rem  ',
