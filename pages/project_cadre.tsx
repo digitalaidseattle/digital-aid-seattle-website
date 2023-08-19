@@ -1,4 +1,4 @@
-import { getTeamMembers } from '../sanity/sanity-utils' // TODO: get this function from fetching data..
+import { getTeamMembers } from '../sanity/sanity-utils' 
 import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
