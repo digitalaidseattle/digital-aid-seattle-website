@@ -13,7 +13,7 @@ import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 
 const ProjectIndividualPage = () => {
-  const [teamData, setTeamData] = useState(null)
+  const [teamData, setTeamData] = useState([])
 
   useEffect(() => {
     const getTeamData = async () => {
@@ -265,41 +265,14 @@ const ProjectIndividualPage = () => {
                 width: '100%',
               }}
             >
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
+              {teamData.map((person) => (
+                <CardWithPhoto
+                  key={person._id}
+                  title={person.name}
+                  description={person.role}
+                  image={person.image}
+                />
+              ))}
             </Box>
           </Section>
 
