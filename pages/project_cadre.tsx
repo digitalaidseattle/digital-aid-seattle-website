@@ -1,11 +1,12 @@
-import { getTeamMembers } from '../sanity/sanity-utils' 
+import { getTeamMembers } from '../sanity/sanity-utils'
 import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
 import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import SectionContainer from 'components/layout/SectionContainer'
 // imports for placeholders-- delete as needed
-import ProjectPlaceholder from 'assets/project-image.png'
+import ProjectPlaceholder from 'assets/logo-light-icon.svg'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
@@ -23,29 +24,26 @@ const ProjectIndividualPage = () => {
   }, [])
 
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const Subheader = styled(Typography)(({ theme }) => ({
     color: theme.palette.primary.main,
-    marginBottom: '2rem',
+    [theme.breakpoints.up('xs')]: {
+      marginBottom: '2rem',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginBottom: '2.5rem',
+    },
   }))
 
   const Section = styled(Stack)(({ theme }) => ({
-    [theme.breakpoints.up('xs')]: {
-      paddingTop: '4rem',
-      paddingLeft: '1rem',
-      paddingRight: '1rem',
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: '4rem',
-      paddingLeft: '2rem',
-      paddingRight: '2rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-      paddingTop: '5rem',
-      paddingLeft: '12.5rem',
-      paddingRight: '12.5rem',
-    },
+    width: '100%',
+    color: theme.palette.primary.main,
+  }))
+
+  const TextSection = styled(Stack)(() => ({
+    gap: '2rem',
   }))
 
   function MobileHeader() {
@@ -104,69 +102,85 @@ const ProjectIndividualPage = () => {
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
-            height: '25rem',
             color: theme.palette.primary.contrastText,
-            position: 'absolute',
+            paddingTop: { md: '5.5rem', lg: '14.5rem' },
+            paddingBottom: '1rem',
             width: '100%',
-          }}
-        ></Box>
-
-        <Box
-          sx={{
-            position: 'relative',
-            margin: { sm: '0 2rem', lg: '0 12.5rem' },
-            paddingTop: '6rem',
           }}
         >
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              gap: '2rem',
-              justifyContent: 'space-between',
-              width: '100%',
-              minHeight: '25rem',
+              position: 'relative',
+              margin: '0 auto',
+              maxWidth: '880px',
+              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
             }}
           >
-            <Stack spacing="3rem">
-              <Stack>
-                <Typography variant="displayLarge">The Cadre</Typography>
-                <Typography variant="headlineLarge">Open Seattle</Typography>
-              </Stack>
-
-              <Stack
-                spacing="1rem"
+            <Stack>
+              <Typography
+                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
                 sx={{
-                  backgroundColor: theme.palette.primary.contrastText,
-                  color: theme.palette.primary.main,
+                  width: { md: '40vw', lg: '25rem' },
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing="1.5rem">
-                  <Typography variant="labelLarge">Project Status:</Typography>
-                  <StateBadge state="active" />
-                </Stack>
-
-                <Stack direction="row" alignItems="center" spacing="1.5rem">
-                  <Typography variant="labelLarge">
-                    Expected Timeline:
-                  </Typography>
-                  <Typography variant="labelLarge">Ongoing</Typography>
-                </Stack>
-              </Stack>
+                The Cadre
+              </Typography>
+              <Typography
+                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              >
+                Open Seattle
+              </Typography>
             </Stack>
 
-            <img
-              src={ProjectPlaceholder.src}
-              style={{
-                width: '25rem',
-                display: 'block',
-                borderRadius: '20px',
-                boxShadow:
-                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+            <Box
+              sx={{
+                width: { md: 'min(40vw, 18rem)', lg: '25rem' },
+                position: 'absolute',
+                right: { xs: '1rem', md: '2rem', lg: '0' },
+                bottom: '-6rem',
+                zIndex: '2',
               }}
-            />
+            >
+              <img
+                src={ProjectPlaceholder.src}
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  borderRadius: '20px',
+                  boxShadow:
+                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                }}
+              />
+            </Box>
           </Box>
+        </Box>
+
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            width: '100%',
+            paddingY: '1rem',
+          }}
+        >
+          <Stack
+            spacing="1rem"
+            width={{ md: 'auto', lg: '880px' }}
+            sx={{
+              color: theme.palette.primary.main,
+              margin: '0 auto',
+              paddingLeft: { md: '2rem', lg: '0' },
+            }}
+          >
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Project Status:</Typography>
+              <StateBadge state="active" />
+            </Stack>
+
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">Expected Timeline:</Typography>
+              <Typography variant="labelLarge">Ongoing</Typography>
+            </Stack>
+          </Stack>
         </Box>
       </>
     )
@@ -176,125 +190,165 @@ const ProjectIndividualPage = () => {
     <>
       {extraSmallScreen ? <MobileHeader /> : <DesktopHeader />}
 
-      <Box
-        sx={{
-          backgroundColor: theme.palette.primary.contrastText,
-          color: theme.palette.primary.main,
-        }}
-      >
-        <Section>
-          <Subheader variant="headlineMedium">Problem</Subheader>
-          <Typography variant="bodyLarge">
-            Nonprofits that try to adopt new tech can&apos;t staff for their
-            digital needs. They grapple with efficiency and face operational
-            burdens without proper digital tools, leading to funding shortages
-            and lost volunteers.
-            <br />
-            <br />
-            77% of nonprofits say that skilled volunteers could majorly impact
-            their mission, but only 12% actually utilize them. Most software
-            projects will fail, even with financial backing. And—during the
-            pandemic, Covid-related drops in volunteer hours nationwide reached
-            19%.
-            <br />
-            <br />
-            Washington state needs a more structured tech volunteering model.
-          </Typography>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium">Solution</Subheader>
-          <Typography variant="bodyLarge">
-            The state of Washington boasts over 70,000 technologists, more than
-            55,000 residing in greater Seattle. Meanwhile, statistics show that
-            30% of professionals will volunteer if given the chance. SO, how can
-            we utilize this resource?
-            <br />
-            <br />
-            OPEN SEATTLE fosters connections between volunteers and the orgs
-            that can utilize their talents and provides nonprofits with digital
-            systems and tools that boost their efforts.
-          </Typography>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium">Impact</Subheader>
-          <Typography variant="bodyLarge">
-            Open Seattle helps nonprofits build the structure essential for
-            success in any technology project, acting as a force multiplier to
-            help organizations create lasting impact.
-          </Typography>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Current Team
-          </Subheader>
-          <Box
-            sx={{
-              display: 'grid',
-              gridAutoFlow: 'columns',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2rem',
-            }}
-          >
-            {teamData &&
-              teamData.map((person) => (
-                <CardWithPhoto
-                  key={person._id}
-                  title={person.name}
-                  description={person.role}
-                  image={person.image}
-                />
-              ))}
-          </Box>
-        </Section>
-
-        <Section>
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Roles Needed
-          </Subheader>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', lg: 'row' },
-              gap: '2rem',
-            }}
-          >
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="UX Designer"
-            />
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="Marketing Director"
-            />
-            <ListItemWithIcon
-              listIcon={<DataObjectIcon />}
-              listText="Backend Engineer"
-            />
-          </Box>
-        </Section>
-
-        <Section
-          sx={{
-            alignItems: 'center',
-            paddingBottom: { xs: '4rem', lg: '5rem' },
-          }}
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
         >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Questions about this project?
-          </Subheader>
-          <Button variant="outlined">Contact us</Button>
-        </Section>
+          <Section>
+            <Subheader variant="headlineMedium">Problem</Subheader>
+            <TextSection>
+              <Typography variant="bodyLarge">
+                Nonprofits that try to adopt new tech can&apos;t staff for their
+                digital needs. They grapple with efficiency and face operational
+                burdens without proper digital tools, leading to funding
+                shortages and lost volunteers.
+              </Typography>
 
+              <Typography variant="bodyLarge">
+                77% of nonprofits say that skilled volunteers could majorly
+                impact their mission, but only 12% actually utilize them. Most
+                software projects will fail, even with financial backing.
+                And—during the pandemic, Covid-related drops in volunteer hours
+                nationwide reached 19%.
+              </Typography>
+
+              <Typography variant="bodyLarge">
+                Washington state needs a more structured tech volunteering
+                model.
+              </Typography>
+            </TextSection>
+          </Section>
+
+          <Section>
+            <Subheader variant="headlineMedium">Solution</Subheader>
+            <TextSection>
+              <Typography variant="bodyLarge">
+                The state of Washington boasts over 70,000 technologists, more
+                than 55,000 residing in greater Seattle. Meanwhile, statistics
+                show that 30% of professionals will volunteer if given the
+                chance. SO, how can we utilize this resource?
+              </Typography>
+              <Typography variant="bodyLarge">
+                OPEN SEATTLE fosters connections between volunteers and the orgs
+                that can utilize their talents and provides nonprofits with
+                digital systems and tools that boost their efforts.
+              </Typography>
+            </TextSection>
+          </Section>
+
+          <Section>
+            <Subheader variant="headlineMedium">Impact</Subheader>
+            <Typography variant="bodyLarge">
+              Open Seattle helps nonprofits build the structure essential for
+              success in any technology project, acting as a force multiplier to
+              help organizations create lasting impact.
+            </Typography>
+          </Section>
+
+          <Section>
+            <Subheader
+              variant="headlineMedium"
+              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+            >
+              Current Team
+            </Subheader>
+            <Box
+              sx={{
+                display: 'grid',
+                gridAutoFlow: 'columns',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '2rem',
+                width: '100%',
+              }}
+            >
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+              <CardWithPhoto
+                title="Jeffrey"
+                description="Program Manager"
+                image={Placeholder.src}
+              />
+            </Box>
+          </Section>
+
+          <Section>
+            <Subheader
+              variant="headlineMedium"
+              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+            >
+              Roles Needed
+            </Subheader>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', lg: 'row' },
+                gap: '2rem',
+              }}
+            >
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="UX Designer"
+              />
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="Marketing Director"
+              />
+              <ListItemWithIcon
+                listIcon={<DataObjectIcon />}
+                listText="Backend Engineer"
+              />
+            </Box>
+          </Section>
+
+          <Section
+            sx={{
+              alignItems: 'center',
+            }}
+          >
+            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+              Questions about this project?
+            </Subheader>
+            <Button variant="outlined">Contact us</Button>
+          </Section>
+        </Stack>
+      </SectionContainer>
+
+      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
         <Section
           sx={{
             alignItems: 'center',
-            backgroundColor: '#ffffff',
-            paddingBottom: { xs: '4rem', lg: '5rem' },
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
@@ -302,7 +356,7 @@ const ProjectIndividualPage = () => {
           </Subheader>
           <Button variant="contained">Apply to volunteer</Button>
         </Section>
-      </Box>
+      </SectionContainer>
     </>
   )
 }
