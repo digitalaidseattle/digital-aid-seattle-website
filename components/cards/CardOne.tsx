@@ -19,6 +19,7 @@ type CardOneProps = {
   icon: ReactNode
   buttonText?: string
   buttonLink?: string
+  smallerTitle?: boolean
 }
 
 const CardOne = ({
@@ -27,6 +28,7 @@ const CardOne = ({
   icon,
   buttonText,
   buttonLink,
+  smallerTitle,
 }: CardOneProps) => {
   return (
     <Card
@@ -51,8 +53,12 @@ const CardOne = ({
         }}
       >
         <IconContainer>{icon}</IconContainer>
-        {title && <Typography variant="titleLarge">{title}</Typography>}
-        <Typography variant="bodyLarge">{description}</Typography>
+        {title && (
+          <Typography variant={smallerTitle ? 'titleMedium' : 'titleLarge'}>
+            {title}
+          </Typography>
+        )}
+        <Typography variant="bodyMedium">{description}</Typography>
         {buttonText && (
           <Button variant="contained" color="secondary" href={buttonLink}>
             {buttonText}

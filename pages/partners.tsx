@@ -169,6 +169,7 @@ const PartnersPage = () => {
           >
             {criteriaContent.map((item) => (
               <CardOne
+                smallerTitle
                 key={item.title}
                 title={item.title}
                 description={item.description}

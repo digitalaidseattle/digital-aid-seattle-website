@@ -16,7 +16,7 @@ const CardLeft = ({ title, description, icon }: CardLeftProps) => {
     <Card
       sx={{
         flex: '1',
-        minWidth: { xs: '100%', sm: 'min-content' },
+        minWidth: { xs: '100%', sm: 'auto' },
         boxShadow:
           '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
       }}
