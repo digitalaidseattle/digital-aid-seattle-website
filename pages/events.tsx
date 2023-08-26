@@ -70,6 +70,12 @@ const EventsPage = () => {
             {events.map((event) => (
               <CardEvent key={event.title} event={event} />
             ))}
+            {events.length === 0 && (
+              <Typography sx={{ textAlign: 'center' }}>
+                There are currently no events scheduled, please check back in
+                the future.
+              </Typography>
+            )}
           </Stack>
         </Box>
       </SectionContainer>
