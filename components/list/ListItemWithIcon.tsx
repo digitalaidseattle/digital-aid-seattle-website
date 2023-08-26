@@ -8,17 +8,24 @@ import { ReactNode } from 'react'
 type ListItemWithIconProps = {
   listIcon?: ReactNode
   listText?: string
+  sxProps?: object
 }
 
-const ListItemWithIcon = ({ listIcon, listText }: ListItemWithIconProps) => {
+const ListItemWithIcon = ({
+  listIcon,
+  listText,
+  sxProps,
+}: ListItemWithIconProps) => {
   const theme = useTheme()
   const palette = theme.palette
 
   return (
     <ListItem
       sx={{
+        overflowWrap: 'break-word',
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
+        ...sxProps,
       }}
     >
       {listIcon && (

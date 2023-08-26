@@ -64,7 +64,7 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">info@openseattle.org</a>
+        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -98,13 +98,13 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">How can you help</a>
+        <a href="mailto:info@openseattle.org">How can you help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem md={4}>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem md={1} display="flex" flexDirection="column">
@@ -143,7 +143,7 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:name@email.com">info@openseattle.org</a>
+            <a href="mailto:info@openseattle.org">info@openseattle.org</a>
           </FooterSubItem>
         </Box>
 
@@ -174,13 +174,13 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:name@email.com">How can you help</a>
+            <a href="mailto:info@openseattle.org">How can you help</a>
           </FooterSubItem>
         </Box>
 
         <Box>
           <FooterItemTitle>About Open Seattle</FooterItemTitle>
-          <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+          <LinkSubItem url="/privacy" name="Privacy Policy" />
         </Box>
       </Box>
     </GridItem>
@@ -237,20 +237,21 @@ const CommonFooterSmallScreen = () => (
     <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">info@openseattle.org</a>
+        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">How can you help</a>
+        {/* TODO Update to support-us page, when the page is added */}
+        <a href="mailto:info@openseattle.org">How can you help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem display="flex" sx={{ gap: '1rem' }}>
