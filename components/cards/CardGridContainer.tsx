@@ -11,7 +11,10 @@ const CardGridContainer = ({ children, columns = 2 }: Props) => {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', lg: `repeat(${columns}, 1fr)` },
+        gridTemplateColumns: {
+          xs: '1fr',
+          lg: `repeat(${columns}, minmax(0, 1fr))`,
+        },
         gap: '2rem',
       }}
     >

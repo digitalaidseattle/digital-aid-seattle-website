@@ -99,7 +99,7 @@ const PartnersPage = () => {
             alignItems: 'center',
             gap: { xs: 4, md: '40px' },
           }}
-          maxWidth={'1000px'}
+          maxWidth={'880px'}
         >
           <Box
             sx={{
@@ -150,10 +150,8 @@ const PartnersPage = () => {
           gap={{ xs: '64px', md: '80px' }}
           sx={{
             textAlign: 'center',
-            paddingY: { xs: 4, md: 8 },
-            paddingX: { xs: '1rem', md: '2rem', lg: 0 },
           }}
-          maxWidth={'1000px'}
+          maxWidth={'880px'}
         >
           <Typography variant="headlineLarge">Our criteria</Typography>
 
@@ -185,10 +183,8 @@ const PartnersPage = () => {
           gap={{ xs: '64px', md: '80px' }}
           sx={{
             textAlign: 'left',
-            paddingY: { xs: 2, md: 4 },
-            paddingX: { xs: '1rem', md: '2rem', lg: 0 },
           }}
-          maxWidth={'1000px'}
+          maxWidth={'880px'}
         >
           <Stack gap={{ xs: 2, md: 4 }}>
             <Typography variant="headlineLarge">The process</Typography>
@@ -240,13 +236,11 @@ const PartnersPage = () => {
       </SectionContainer>
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack
-          gap={{ xs: '64px', md: '80px' }}
+          gap={{ xs: '2rem', md: '2.5rem' }}
           sx={{
             textAlign: 'center',
-            paddingY: { xs: 2, md: 4 },
-            paddingX: { xs: '1rem', md: '2rem', lg: 0 },
           }}
-          maxWidth={'1000px'}
+          maxWidth={'880px'}
         >
           <Typography variant="headlineLarge">
             Interested in partnering with Open Seattle?
