@@ -2,13 +2,7 @@
  * @2023 Open Seattle
  */
 
-import {
-  Box,
-  Container,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Box, Container, Stack, Typography, useTheme } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
 import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
@@ -72,7 +66,7 @@ const EventsPage = () => {
           }}
           maxWidth={'880px'}
         >
-          <Stack gap={{ xs: '2rem', md: '2rem' }} maxWidth={'880px'}>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
             {events.map((event) => (
               <CardEvent key={event.title} event={event} />
             ))}
