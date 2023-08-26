@@ -15,27 +15,26 @@ type CardEventProps = {
 
 const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.between('xs', 'md'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   if (extraSmallScreen || largeScreen) {
     return (
       <Card>
         <Stack
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={{ xs: '0', sm: '1.5rem' }}
+          direction={{ xs: 'column', lg: 'row' }}
+          spacing={{ xs: '0', lg: '1.5rem' }}
         >
           <Box
             sx={{
               position: 'relative',
               border: '2px solid #EAF1F1',
-              height: { xs: '0', sm: '20rem' },
-              width: { xs: '100%', sm: '20rem' },
-              paddingBottom: { xs: '100%', sm: '0' },
-              flexShrink: { xs: '0', sm: '1', md: '0' },
-              margin: { xs: '0', sm: '2rem 0 2rem 2rem' },
-              minWidth: { xs: '0', sm: '50%', md: '0' },
+              height: { xs: '0', lg: '20rem' },
+              width: { xs: '100%', lg: '20rem' },
+              paddingBottom: { xs: '100%', lg: '0' },
+              flexShrink: '0',
+              margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
+              minWidth: '0',
             }}
           >
             <CardMedia
@@ -43,7 +42,7 @@ const CardEvent = ({ event }: CardEventProps) => {
               alt={event.imageAlt}
               image={event.imageSrc}
               sx={{
-                position: { xs: 'absolute', sm: 'static' },
+                position: { xs: 'absolute', lg: 'static' },
                 height: '100%',
                 borderRadius: '8px',
               }}
@@ -51,8 +50,8 @@ const CardEvent = ({ event }: CardEventProps) => {
           </Box>
           <CardContent
             sx={{
-              padding: { xs: '2rem 1rem 1rem 1rem', sm: '2rem 2rem 2rem 0' },
-              paddingBottom: { xs: '1rem !important', sm: '2rem !important' },
+              padding: { xs: '2rem 1rem 1rem 1rem', lg: '2rem 2rem 2rem 0' },
+              paddingBottom: { xs: '1rem !important', lg: '2rem !important' },
             }}
           >
             <Stack justifyContent="center" sx={{ height: '100%' }}>
@@ -76,9 +75,9 @@ const CardEvent = ({ event }: CardEventProps) => {
               <Button
                 variant="contained"
                 sx={{
-                  marginTop: { xs: '2rem', md: '2.5rem' },
+                  marginTop: { xs: '2rem', lg: '2.5rem' },
                   textAlign: 'center',
-                  maxWidth: { xs: '100%', sm: 'min-content' },
+                  maxWidth: { xs: '100%', lg: 'min-content' },
                 }}
                 href={event.buttonLink}
               >
@@ -90,7 +89,7 @@ const CardEvent = ({ event }: CardEventProps) => {
       </Card>
     )
   } else {
-    // smallScreen (tablet)
+    // mediumScreen (tablet)
     return (
       <Card>
         <CardContent>
