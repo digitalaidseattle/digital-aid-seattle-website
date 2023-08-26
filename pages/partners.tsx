@@ -18,6 +18,7 @@ import {
 } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
+import CardLeft from 'components/cards/CardLeft'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
@@ -155,7 +156,17 @@ const PartnersPage = () => {
         >
           <Typography variant="headlineLarge">Our criteria</Typography>
 
-          <CardGridContainer columns={4}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: '1fr',
+                md: 'repeat(2, minmax(0, 1fr))',
+                lg: 'repeat(4, minmax(0, 1fr))',
+              },
+              gap: '2rem',
+            }}
+          >
             {criteriaContent.map((item) => (
               <CardOne
                 key={item.title}
@@ -164,11 +175,11 @@ const PartnersPage = () => {
                 icon={item.icon}
               />
             ))}
-          </CardGridContainer>
+          </Box>
           <Typography variant="headlineLarge">How we can help</Typography>
           <CardGridContainer columns={3}>
             {provideContent.map((item) => (
-              <CardOne
+              <CardLeft
                 key={item.title}
                 title={item.title}
                 description={item.description}
