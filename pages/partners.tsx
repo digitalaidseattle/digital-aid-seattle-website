@@ -23,6 +23,7 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 import PartnerImage from '../assets/partnerWithUs.png'
+import MastheadWithImage from 'components/MastheadWithImage'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -92,60 +93,28 @@ const PartnersPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <SectionContainer backgroundColor={theme.palette.primary.main}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-            alignItems: 'center',
-            gap: { xs: 4, md: '40px' },
-          }}
-          maxWidth={'880px'}
-        >
-          <Box
+      <MastheadWithImage
+        imageSrc={PartnerImage.src}
+        imageText="Partner graphic"
+      >
+        <>
+          <Typography
+            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            Partner with us
+          </Typography>
+          <Typography
+            variant="headlineLarge"
             sx={{
-              textAlign: 'left',
-              width: '100%',
-              maxWidth: '418px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem  ',
+              color: theme.palette.primary.contrastText,
             }}
           >
-            <Typography
-              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
-              sx={{ color: theme.palette.primary.contrastText }}
-            >
-              Partner with us
-            </Typography>
-            <Typography
-              variant="headlineLarge"
-              sx={{
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Open Seattle works with Seattle-based nonprofits to create
-              customized digital solutions for their needs, for free.
-            </Typography>
-            <div style={{ marginTop: '1rem' }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
-                target="_blank"
-              >
-                Partner with us
-              </Button>
-            </div>
-          </Box>
-          <img
-            src={PartnerImage.src}
-            alt="Partner page graphic"
-            width="418px"
-            style={{ objectFit: 'cover' }}
-          />
-        </Box>
-      </SectionContainer>
+            Open Seattle works with Seattle-based nonprofits to create
+            customized digital solutions for their needs, for free.
+          </Typography>
+        </>
+      </MastheadWithImage>
       <SectionContainer backgroundColor={designColor.background}>
         <Stack
           gap={{ xs: '64px', md: '80px' }}
