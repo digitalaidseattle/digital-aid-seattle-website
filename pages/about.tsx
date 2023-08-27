@@ -50,6 +50,7 @@ import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_managemen
 import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
 import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
+import MastheadWithImage from 'components/MastheadWithImage'
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -88,54 +89,29 @@ const AboutUsSection = ({ backgroundColor, children }) => (
 const AboutUsHeroSection = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
   return (
-    <SectionContainer backgroundColor={theme.palette.primary.main}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', lg: 'row' },
-          alignItems: 'center',
-          gap: { xs: 4, md: '40px' },
-        }}
-      >
-        <Box
+    <MastheadWithImage imageSrc={AboutUsImage.src} imageText="About Us page graphic">
+      <>
+        <Typography
+          variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+          sx={{ color: theme.palette.primary.contrastText }}
+        >
+          About us
+        </Typography>
+        <Typography
+          variant="bodyLarge"
           sx={{
-            textAlign: 'left',
-            width: '100%',
-            maxWidth: largeScreen ? '418px' : '950px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem',
+            color: theme.palette.primary.contrastText,
           }}
         >
-          <Typography
-            variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
-            sx={{ color: theme.palette.primary.contrastText }}
-          >
-            About us
-          </Typography>
-          <Typography
-            variant="bodyLarge"
-            sx={{
-              color: theme.palette.primary.contrastText,
-            }}
-          >
-            Open Seattle comprises a group of seasoned professionals with
-            experience in web development, software engineering, digital
-            strategy, visual and content design, and more. We leverage this vast
-            experience to transform the nonprofit sector—to make it more
-            efficient, effective, and accessible to all.
-          </Typography>
-        </Box>
-        <img
-          src={AboutUsImage.src}
-          alt="About Us page graphic"
-          width="418px"
-          style={{ objectFit: 'cover' }}
-        />
-      </Box>
-    </SectionContainer>
+          Open Seattle comprises a group of seasoned professionals with
+          experience in web development, software engineering, digital
+          strategy, visual and content design, and more. We leverage this vast
+          experience to transform the nonprofit sector—to make it more
+          efficient, effective, and accessible to all.
+        </Typography>
+      </>
+    </MastheadWithImage>
   )
 }
 
