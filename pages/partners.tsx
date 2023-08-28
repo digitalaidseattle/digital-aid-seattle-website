@@ -113,6 +113,17 @@ const PartnersPage = () => {
             Open Seattle works with Seattle-based nonprofits to create
             customized digital solutions for their needs, for free.
           </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            target="_blank"
+            sx={{
+              alignSelf: 'flex-start',
+            }}
+          >
+            Partner with us
+          </Button>
         </>
       </MastheadWithImage>
       <SectionContainer backgroundColor={designColor.background}>
@@ -226,16 +237,18 @@ const PartnersPage = () => {
           <Typography variant="headlineLarge">
             Interested in partnering with Open Seattle?
           </Typography>
-          <div>
-            <Button
-              variant="contained"
-              color="secondary"
-              href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
-              target="_blank"
-            >
-              Partner with us
-            </Button>
-          </div>
+
+          <Button
+            variant="contained"
+            color="secondary"
+            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            target="_blank"
+            sx={{
+              alignSelf: 'center',
+            }}
+          >
+            Partner with us
+          </Button>
         </Stack>
       </SectionContainer>
     </Container>
