@@ -40,6 +40,8 @@ const CardEvent = ({ event }: CardEventProps) => {
               flexShrink: '0',
               margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
               minWidth: '0',
+              borderRadius: '8px',
+              overflow: 'hidden',
             }}
           >
             <CardMedia
@@ -49,7 +51,6 @@ const CardEvent = ({ event }: CardEventProps) => {
               sx={{
                 position: { xs: 'absolute', lg: 'static' },
                 height: '100%',
-                borderRadius: '8px',
               }}
             />
           </Box>
