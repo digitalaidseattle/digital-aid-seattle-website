@@ -25,8 +25,6 @@
     "@sanity/demo": "^1.0.1",
     "@sanity/icons": "^2.2.2",
     "@sanity/vision": "^3.1.4",
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/typography": "^0.5.8",
     "@types/material-ui": "^0.21.12",
     "airtable": "^0.11.6",
     "clsx": "^1.2.1",
