@@ -24,6 +24,8 @@
     "@portabletext/react": "^2.0.1",
     "@sanity/demo": "^1.0.1",
     "@sanity/icons": "^2.2.2",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/orderable-document-list": "^1.1.0",
     "@sanity/vision": "^3.1.4",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",

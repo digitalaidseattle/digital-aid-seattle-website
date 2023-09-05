@@ -1,4 +1,4 @@
-import { getTeamMembers } from '../sanity/sanity-utils'
+import { getTeamMembers, urlFor } from '../sanity/sanity-utils'
 import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
@@ -18,6 +18,7 @@ const ProjectIndividualPage = () => {
   useEffect(() => {
     const getTeamData = async () => {
       const fetchedData = await getTeamMembers()
+      console.log(fetchedData)
       setTeamData(fetchedData)
     }
     getTeamData()
@@ -270,7 +271,7 @@ const ProjectIndividualPage = () => {
                   key={person._id}
                   title={person.name}
                   description={person.role}
-                  image={person.image}
+                  image={urlFor(person.image).url()}
                 />
               ))}
             </Box>
