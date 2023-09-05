@@ -1,4 +1,5 @@
-import { getTeamMembers, urlFor } from '../sanity/sanity-utils'
+import { getTeamMembers } from '../sanity/lib/client'
+import { urlForImage } from '../sanity/lib/image'
 import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
@@ -271,7 +272,7 @@ const ProjectIndividualPage = () => {
                   key={person._id}
                   title={person.name}
                   description={person.role}
-                  image={urlFor(person.image).url()}
+                  image={urlForImage(person.image).url()}
                 />
               ))}
             </Box>

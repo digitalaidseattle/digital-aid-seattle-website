@@ -56,3 +56,5 @@ export const homePageQuery = groq`
     }
   }
 `
+
+export const teamMemberQuery = groq`*[_type == "team-member"]|order(orderRank)`
