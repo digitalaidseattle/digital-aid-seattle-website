@@ -45,44 +45,38 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '1800px', lg: '1280px' },
+            width: { xs: '600px', md: '2321px' },
             height: 'auto',
-            left: { xs: 0, sm: '50%' },
+            left: { xs: '50%', sm: '50%' },
             top: { xs: 0, sm: '50%' },
             transform: {
-              sm: 'rotate(90deg)translate(15%, 125%)',
+              sm: 'rotate(90deg)translate(-50%, 25%)',
               md: 'translate(-50%, -50%)',
             },
+            opacity: 0.4,
+            mixBlendMode: 'overlay',
           }}
         >
           {isMediumScreen ? (
             <img
               src={HeroLinesMobile.src}
               alt="Hero Lines"
-              style={{
-                opacity: 0.3,
-                objectFit: 'cover',
-                mixBlendMode: 'overlay',
-              }}
+              style={
+                {
+                  // objectFit: 'cover',
+                }
+              }
             />
           ) : (
-            <img
-              src={HeroLines.src}
-              alt="Hero Lines"
-              style={{
-                opacity: 0.3,
-                objectFit: 'cover',
-                mixBlendMode: 'overlay',
-              }}
-            />
+            <img src={HeroLines.src} alt="Hero Lines" style={{}} />
           )}
         </Box>
         {/* Hero Content */}
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-            gap: { xs: 4, md: 12 },
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+            gap: { xs: '64px', md: '87px', lg: 4 },
             alignItems: 'center',
             textAlign: { xs: 'center', lg: 'left' },
             paddingX: { xs: '16px', md: '32px', lg: 0 },
@@ -97,7 +91,7 @@ const Home = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              gap: { xs: 3, sm: 5 },
+              gap: { xs: 3, sm: '64px' },
               alignItems: { xs: 'center', lg: 'flex-start' },
               textAlign: { xs: 'center', lg: 'left' },
             }}
@@ -116,7 +110,12 @@ const Home = () => {
                 flexDirection: { xs: 'column', lg: 'row' },
               }}
             >
-              <Button variant="contained" color="secondary" size="small">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                href={'/partners'}
+              >
                 Partner With Us
               </Button>
               <Button
@@ -127,6 +126,7 @@ const Home = () => {
                   backgroundColor: '#004138',
                   marginBottom: { xs: '32px', md: '0px' },
                 }}
+                href={'/volunteers'}
               >
                 Volunteer With Us
               </Button>
@@ -153,7 +153,7 @@ const Home = () => {
               {/* Image Container */}
               <Box
                 sx={{
-                  position: 'relative',
+                  // position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   width: { xs: '275px', md: '424px' },
@@ -231,9 +231,10 @@ const Home = () => {
       <SectionContainer backgroundColor={palette.background.default}>
         <Stack
           sx={{
-            gap: { xs: 3, md: 5 },
+            gap: { xs: 3, lg: 10 },
             justifyContent: 'space-around',
             alignItems: 'center',
+            marginBottom: { sm: 4, lg: 10 },
           }}
           maxWidth={'880px'}
         >
@@ -250,7 +251,11 @@ const Home = () => {
           </Typography>
           <Button
             variant="contained"
-            sx={{ backgroundColor: palette.primary.dark }}
+            href={'/about'}
+            sx={{
+              backgroundColor: palette.primary.dark,
+              marginBottom: { sm: 4, lg: 10 },
+            }}
           >
             Learn About Us
           </Button>
@@ -258,6 +263,7 @@ const Home = () => {
             <CardOne
               description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
+              buttonLink="/partners"
               icon={
                 <HandshakeOutlinedIcon
                   fontSize="large"
@@ -268,6 +274,7 @@ const Home = () => {
             <CardOne
               description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
               buttonText="Volunteer With Us"
+              buttonLink="/volunteers"
               icon={
                 <Groups2OutlinedIcon
                   fontSize="large"

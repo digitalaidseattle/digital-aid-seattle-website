@@ -52,19 +52,22 @@ const CommonFooterLargeScreen = () => (
   <Grid container direction="row" rowGap="2.5rem">
     {/* LOGO */}
     <GridItem md={3}>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '80%',
-          width: '120px',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '80%',
+            width: '120px',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem md={4}>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">info@openseattle.org</a>
+        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -98,13 +101,13 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">How can you help</a>
+        <a href="mailto:info@openseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem md={4}>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem md={1} display="flex" flexDirection="column">
@@ -132,18 +135,20 @@ const CommonFooterMidScreen = () => (
           height: '100%',
         }}
       >
-        <img
-          src={OSLogo.src}
-          style={{
-            height: 'auto',
-            width: '120px',
-          }}
-        />
-
+        <Link href="/">
+          <img
+            src={OSLogo.src}
+            style={{
+              height: 'auto',
+              width: '120px',
+            }}
+            alt="Open Seattle Home"
+          />
+        </Link>
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:name@email.com">info@openseattle.org</a>
+            <a href="mailto:info@openseattle.org">info@openseattle.org</a>
           </FooterSubItem>
         </Box>
 
@@ -174,13 +179,13 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:name@email.com">How can you help</a>
+            <a href="mailto:info@openseattle.org">How you can help</a>
           </FooterSubItem>
         </Box>
 
         <Box>
           <FooterItemTitle>About Open Seattle</FooterItemTitle>
-          <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+          <LinkSubItem url="/privacy" name="Privacy Policy" />
         </Box>
       </Box>
     </GridItem>
@@ -219,13 +224,16 @@ const CommonFooterSmallScreen = () => (
   >
     {/* LOGO */}
     <GridItem>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '3rem',
-          width: 'auto',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '3rem',
+            width: 'auto',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem>
@@ -237,20 +245,21 @@ const CommonFooterSmallScreen = () => (
     <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">info@openseattle.org</a>
+        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:name@email.com">How can you help</a>
+        {/* TODO Update to support-us page, when the page is added */}
+        <a href="mailto:info@openseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem>
       <FooterItemTitle>About Open Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy-policy" name="Privacy Policy" />
+      <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
     <GridItem display="flex" sx={{ gap: '1rem' }}>

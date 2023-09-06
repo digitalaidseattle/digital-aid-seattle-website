@@ -12,6 +12,7 @@ const CardRowContainer = ({ children }: Props) => {
         display: 'grid',
         gridTemplateColumns: {
           xs: '1fr',
+          md: '1fr',
           lg: 'repeat(3, minmax(0, 1fr))',
         },
         gap: '2rem',
