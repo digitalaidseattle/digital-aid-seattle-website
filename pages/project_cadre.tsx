@@ -328,7 +328,9 @@ const ProjectIndividualPage = () => {
             <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
               Questions about this project?
             </Subheader>
-            <Button variant="outlined">Contact us</Button>
+            <Button variant="outlined" href="mailto:info@openseattle.org">
+              Contact us
+            </Button>
           </Section>
         </Stack>
       </SectionContainer>
