@@ -52,13 +52,16 @@ const CommonFooterLargeScreen = () => (
   <Grid container direction="row" rowGap="2.5rem">
     {/* LOGO */}
     <GridItem md={3}>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '80%',
-          width: '120px',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '80%',
+            width: '120px',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem md={4}>
@@ -132,14 +135,16 @@ const CommonFooterMidScreen = () => (
           height: '100%',
         }}
       >
-        <img
-          src={OSLogo.src}
-          style={{
-            height: 'auto',
-            width: '120px',
-          }}
-        />
-
+        <Link href="/">
+          <img
+            src={OSLogo.src}
+            style={{
+              height: 'auto',
+              width: '120px',
+            }}
+            alt="Open Seattle Home"
+          />
+        </Link>
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
@@ -219,13 +224,16 @@ const CommonFooterSmallScreen = () => (
   >
     {/* LOGO */}
     <GridItem>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '3rem',
-          width: 'auto',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '3rem',
+            width: 'auto',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem>
