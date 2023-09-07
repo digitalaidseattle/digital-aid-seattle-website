@@ -27,10 +27,9 @@ const EventsPage = () => {
 
   useEffect(() => {
     osEventsService.getActiveEvents()
-      .then(evs => {
-        setEvents(evs);
-        setLoading(false);
-      });
+      .then(evs => setEvents(evs))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))      
   }, []);
 
   return (
