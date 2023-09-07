@@ -3,6 +3,7 @@
 */
 
 import {
+  CircularProgress,
   Container,
   Stack,
   Typography,
@@ -21,11 +22,15 @@ const EventsPage = () => {
   const palette = theme.palette
 
   const title = 'Events';
+  const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     osEventsService.getActiveEvents()
-      .then(e => setEvents(e));
+      .then(evs => {
+        setEvents(evs);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -38,11 +43,23 @@ const EventsPage = () => {
         }}
         maxWidth={false}
       >
-        {(events.length > 0) &&
+        {loading &&
+          <Stack
+            sx={{
+              backgroundColor: theme.palette.primary.contrastText,
+              alignItems: 'center',
+              padding: {
+                xs: '2.5rem 1rem 4rem 1rem',
+                md: '2.5rem 2rem 4rem 2rem',
+                lg: '2.5rem 12.5rem 7.5rem 12.5rem',
+              },
+            }}><CircularProgress />
+          </Stack>}
+        {(!loading && events.length > 0) &&
           <CardRowContainer>
             {events.map(event => <CardEvent key={event.title} event={event} />)}
           </CardRowContainer>}
-        {(events.length === 0) &&
+        {(!loading && events.length === 0) &&
           <Stack
             sx={{
               backgroundColor: theme.palette.primary.contrastText,
