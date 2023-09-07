@@ -1,13 +1,17 @@
+/*
+* @2023 Open Seattle
+*/
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Stack from '@mui/material/Stack'
-import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { OSEvent } from 'pages/api/EventsService'
+import { urlForImage } from '../../sanity/lib/image'
+import { OSEvent } from 'types'
 
 type CardEventProps = {
   event: OSEvent
@@ -18,9 +22,7 @@ const CardEvent = ({
 }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-  const mediumScreen = useMediaQuery(theme.breakpoints.up('md'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
-
   if (extraSmallScreen || largeScreen) {
     return (
       <Card>
@@ -42,8 +44,8 @@ const CardEvent = ({
           >
             <CardMedia
               component="img"
-              alt={event.imageAlt}
-              image={event.imageSrc}
+              alt={event.image.alt}
+              image={urlForImage(event.image).url()}
               sx={{
                 position: { xs: 'absolute', sm: 'static' },
                 height: '100%',
@@ -63,7 +65,7 @@ const CardEvent = ({
                 <Stack direction="row" spacing="1rem">
                   <Typography variant="labelLarge">{event.date}</Typography>
                   <Typography variant="labelLarge">
-                    {event.time.start} - {event.time.end}
+                    {event.start} - {event.end}
                   </Typography>
                 </Stack>
                 <Typography variant="labelMedium">{event.location}</Typography>
@@ -75,17 +77,17 @@ const CardEvent = ({
               >
                 {event.description}
               </Typography>
-              <Button
+              {event.rsvpLink && <Button
                 variant="contained"
                 sx={{
                   marginTop: { xs: '2rem', md: '2.5rem' },
                   textAlign: 'center',
                   maxWidth: { xs: '100%', sm: 'min-content' },
                 }}
-                href={event.buttonLink}
+                href={event.rsvpLink}
               >
                 RVSP
-              </Button>
+              </Button>}
             </Stack>
           </CardContent>
         </Stack>
@@ -125,7 +127,7 @@ const CardEvent = ({
               <Stack direction="row" spacing="1rem">
                 <Typography variant="labelLarge">{event.date}</Typography>
                 <Typography variant="labelLarge">
-                  {event.time.start} - {event.time.end}
+                  {event.start} - {event.end}
                 </Typography>
               </Stack>
               <Typography variant="labelMedium">{event.location}</Typography>

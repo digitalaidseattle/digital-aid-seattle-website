@@ -5,6 +5,7 @@
 import {
   Container,
   Stack,
+  Typography,
   useTheme
 } from '@mui/material'
 import Masthead from 'components/Masthead'
@@ -23,7 +24,8 @@ const EventsPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    setEvents(osEventsService.getActiveEvents());
+    osEventsService.getActiveEvents()
+      .then(e => setEvents(e));
   }, []);
 
   return (
@@ -51,7 +53,9 @@ const EventsPage = () => {
                 lg: '2.5rem 12.5rem 7.5rem 12.5rem',
               },
             }}>
-            There are currently no events scheduled, please check back in the future.
+            <Typography sx={{ textAlign: 'center' }}>
+              There are currently no events scheduled, please check back in the future.
+            </Typography>
           </Stack>}
       </Container>
     </div >
