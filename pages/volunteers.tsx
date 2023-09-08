@@ -51,14 +51,61 @@ const gridContent = [
 ]
 
 const oathContent = [
-  { label: 'Assume positive intent.', content: 'Needs Content' },
-  { label: 'Bring out the best in others.', content: 'Needs Content' },
-  { label: 'Start with the partner.', content: 'Needs Content' },
   {
-    label: 'Focus on the problems not the solutions.',
-    content: 'Needs Content',
+    label: 'Serve wholeheartedly.',
+    content:
+      'I will selflessly fulfill the needs identified by our partners, the glamorous and the mundane. I will gladly handle any necessary tasks, both analog and digital.',
   },
-  { label: 'Sense of urgency and teamwork', content: 'Needs Content' },
+  {
+    label: 'Prioritize support.',
+    content:
+      'I will always begin by asking how I can be of assistance, placing the needs of the team and projects above personal ideas or approaches.',
+  },
+  {
+    label: 'Foster collaboration.',
+    content:
+      'Before initiating any work, I will explore existing projects, individuals, or organizations working in related fields. I will actively seek opportunities for collaboration and alignment whenever feasible.',
+  },
+  {
+    label: 'Embrace curiosity.',
+    content:
+      'I will ask "why" when faced with uncertainty, recognizing the inherent value in diverse perspectives, skills, and contributions from all team members.',
+  },
+  {
+    label: 'Listen intently.',
+    content:
+      'I will prioritize active listening, valuing the insights and ideas shared by others.',
+  },
+  {
+    label: 'Uphold privacy standards.',
+    content:
+      'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless OS explicitly endorses such discussions through published materials or media outlets.',
+  },
+  {
+    label: 'Safeguard partner information.',
+    content:
+      'I will safeguard our partners’ personal information, preserving and personal data encountered in my role as an Open Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
+  },
+  {
+    label: 'Maintain open communication.',
+    content:
+      'I will promptly notify Open Seattle of any changes in my availability, project status, or progress. Additionally, I will report any issues or updates to ensure transparency and effective coordination.',
+  },
+  {
+    label: 'Promote inclusivity.',
+    content:
+      'I will contribute to fostering an environment free from harassment and discrimination, upholding the principles of equality and respect. I will not engage in any form of discrimination.',
+  },
+  {
+    label: 'Comply and collaborate.',
+    content:
+      'I will comply with all applicable laws and adhere to the operating procedures set by our partners, promoting harmonious collaboration and mutual respect.',
+  },
+  {
+    label: 'Uphold our mission.',
+    content:
+      "I commit to understanding and upholding Open Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
+  },
 ]
 
 const processContent = [
@@ -79,7 +126,10 @@ const VolunteerPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <MastheadWithImage imageSrc={VolunteerImage.src} imageText="Volunteer graphic" >
+      <MastheadWithImage
+        imageSrc={VolunteerImage.src}
+        imageText="Volunteer graphic"
+      >
         <>
           <Typography
             variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
