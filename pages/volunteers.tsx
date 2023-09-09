@@ -109,7 +109,7 @@ const VolunteerPage = () => {
           paddingY: { xs: 4, md: 8 },
           paddingX: { xs: '1rem', md: '2rem', lg: 0 },
         }}
-        maxWidth={'1000px'}
+        maxWidth={'880px'}
       >
         <Typography variant="headlineLarge">How you can participate</Typography>
         <Grid container spacing={2}>
@@ -169,8 +169,8 @@ const VolunteerPage = () => {
           gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'left',
-            width: { xs: '100%', lg: '1000px' },
-            maxWidth: '1000px',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
           }}
         >
           <Typography variant="headlineLarge">Our Oath</Typography>
@@ -206,8 +206,8 @@ const VolunteerPage = () => {
         <Stack
           gap={{ xs: 4, md: 8 }}
           sx={{
-            width: { xs: '100%', lg: '1000px' },
-            maxWidth: '1000px',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
           }}
         >
           <Typography variant="headlineLarge">The Process</Typography>
@@ -232,7 +232,7 @@ const VolunteerPage = () => {
           gap={{ xs: 4, md: 8 }}
           sx={{
             textAlign: 'center',
-            maxWidth: '1000px',
+            maxWidth: '880px',
             marginX: 'auto',
           }}
         >
