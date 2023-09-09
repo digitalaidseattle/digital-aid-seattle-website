@@ -90,7 +90,10 @@ const AboutUsHeroSection = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   return (
-    <MastheadWithImage imageSrc={AboutUsImage.src} imageText="About Us page graphic">
+    <MastheadWithImage
+      imageSrc={AboutUsImage.src}
+      imageText="About Us page graphic"
+    >
       <>
         <Typography
           variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
@@ -105,10 +108,10 @@ const AboutUsHeroSection = () => {
           }}
         >
           Open Seattle comprises a group of seasoned professionals with
-          experience in web development, software engineering, digital
-          strategy, visual and content design, and more. We leverage this vast
-          experience to transform the nonprofit sector—to make it more
-          efficient, effective, and accessible to all.
+          experience in web development, software engineering, digital strategy,
+          visual and content design, and more. We leverage this vast experience
+          to transform the nonprofit sector—to make it more efficient,
+          effective, and accessible to all.
         </Typography>
       </>
     </MastheadWithImage>
