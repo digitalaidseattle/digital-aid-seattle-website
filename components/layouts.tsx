@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { theme } from 'theme/theme'
+import GlobalStyles from '@mui/material/GlobalStyles'
+import CssBaseline from '@mui/material/CssBaseline'
 
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
@@ -25,6 +27,15 @@ export const FooterContainer = styled.footer`
 export const withBasicLayout = (Page: () => JSX.Element) => () =>
   (
     <>
+      <CssBaseline />
+      <GlobalStyles
+        styles={{
+          a: {
+            color: 'inherit',
+            textDecoration: 'inherit',
+          },
+        }}
+      />
       <HeaderContainer>
         <CommonHeader />
       </HeaderContainer>

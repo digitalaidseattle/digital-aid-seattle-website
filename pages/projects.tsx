@@ -1,6 +1,7 @@
-import { Box,Stack, styled, Typography, useTheme } from '@mui/material'
+import { Box, Stack, styled, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import ProjectCadreImage from 'assets/project-image.png'
+import Masthead from 'components/Masthead'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -51,18 +52,7 @@ const ProjectsPage = () => {
 
   return (
     <>
-      <Stack
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          color: theme.palette.primary.contrastText,
-        }}
-      >
-        {extraSmallScreen ? (
-          <MobileHeader variant="displayMedium">Projects</MobileHeader>
-        ) : (
-          <DesktopHeader variant="displayLarge">Projects</DesktopHeader>
-        )}
-      </Stack>
+      <Masthead title="Projects" />
       <Box
         sx={{
           width: '100%',

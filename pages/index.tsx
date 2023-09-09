@@ -110,7 +110,12 @@ const Home = () => {
                 flexDirection: { xs: 'column', lg: 'row' },
               }}
             >
-              <Button variant="contained" color="secondary" size="small">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                href={'/partners'}
+              >
                 Partner With Us
               </Button>
               <Button
@@ -121,6 +126,7 @@ const Home = () => {
                   backgroundColor: '#004138',
                   marginBottom: { xs: '32px', md: '0px' },
                 }}
+                href={'/volunteers'}
               >
                 Volunteer With Us
               </Button>
@@ -245,6 +251,7 @@ const Home = () => {
           </Typography>
           <Button
             variant="contained"
+            href={'/about'}
             sx={{
               backgroundColor: palette.primary.dark,
               marginBottom: { sm: 4, lg: 10 },
@@ -256,6 +263,7 @@ const Home = () => {
             <CardOne
               description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
+              buttonLink="/partners"
               icon={
                 <HandshakeOutlinedIcon
                   fontSize="large"
@@ -266,6 +274,7 @@ const Home = () => {
             <CardOne
               description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
               buttonText="Volunteer With Us"
+              buttonLink="/volunteers"
               icon={
                 <Groups2OutlinedIcon
                   fontSize="large"

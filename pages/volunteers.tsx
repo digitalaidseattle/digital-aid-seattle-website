@@ -34,6 +34,8 @@ import Link from 'next/link'
 import { designColor } from 'theme/theme'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
+import { ReactElement, ReactNode } from 'react'
+import MastheadWithImage from 'components/MastheadWithImage'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -77,50 +79,28 @@ const VolunteerPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <SectionContainer backgroundColor={theme.palette.primary.main}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-            alignItems: 'center',
-            gap: { xs: 4, md: '40px' },
-          }}
-          maxWidth={'880px'}
-        >
-          <Box
+      <MastheadWithImage
+        imageSrc={VolunteerImage.src}
+        imageText="Volunteer graphic"
+      >
+        <>
+          <Typography
+            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            Volunteer with us
+          </Typography>
+          <Typography
+            variant="headlineLarge"
             sx={{
-              textAlign: 'left',
-              width: '100%',
-              maxWidth: '418px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem  ',
+              color: theme.palette.primary.contrastText,
             }}
           >
-            <Typography
-              variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
-              sx={{ color: theme.palette.primary.contrastText }}
-            >
-              Volunteer with us
-            </Typography>
-            <Typography
-              variant="headlineLarge"
-              sx={{
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Join Open Seattle to make a difference in the lives of others! We
-              have a wide range of volunteer opportunities available.
-            </Typography>
-          </Box>
-          <img
-            src={VolunteerImage.src}
-            alt="Volunteer page graphic"
-            width="418px"
-            style={{ objectFit: 'cover' }}
-          />
-        </Box>
-      </SectionContainer>
+            Join Open Seattle to make a difference in the lives of others! We
+            have a wide range of volunteer opportunities available.
+          </Typography>
+        </>
+      </MastheadWithImage>
       {/* Volunteer Roles Section */}
       <Stack
         gap={{ xs: '64px', md: '80px' }}

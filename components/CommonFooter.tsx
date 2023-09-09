@@ -52,13 +52,16 @@ const CommonFooterLargeScreen = () => (
   <Grid container direction="row" rowGap="2.5rem">
     {/* LOGO */}
     <GridItem md={3}>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '80%',
-          width: '120px',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '80%',
+            width: '120px',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem md={4}>
@@ -98,7 +101,7 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">How can you help</a>
+        <a href="mailto:info@openseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
@@ -132,14 +135,16 @@ const CommonFooterMidScreen = () => (
           height: '100%',
         }}
       >
-        <img
-          src={OSLogo.src}
-          style={{
-            height: 'auto',
-            width: '120px',
-          }}
-        />
-
+        <Link href="/">
+          <img
+            src={OSLogo.src}
+            style={{
+              height: 'auto',
+              width: '120px',
+            }}
+            alt="Open Seattle Home"
+          />
+        </Link>
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
@@ -174,7 +179,7 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@openseattle.org">How can you help</a>
+            <a href="mailto:info@openseattle.org">How you can help</a>
           </FooterSubItem>
         </Box>
 
@@ -219,13 +224,16 @@ const CommonFooterSmallScreen = () => (
   >
     {/* LOGO */}
     <GridItem>
-      <img
-        src={OSLogo.src}
-        style={{
-          height: '3rem',
-          width: 'auto',
-        }}
-      />
+      <Link href="/">
+        <img
+          src={OSLogo.src}
+          style={{
+            height: '3rem',
+            width: 'auto',
+          }}
+          alt="Open Seattle Home"
+        />
+      </Link>
     </GridItem>
 
     <GridItem>
@@ -245,7 +253,7 @@ const CommonFooterSmallScreen = () => (
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         {/* TODO Update to support-us page, when the page is added */}
-        <a href="mailto:info@openseattle.org">How can you help</a>
+        <a href="mailto:info@openseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 

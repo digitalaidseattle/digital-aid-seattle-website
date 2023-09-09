@@ -1,9 +1,11 @@
 import { Box } from '@mui/material'
+import { theme } from 'theme/theme'
 const SectionContainer = ({ backgroundColor, children }) => {
   return (
     <Box
       sx={{
         bgcolor: backgroundColor,
+        color: theme.palette.primary.main,
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
