@@ -1,7 +1,7 @@
 import { createClient } from 'next-sanity'
 
 import { apiVersion, dataset, projectId, useCdn } from '../env'
-import { homePageQuery, pagePaths, pagesBySlugQuery } from './queries'
+import { homePageQuery, pagePaths, pagesBySlugQuery, teamMemberQuery } from './queries'
 
 export const sanityClient = (token?: string, useCdn?: boolean) => {
   return projectId
@@ -27,4 +27,8 @@ export async function getHomePage() {
 
 export async function getPagePaths(): Promise<string[] | undefined> {
   return await sanityClient()?.fetch(pagePaths)
+}
+
+export async function getTeamMembers(): Promise<TeamMember[]> {
+  return await sanityClient()?.fetch(teamMemberQuery)
 }

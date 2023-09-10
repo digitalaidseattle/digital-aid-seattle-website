@@ -24,6 +24,8 @@
     "@portabletext/react": "^2.0.1",
     "@sanity/demo": "^1.0.1",
     "@sanity/icons": "^2.2.2",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/orderable-document-list": "^1.1.0",
     "@sanity/vision": "^3.1.4",
     "@types/material-ui": "^0.21.12",
     "airtable": "^0.11.6",

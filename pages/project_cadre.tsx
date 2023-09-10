@@ -1,16 +1,37 @@
+import { getTeamMembers } from '../sanity/lib/client'
+import { urlForImage } from '../sanity/lib/image'
+import { useEffect, useState } from 'react'
+
 import DataObjectIcon from '@mui/icons-material/DataObject'
-import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+  CircularProgress,
+} from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
 // imports for placeholders-- delete as needed
-import Placeholder from 'assets/placeholder-person.png'
 import ProjectPlaceholder from 'assets/logo-light-icon.svg'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
 
 const ProjectIndividualPage = () => {
+  const [teamData, setTeamData] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getTeamMembers()
+      .then((fetchedData) => setTeamData(fetchedData))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }, [])
+
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
@@ -242,6 +263,11 @@ const ProjectIndividualPage = () => {
             >
               Current Team
             </Subheader>
+            {loading && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </Box>
+            )}
             <Box
               sx={{
                 display: 'grid',
@@ -253,41 +279,14 @@ const ProjectIndividualPage = () => {
                 width: '100%',
               }}
             >
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
-              <CardWithPhoto
-                title="Jeffrey"
-                description="Program Manager"
-                image={Placeholder.src}
-              />
+              {teamData.map((person) => (
+                <CardWithPhoto
+                  key={person._id}
+                  title={person.name}
+                  description={person.role}
+                  image={urlForImage(person.image).url()}
+                />
+              ))}
             </Box>
           </Section>
 
