@@ -3,7 +3,15 @@ import { urlForImage } from '../sanity/lib/image'
 import { useEffect, useState } from 'react'
 
 import DataObjectIcon from '@mui/icons-material/DataObject'
-import { Box, Button, Stack, styled, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+  CircularProgress,
+} from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
 // imports for placeholders-- delete as needed
@@ -15,14 +23,13 @@ import CardWithPhoto from 'components/cards/CardWithPhoto'
 
 const ProjectIndividualPage = () => {
   const [teamData, setTeamData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const getTeamData = async () => {
-      const fetchedData = await getTeamMembers()
-      console.log(fetchedData)
-      setTeamData(fetchedData)
-    }
-    getTeamData()
+    getTeamMembers()
+      .then((fetchedData) => setTeamData(fetchedData))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
   }, [])
 
   const theme = useTheme()
@@ -256,6 +263,11 @@ const ProjectIndividualPage = () => {
             >
               Current Team
             </Subheader>
+            {loading && (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+              </Box>
+            )}
             <Box
               sx={{
                 display: 'grid',
