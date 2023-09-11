@@ -1,9 +1,13 @@
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
+
 export default {
     name: 'os-event',
     type: 'document',
     title: 'OS Event',
+    orderings: [orderRankOrdering],
     fields: [
-        {
+        orderRankField({ type: "os-event" }),
+      {
             name: 'title',
             type: 'string',
             title: 'Title'
