@@ -10,8 +10,8 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { urlForImage } from '../../sanity/lib/image'
 import { OSEvent } from 'types'
+import { urlForImage } from '../../sanity/lib/image'
 
 type CardEventProps = {
   event: OSEvent

@@ -12,16 +12,7 @@ class OSEventService {
 
     async getActiveEvents(): Promise<OSEvent[]> {
         return sanityClient().fetch(this.eventsQuery);
-        // return this.getResourceFile();
     }
-
-    async getOSEvents(): Promise<OSEvent[]> {
-        return await sanityClient()?.fetch(this.eventsQuery)
-    }
-
-    // getResourceFile(): async OSEvent[] {
-    //     return [] //localEvents.map(json => new OSEvent(json));
-    // }
 
 }
 
