@@ -15,3 +15,11 @@ type OSEvent = {
     image: Image,
     rsvpLink: string
 }
+
+type TeamMember = {
+    _id: string,
+    _createdAt: Date,
+    name: string,
+    role: string,
+    image: string,
+}

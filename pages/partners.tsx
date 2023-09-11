@@ -11,15 +11,19 @@ import {
   Box,
   Button,
   Container,
-  Grid,
+  Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material'
+import CardGridContainer from 'components/cards/CardGridContainer'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
+import CardLeft from 'components/cards/CardLeft'
+import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
-
 import PartnerImage from '../assets/partnerWithUs.png'
+import MastheadWithImage from 'components/MastheadWithImage'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -81,189 +85,173 @@ const criteriaContent = [
 const PartnersPage = () => {
   const theme = useTheme()
   const palette = theme.palette
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   return (
-    <div>
-      <Container
-        sx={{
-          backgroundColor: theme.palette.primary.main,
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          paddingY: '5rem',
-        }}
-        maxWidth={false}
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <MastheadWithImage
+        imageSrc={PartnerImage.src}
+        imageText="Partner graphic"
       >
-        <Box
+        <>
+          <Typography
+            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+          >
+            Partner with us
+          </Typography>
+          <Typography
+            variant="headlineLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Open Seattle works with Seattle-based nonprofits to create
+            customized digital solutions for their needs, for free.
+          </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            target="_blank"
+            sx={{
+              alignSelf: 'flex-start',
+            }}
+          >
+            Partner with us
+          </Button>
+        </>
+      </MastheadWithImage>
+      <SectionContainer backgroundColor={designColor.background}>
+        <Stack
+          gap={{ xs: '64px', md: '80px' }}
           sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: 'center',
+            textAlign: 'center',
           }}
+          maxWidth={'880px'}
         >
-          <Box sx={{ width: '50%', textAlign: 'left' }} maxWidth={'422px'}>
-            <Typography
-              variant="displayLarge"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                marginBottom: '2rem',
-              }}
-            >
-              Partner with us
-            </Typography>
-            <Typography
-              variant="headlineLarge"
-              sx={{ color: theme.palette.primary.contrastText }}
-            >
-              Open Seattle works with Seattle-based nonprofits to create
-              customized digital solutions for their needs, for free.
-            </Typography>
-            <div style={{ margin: '2rem' }}>
+          <Typography variant="headlineLarge">Our criteria</Typography>
+
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: '1fr',
+                md: 'repeat(2, minmax(0, 1fr))',
+                lg: 'repeat(4, minmax(0, 1fr))',
+              },
+              gap: '2rem',
+            }}
+          >
+            {criteriaContent.map((item) => (
+              <CardOne
+                smallerTitle
+                key={item.title}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+              />
+            ))}
+          </Box>
+          <Typography variant="headlineLarge">How we can help</Typography>
+          <CardGridContainer columns={3}>
+            {provideContent.map((item) => (
+              <CardLeft
+                key={item.title}
+                title={item.title}
+                description={item.description}
+                icon={item.icon}
+              />
+            ))}
+          </CardGridContainer>
+        </Stack>
+      </SectionContainer>
+      <SectionContainer backgroundColor={designColor.white}>
+        <Stack
+          gap={{ xs: '64px', md: '80px' }}
+          sx={{
+            textAlign: 'left',
+          }}
+          maxWidth={'880px'}
+        >
+          <Stack gap={{ xs: 2, md: 4 }}>
+            <Typography variant="headlineLarge">The process</Typography>
+            <ol>
+              {processContent.map((item, index) => (
+                <li key={index + 1} style={{ marginBottom: '2rem' }}>
+                  <Typography
+                    variant="titleLarge"
+                    color={palette.primary.main}
+                  >{`${index + 1}.`}</Typography>
+                  <Typography variant="bodyLarge" mx={2}>
+                    {item}
+                  </Typography>
+                </li>
+              ))}
+            </ol>
+            <div>
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
                 target="_blank"
               >
                 Partner with us
               </Button>
             </div>
-          </Box>
-          <Box sx={{ width: '50%' }} maxWidth={'700px'}>
-            <img
-              src={PartnerImage.src}
-              alt="Partner page graphic"
-              style={{ objectFit: 'cover' }}
-            ></img>
-          </Box>
-        </Box>
-      </Container>
-      <Container
-        style={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.primary.main,
-          textAlign: 'center',
-          padding: '2rem',
-        }}
-        maxWidth={false}
-      >
-        <Box
+          </Stack>
+          <Stack gap={{ xs: 2, md: 4 }}>
+            <Typography variant="headlineLarge">
+              Partner expectations
+            </Typography>
+            <Typography variant="bodyLarge">
+              Partners should plan to maintain projects after handoff, and to
+              provide all volunteers with the necessary documentation for timely
+              project completion. All Open Seattle projects are open and
+              accessible by default.
+            </Typography>
+          </Stack>
+          <Stack gap={{ xs: 2, md: 4 }}>
+            <Typography variant="headlineLarge">
+              Volunteer expectations
+            </Typography>
+            <Typography variant="bodyLarge">
+              All of our volunteers are vetted for experience, and sign a
+              volunteer agreement before commencing work with Open Seattle.
+            </Typography>
+          </Stack>
+        </Stack>
+      </SectionContainer>
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '2rem', md: '2.5rem' }}
           sx={{
-            gap: '2rem',
-            display: 'grid',
-            margin: '2rem',
+            textAlign: 'center',
           }}
+          maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our criteria</Typography>
-
-          <Grid container spacing={2}>
-            {criteriaContent.map((item, index) => (
-              <Grid item md={3} key={index}>
-                <CardOne
-                  title={item.title}
-                  description={item.description}
-                  icon={item.icon}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <Box
-          sx={{
-            gap: '2rem',
-            display: 'grid',
-            margin: '2rem',
-            marginTop: '5rem',
-          }}
-        >
-          <Typography variant="headlineLarge">How we can help</Typography>
-
-          <Grid container spacing={2}>
-            {provideContent.map((item, index) => (
-              <Grid item md={4} key={index}>
-                <CardOne
-                  title={item.title}
-                  description={item.description}
-                  icon={item.icon}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </Container>
-      <Container
-        sx={{
-          backgroundColor: designColor.white,
-          color: theme.palette.primary.main,
-          padding: '2rem',
-        }}
-        maxWidth={false}
-      >
-        <Box sx={{ gap: '2rem', display: 'grid', margin: '2rem' }}>
-          <Typography variant="headlineLarge">The process</Typography>
-          <ol>
-            {processContent.map((item, index) => (
-              <li key={index + 1} style={{ marginBottom: '2rem' }}>
-                <Typography
-                  variant="titleLarge"
-                  color={palette.primary.main}
-                >{`${index + 1}.`}</Typography>
-                <Typography variant="bodyLarge" mx={2}>
-                  {item}
-                </Typography>
-              </li>
-            ))}
-          </ol>
-          <div style={{ margin: '2rem' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
-              target="_blank"
-            >
-              Partner with us
-            </Button>
-          </div>
-          <Typography variant="headlineLarge">Partner expectations</Typography>
-          <Typography variant="bodyLarge">
-            Partners should plan to maintain projects after handoff, and to
-            provide all volunteers with the necessary documentation for timely
-            project completion. All Open Seattle projects are open and
-            accessible by default.
-          </Typography>
           <Typography variant="headlineLarge">
-            Volunteer expectations
+            Interested in partnering with Open Seattle?
           </Typography>
-          <Typography variant="bodyLarge">
-            All of our volunteers are vetted for experience, and sign a
-            volunteer agreement before commencing work with Open Seattle.
-          </Typography>
-        </Box>
-      </Container>
-      <Container
-        style={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.primary.main,
-          textAlign: 'center',
-          padding: '5rem',
-        }}
-        maxWidth={false}
-      >
-        <Typography variant="headlineLarge">
-          Interested in partnering with Open Seattle?
-        </Typography>
-        <div style={{ margin: '2rem' }}>
+
           <Button
             variant="contained"
             color="secondary"
             href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
             target="_blank"
+            sx={{
+              alignSelf: 'center',
+            }}
           >
             Partner with us
           </Button>
-        </div>
-      </Container>
-    </div>
+        </Stack>
+      </SectionContainer>
+    </Container>
   )
 }
 

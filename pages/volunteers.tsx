@@ -79,7 +79,10 @@ const VolunteerPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <MastheadWithImage imageSrc={VolunteerImage.src} imageText="Volunteer graphic" >
+      <MastheadWithImage
+        imageSrc={VolunteerImage.src}
+        imageText="Volunteer graphic"
+      >
         <>
           <Typography
             variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}

@@ -9,14 +9,12 @@ loadEnvConfig(__dirname, dev, { info: () => null, error: console.error })
 // @TODO report top-level await bug
 // Using a dynamic import here as `loadEnvConfig` needs to run before this file is loaded
 // const { projectId, dataset } = await import('lib/sanity.api')
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+import { apiVersion, dataset, projectId } from './sanity/env'
 
 export const client = createClient({
   projectId,
   dataset,
-  apiVersion: '2023-05-12',
+  apiVersion,
   useCdn: false,
 })
 const config = defineCliConfig({ api: { projectId, dataset } })
