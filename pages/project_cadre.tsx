@@ -272,8 +272,8 @@ const ProjectIndividualPage = () => {
               sx={{
                 display: 'grid',
                 gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-                alignItems: 'center',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
+                // alignItems: 'flex-start',
                 justifyContent: 'center',
                 gap: '2rem',
                 width: '100%',
