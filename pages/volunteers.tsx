@@ -241,11 +241,6 @@ const VolunteerPage = () => {
               </Accordion>
             ))}
           </Box>
-          {/*           <Link href="/volunteer-agreement" passHref>
-            <Button variant="contained" color="primary">
-              Read Our Volunteer Agreement
-            </Button>
-          </Link> */}
         </Stack>
       </SectionContainer>
       {/* Process Section */}
