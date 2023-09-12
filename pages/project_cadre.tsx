@@ -408,7 +408,13 @@ const ProjectIndividualPage = () => {
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Interested in volunteering with Open Seattle?
           </Subheader>
-          <Button variant="contained">Apply to volunteer</Button>
+          <Button
+            variant="contained"
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            target="_blank"
+          >
+            Apply to volunteer
+          </Button>
         </Section>
       </SectionContainer>
     </>
