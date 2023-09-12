@@ -131,7 +131,6 @@ const ProjectIndividualPage = () => {
             backgroundColor: theme.palette.primary.main,
             width: '100%',
             height: '28.75rem',
-            color: theme.palette.primary.contrastText,
             position: 'absolute',
             zIndex: '0',
           }}
@@ -141,6 +140,7 @@ const ProjectIndividualPage = () => {
           sx={{
             position: 'relative',
             padding: '4rem 1rem 0rem 1rem',
+            color: theme.palette.primary.contrastText,
           }}
         >
           <Stack>
