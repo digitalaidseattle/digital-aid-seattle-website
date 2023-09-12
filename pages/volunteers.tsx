@@ -30,12 +30,12 @@ import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
-import Link from 'next/link'
-import { designColor } from 'theme/theme'
-
-import VolunteerImage from '../assets/volunteerWithUs.png'
-import { ReactElement, ReactNode } from 'react'
 import MastheadWithImage from 'components/MastheadWithImage'
+import Link from 'next/link'
+import { ReactElement, ReactNode } from 'react'
+import { designColor } from 'theme/theme'
+import VolunteerImage from '../assets/volunteerWithUs.png'
+import React from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -119,6 +119,13 @@ const VolunteerPage = () => {
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
+    string | false
+  >(false)
+  const handleOathValuesChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setOathValuesExpanded(newExpanded ? panel : false)
+    }
 
   return (
     <Container
@@ -227,7 +234,11 @@ const VolunteerPage = () => {
           </Typography>
           <Box sx={{ display: 'block' }}>
             {oathContent.map((item, index) => (
-              <Accordion key={index}>
+              <Accordion
+                key={index}
+                expanded={oathValuesExpanded === `${index}`}
+                onChange={handleOathValuesChange(`${index}`)}
+              >
                 <AccordionSummary
                   expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                   aria-controls={`volunteer-values${index}-content`}
