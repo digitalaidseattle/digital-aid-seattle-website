@@ -2,7 +2,6 @@ import { getTeamMembers } from '../sanity/lib/client'
 import { urlForImage } from '../sanity/lib/image'
 import { useEffect, useState } from 'react'
 
-import DataObjectIcon from '@mui/icons-material/DataObject'
 import {
   Box,
   Button,
@@ -20,6 +19,75 @@ import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import CardWithPhoto from 'components/cards/CardWithPhoto'
+
+// icons for role cards
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
+import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
+import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined'
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
+import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
+import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
+import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
+
+const rolesNeeded = [
+  {
+    role: 'community engagement liaison',
+    icon: <CampaignOutlinedIcon />,
+  },
+  {
+    role: 'data analyst',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  {
+    role: 'designer',
+    icon: <DrawOutlinedIcon />,
+  },
+  {
+    role: 'grant writer',
+    icon: <DescriptionOutlinedIcon />,
+  },
+  {
+    role: 'legal help',
+    icon: <GavelRoundedIcon />,
+  },
+  {
+    role: 'product manager',
+    icon: <Diversity3OutlinedIcon />,
+  },
+  {
+    role: 'project manager',
+    icon: <ManageAccountsOutlinedIcon />,
+  },
+  {
+    role: 'user experience researcher',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  {
+    role: 'social media designer',
+    icon: <ShareOutlinedIcon />,
+  },
+  {
+    role: 'social media specialist',
+    icon: <EmojiPeopleOutlinedIcon />,
+  },
+  {
+    role: 'software engineer',
+    icon: <CodeOutlinedIcon />,
+  },
+  {
+    role: 'solution architect',
+    icon: <ApartmentOutlinedIcon />,
+  },
+  {
+    role: 'storyteller',
+    icon: <AutoStoriesOutlinedIcon />,
+  },
+]
 
 const ProjectIndividualPage = () => {
   const [teamData, setTeamData] = useState([])
@@ -63,7 +131,6 @@ const ProjectIndividualPage = () => {
             backgroundColor: theme.palette.primary.main,
             width: '100%',
             height: '28.75rem',
-            color: theme.palette.primary.contrastText,
             position: 'absolute',
             zIndex: '0',
           }}
@@ -73,6 +140,7 @@ const ProjectIndividualPage = () => {
           sx={{
             position: 'relative',
             padding: '4rem 1rem 0rem 1rem',
+            color: theme.palette.primary.contrastText,
           }}
         >
           <Stack>
@@ -272,8 +340,7 @@ const ProjectIndividualPage = () => {
               sx={{
                 display: 'grid',
                 gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(12.5rem, 1fr))',
-                alignItems: 'center',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
                 justifyContent: 'center',
                 gap: '2rem',
                 width: '100%',
@@ -299,23 +366,21 @@ const ProjectIndividualPage = () => {
             </Subheader>
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', lg: 'row' },
+                display: 'grid',
+                gridAutoFlow: 'columns',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
+                justifyContent: 'center',
                 gap: '2rem',
+                width: '100%',
               }}
             >
-              <ListItemWithIcon
-                listIcon={<DataObjectIcon />}
-                listText="UX Designer"
-              />
-              <ListItemWithIcon
-                listIcon={<DataObjectIcon />}
-                listText="Marketing Director"
-              />
-              <ListItemWithIcon
-                listIcon={<DataObjectIcon />}
-                listText="Backend Engineer"
-              />
+              {rolesNeeded.map((item) => (
+                <ListItemWithIcon
+                  key={item.role}
+                  listIcon={item.icon}
+                  listText={item.role}
+                />
+              ))}
             </Box>
           </Section>
 
@@ -343,7 +408,13 @@ const ProjectIndividualPage = () => {
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
             Interested in volunteering with Open Seattle?
           </Subheader>
-          <Button variant="contained">Apply to volunteer</Button>
+          <Button
+            variant="contained"
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            target="_blank"
+          >
+            Apply to volunteer
+          </Button>
         </Section>
       </SectionContainer>
     </>

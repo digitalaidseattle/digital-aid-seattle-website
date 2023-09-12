@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
-
+import { Box } from '@mui/material'
 type CardWithPhotoProps = {
   title: string
   description: string
@@ -42,6 +42,7 @@ const CardWithPhoto = ({
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          justifyContent: 'center',
           gap: '0.5rem',
           paddingBottom: '1rem !important',
         }}
