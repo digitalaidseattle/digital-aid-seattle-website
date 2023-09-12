@@ -375,7 +375,11 @@ const ProjectIndividualPage = () => {
               }}
             >
               {rolesNeeded.map((item) => (
-                <ListItemWithIcon listIcon={item.icon} listText={item.role} />
+                <ListItemWithIcon
+                  key={item.role}
+                  listIcon={item.icon}
+                  listText={item.role}
+                />
               ))}
             </Box>
           </Section>
