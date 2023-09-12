@@ -42,6 +42,7 @@ const ListItemWithIcon = ({
               color={palette.secondary.contrastText}
               sx={{
                 textTransform: 'capitalize',
+                display: 'inline-block',
               }}
             >
               {listText}
