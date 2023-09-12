@@ -2,7 +2,7 @@
  * @2023 Open Seattle
  */
 
-import { Box, Container, Stack, Typography, useTheme } from '@mui/material'
+import { Box, CircularProgress, Container, Stack, Typography, useTheme } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
 import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
@@ -45,18 +45,21 @@ const Masthead = ({ title }: MastheadProps) => {
 
 const EventsPage = () => {
   const theme = useTheme()
-  const palette = theme.palette
 
-  const title = 'Events'
-  const [events, setEvents] = useState([])
+  const title = 'Events';
+  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    setEvents(osEventsService.getActiveEvents())
-  }, [])
+    osEventsService.getActiveEvents()
+      .then(evs => setEvents(evs))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
+  }, []);
 
   return (
     <div>
-      <Masthead title="Events" />
+      <Masthead title={title} />
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Box
           sx={{
@@ -67,19 +70,25 @@ const EventsPage = () => {
           maxWidth={'880px'}
         >
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-            {events.map((event) => (
+            {loading &&
+              <CircularProgress />
+            }
+
+            {!loading && events.map((event) => (
               <CardEvent key={event.title} event={event} />
             ))}
-            {events.length === 0 && (
+
+            {!loading && events.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
                 There are currently no events scheduled, please check back in
                 the future.
               </Typography>
             )}
+
           </Stack>
         </Box>
       </SectionContainer>
-    </div>
+    </div >
   )
 }
 
