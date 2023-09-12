@@ -22,6 +22,7 @@ const ListItemWithIcon = ({
   return (
     <ListItem
       sx={{
+        height: '3.5rem',
         overflowWrap: 'break-word',
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
@@ -39,6 +40,9 @@ const ListItemWithIcon = ({
             <Typography
               variant="labelMedium"
               color={palette.secondary.contrastText}
+              sx={{
+                textTransform: 'capitalize',
+              }}
             >
               {listText}
             </Typography>
