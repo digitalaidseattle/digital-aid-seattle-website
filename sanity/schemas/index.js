@@ -5,6 +5,7 @@ import landingPage from './landingPage'
 import selectableLink, { externalLink, internalLink } from './link'
 import portableText from './portableText'
 import textWithIllustration from './textWithIllustration'
+import osEvent from './osEvent'
 import teamMember from './teamMember'
 
 export const schemaTypes = [
@@ -17,5 +18,6 @@ export const schemaTypes = [
   formPage,
   internalLink,
   externalLink,
+  osEvent,
   teamMember
 ]
