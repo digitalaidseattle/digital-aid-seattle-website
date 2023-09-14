@@ -1,5 +1,5 @@
 <p align='center'>
-    <a href='https://www.openseattle.org'>
+    <a href='https://www.digitalaidseattle.org'>
         <img src='https://avatars.githubusercontent.com/u/3466034?s=200&v=4' height='128'>
     </a>
     <h1 align='center'>Digital Aid Seattle Website</h1>
@@ -20,7 +20,7 @@ Just outside their doors is a fleet of experts and technologists with the talent
 
 Seattle is world-renowned as a hub for technology talent, full of motivated builders, designers, and creators that want to use their skills for good. Digital Aid Seattle is bringing these communities together to create a sum greater than its parts.
 
-This website is for organizations that want to [learn more about partnering with Digital Aid Seattle](https://www.openseattle.org/partner) and for passionate, skilled Seattlites who want to [learn more about volunteering!](https://www.openseattle.org/volunteer)
+This website is for organizations that want to [learn more about partnering with Digital Aid Seattle](https://www.digitalaidseattle.org/partner) and for passionate, skilled Seattlites who want to [learn more about volunteering!](https://www.digitalaidseattle.org/volunteer)
 
 ## Technology Stack
 
@@ -100,7 +100,7 @@ The website is built using **Next.js**, a React-based framework for server-side 
 2. Ensure access to appropriate accounts:
    - Github: Must be member of [Digital Aid Seattle Github Org](https://github.com/openseattle) in order to push changes to the repo.
    - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/openseattle/open-seattle-website)to approve staged changes to production.
-   - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.openseattle.org/studio)
+   - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.digitalaidseattle.org/studio)
    - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
 3. Get issue from group Asana board.
 4. Create a branch with the following convention: username/feature-name
