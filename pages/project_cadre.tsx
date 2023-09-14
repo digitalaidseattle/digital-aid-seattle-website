@@ -145,7 +145,7 @@ const ProjectIndividualPage = () => {
         >
           <Stack>
             <Typography variant="displayMedium">The Cadre</Typography>
-            <Typography variant="headlineMedium">Open Seattle</Typography>
+            <Typography variant="headlineMedium">Digital Aid Seattle</Typography>
           </Stack>
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
@@ -205,7 +205,7 @@ const ProjectIndividualPage = () => {
               <Typography
                 variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
               >
-                Open Seattle
+                Digital Aid Seattle
               </Typography>
             </Stack>
 
@@ -308,7 +308,7 @@ const ProjectIndividualPage = () => {
                 chance. SO, how can we utilize this resource?
               </Typography>
               <Typography variant="bodyLarge">
-                OPEN SEATTLE fosters connections between volunteers and the orgs
+                Digital Aid Seattle fosters connections between volunteers and the orgs
                 that can utilize their talents and provides nonprofits with
                 digital systems and tools that boost their efforts.
               </Typography>
@@ -318,7 +318,7 @@ const ProjectIndividualPage = () => {
           <Section>
             <Subheader variant="headlineMedium">Impact</Subheader>
             <Typography variant="bodyLarge">
-              Open Seattle helps nonprofits build the structure essential for
+              Digital Aid Seattle helps nonprofits build the structure essential for
               success in any technology project, acting as a force multiplier to
               help organizations create lasting impact.
             </Typography>
@@ -406,7 +406,7 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Interested in volunteering with Open Seattle?
+            Interested in volunteering with Digital Aid Seattle?
           </Subheader>
           <Button
             variant="contained"

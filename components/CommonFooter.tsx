@@ -59,7 +59,7 @@ const CommonFooterLargeScreen = () => (
             height: '80%',
             width: '120px',
           }}
-          alt="Open Seattle Home"
+          alt="Digital Aid Seattle Home"
         />
       </Link>
     </GridItem>
@@ -95,7 +95,7 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={3}>
       <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
     </GridItem>
 
     <GridItem md={4}>
@@ -106,7 +106,7 @@ const CommonFooterLargeScreen = () => (
     </GridItem>
 
     <GridItem md={4}>
-      <FooterItemTitle>About Open Seattle</FooterItemTitle>
+      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
@@ -142,7 +142,7 @@ const CommonFooterMidScreen = () => (
               height: 'auto',
               width: '120px',
             }}
-            alt="Open Seattle Home"
+            alt="Digital Aid Seattle Home"
           />
         </Link>
         <Box>
@@ -154,7 +154,7 @@ const CommonFooterMidScreen = () => (
 
         <Box>
           <SubText>Illustrations by: Storyset by Freepik</SubText>
-          <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+          <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
         </Box>
       </Box>
     </GridItem>
@@ -184,7 +184,7 @@ const CommonFooterMidScreen = () => (
         </Box>
 
         <Box>
-          <FooterItemTitle>About Open Seattle</FooterItemTitle>
+          <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
           <LinkSubItem url="/privacy" name="Privacy Policy" />
         </Box>
       </Box>
@@ -231,7 +231,7 @@ const CommonFooterSmallScreen = () => (
             height: '3rem',
             width: 'auto',
           }}
-          alt="Open Seattle Home"
+          alt="Digital Aid Seattle Home"
         />
       </Link>
     </GridItem>
@@ -258,7 +258,7 @@ const CommonFooterSmallScreen = () => (
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>About Open Seattle</FooterItemTitle>
+      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
@@ -279,7 +279,7 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem display="flex" flexDirection="column" sx={{ gap: '1rem' }}>
       <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
     </GridItem>
   </Grid>
 )

@@ -68,7 +68,7 @@ const CommonHeader = () => {
               style={{
                 width: '120px',
               }}
-              alt="Open Seattle Home"
+              alt="Digital Aid Seattle Home"
             />
           </Link>
           <IconButton
@@ -135,7 +135,7 @@ const CommonHeader = () => {
               style={{
                 width: '120px',
               }}
-              alt="Open Seattle Home"
+              alt="Digital Aid Seattle Home"
             />
           </Link>
           <Box>
