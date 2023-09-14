@@ -392,7 +392,7 @@ const ProjectIndividualPage = () => {
             <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
               Questions about this project?
             </Subheader>
-            <Button variant="outlined" href="mailto:info@openseattle.org">
+            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
               Contact us
             </Button>
           </Section>

@@ -67,7 +67,7 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -101,7 +101,7 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">How you can help</a>
+        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
@@ -148,7 +148,7 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+            <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
           </FooterSubItem>
         </Box>
 
@@ -179,7 +179,7 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@openseattle.org">How you can help</a>
+            <a href="mailto:info@digitalaidseattle.org">How you can help</a>
           </FooterSubItem>
         </Box>
 
@@ -245,7 +245,7 @@ const CommonFooterSmallScreen = () => (
     <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -253,7 +253,7 @@ const CommonFooterSmallScreen = () => (
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         {/* TODO Update to support-us page, when the page is added */}
-        <a href="mailto:info@openseattle.org">How you can help</a>
+        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
