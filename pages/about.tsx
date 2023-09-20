@@ -122,8 +122,8 @@ const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium">What we do</Typography>
     <Typography variant="bodyLarge">
-      Digital Aid Seattle partners with other nonprofits in order to amplifying their
-      impact, and to uplift communities with technology.
+      Digital Aid Seattle partners with other nonprofits in order to amplifying
+      their impact, and to uplift communities with technology.
     </Typography>
   </AboutUsSection>
 )
@@ -230,7 +230,7 @@ const OurTeamSection = () => {
       <Box textAlign="center">
         <Button
           variant="contained"
-          href={'/project_individual'}
+          href={'/project_cadre'}
           sx={{ width: 'fit-content' }}
         >
           View our Cadre

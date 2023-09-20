@@ -150,8 +150,8 @@ const VolunteerPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            Join Digital Aid Seattle to make a difference in the lives of others! We
-            have a wide range of volunteer opportunities available.
+            Join Digital Aid Seattle to make a difference in the lives of
+            others! We have a wide range of volunteer opportunities available.
           </Typography>
         </>
       </MastheadWithImage>
@@ -294,7 +294,10 @@ const VolunteerPage = () => {
           >
             Interested in volunteering with Digital Aid Seattle?
           </Typography>
-          <Link href="/volunteer-application" passHref>
+          <Link
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            passHref
+          >
             <Button variant="contained" color="primary">
               Apply to volunteer
             </Button>
