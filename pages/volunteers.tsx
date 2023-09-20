@@ -84,12 +84,12 @@ const oathContent = [
   {
     label: 'Safeguard partner information.',
     content:
-      'I will safeguard our partners’ personal information, preserving and personal data encountered in my role as an Open Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
+      'I will safeguard our partners’ personal information, preserving and personal data encountered in my role as an Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
   },
   {
     label: 'Maintain open communication.',
     content:
-      'I will promptly notify Open Seattle of any changes in my availability, project status, or progress. Additionally, I will report any issues or updates to ensure transparency and effective coordination.',
+      'I will promptly notify Digital Aid Seattle of any changes in my availability, project status, or progress. Additionally, I will report any issues or updates to ensure transparency and effective coordination.',
   },
   {
     label: 'Promote inclusivity.',
@@ -104,7 +104,7 @@ const oathContent = [
   {
     label: 'Uphold our mission.',
     content:
-      "I commit to understanding and upholding Open Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
+      "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
   },
 ]
 
@@ -150,7 +150,7 @@ const VolunteerPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            Join Open Seattle to make a difference in the lives of others! We
+            Join Digital Aid Seattle to make a difference in the lives of others! We
             have a wide range of volunteer opportunities available.
           </Typography>
         </>
@@ -175,7 +175,7 @@ const VolunteerPage = () => {
         </Grid>
         <Typography variant="bodyLarge">
           All of our volunteers are vetted for experience, and sign a volunteer
-          agreement before commencing work with Open Seattle.
+          agreement before commencing work with Digital Aid Seattle.
         </Typography>
         <Typography variant="headlineLarge">Our Expectations</Typography>
         <Box
@@ -213,7 +213,7 @@ const VolunteerPage = () => {
                 fontSize="large"
               />
             }
-            description="You dedicate the time you need to accomplish your committed tasks with Open Seattle."
+            description="You dedicate the time you need to accomplish your committed tasks with Digital Aid Seattle."
           />
         </Box>
       </Stack>
@@ -292,7 +292,7 @@ const VolunteerPage = () => {
           <Typography
             variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
           >
-            Interested in volunteering with Open Seattle?
+            Interested in volunteering with Digital Aid Seattle?
           </Typography>
           <Link href="/volunteer-application" passHref>
             <Button variant="contained" color="primary">

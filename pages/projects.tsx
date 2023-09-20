@@ -39,14 +39,14 @@ const ProjectsPage = () => {
   const projectData: CardProjectProps[] = [
     {
       title: 'The Cadre',
-      partner: 'Open Seattle',
+      partner: 'Digital Aid Seattle',
       programAreas: ['Civic technology'],
       description:
-        'Open Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
+        'Digital Aid Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
       status: 'active' as 'active',
       projectLink: '/project_cadre',
       imageSrc: ProjectCadreImage.src,
-      imageAlt: 'Open seattle logo',
+      imageAlt: 'Digital Aid Seattle logo',
     },
   ]
 

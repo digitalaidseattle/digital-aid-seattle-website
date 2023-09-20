@@ -1,5 +1,5 @@
 /*
-* @2023 Open Seattle
+* @2023 Digital Aid Seattle
 */
 import { Box, Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'

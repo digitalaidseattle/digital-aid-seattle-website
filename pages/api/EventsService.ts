@@ -1,5 +1,5 @@
 /*
-* @2023 Open Seattle
+* @2023 Digital Aid Seattle
 */
 
 import { groq } from 'next-sanity';
