@@ -50,7 +50,7 @@ const provideContent = [
   {
     title: 'Technical problems',
     description:
-      'No matter the size, any organization in business today is bound to face technical challenges. Open Seattle partners with non-profits and other organizations to navigate these challenges.',
+      'No matter the size, any organization in business today is bound to face technical challenges. Digital Aid Seattle partners with non-profits and other organizations to navigate these challenges.',
     icon: <HandymanOutlined style={ICON_STYLE} />,
   },
 ]
@@ -110,7 +110,7 @@ const PartnersPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            Open Seattle works with Seattle-based nonprofits to create
+            Digital Aid Seattle works with Seattle-based nonprofits to create
             customized digital solutions for their needs, for free.
           </Typography>
           <Button
@@ -211,7 +211,7 @@ const PartnersPage = () => {
             <Typography variant="bodyLarge">
               Partners should plan to maintain projects after handoff, and to
               provide all volunteers with the necessary documentation for timely
-              project completion. All Open Seattle projects are open and
+              project completion. All Digital Aid Seattle projects are open and
               accessible by default.
             </Typography>
           </Stack>
@@ -221,7 +221,7 @@ const PartnersPage = () => {
             </Typography>
             <Typography variant="bodyLarge">
               All of our volunteers are vetted for experience, and sign a
-              volunteer agreement before commencing work with Open Seattle.
+              volunteer agreement before commencing work with Digital Aid Seattle.
             </Typography>
           </Stack>
         </Stack>
@@ -235,7 +235,7 @@ const PartnersPage = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge">
-            Interested in partnering with Open Seattle?
+            Interested in partnering with Digital Aid Seattle?
           </Typography>
 
           <Button

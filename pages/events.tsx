@@ -1,5 +1,5 @@
 /*
- * @2023 Open Seattle
+ * @2023 Digital Aid Seattle
  */
 
 import { Box, CircularProgress, Container, Stack, Typography, useTheme } from '@mui/material'

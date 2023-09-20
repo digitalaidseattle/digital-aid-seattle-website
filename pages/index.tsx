@@ -261,7 +261,7 @@ const Home = () => {
           </Button>
           <CardRowContainer>
             <CardOne
-              description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
+              description="Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
               buttonLink="/partners"
               icon={
@@ -272,7 +272,7 @@ const Home = () => {
               }
             />
             <CardOne
-              description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
+              description="Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
               buttonText="Volunteer With Us"
               buttonLink="/volunteers"
               icon={
@@ -283,7 +283,7 @@ const Home = () => {
               }
             />
             <CardOne
-              description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating."
+              description="Support Digital Aid Seattle in its mission to build tech solutions for our community nonprofits by donating."
               buttonText="Support Us"
               icon={
                 <VolunteerActivismOutlinedIcon
