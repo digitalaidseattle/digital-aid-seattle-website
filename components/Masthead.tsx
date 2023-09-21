@@ -1,6 +1,6 @@
 /*
 * Masthead.tsx
-* @2023 Open Seattle
+* @2023 Digital Aid Seattle
 */
 
 import { Stack, Typography, styled, useMediaQuery, useTheme } from "@mui/material"

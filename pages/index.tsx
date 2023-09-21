@@ -1,13 +1,12 @@
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
-import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined'
 import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 
+import CardGridContainer from 'components/cards/CardGridContainer'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.png'
@@ -259,9 +258,9 @@ const Home = () => {
           >
             Learn About Us
           </Button>
-          <CardRowContainer>
+          <CardGridContainer columns={2}>
             <CardOne
-              description="Reach out to Open Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
+              description="Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
               buttonText="Partner With Us"
               buttonLink="/partners"
               icon={
@@ -272,7 +271,7 @@ const Home = () => {
               }
             />
             <CardOne
-              description="Join Open Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
+              description="Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
               buttonText="Volunteer With Us"
               buttonLink="/volunteers"
               icon={
@@ -282,8 +281,10 @@ const Home = () => {
                 />
               }
             />
-            <CardOne
-              description="Support Open Seattle in its mission to build tech solutions for our community nonprofits by donating."
+          
+            {// Disabling until we implement a supoort-us page
+            /* <CardOne
+              description="Support Digital Aid Seattle in its mission to build tech solutions for our community nonprofits by donating."
               buttonText="Support Us"
               icon={
                 <VolunteerActivismOutlinedIcon
@@ -291,8 +292,8 @@ const Home = () => {
                   sx={{ color: palette.text.secondary }}
                 />
               }
-            />
-          </CardRowContainer>
+            /> */}
+          </CardGridContainer>
         </Stack>
       </SectionContainer>
     </>

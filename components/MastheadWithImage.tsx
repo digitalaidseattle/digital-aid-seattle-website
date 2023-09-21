@@ -1,6 +1,6 @@
 /*
  * MastheadWithImage.tsx
- * @2023 Open Seattle
+ * @2023 Digital Aid Seattle
  */
 
 import { ReactNode } from 'react'

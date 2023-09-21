@@ -107,7 +107,7 @@ const AboutUsHeroSection = () => {
             color: theme.palette.primary.contrastText,
           }}
         >
-          Open Seattle comprises a group of seasoned professionals with
+          Digital Aid Seattle comprises a group of seasoned professionals with
           experience in web development, software engineering, digital strategy,
           visual and content design, and more. We leverage this vast experience
           to transform the nonprofit sector—to make it more efficient,
@@ -122,8 +122,8 @@ const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium">What we do</Typography>
     <Typography variant="bodyLarge">
-      Open Seattle partners with other nonprofits in order to amplifying their
-      impact, and to uplift communities with technology.
+      Digital Aid Seattle partners with other nonprofits in order to amplifying
+      their impact, and to uplift communities with technology.
     </Typography>
   </AboutUsSection>
 )
@@ -183,7 +183,7 @@ const OurTeamSection = () => {
     <AboutUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium">Our team</Typography>
       <Typography variant="bodyLarge" align="center" display="block">
-        The Open Seattle cadre is made up of highly skilled and committed
+        The Digital Aid Seattle cadre is made up of highly skilled and committed
         volunteers, dedicated to serving the greater Seattle area.
       </Typography>
       <Typography variant="titleMedium" align="center" display="block">
@@ -230,7 +230,7 @@ const OurTeamSection = () => {
       <Box textAlign="center">
         <Button
           variant="contained"
-          href={'/project_individual'}
+          href={'/project_cadre'}
           sx={{ width: 'fit-content' }}
         >
           View our Cadre

@@ -59,7 +59,7 @@ const CommonFooterLargeScreen = () => (
             height: '80%',
             width: '120px',
           }}
-          alt="Open Seattle Home"
+          alt="Digital Aid Seattle Home"
         />
       </Link>
     </GridItem>
@@ -67,7 +67,7 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -95,18 +95,18 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={3}>
       <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
     </GridItem>
 
     <GridItem md={4}>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">How you can help</a>
+        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem md={4}>
-      <FooterItemTitle>About Open Seattle</FooterItemTitle>
+      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
@@ -142,19 +142,19 @@ const CommonFooterMidScreen = () => (
               height: 'auto',
               width: '120px',
             }}
-            alt="Open Seattle Home"
+            alt="Digital Aid Seattle Home"
           />
         </Link>
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+            <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
           </FooterSubItem>
         </Box>
 
         <Box>
           <SubText>Illustrations by: Storyset by Freepik</SubText>
-          <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+          <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
         </Box>
       </Box>
     </GridItem>
@@ -179,12 +179,12 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@openseattle.org">How you can help</a>
+            <a href="mailto:info@digitalaidseattle.org">How you can help</a>
           </FooterSubItem>
         </Box>
 
         <Box>
-          <FooterItemTitle>About Open Seattle</FooterItemTitle>
+          <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
           <LinkSubItem url="/privacy" name="Privacy Policy" />
         </Box>
       </Box>
@@ -231,7 +231,7 @@ const CommonFooterSmallScreen = () => (
             height: '3rem',
             width: 'auto',
           }}
-          alt="Open Seattle Home"
+          alt="Digital Aid Seattle Home"
         />
       </Link>
     </GridItem>
@@ -245,7 +245,7 @@ const CommonFooterSmallScreen = () => (
     <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@openseattle.org">info@openseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
       </FooterSubItem>
     </GridItem>
 
@@ -253,12 +253,12 @@ const CommonFooterSmallScreen = () => (
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         {/* TODO Update to support-us page, when the page is added */}
-        <a href="mailto:info@openseattle.org">How you can help</a>
+        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
       </FooterSubItem>
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>About Open Seattle</FooterItemTitle>
+      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
     </GridItem>
 
@@ -279,7 +279,7 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem display="flex" flexDirection="column" sx={{ gap: '1rem' }}>
       <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Open Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
     </GridItem>
   </Grid>
 )
