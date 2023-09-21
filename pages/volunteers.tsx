@@ -165,14 +165,14 @@ const VolunteerPage = () => {
         }}
         maxWidth={'880px'}
       >
-        <Typography variant="headlineLarge">How you can participate</Typography>
-        <Grid container spacing={2}>
-          {gridContent.map((item) => (
-            <Grid item xs={12} md={6} key={item.label}>
-              <ListItemWithIcon listIcon={item.icon} listText={item.label} />
-            </Grid>
-          ))}
-        </Grid>
+        <Typography variant="headlineLarge">
+          Current volunteer openings
+        </Typography>
+        <iframe
+          src="https://airtable.com/embed/appaQcPIp7W2K85rx/shr67A1j2V75pw5PK?backgroundColor=greenLight"
+          width="100%"
+          height="600"
+        ></iframe>
         <Typography variant="bodyLarge">
           All of our volunteers are vetted for experience, and sign a volunteer
           agreement before commencing work with Open Seattle.
