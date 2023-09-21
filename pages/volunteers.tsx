@@ -294,7 +294,11 @@ const VolunteerPage = () => {
           >
             Interested in volunteering with Open Seattle?
           </Typography>
-          <Link href="/volunteer-application" passHref>
+          <Link
+            href="https://airtable.com/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            target="_blank"
+            passHref
+          >
             <Button variant="contained" color="primary">
               Apply to volunteer
             </Button>
