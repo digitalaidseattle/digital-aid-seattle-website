@@ -128,7 +128,7 @@ const WhatWeDoSection = ({ theme }) => (
     <Box textAlign="center">
         <Button
           variant="contained"
-          href={'/project_cadre'}
+          href={'/project_individual?project=the-cadre'}
           sx={{ width: 'fit-content' }}
         >
           View our leadership team
@@ -236,15 +236,6 @@ const OurTeamSection = () => {
           </Grid>
         ))}
       </Grid>
-      <Box textAlign="center">
-        <Button
-          variant="contained"
-          href={'/project_individual?project=the-cadre'}
-          sx={{ width: 'fit-content' }}
-        >
-          View our Cadre
-        </Button>
-      </Box>
     </AboutUsSection>
   )
 }
