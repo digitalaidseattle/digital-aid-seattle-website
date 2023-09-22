@@ -38,6 +38,7 @@ import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
 import { DASProject } from 'types'
+import { Image } from 'sanity'
 
 const rolesMap = {
   communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
@@ -248,7 +249,7 @@ const ProjectIndividualPage = () => {
           <Section>
             <Subheader variant="headlineMedium">Problem</Subheader>
             <TextSection>
-              {project.problem.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
+              {project.problem.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
             </TextSection>
           </Section>
         }
@@ -257,7 +258,7 @@ const ProjectIndividualPage = () => {
           <Section>
             <Subheader variant="headlineMedium">Solution</Subheader>
             <TextSection>
-              {project.solution.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
+              {project.solution.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
             </TextSection>
           </Section>
         }
@@ -266,7 +267,7 @@ const ProjectIndividualPage = () => {
           <Section>
             <Subheader variant="headlineMedium">Impact</Subheader>
             <Typography variant="bodyLarge">
-              {project.impact.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
+              {project.impact.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
             </Typography>
           </Section>
         }
@@ -321,7 +322,7 @@ const ProjectIndividualPage = () => {
             >
               {project.rolesNeeded.map(item => (
                 <ListItemWithIcon
-                  key={rolesMap[item].role}
+                  key={item}
                   listIcon={rolesMap[item].icon}
                   listText={rolesMap[item].role}
                 />
