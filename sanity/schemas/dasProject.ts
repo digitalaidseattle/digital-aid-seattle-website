@@ -117,6 +117,11 @@ export default {
             type: 'array',
             title: 'Current Team',
             of: [{ type: 'team-member' }]
+        },
+        {
+            name: 'display',
+            type: 'boolean',
+            title: 'Display'
         }
     ]
 } 

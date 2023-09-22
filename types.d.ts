@@ -41,6 +41,6 @@ type DASProject = {
     solution: string[],
     impact: string[],
     rolesNeeded: string[],
-    currentTeam: TeamMember[]
-    
+    currentTeam: TeamMember[],
+    display: boolean
 }

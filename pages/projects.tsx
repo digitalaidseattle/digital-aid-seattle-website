@@ -15,7 +15,9 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     dasProjectsService.getAll()
-      .then(evs => setProjects(evs.sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))))
+      .then(projs => setProjects(projs
+        .filter(proj => proj.display || proj.display === undefined)
+        .sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))))
       .catch(error => console.log(error))
       .finally(() => setLoading(false))
   }, []);
