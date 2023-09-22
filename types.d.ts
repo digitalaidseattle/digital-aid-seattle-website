@@ -23,3 +23,24 @@ type TeamMember = {
     role: string,
     image: string,
 }
+
+type DASProject = {
+    _id: string,
+    _createdAt: Date,
+    orderRank: string,
+    id: string,
+    title: string,
+    partner: string,
+    programAreas: string[],
+    description: string
+    status: 'active' | 'recruiting' | 'complete',
+    projectLink: string,
+    duration?: { start: string; end: string },
+    image: Image,
+    problem: string[],
+    solution: string[],
+    impact: string[],
+    rolesNeeded: string[],
+    currentTeam: TeamMember[]
+    
+}

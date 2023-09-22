@@ -1,4 +1,6 @@
-import { getTeamMembers } from '../sanity/lib/client'
+/*
+* @2023 Digital Aid Seattle
+*/
 import { urlForImage } from '../sanity/lib/image'
 import { useEffect, useState } from 'react'
 
@@ -13,6 +15,8 @@ import {
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
+import { dasProjectsService } from './api/ProjectsService'
+
 // imports for placeholders-- delete as needed
 import ProjectPlaceholder from 'assets/logo-light-icon.svg'
 import StateBadge from 'components/cards/StateBadge'
@@ -33,71 +37,35 @@ import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
 import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
+import { DASProject } from 'types'
 
-const rolesNeeded = [
-  {
-    role: 'community engagement liaison',
-    icon: <CampaignOutlinedIcon />,
-  },
-  {
-    role: 'data analyst',
-    icon: <ScreenSearchDesktopOutlinedIcon />,
-  },
-  {
-    role: 'designer',
-    icon: <DrawOutlinedIcon />,
-  },
-  {
-    role: 'grant writer',
-    icon: <DescriptionOutlinedIcon />,
-  },
-  {
-    role: 'legal help',
-    icon: <GavelRoundedIcon />,
-  },
-  {
-    role: 'product manager',
-    icon: <Diversity3OutlinedIcon />,
-  },
-  {
-    role: 'project manager',
-    icon: <ManageAccountsOutlinedIcon />,
-  },
-  {
-    role: 'user experience researcher',
-    icon: <ScreenSearchDesktopOutlinedIcon />,
-  },
-  {
-    role: 'social media designer',
-    icon: <ShareOutlinedIcon />,
-  },
-  {
-    role: 'social media specialist',
-    icon: <EmojiPeopleOutlinedIcon />,
-  },
-  {
-    role: 'software engineer',
-    icon: <CodeOutlinedIcon />,
-  },
-  {
-    role: 'solution architect',
-    icon: <ApartmentOutlinedIcon />,
-  },
-  {
-    role: 'storyteller',
-    icon: <AutoStoriesOutlinedIcon />,
-  },
-]
+const rolesMap = {
+  communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
+  dataAnalyst: { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  designer: { role: 'designer', icon: <DrawOutlinedIcon />, },
+  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
+  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon />, },
+  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
+  projectManager: { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
+  uxResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  socialMediaDesigner: { role: 'social media designer', icon: <ShareOutlinedIcon />, },
+  socialMediaSpecialist: { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
+  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
+  solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
+  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
+}
 
 const ProjectIndividualPage = () => {
-  const [teamData, setTeamData] = useState([])
+  const [project, setProject] = useState<DASProject>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getTeamMembers()
-      .then((fetchedData) => setTeamData(fetchedData))
+    const params = new URLSearchParams(window.location.search);
+    dasProjectsService.getOne(params.get('project'))
+      .then(data => setProject(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
+
   }, [])
 
   const theme = useTheme()
@@ -144,13 +112,13 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">The Cadre</Typography>
-            <Typography variant="headlineMedium">Digital Aid Seattle</Typography>
+            <Typography variant="displayMedium">{project.title}</Typography>
+            <Typography variant="headlineMedium">{project.partner}</Typography>
           </Stack>
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
-              <StateBadge state="active" />
+              <StateBadge state={project.status} />
             </Stack>
             <Typography variant="labelLarge">
               Expected Timeline: Ongoing
@@ -158,7 +126,7 @@ const ProjectIndividualPage = () => {
           </Stack>
 
           <img
-            src={ProjectPlaceholder.src}
+            src={urlForImage(project.image).url()}
             style={{
               width: '100%',
               aspectRatio: '1 / 1',
@@ -200,12 +168,12 @@ const ProjectIndividualPage = () => {
                   width: { md: '40vw', lg: '25rem' },
                 }}
               >
-                The Cadre
+                {project.title}
               </Typography>
               <Typography
                 variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
               >
-                Digital Aid Seattle
+                {project.partner}
               </Typography>
             </Stack>
 
@@ -219,7 +187,7 @@ const ProjectIndividualPage = () => {
               }}
             >
               <img
-                src={ProjectPlaceholder.src}
+                src={urlForImage(project.image).url()}
                 style={{
                   width: '100%',
                   display: 'block',
@@ -250,12 +218,14 @@ const ProjectIndividualPage = () => {
           >
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
-              <StateBadge state="active" />
+              <StateBadge state={project.status} />
             </Stack>
 
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Expected Timeline:</Typography>
-              <Typography variant="labelLarge">Ongoing</Typography>
+              <Typography variant="labelLarge">
+                {dasProjectsService.getTimeline(project)}
+              </Typography>
             </Stack>
           </Stack>
         </Box>
@@ -263,67 +233,45 @@ const ProjectIndividualPage = () => {
     )
   }
 
-  return (
-    <>
-      {extraSmallScreen ? <MobileHeader /> : <DesktopHeader />}
+  function getHeader() {
+    return extraSmallScreen ? <MobileHeader /> : <DesktopHeader />
+  }
 
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack
-          gap={{ xs: '64px', lg: '80px' }}
-          maxWidth="880px"
-          margin="0 auto"
-        >
+  function getBody() {
+    return <SectionContainer backgroundColor={theme.palette.background.default}>
+      <Stack
+        gap={{ xs: '64px', lg: '80px' }}
+        maxWidth="880px"
+        margin="0 auto"
+      >
+        {(project.problem && project.problem.length > 0) &&
           <Section>
             <Subheader variant="headlineMedium">Problem</Subheader>
             <TextSection>
-              <Typography variant="bodyLarge">
-                Nonprofits that try to adopt new tech can&apos;t staff for their
-                digital needs. They grapple with efficiency and face operational
-                burdens without proper digital tools, leading to funding
-                shortages and lost volunteers.
-              </Typography>
-
-              <Typography variant="bodyLarge">
-                77% of nonprofits say that skilled volunteers could majorly
-                impact their mission, but only 12% actually utilize them. Most
-                software projects will fail, even with financial backing.
-                And—during the pandemic, Covid-related drops in volunteer hours
-                nationwide reached 19%.
-              </Typography>
-
-              <Typography variant="bodyLarge">
-                Washington state needs a more structured tech volunteering
-                model.
-              </Typography>
+              {project.problem.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
             </TextSection>
           </Section>
+        }
 
+        {(project.solution && project.solution.length > 0) &&
           <Section>
             <Subheader variant="headlineMedium">Solution</Subheader>
             <TextSection>
-              <Typography variant="bodyLarge">
-                The state of Washington boasts over 70,000 technologists, more
-                than 55,000 residing in greater Seattle. Meanwhile, statistics
-                show that 30% of professionals will volunteer if given the
-                chance. SO, how can we utilize this resource?
-              </Typography>
-              <Typography variant="bodyLarge">
-                Digital Aid Seattle fosters connections between volunteers and the orgs
-                that can utilize their talents and provides nonprofits with
-                digital systems and tools that boost their efforts.
-              </Typography>
+              {project.solution.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
             </TextSection>
           </Section>
+        }
 
+        {(project.impact && project.impact.length > 0) &&
           <Section>
             <Subheader variant="headlineMedium">Impact</Subheader>
             <Typography variant="bodyLarge">
-              Digital Aid Seattle helps nonprofits build the structure essential for
-              success in any technology project, acting as a force multiplier to
-              help organizations create lasting impact.
+              {project.impact.map(t => <Typography variant="bodyLarge">{t}</Typography>)}
             </Typography>
           </Section>
+        }
 
+        {(project.currentTeam && project.currentTeam.length > 0) &&
           <Section>
             <Subheader
               variant="headlineMedium"
@@ -331,11 +279,6 @@ const ProjectIndividualPage = () => {
             >
               Current Team
             </Subheader>
-            {loading && (
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <CircularProgress />
-              </Box>
-            )}
             <Box
               sx={{
                 display: 'grid',
@@ -346,7 +289,7 @@ const ProjectIndividualPage = () => {
                 width: '100%',
               }}
             >
-              {teamData.map((person) => (
+              {project.currentTeam.map((person) => (
                 <CardWithPhoto
                   key={person._id}
                   title={person.name}
@@ -356,7 +299,9 @@ const ProjectIndividualPage = () => {
               ))}
             </Box>
           </Section>
+        }
 
+        {(project.rolesNeeded && project.rolesNeeded.length > 0) &&
           <Section>
             <Subheader
               variant="headlineMedium"
@@ -374,49 +319,65 @@ const ProjectIndividualPage = () => {
                 width: '100%',
               }}
             >
-              {rolesNeeded.map((item) => (
+              {project.rolesNeeded.map(item => (
                 <ListItemWithIcon
-                  key={item.role}
-                  listIcon={item.icon}
-                  listText={item.role}
+                  key={rolesMap[item].role}
+                  listIcon={rolesMap[item].icon}
+                  listText={rolesMap[item].role}
                 />
               ))}
             </Box>
           </Section>
+        }
 
-          <Section
-            sx={{
-              alignItems: 'center',
-            }}
-          >
-            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-              Questions about this project?
-            </Subheader>
-            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-              Contact us
-            </Button>
-          </Section>
-        </Stack>
-      </SectionContainer>
-
-      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
         <Section
           sx={{
             alignItems: 'center',
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Interested in volunteering with Digital Aid Seattle?
+            Questions about this project?
           </Subheader>
-          <Button
-            variant="contained"
-            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-            target="_blank"
-          >
-            Apply to volunteer
+          <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+            Contact us
           </Button>
         </Section>
-      </SectionContainer>
+      </Stack>
+    </SectionContainer>
+  }
+
+
+  function getFooter() {
+    return <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
+      <Section
+        sx={{
+          alignItems: 'center',
+        }}
+      >
+        <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+          Interested in volunteering with Digital Aid Seattle?
+        </Subheader>
+        <Button
+          variant="contained"
+          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          target="_blank"
+        >
+          Apply to volunteer
+        </Button>
+      </Section>
+    </SectionContainer>
+  }
+
+  return (
+    <>
+      {loading &&
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+        </Box>
+      }
+      {project ? getHeader() : <></>}
+      {project ? getBody() : <></>}
+      {getFooter()}
     </>
   )
 }

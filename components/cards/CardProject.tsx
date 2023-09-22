@@ -6,30 +6,16 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 
 import StateBadge from './StateBadge'
+import { Image } from 'sanity'
+import { urlForImage } from '../../sanity/lib/image'
+import { DASProject } from 'types'
+import { dasProjectsService } from 'pages/api/ProjectsService'
 
 type CardProjectProps = {
-  title: string
-  partner: string
-  programAreas: string[]
-  description: string
-  status: 'active' | 'recruiting' | 'complete'
-  projectLink: string
-  duration?: { start: string; end: string }
-  imageSrc: string
-  imageAlt: string
+  project: DASProject
 }
 
-const CardProject = ({
-  title,
-  partner,
-  programAreas,
-  description,
-  status,
-  projectLink,
-  duration,
-  imageSrc,
-  imageAlt,
-}: CardProjectProps) => {
+const CardProject = ({ project }: CardProjectProps) => {
   return (
     <Card
       sx={{
@@ -50,8 +36,7 @@ const CardProject = ({
         <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
           <CardMedia
             component="img"
-            alt={imageAlt}
-            image={imageSrc}
+            image={urlForImage(project.image).url()}
             sx={{
               width: { md: '7rem', lg: '100%' },
               aspectRatio: '1 / 1',
@@ -61,14 +46,14 @@ const CardProject = ({
             }}
           />
           <Stack spacing="1rem">
-            <Typography variant="titleLarge">{title}</Typography>
-            <Typography variant="labelLarge">{partner}</Typography>
+            <Typography variant="titleLarge">{project.title}</Typography>
+            <Typography variant="labelLarge">{project.partner}</Typography>
             <Typography variant="labelMedium">
-              {programAreas.join(', ')}
+              {(project.programAreas ? project.programAreas : []).join(', ')}
             </Typography>
           </Stack>
         </Stack>
-        <Typography variant="bodyMedium">{description}</Typography>
+        <Typography variant="bodyMedium">{project.description}</Typography>
         <Stack
           direction={{ xs: 'column-reverse', lg: 'row' }}
           alignItems={{ xs: 'auto', lg: 'flex-end' }}
@@ -77,7 +62,7 @@ const CardProject = ({
         >
           <Button
             variant="contained"
-            href={projectLink}
+            href={project.projectLink}
             sx={{ width: { md: 'max-content' } }}
           >
             View Project
@@ -88,10 +73,10 @@ const CardProject = ({
             alignItems={{ xs: 'center', sm: 'auto' }}
             spacing="1rem"
           >
-            <StateBadge state={status} />
+            <StateBadge state={project.status} />
 
             <Typography variant="labelMedium">
-              {duration ? `${duration.start} - ${duration.end}` : 'Ongoing'}
+              {dasProjectsService.getTimeline(project)}
             </Typography>
           </Stack>
         </Stack>

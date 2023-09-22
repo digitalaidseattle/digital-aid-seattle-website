@@ -230,7 +230,7 @@ const OurTeamSection = () => {
       <Box textAlign="center">
         <Button
           variant="contained"
-          href={'/project_cadre'}
+          href={'/project_individual?project=the-cadre'}
           sx={{ width: 'fit-content' }}
         >
           View our Cadre

@@ -1,58 +1,28 @@
-import { Box, Stack, styled, Typography, useTheme } from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import ProjectCadreImage from 'assets/project-image.png'
+import { Box, CircularProgress, Stack, useTheme } from '@mui/material'
 import Masthead from 'components/Masthead'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
-
-type CardProjectProps = {
-  title: string
-  partner: string
-  programAreas: string[]
-  description: string
-  status: 'active' | 'recruiting' | 'complete'
-  projectLink: string
-  duration?: { start: string; end: string }
-  imageSrc: string
-  imageAlt: string
-}
-
-const MobileHeader = styled(Typography)(({ theme }) => ({
-  padding: '4rem 0',
-  width: '100%',
-  textAlign: 'center',
-}))
-
-const DesktopHeader = styled(Typography)(({ theme }) => ({
-  padding: '5rem 0',
-  width: '100%',
-  textAlign: 'center',
-}))
+import { useEffect, useState } from 'react'
+import { dasProjectsService } from './api/ProjectsService'
 
 const ProjectsPage = () => {
   const theme = useTheme()
 
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const title = 'Projects';
+  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
 
-  const projectData: CardProjectProps[] = [
-    {
-      title: 'The Cadre',
-      partner: 'Digital Aid Seattle',
-      programAreas: ['Civic technology'],
-      description:
-        'Digital Aid Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
-      status: 'active' as 'active',
-      projectLink: '/project_cadre',
-      imageSrc: ProjectCadreImage.src,
-      imageAlt: 'Digital Aid Seattle logo',
-    },
-  ]
+  useEffect(() => {
+    dasProjectsService.getAll()
+      .then(evs => setProjects(evs.sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
+  }, []);
 
   return (
     <>
-      <Masthead title="Projects" />
+      <Masthead title={title} />
       <Box
         sx={{
           width: '100%',
@@ -78,19 +48,14 @@ const ProjectsPage = () => {
           }}
           maxWidth={'880px'}
         >
+          {loading &&
+            <CircularProgress />
+          }
           <CardGridContainer>
-            {projectData.map((project) => (
+            {projects.map((project) => (
               <CardProject
-                key={project.title}
-                title={project.title}
-                partner={project.partner}
-                programAreas={project.programAreas}
-                description={project.description}
-                status={project.status}
-                projectLink={project.projectLink}
-                duration={project.duration}
-                imageSrc={project.imageSrc}
-                imageAlt={project.imageAlt}
+                key={project.id}
+                project={project}
               />
             ))}
           </CardGridContainer>

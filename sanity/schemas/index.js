@@ -7,6 +7,7 @@ import portableText from './portableText'
 import textWithIllustration from './textWithIllustration'
 import osEvent from './osEvent'
 import teamMember from './teamMember'
+import dasProject from './dasProject'
 
 export const schemaTypes = [
   textWithIllustration,
@@ -19,5 +20,6 @@ export const schemaTypes = [
   internalLink,
   externalLink,
   osEvent,
-  teamMember
+  teamMember,
+  dasProject
 ]
