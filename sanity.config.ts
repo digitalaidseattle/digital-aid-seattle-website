@@ -25,7 +25,8 @@ export default defineConfig({
           .items([
             // Minimum required configuration
             orderableDocumentListDeskItem({type: 'team-member', S, context}),
-            orderableDocumentListDeskItem({type: 'os-event', S, context})
+            orderableDocumentListDeskItem({type: 'os-event', S, context}),
+            orderableDocumentListDeskItem({type: 'das-project', S, context})
           ])
         }
       }
