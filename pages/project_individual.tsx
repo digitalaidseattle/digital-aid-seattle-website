@@ -295,7 +295,7 @@ const ProjectIndividualPage = () => {
                   key={person._id}
                   title={person.name}
                   description={person.role}
-                  image={urlForImage(person.image).url()}
+                  image={person.image ? urlForImage(person.image).url() : undefined}
                 />
               ))}
             </Box>
