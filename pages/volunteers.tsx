@@ -177,7 +177,7 @@ const VolunteerPage = () => {
           All of our volunteers are vetted for experience, and sign a volunteer
           agreement before commencing work with Digital Aid Seattle.
         </Typography>
-        <Typography variant="headlineLarge">Our Expectations</Typography>
+        <Typography variant="headlineLarge">Our expectations</Typography>
         <Box
           sx={{
             display: 'grid',
@@ -227,7 +227,7 @@ const VolunteerPage = () => {
             maxWidth: '880px',
           }}
         >
-          <Typography variant="headlineLarge">Our Oath</Typography>
+          <Typography variant="headlineLarge">Our oath</Typography>
           <Typography variant="bodyLarge">
             We champion these values and ask you as a volunteer to adopt them,
             too.
@@ -263,7 +263,7 @@ const VolunteerPage = () => {
             maxWidth: '880px',
           }}
         >
-          <Typography variant="headlineLarge">The Process</Typography>
+          <Typography variant="headlineLarge">The process</Typography>
           <ol>
             {processContent.map((item, index) => (
               <li key={index + 1} style={{ marginBottom: '2rem' }}>

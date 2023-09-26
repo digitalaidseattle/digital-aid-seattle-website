@@ -67,7 +67,9 @@ const CommonFooterLargeScreen = () => (
     <GridItem md={4}>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">
+          info@digitalaidseattle.org
+        </a>
       </FooterSubItem>
     </GridItem>
 
@@ -84,7 +86,7 @@ const CommonFooterLargeScreen = () => (
           alignSelf: 'flex-end',
         }}
       >
-        <a href="https://www.linkedin.com/company/open-seattle/">
+        <a href="https://www.linkedin.com/company/digitalseattle/">
           <LinkedInIcon
             sx={{ color: theme.palette.primary.contrastText }}
             fontSize="large"
@@ -148,7 +150,9 @@ const CommonFooterMidScreen = () => (
         <Box>
           <FooterItemTitle>Contact us</FooterItemTitle>
           <FooterSubItem>
-            <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
+            <a href="mailto:info@digitalaidseattle.org">
+              info@digitalaidseattle.org
+            </a>
           </FooterSubItem>
         </Box>
 
@@ -198,7 +202,7 @@ const CommonFooterMidScreen = () => (
           gap: '2rem',
         }}
       >
-        <a href="https://www.linkedin.com/company/open-seattle/">
+        <a href="https://www.linkedin.com/company/digitalseattle/">
           <LinkedInIcon
             sx={{ color: theme.palette.primary.contrastText }}
             fontSize="large"
@@ -245,7 +249,9 @@ const CommonFooterSmallScreen = () => (
     <GridItem>
       <FooterItemTitle>Contact us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">info@digitalaidseattle.org</a>
+        <a href="mailto:info@digitalaidseattle.org">
+          info@digitalaidseattle.org
+        </a>
       </FooterSubItem>
     </GridItem>
 
@@ -263,7 +269,7 @@ const CommonFooterSmallScreen = () => (
     </GridItem>
 
     <GridItem display="flex" sx={{ gap: '1rem' }}>
-      <a href="https://www.linkedin.com/company/open-seattle/">
+      <a href="https://www.linkedin.com/company/digitalseattle/">
         <LinkedInIcon
           sx={{ color: theme.palette.primary.contrastText }}
           fontSize="large"

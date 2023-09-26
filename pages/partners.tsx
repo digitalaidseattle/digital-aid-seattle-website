@@ -28,7 +28,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 /* eslint-disable @next/next/no-img-element */
 
 const processContent = [
-  'Apply for help using the “Get Help” button.',
+  'Apply for help using the “Partner with us” button.',
   'You will receive an invitation for an interview within a few days.',
   'If accepted, complete your onboarding and gather a team for your project.',
   'Once work has begun, you will get weekly updates on the progress.',
@@ -221,7 +221,8 @@ const PartnersPage = () => {
             </Typography>
             <Typography variant="bodyLarge">
               All of our volunteers are vetted for experience, and sign a
-              volunteer agreement before commencing work with Digital Aid Seattle.
+              volunteer agreement before commencing work with Digital Aid
+              Seattle.
             </Typography>
           </Stack>
         </Stack>

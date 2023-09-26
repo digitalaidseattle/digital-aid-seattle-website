@@ -237,7 +237,7 @@ const Home = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our Mission</Typography>
+          <Typography variant="headlineLarge">Our mission</Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}
@@ -281,9 +281,10 @@ const Home = () => {
                 />
               }
             />
-          
-            {// Disabling until we implement a supoort-us page
-            /* <CardOne
+
+            {
+              // Disabling until we implement a support-us page
+              /* <CardOne
               description="Support Digital Aid Seattle in its mission to build tech solutions for our community nonprofits by donating."
               buttonText="Support Us"
               icon={
@@ -292,7 +293,8 @@ const Home = () => {
                   sx={{ color: palette.text.secondary }}
                 />
               }
-            /> */}
+            /> */
+            }
           </CardGridContainer>
         </Stack>
       </SectionContainer>
