@@ -263,7 +263,7 @@ const VolunteerPage = () => {
             maxWidth: '880px',
           }}
         >
-          <Typography variant="headlineLarge">The Process</Typography>
+          <Typography variant="headlineLarge">The process</Typography>
           <ol>
             {processContent.map((item, index) => (
               <li key={index + 1} style={{ marginBottom: '2rem' }}>
