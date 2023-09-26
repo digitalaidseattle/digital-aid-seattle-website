@@ -125,6 +125,15 @@ const WhatWeDoSection = ({ theme }) => (
       Digital Aid Seattle partners with other nonprofits in order to amplifying
       their impact, and to uplift communities with technology.
     </Typography>
+    <Box textAlign="center">
+        <Button
+          variant="contained"
+          href={'/project_individual?project=the-cadre'}
+          sx={{ width: 'fit-content' }}
+        >
+          View our leadership team
+        </Button>
+      </Box>
   </AboutUsSection>
 )
 
@@ -227,15 +236,6 @@ const OurTeamSection = () => {
           </Grid>
         ))}
       </Grid>
-      <Box textAlign="center">
-        <Button
-          variant="contained"
-          href={'/project_cadre'}
-          sx={{ width: 'fit-content' }}
-        >
-          View our Cadre
-        </Button>
-      </Box>
     </AboutUsSection>
   )
 }
