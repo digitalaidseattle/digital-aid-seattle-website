@@ -1,6 +1,6 @@
 /*
-* @2023 Digital Aid Seattle
-*/
+ * @2023 Digital Aid Seattle
+ */
 import { useEffect, useState } from 'react'
 import { urlForImage } from '../sanity/lib/image'
 
@@ -39,20 +39,41 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { DASProject } from 'types'
 
 const rolesMap = {
-  communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
-  dataAnalyst: { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  designer: { role: 'designer', icon: <DrawOutlinedIcon />, },
-  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
-  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon />, },
-  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
-  projectManager: { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
-  uxResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  socialMediaDesigner: { role: 'social media designer', icon: <ShareOutlinedIcon />, },
-  socialMediaSpecialist: { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
-  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
-  solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
-  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
+  communityEngagementLiason: {
+    role: 'community engagement liaison',
+    icon: <CampaignOutlinedIcon />,
+  },
+  dataAnalyst: {
+    role: 'data analyst',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  designer: { role: 'designer', icon: <DrawOutlinedIcon /> },
+  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon /> },
+  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon /> },
+  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon /> },
+  projectManager: {
+    role: 'project manager',
+    icon: <ManageAccountsOutlinedIcon />,
+  },
+  uxResearcher: {
+    role: 'user experience researcher',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  socialMediaDesigner: {
+    role: 'social media designer',
+    icon: <ShareOutlinedIcon />,
+  },
+  socialMediaSpecialist: {
+    role: 'social media specialist',
+    icon: <EmojiPeopleOutlinedIcon />,
+  },
+  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon /> },
+  solutionArchitect: {
+    role: 'solution architect',
+    icon: <ApartmentOutlinedIcon />,
+  },
+  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon /> },
+  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
 const ProjectIndividualPage = () => {
@@ -60,12 +81,12 @@ const ProjectIndividualPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    dasProjectsService.getOne(params.get('project'))
-      .then(data => setProject(data))
+    const params = new URLSearchParams(window.location.search)
+    dasProjectsService
+      .getOne(params.get('project'))
+      .then((data) => setProject(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-
   }, [])
 
   const theme = useTheme()
@@ -238,145 +259,163 @@ const ProjectIndividualPage = () => {
   }
 
   function getBody() {
-    return <SectionContainer backgroundColor={theme.palette.background.default}>
-      <Stack
-        gap={{ xs: '64px', lg: '80px' }}
-        maxWidth="880px"
-        margin="0 auto"
-      >
-        {(project.problem && project.problem.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Problem</Subheader>
-            <TextSection>
-              {project.problem.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </TextSection>
-          </Section>
-        }
+    return (
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
+        >
+          {project.problem && project.problem.length > 0 && (
+            <Section>
+              <Subheader variant="headlineMedium">Problem</Subheader>
+              <TextSection>
+                {project.problem.map((t, index) => (
+                  <Typography key={index} variant="bodyLarge">
+                    {t}
+                  </Typography>
+                ))}
+              </TextSection>
+            </Section>
+          )}
 
-        {(project.solution && project.solution.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Solution</Subheader>
-            <TextSection>
-              {project.solution.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </TextSection>
-          </Section>
-        }
+          {project.solution && project.solution.length > 0 && (
+            <Section>
+              <Subheader variant="headlineMedium">Solution</Subheader>
+              <TextSection>
+                {project.solution.map((t, index) => (
+                  <Typography key={index} variant="bodyLarge">
+                    {t}
+                  </Typography>
+                ))}
+              </TextSection>
+            </Section>
+          )}
 
-        {(project.impact && project.impact.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Impact</Subheader>
-            <Typography variant="bodyLarge">
-              {project.impact.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </Typography>
-          </Section>
-        }
+          {project.impact && project.impact.length > 0 && (
+            <Section>
+              <Subheader variant="headlineMedium">Impact</Subheader>
+              <Typography variant="bodyLarge">
+                {project.impact.map((t, index) => (
+                  <Typography key={index} variant="bodyLarge">
+                    {t}
+                  </Typography>
+                ))}
+              </Typography>
+            </Section>
+          )}
 
-        {(project.currentTeam && project.currentTeam.length > 0) &&
-          <Section>
-            <Subheader
-              variant="headlineMedium"
-              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-            >
-              Current Team
-            </Subheader>
-            <Box
-              sx={{
-                display: 'grid',
-                gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
-                justifyContent: 'center',
-                gap: '2rem',
-                width: '100%',
-              }}
-            >
-              {project.currentTeam.map((person) => (
-                <CardWithPhoto
-                  key={person._id}
-                  title={person.name}
-                  description={person.role}
-                  image={person.image ? urlForImage(person.image).url() : undefined}
-                />
-              ))}
-            </Box>
-          </Section>
-        }
-
-        {(project.rolesNeeded && project.rolesNeeded.length > 0) &&
-          <Section>
-            <Subheader
-              variant="headlineMedium"
-              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-            >
-              Roles Needed
-            </Subheader>
-            <Box
-              sx={{
-                display: 'grid',
-                gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
-                justifyContent: 'center',
-                gap: '2rem',
-                width: '100%',
-              }}
-            >
-              {project.rolesNeeded
-                .filter(item => rolesMap[item])
-                .map(item => (
-                  <ListItemWithIcon
-                    key={item}
-                    listIcon={rolesMap[item].icon}
-                    listText={rolesMap[item].role}
+          {project.currentTeam && project.currentTeam.length > 0 && (
+            <Section>
+              <Subheader
+                variant="headlineMedium"
+                sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+              >
+                Current team
+              </Subheader>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridAutoFlow: 'columns',
+                  gridTemplateColumns:
+                    'repeat(auto-fill, minmax(12.25rem, 1fr))',
+                  justifyContent: 'center',
+                  gap: '2rem',
+                  width: '100%',
+                }}
+              >
+                {project.currentTeam.map((person) => (
+                  <CardWithPhoto
+                    key={person._id}
+                    title={person.name}
+                    description={person.role}
+                    image={
+                      person.image ? urlForImage(person.image).url() : undefined
+                    }
                   />
                 ))}
-            </Box>
-          </Section>
-        }
+              </Box>
+            </Section>
+          )}
 
+          {project.rolesNeeded && project.rolesNeeded.length > 0 && (
+            <Section>
+              <Subheader
+                variant="headlineMedium"
+                sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+              >
+                Roles needed
+              </Subheader>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridAutoFlow: 'columns',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
+                  justifyContent: 'center',
+                  gap: '2rem',
+                  width: '100%',
+                }}
+              >
+                {project.rolesNeeded
+                  .filter((item) => rolesMap[item])
+                  .map((item) => (
+                    <ListItemWithIcon
+                      key={item}
+                      listIcon={rolesMap[item].icon}
+                      listText={rolesMap[item].role}
+                    />
+                  ))}
+              </Box>
+            </Section>
+          )}
+
+          <Section
+            sx={{
+              alignItems: 'center',
+            }}
+          >
+            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+              Questions about this project?
+            </Subheader>
+            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+              Contact us
+            </Button>
+          </Section>
+        </Stack>
+      </SectionContainer>
+    )
+  }
+
+  function getFooter() {
+    return (
+      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
         <Section
           sx={{
             alignItems: 'center',
           }}
         >
           <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Questions about this project?
+            Interested in volunteering with Digital Aid Seattle?
           </Subheader>
-          <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-            Contact us
+          <Button
+            variant="contained"
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            target="_blank"
+          >
+            Apply to volunteer
           </Button>
         </Section>
-      </Stack>
-    </SectionContainer>
-  }
-
-
-  function getFooter() {
-    return <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
-      <Section
-        sx={{
-          alignItems: 'center',
-        }}
-      >
-        <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-          Interested in volunteering with Digital Aid Seattle?
-        </Subheader>
-        <Button
-          variant="contained"
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-          target="_blank"
-        >
-          Apply to volunteer
-        </Button>
-      </Section>
-    </SectionContainer>
+      </SectionContainer>
+    )
   }
 
   return (
     <>
-      {loading &&
+      {loading && (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress />
         </Box>
-      }
+      )}
       {project ? getHeader() : <></>}
       {project ? getBody() : <></>}
       {getFooter()}
