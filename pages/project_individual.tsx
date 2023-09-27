@@ -1,44 +1,42 @@
 /*
 * @2023 Digital Aid Seattle
 */
-import { urlForImage } from '../sanity/lib/image'
 import { useEffect, useState } from 'react'
+import { urlForImage } from '../sanity/lib/image'
 
 import {
   Box,
   Button,
-  Stack,
-  styled,
-  Typography,
-  useTheme,
   CircularProgress,
+  Stack,
+  Typography,
+  styled,
+  useTheme,
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService } from './api/ProjectsService'
 
-// imports for placeholders-- delete as needed
-import ProjectPlaceholder from 'assets/logo-light-icon.svg'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
 
 // icons for role cards
-import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
-import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
-import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
-import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined'
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
-import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
+import BugReportOutlinedIcon from '@mui/icons-material/BugReportOutlined'
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
+import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined'
+import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
+import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
+import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
+import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { DASProject } from 'types'
-import { Image } from 'sanity'
 
 const rolesMap = {
   communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
@@ -54,6 +52,7 @@ const rolesMap = {
   softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
   solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
   storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
+  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
 }
 
 const ProjectIndividualPage = () => {
@@ -320,13 +319,15 @@ const ProjectIndividualPage = () => {
                 width: '100%',
               }}
             >
-              {project.rolesNeeded.map(item => (
-                <ListItemWithIcon
-                  key={item}
-                  listIcon={rolesMap[item].icon}
-                  listText={rolesMap[item].role}
-                />
-              ))}
+              {project.rolesNeeded
+                .filter(item => rolesMap[item])
+                .map(item => (
+                  <ListItemWithIcon
+                    key={item}
+                    listIcon={rolesMap[item].icon}
+                    listText={rolesMap[item].role}
+                  />
+                ))}
             </Box>
           </Section>
         }
