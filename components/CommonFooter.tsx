@@ -89,7 +89,7 @@ const CommonFooterLargeScreen = () => (
         <a
           href="https://www.linkedin.com/company/digitalseattle/"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           <LinkedInIcon
             sx={{ color: theme.palette.primary.contrastText }}
@@ -118,7 +118,11 @@ const CommonFooterLargeScreen = () => (
 
     <GridItem md={1} display="flex" flexDirection="column">
       <Box sx={{ alignSelf: 'flex-end' }}>
-        <a href="https://github.com/openseattle" target="_blank" rel="noopener">
+        <a
+          href="https://github.com/openseattle"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <GitHubIcon
             sx={{ color: theme.palette.primary.contrastText }}
             fontSize="large"
@@ -209,14 +213,18 @@ const CommonFooterMidScreen = () => (
         <a
           href="https://www.linkedin.com/company/digitalseattle/"
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           <LinkedInIcon
             sx={{ color: theme.palette.primary.contrastText }}
             fontSize="large"
           />
         </a>
-        <a href="https://github.com/openseattle" target="_blank" rel="noopener">
+        <a
+          href="https://github.com/openseattle"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <GitHubIcon
             sx={{ color: theme.palette.primary.contrastText }}
             fontSize="large"
@@ -280,14 +288,18 @@ const CommonFooterSmallScreen = () => (
       <a
         href="https://www.linkedin.com/company/digitalseattle/"
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
       >
         <LinkedInIcon
           sx={{ color: theme.palette.primary.contrastText }}
           fontSize="large"
         />
       </a>
-      <a href="https://github.com/openseattle" target="_blank" rel="noopener">
+      <a
+        href="https://github.com/openseattle"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <GitHubIcon
           sx={{ color: theme.palette.primary.contrastText }}
           fontSize="large"
