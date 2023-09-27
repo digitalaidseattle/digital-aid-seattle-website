@@ -51,7 +51,9 @@ export default {
             name: 'status',
             type: 'string',
             title: 'Status',
-            list: ['active', 'recruiting', 'complete']
+            options: {
+                list: ['active', 'recruiting', 'complete']
+            }
         },
         {
             name: 'projectLink',
@@ -110,7 +112,27 @@ export default {
             name: 'rolesNeeded',
             type: 'array',
             title: 'Roles Needed',
-            of: [{ type: 'string' }]
+            of: [{
+                type: 'string',
+                options: {
+                    list: [
+                        {title: 'Community Engagement Liason', value: 'communityEngagementLiason'},
+                        {title: 'Data Analyst', value: 'dataAnalyst'},
+                        {title: 'Designer', value: 'designer'},
+                        {title: 'Grant Writer', value: 'grantWriter'},
+                        {title: 'Legal Help', value: 'legalHelp'},
+                        {title: 'Product Manager', value: 'productManager'},
+                        {title: 'Project Manager', value: 'projectManager'},
+                        {title: 'UX Researcher', value: 'uxResearcher'},
+                        {title: 'Social Media Designer', value: 'socialMediaDesigner'},
+                        {title: 'Social Media Specialist', value: 'socialMediaSpecialist'},
+                        {title: 'Software Engineer', value: 'softwareEngineer'},
+                        {title: 'Solution Architect', value: 'solutionArchitect'},
+                        {title: 'Storyteller', value: 'storyteller'},
+                        {title: 'QA Specialist', value: 'qaSpecialist'}
+                    ]
+                }
+            }]
         },
         {
             name: 'currentTeam',
