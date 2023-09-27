@@ -52,7 +52,7 @@ const rolesMap = {
   softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
   solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
   storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  // qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
+  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
 }
 
 const ProjectIndividualPage = () => {
