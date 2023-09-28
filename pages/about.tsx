@@ -126,14 +126,14 @@ const WhatWeDoSection = ({ theme }) => (
       their impact, and to uplift communities with technology.
     </Typography>
     <Box textAlign="center">
-        <Button
-          variant="contained"
-          href={'/project_individual?project=the-cadre'}
-          sx={{ width: 'fit-content' }}
-        >
-          View our leadership team
-        </Button>
-      </Box>
+      <Button
+        variant="contained"
+        href={'/project_individual?project=the-cadre'}
+        sx={{ width: 'fit-content' }}
+      >
+        View our leadership team
+      </Button>
+    </Box>
   </AboutUsSection>
 )
 
