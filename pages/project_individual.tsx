@@ -1,6 +1,6 @@
 /*
-* @2023 Digital Aid Seattle
-*/
+ * @2023 Digital Aid Seattle
+ */
 import { useEffect, useState } from 'react'
 import { urlForImage } from '../sanity/lib/image'
 
@@ -168,12 +168,12 @@ const ProjectIndividualPage = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    dasProjectsService.getOne(params.get('project'))
-      .then(data => setProject(data))
+    const params = new URLSearchParams(window.location.search)
+    dasProjectsService
+      .getOne(params.get('project'))
+      .then((data) => setProject(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-
   }, [])
 
   const theme = useTheme()
@@ -337,7 +337,8 @@ const ProjectIndividualPage = () => {
         <BodyTextSection title="Solution" texts={project.solution} />
         <BodyTextSection title="Impact" texts={project.impact} />
         <TeamSection title="Current team" members={project.currentTeam} />
-        <RolesSection title="Roles Needed" roles={project.rolesNeeded} />
+        <RolesSection title="Roles needed" roles={project.rolesNeeded} />
+
         <Section
           sx={{
             alignItems: 'center',
@@ -354,35 +355,36 @@ const ProjectIndividualPage = () => {
     </SectionContainer>
   }
 
-
   function getFooter() {
-    return <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
-      <Section
-        sx={{
-          alignItems: 'center',
-        }}
-      >
-        <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-          Interested in volunteering with Digital Aid Seattle?
-        </Subheader>
-        <Button
-          variant="contained"
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-          target="_blank"
+    return (
+      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
+        <Section
+          sx={{
+            alignItems: 'center',
+          }}
         >
-          Apply to volunteer
-        </Button>
-      </Section>
-    </SectionContainer>
+          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+            Interested in volunteering with Digital Aid Seattle?
+          </Subheader>
+          <Button
+            variant="contained"
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            target="_blank"
+          >
+            Apply to volunteer
+          </Button>
+        </Section>
+      </SectionContainer>
+    )
   }
 
   return (
     <>
-      {loading &&
+      {loading && (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <CircularProgress />
         </Box>
-      }
+      )}
       {project ? getHeader() : <></>}
       {project ? getBody() : <></>}
       {getFooter()}
