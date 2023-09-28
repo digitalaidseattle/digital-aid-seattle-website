@@ -105,12 +105,10 @@ const CommonFooterLargeScreen = () => (
     </GridItem>
 
     <GridItem md={4}>
-      {/* NRFPT
-      <FooterItemTitle>Support us</FooterItemTitle>
+      {/* <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-      </FooterSubItem> 
-      */}
+      </FooterSubItem> */}
     </GridItem>
 
     <GridItem md={4}>
@@ -191,10 +189,10 @@ const CommonFooterMidScreen = () => (
         </Box>
 
         <Box>
-          <FooterItemTitle>Support us</FooterItemTitle>
+          {/* <FooterItemTitle>Support us</FooterItemTitle>
           <FooterSubItem>
             <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-          </FooterSubItem>
+          </FooterSubItem> */}
         </Box>
 
         <Box>
@@ -273,13 +271,12 @@ const CommonFooterSmallScreen = () => (
       </FooterSubItem>
     </GridItem>
 
-    <GridItem>
+    {/* <GridItem>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        {/* TODO Update to support-us page, when the page is added */}
         <a href="mailto:info@digitalaidseattle.org">How you can help</a>
       </FooterSubItem>
-    </GridItem>
+    </GridItem> */}
 
     <GridItem>
       <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
