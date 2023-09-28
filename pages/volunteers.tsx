@@ -19,23 +19,19 @@ import {
   Box,
   Button,
   Container,
-  Grid,
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from '@mui/material'
+import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
-import ListItemWithIcon from 'components/list/ListItemWithIcon'
-import MastheadWithImage from 'components/MastheadWithImage'
 import Link from 'next/link'
-import { ReactElement, ReactNode } from 'react'
+import React from 'react'
 import { designColor } from 'theme/theme'
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import React from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -109,7 +105,7 @@ const oathContent = [
 ]
 
 const processContent = [
-  'Read our volunteer agreement, then apply to volunteer using the button below.',
+  'Read our oath, then apply to volunteer using the button below.',
   'You will receive an invitation for an interview within a few days.',
   'If accepted, complete onboarding and choose a project to work on.',
   'Contribute weekly to your project, and make a difference for your community!',
@@ -213,7 +209,7 @@ const VolunteerPage = () => {
                 fontSize="large"
               />
             }
-            description="You dedicate the time you need to accomplish your committed tasks with Digital Aid Seattle."
+            description="You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle."
           />
         </Box>
       </Stack>
