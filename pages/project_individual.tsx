@@ -101,7 +101,7 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
         variant="headlineMedium"
         sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
       >
-        Current Team
+        {title}
       </Subheader>
       <Box
         sx={{
@@ -137,7 +137,7 @@ const RolesSection = ({ title, roles }: RolesSectionProps) => {
         variant="headlineMedium"
         sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
       >
-        Roles Needed
+        {title}
       </Subheader>
       <Box
         sx={{
