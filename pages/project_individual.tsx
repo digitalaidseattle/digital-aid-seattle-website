@@ -36,7 +36,7 @@ import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { DASProject } from 'types'
+import { DASProject, TeamMember } from 'types'
 
 const rolesMap = {
   communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
@@ -55,6 +55,114 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
 }
 
+const Subheader = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  [theme.breakpoints.up('xs')]: {
+    marginBottom: '2rem',
+  },
+  [theme.breakpoints.up('lg')]: {
+    marginBottom: '2.5rem',
+  },
+}))
+
+const Section = styled(Stack)(({ theme }) => ({
+  width: '100%',
+  color: theme.palette.primary.main,
+}))
+
+const TextSection = styled(Stack)(() => ({
+  gap: '2rem',
+}))
+
+type BodyTextSectionProps = {
+  title: string
+  texts?: string[]
+}
+
+const BodyTextSection = ({ title, texts }: BodyTextSectionProps) => {
+  return (texts && texts.length > 0) &&
+    <Section>
+      <Subheader variant="headlineMedium">{title}</Subheader>
+      <TextSection>
+        {texts.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
+      </TextSection>
+    </Section>
+}
+
+type TeamSectionProps = {
+  title: string
+  members?: TeamMember[]
+}
+
+const TeamSection = ({ title, members }: TeamSectionProps) => {
+  return (members && members.length > 0) &&
+    <Section>
+      <Subheader
+        variant="headlineMedium"
+        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+      >
+        Current Team
+      </Subheader>
+      <Box
+        sx={{
+          display: 'grid',
+          gridAutoFlow: 'columns',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
+          justifyContent: 'center',
+          gap: '2rem',
+          width: '100%',
+        }}
+      >
+        {members.map((person) => (
+          <CardWithPhoto
+            key={person._id}
+            title={person.name}
+            description={person.role}
+            image={person.image ? urlForImage(person.image).url() : undefined}
+          />
+        ))}
+      </Box>
+    </Section>
+}
+
+type RolesSectionProps = {
+  title: string
+  roles?: string[]
+}
+
+const RolesSection = ({ title, roles }: RolesSectionProps) => {
+  return (roles && roles.length > 0) &&
+    <Section>
+      <Subheader
+        variant="headlineMedium"
+        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+      >
+        Roles Needed
+      </Subheader>
+      <Box
+        sx={{
+          display: 'grid',
+          gridAutoFlow: 'columns',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
+          justifyContent: 'center',
+          gap: '2rem',
+          width: '100%',
+        }}
+      >
+        {roles
+          .filter(item => rolesMap[item])
+          .map(item => (
+            <ListItemWithIcon
+              key={item}
+              listIcon={rolesMap[item].icon}
+              listText={rolesMap[item].role}
+            />
+          ))}
+      </Box>
+    </Section>
+}
+
+
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
   const [loading, setLoading] = useState(true)
@@ -71,25 +179,6 @@ const ProjectIndividualPage = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
-
-  const Subheader = styled(Typography)(({ theme }) => ({
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up('xs')]: {
-      marginBottom: '2rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-      marginBottom: '2.5rem',
-    },
-  }))
-
-  const Section = styled(Stack)(({ theme }) => ({
-    width: '100%',
-    color: theme.palette.primary.main,
-  }))
-
-  const TextSection = styled(Stack)(() => ({
-    gap: '2rem',
-  }))
 
   function MobileHeader() {
     return (
@@ -244,94 +333,11 @@ const ProjectIndividualPage = () => {
         maxWidth="880px"
         margin="0 auto"
       >
-        {(project.problem && project.problem.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Problem</Subheader>
-            <TextSection>
-              {project.problem.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </TextSection>
-          </Section>
-        }
-
-        {(project.solution && project.solution.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Solution</Subheader>
-            <TextSection>
-              {project.solution.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </TextSection>
-          </Section>
-        }
-
-        {(project.impact && project.impact.length > 0) &&
-          <Section>
-            <Subheader variant="headlineMedium">Impact</Subheader>
-            <Typography variant="bodyLarge">
-              {project.impact.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-            </Typography>
-          </Section>
-        }
-
-        {(project.currentTeam && project.currentTeam.length > 0) &&
-          <Section>
-            <Subheader
-              variant="headlineMedium"
-              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-            >
-              Current Team
-            </Subheader>
-            <Box
-              sx={{
-                display: 'grid',
-                gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
-                justifyContent: 'center',
-                gap: '2rem',
-                width: '100%',
-              }}
-            >
-              {project.currentTeam.map((person) => (
-                <CardWithPhoto
-                  key={person._id}
-                  title={person.name}
-                  description={person.role}
-                  image={person.image ? urlForImage(person.image).url() : undefined}
-                />
-              ))}
-            </Box>
-          </Section>
-        }
-
-        {(project.rolesNeeded && project.rolesNeeded.length > 0) &&
-          <Section>
-            <Subheader
-              variant="headlineMedium"
-              sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-            >
-              Roles Needed
-            </Subheader>
-            <Box
-              sx={{
-                display: 'grid',
-                gridAutoFlow: 'columns',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
-                justifyContent: 'center',
-                gap: '2rem',
-                width: '100%',
-              }}
-            >
-              {project.rolesNeeded
-                .filter(item => rolesMap[item])
-                .map(item => (
-                  <ListItemWithIcon
-                    key={item}
-                    listIcon={rolesMap[item].icon}
-                    listText={rolesMap[item].role}
-                  />
-                ))}
-            </Box>
-          </Section>
-        }
-
+        <BodyTextSection title="Problem" texts={project.problem} />
+        <BodyTextSection title="Solution" texts={project.solution} />
+        <BodyTextSection title="Impact" texts={project.impact} />
+        <TeamSection title="Current team" members={project.currentTeam} />
+        <RolesSection title="Roles Needed" roles={project.rolesNeeded} />
         <Section
           sx={{
             alignItems: 'center',
