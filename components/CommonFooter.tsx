@@ -105,10 +105,12 @@ const CommonFooterLargeScreen = () => (
     </GridItem>
 
     <GridItem md={4}>
+      {/* NRFPT
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
         <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-      </FooterSubItem>
+      </FooterSubItem> 
+      */}
     </GridItem>
 
     <GridItem md={4}>
