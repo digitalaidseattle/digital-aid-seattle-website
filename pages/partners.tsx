@@ -30,7 +30,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 const processContent = [
   'Apply for help using the “Partner with us” button.',
   'You will receive an invitation for an interview within a few days.',
-  'If accepted, complete your onboarding and gather a team for your project.',
+  "By detailing your situation, experiences, and aspirations, help us compose a vision of the solution we'll be creating for you.",
   'Once work has begun, you will get weekly updates on the progress.',
 ]
 
@@ -210,9 +210,9 @@ const PartnersPage = () => {
             </Typography>
             <Typography variant="bodyLarge">
               Partners should plan to maintain projects after handoff, and to
-              provide all volunteers with the necessary documentation for timely
-              project completion. All Digital Aid Seattle projects are open and
-              accessible by default.
+              provide Digital Aid Seattle volunteers with the necessary
+              documentation for timely project completion. All Digital Aid
+              Seattle projects are open and accessible by default.
             </Typography>
           </Stack>
           <Stack gap={{ xs: 2, md: 4 }}>
