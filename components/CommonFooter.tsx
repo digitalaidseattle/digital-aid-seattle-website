@@ -8,13 +8,40 @@ import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
+import { ReactNode } from 'react'
 
-const GridItem = styled(Grid)(() => ({
-  item: true,
-  padding: '0.5rem',
-  justifyContent: 'left',
-  alignItems: 'center',
-}))
+// const GridItem = styled(Grid)(() => {
+//   return {
+//     item: true,
+//     padding: '0.5rem',
+//     justifyContent: 'left',
+//     alignItems: 'center'
+//   }
+// })
+type GridItemProps = {
+  children: ReactNode
+  md?: number
+}
+
+const GridItem = ({ md, children }: GridItemProps) => (
+  md ?
+    <Grid
+      item={true}
+      padding='0.5rem'
+      justifyContent='left'
+      alignItems='center'
+      md={md}>
+      {children}
+    </Grid>
+    :
+    <Grid
+      item={true}
+      padding='0.5rem'
+      justifyContent='left'
+      alignItems='center'>
+      {children}
+    </Grid>
+)
 
 const FooterItemTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
@@ -127,8 +154,8 @@ const githubLink = () => {
 }
 
 const CommonFooterLargeScreen = () => (
-  <Grid container direction="row" columns={3}>
-    <GridItem>
+  <Grid container direction="column" columns={4}>
+    <GridItem md={3}>
       <Box
         sx={{
           display: 'flex',
@@ -141,11 +168,10 @@ const CommonFooterLargeScreen = () => (
       </Box>
     </GridItem>
 
-    <GridItem>
+    <GridItem md={4}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
         gap: '2rem',
         height: '100%',
       }}
@@ -155,7 +181,7 @@ const CommonFooterLargeScreen = () => (
       </Box>
     </GridItem>
 
-    <GridItem>
+    <GridItem md={4}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -167,7 +193,7 @@ const CommonFooterLargeScreen = () => (
       </Box>
     </GridItem>
 
-    <GridItem>
+    <GridItem md={1}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -184,8 +210,7 @@ const CommonFooterLargeScreen = () => (
 
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
-    {/* LOGO */}
-    <GridItem md={3}>
+    <GridItem md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -199,7 +224,7 @@ const CommonFooterMidScreen = () => (
       </Box>
     </GridItem>
 
-    <GridItem md={3}>
+    <GridItem md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -214,7 +239,7 @@ const CommonFooterMidScreen = () => (
       </Box>
     </GridItem>
 
-    <GridItem md={3}>
+    <GridItem md={2}>
       <Box
         sx={{
           display: 'flex',
@@ -236,7 +261,6 @@ const CommonFooterSmallScreen = () => (
     columns={1}
     sx={{ alignItems: 'center', textAlign: 'center', gap: '4rem' }}
   >
-    {/* LOGO */}
     <GridItem>
       {logoBox({ height: '3rem', width: 'auto' })}
     </GridItem>
@@ -253,12 +277,14 @@ const CommonFooterSmallScreen = () => (
       {aboutBox()}
     </GridItem>
 
-    <GridItem display="flex" sx={{ gap: '1rem' }}>
-      {linkedInLink()}
-      {githubLink()}
+    <GridItem>
+      <Box display="flex" sx={{ gap: '1rem' }}>
+        {linkedInLink()}
+        {githubLink()}
+      </Box>
     </GridItem>
 
-    <GridItem display="flex" flexDirection="column" sx={{ gap: '1rem' }}>
+    <GridItem>
       {copyrightBox()}
     </GridItem>
   </Grid>
@@ -270,10 +296,8 @@ const CommonFooter = () => {
       <Container
         sx={{
           padding: '5rem 0rem',
-          display: {
-            lg: 'flex',
-            xs: 'none',
-          },
+          display: { xs: 'none', md: 'none', lg: 'flex' },
+          height: '28rem'
         }}
       >
         <CommonFooterLargeScreen />
@@ -283,14 +307,17 @@ const CommonFooter = () => {
         sx={{
           padding: '4rem 2rem',
           display: { xs: 'none', md: 'flex', lg: 'none' },
-          height: '29rem',
+          height: '29rem'
         }}
       >
         <CommonFooterMidScreen />
       </Container>
 
       <Container
-        sx={{ padding: '4rem 0rem', display: { xs: 'flex', md: 'none' } }}
+        sx={{
+          padding: '4rem 0rem',
+          display: { xs: 'flex', md: 'none', lg: 'none' }
+        }}
       >
         <CommonFooterSmallScreen />
       </Container>
