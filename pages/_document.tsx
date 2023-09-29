@@ -11,8 +11,14 @@ export default function Document() {
         <link
           rel="icon"
           sizes="any"
-          href="/logo-light-icon.svg"
+          href="/logo-light-icon-sm.svg"
           type="image/svg+xml"
+        />
+        <link
+          rel="icon"
+          sizes="any"
+          href="/logo-light-icon-32x32.png"
+          type="image/png"
         />
       </Head>
       <body className="bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100">
