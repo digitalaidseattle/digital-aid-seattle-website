@@ -2,7 +2,14 @@
  * @2023 Digital Aid Seattle
  */
 
-import { Box, CircularProgress, Container, Stack, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
 import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
@@ -46,16 +53,17 @@ const Masthead = ({ title }: MastheadProps) => {
 const EventsPage = () => {
   const theme = useTheme()
 
-  const title = 'Events';
-  const [loading, setLoading] = useState(true);
-  const [events, setEvents] = useState([]);
+  const title = 'Events'
+  const [loading, setLoading] = useState(true)
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
-    osEventsService.getActiveEvents()
-      .then(evs => setEvents(evs))
-      .catch(error => console.log(error))
+    osEventsService
+      .getActiveEvents()
+      .then((evs) => setEvents(evs))
+      .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, []);
+  }, [])
 
   return (
     <div>
@@ -70,25 +78,23 @@ const EventsPage = () => {
           maxWidth={'880px'}
         >
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-            {loading &&
-              <CircularProgress />
-            }
+            {loading && <CircularProgress />}
 
-            {!loading && events.map((event) => (
-              <CardEvent key={event.title} event={event} />
-            ))}
+            {!loading &&
+              events.map((event) => (
+                <CardEvent key={event.title} event={event} />
+              ))}
 
             {!loading && events.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
-                There are currently no events scheduled, please check back in
-                the future.
+                All upcoming events are invite-only. Please check back in the
+                future for public events.
               </Typography>
             )}
-
           </Stack>
         </Box>
       </SectionContainer>
-    </div >
+    </div>
   )
 }
 
