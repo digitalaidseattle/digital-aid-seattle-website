@@ -22,7 +22,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material'
 import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
@@ -107,7 +107,7 @@ const oathContent = [
 const processContent = [
   'Read our oath, then apply to volunteer using the button below.',
   'You will receive an invitation for an interview within a few days.',
-  'If accepted, complete onboarding and choose a project to work on.',
+  'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
