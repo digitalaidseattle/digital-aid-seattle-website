@@ -1,11 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import {
   AccessAlarmOutlined,
-  AutoGraphOutlined,
-  MilitaryTechOutlined,
-} from '@mui/icons-material'
-import {
   Apartment,
+  AutoGraphOutlined,
   Code,
   DataObjectOutlined,
   Diversity1Outlined,
@@ -16,6 +13,7 @@ import {
   LibraryMusicOutlined,
   ManageAccountsOutlined,
   MenuBook,
+  MilitaryTechOutlined,
   ScreenSearchDesktopOutlined,
   Storefront,
   SupervisorAccountOutlined,
@@ -39,6 +37,7 @@ import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
 import { designColor } from 'theme/theme'
 
+import MastheadWithImage from 'components/MastheadWithImage'
 import AboutUsImage from '../assets/aboutUs.png'
 import AppleLogo from '../assets/aboutUsIcons/apple.svg'
 import GeneticsIcon from '../assets/aboutUsIcons/genetics.svg'
@@ -50,7 +49,6 @@ import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_managemen
 import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
 import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
-import MastheadWithImage from 'components/MastheadWithImage'
 
 const AboutPage = () => {
   const theme = useTheme()
@@ -122,8 +120,7 @@ const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium">What we do</Typography>
     <Typography variant="bodyLarge">
-      Digital Aid Seattle partners with other nonprofits in order to amplifying
-      their impact, and to uplift communities with technology.
+      Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.
     </Typography>
     <Box textAlign="center">
       <Button
@@ -223,7 +220,7 @@ const OurTeamSection = () => {
         ))}
       </Grid>
       <Typography variant="titleMedium" align="center" display="block">
-        And we have degrees in:
+        We have graduate and post-graduate degrees in:
       </Typography>
       <Grid container spacing={2}>
         {degreeContent.map((item) => (
@@ -297,23 +294,23 @@ const experienceContent = [
 
 const degreeContent = [
   {
-    label: 'BS in Informatics & Human Computer Interaction',
+    label: 'Informatics & Human Computer Interaction',
     icon: <img src={HCIIcon.src} alt="NOAA logo" width="24px" />,
   },
   {
-    label: 'BS, MS in Computer Science / Engineering',
+    label: 'Computer Science / Engineering',
     icon: <TerminalOutlined />,
   },
-  { label: 'BA in English Literature', icon: <MenuBook /> },
-  { label: 'BPS in Music Production', icon: <LibraryMusicOutlined /> },
-  { label: 'BA, MA in Architecture', icon: <Apartment /> },
+  { label: 'English Literature', icon: <MenuBook /> },
+  { label: 'Music Production', icon: <LibraryMusicOutlined /> },
+  { label: 'Architecture', icon: <Apartment /> },
   {
-    label: 'BA, MS in Life Sciences',
+    label: 'Life Sciences',
     icon: <img src={GeneticsIcon.src} alt="NOAA logo" width="24px" />,
   },
-  { label: 'BA, MBA, JD in Law', icon: <Gavel /> },
+  { label: 'Law', icon: <Gavel /> },
   {
-    label: 'BA in Astrophysics',
+    label: 'Astrophysics',
     icon: <img src={PhysicsIcon.src} alt="NOAA logo" width="24px" />,
   },
 ]
