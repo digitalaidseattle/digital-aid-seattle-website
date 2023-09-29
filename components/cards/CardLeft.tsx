@@ -26,7 +26,7 @@ const CardLeft = ({ title, description, icon }: CardLeftProps) => {
           display: 'flex',
           flexDirection: 'column',
           gap: '1.5rem',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           textAlign: 'left',
           padding: '2rem',
         }}
