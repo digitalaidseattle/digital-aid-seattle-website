@@ -8,13 +8,40 @@ import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
+import { ReactNode } from 'react'
 
-const GridItem = styled(Grid)(() => ({
-  item: true,
-  padding: '0.5rem',
-  justifyContent: 'left',
-  alignItems: 'center',
-}))
+// const GridItem = styled(Grid)(() => {
+//   return {
+//     item: true,
+//     padding: '0.5rem',
+//     justifyContent: 'left',
+//     alignItems: 'center'
+//   }
+// })
+type GridItemProps = {
+  children: ReactNode
+  md?: number
+}
+
+const GridItem = ({ md, children }: GridItemProps) => (
+  md ?
+    <Grid
+      item={true}
+      padding='0.5rem'
+      justifyContent='left'
+      alignItems='center'
+      md={md}>
+      {children}
+    </Grid>
+    :
+    <Grid
+      item={true}
+      padding='0.5rem'
+      justifyContent='left'
+      alignItems='center'>
+      {children}
+    </Grid>
+)
 
 const FooterItemTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 700,
@@ -48,86 +75,134 @@ const SubText = styled(Typography)(({ theme }) => ({
   fontSize: '0.75rem',
 }))
 
+const logoBox = (imageStyle) => {
+  return <Box>
+    <Link href="/">
+      <img
+        src={OSLogo.src}
+        style={imageStyle}
+        alt="Digital Aid Seattle Home"
+      />
+    </Link>
+  </Box>
+}
+
+const aboutBox = () => {
+  return <Box>
+    <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
+    <LinkSubItem url="/privacy" name="Privacy Policy" />
+  </Box>
+}
+const contactUsBox = () => {
+  return <Box>
+    <FooterItemTitle>Contact us</FooterItemTitle>
+    <FooterSubItem>
+      <a href="mailto:info@digitalaidseattle.org">
+        info@digitalaidseattle.org
+      </a>
+    </FooterSubItem>
+  </Box>
+}
+
+const workWithUsBox = () => {
+  return <Box>
+    <FooterItemTitle>Work with us</FooterItemTitle>
+    <LinkSubItem url="/partners" name="Partner" />
+    <LinkSubItem url="/volunteers" name="Volunteer" />
+  </Box>
+}
+
+const supportUsBox = () => {
+  return <Box>
+    <FooterItemTitle>Support us</FooterItemTitle>
+    <FooterSubItem>
+      <a href="mailto:info@digitalaidseattle.org">How you can help</a>
+    </FooterSubItem>
+  </Box>
+}
+
+const copyrightBox = () => {
+  return <Box>
+    <SubText>Illustrations by: Storyset by Freepik</SubText>
+    <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
+  </Box>
+}
+
+const linkedInLink = () => {
+  return <a
+    href="https://www.linkedin.com/company/digitalseattle/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <LinkedInIcon
+      sx={{ color: theme.palette.primary.contrastText }}
+      fontSize="large"
+    />
+  </a>
+}
+const githubLink = () => {
+  return <a
+    href="https://github.com/openseattle"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <GitHubIcon
+      sx={{ color: theme.palette.primary.contrastText }}
+      fontSize="large"
+    />
+  </a>
+}
+
 const CommonFooterLargeScreen = () => (
-  <Grid container direction="row" rowGap="2.5rem">
-    {/* LOGO */}
+  <Grid container direction="column" columns={4}>
     <GridItem md={3}>
-      <Link href="/">
-        <img
-          src={OSLogo.src}
-          style={{
-            height: '80%',
-            width: '120px',
-          }}
-          alt="Digital Aid Seattle Home"
-        />
-      </Link>
-    </GridItem>
-
-    <GridItem md={4}>
-      <FooterItemTitle>Contact us</FooterItemTitle>
-      <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">
-          info@digitalaidseattle.org
-        </a>
-      </FooterSubItem>
-    </GridItem>
-
-    <GridItem md={4}>
-      <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners" name="Partner" />
-      <LinkSubItem url="/volunteers" name="Volunteer" />
-    </GridItem>
-
-    <GridItem md={1} display="flex" flexDirection="row">
       <Box
         sx={{
-          marginLeft: 'auto',
-          alignSelf: 'flex-end',
-        }}
-      >
-        <a
-          href="https://www.linkedin.com/company/digitalseattle/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <LinkedInIcon
-            sx={{ color: theme.palette.primary.contrastText }}
-            fontSize="large"
-          />
-        </a>
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: '100%',
+        }}>
+        {logoBox({ height: '80%', width: '120px' })}
+        {copyrightBox()}
       </Box>
     </GridItem>
 
-    <GridItem md={3}>
-      <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
+    <GridItem md={4}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        height: '100%',
+      }}
+      >
+        {contactUsBox()}
+        {workWithUsBox()}
+      </Box>
     </GridItem>
 
     <GridItem md={4}>
-      <FooterItemTitle>Support us</FooterItemTitle>
-      <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-      </FooterSubItem>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '100%',
+      }}
+      >
+        {aboutBox()}
+      </Box>
     </GridItem>
 
-    <GridItem md={4}>
-      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy" name="Privacy Policy" />
-    </GridItem>
-
-    <GridItem md={1} display="flex" flexDirection="column">
-      <Box sx={{ alignSelf: 'flex-end' }}>
-        <a
-          href="https://github.com/openseattle"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GitHubIcon
-            sx={{ color: theme.palette.primary.contrastText }}
-            fontSize="large"
-          />
-        </a>
+    <GridItem md={1}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2rem',
+        marginLeft: '4rem'
+      }}
+      >
+        {linkedInLink()}
+        {githubLink()}
       </Box>
     </GridItem>
   </Grid>
@@ -135,8 +210,7 @@ const CommonFooterLargeScreen = () => (
 
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
-    {/* LOGO */}
-    <GridItem md={4}>
+    <GridItem md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -145,33 +219,12 @@ const CommonFooterMidScreen = () => (
           height: '100%',
         }}
       >
-        <Link href="/">
-          <img
-            src={OSLogo.src}
-            style={{
-              height: 'auto',
-              width: '120px',
-            }}
-            alt="Digital Aid Seattle Home"
-          />
-        </Link>
-        <Box>
-          <FooterItemTitle>Contact us</FooterItemTitle>
-          <FooterSubItem>
-            <a href="mailto:info@digitalaidseattle.org">
-              info@digitalaidseattle.org
-            </a>
-          </FooterSubItem>
-        </Box>
-
-        <Box>
-          <SubText>Illustrations by: Storyset by Freepik</SubText>
-          <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
-        </Box>
+        {logoBox({ height: 'auto', width: '120px' })}
+        {copyrightBox()}
       </Box>
     </GridItem>
 
-    <GridItem md={4}>
+    <GridItem md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -180,29 +233,13 @@ const CommonFooterMidScreen = () => (
           height: '100%',
         }}
       >
-        <Box>
-          <FooterItemTitle>Work with us</FooterItemTitle>
-
-          <LinkSubItem url="/partners" name="Partner" />
-
-          <LinkSubItem url="/volunteers" name="Volunteer" />
-        </Box>
-
-        <Box>
-          <FooterItemTitle>Support us</FooterItemTitle>
-          <FooterSubItem>
-            <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-          </FooterSubItem>
-        </Box>
-
-        <Box>
-          <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
-          <LinkSubItem url="/privacy" name="Privacy Policy" />
-        </Box>
+        {contactUsBox()}
+        {workWithUsBox()}
+        {aboutBox()}
       </Box>
     </GridItem>
 
-    <GridItem md={4} display="flex">
+    <GridItem md={2}>
       <Box
         sx={{
           display: 'flex',
@@ -210,26 +247,8 @@ const CommonFooterMidScreen = () => (
           gap: '2rem',
         }}
       >
-        <a
-          href="https://www.linkedin.com/company/digitalseattle/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <LinkedInIcon
-            sx={{ color: theme.palette.primary.contrastText }}
-            fontSize="large"
-          />
-        </a>
-        <a
-          href="https://github.com/openseattle"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GitHubIcon
-            sx={{ color: theme.palette.primary.contrastText }}
-            fontSize="large"
-          />
-        </a>
+        {linkedInLink()}
+        {githubLink()}
       </Box>
     </GridItem>
   </Grid>
@@ -242,74 +261,31 @@ const CommonFooterSmallScreen = () => (
     columns={1}
     sx={{ alignItems: 'center', textAlign: 'center', gap: '4rem' }}
   >
-    {/* LOGO */}
     <GridItem>
-      <Link href="/">
-        <img
-          src={OSLogo.src}
-          style={{
-            height: '3rem',
-            width: 'auto',
-          }}
-          alt="Digital Aid Seattle Home"
-        />
-      </Link>
+      {logoBox({ height: '3rem', width: 'auto' })}
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>Work with us</FooterItemTitle>
-      <LinkSubItem url="/partners" name="Partner" />
-      <LinkSubItem url="/volunteers" name="Volunteer" />
+      {contactUsBox()}
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>Contact us</FooterItemTitle>
-      <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">
-          info@digitalaidseattle.org
-        </a>
-      </FooterSubItem>
+      {workWithUsBox()}
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>Support us</FooterItemTitle>
-      <FooterSubItem>
-        {/* TODO Update to support-us page, when the page is added */}
-        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-      </FooterSubItem>
+      {aboutBox()}
     </GridItem>
 
     <GridItem>
-      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
-      <LinkSubItem url="/privacy" name="Privacy Policy" />
+      <Box display="flex" sx={{ gap: '1rem' }}>
+        {linkedInLink()}
+        {githubLink()}
+      </Box>
     </GridItem>
 
-    <GridItem display="flex" sx={{ gap: '1rem' }}>
-      <a
-        href="https://www.linkedin.com/company/digitalseattle/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <LinkedInIcon
-          sx={{ color: theme.palette.primary.contrastText }}
-          fontSize="large"
-        />
-      </a>
-      <a
-        href="https://github.com/openseattle"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <GitHubIcon
-          sx={{ color: theme.palette.primary.contrastText }}
-          fontSize="large"
-        />
-      </a>
-    </GridItem>
-
-    <GridItem display="flex" flexDirection="column" sx={{ gap: '1rem' }}>
-      <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
+    <GridItem>
+      {copyrightBox()}
     </GridItem>
   </Grid>
 )
@@ -320,10 +296,8 @@ const CommonFooter = () => {
       <Container
         sx={{
           padding: '5rem 0rem',
-          display: {
-            lg: 'flex',
-            xs: 'none',
-          },
+          display: { xs: 'none', md: 'none', lg: 'flex' },
+          height: '28rem'
         }}
       >
         <CommonFooterLargeScreen />
@@ -333,14 +307,17 @@ const CommonFooter = () => {
         sx={{
           padding: '4rem 2rem',
           display: { xs: 'none', md: 'flex', lg: 'none' },
-          height: '29rem',
+          height: '29rem'
         }}
       >
         <CommonFooterMidScreen />
       </Container>
 
       <Container
-        sx={{ padding: '4rem 0rem', display: { xs: 'flex', md: 'none' } }}
+        sx={{
+          padding: '4rem 0rem',
+          display: { xs: 'flex', md: 'none', lg: 'none' }
+        }}
       >
         <CommonFooterSmallScreen />
       </Container>
