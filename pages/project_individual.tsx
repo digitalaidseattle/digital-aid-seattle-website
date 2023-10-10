@@ -15,45 +15,16 @@ import {
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
-import { dasProjectsService } from './api/ProjectsService'
 
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
-import ListItemWithIcon from 'components/list/ListItemWithIcon'
 
-// icons for role cards
-import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
-import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
-import BugReportOutlinedIcon from '@mui/icons-material/BugReportOutlined'
-import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
-import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
-import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined'
-import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
-import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
-import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
-import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import RolesSection from 'components/RolesSection'
 import { DASProject, TeamMember } from 'types'
+import { dasProjectsService } from './api/ProjectsService'
 
-const rolesMap = {
-  communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
-  dataAnalyst: { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  designer: { role: 'designer', icon: <DrawOutlinedIcon />, },
-  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
-  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon />, },
-  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
-  projectManager: { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
-  uxResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  socialMediaDesigner: { role: 'social media designer', icon: <ShareOutlinedIcon />, },
-  socialMediaSpecialist: { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
-  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
-  solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
-  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
-}
+
 
 const Subheader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -124,44 +95,6 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
       </Box>
     </Section>
 }
-
-type RolesSectionProps = {
-  title: string
-  roles?: string[]
-}
-
-const RolesSection = ({ title, roles }: RolesSectionProps) => {
-  return (roles && roles.length > 0) &&
-    <Section>
-      <Subheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-      >
-        {title}
-      </Subheader>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
-          justifyContent: 'center',
-          gap: '2rem',
-          width: '100%',
-        }}
-      >
-        {roles
-          .filter(item => rolesMap[item])
-          .map(item => (
-            <ListItemWithIcon
-              key={item}
-              listIcon={rolesMap[item].icon}
-              listText={rolesMap[item].role}
-            />
-          ))}
-      </Box>
-    </Section>
-}
-
 
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
