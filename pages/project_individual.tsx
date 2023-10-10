@@ -21,7 +21,7 @@ import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
-
+import NoPhotoPerson from '../assets/no-photo-person.svg'
 // icons for role cards
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
@@ -39,20 +39,41 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { DASProject, TeamMember } from 'types'
 
 const rolesMap = {
-  communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
-  dataAnalyst: { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  designer: { role: 'designer', icon: <DrawOutlinedIcon />, },
-  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
-  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon />, },
-  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
-  projectManager: { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
-  uxResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  socialMediaDesigner: { role: 'social media designer', icon: <ShareOutlinedIcon />, },
-  socialMediaSpecialist: { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
-  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
-  solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
-  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
+  communityEngagementLiason: {
+    role: 'community engagement liaison',
+    icon: <CampaignOutlinedIcon />,
+  },
+  dataAnalyst: {
+    role: 'data analyst',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  designer: { role: 'designer', icon: <DrawOutlinedIcon /> },
+  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon /> },
+  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon /> },
+  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon /> },
+  projectManager: {
+    role: 'project manager',
+    icon: <ManageAccountsOutlinedIcon />,
+  },
+  uxResearcher: {
+    role: 'user experience researcher',
+    icon: <ScreenSearchDesktopOutlinedIcon />,
+  },
+  socialMediaDesigner: {
+    role: 'social media designer',
+    icon: <ShareOutlinedIcon />,
+  },
+  socialMediaSpecialist: {
+    role: 'social media specialist',
+    icon: <EmojiPeopleOutlinedIcon />,
+  },
+  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon /> },
+  solutionArchitect: {
+    role: 'solution architect',
+    icon: <ApartmentOutlinedIcon />,
+  },
+  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon /> },
+  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
 const Subheader = styled(Typography)(({ theme }) => ({
@@ -80,13 +101,21 @@ type BodyTextSectionProps = {
 }
 
 const BodyTextSection = ({ title, texts }: BodyTextSectionProps) => {
-  return (texts && texts.length > 0) &&
-    <Section>
-      <Subheader variant="headlineMedium">{title}</Subheader>
-      <TextSection>
-        {texts.map((t, index) => <Typography key={index} variant="bodyLarge">{t}</Typography>)}
-      </TextSection>
-    </Section>
+  return (
+    texts &&
+    texts.length > 0 && (
+      <Section>
+        <Subheader variant="headlineMedium">{title}</Subheader>
+        <TextSection>
+          {texts.map((t, index) => (
+            <Typography key={index} variant="bodyLarge">
+              {t}
+            </Typography>
+          ))}
+        </TextSection>
+      </Section>
+    )
+  )
 }
 
 type TeamSectionProps = {
@@ -95,34 +124,42 @@ type TeamSectionProps = {
 }
 
 const TeamSection = ({ title, members }: TeamSectionProps) => {
-  return (members && members.length > 0) &&
-    <Section>
-      <Subheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-      >
-        {title}
-      </Subheader>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
-          justifyContent: 'center',
-          gap: '2rem',
-          width: '100%',
-        }}
-      >
-        {members.map((person) => (
-          <CardWithPhoto
-            key={person._id}
-            title={person.name}
-            description={person.role}
-            image={person.image ? urlForImage(person.image).url() : undefined}
-          />
-        ))}
-      </Box>
-    </Section>
+  return (
+    members &&
+    members.length > 0 && (
+      <Section>
+        <Subheader
+          variant="headlineMedium"
+          sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+        >
+          {title}
+        </Subheader>
+        <Box
+          sx={{
+            display: 'grid',
+            gridAutoFlow: 'columns',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
+            justifyContent: 'center',
+            gap: '2rem',
+            width: '100%',
+          }}
+        >
+          {members.map((person) => (
+            <CardWithPhoto
+              key={person._id}
+              title={person.name}
+              description={person.role}
+              image={
+                person.image
+                  ? urlForImage(person.image).url()
+                  : NoPhotoPerson.src
+              }
+            />
+          ))}
+        </Box>
+      </Section>
+    )
+  )
 }
 
 type RolesSectionProps = {
@@ -131,37 +168,40 @@ type RolesSectionProps = {
 }
 
 const RolesSection = ({ title, roles }: RolesSectionProps) => {
-  return (roles && roles.length > 0) &&
-    <Section>
-      <Subheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-      >
-        {title}
-      </Subheader>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
-          justifyContent: 'center',
-          gap: '2rem',
-          width: '100%',
-        }}
-      >
-        {roles
-          .filter(item => rolesMap[item])
-          .map(item => (
-            <ListItemWithIcon
-              key={item}
-              listIcon={rolesMap[item].icon}
-              listText={rolesMap[item].role}
-            />
-          ))}
-      </Box>
-    </Section>
+  return (
+    roles &&
+    roles.length > 0 && (
+      <Section>
+        <Subheader
+          variant="headlineMedium"
+          sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+        >
+          {title}
+        </Subheader>
+        <Box
+          sx={{
+            display: 'grid',
+            gridAutoFlow: 'columns',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
+            justifyContent: 'center',
+            gap: '2rem',
+            width: '100%',
+          }}
+        >
+          {roles
+            .filter((item) => rolesMap[item])
+            .map((item) => (
+              <ListItemWithIcon
+                key={item}
+                listIcon={rolesMap[item].icon}
+                listText={rolesMap[item].role}
+              />
+            ))}
+        </Box>
+      </Section>
+    )
+  )
 }
-
 
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
@@ -327,32 +367,34 @@ const ProjectIndividualPage = () => {
   }
 
   function getBody() {
-    return <SectionContainer backgroundColor={theme.palette.background.default}>
-      <Stack
-        gap={{ xs: '64px', lg: '80px' }}
-        maxWidth="880px"
-        margin="0 auto"
-      >
-        <BodyTextSection title="Problem" texts={project.problem} />
-        <BodyTextSection title="Solution" texts={project.solution} />
-        <BodyTextSection title="Impact" texts={project.impact} />
-        <TeamSection title="Current team" members={project.currentTeam} />
-        <RolesSection title="Roles needed" roles={project.rolesNeeded} />
-
-        <Section
-          sx={{
-            alignItems: 'center',
-          }}
+    return (
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
         >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
-            Questions about this project?
-          </Subheader>
-          <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-            Contact us
-          </Button>
-        </Section>
-      </Stack>
-    </SectionContainer>
+          <BodyTextSection title="Problem" texts={project.problem} />
+          <BodyTextSection title="Solution" texts={project.solution} />
+          <BodyTextSection title="Impact" texts={project.impact} />
+          <TeamSection title="Current team" members={project.currentTeam} />
+          <RolesSection title="Roles needed" roles={project.rolesNeeded} />
+
+          <Section
+            sx={{
+              alignItems: 'center',
+            }}
+          >
+            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+              Questions about this project?
+            </Subheader>
+            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+              Contact us
+            </Button>
+          </Section>
+        </Stack>
+      </SectionContainer>
+    )
   }
 
   function getFooter() {
