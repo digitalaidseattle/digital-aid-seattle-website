@@ -13,7 +13,7 @@
 */
 
 
-import { Box, Button, Stack, Typography, styled } from '@mui/material'
+import { Box, Button } from '@mui/material'
 // icons for role cards
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
@@ -28,8 +28,9 @@ import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import ListItemWithIcon from './list/ListItemWithIcon'
 import { ReactNode } from 'react'
+import ListItemWithIcon from './list/ListItemWithIcon'
+import { Section, Subheader } from './style-utils'
 
 const rolesMap = {
   communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
@@ -48,22 +49,6 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
 }
 
-const Section = styled(Stack)(({ theme }) => ({
-  width: '100%',
-  color: theme.palette.primary.main,
-}))
-
-const Subheader = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  [theme.breakpoints.up('xs')]: {
-    marginBottom: '2rem',
-  },
-  [theme.breakpoints.up('lg')]: {
-    marginBottom: '2.5rem',
-  },
-}))
-
-
 type RolesSectionProps = {
   title: string
   columns?: number
@@ -75,10 +60,7 @@ type RolesSectionProps = {
 const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
   return (roles.length > 0) &&
     <Section>
-      <Subheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-      >
+      <Subheader variant="headlineMedium">
         {title}
       </Subheader>
       <Box

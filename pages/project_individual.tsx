@@ -10,7 +10,6 @@ import {
   CircularProgress,
   Stack,
   Typography,
-  styled,
   useTheme,
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -23,27 +22,7 @@ import { withBasicLayout } from 'components/layouts'
 import RolesSection from 'components/RolesSection'
 import { DASProject, TeamMember } from 'types'
 import { dasProjectsService } from './api/ProjectsService'
-
-
-
-const Subheader = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  [theme.breakpoints.up('xs')]: {
-    marginBottom: '2rem',
-  },
-  [theme.breakpoints.up('lg')]: {
-    marginBottom: '2.5rem',
-  },
-}))
-
-const Section = styled(Stack)(({ theme }) => ({
-  width: '100%',
-  color: theme.palette.primary.main,
-}))
-
-const TextSection = styled(Stack)(() => ({
-  gap: '2rem',
-}))
+import { Section, Subheader, TextSection } from 'components/style-utils'
 
 type BodyTextSectionProps = {
   title: string
@@ -68,10 +47,7 @@ type TeamSectionProps = {
 const TeamSection = ({ title, members }: TeamSectionProps) => {
   return (members && members.length > 0) &&
     <Section>
-      <Subheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
-      >
+      <Subheader variant="headlineMedium">
         {title}
       </Subheader>
       <Box
@@ -272,12 +248,8 @@ const ProjectIndividualPage = () => {
         <TeamSection title="Current team" members={project.currentTeam} />
         <RolesSection title="Roles needed" roles={project.rolesNeeded} />
 
-        <Section
-          sx={{
-            alignItems: 'center',
-          }}
-        >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+        <Section>
+          <Subheader variant="headlineMedium">
             Questions about this project?
           </Subheader>
           <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
@@ -291,12 +263,8 @@ const ProjectIndividualPage = () => {
   function getFooter() {
     return (
       <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
-        <Section
-          sx={{
-            alignItems: 'center',
-          }}
-        >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+        <Section>
+          <Subheader variant="headlineMedium">
             Interested in volunteering with Digital Aid Seattle?
           </Subheader>
           <Button
