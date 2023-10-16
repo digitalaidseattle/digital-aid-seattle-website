@@ -201,7 +201,7 @@ const OurTeamSection = () => {
           <Grid item xs={6} md={4} key={item.label}>
             <ListItemWithIcon
               listIcon={item.icon}
-              listText={!extraSmallScreen && item.label}
+              listText={!isMediumOrSmallerScreen && item.label}
             />
           </Grid>
         ))}
