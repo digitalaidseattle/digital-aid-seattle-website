@@ -211,10 +211,10 @@ const OurTeamSection = () => {
       </Typography>
       <Grid container spacing={2}>
         {experienceContent.map((item) => (
-          <Grid item xs={12} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
@@ -225,10 +225,10 @@ const OurTeamSection = () => {
       </Typography>
       <Grid container spacing={2}>
         {degreeContent.map((item) => (
-          <Grid item xs={12} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
