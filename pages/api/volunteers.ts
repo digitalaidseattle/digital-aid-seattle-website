@@ -20,8 +20,23 @@ export async function getVolunteerRoles() {
         })
         .all()
         .then((records) => {
-            const volunteerRolesData = records.map((record) => {
-                return record
+            const activeRoles = records.filter((record) => {
+                return record.get('Status') === 'Active'
+            })
+            const volunteerRolesData = activeRoles.map((record) => {
+                
+                return {
+                    id: record.id,
+                    role: record.fields.Role,
+                    description: record.fields.Description,
+                    applicationLink: record.fields['url to apply'],
+                    image: {
+                        filename: record.fields.image[0].filename,
+                        url: record.fields.image[0].url,
+                        width: record.fields.image[0].width,
+                        height: record.fields.image[0].height,
+                    }
+                }
             })
             resolve(volunteerRolesData)
         })

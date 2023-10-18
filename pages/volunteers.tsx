@@ -113,13 +113,25 @@ const processContent = [
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
+interface VolunteerRole {
+  applicationLink: string;
+  description: string;
+  id: string;
+  image: {
+      filename: string;
+      height: number;
+      url: string;
+      width: number;
+  };
+  role: string;
+}
 const VolunteerPage = () => {
 
-  const [volunteerRoles, setVolunteerRoles] = React.useState<any[]>([])
+  const [volunteerRoles, setVolunteerRoles] = React.useState<VolunteerRole[]>([])
   
   useEffect(() => {
     const fetchData = async () => {
-      const roles: any[] = await getVolunteerRoles()
+      const roles: VolunteerRole[]= await getVolunteerRoles()
       setVolunteerRoles(roles)
     }
     fetchData()
