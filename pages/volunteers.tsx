@@ -24,13 +24,15 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
-import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
+import MastheadWithImage from 'components/MastheadWithImage'
 import Link from 'next/link'
-import React from 'react'
+import { getVolunteerRoles } from 'pages/api/volunteers'
+import React, { useEffect } from 'react'
 import { designColor } from 'theme/theme'
+
 import VolunteerImage from '../assets/volunteerWithUs.png'
 
 /* eslint-disable @next/next/no-img-element */
@@ -112,9 +114,21 @@ const processContent = [
 ]
 
 const VolunteerPage = () => {
+
+  const [volunteerRoles, setVolunteerRoles] = React.useState<any[]>([])
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const roles: any[] = await getVolunteerRoles()
+      setVolunteerRoles(roles)
+    }
+    fetchData()
+  },[]);
+
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+
   const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
     string | false
   >(false)
