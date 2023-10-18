@@ -3,6 +3,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
+
 import { ReactNode } from 'react'
 
 type ListItemWithIconProps = {
@@ -22,10 +23,14 @@ const ListItemWithIcon = ({
   return (
     <ListItem
       sx={{
-        height: '3.5rem',
+        minHeight: '3.5rem',
         overflowWrap: 'break-word',
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+        alignItems: 'center',
         ...sxProps,
       }}
     >

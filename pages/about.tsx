@@ -120,7 +120,8 @@ const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium">What we do</Typography>
     <Typography variant="bodyLarge">
-      Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.
+      Digital Aid Seattle partners with other nonprofits to amplify their impact
+      and to uplift communities through the power of technology.
     </Typography>
     <Box textAlign="center">
       <Button
@@ -200,7 +201,7 @@ const OurTeamSection = () => {
           <Grid item xs={6} md={4} key={item.label}>
             <ListItemWithIcon
               listIcon={item.icon}
-              listText={!extraSmallScreen && item.label}
+              listText={!isMediumOrSmallerScreen && item.label}
             />
           </Grid>
         ))}
@@ -210,10 +211,10 @@ const OurTeamSection = () => {
       </Typography>
       <Grid container spacing={2}>
         {experienceContent.map((item) => (
-          <Grid item xs={6} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
@@ -224,10 +225,10 @@ const OurTeamSection = () => {
       </Typography>
       <Grid container spacing={2}>
         {degreeContent.map((item) => (
-          <Grid item xs={6} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
