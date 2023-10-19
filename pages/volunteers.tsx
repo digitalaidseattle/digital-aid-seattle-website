@@ -29,11 +29,14 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
 import Link from 'next/link'
-import { getVolunteerRoles } from 'pages/api/volunteers'
 import React, { useEffect } from 'react'
 import { designColor } from 'theme/theme'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
+
+import { DASVolunteerRole } from 'types'
+
+import { dasVolunteerRoleService } from './api/VolunterRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -113,25 +116,14 @@ const processContent = [
   'Contribute weekly to your project, and make a difference for your community!',
 ]
 
-interface VolunteerRole {
-  applicationLink: string;
-  description: string;
-  id: string;
-  image: {
-      filename: string;
-      height: number;
-      url: string;
-      width: number;
-  };
-  role: string;
-}
 const VolunteerPage = () => {
 
-  const [volunteerRoles, setVolunteerRoles] = React.useState<VolunteerRole[]>([])
+  const [volunteerRoles, setVolunteerRoles] = React.useState<DASVolunteerRole[]>([])
   
   useEffect(() => {
     const fetchData = async () => {
-      const roles: VolunteerRole[]= await getVolunteerRoles()
+      const roles: DASVolunteerRole[]= await dasVolunteerRoleService.getVolunteerRoles()
+      console.log('roles', roles)
       setVolunteerRoles(roles)
     }
     fetchData()

@@ -44,3 +44,16 @@ type DASProject = {
     currentTeam: TeamMember[],
     display: boolean
 }
+
+type DASVolunteerRole = {
+    applicationLink: string;
+    description: string;
+    id: string;
+    image: {
+        filename: string;
+        height: number;
+        url: string;
+        width: number;
+    };
+    role: string;
+}
