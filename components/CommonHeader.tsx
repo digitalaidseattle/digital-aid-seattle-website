@@ -153,7 +153,7 @@ const CommonHeader = () => {
                   underline="hover"
                   sx={{
                     color: theme.palette.primary.contrastText,
-                    'text-underline-offset': '0.5rem',
+                    textUnderlineOffset: '0.5rem',
                     textDecoration:
                       currentRoute === page_mapping[name]
                         ? 'underline'

@@ -1,3 +1,9 @@
+/**
+* Volunteers.tsx
+*
+* @2023 Digital Aid Seattle
+*/
+
 import {
   AddOutlined,
   Campaign,
@@ -18,6 +24,7 @@ import {
   AccordionSummary,
   Box,
   Button,
+  CircularProgress,
   Container,
   Stack,
   Typography,
@@ -29,9 +36,13 @@ import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import VolunteerImage from '../assets/volunteerWithUs.png'
+import RolesSection from 'components/RolesSection'
+import { volunteerService } from './api/VolunteerService'
+import CardGridContainer from 'components/cards/CardGridContainer'
+import { Section, Subheader } from 'components/style-utils'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -104,6 +115,24 @@ const oathContent = [
   },
 ]
 
+const expectationsContent = [
+  {
+    label: 'Skill',
+    content: 'You demonstrate proficiency in your craft and operate with both autonomy and transparency.',
+    icon: StarsOutlined
+  },
+  {
+    label: 'Experience',
+    content: 'You are a seasoned professional, capable of leading yourself and others in your discipline.',
+    icon: WorkHistoryOutlined
+  },
+  {
+    label: 'Availability',
+    content: 'You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle.',
+    icon: EventAvailableOutlined
+  },
+]
+
 const processContent = [
   'Read our oath, then apply to volunteer using the button below.',
   'You will receive an invitation for an interview within a few days.',
@@ -115,15 +144,29 @@ const VolunteerPage = () => {
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
-    string | false
-  >(false)
+  const [oathValuesExpanded, setOathValuesExpanded] = useState<string | false>(false)
+  const [roles, setRoles] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    volunteerService.getRoles()
+      .then(r => setRoles(r))
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false))
+  }, [])
+
   const handleOathValuesChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setOathValuesExpanded(newExpanded ? panel : false)
     }
 
   const rolesSection = () => {
+    if (loading) {
+      return <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    }
+
     return <Stack
       gap={{ xs: '64px', md: '80px' }}
       sx={{
@@ -133,57 +176,28 @@ const VolunteerPage = () => {
       }}
       maxWidth={'880px'}
     >
-      <Typography variant="headlineLarge">
-        Current volunteer openings
-      </Typography>
-      <iframe
-        src="https://airtable.com/embed/appaQcPIp7W2K85rx/shr67A1j2V75pw5PK?backgroundColor=greenLight"
-        width="100%"
-        height="600"
-      ></iframe>
-      <Typography variant="bodyLarge">
-        All of our volunteers are vetted for experience, and sign a volunteer
-        agreement before commencing work with Digital Aid Seattle.
-      </Typography>
+      <RolesSection title="Current volunteer openings"
+        roles={roles}
+        showLink={true}
+        columns={2} >
+        <Typography variant="bodyLarge" marginTop={'2rem'} textAlign={'center'}>All of our volunteers are vetted for experience, and sign a volunteer agreement before commencing work with Digital Aid Seattle.</Typography>
+      </RolesSection>
       <Typography variant="headlineLarge">Our expectations</Typography>
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-          gap: '2rem',
-        }}
-      >
-        <CardOne
-          title="Skill"
-          icon={
-            <StarsOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
-        />
-        <CardOne
-          title="Experience"
-          icon={
-            <WorkHistoryOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You are a seasoned professional, capable of leading yourself and others in your discipline."
-        />
-        <CardOne
-          title="Availability"
-          icon={
-            <EventAvailableOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle."
-        />
-      </Box>
+      <CardGridContainer columns={3}>
+        {expectationsContent.map((e, index) =>
+          <CardOne
+            key={index}
+            title={e.label}
+            icon={
+              <e.icon
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description={e.content}
+          />
+        )}
+      </CardGridContainer>
     </Stack>
   }
 
@@ -255,19 +269,15 @@ const VolunteerPage = () => {
 
   const volunteerApplication = () => {
     return <SectionContainer backgroundColor={designColor.white}>
-      <Stack
-        gap={{ xs: 4, md: 8 }}
-        sx={{
-          textAlign: 'center',
-          maxWidth: '880px',
-          marginX: 'auto',
-        }}
-      >
-        <Typography
-          variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
-        >
-          Interested in volunteering with Digital Aid Seattle?
-        </Typography>
+      <Section>
+        <Subheader>
+          <Typography
+            variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
+          >
+            Interested in volunteering with Digital Aid Seattle?
+          </Typography>
+        </Subheader>
+
         <Link
           href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
           passHref
@@ -276,7 +286,7 @@ const VolunteerPage = () => {
             Apply to volunteer
           </Button>
         </Link>
-      </Stack>
+      </Section>
     </SectionContainer>
   }
 
