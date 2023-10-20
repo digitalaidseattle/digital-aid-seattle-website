@@ -36,7 +36,7 @@ import VolunteerImage from '../assets/volunteerWithUs.png'
 
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService } from './api/VolunterRoleService'
+import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -117,17 +117,19 @@ const processContent = [
 ]
 
 const VolunteerPage = () => {
+  const [volunteerRoles, setVolunteerRoles] = React.useState<
+    DASVolunteerRole[]
+  >([])
 
-  const [volunteerRoles, setVolunteerRoles] = React.useState<DASVolunteerRole[]>([])
-  
   useEffect(() => {
     const fetchData = async () => {
-      const roles: DASVolunteerRole[]= await dasVolunteerRoleService.getVolunteerRoles()
-      console.log('roles', roles)
+      const roles: DASVolunteerRole[] =
+        await dasVolunteerRoleService.getVolunteerRoles()
       setVolunteerRoles(roles)
     }
+
     fetchData()
-  },[]);
+  }, [])
 
   const theme = useTheme()
   const palette = theme.palette
@@ -141,161 +143,185 @@ const VolunteerPage = () => {
       setOathValuesExpanded(newExpanded ? panel : false)
     }
 
-  const rolesSection = () => {
-    return <Stack
-      gap={{ xs: '64px', md: '80px' }}
-      sx={{
-        textAlign: 'center',
-        paddingY: { xs: 4, md: 8 },
-        paddingX: { xs: '1rem', md: '2rem', lg: 0 },
-      }}
-      maxWidth={'880px'}
-    >
-      <Typography variant="headlineLarge">
-        Current volunteer openings
-      </Typography>
-      <iframe
-        src="https://airtable.com/embed/appaQcPIp7W2K85rx/shr67A1j2V75pw5PK?backgroundColor=greenLight"
-        width="100%"
-        height="600"
-      ></iframe>
-      <Typography variant="bodyLarge">
-        All of our volunteers are vetted for experience, and sign a volunteer
-        agreement before commencing work with Digital Aid Seattle.
-      </Typography>
-      <Typography variant="headlineLarge">Our expectations</Typography>
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-          gap: '2rem',
-        }}
-      >
-        <CardOne
-          title="Skill"
-          icon={
-            <StarsOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
-        />
-        <CardOne
-          title="Experience"
-          icon={
-            <WorkHistoryOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You are a seasoned professional, capable of leading yourself and others in your discipline."
-        />
-        <CardOne
-          title="Availability"
-          icon={
-            <EventAvailableOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle."
-        />
+  const rolesTemp = () => {
+    return (
+      <Box>
+        {volunteerRoles.length > 0 && volunteerRoles.map((role, index) => (
+          <Box key={index}>
+            <Link href={role.roleUrl} passHref>
+              <Button variant="contained" color="primary">
+                {role.role}
+              </Button>
+            </Link>
+          </Box>
+        ))}
       </Box>
-    </Stack>
+    )
+  }
+
+  const rolesSection = () => {
+    return (
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+          paddingY: { xs: 4, md: 8 },
+          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
+        }}
+        maxWidth={'880px'}
+      >
+        <Typography variant="headlineLarge">
+          Current volunteer openings
+        </Typography>
+        <iframe
+          src="https://airtable.com/embed/appaQcPIp7W2K85rx/shr67A1j2V75pw5PK?backgroundColor=greenLight"
+          width="100%"
+          height="600"
+        ></iframe>
+        <Typography variant="bodyLarge">
+          All of our volunteers are vetted for experience, and sign a volunteer
+          agreement before commencing work with Digital Aid Seattle.
+        </Typography>
+        <Typography variant="headlineLarge">Our expectations</Typography>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+            gap: '2rem',
+          }}
+        >
+          <CardOne
+            title="Skill"
+            icon={
+              <StarsOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
+          />
+          <CardOne
+            title="Experience"
+            icon={
+              <WorkHistoryOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You are a seasoned professional, capable of leading yourself and others in your discipline."
+          />
+          <CardOne
+            title="Availability"
+            icon={
+              <EventAvailableOutlined
+                sx={{ color: palette.text.secondary }}
+                fontSize="large"
+              />
+            }
+            description="You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle."
+          />
+        </Box>
+      </Stack>
+    )
   }
 
   const oathAndValuesSection = () => {
-    return <SectionContainer backgroundColor={designColor.white}>
-      <Stack
-        gap={{ xs: 4, md: 8 }}
-        sx={{
-          textAlign: 'left',
-          width: { xs: '100%', lg: '880px' },
-          maxWidth: '880px',
-        }}
-      >
-        <Typography variant="headlineLarge">Our oath</Typography>
-        <Typography variant="bodyLarge">
-          We champion these values and ask you as a volunteer to adopt them,
-          too.
-        </Typography>
-        <Box sx={{ display: 'block' }}>
-          {oathContent.map((item, index) => (
-            <Accordion
-              key={index}
-              expanded={oathValuesExpanded === `${index}`}
-              onChange={handleOathValuesChange(`${index}`)}
-            >
-              <AccordionSummary
-                expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
-                aria-controls={`volunteer-values${index}-content`}
-                id={`volunteer-values${index}-header`}
+    return (
+      <SectionContainer backgroundColor={designColor.white}>
+        <Stack
+          gap={{ xs: 4, md: 8 }}
+          sx={{
+            textAlign: 'left',
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
+          }}
+        >
+          <Typography variant="headlineLarge">Our oath</Typography>
+          <Typography variant="bodyLarge">
+            We champion these values and ask you as a volunteer to adopt them,
+            too.
+          </Typography>
+          <Box sx={{ display: 'block' }}>
+            {oathContent.map((item, index) => (
+              <Accordion
+                key={index}
+                expanded={oathValuesExpanded === `${index}`}
+                onChange={handleOathValuesChange(`${index}`)}
               >
-                <Typography variant="titleLarge">{item.label}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography variant="bodyLarge">{item.content}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Box>
-      </Stack>
-    </SectionContainer>
+                <AccordionSummary
+                  expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+                  aria-controls={`volunteer-values${index}-content`}
+                  id={`volunteer-values${index}-header`}
+                >
+                  <Typography variant="titleLarge">{item.label}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="bodyLarge">{item.content}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Stack>
+      </SectionContainer>
+    )
   }
 
   const processSection = () => {
-    return <SectionContainer backgroundColor={designColor.background}>
-      <Stack
-        gap={{ xs: 4, md: 8 }}
-        sx={{
-          width: { xs: '100%', lg: '880px' },
-          maxWidth: '880px',
-        }}
-      >
-        <Typography variant="headlineLarge">The process</Typography>
-        <ol>
-          {processContent.map((item, index) => (
-            <li key={index + 1} style={{ marginBottom: '2rem' }}>
-              <Typography
-                variant="titleLarge"
-                color={palette.primary.main}
-              >{`${index + 1}.`}</Typography>
-              <Typography variant="bodyLarge" mx={2}>
-                {item}
-              </Typography>
-            </li>
-          ))}
-        </ol>
-      </Stack>
-    </SectionContainer>
+    return (
+      <SectionContainer backgroundColor={designColor.background}>
+        <Stack
+          gap={{ xs: 4, md: 8 }}
+          sx={{
+            width: { xs: '100%', lg: '880px' },
+            maxWidth: '880px',
+          }}
+        >
+          <Typography variant="headlineLarge">The process</Typography>
+          <ol>
+            {processContent.map((item, index) => (
+              <li key={index + 1} style={{ marginBottom: '2rem' }}>
+                <Typography
+                  variant="titleLarge"
+                  color={palette.primary.main}
+                >{`${index + 1}.`}</Typography>
+                <Typography variant="bodyLarge" mx={2}>
+                  {item}
+                </Typography>
+              </li>
+            ))}
+          </ol>
+        </Stack>
+      </SectionContainer>
+    )
   }
 
   const volunteerApplication = () => {
-    return <SectionContainer backgroundColor={designColor.white}>
-      <Stack
-        gap={{ xs: 4, md: 8 }}
-        sx={{
-          textAlign: 'center',
-          maxWidth: '880px',
-          marginX: 'auto',
-        }}
-      >
-        <Typography
-          variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
+    return (
+      <SectionContainer backgroundColor={designColor.white}>
+        <Stack
+          gap={{ xs: 4, md: 8 }}
+          sx={{
+            textAlign: 'center',
+            maxWidth: '880px',
+            marginX: 'auto',
+          }}
         >
-          Interested in volunteering with Digital Aid Seattle?
-        </Typography>
-        <Link
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-          passHref
-        >
-          <Button variant="contained" color="primary">
-            Apply to volunteer
-          </Button>
-        </Link>
-      </Stack>
-    </SectionContainer>
+          <Typography
+            variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
+          >
+            Interested in volunteering with Digital Aid Seattle?
+          </Typography>
+          <Link
+            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+            passHref
+          >
+            <Button variant="contained" color="primary">
+              Apply to volunteer
+            </Button>
+          </Link>
+        </Stack>
+      </SectionContainer>
+    )
   }
 
   return (
@@ -335,6 +361,7 @@ const VolunteerPage = () => {
           alignItems: 'center',
         }}
       >
+        {rolesTemp()}
         {rolesSection()}
         {oathAndValuesSection()}
         {processSection()}
