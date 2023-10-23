@@ -5,6 +5,7 @@ import { Box, Button, Container, Typography, useMediaQuery, useTheme } from '@mu
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import ErrorImage from '../assets/404-error.png'
+import Masthead from 'components/Masthead'
 
 // Promote, if we want to handle other error types
 type ErrorComponentProps = {
@@ -37,7 +38,7 @@ const ErrorComponent = ({ title, description, imageSrc, imageTitle }: ErrorCompo
           gap: '2rem',
         }}>
         <Typography
-          variant={smallScreen ? 'displayMedium' : 'displayLarge'}>
+          variant={smallScreen ? 'headlineMedium' : 'headlineLarge'}>
           {title}
         </Typography>
         <Typography variant="bodyLarge" >
@@ -65,16 +66,28 @@ const ErrorComponent = ({ title, description, imageSrc, imageTitle }: ErrorCompo
 }
 
 function Page404() {
+  const theme = useTheme()
+
+  const title = '404';
+
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <ErrorComponent title="Page Not Found"
-        description="Unfortunately, the page you are trying to access could not be located. Please return to our home page to continue your journey."
-        imageSrc={ErrorImage.src}
-        imageTitle="404 Error Image" />
-    </Container>
+    <>
+      <Masthead title={title} />
+      <Box
+        sx={{
+          width: '100%',
+          backgroundColor: theme.palette.background.default,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <ErrorComponent title="Page Not Found"
+          description="Unfortunately, the page you are trying to access could not be located. Please return to our home page to continue your journey."
+          imageSrc={ErrorImage.src}
+          imageTitle="404 Error Image" />
+      </Box>
+    </>
   )
 }
 
