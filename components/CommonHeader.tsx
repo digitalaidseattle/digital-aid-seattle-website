@@ -98,23 +98,25 @@ const CommonHeader = () => {
               display: { xs: 'block', lg: 'none' },
             }}
           >
-            {Object.keys(page_mapping).map((name) => (
-              <MenuItem
-                key={name}
-                onClick={handleCloseNavMenu}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.dark,
-                  }}
-                  href={page_mapping[name]}
+            <nav>
+              {Object.keys(page_mapping).map((name) => (
+                <MenuItem
+                  key={name}
+                  onClick={handleCloseNavMenu}
+                  style={{ borderRadius: '0px' }}
                 >
-                  {name}
-                </Link>
-              </MenuItem>
-            ))}
+                  <Link
+                    underline="hover"
+                    sx={{
+                      color: theme.palette.primary.dark,
+                    }}
+                    href={page_mapping[name]}
+                  >
+                    {name}
+                  </Link>
+                </MenuItem>
+              ))}
+            </nav>
           </Menu>
         </Box>
         {/* Menu items that are shown on desktop */}
@@ -137,27 +139,31 @@ const CommonHeader = () => {
               alt="Digital Aid Seattle Home"
             />
           </Link>
-          <Box>
-            {Object.keys(page_mapping).map((name) => (
-              <Button
-                key={name}
-                component={Link}
-                href={page_mapping[name]}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  borderRadius: '0px',
-                  'text-underline-offset': '0.5rem',
-                  textDecoration:
-                    currentRoute === page_mapping[name] ? 'underline' : 'none',
-                }}
-                disableRipple={true}
-                underline="always"
-              >
-                {name}
-              </Button>
-            ))}
-          </Box>
+          <nav>
+            <Box>
+              {Object.keys(page_mapping).map((name) => (
+                <Button
+                  key={name}
+                  component={Link}
+                  href={page_mapping[name]}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: theme.palette.primary.contrastText,
+                    borderRadius: '0px',
+                    'text-underline-offset': '0.5rem',
+                    textDecoration:
+                      currentRoute === page_mapping[name]
+                        ? 'underline'
+                        : 'none',
+                  }}
+                  disableRipple={true}
+                  underline="always"
+                >
+                  {name}
+                </Button>
+              ))}
+            </Box>
+          </nav>
         </Container>
       </Toolbar>
     </AppBar>
