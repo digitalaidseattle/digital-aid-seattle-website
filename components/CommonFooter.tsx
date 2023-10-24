@@ -136,8 +136,19 @@ const supportUsBox = () => {
 const copyrightBox = () => {
   return (
     <Box>
-      <SubText>Illustrations by: Storyset by Freepik</SubText>
-      <FooterItemTitle>@ Digital Aid Seattle 2023</FooterItemTitle>
+      <SubText>
+        Illustrations:
+        <Link
+          href="www.freepik.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Freepik"
+          aria-label="Opens Freepik in a new window."
+        >
+          Freepik
+        </Link>
+      </SubText>
+      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
     </Box>
   )
 }
