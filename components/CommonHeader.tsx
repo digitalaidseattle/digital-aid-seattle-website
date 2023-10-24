@@ -99,23 +99,25 @@ const CommonHeader = () => {
             }}
           >
             <nav>
-              {Object.keys(page_mapping).map((name) => (
-                <MenuItem
-                  key={name}
-                  onClick={handleCloseNavMenu}
-                  style={{ borderRadius: '0px' }}
-                >
-                  <Link
-                    underline="hover"
-                    sx={{
-                      color: theme.palette.primary.dark,
-                    }}
-                    href={page_mapping[name]}
+              <ul>
+                {Object.keys(page_mapping).map((name) => (
+                  <MenuItem
+                    key={name}
+                    onClick={handleCloseNavMenu}
+                    style={{ borderRadius: '0px' }}
                   >
-                    {name}
-                  </Link>
-                </MenuItem>
-              ))}
+                    <Link
+                      underline="hover"
+                      sx={{
+                        color: theme.palette.primary.dark,
+                      }}
+                      href={page_mapping[name]}
+                    >
+                      {name}
+                    </Link>
+                  </MenuItem>
+                ))}
+              </ul>
             </nav>
           </Menu>
         </Box>
@@ -140,7 +142,7 @@ const CommonHeader = () => {
             />
           </Link>
           <nav>
-            <Box>
+            <ul>
               {Object.keys(page_mapping).map((name) => (
                 <Button
                   key={name}
@@ -162,7 +164,7 @@ const CommonHeader = () => {
                   {name}
                 </Button>
               ))}
-            </Box>
+            </ul>
           </nav>
         </Container>
       </Toolbar>
