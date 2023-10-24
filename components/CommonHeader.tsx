@@ -141,28 +141,20 @@ const CommonHeader = () => {
             {Object.keys(page_mapping).map((name) => (
               <Button
                 key={name}
+                component={Link}
+                href={page_mapping[name]}
                 onClick={handleCloseNavMenu}
                 sx={{
                   color: theme.palette.primary.contrastText,
                   borderRadius: '0px',
+                  'text-underline-offset': '0.5rem',
+                  textDecoration:
+                    currentRoute === page_mapping[name] ? 'underline' : 'none',
                 }}
                 disableRipple={true}
-                tabIndex={-1}
+                underline="always"
               >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                    'text-underline-offset': '0.5rem',
-                    textDecoration:
-                      currentRoute === page_mapping[name]
-                        ? 'underline'
-                        : 'none',
-                  }}
-                  href={page_mapping[name]}
-                >
-                  {name}
-                </Link>
+                {name}
               </Button>
             ))}
           </Box>
