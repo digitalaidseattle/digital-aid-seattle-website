@@ -57,17 +57,9 @@ const Home = () => {
           }}
         >
           {isMediumScreen ? (
-            <img
-              src={HeroLinesMobile.src}
-              alt="Hero Lines"
-              style={
-                {
-                  // objectFit: 'cover',
-                }
-              }
-            />
+            <img src={HeroLinesMobile.src} alt="" />
           ) : (
-            <img src={HeroLines.src} alt="Hero Lines" style={{}} />
+            <img src={HeroLines.src} alt="" style={{}} />
           )}
         </Box>
         {/* Hero Content */}
@@ -152,7 +144,6 @@ const Home = () => {
               {/* Image Container */}
               <Box
                 sx={{
-                  // position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   width: { xs: '275px', md: '424px' },

@@ -137,7 +137,7 @@ const copyrightBox = () => {
   return (
     <Box>
       <SubText>
-        Illustrations:
+        Illustrations by
         <Link
           href="www.freepik.com"
           target="_blank"
