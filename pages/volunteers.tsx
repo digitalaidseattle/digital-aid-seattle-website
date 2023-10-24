@@ -213,8 +213,9 @@ const VolunteerPage = () => {
                 expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                 aria-controls={`volunteer-values${index}-content`}
                 id={`volunteer-values${index}-header`}
+                sx={{ paddingLeft: '0px', paddingRight: '0px', paddingTop: '1rem', paddingBottom: '1rem' }}
               >
-                <Typography variant="titleLarge">{item.label}</Typography>
+                <Typography variant="titleLarge" >{item.label}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="bodyLarge">{item.content}</Typography>
