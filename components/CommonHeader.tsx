@@ -128,6 +128,7 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            alignItems: 'center',
             padding: '1.25rem 2.5rem !important',
           }}
         >
@@ -144,12 +145,13 @@ const CommonHeader = () => {
           <nav>
             <ul>
               {Object.keys(page_mapping).map((name) => (
-                <Button
+                <Link
                   key={name}
-                  component={Link}
                   href={page_mapping[name]}
                   onClick={handleCloseNavMenu}
                   sx={{
+                    fontSize: '14px',
+                    fontWeight: '700',
                     color: theme.palette.primary.contrastText,
                     borderRadius: '0px',
                     'text-underline-offset': '0.5rem',
@@ -157,12 +159,12 @@ const CommonHeader = () => {
                       currentRoute === page_mapping[name]
                         ? 'underline'
                         : 'none',
+                    padding: '10px 24px 10px 24px',
                   }}
-                  disableRipple={true}
-                  underline="always"
+                  underline="hover"
                 >
                   {name}
-                </Button>
+                </Link>
               ))}
             </ul>
           </nav>
