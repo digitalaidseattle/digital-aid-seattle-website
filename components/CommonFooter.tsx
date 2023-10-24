@@ -142,7 +142,6 @@ const copyrightBox = () => {
           href="https://www.freepik.com"
           target="_blank"
           rel="noopener noreferrer"
-          title="Freepik"
           aria-label="Freepik, which opens in a new window."
           sx={{ color: theme.palette.primary.contrastText }}
         >
@@ -177,7 +176,7 @@ const githubLink = () => {
       target="_blank"
       rel="noopener noreferrer"
       title="GitHub"
-      aria-label="Visit our GitHub, which opens in a new window."
+      aria-label="Our GitHub, which opens in a new window."
     >
       <GitHubIcon
         sx={{ color: theme.palette.primary.contrastText }}
