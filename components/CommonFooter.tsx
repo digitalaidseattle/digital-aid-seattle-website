@@ -137,13 +137,14 @@ const copyrightBox = () => {
   return (
     <Box>
       <SubText>
-        Illustrations by
+        Illustrations by{' '}
         <Link
-          href="www.freepik.com"
+          href="https://www.freepik.com"
           target="_blank"
           rel="noopener noreferrer"
           title="Freepik"
-          aria-label="Opens Freepik in a new window."
+          aria-label="Freepik, which opens in a new window."
+          sx={{ color: theme.palette.primary.contrastText }}
         >
           Freepik
         </Link>
@@ -160,7 +161,7 @@ const linkedInLink = () => {
       target="_blank"
       rel="noopener noreferrer"
       title="LinkedIn"
-      aria-label="Visit our LinkedIn, which opens in a new window."
+      aria-label="Our LinkedIn, which opens in a new window."
     >
       <LinkedInIcon
         sx={{ color: theme.palette.primary.contrastText }}

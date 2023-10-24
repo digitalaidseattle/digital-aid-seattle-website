@@ -153,7 +153,8 @@ const Home = () => {
               >
                 <img
                   src={HeroImage.src}
-                  alt="Seattle skyline by Stephen Plopper"
+                  title="Seattle skyline by Stephen Plopper"
+                  alt=""
                   style={{
                     objectFit: 'cover',
                     width: '100%',
