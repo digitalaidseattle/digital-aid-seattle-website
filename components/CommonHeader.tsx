@@ -10,7 +10,6 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
@@ -148,6 +147,7 @@ const CommonHeader = () => {
                   borderRadius: '0px',
                 }}
                 disableRipple={true}
+                tabIndex={-1}
               >
                 <Link
                   underline="hover"
