@@ -76,13 +76,7 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
-// the ExtraProps type definition allows an H2 component
-// to be passed to the styled typography.
-type ExtraProps = {
-  component: React.ElementType
-}
-
-const Subheader = styled(Typography)<ExtraProps>(({ theme }) => ({
+const Subheader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
   [theme.breakpoints.up('xs')]: {
     marginBottom: '2rem',
@@ -90,7 +84,7 @@ const Subheader = styled(Typography)<ExtraProps>(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     marginBottom: '2.5rem',
   },
-}))
+})) as typeof Typography
 
 const Section = styled(Stack)(({ theme }) => ({
   width: '100%',

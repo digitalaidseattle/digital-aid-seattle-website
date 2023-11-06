@@ -261,7 +261,6 @@ const VolunteerPage = () => {
                 <Typography
                   variant="titleLarge"
                   color={palette.primary.main}
-                  component="h3"
                 >{`${index + 1}.`}</Typography>
                 <Typography variant="bodyLarge" mx={2}>
                   {item}
