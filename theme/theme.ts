@@ -1,3 +1,6 @@
+/*
+ * @2023 Digital Aid Seattle
+ */
 import { createTheme } from '@mui/material'
 
 interface FontProperties {
@@ -132,6 +135,9 @@ export const theme = createTheme({
       light: designColor.yellow.light,
       dark: designColor.yellow.dark,
       contrastText: designColor.black,
+    },
+    success: {
+      main: designColor.green.dark
     },
     background: {
       default: '#F2F7F7',
@@ -295,7 +301,6 @@ export const theme = createTheme({
             borderWidth: '2px',
           }
         }
-
       },
       variants: [
         {
@@ -325,7 +330,7 @@ export const theme = createTheme({
         },
       },
     },
-  },  
+  },
 })
 
 declare module '@mui/material/Button' {

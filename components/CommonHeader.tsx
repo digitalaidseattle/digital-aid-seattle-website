@@ -1,3 +1,6 @@
+/*
+ * @2023 Digital Aid Seattle
+ */
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
@@ -10,20 +13,31 @@ import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
 
+import { Stack } from '@mui/material'
 import OSLogo from '../assets/darkThemeLogo.svg'
 
-const page_mapping = {
+const SECTION_TO_PATH = {
   About: '/about',
   Projects: '/projects',
   Partners: '/partners',
   Volunteer: '/volunteers',
   Events: '/events',
 }
+
+const PATH_TO_SECTION = {
+  '/about': 'About',
+  '/projects': 'Projects',
+  '/project_individual': 'Projects',
+  '/partners': 'Partners',
+  '/volunteers': 'Volunteer',
+  '/volunteer_individual': 'Volunteer',
+  '/events': 'Events'
+}
+
 
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
@@ -38,7 +52,10 @@ const CommonHeader = () => {
   }
 
   const router = useRouter()
-  const currentRoute = router.route
+
+  const isCurrent = (name: string) => {
+    return name === PATH_TO_SECTION[router.route];
+  }
 
   return (
     <AppBar
@@ -99,7 +116,7 @@ const CommonHeader = () => {
               display: { xs: 'block', lg: 'none' },
             }}
           >
-            {Object.keys(page_mapping).map((name) => (
+            {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
                 onClick={handleCloseNavMenu}
@@ -110,7 +127,7 @@ const CommonHeader = () => {
                   sx={{
                     color: theme.palette.primary.dark,
                   }}
-                  href={page_mapping[name]}
+                  href={SECTION_TO_PATH[name]}
                 >
                   {name}
                 </Link>
@@ -138,34 +155,29 @@ const CommonHeader = () => {
               alt="Digital Aid Seattle Home"
             />
           </Link>
-          <Box>
-            {Object.keys(page_mapping).map((name) => (
+          <Stack direction="row" spacing={1}>
+            {Object.keys(SECTION_TO_PATH).map((name) => (
               <Button
                 key={name}
                 onClick={handleCloseNavMenu}
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  borderRadius: '0px',
-                }}
+                variant="contained"
+                color={isCurrent(name)
+                  ? 'success'
+                  : 'primary'}
                 disableRipple={true}
               >
                 <Link
-                  underline="hover"
                   sx={{
                     color: theme.palette.primary.contrastText,
-                    'text-underline-offset': '0.5rem',
-                    textDecoration:
-                      currentRoute === page_mapping[name]
-                        ? 'underline'
-                        : 'none',
+                    textDecoration: 'none'
                   }}
-                  href={page_mapping[name]}
+                  href={SECTION_TO_PATH[name]}
                 >
                   {name}
                 </Link>
               </Button>
             ))}
-          </Box>
+          </Stack>
         </Container>
       </Toolbar>
     </AppBar>
