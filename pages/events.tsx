@@ -15,7 +15,7 @@ import { withBasicLayout } from 'components/layouts'
 import { useEffect, useState } from 'react'
 
 import SectionContainer from 'components/layout/SectionContainer'
-import { osEventsService } from './api/EventsService'
+import { eventsService } from './api/EventsService'
 
 type MastheadProps = {
   title: string
@@ -58,7 +58,7 @@ const EventsPage = () => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    osEventsService
+    eventsService
       .getActiveEvents()
       .then((evs) => setEvents(evs))
       .catch((error) => console.log(error))

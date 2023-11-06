@@ -6,8 +6,8 @@ import { groq } from 'next-sanity';
 import { sanityClient } from '../../sanity/lib/client';
 import { OSEvent } from 'types';
 
-
-class OSEventService {
+// Who knows, maybe we replace this with Airtable
+class SanityEventService {
     eventsQuery = groq`*[_type == "os-event"]`
 
     async getActiveEvents(): Promise<OSEvent[]> {
@@ -16,6 +16,6 @@ class OSEventService {
 
 }
 
-const osEventsService = new OSEventService();
+const eventsService = new SanityEventService();
 
-export { osEventsService };
+export { eventsService };
