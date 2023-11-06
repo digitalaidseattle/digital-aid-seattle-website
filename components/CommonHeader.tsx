@@ -3,14 +3,12 @@
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
@@ -99,23 +97,27 @@ const CommonHeader = () => {
               display: { xs: 'block', lg: 'none' },
             }}
           >
-            {Object.keys(page_mapping).map((name) => (
-              <MenuItem
-                key={name}
-                onClick={handleCloseNavMenu}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.dark,
-                  }}
-                  href={page_mapping[name]}
-                >
-                  {name}
-                </Link>
-              </MenuItem>
-            ))}
+            <nav>
+              <ul>
+                {Object.keys(page_mapping).map((name) => (
+                  <MenuItem
+                    key={name}
+                    onClick={handleCloseNavMenu}
+                    style={{ borderRadius: '0px' }}
+                  >
+                    <Link
+                      underline="hover"
+                      sx={{
+                        color: theme.palette.primary.dark,
+                      }}
+                      href={page_mapping[name]}
+                    >
+                      {name}
+                    </Link>
+                  </MenuItem>
+                ))}
+              </ul>
+            </nav>
           </Menu>
         </Box>
         {/* Menu items that are shown on desktop */}
@@ -125,6 +127,7 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            alignItems: 'center',
             padding: '1.25rem 2.5rem !important',
           }}
         >
@@ -138,34 +141,32 @@ const CommonHeader = () => {
               alt="Digital Aid Seattle Home"
             />
           </Link>
-          <Box>
-            {Object.keys(page_mapping).map((name) => (
-              <Button
-                key={name}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  borderRadius: '0px',
-                }}
-                disableRipple={true}
-              >
+          <nav>
+            <ul>
+              {Object.keys(page_mapping).map((name) => (
                 <Link
-                  underline="hover"
+                  key={name}
+                  href={page_mapping[name]}
+                  onClick={handleCloseNavMenu}
                   sx={{
+                    fontSize: '14px',
+                    fontWeight: '700',
                     color: theme.palette.primary.contrastText,
+                    borderRadius: '0px',
                     'text-underline-offset': '0.5rem',
                     textDecoration:
                       currentRoute === page_mapping[name]
                         ? 'underline'
                         : 'none',
+                    padding: '10px 24px 10px 24px',
                   }}
-                  href={page_mapping[name]}
+                  underline="hover"
                 >
                   {name}
                 </Link>
-              </Button>
-            ))}
-          </Box>
+              ))}
+            </ul>
+          </nav>
         </Container>
       </Toolbar>
     </AppBar>

@@ -7,8 +7,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
 
-export const HeaderContainer = styled.header``
-
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
 export const MainContainer = styled.main`
@@ -36,9 +34,7 @@ export const withBasicLayout = (Page: () => JSX.Element) => () =>
           },
         }}
       />
-      <HeaderContainer>
-        <CommonHeader />
-      </HeaderContainer>
+      <CommonHeader />
       <MainContainer>
         <Page />
       </MainContainer>

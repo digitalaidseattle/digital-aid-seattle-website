@@ -17,6 +17,7 @@ const CardGridContainer = ({ children, columns = 2 }: Props) => {
         },
         gap: '2rem',
       }}
+      component="ul"
     >
       {children}
     </Box>
