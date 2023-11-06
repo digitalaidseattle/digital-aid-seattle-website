@@ -1,6 +1,6 @@
 /*
-* @2023 Digital Aid Seattle
-*/
+ * @2023 Digital Aid Seattle
+ */
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
@@ -64,7 +64,9 @@ const CardEvent = ({ event }: CardEventProps) => {
           >
             <Stack justifyContent="center" sx={{ height: '100%' }}>
               <Stack spacing="1rem">
-                <Typography variant="titleLarge">{event.title}</Typography>
+                <Typography variant="titleLarge" component="h2">
+                  {event.title}
+                </Typography>
                 <Stack direction="row" spacing="1rem">
                   <Typography variant="labelLarge">{event.date}</Typography>
                   <Typography variant="labelLarge">
@@ -80,17 +82,19 @@ const CardEvent = ({ event }: CardEventProps) => {
               >
                 {event.description}
               </Typography>
-              {event.rsvpLink && <Button
-                variant="contained"
-                sx={{
-                  marginTop: { xs: '2rem', lg: '2.5rem' },
-                  textAlign: 'center',
-                  maxWidth: { xs: '100%', lg: 'min-content' },
-                }}
-                href={event.rsvpLink}
-              >
-                RVSP
-              </Button>}
+              {event.rsvpLink && (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginTop: { xs: '2rem', lg: '2.5rem' },
+                    textAlign: 'center',
+                    maxWidth: { xs: '100%', lg: 'min-content' },
+                  }}
+                  href={event.rsvpLink}
+                >
+                  RVSP
+                </Button>
+              )}
             </Stack>
           </CardContent>
         </Stack>
@@ -113,7 +117,8 @@ const CardEvent = ({ event }: CardEventProps) => {
                 border: '2px solid #EAF1F1',
                 height: '10rem',
                 width: '10rem',
-              }}>
+              }}
+            >
               <CardMedia
                 component="img"
                 image={urlForImage(event.image).url()}
@@ -127,7 +132,8 @@ const CardEvent = ({ event }: CardEventProps) => {
             <Stack
               spacing="1rem"
               justifyContent="center"
-              sx={{ marginLeft: '1.5rem' }}>
+              sx={{ marginLeft: '1.5rem' }}
+            >
               <Typography variant="titleLarge">{event.title}</Typography>
               <Stack direction="row" spacing="1rem">
                 <Typography variant="labelLarge">{event.date}</Typography>
@@ -140,20 +146,23 @@ const CardEvent = ({ event }: CardEventProps) => {
           </Stack>
           <Typography
             variant="bodyMedium"
-            sx={{ display: 'block', marginTop: '1rem !important' }}>
+            sx={{ display: 'block', marginTop: '1rem !important' }}
+          >
             {event.description}
           </Typography>
-          {event.rsvpLink && <Button
-            variant="contained"
-            href={event.rsvpLink}
-            sx={{
-              maxWidth: 'min-content',
-              display: 'block',
-              marginTop: '2rem',
-            }}>
-            RVSP
-          </Button>
-          }
+          {event.rsvpLink && (
+            <Button
+              variant="contained"
+              href={event.rsvpLink}
+              sx={{
+                maxWidth: 'min-content',
+                display: 'block',
+                marginTop: '2rem',
+              }}
+            >
+              RVSP
+            </Button>
+          )}
         </CardContent>
       </Card>
     )

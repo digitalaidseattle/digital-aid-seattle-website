@@ -229,7 +229,9 @@ const Home = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our mission</Typography>
+          <Typography variant="headlineLarge" component="h2">
+            Our mission
+          </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}

@@ -76,7 +76,13 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
-const Subheader = styled(Typography)(({ theme }) => ({
+// the ExtraProps type definition allows an H2 component
+// to be passed to the styled typography.
+type ExtraProps = {
+  component: React.ElementType
+}
+
+const Subheader = styled(Typography)<ExtraProps>(({ theme }) => ({
   color: theme.palette.primary.main,
   [theme.breakpoints.up('xs')]: {
     marginBottom: '2rem',
@@ -105,7 +111,9 @@ const BodyTextSection = ({ title, texts }: BodyTextSectionProps) => {
     texts &&
     texts.length > 0 && (
       <Section>
-        <Subheader variant="headlineMedium">{title}</Subheader>
+        <Subheader variant="headlineMedium" component="h2">
+          {title}
+        </Subheader>
         <TextSection>
           {texts.map((t, index) => (
             <Typography key={index} variant="bodyLarge">
@@ -131,6 +139,7 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
         <Subheader
           variant="headlineMedium"
           sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+          component="h2"
         >
           {title}
         </Subheader>
@@ -175,6 +184,7 @@ const RolesSection = ({ title, roles }: RolesSectionProps) => {
         <Subheader
           variant="headlineMedium"
           sx={{ textAlign: 'center', marginBottom: { lg: '5rem' } }}
+          component="h2"
         >
           {title}
         </Subheader>
@@ -241,8 +251,12 @@ const ProjectIndividualPage = () => {
           }}
         >
           <Stack>
-            <Typography variant="displayMedium">{project.title}</Typography>
-            <Typography variant="headlineMedium">{project.partner}</Typography>
+            <Typography variant="displayMedium" component="h1">
+              {project.title}
+            </Typography>
+            <Typography variant="headlineMedium" component="h2">
+              {project.partner}
+            </Typography>
           </Stack>
           <Stack spacing="1rem">
             <Stack direction="row" alignItems="center" spacing="1.5rem">
@@ -296,11 +310,13 @@ const ProjectIndividualPage = () => {
                 sx={{
                   width: { md: '40vw', lg: '25rem' },
                 }}
+                component="h1"
               >
                 {project.title}
               </Typography>
               <Typography
                 variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+                component="h2"
               >
                 {project.partner}
               </Typography>
@@ -385,7 +401,11 @@ const ProjectIndividualPage = () => {
               alignItems: 'center',
             }}
           >
-            <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+            <Subheader
+              variant="headlineMedium"
+              sx={{ textAlign: 'center' }}
+              component="h2"
+            >
               Questions about this project?
             </Subheader>
             <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
@@ -405,7 +425,11 @@ const ProjectIndividualPage = () => {
             alignItems: 'center',
           }}
         >
-          <Subheader variant="headlineMedium" sx={{ textAlign: 'center' }}>
+          <Subheader
+            variant="headlineMedium"
+            sx={{ textAlign: 'center' }}
+            component="h2"
+          >
             Interested in volunteering with Digital Aid Seattle?
           </Subheader>
           <Button
