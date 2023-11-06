@@ -146,6 +146,7 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
             gap: '2rem',
             width: '100%',
           }}
+          component="ul"
         >
           {members.map((person) => (
             <CardWithPhoto
@@ -191,6 +192,7 @@ const RolesSection = ({ title, roles }: RolesSectionProps) => {
             gap: '2rem',
             width: '100%',
           }}
+          component="ul"
         >
           {roles
             .filter((item) => rolesMap[item])
@@ -248,7 +250,7 @@ const ProjectIndividualPage = () => {
             <Typography variant="displayMedium" component="h1">
               {project.title}
             </Typography>
-            <Typography variant="headlineMedium" component="h2">
+            <Typography variant="headlineMedium" component="span">
               {project.partner}
             </Typography>
           </Stack>
@@ -310,7 +312,7 @@ const ProjectIndividualPage = () => {
               </Typography>
               <Typography
                 variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="h2"
+                component="span"
               >
                 {project.partner}
               </Typography>

@@ -150,6 +150,7 @@ const PartnersPage = () => {
               },
               gap: '2rem',
             }}
+            component="ul"
           >
             {criteriaContent.map((item) => (
               <CardOne

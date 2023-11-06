@@ -210,7 +210,7 @@ const OurTeamSection = () => {
       >
         We’ve worked in tech and management for companies like:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {companiesList.map((item) => (
           <Grid item xs={6} md={4} key={item.label}>
             <ListItemWithIcon
@@ -228,7 +228,7 @@ const OurTeamSection = () => {
       >
         We collectively hold experience in:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {experienceContent.map((item) => (
           <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
@@ -247,7 +247,7 @@ const OurTeamSection = () => {
       >
         We have graduate and post-graduate degrees in:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {degreeContent.map((item) => (
           <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
