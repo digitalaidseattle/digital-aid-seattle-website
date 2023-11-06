@@ -21,6 +21,11 @@ const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
+
+  const getTimeString = (event: OSEvent): string => {
+    return event.start + (event.end ? ' - ' + event.end : '');
+  }
+
   if (extraSmallScreen || largeScreen) {
     return (
       <Card
@@ -47,14 +52,16 @@ const CardEvent = ({ event }: CardEventProps) => {
               overflow: 'hidden',
             }}
           >
-            <CardMedia
-              component="img"
-              image={urlForImage(event.image).url()}
-              sx={{
-                position: { xs: 'absolute', lg: 'static' },
-                height: '100%',
-              }}
-            />
+            {event.image &&
+              <CardMedia
+                component="img"
+                image={urlForImage(event.image).url()}
+                sx={{
+                  position: { xs: 'absolute', lg: 'static' },
+                  height: '100%',
+                }}
+              />
+            }
           </Box>
           <CardContent
             sx={{
@@ -70,7 +77,7 @@ const CardEvent = ({ event }: CardEventProps) => {
                 <Stack direction="row" spacing="1rem">
                   <Typography variant="labelLarge">{event.date}</Typography>
                   <Typography variant="labelLarge">
-                    {event.start} - {event.end}
+                    {getTimeString(event)}
                   </Typography>
                 </Stack>
                 <Typography variant="labelMedium">{event.location}</Typography>
@@ -117,17 +124,18 @@ const CardEvent = ({ event }: CardEventProps) => {
                 border: '2px solid #EAF1F1',
                 height: '10rem',
                 width: '10rem',
-              }}
-            >
-              <CardMedia
-                component="img"
-                image={urlForImage(event.image).url()}
-                sx={{
-                  position: 'static',
-                  height: '100%',
-                  borderRadius: '8px',
-                }}
-              />
+              }}>
+              {event.image &&
+                <CardMedia
+                  component="img"
+                  image={urlForImage(event.image).url()}
+                  sx={{
+                    position: 'static',
+                    height: '100%',
+                    borderRadius: '8px',
+                  }}
+                />
+              }
             </Box>
             <Stack
               spacing="1rem"
@@ -138,7 +146,7 @@ const CardEvent = ({ event }: CardEventProps) => {
               <Stack direction="row" spacing="1rem">
                 <Typography variant="labelLarge">{event.date}</Typography>
                 <Typography variant="labelLarge">
-                  {event.start} - {event.end}
+                  {getTimeString(event)}
                 </Typography>
               </Stack>
               <Typography variant="labelMedium">{event.location}</Typography>
