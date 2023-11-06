@@ -322,6 +322,7 @@ export const theme = createTheme({
       defaultProps: {
         variantMapping: {
           displayLarge: 'h1',
+          displayMedium: 'h1',
         },
       },
     },

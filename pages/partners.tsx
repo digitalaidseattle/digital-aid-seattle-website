@@ -101,6 +101,7 @@ const PartnersPage = () => {
           <Typography
             variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
             sx={{ color: theme.palette.primary.contrastText }}
+            component="h1"
           >
             Partner with us
           </Typography>
@@ -109,6 +110,7 @@ const PartnersPage = () => {
             sx={{
               color: theme.palette.primary.contrastText,
             }}
+            component="span"
           >
             Digital Aid Seattle works with Seattle-based nonprofits to create
             customized digital solutions for their needs, for free.
@@ -134,7 +136,9 @@ const PartnersPage = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our criteria</Typography>
+          <Typography variant="headlineLarge" component="h2">
+            Our criteria
+          </Typography>
 
           <Box
             sx={{
@@ -157,7 +161,9 @@ const PartnersPage = () => {
               />
             ))}
           </Box>
-          <Typography variant="headlineLarge">How we can help</Typography>
+          <Typography variant="headlineLarge" component="h2">
+            How we can help
+          </Typography>
           <CardGridContainer columns={3}>
             {provideContent.map((item) => (
               <CardLeft
@@ -179,7 +185,9 @@ const PartnersPage = () => {
           maxWidth={'880px'}
         >
           <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge">The process</Typography>
+            <Typography variant="headlineLarge" component="h2">
+              The process
+            </Typography>
             <ol>
               {processContent.map((item, index) => (
                 <li key={index + 1} style={{ marginBottom: '2rem' }}>
@@ -205,7 +213,7 @@ const PartnersPage = () => {
             </div>
           </Stack>
           <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge">
+            <Typography variant="headlineLarge" component="h2">
               Partner expectations
             </Typography>
             <Typography variant="bodyLarge">
@@ -216,7 +224,7 @@ const PartnersPage = () => {
             </Typography>
           </Stack>
           <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge">
+            <Typography variant="headlineLarge" component="h2">
               Volunteer expectations
             </Typography>
             <Typography variant="bodyLarge">
@@ -235,7 +243,7 @@ const PartnersPage = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">
+          <Typography variant="headlineLarge" component="h2">
             Interested in partnering with Digital Aid Seattle?
           </Typography>
 

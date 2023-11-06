@@ -96,6 +96,7 @@ const AboutUsHeroSection = () => {
         <Typography
           variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
           sx={{ color: theme.palette.primary.contrastText }}
+          component="h1"
         >
           About us
         </Typography>
@@ -118,7 +119,9 @@ const AboutUsHeroSection = () => {
 
 const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
-    <Typography variant="headlineMedium">What we do</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      What we do
+    </Typography>
     <Typography variant="bodyLarge">
       Digital Aid Seattle partners with other nonprofits to amplify their impact
       and to uplift communities through the power of technology.
@@ -137,7 +140,9 @@ const WhatWeDoSection = ({ theme }) => (
 
 const OurValueSection = ({ theme }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>
-    <Typography variant="headlineMedium">Our values</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      Our values
+    </Typography>
     <CardRowContainer>
       <CardOne
         title="Excellence"
@@ -172,7 +177,9 @@ const OurValueSection = ({ theme }) => (
 
 const OurVisionSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
-    <Typography variant="headlineMedium">Our vision</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      Our vision
+    </Typography>
     <Typography variant="bodyLarge" align="center" display="block">
       We envision a network of highly functional non-profits in the Puget Sound
       area, working in tandem with one another and with the municipal government
@@ -188,12 +195,19 @@ const OurTeamSection = () => {
 
   return (
     <AboutUsSection backgroundColor={theme.palette.background.default}>
-      <Typography variant="headlineMedium">Our team</Typography>
+      <Typography variant="headlineMedium" component="h2">
+        Our team
+      </Typography>
       <Typography variant="bodyLarge" align="center" display="block">
         The Digital Aid Seattle cadre is made up of highly skilled and committed
         volunteers, dedicated to serving the greater Seattle area.
       </Typography>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We’ve worked in tech and management for companies like:
       </Typography>
       <Grid container spacing={2}>
@@ -206,7 +220,12 @@ const OurTeamSection = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We collectively hold experience in:
       </Typography>
       <Grid container spacing={2}>
@@ -220,7 +239,12 @@ const OurTeamSection = () => {
           </Grid>
         ))}
       </Grid>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We have graduate and post-graduate degrees in:
       </Typography>
       <Grid container spacing={2}>
