@@ -320,7 +320,7 @@ const experienceContent = [
 const degreeContent = [
   {
     label: 'Informatics & Human Computer Interaction',
-    icon: <img src={HCIIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={HCIIcon.src} alt="" width="24px" />,
   },
   {
     label: 'Computer Science / Engineering',
@@ -331,11 +331,11 @@ const degreeContent = [
   { label: 'Architecture', icon: <Apartment /> },
   {
     label: 'Life Sciences',
-    icon: <img src={GeneticsIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={GeneticsIcon.src} alt="" width="24px" />,
   },
   { label: 'Law', icon: <Gavel /> },
   {
     label: 'Astrophysics',
-    icon: <img src={PhysicsIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={PhysicsIcon.src} alt="" width="24px" />,
   },
 ]
