@@ -73,37 +73,64 @@ class DASVolunteerRoleService {
         return null
       }
       //TODO: Finish handling of 'key technologies' field. Currently this field is returned as an array of records. Working with Seamus to establish his aims here.
-      
-      const volunteerRoleData = {
-        role: record.fields?.Role ?? null,
-        key: record.fields.Key ?? null,
-        location: record.fields?.Location ?? null,
-        duration: record.fields?.Duration ?? null,
-        headline: record.fields?.Headline ?? null,
-        description: record.fields?.Description ?? null,
-        whyJoin: record.fields?.['Why Join Us'] ?? null,
-        aboutUs: record.fields?.['About Us'] ?? null,
+
+      const volunteerRoleData: DASVolunteerRole = {
+        role:
+          typeof record.fields.Role === 'string' ? record.fields.Role : null,
+        key: typeof record.fields.Key,
+        location:
+          typeof record.fields?.Location === 'string'
+            ? record.fields?.Location
+            : null,
+        duration:
+          typeof record.fields?.Duration === 'string'
+            ? record.fields?.Duration
+            : null,
+        headline:
+          typeof record.fields?.Headline === 'string'
+            ? record.fields?.Headline
+            : null,
+        description:
+          typeof record.fields?.Description === 'string'
+            ? record.fields?.Description
+            : null,
+        whyJoin:
+          typeof record.fields?.['Why Join Us'] === 'string'
+            ? record.fields?.['Why Join Us']
+            : null,
+        aboutUs:
+          typeof record.fields?.['About Us'] === 'string'
+            ? record.fields?.['About Us']
+            : null,
         responsibilities:
           typeof record.fields?.Responsibilities === 'string'
             ? record.fields?.Responsibilities.split('\n')
             : null,
         preferredQualifications:
           typeof record.fields?.['Preferred Qualifications'] === 'string'
-            ? record.fields?.['Preferred Qualifications'].split('\n')
+            ? record.fields?.['Preferred Qualifications']
+            : null,
+        keyAttributesToSuccess:
+          typeof record.fields?.['Key attributes for success'] === 'string'
+            ? record.fields?.['Key attributes for success'].split('\n')
             : null,
         keyTechnologies:
           typeof record.fields?.['Key technologies'] === 'string'
             ? record.fields?.['Key technologies'].split('\n')
             : null,
-        venture: record.fields?.['Venture (from Partner Needs Link)'] ?? null,
-        applicationLink: record.fields?.['url to apply'] ?? null,
-        urgency: record.fields?.Urgency ?? null,
-        image: {
-          filename: record.fields?.image[0]?.filename,
-          url: record.fields?.image[0]?.url,
-          width: record.fields?.image[0]?.width,
-          height: record.fields?.image[0]?.height,
-        },
+        venture:
+          typeof record.fields?.['Venture (from Partner Needs Link)'] ===
+          'string'
+            ? record.fields?.['Venture (from Partner Needs Link)']
+            : null,
+        applicationLink:
+          typeof record.fields?.['url to apply'] === 'string'
+            ? record.fields?.['url to apply']
+            : null,
+        urgency:
+          typeof record.fields?.Urgency === 'number'
+            ? record.fields?.Urgency
+            : null,
       }
       return volunteerRoleData
     } catch (error) {
