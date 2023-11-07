@@ -1,11 +1,24 @@
 import { useEffect, useState } from 'react'
-import { DASVolunteerRole } from 'types'
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
-import { withBasicLayout } from 'components/layouts'
-import { Button } from '@mui/material'
-import Link from 'next/link'
 
-import { Box, useTheme } from '@mui/material'
+import { withBasicLayout } from 'components/layouts'
+import Masthead from 'components/Masthead'
+
+import {
+  Box,
+  Breadcrumbs,
+  Button,
+  CircularProgress,
+  Link,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material'
+
+import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import { DASVolunteerRole } from 'types'
+
+import { NavigateNextSharp } from '@mui/icons-material'
+import SectionContainer from 'components/layout/SectionContainer'
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
@@ -14,32 +27,218 @@ const VolunteerRolePage = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     dasVolunteerRoleService
-      .getVolunteerRoleByName(params.get('role'))
+      .getRoleDetailsByName(params.get('role'))
       .then((role) => setRole(role))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [])
 
+  const theme = useTheme()
+
+  const buildListItems = (content: string[]) => {
+    return (
+      <ul
+        style={{
+          listStyleType: 'disc',
+          listStylePosition: 'outside',
+          marginLeft: 0,
+          paddingLeft: '1em',
+        }}
+      >
+        {content.map((item: string, i) => (
+          <li
+            style={{ display: 'list-item', paddingLeft: '1em' }}
+            key={`${i}-${item}`}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  const BreadCrumbSection = ({ roleName }) => {
+    return (
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
+      >
+        <Link href={'./'} color="primary" underline="hover">
+          Home
+        </Link>
+        <Link href={'./volunteers'} color="primary" underline="hover">
+          Volunteers
+        </Link>
+        <Typography color="textPrimary">{roleName}</Typography>
+      </Breadcrumbs>
+    )
+  }
+
+  const RoleDescriptionSubSection = ({ title, content, list }) => {
+    return (
+      <>
+        <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold', mt: '2rem' }}>
+          {title}
+        </Box>
+        {title === 'Preferred Qualifications' ? (
+          <Typography
+            variant="bodyLarge"
+            sx={{ mt: '0.5rem', display: 'block', fontStyle: 'italic' }}
+          >
+            {
+              "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps."
+            }
+          </Typography>
+        ) : null}
+        {list ? (
+          <>{buildListItems(content)}</>
+        ) : (
+          <Typography variant="bodyLarge" sx={{ mt: '0.5rem' }}>
+            {content}
+          </Typography>
+        )}
+      </>
+    )
+  }
+  const RoleDescriptionSection = ({ roleData }) => {
+    return (
+      <>
+        <Typography variant="headlineLarge" sx={{ mt: '2rem' }}>
+          {roleData.role}
+        </Typography>
+        {roleData.headline ? (
+          <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold' }}>
+            {roleData.headline}
+          </Box>
+        ) : null}
+        {roleData.location ? (
+          <Box
+            sx={{
+              typography: 'bodyLarge',
+              fontWeight: 'bold',
+              lineHeight: '0.5rem',
+              mt: '1rem',
+            }}
+          >
+            {'Location: '}
+            <span style={{ fontWeight: 'normal' }}>{roleData.location}</span>
+          </Box>
+        ) : null}
+        {roleData.duration ? (
+          <Box
+            sx={{
+              typography: 'bodyLarge',
+              fontWeight: 'bold',
+              lineHeight: '0.5rem',
+              mb: '1rem',
+            }}
+          >
+            {'Duration: '}
+            <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
+          </Box>
+        ) : null}
+        {roleData.aboutUs ? (
+          <RoleDescriptionSubSection
+            title={'About Us'}
+            content={roleData.aboutUs}
+            list={false}
+          />
+        ) : null}
+        {roleData.whyJoin ? (
+          <RoleDescriptionSubSection
+            title={'Why Join Us?'}
+            content={roleData.whyJoin}
+            list={false}
+          />
+        ) : null}
+        {roleData.whatYouWillDo ? (
+          <RoleDescriptionSubSection
+            title={'What You Will Do'}
+            content={roleData.whatYouWillDo}
+            list={false}
+          />
+        ) : null}
+        {roleData.responsibilities ? (
+          <RoleDescriptionSubSection
+            title={`Responsibilities of ${roleData.role}`}
+            content={roleData.responsibilities}
+            list={true}
+          />
+        ) : null}
+        {roleData.preferredQualifications ? (
+          <RoleDescriptionSubSection
+            title={'Preferred Qualifications'}
+            content={roleData.preferredQualifications}
+            list={false}
+          />
+        ) : null}
+        {roleData.keyAttributesToSuccess ? (
+          <RoleDescriptionSubSection
+            title={'Key Attributes to Success'}
+            content={roleData.keyAttributesToSuccess}
+            list={true}
+          />
+        ) : null}
+        {roleData.keyTechnologies ? (
+          <RoleDescriptionSubSection
+            title={'Key Technologies'}
+            content={roleData.keyTechnologies}
+            list={true}
+          />
+        ) : null}
+        {roleData.applicationLink ? (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              mt: '2rem',
+            }}
+          >
+            <Link href={roleData.applicationLink}>
+              <Button variant="contained">Apply to Volunteer</Button>
+            </Link>
+          </Box>
+        ) : null}
+      </>
+    )
+  }
+
+  const RoleUnavailableSection = () => {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="headlineLarge" sx={{ mt: '2rem', mb: '2rem' }}>
+          {'Sorry, this volunteer role is not available.'}
+        </Typography>
+        <Link href={'./volunteers'}>
+          <Button variant="contained">Return to Volunteer Page</Button>
+        </Link>
+      </Box>
+    )
+  }
+
   return (
     <>
-      {loading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <h1>Loading!</h1>
-        </Box>
-      )}
-      {role ? (
-        <>
-        {/* Fix: format to match figma file: https://www.figma.com/file/vs1l6ERmi4AqYjxBBK9gDJ/Style-Guide-%26-Prototypes?type=design&node-id=2404-32837&mode=design&t=YHOYNerJdHcOVOLq-0 */}
-        {/* Blocker: waiting for Seamus to update airtable fields for better formatting - volunteerRoleService.ts will need to be updated to accommodate updated fields */}
-          <h1>{role.role}</h1>
-          <p>{role.description}</p>
-          <Link href={'./volunteers'}>
-            <Button>Return to Volunteer Page</Button>
-          </Link>
-        </>
-      ) : (
-        <p>Role not found</p>
-      )}
+      <Masthead title={'Volunteer Opening'} />
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+          {loading && <CircularProgress />}
+
+          {!loading && role && (
+            <>
+              <BreadCrumbSection roleName={String(role.role)} />
+              <RoleDescriptionSection roleData={role} />
+            </>
+          )}
+          {!loading && !role && <RoleUnavailableSection />}
+        </Stack>
+      </SectionContainer>
     </>
   )
 }

@@ -41,7 +41,7 @@ import Link from 'next/link'
 import React from 'react'
 import { useEffect,useState } from 'react'
 import { designColor } from 'theme/theme'
-import { DASVolunteerRole } from 'types'
+import { DASVolunteerRole, DASVolunteerRoleBasicInfo } from 'types'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
@@ -146,22 +146,18 @@ const processContent = [
 
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<
-    DASVolunteerRole[]
+    DASVolunteerRoleBasicInfo[]
   >([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const roles: DASVolunteerRole[] =
-        await (await dasVolunteerRoleService.getVolunteerRoles())
+      const roles: DASVolunteerRoleBasicInfo[] =
+        await (dasVolunteerRoleService.getAllActiveRoles())
       setVolunteerRoles(roles)
     }
 
     fetchData()
   }, [])
-
-  const getRoleNames = (volunteerRoles:DASVolunteerRole[]) => {
-    return volunteerRoles.map((role) => role.role)
-  }
 
   const theme = useTheme()
   const palette = theme.palette
@@ -184,15 +180,7 @@ const VolunteerPage = () => {
       }}
       maxWidth={'880px'}
     >
-      {/* <Typography variant="headlineLarge">
-        Current volunteer openings
-      </Typography>
-      <iframe
-        src="https://airtable.com/embed/appaQcPIp7W2K85rx/shr67A1j2V75pw5PK?backgroundColor=greenLight"
-        width="100%"
-        height="600"
-      ></iframe> */}
-      <RolesSection title='Current Volunteer Openings' showLink={true} roles={getRoleNames(volunteerRoles)}/>
+      <RolesSection title='Current Volunteer Openings' showLink={true} roles={volunteerRoles}/>
       <Typography variant="bodyLarge">
         All of our volunteers are vetted for experience, and sign a volunteer
         agreement before commencing work with Digital Aid Seattle.

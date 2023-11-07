@@ -45,16 +45,23 @@ type DASProject = {
   display: boolean
 }
 
-type DASVolunteerRole = {
-  applicationLink: string
-  description: string
-  id: string | null
-  image?: {
-    filename: string
-    height: number
-    url: string
-    width: number
-  }
+type DASVolunteerRoleBasicInfo = {
   role: string
-  roleUrl: string
+  key: string
 }
+
+type DASVolunteerRole = {
+  location: string
+  duration: string
+  headline: string
+  description?: string
+  whyJoin: string
+  aboutUs: string
+  responsibilities: string[]
+  preferredQualifications: string
+  keyAttributesToSuccess: string[]
+  keyTechnologies?: string[]
+  venture?: string
+  applicationLink?: string
+  urgency?: number
+} & DASVolunteerRoleBasicInfo

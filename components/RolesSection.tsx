@@ -31,7 +31,7 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { ReactNode } from 'react'
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
-import { form } from 'sanity/desk'
+import { DASVolunteerRoleBasicInfo } from 'types'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
@@ -53,68 +53,97 @@ const rolesMap = {
   solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
   qaTestEngineer: { role: 'QA/test engineer', icon: <BugReportOutlinedIcon /> },
   storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, }
+  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, },
+  // Keyed Roles
+  "account-manager" : { role: 'account manager', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "accountant" : { role: 'accountant', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "administrative-manager" : { role: 'administrative manager', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "bookkeeper" : { role: 'bookkeeper', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "community-engagement-liaison": { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
+  "data-analyst" : { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  "digital-marketing-specialist-&-ga4-specialist" : { role: 'digital marketing specialist & ga4 specialist', icon: <ScreenSearchDesktopOutlinedIcon />, }, // TODO: add appropriate icon
+  "engineering-manager" : { role: 'engineering manager', icon: <CodeOutlinedIcon />, },
+  "executive-assistant" : { role: 'executive assistant', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "grant-project-manager": { role: 'grant project manager', icon: <DescriptionOutlinedIcon />, },
+  "grant-researcher": { role: 'grant researcher', icon: <DescriptionOutlinedIcon />, },
+  "grant-writer": { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
+  "graphic-designer": { role: 'graphic designer', icon: <DrawOutlinedIcon />, },
+  "hr-generalist": { role: 'hr generalist', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "information-architect": { role: 'information architect', icon: <ApartmentOutlinedIcon />, }, // TODO: add appropriate icon
+  "it-generalist": { role: 'it generalist', icon: <ApartmentOutlinedIcon />, }, // TODO: add appropriate icon
+  "marketing-generalist": { role: 'marketing generalist', icon: <AutoStoriesOutlinedIcon />, }, // TODO: add appropriate icon
+  "operations-manager": { role: 'operations manager', icon: <ManageAccountsOutlinedIcon />, }, // TODO: add appropriate icon
+  "product-manager": { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
+  "project-manager": { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
+  "public-relations-lead": { role: 'public relations lead', icon: <AutoStoriesOutlinedIcon />, }, // TODO: add appropriate icon
+  "qa-test-engineer": { role: 'QA/test engineer', icon: <BugReportOutlinedIcon /> },
+  "researcher": { role: 'researcher', icon: <ScreenSearchDesktopOutlinedIcon />, }, // TODO: add appropriate icon
+  "social-media-designer": { role: 'social media designer', icon: <ShareOutlinedIcon />, },
+  "social-media-specialist": { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
+  "software-developer": { role: 'software developer', icon: <CodeOutlinedIcon />, },
+  "software-developer-back-end": { role: 'software developer back end', icon: <CodeOutlinedIcon />, },
+  "software-developer-front-end": { role: 'software developer front end', icon: <CodeOutlinedIcon />, },
+  "solution-architect": { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
+  "storyteller-&-content-writer": { role: 'storyteller & content writer', icon: <AutoStoriesOutlinedIcon />, },
+  "user-experience-researcher": { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  "ux-ui-designer": { role: 'UX/UI designer', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  "volunteer": { role: 'volunteer', icon: <EmojiPeopleOutlinedIcon />, }
 }
 
-// TODO: do we want to make an option of allowing for a full role to be passed in, or just the role name?
 type RolesSectionProps = {
   title: string
   columns?: number
   showLink?: boolean
-  roles?: string[]
+  roles?: DASVolunteerRoleBasicInfo[] | String[]
   children?: ReactNode
 }
 
-// TODO: simplify the conversion of role names to url friendly formats and vice versa
-const getRoleUrl = (role:string) => {
- return `/volunteer_role?role=${(role.split(/(?=[A-Z \/])/g).join('-').toLowerCase())}`
+const getRoleUrl = (roleKey:string) => {
+ return `/volunteer_role?role=${roleKey}`
 }
 
 const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
-  // TODO: simplify the conversion of role names for use in map lookup
-  const formattedRoles = roles.map(role => role.toLowerCase().split(/ |\//).map((word,i)=>{ return (i>0 ?(word[0].toUpperCase() + word.slice(1)) : word)}).join('').replace(/\//g,''))
-
-  return (roles.length > 0) &&
-    <Section>
-      <Subheader variant="headlineMedium">
-        {title}
-      </Subheader>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: `repeat(${columns}, minmax(15rem, 1fr))`,
-          justifyContent: 'center',
-          gap: '2rem',
-          width: '100%',
-        }}
-      >
-        {(showLink ? formattedRoles : roles)
-          .filter(item => rolesMap[item])
-          .map(item =>
-            <>
-            <ListItemWithIcon
-              key={item}
-              listIcon={rolesMap[item].icon}
-              listText={rolesMap[item].role}
-              sxProps={{ alignItems: showLink ? 'flex-start' : 'center' }}
-              >
-              {showLink &&
-                <Button
-                variant="outlined"
-                href={`${getRoleUrl(item)}`}
-                sx={{ width: { md: 'max-content' } }}
-                >
-                  Learn more &rarr;
-                </Button>
-              }
-            </ListItemWithIcon>
-        </>
-            )
-        }
-      </Box>
-      {children}
+  return (
+    roles.length > 0 && (
+      <Section>
+        <Subheader variant="headlineMedium">{title}</Subheader>
+        <Box
+          sx={{
+            display: 'grid',
+            gridAutoFlow: 'columns',
+            gridTemplateColumns: `repeat(${columns}, minmax(15rem, 1fr))`,
+            justifyContent: 'center',
+            gap: '2rem',
+            width: '100%',
+          }}
+        >
+          {roles.length > 0 &&
+              roles.map((singleRole, i) => (
+                    <ListItemWithIcon
+                      key={`${i}-${singleRole?.key}` || `${i}-${singleRole}`}
+                      listIcon={rolesMap[singleRole.key]?.icon || rolesMap[singleRole].icon || null}
+                      listText={rolesMap[singleRole.key]?.role || rolesMap[singleRole].role || null}
+                      sxProps={{
+                        alignItems: showLink ? 'flex-start' : 'center',
+                      }}
+                    >
+                      {showLink &&
+                        <Button
+                          variant="outlined"
+                          href={`${getRoleUrl(singleRole.key)}`}
+                          sx={{ width: { md: 'max-content' } }}
+                        >
+                          Learn more &rarr;
+                        </Button>
+                      }
+                    </ListItemWithIcon>
+                ))
+            }
+        </Box>
+        {children}
       </Section>
+    )
+  )
 }
 
 export default RolesSection
