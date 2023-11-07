@@ -57,17 +57,9 @@ const Home = () => {
           }}
         >
           {isMediumScreen ? (
-            <img
-              src={HeroLinesMobile.src}
-              alt="Hero Lines"
-              style={
-                {
-                  // objectFit: 'cover',
-                }
-              }
-            />
+            <img src={HeroLinesMobile.src} alt="" />
           ) : (
-            <img src={HeroLines.src} alt="Hero Lines" style={{}} />
+            <img src={HeroLines.src} alt="" style={{}} />
           )}
         </Box>
         {/* Hero Content */}
@@ -152,7 +144,6 @@ const Home = () => {
               {/* Image Container */}
               <Box
                 sx={{
-                  // position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   width: { xs: '275px', md: '424px' },
@@ -162,7 +153,8 @@ const Home = () => {
               >
                 <img
                   src={HeroImage.src}
-                  alt="Seattle skyline by Stephen Plopper"
+                  title="Seattle skyline by Stephen Plopper"
+                  alt=""
                   style={{
                     objectFit: 'cover',
                     width: '100%',
@@ -237,7 +229,9 @@ const Home = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our mission</Typography>
+          <Typography variant="headlineLarge" component="h2">
+            Our mission
+          </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}

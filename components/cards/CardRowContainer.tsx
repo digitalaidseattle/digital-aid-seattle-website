@@ -17,6 +17,7 @@ const CardRowContainer = ({ children }: Props) => {
         },
         gap: '2rem',
       }}
+      component="ul"
     >
       {children}
     </Box>

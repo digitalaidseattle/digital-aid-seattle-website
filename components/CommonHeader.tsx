@@ -5,8 +5,7 @@
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
@@ -17,7 +16,6 @@ import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
 
-import { Stack } from '@mui/material'
 import OSLogo from '../assets/darkThemeLogo.svg'
 
 const SECTION_TO_PATH = {
@@ -142,6 +140,7 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            alignItems: 'center',
             padding: '1.25rem 2.5rem !important',
           }}
         >
@@ -155,29 +154,33 @@ const CommonHeader = () => {
               alt="Digital Aid Seattle Home"
             />
           </Link>
-          <Stack direction="row" spacing={1}>
-            {Object.keys(SECTION_TO_PATH).map((name) => (
-              <Button
-                key={name}
-                onClick={handleCloseNavMenu}
-                variant="contained"
-                color={isCurrent(name)
-                  ? 'success'
-                  : 'primary'}
-                disableRipple={true}
-              >
-                <Link
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                    textDecoration: 'none'
-                  }}
-                  href={SECTION_TO_PATH[name]}
+          <nav>
+            <ul>
+              {Object.keys(SECTION_TO_PATH).map((name) => (
+                <Button
+                  key={name}
+                  onClick={handleCloseNavMenu}
+                  variant="contained"
+                  color={isCurrent(name)
+                    ? 'success'
+                    : 'primary'}
+                  disableRipple={true}
                 >
-                  {name}
-                </Link>
-              </Button>
-            ))}
-          </Stack>
+                  <Link
+                    sx={{
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      color: theme.palette.primary.contrastText,
+                      textDecoration: 'none'
+                    }}
+                    href={SECTION_TO_PATH[name]}
+                  >
+                    {name}
+                  </Link>
+                </Button>
+              ))}
+            </ul>
+          </nav>
         </Container>
       </Toolbar>
     </AppBar>
