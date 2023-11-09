@@ -22,18 +22,21 @@ const tagNames = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const path = usePathname().split('/')
-  let page_name = path[path.length - 1]
+  const pathName = usePathname()
   const searchParams = useSearchParams()
-  if (page_name === 'project_individual') {
-    page_name = searchParams.get('project')
+  let pageName = null
+  if (pathName !== null) {
+    const path = pathName.split('/')
+    pageName = path[path.length - 1]
+    if (pageName === 'project_individual') {
+      pageName = searchParams.get('project')
+    }
   }
-
   const [title, setTitle] = useState(DEFAULT_TAG)
   useEffect(() => {
-    const tag = tagNames[page_name]
+    const tag = tagNames[pageName]
     setTitle(tag ? tag : DEFAULT_TAG)
-  }, [page_name])
+  }, [pageName])
   return (
     <>
       <Head>
