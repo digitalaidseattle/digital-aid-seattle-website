@@ -24,14 +24,14 @@ export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
-  let pageName = null
-  if (pathName) {
-    const path = pathName.split('/')
-    pageName = path[path.length - 1]
-  }
   const [title, setTitle] = useState(DEFAULT_TAG)
   useEffect(() => {
-    const lookupTitle = async (pageName: string) => {
+    const lookupTitle = async (pathName: string) => {
+      let pageName = null
+      if (pathName) {
+        const path = pathName.split('/')
+        pageName = path[path.length - 1]
+      }
       switch (pageName) {
         case 'project_individual':
           const project = searchParams.get('project')
@@ -44,10 +44,10 @@ export default function App({ Component, pageProps }: AppProps) {
           return tag ?? DEFAULT_TAG
       }
     }
-    if (pageName) {
-      lookupTitle(pageName).then((title) => setTitle(title))
+    if (pathName) {
+      lookupTitle(pathName).then((title) => setTitle(title))
     }
-  }, [pageName, searchParams])
+  }, [pathName, searchParams])
   return (
     <>
       <Head>
