@@ -1,8 +1,11 @@
+/*
+ * @2023 Digital Aid Seattle
+ */
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
+import { Box, Button } from '@mui/material'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
@@ -15,13 +18,24 @@ import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
-const page_mapping = {
+const SECTION_TO_PATH = {
   About: '/about',
   Projects: '/projects',
   Partners: '/partners',
   Volunteer: '/volunteers',
   Events: '/events',
 }
+
+const PATH_TO_SECTION = {
+  '/about': 'About',
+  '/projects': 'Projects',
+  '/project_individual': 'Projects',
+  '/partners': 'Partners',
+  '/volunteers': 'Volunteer',
+  '/volunteer_individual': 'Volunteer',
+  '/events': 'Events'
+}
+
 
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
@@ -36,7 +50,10 @@ const CommonHeader = () => {
   }
 
   const router = useRouter()
-  const currentRoute = router.route
+
+  const isCurrent = (name: string) => {
+    return name === PATH_TO_SECTION[router.route];
+  }
 
   return (
     <AppBar
@@ -97,27 +114,23 @@ const CommonHeader = () => {
               display: { xs: 'block', lg: 'none' },
             }}
           >
-            <nav>
-              <ul>
-                {Object.keys(page_mapping).map((name) => (
-                  <MenuItem
-                    key={name}
-                    onClick={handleCloseNavMenu}
-                    style={{ borderRadius: '0px' }}
-                  >
-                    <Link
-                      underline="hover"
-                      sx={{
-                        color: theme.palette.primary.dark,
-                      }}
-                      href={page_mapping[name]}
-                    >
-                      {name}
-                    </Link>
-                  </MenuItem>
-                ))}
-              </ul>
-            </nav>
+            {Object.keys(SECTION_TO_PATH).map((name) => (
+              <MenuItem
+                key={name}
+                onClick={handleCloseNavMenu}
+                style={{ borderRadius: '0px' }}
+              >
+                <Link
+                  underline="hover"
+                  sx={{
+                    color: theme.palette.primary.dark,
+                  }}
+                  href={SECTION_TO_PATH[name]}
+                >
+                  {name}
+                </Link>
+              </MenuItem>
+            ))}
           </Menu>
         </Box>
         {/* Menu items that are shown on desktop */}
@@ -143,27 +156,28 @@ const CommonHeader = () => {
           </Link>
           <nav>
             <ul>
-              {Object.keys(page_mapping).map((name) => (
-                <Link
+              {Object.keys(SECTION_TO_PATH).map((name) => (
+                <Button
                   key={name}
-                  href={page_mapping[name]}
                   onClick={handleCloseNavMenu}
-                  sx={{
-                    fontSize: '14px',
-                    fontWeight: '700',
-                    color: theme.palette.primary.contrastText,
-                    borderRadius: '0px',
-                    textUnderlineOffset: '0.5rem',
-                    textDecoration:
-                      currentRoute === page_mapping[name]
-                        ? 'underline'
-                        : 'none',
-                    padding: '10px 24px 10px 24px',
-                  }}
-                  underline="hover"
+                  variant="contained"
+                  color={isCurrent(name)
+                    ? 'success'
+                    : 'primary'}
+                  disableRipple={true}
                 >
-                  {name}
-                </Link>
+                  <Link
+                    sx={{
+                      fontSize: '14px',
+                      fontWeight: '700',
+                      color: theme.palette.primary.contrastText,
+                      textDecoration: 'none'
+                    }}
+                    href={SECTION_TO_PATH[name]}
+                  >
+                    {name}
+                  </Link>
+                </Button>
               ))}
             </ul>
           </nav>
