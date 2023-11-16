@@ -15,13 +15,12 @@ import {
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import SectionContainer from 'components/layout/SectionContainer'
-import { dasProjectsService } from './api/ProjectsService'
+import { dasProjectsService } from '../src/ProjectsService'
 
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import StateBadge from 'components/cards/StateBadge'
 import { withBasicLayout } from 'components/layouts'
 import ListItemWithIcon from 'components/list/ListItemWithIcon'
-import NoPhotoPerson from '../assets/no-photo-person.svg'
 // icons for role cards
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
@@ -37,6 +36,8 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { DASProject, TeamMember } from 'types'
+
+const NoPhotoPerson = '/images/no-photo-person.svg'
 
 const rolesMap = {
   communityEngagementLiason: {
@@ -156,7 +157,7 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
               image={
                 person.image
                   ? urlForImage(person.image).url()
-                  : NoPhotoPerson.src
+                  : NoPhotoPerson
               }
             />
           ))}

@@ -9,7 +9,7 @@ import StateBadge from './StateBadge'
 import { Image } from 'sanity'
 import { urlForImage } from '../../sanity/lib/image'
 import { DASProject } from 'types'
-import { dasProjectsService } from 'pages/api/ProjectsService'
+import { dasProjectsService } from 'src/ProjectsService'
 
 type CardProjectProps = {
   project: DASProject

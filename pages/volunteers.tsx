@@ -31,7 +31,8 @@ import { withBasicLayout } from 'components/layouts'
 import Link from 'next/link'
 import React from 'react'
 import { designColor } from 'theme/theme'
-import VolunteerImage from '../assets/volunteerWithUs.png'
+
+const VolunteerImage = '/images/volunteerWithUs.png'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -310,7 +311,7 @@ const VolunteerPage = () => {
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <MastheadWithImage
-        imageSrc={VolunteerImage.src}
+        imageSrc={VolunteerImage}
         imageText="Volunteer graphic"
       >
         <>
