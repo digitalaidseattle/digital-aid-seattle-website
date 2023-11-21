@@ -23,7 +23,7 @@ const Home = () => {
     }`
   }
 
-  const isMediumScreen = useMediaQuery('(max-Width:600px)')
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <>
@@ -44,20 +44,19 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '600px', md: '2321px' },
-            height: 'auto',
-            left: { xs: '50%', sm: '50%' },
-            top: { xs: 0, sm: '50%' },
+            width: { xs: '100%', md: '2321px' },
+            left: { xs: 0, md: '50%' },
+            top: { xs: 0, md: '50%' },
             transform: {
-              sm: 'rotate(90deg)translate(-50%, 25%)',
               md: 'translate(-50%, -50%)',
             },
             opacity: 0.4,
             mixBlendMode: 'overlay',
+            objectFit: 'fill',
           }}
         >
           {isMediumScreen ? (
-            <img src={HeroLinesMobile.src} alt="" />
+            <img src={HeroLinesMobile.src} alt="" style={{ width: '100%' }} />
           ) : (
             <img src={HeroLines.src} alt="" style={{}} />
           )}
