@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react'
-
-import { withBasicLayout } from 'components/layouts'
-import Masthead from 'components/Masthead'
-
+import { NavigateNextSharp } from '@mui/icons-material'
 import {
   Box,
   Breadcrumbs,
@@ -13,12 +9,13 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import SectionContainer from 'components/layout/SectionContainer'
+import { withBasicLayout } from 'components/layouts'
+import Masthead from 'components/Masthead'
+import { useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
-import { NavigateNextSharp } from '@mui/icons-material'
-import SectionContainer from 'components/layout/SectionContainer'
+import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
@@ -100,6 +97,7 @@ const VolunteerRolePage = () => {
       </>
     )
   }
+
   const RoleDescriptionSection = ({ roleData }) => {
     return (
       <>

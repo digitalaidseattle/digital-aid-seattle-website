@@ -10,10 +10,12 @@ import { DASVolunteerRole, DASVolunteerRoleBasicInfo } from 'types'
 // To find the baseID, visit any page in the Digital Aid Airtable base and look at the URL.
 // It will be the string of characters after the first slash, starting with "app".
 
+
 class DASVolunteerRoleService {
   private airtable: Airtable
   private base: Airtable.Base
   private volunteerRolesTable: Airtable.Table<Airtable.FieldSet>
+  private toolsWeUseTable: Airtable.Table<Airtable.FieldSet>
 
   constructor(apiKey: string, baseId: string, tableId: string) {
     this.airtable = new Airtable({
@@ -25,6 +27,7 @@ class DASVolunteerRoleService {
     this.volunteerRolesTable = this.base(
       tableId || process.env.NEXT_PUBLIC_AIRTABLE_TABLE_VOLUNTEER_ROLES
     )
+    this.toolsWeUseTable = this.base(process.env.NEXT_PUBLIC_AIRTABLE_TABLE_TOOLS_WE_USE)
   }
 
   async getAllActiveRoles(): Promise<DASVolunteerRoleBasicInfo[]> {
@@ -72,8 +75,42 @@ class DASVolunteerRoleService {
       if (record.fields.Status !== 'Active') {
         return null
       }
-      //TODO: Finish handling of 'key technologies' field. Currently this field is returned as an array of records. Working with Seamus to establish his aims here.
+      let keyTechnologies = null
 
+      if (record.fields['Key technologies'] && Array.isArray(record.fields['Key technologies'])) {
+        const technologiesRecordIds:Array<any> = record.fields['Key technologies']
+        try {
+          const technologiesData = await this.toolsWeUseTable
+            .select({
+              view: 'Grid view',
+            })
+            .all()
+          const roleTechnologies = technologiesData.filter((tech) => {
+            return technologiesRecordIds.includes(tech.id)
+          })
+          const technologiesMap = new Map()
+          roleTechnologies.forEach((tech) => {
+            const category = tech.fields?.Category || 'Other'
+            const name = tech.fields?.['Name']
+            if (!technologiesMap.has(category)) {
+              technologiesMap.set(category, [])
+            }
+            technologiesMap.get(category).push(name)
+          })
+          keyTechnologies = []
+          technologiesMap.forEach((value, key) => {
+            keyTechnologies.push(`${key}: ${value.join(', ')}`)
+          })
+          keyTechnologies = keyTechnologies.sort((a, b) => {
+            if (a.startsWith('Other')) {
+              return 1
+            } else if (b.startsWith('Other')) {
+              return -1
+            } else {
+            }
+          })
+        } catch (error) {}
+      }
       const volunteerRoleData: DASVolunteerRole = {
         role:
           typeof record.fields.Role === 'string' ? record.fields.Role : null,
@@ -114,10 +151,7 @@ class DASVolunteerRoleService {
           typeof record.fields?.['Key attributes for success'] === 'string'
             ? record.fields?.['Key attributes for success'].split('\n')
             : null,
-        keyTechnologies:
-          typeof record.fields?.['Key technologies'] === 'string'
-            ? record.fields?.['Key technologies'].split('\n')
-            : null,
+        keyTechnologies: keyTechnologies,
         venture:
           typeof record.fields?.['Venture (from Partner Needs Link)'] ===
           'string'
