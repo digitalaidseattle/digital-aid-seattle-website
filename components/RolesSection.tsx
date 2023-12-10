@@ -17,8 +17,8 @@ import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined'
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
 import BugReportOutlinedIcon from '@mui/icons-material/BugReportOutlined'
-import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
 import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined'
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
 import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 import CodeOutlinedIcon from '@mui/icons-material/CodeOutlined'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
@@ -33,8 +33,9 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Button } from '@mui/material'
+import { Box, Link } from '@mui/material'
 import { ReactNode } from 'react'
+import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
 import ListItemWithIcon from './list/ListItemWithIcon'
@@ -91,6 +92,58 @@ const getRoleUrl = (roleKey:string) => {
  return `/volunteer_role?role=${roleKey}`
 }
 
+const RoleListing = ({
+  role,
+  key,
+  showLink,
+}: {
+  role: any
+  key: number
+  showLink?: boolean
+}) => {
+  const RoleBase = (
+    {
+      sxProps
+    }: {
+      sxProps?: any
+    }
+  ) => {
+    return (
+      <ListItemWithIcon
+        key={`${key}-${role?.key}` || `${key}-${role}`}
+        listIcon={
+          rolesMap[role.key]?.icon ||
+          rolesMap[role]?.icon ||
+          rolesMap['default'].icon
+        }
+        listText={role.role || rolesMap[role].role || null}
+        sxProps={{
+          alignItems: showLink ? 'flex-start' : 'center',
+          ...sxProps,
+        }}
+      />
+    )
+  }
+  return showLink ? (
+    <Link href={`${getRoleUrl(role.key)}`}> 
+      <RoleBase
+        sxProps={{
+          '&': {
+            '&:hover': {
+              background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
+              border: `2px solid ${theme.palette.primary.main}`,
+              boxShadow:
+                '0px 8px 8px 2px rgba(52, 61, 62, 0.1), 0px 8px 4px rgba(52, 61, 62, 0.1)',
+            },
+          },
+        }}
+      />
+    </Link>
+  ) : (
+    <RoleBase />
+  )
+}
+
 const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
   return (
     roles.length > 0 && (
@@ -108,25 +161,11 @@ const RolesSection = ({ title, columns = 3, showLink = false, roles = [], childr
         >
           {roles.length > 0 &&
               roles.map((singleRole, i) => (
-                    <ListItemWithIcon
-                      key={`${i}-${singleRole?.key}` || `${i}-${singleRole}`}
-                      listIcon={rolesMap[singleRole.key]?.icon || rolesMap[singleRole]?.icon || rolesMap['default'].icon }
-                      listText={singleRole.role || rolesMap[singleRole].role || null}
-                      sxProps={{
-                        alignItems: showLink ? 'flex-start' : 'center',
-                      }}
-                    >
-                      {showLink &&
-                        <Button
-                          variant="outlined"
-                          href={`${getRoleUrl(singleRole.key)}`}
-                          sx={{ width: { md: 'max-content' } }}
-                        >
-                          Learn more &rarr;
-                        </Button>
-                      }
-                    </ListItemWithIcon>
-                ))
+                  <RoleListing
+                  key={i}
+                  role={singleRole}
+                  showLink={showLink}/>
+                  ))
             }
         </Box>
         {children}
