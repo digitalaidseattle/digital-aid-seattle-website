@@ -42,26 +42,6 @@ import { Section, Subheader } from './style-utils'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
-  communityEngagementLiason: { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
-  dataAnalyst: { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  designer: { role: 'designer', icon: <DrawOutlinedIcon />, },
-  graphicDesigner: { role: 'graphic designer', icon: <DrawOutlinedIcon />, },
-  grantWriter: { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
-  legalHelp: { role: 'legal help', icon: <GavelRoundedIcon />, },
-  productManager: { role: 'product manager', icon: <Diversity3OutlinedIcon />, },
-  projectManager: { role: 'project manager', icon: <ManageAccountsOutlinedIcon />, },
-  uxResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  userExperienceResearcher: { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  uxUiDesigner: { role: 'UX/UI designer', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  socialMediaDesigner: { role: 'social media designer', icon: <ShareOutlinedIcon />, },
-  socialMediaSpecialist: { role: 'social media specialist', icon: <EmojiPeopleOutlinedIcon />, },
-  softwareEngineer: { role: 'software engineer', icon: <CodeOutlinedIcon />, },
-  softwareDeveloper: { role: 'software developer', icon: <CodeOutlinedIcon />, },
-  solutionArchitect: { role: 'solution architect', icon: <ApartmentOutlinedIcon />, },
-  qaTestEngineer: { role: 'QA/test engineer', icon: <BugReportOutlinedIcon /> },
-  storyteller: { role: 'storyteller', icon: <AutoStoriesOutlinedIcon />, },
-  qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon />, },
-  // Keyed Roles
   "account-manager" : { role: 'account manager', icon: <AccountTreeOutlinedIcon/>, },
   "accountant" : { role: 'accountant', icon: <CalculateOutlinedIcon/>, },
   "administrative-manager" : { role: 'administrative manager', icon: <ManageAccountsOutlinedIcon />, },

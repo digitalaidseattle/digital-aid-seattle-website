@@ -243,27 +243,31 @@ const ProjectIndividualPage = () => {
     return extraSmallScreen ? <MobileHeader /> : <DesktopHeader />
   }
   function getBody() {
-    return <SectionContainer backgroundColor={theme.palette.background.default}>
-      <Stack
-        gap={{ xs: '64px', lg: '80px' }}
-        maxWidth="880px"
-        margin="0 auto"
-      >
-        <BodyTextSection title="Problem" texts={project.problem} />
-        <BodyTextSection title="Solution" texts={project.solution} />
-        <BodyTextSection title="Impact" texts={project.impact} />
-        <TeamSection title="Current team" members={project.currentTeam} />
-        <RolesSection title="Roles needed" roles={project.rolesNeeded} />
-        <Section> 
-          <Subheader variant="headlineMedium">
-            Questions about this project?
-          </Subheader>
-          <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-            Contact us
-          </Button>
-        </Section>
-      </Stack>
-    </SectionContainer>
+    return (
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
+        >
+          <BodyTextSection title="Problem" texts={project.problem} />
+          <BodyTextSection title="Solution" texts={project.solution} />
+          <BodyTextSection title="Impact" texts={project.impact} />
+          <TeamSection title="Current team" members={project.currentTeam} />
+          {project.rolesNeeded && project.rolesNeeded.length > 0 && (
+            <RolesSection title="Roles needed" roles={project.rolesNeeded} />
+          )}
+          <Section>
+            <Subheader variant="headlineMedium">
+              Questions about this project?
+            </Subheader>
+            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+              Contact us
+            </Button>
+          </Section>
+        </Stack>
+      </SectionContainer>
+    )
   }
 
   function getFooter() {
