@@ -127,7 +127,7 @@ export default {
                         {title: 'Social Media Specialist', value: 'social-media-specialist'},
                         {title: 'Software Engineer', value: 'software-developer'},
                         {title: 'Solution Architect', value: 'solution-architect'},
-                        {title: 'Storyteller', value: 'storyteller-&-content-writer'},
+                        {title: 'Storyteller', value: 'storyteller-and-content-writer'},
                         {title: 'QA/Test Engineer', value: 'qa-test-engineer'}
                     ]
                 }
