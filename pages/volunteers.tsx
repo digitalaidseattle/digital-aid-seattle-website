@@ -310,6 +310,7 @@ const VolunteerPage = () => {
 
         <Link
           href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          target='_blank'
           passHref
         >
           <Button variant="contained" color="primary">

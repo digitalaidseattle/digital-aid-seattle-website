@@ -193,7 +193,7 @@ const VolunteerRolePage = () => {
               mt: '2rem',
             }}
           >
-            <Link href={roleData.applicationLink}>
+            <Link href={roleData.applicationLink} target="_blank">
               <Button variant="contained">Apply to Volunteer</Button>
             </Link>
           </Box>
