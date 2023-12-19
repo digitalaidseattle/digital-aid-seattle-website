@@ -9,7 +9,7 @@ import { withBasicLayout } from 'components/layouts'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
-import HeroImage from '../public/images/SeattleSkyline.png'
+import HeroImage from '../public/images/SeattleSkyline.jpg'
 
 /* eslint-disable @next/next/no-img-element */
 
