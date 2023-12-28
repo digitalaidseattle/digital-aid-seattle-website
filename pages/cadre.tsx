@@ -14,6 +14,7 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService } from './api/ProjectsService'
 
 import { withBasicLayout } from 'components/layouts'
+// icons for role cards
 import {
   ProjectBodyTextSection,
   ProjectContactUsSection,
@@ -26,17 +27,15 @@ import {
 } from 'components/ProjectComponents'
 import { DASProject } from 'types'
 
-
-const ProjectIndividualPage = () => {
+const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
     dasProjectsService
-      .getOne(params.get('project'))
+      .getOne('the-cadre')
       .then((data) => setProject(data))
-      .catch((error) => console.log(error))
+      .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [])
 
@@ -75,4 +74,4 @@ const ProjectIndividualPage = () => {
   )
 }
 
-export default withBasicLayout(ProjectIndividualPage)
+export default withBasicLayout(TheCadrePage)
