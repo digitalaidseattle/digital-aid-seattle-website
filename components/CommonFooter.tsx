@@ -9,6 +9,8 @@ import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 import { ReactNode } from 'react'
+import EmailFormInput from './email-form/EmailFormInput'
+import EmailFormContainer from './email-form/EmailFormContainer'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -208,7 +210,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          height: '100%',
+          // height: '100%',
         }}
       >
         {contactUsBox()}
@@ -222,7 +224,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          height: '100%',
+          // height: '100%',
         }}
       >
         {aboutBox()}
@@ -320,33 +322,36 @@ const CommonFooterSmallScreen = () => (
 const CommonFooter = () => {
   return (
     <>
-      <Container
-        sx={{
-          padding: '5rem 0rem',
-          display: { xs: 'none', md: 'none', lg: 'flex' },
-          height: '28rem',
-        }}
-      >
-        <CommonFooterLargeScreen />
-      </Container>
+      <Container sx={{}}>
+        <EmailFormContainer />
+        <Container
+          sx={{
+            padding: '5rem 0rem',
+            display: { xs: 'none', md: 'none', lg: 'flex' },
+            height: '28rem',
+          }}
+        >
+          <CommonFooterLargeScreen />
+        </Container>
 
-      <Container
-        sx={{
-          padding: '4rem 2rem',
-          display: { xs: 'none', md: 'flex', lg: 'none' },
-          height: '29rem',
-        }}
-      >
-        <CommonFooterMidScreen />
-      </Container>
+        <Container
+          sx={{
+            padding: '4rem 2rem',
+            display: { xs: 'none', md: 'flex', lg: 'none' },
+            height: '29rem',
+          }}
+        >
+          <CommonFooterMidScreen />
+        </Container>
 
-      <Container
-        sx={{
-          padding: '4rem 0rem',
-          display: { xs: 'flex', md: 'none', lg: 'none' },
-        }}
-      >
-        <CommonFooterSmallScreen />
+        <Container
+          sx={{
+            padding: '4rem 0rem',
+            display: { xs: 'flex', md: 'none', lg: 'none' },
+          }}
+        >
+          <CommonFooterSmallScreen />
+        </Container>
       </Container>
     </>
   )
