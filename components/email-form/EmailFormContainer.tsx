@@ -5,13 +5,25 @@ const EmailFormContainer = () => {
   const theme = useTheme()
 
   return (
-    <Stack direction={'row'} justifyContent={'space-between'}>
-      <Typography
-        variant="headlineMedium"
-        sx={{ color: theme.palette.primary.contrastText }}
-      >
-        Sign up for our newsletter
-      </Typography>
+    <Stack
+      direction={'row'}
+      justifyContent={'space-between'}
+      alignItems={'center'}
+    >
+      <Stack direction={'column'}>
+        <Typography
+          variant="headlineMedium"
+          sx={{ color: theme.palette.primary.contrastText }}
+        >
+          Sign up for our newsletter
+        </Typography>
+        <Typography
+          variant="bodyLarge"
+          sx={{ color: theme.palette.primary.contrastText }}
+        >
+          Stay in the know!
+        </Typography>
+      </Stack>
       <Stack direction={'row'} gap={'2rem'}>
         <EmailFormInput />
         <Button
