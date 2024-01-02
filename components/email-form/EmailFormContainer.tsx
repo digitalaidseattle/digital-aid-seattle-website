@@ -17,7 +17,7 @@ const EmailFormContainer = () => {
         <Button
           sx={{
             color: theme.palette.primary.contrastText,
-            backgroundColor: '#00382F', // TODO take from theme
+            backgroundColor: theme.palette.primary.dark,
           }}
         >
           Sign up
