@@ -322,11 +322,16 @@ const CommonFooterSmallScreen = () => (
 const CommonFooter = () => {
   return (
     <>
-      <Container sx={{ paddingTop: { xs: '4rem', lg: '5rem' } }}>
+      <Container
+        sx={{
+          paddingTop: { xs: '4rem', lg: '5rem' },
+          paddingX: { md: '2rem', lg: '0' },
+        }}
+      >
         <EmailFormContainer />
         <Box
           sx={{
-            padding: '5rem 0rem',
+            paddingY: '5rem',
             display: { xs: 'none', md: 'none', lg: 'flex' },
             height: '28rem',
           }}
@@ -336,7 +341,7 @@ const CommonFooter = () => {
 
         <Box
           sx={{
-            padding: '4rem 2rem',
+            paddingY: '4rem',
             display: { xs: 'none', md: 'flex', lg: 'none' },
             height: '29rem',
           }}
@@ -346,7 +351,7 @@ const CommonFooter = () => {
 
         <Box
           sx={{
-            padding: '4rem 0rem',
+            paddingY: '4rem',
             display: { xs: 'flex', md: 'none', lg: 'none' },
           }}
         >

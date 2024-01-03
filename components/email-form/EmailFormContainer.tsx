@@ -9,6 +9,7 @@ const EmailFormContainer = () => {
       sx={{
         flexDirection: { xs: 'column', lg: 'row' },
         alignItems: { xs: 'flex-start', lg: 'center' },
+        gap: '2rem',
       }}
       justifyContent={'space-between'}
     >
