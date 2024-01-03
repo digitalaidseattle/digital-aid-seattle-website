@@ -38,13 +38,12 @@ const VolunteerRolePage = () => {
         style={{
           listStyleType: 'disc',
           listStylePosition: 'outside',
-          marginLeft: 0,
-          paddingLeft: '1em',
+          paddingLeft: '1rem',
         }}
       >
         {content.map((item: string, i) => (
           <li
-            style={{ display: 'list-item', paddingLeft: '1em' }}
+            style={{ display: 'list-item', paddingLeft: '1rem', marginBottom: '1rem' }}
             key={`${i}-${item}`}
           >
             {item}
@@ -74,13 +73,13 @@ const VolunteerRolePage = () => {
   const RoleDescriptionSubSection = ({ title, content, list }) => {
     return (
       <>
-        <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold', mt: '2rem' }}>
+        <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold' }}>
           {title}
         </Box>
         {title === 'Preferred Qualifications' ? (
           <Typography
             variant="bodyLarge"
-            sx={{ mt: '0.5rem', display: 'block', fontStyle: 'italic' }}
+            sx={{display: 'block', fontStyle: 'italic' }}
           >
             {
               "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps."
@@ -90,7 +89,7 @@ const VolunteerRolePage = () => {
         {list ? (
           <>{buildListItems(content)}</>
         ) : (
-          <Typography variant="bodyLarge" sx={{ mt: '0.5rem' }}>
+          <Typography variant="bodyLarge">
             {content}
           </Typography>
         )}
@@ -109,14 +108,15 @@ const VolunteerRolePage = () => {
             {roleData.headline}
           </Box>
         ) : null}
+        <>
         {roleData.location ? (
           <Box
-            sx={{
-              typography: 'bodyLarge',
-              fontWeight: 'bold',
-              lineHeight: '0.5rem',
-              mt: '1rem',
-            }}
+          sx={{
+            typography: 'bodyLarge',
+            fontWeight: 'bold',
+            lineHeight: '0.5rem',
+            mt: '1rem',
+          }}
           >
             {'Location: '}
             <span style={{ fontWeight: 'normal' }}>{roleData.location}</span>
@@ -124,17 +124,18 @@ const VolunteerRolePage = () => {
         ) : null}
         {roleData.duration ? (
           <Box
-            sx={{
-              typography: 'bodyLarge',
-              fontWeight: 'bold',
-              lineHeight: '0.5rem',
-              mb: '1rem',
-            }}
+          sx={{
+            typography: 'bodyLarge',
+            fontWeight: 'bold',
+            lineHeight: '0.5rem',
+            mb: '1rem',
+          }}
           >
             {'Duration: '}
             <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
           </Box>
         ) : null}
+        </>
         {roleData.aboutUs ? (
           <RoleDescriptionSubSection
             title={'About Us'}

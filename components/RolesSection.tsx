@@ -125,9 +125,10 @@ const RoleListing = ({
     )
   }
   return showLink ? (
-    <Link href={`${getRoleUrl(role.key)}`}> 
+    <Link href={`${getRoleUrl(role.key)}`} sx={{textDecoration: 'none'}}> 
       <RoleBase
         sxProps={{
+
           '&': {
             '&:hover': {
               background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
