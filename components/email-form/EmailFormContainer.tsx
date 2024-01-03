@@ -6,9 +6,11 @@ const EmailFormContainer = () => {
 
   return (
     <Stack
-      direction={'row'}
+      sx={{
+        flexDirection: { xs: 'column', lg: 'row' },
+        alignItems: { xs: 'flex-start', lg: 'center' },
+      }}
       justifyContent={'space-between'}
-      alignItems={'center'}
     >
       <Stack direction={'column'}>
         <Typography
@@ -24,7 +26,13 @@ const EmailFormContainer = () => {
           Stay in the know!
         </Typography>
       </Stack>
-      <Stack direction={'row'} gap={'2rem'}>
+      <Stack
+        gap={'2rem'}
+        sx={{
+          flexDirection: { xs: 'column', md: 'row' },
+          width: { xs: '100%', lg: 'auto' },
+        }}
+      >
         <EmailFormInput />
         <Button
           sx={{

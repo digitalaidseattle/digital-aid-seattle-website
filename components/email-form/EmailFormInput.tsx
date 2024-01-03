@@ -11,7 +11,8 @@ const EmailFormInput = () => {
         backgroundColor: 'white',
         borderRadius: '28px',
         padding: '0 1rem',
-        width: '25rem',
+        width: { xs: 'auto', lg: '25rem' },
+        flex: { xs: '1', lg: 'none' },
       }}
     >
       <TextField
