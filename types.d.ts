@@ -25,22 +25,43 @@ type TeamMember = {
 }
 
 type DASProject = {
-    _id: string,
-    _createdAt: Date,
-    orderRank: string,
-    id: string,
-    title: string,
-    partner: string,
-    programAreas: string[],
-    description: string
-    status: 'active' | 'recruiting' | 'complete',
-    projectLink: string,
-    duration?: { start: string; end: string },
-    image: Image,
-    problem: string[],
-    solution: string[],
-    impact: string[],
-    rolesNeeded: string[],
-    currentTeam: TeamMember[],
-    display: boolean
+  _id: string
+  _createdAt: Date
+  orderRank: string
+  id: string
+  title: string
+  partner: string
+  programAreas: string[]
+  description: string
+  status: 'active' | 'recruiting' | 'complete'
+  projectLink: string
+  duration?: { start: string; end: string }
+  image: Image
+  problem: string[]
+  solution: string[]
+  impact: string[]
+  rolesNeeded: string[]
+  currentTeam: TeamMember[]
+  display: boolean
 }
+
+type DASVolunteerRoleBasicInfo = {
+  role: string
+  key: string
+}
+
+type DASVolunteerRole = {
+  location: string
+  duration: string
+  headline: string
+  description?: string
+  whyJoin: string
+  aboutUs: string
+  responsibilities: string[]
+  preferredQualifications: string
+  keyAttributesToSuccess: string[]
+  keyTechnologies?: string[]
+  venture?: string
+  applicationLink?: string
+  urgency?: number
+} & DASVolunteerRoleBasicInfo
