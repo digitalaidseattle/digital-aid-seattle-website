@@ -31,18 +31,18 @@ class DASProjectsService {
     }
 
     async getPeople(status: string): Promise<TeamMember[]> {
-        const records = (await airtableService.getTableRecords(
+        return (await airtableService.getTableRecords(
             process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE
             , 100
             , `{Manual Status} = "${status}"`
-        ) as unknown as any[]);
-        return records.map(r => {
-            return {
-                name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
-                role: r.fields["Position"],
-                url: r.fields.pic[0].thumbnails.large.url
-            } as TeamMember
-        });
+        ))
+            .map(r => {
+                return {
+                    name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
+                    role: r.fields["Position"],
+                    url: r.fields.pic[0].thumbnails.large.url
+                } as TeamMember
+            });
     }
 }
 
