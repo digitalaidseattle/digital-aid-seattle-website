@@ -108,7 +108,6 @@ const RoleListing = ({
       sxProps?: any
     }
   ) => {
-    console.log('role', role, rolesMap)
     return (
       <ListItemWithIcon
         key={`${key}-${role?.key}` || `${key}-${role}`}

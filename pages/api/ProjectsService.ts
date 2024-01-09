@@ -4,7 +4,7 @@
 
 import { groq } from 'next-sanity';
 import { sanityClient } from '../../sanity/lib/client';
-import { DASProject } from 'types';
+import { DASProject, TeamMember } from 'types';
 import airtableService from './AirtableService';
 
 
@@ -30,13 +30,19 @@ class DASProjectsService {
         return timeline
     }
 
-    async getPeople(status: string): Promise<any[]> {
-        const records = await airtableService.getTableRecords(
+    async getPeople(status: string): Promise<TeamMember[]> {
+        const records = (await airtableService.getTableRecords(
             process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE
             , 100
             , `{Manual Status} = "${status}"`
-        )
-        return records;
+        ) as unknown as any[]);
+        return records.map(r => {
+            return {
+                name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
+                role: r.fields["Position"],
+                url: r.fields.pic[0].thumbnails.large.url
+            } as TeamMember
+        });
     }
 }
 

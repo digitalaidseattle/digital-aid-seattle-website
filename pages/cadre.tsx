@@ -40,16 +40,7 @@ const TheCadrePage = () => {
       .then(resps => {
         setVolunteerRoles(resps[0]);
         setProject(resps[1]);
-        setMembers(resps[2]
-          .sort((r1, r2) => r1.fields["First name"].localeCompare(r2.fields["First name"]))
-          .map(r => {
-            return {
-              name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
-              role: r.fields["Position"],
-              url: r.fields.pic[0].thumbnails.large.url
-            } as TeamMember
-          })
-        )
+        setMembers(resps[2].sort((r1, r2) => r1.name.localeCompare(r2.name)));
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
