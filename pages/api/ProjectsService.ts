@@ -5,6 +5,7 @@
 import { groq } from 'next-sanity';
 import { sanityClient } from '../../sanity/lib/client';
 import { DASProject } from 'types';
+import airtableService from './AirTableService';
 
 
 class DASProjectsService {
@@ -27,6 +28,15 @@ class DASProjectsService {
             ? `${project.duration.start ? project.duration.start : ''} ${project.duration.end ? (' - ' + project.duration.end) : ''}`
             : 'Ongoing'
         return timeline
+    }
+
+    async getPeople(status: string): Promise<any[]> {
+        const records = await airtableService.getTableRecords(
+            process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE
+            , 100
+            , `{Manual Status} = "${status}"`
+        )
+        return records;
     }
 }
 

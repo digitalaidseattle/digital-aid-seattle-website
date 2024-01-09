@@ -22,21 +22,34 @@ import {
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
-import { DASProject, DASVolunteerRoleBasicInfo } from 'types'
+import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const [loading, setLoading] = useState(true)
+  const [members, setMembers] = useState<TeamMember[]>([])
 
   useEffect(() => {
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
-      dasProjectsService.getOne('the-cadre')])
+      dasProjectsService.getOne('the-cadre'),
+      dasProjectsService.getPeople('ongoing')
+    ])
       .then(resps => {
         setVolunteerRoles(resps[0]);
         setProject(resps[1]);
+        setMembers(resps[2]
+          .sort((r1, r2) => r1.fields["First name"].localeCompare(r2.fields["First name"]))
+          .map(r => {
+            return {
+              name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
+              role: r.fields["Position"],
+              url: r.fields.pic[0].thumbnails.large.url
+            } as TeamMember
+          })
+        )
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
@@ -55,7 +68,7 @@ const TheCadrePage = () => {
           <ProjectBodyTextSection title="Problem" texts={project.problem} />
           <ProjectBodyTextSection title="Solution" texts={project.solution} />
           <ProjectBodyTextSection title="Impact" texts={project.impact} />
-          <ProjectTeamSection title="Current team" members={project.currentTeam} />
+          <ProjectTeamSection title="Current team" members={members} />
           <RolesSection title="Roles needed" roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
