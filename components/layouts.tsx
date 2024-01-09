@@ -1,8 +1,7 @@
 import styled from '@emotion/styled'
-import React from 'react'
-import { theme } from 'theme/theme'
-import GlobalStyles from '@mui/material/GlobalStyles'
 import CssBaseline from '@mui/material/CssBaseline'
+import GlobalStyles from '@mui/material/GlobalStyles'
+import { theme } from 'theme/theme'
 
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
@@ -23,23 +22,23 @@ export const FooterContainer = styled.footer`
 
 // eslint-disable-next-line react/display-name
 export const withBasicLayout = (Page: () => JSX.Element) => () =>
-  (
-    <>
-      <CssBaseline />
-      <GlobalStyles
-        styles={{
-          a: {
-            color: 'inherit',
-            textDecoration: 'inherit',
-          },
-        }}
-      />
-      <CommonHeader />
-      <MainContainer>
-        <Page />
-      </MainContainer>
-      <FooterContainer>
-        <CommonFooter />
-      </FooterContainer>
-    </>
-  )
+(
+  <>
+    <CssBaseline />
+    <GlobalStyles
+      styles={{
+        a: {
+          color: 'inherit',
+          textDecoration: 'inherit',
+        },
+      }}
+    />
+    <CommonHeader />
+    <MainContainer>
+      <Page />
+    </MainContainer>
+    <FooterContainer>
+      <CommonFooter />
+    </FooterContainer>
+  </>
+)

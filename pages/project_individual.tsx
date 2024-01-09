@@ -15,10 +15,13 @@ import SectionContainer from 'components/layout/SectionContainer'
 
 import { withBasicLayout } from 'components/layouts'
 
+import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
-import { DASProject, TeamMember } from 'types'
-import { dasProjectsService } from './api/ProjectsService'
+import CardWithPhoto from 'components/cards/CardWithPhoto'
 import { Section, Subheader, TextSection } from 'components/style-utils'
+import { DASProject, TeamMember } from 'types'
+import { urlForImage } from '../sanity/lib/image'
+import { dasProjectsService } from './api/ProjectsService'
 
 type BodyTextSectionProps = {
   title: string

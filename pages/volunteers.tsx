@@ -24,24 +24,22 @@ import {
   AccordionSummary,
   Box,
   Button,
-  CircularProgress,
   Container,
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from '@mui/material'
+import MastheadWithImage from 'components/MastheadWithImage'
+import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
-import MastheadWithImage from 'components/MastheadWithImage'
 import { Section, Subheader } from 'components/style-utils'
-import RolesSection from 'components/RolesSection'
 import Link from 'next/link'
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
-import { DASVolunteerRole, DASVolunteerRoleBasicInfo } from 'types'
+import { DASVolunteerRoleBasicInfo } from 'types'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'

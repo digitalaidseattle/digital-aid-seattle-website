@@ -43,16 +43,16 @@ import { Section, Subheader } from './style-utils'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
-  "account-manager" : { role: 'account manager', icon: <AccountTreeOutlinedIcon/>, },
-  "accountant" : { role: 'accountant', icon: <CalculateOutlinedIcon/>, },
-  "administrative-manager" : { role: 'administrative manager', icon: <ManageAccountsOutlinedIcon />, },
-  "bookkeeper" : { role: 'bookkeeper', icon: <CalculateOutlinedIcon />, },
-  "business-analyst" : { role: 'business analyst', icon: <InsightsOutlinedIcon />, },
+  "account-manager": { role: 'account manager', icon: <AccountTreeOutlinedIcon />, },
+  "accountant": { role: 'accountant', icon: <CalculateOutlinedIcon />, },
+  "administrative-manager": { role: 'administrative manager', icon: <ManageAccountsOutlinedIcon />, },
+  "bookkeeper": { role: 'bookkeeper', icon: <CalculateOutlinedIcon />, },
+  "business-analyst": { role: 'business analyst', icon: <InsightsOutlinedIcon />, },
   "community-engagement-liaison": { role: 'community engagement liaison', icon: <CampaignOutlinedIcon />, },
-  "data-analyst" : { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
-  "digital-marketing-specialist-and-ga4-specialist" : { role: 'digital marketing specialist & ga4 specialist', icon: <InsightsOutlinedIcon />, },
-  "engineering-manager" : { role: 'engineering manager', icon: <IntegrationInstructionsOutlinedIcon />, },
-  "executive-assistant" : { role: 'executive assistant', icon: <ChecklistOutlinedIcon />, },
+  "data-analyst": { role: 'data analyst', icon: <ScreenSearchDesktopOutlinedIcon />, },
+  "digital-marketing-specialist-and-ga4-specialist": { role: 'digital marketing specialist & ga4 specialist', icon: <InsightsOutlinedIcon />, },
+  "engineering-manager": { role: 'engineering manager', icon: <IntegrationInstructionsOutlinedIcon />, },
+  "executive-assistant": { role: 'executive assistant', icon: <ChecklistOutlinedIcon />, },
   "grant-project-manager": { role: 'grant project manager', icon: <DescriptionOutlinedIcon />, },
   "grant-researcher": { role: 'grant researcher', icon: <DescriptionOutlinedIcon />, },
   "grant-writer": { role: 'grant writer', icon: <DescriptionOutlinedIcon />, },
@@ -77,7 +77,7 @@ const rolesMap = {
   "user-experience-researcher": { role: 'user experience researcher', icon: <ScreenSearchDesktopOutlinedIcon />, },
   "ux-ui-designer": { role: 'UX/UI designer', icon: <ScreenSearchDesktopOutlinedIcon />, },
   "volunteer": { role: 'volunteer', icon: <EmojiPeopleOutlinedIcon />, },
-  "default": { icon: <PeopleOutlineOutlinedIcon/>}
+  "default": { icon: <PeopleOutlineOutlinedIcon /> }
 }
 
 type RolesSectionProps = {
@@ -88,8 +88,8 @@ type RolesSectionProps = {
   children?: ReactNode
 }
 
-const getRoleUrl = (roleKey:string) => {
- return `/volunteer_role?role=${roleKey}`
+const getRoleUrl = (roleKey: string) => {
+  return `/volunteer_role?role=${roleKey}`
 }
 
 const RoleListing = ({
@@ -108,6 +108,7 @@ const RoleListing = ({
       sxProps?: any
     }
   ) => {
+    console.log('role', role, rolesMap)
     return (
       <ListItemWithIcon
         key={`${key}-${role?.key}` || `${key}-${role}`}
@@ -125,7 +126,7 @@ const RoleListing = ({
     )
   }
   return showLink ? (
-    <Link href={`${getRoleUrl(role.key)}`} sx={{textDecoration: 'none'}}> 
+    <Link href={`${getRoleUrl(role.key)}`} sx={{ textDecoration: 'none' }}>
       <RoleBase
         sxProps={{
 
@@ -161,13 +162,13 @@ const RolesSection = ({ title, columns = 3, showLink = false, roles = [], childr
           }}
         >
           {roles.length > 0 &&
-              roles.map((singleRole, i) => (
-                  <RoleListing
-                  key={i}
-                  role={singleRole}
-                  showLink={showLink}/>
-                  ))
-            }
+            roles.map((singleRole, i) => (
+              <RoleListing
+                key={i}
+                role={singleRole}
+                showLink={showLink} />
+            ))
+          }
         </Box>
         {children}
       </Section>
