@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 
 import {
   Box,
-  Button,
   CircularProgress,
   Stack,
   useTheme
@@ -20,21 +19,25 @@ import {
   ProjectContactUsSection,
   ProjectFooterSection,
   ProjectHeaderSection,
-  ProjectRolesSection,
-  ProjectSection,
-  ProjectSubheader,
   ProjectTeamSection
 } from 'components/ProjectComponents'
-import { DASProject } from 'types'
+import RolesSection from 'components/RolesSection'
+import { DASProject, DASVolunteerRoleBasicInfo } from 'types'
+import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
+  const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    dasProjectsService
-      .getOne('the-cadre')
-      .then((data) => setProject(data))
+    Promise.all([
+      dasVolunteerRoleService.getAllActiveRoles(),
+      dasProjectsService.getOne('the-cadre')])
+      .then(resps => {
+        setVolunteerRoles(resps[0]);
+        setProject(resps[1]);
+      })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [])
@@ -53,7 +56,7 @@ const TheCadrePage = () => {
           <ProjectBodyTextSection title="Solution" texts={project.solution} />
           <ProjectBodyTextSection title="Impact" texts={project.impact} />
           <ProjectTeamSection title="Current team" members={project.currentTeam} />
-          <ProjectRolesSection title="Roles needed" roles={project.rolesNeeded} />
+          <RolesSection title="Roles needed" roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
       </SectionContainer>
