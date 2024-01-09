@@ -9,7 +9,7 @@ import { withBasicLayout } from 'components/layouts'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
-import HeroImage from '../public/images/SeattleSkyline.png'
+import HeroImage from '../public/images/SeattleSkyline.jpg'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -23,7 +23,7 @@ const Home = () => {
     }`
   }
 
-  const isMediumScreen = useMediaQuery('(max-Width:600px)')
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <>
@@ -44,30 +44,21 @@ const Home = () => {
         <Box
           sx={{
             position: 'absolute',
-            width: { xs: '600px', md: '2321px' },
-            height: 'auto',
-            left: { xs: '50%', sm: '50%' },
-            top: { xs: 0, sm: '50%' },
+            width: { xs: '100%', md: '2321px' },
+            left: { xs: 0, md: '50%' },
+            top: { xs: 0, md: '50%' },
             transform: {
-              sm: 'rotate(90deg)translate(-50%, 25%)',
               md: 'translate(-50%, -50%)',
             },
             opacity: 0.4,
             mixBlendMode: 'overlay',
+            objectFit: 'fill',
           }}
         >
           {isMediumScreen ? (
-            <img
-              src={HeroLinesMobile.src}
-              alt="Hero Lines"
-              style={
-                {
-                  // objectFit: 'cover',
-                }
-              }
-            />
+            <img src={HeroLinesMobile.src} alt="" style={{ width: '100%' }} />
           ) : (
-            <img src={HeroLines.src} alt="Hero Lines" style={{}} />
+            <img src={HeroLines.src} alt="" style={{}} />
           )}
         </Box>
         {/* Hero Content */}
@@ -152,7 +143,6 @@ const Home = () => {
               {/* Image Container */}
               <Box
                 sx={{
-                  // position: 'relative',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   width: { xs: '275px', md: '424px' },
@@ -162,7 +152,8 @@ const Home = () => {
               >
                 <img
                   src={HeroImage.src}
-                  alt="Seattle skyline by Stephen Plopper"
+                  title="Seattle skyline by Stephen Plopper"
+                  alt=""
                   style={{
                     objectFit: 'cover',
                     width: '100%',
@@ -237,7 +228,9 @@ const Home = () => {
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge">Our mission</Typography>
+          <Typography variant="headlineLarge" component="h2">
+            Our mission
+          </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}

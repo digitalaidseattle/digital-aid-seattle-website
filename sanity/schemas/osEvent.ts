@@ -7,7 +7,7 @@ export default {
     orderings: [orderRankOrdering],
     fields: [
         orderRankField({ type: "os-event" }),
-      {
+        {
             name: 'title',
             type: 'string',
             title: 'Title'
@@ -49,7 +49,7 @@ export default {
                     type: 'string'
                 }
             ]
-        }        ,
+        },
         {
             name: 'rsvpLink',
             type: 'string',

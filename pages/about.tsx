@@ -96,6 +96,7 @@ const AboutUsHeroSection = () => {
         <Typography
           variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
           sx={{ color: theme.palette.primary.contrastText }}
+          component="h1"
         >
           About us
         </Typography>
@@ -118,14 +119,17 @@ const AboutUsHeroSection = () => {
 
 const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
-    <Typography variant="headlineMedium">What we do</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      What we do
+    </Typography>
     <Typography variant="bodyLarge">
-      Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.
+      Digital Aid Seattle partners with other nonprofits to amplify their impact
+      and to uplift communities through the power of technology.
     </Typography>
     <Box textAlign="center">
       <Button
         variant="contained"
-        href={'/project_individual?project=the-cadre'}
+        href={'/cadre'}
         sx={{ width: 'fit-content' }}
       >
         View our leadership team
@@ -136,7 +140,9 @@ const WhatWeDoSection = ({ theme }) => (
 
 const OurValueSection = ({ theme }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>
-    <Typography variant="headlineMedium">Our values</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      Our values
+    </Typography>
     <CardRowContainer>
       <CardOne
         title="Excellence"
@@ -171,7 +177,9 @@ const OurValueSection = ({ theme }) => (
 
 const OurVisionSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
-    <Typography variant="headlineMedium">Our vision</Typography>
+    <Typography variant="headlineMedium" component="h2">
+      Our vision
+    </Typography>
     <Typography variant="bodyLarge" align="center" display="block">
       We envision a network of highly functional non-profits in the Puget Sound
       area, working in tandem with one another and with the municipal government
@@ -187,47 +195,64 @@ const OurTeamSection = () => {
 
   return (
     <AboutUsSection backgroundColor={theme.palette.background.default}>
-      <Typography variant="headlineMedium">Our team</Typography>
+      <Typography variant="headlineMedium" component="h2">
+        Our team
+      </Typography>
       <Typography variant="bodyLarge" align="center" display="block">
         The Digital Aid Seattle cadre is made up of highly skilled and committed
         volunteers, dedicated to serving the greater Seattle area.
       </Typography>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We’ve worked in tech and management for companies like:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {companiesList.map((item) => (
           <Grid item xs={6} md={4} key={item.label}>
             <ListItemWithIcon
               listIcon={item.icon}
-              listText={!extraSmallScreen && item.label}
+              listText={!isMediumOrSmallerScreen && item.label}
             />
           </Grid>
         ))}
       </Grid>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We collectively hold experience in:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {experienceContent.map((item) => (
-          <Grid item xs={6} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
         ))}
       </Grid>
-      <Typography variant="titleMedium" align="center" display="block">
+      <Typography
+        variant="titleMedium"
+        align="center"
+        display="block"
+        component="h3"
+      >
         We have graduate and post-graduate degrees in:
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} component="ul">
         {degreeContent.map((item) => (
-          <Grid item xs={6} md={6} lg={4} key={item.label}>
+          <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
               sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
-              listIcon={!extraSmallScreen && item.icon}
+              listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
           </Grid>
@@ -295,7 +320,7 @@ const experienceContent = [
 const degreeContent = [
   {
     label: 'Informatics & Human Computer Interaction',
-    icon: <img src={HCIIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={HCIIcon.src} alt="" width="24px" />,
   },
   {
     label: 'Computer Science / Engineering',
@@ -306,11 +331,11 @@ const degreeContent = [
   { label: 'Architecture', icon: <Apartment /> },
   {
     label: 'Life Sciences',
-    icon: <img src={GeneticsIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={GeneticsIcon.src} alt="" width="24px" />,
   },
   { label: 'Law', icon: <Gavel /> },
   {
     label: 'Astrophysics',
-    icon: <img src={PhysicsIcon.src} alt="NOAA logo" width="24px" />,
+    icon: <img src={PhysicsIcon.src} alt="" width="24px" />,
   },
 ]

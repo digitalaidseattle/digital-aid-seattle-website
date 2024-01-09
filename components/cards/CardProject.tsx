@@ -46,7 +46,9 @@ const CardProject = ({ project }: CardProjectProps) => {
             }}
           />
           <Stack spacing="1rem">
-            <Typography variant="titleLarge">{project.title}</Typography>
+            <Typography variant="titleLarge" component="h2">
+              {project.title}
+            </Typography>
             <Typography variant="labelLarge">{project.partner}</Typography>
             <Typography variant="labelMedium">
               {(project.programAreas ? project.programAreas : []).join(', ')}

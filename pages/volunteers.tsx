@@ -35,11 +35,11 @@ import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
-import { Section,Subheader } from 'components/style-utils'
+import { Section, Subheader } from 'components/style-utils'
 import RolesSection from 'components/RolesSection'
 import Link from 'next/link'
 import React from 'react'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRole, DASVolunteerRoleBasicInfo } from 'types'
 
@@ -180,7 +180,7 @@ const VolunteerPage = () => {
       }}
       maxWidth={'880px'}
     >
-      <RolesSection title='Current Volunteer Openings' showLink={true} roles={volunteerRoles}/>
+      <RolesSection title='Current Volunteer Openings' showLink={true} roles={volunteerRoles} />
       <Typography variant="bodyLarge">
         All of our volunteers are vetted for experience, and sign a volunteer
         agreement before commencing work with Digital Aid Seattle.
@@ -229,71 +229,87 @@ const VolunteerPage = () => {
 
   const oathAndValuesSection = () => {
     return (
-      <SectionContainer backgroundColor={designColor.white}>
-        <Stack
-          gap={{ xs: 4, md: 8 }}
-          sx={{
-            textAlign: 'left',
-            width: { xs: '100%', lg: '880px' },
-            maxWidth: '880px',
-          }}
-        >
-          <Typography variant="headlineLarge">Our oath</Typography>
-          <Typography variant="bodyLarge">
-            We champion these values and ask you as a volunteer to adopt them,
-            too.
-          </Typography>
-          <Box sx={{ display: 'block' }}>
-            {oathContent.map((item, index) => (
-              <Accordion
-                key={index}
-                expanded={oathValuesExpanded === `${index}`}
-                onChange={handleOathValuesChange(`${index}`)}
-              >
-                <AccordionSummary
-                  expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
-                  aria-controls={`volunteer-values${index}-content`}
-                  id={`volunteer-values${index}-header`}
+      (
+        <SectionContainer backgroundColor={designColor.white}>
+          <Stack
+            gap={{ xs: 4, md: 8 }}
+            sx={{
+              textAlign: 'left',
+              width: { xs: '100%', lg: '880px' },
+              maxWidth: '880px',
+            }}
+          >
+            <Typography variant="headlineLarge" component="h2">
+              Our oath
+            </Typography>
+            <Typography variant="bodyLarge">
+              We champion these values and ask you as a volunteer to adopt them,
+              too.
+            </Typography>
+            <Box sx={{ display: 'block' }}>
+              {oathContent.map((item, index) => (
+                <Accordion
+                  key={index}
+                  expanded={oathValuesExpanded === `${index}`}
+                  onChange={handleOathValuesChange(`${index}`)}
                 >
-                  <Typography variant="titleLarge">{item.label}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant="bodyLarge">{item.content}</Typography>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </Box>
-        </Stack>
-      </SectionContainer>
+                  <AccordionSummary
+                    expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+                    aria-controls={`volunteer-values${index}-content`}
+                    id={`volunteer-values${index}-header`}
+                    sx={{
+                      paddingLeft: '0px',
+                      paddingRight: '0px',
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    <Typography variant="titleLarge" component="h3">
+                      {item.label}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="bodyLarge">{item.content}</Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+            </Box>
+          </Stack>
+        </SectionContainer>
+      )
     )
   }
 
   const processSection = () => {
     return (
-      <SectionContainer backgroundColor={designColor.background}>
-        <Stack
-          gap={{ xs: 4, md: 8 }}
-          sx={{
-            width: { xs: '100%', lg: '880px' },
-            maxWidth: '880px',
-          }}
-        >
-          <Typography variant="headlineLarge">The process</Typography>
-          <ol>
-            {processContent.map((item, index) => (
-              <li key={index + 1} style={{ marginBottom: '2rem' }}>
-                <Typography
-                  variant="titleLarge"
-                  color={palette.primary.main}
-                >{`${index + 1}.`}</Typography>
-                <Typography variant="bodyLarge" mx={2}>
-                  {item}
-                </Typography>
-              </li>
-            ))}
-          </ol>
-        </Stack>
-      </SectionContainer>
+      (
+        <SectionContainer backgroundColor={designColor.background}>
+          <Stack
+            gap={{ xs: 4, md: 8 }}
+            sx={{
+              width: { xs: '100%', lg: '880px' },
+              maxWidth: '880px',
+            }}
+          >
+            <Typography variant="headlineLarge" component="h2">
+              The process
+            </Typography>
+            <ol>
+              {processContent.map((item, index) => (
+                <li key={index + 1} style={{ marginBottom: '2rem' }}>
+                  <Typography
+                    variant="titleLarge"
+                    color={palette.primary.main}
+                  >{`${index + 1}.`}</Typography>
+                  <Typography variant="bodyLarge" mx={2}>
+                    {item}
+                  </Typography>
+                </li>
+              ))}
+            </ol>
+          </Stack>
+        </SectionContainer>
+      )
     )
   }
 
@@ -335,6 +351,7 @@ const VolunteerPage = () => {
           <Typography
             variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
             sx={{ color: theme.palette.primary.contrastText }}
+            component="h1"
           >
             Volunteer with us
           </Typography>
@@ -343,6 +360,7 @@ const VolunteerPage = () => {
             sx={{
               color: theme.palette.primary.contrastText,
             }}
+            component="span"
           >
             Join Digital Aid Seattle to make a difference in the lives of
             others! We have a wide range of volunteer opportunities available.

@@ -1,29 +1,41 @@
+/*
+ * @2023 Digital Aid Seattle
+ */
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
-const page_mapping = {
+const SECTION_TO_PATH = {
   About: '/about',
   Projects: '/projects',
   Partners: '/partners',
   Volunteer: '/volunteers',
   Events: '/events',
 }
+
+const PATH_TO_SECTION = {
+  '/about': 'About',
+  '/projects': 'Projects',
+  '/project_individual': 'Projects',
+  '/partners': 'Partners',
+  '/volunteers': 'Volunteer',
+  '/volunteer_individual': 'Volunteer',
+  '/events': 'Events'
+}
+
 
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
@@ -38,7 +50,10 @@ const CommonHeader = () => {
   }
 
   const router = useRouter()
-  const currentRoute = router.route
+
+  const isCurrent = (name: string) => {
+    return name === PATH_TO_SECTION[router.route];
+  }
 
   return (
     <AppBar
@@ -99,7 +114,7 @@ const CommonHeader = () => {
               display: { xs: 'block', lg: 'none' },
             }}
           >
-            {Object.keys(page_mapping).map((name) => (
+            {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
                 onClick={handleCloseNavMenu}
@@ -110,7 +125,7 @@ const CommonHeader = () => {
                   sx={{
                     color: theme.palette.primary.dark,
                   }}
-                  href={page_mapping[name]}
+                  href={SECTION_TO_PATH[name]}
                 >
                   {name}
                 </Link>
@@ -125,6 +140,7 @@ const CommonHeader = () => {
             flexGrow: 1,
             display: { xs: 'none', md: 'none', lg: 'flex' },
             justifyContent: 'space-between',
+            alignItems: 'center',
             padding: '1.25rem 2.5rem !important',
           }}
         >
@@ -138,34 +154,34 @@ const CommonHeader = () => {
               alt="Digital Aid Seattle Home"
             />
           </Link>
-          <Box>
-            {Object.keys(page_mapping).map((name) => (
-              <Button
-                key={name}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  borderRadius: '0px',
-                }}
-                disableRipple={true}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                    textUnderlineOffset: '0.5rem',
-                    textDecoration:
-                      currentRoute === page_mapping[name]
-                        ? 'underline'
-                        : 'none',
-                  }}
-                  href={page_mapping[name]}
+          <nav>
+            <ul>
+              {Object.keys(SECTION_TO_PATH).map((name) => (
+                <Button
+                  key={name}
+                  onClick={handleCloseNavMenu}
+                  variant="contained"
+                  color={isCurrent(name)
+                    ? 'success'
+                    : 'primary'}
+                  disableRipple={true}
                 >
-                  {name}
-                </Link>
-              </Button>
-            ))}
-          </Box>
+                  <Link
+                    sx={{
+                      color: theme.palette.primary.contrastText,
+                      textUnderlineOffset: '0.5rem',
+                      textDecoration: currentRoute === page_mapping[name]
+                        ? 'underline'
+                        : 'none'
+                    }}
+                    href={SECTION_TO_PATH[name]}
+                  >
+                    {name}
+                  </Link>
+                </Button>
+              ))}
+            </ul>
+          </nav>
         </Container>
       </Toolbar>
     </AppBar>

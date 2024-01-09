@@ -45,9 +45,12 @@ const MastheadWithImage = ({
         </Box>
         <img
           src={imageSrc}
-          alt={imageText}
+          alt="" // left blank for decorative images
           width="418px"
-          style={{ objectFit: 'cover' }}
+          style={{
+            objectFit: 'cover',
+            filter: 'drop-shadow(0px 1px 50px rgba(245, 239, 93, 0.24))',
+          }}
         />
       </Box>
     </SectionContainer>
