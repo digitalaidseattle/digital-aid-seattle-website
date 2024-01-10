@@ -38,14 +38,11 @@ import { withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { dasVolunteerRoleService } from 'src/VolunteerRoleService'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
-
 const VolunteerImage = '/images/volunteerWithUs.png'
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
-
-
 
 /* eslint-disable @next/next/no-img-element */
 

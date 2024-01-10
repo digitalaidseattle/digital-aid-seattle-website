@@ -12,7 +12,6 @@ import {
   useTheme,
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
-import { dasProjectsService } from '../src/ProjectsService'
 
 import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -20,9 +19,9 @@ import CardWithPhoto from 'components/cards/CardWithPhoto'
 import { Section, Subheader, TextSection } from 'components/style-utils'
 import { DASProject, TeamMember } from 'types'
 
-const NoPhotoPerson = '/images/no-photo-person.svg'
+import { withBasicLayout } from 'components/layouts'
+import { dasProjectsService } from 'src/ProjectsService'
 import { urlForImage } from '../sanity/lib/image'
-import { dasProjectsService } from './api/ProjectsService'
 
 type BodyTextSectionProps = {
   title: string

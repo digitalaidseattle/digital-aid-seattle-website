@@ -94,11 +94,9 @@ const getRoleUrl = (roleKey: string) => {
 
 const RoleListing = ({
   role,
-  key,
   showLink,
 }: {
   role: any
-  key: number
   showLink?: boolean
 }) => {
   const RoleBase = (
@@ -108,10 +106,8 @@ const RoleListing = ({
       sxProps?: any
     }
   ) => {
-    console.log('role', role, rolesMap)
     return (
       <ListItemWithIcon
-        key={`${key}-${role?.key}` || `${key}-${role}`}
         listIcon={
           rolesMap[role.key]?.icon ||
           rolesMap[role]?.icon ||
