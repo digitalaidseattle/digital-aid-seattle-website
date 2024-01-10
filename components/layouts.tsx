@@ -7,7 +7,7 @@ import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
 import { ReactNode, createContext, useContext, useState } from 'react'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Box, CircularProgress } from '@mui/material'
+import { Box, CircularProgress, LinearProgress } from '@mui/material'
 
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
@@ -34,14 +34,11 @@ const LoadingIndicator = (): ReactJSXElement => {
   // creating an overlay effect
   return (loading &&
     <Box sx={{
-      display: 'flex',
-      justifyContent: 'center',
       zIndex: 2,
       position: 'fixed',
-      top: '5rem',
       width: '100%'
     }}>
-      <CircularProgress color="secondary" />
+      <LinearProgress color="success" />
     </Box>
   )
 }
