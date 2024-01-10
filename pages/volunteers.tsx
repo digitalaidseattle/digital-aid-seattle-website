@@ -34,10 +34,10 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
@@ -143,18 +143,15 @@ const processContent = [
 ]
 
 const VolunteerPage = () => {
-  const [volunteerRoles, setVolunteerRoles] = useState<
-    DASVolunteerRoleBasicInfo[]
-  >([])
+  const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
+  const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const roles: DASVolunteerRoleBasicInfo[] =
-        await (dasVolunteerRoleService.getAllActiveRoles())
-      setVolunteerRoles(roles)
-    }
-
-    fetchData()
+    setLoading(true);
+    dasVolunteerRoleService.getAllActiveRoles()
+      .then(roles => setVolunteerRoles(roles))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
   }, [])
 
   const theme = useTheme()

@@ -3,25 +3,25 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  CircularProgress,
   Link,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 import Masthead from 'components/Masthead'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
+    setLoading(true);
     const params = new URLSearchParams(window.location.search)
     dasVolunteerRoleService
       .getRoleDetailsByName(params.get('role'))
@@ -79,7 +79,7 @@ const VolunteerRolePage = () => {
         {title === 'Preferred Qualifications' ? (
           <Typography
             variant="bodyLarge"
-            sx={{display: 'block', fontStyle: 'italic' }}
+            sx={{ display: 'block', fontStyle: 'italic' }}
           >
             {
               "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps."
@@ -109,32 +109,32 @@ const VolunteerRolePage = () => {
           </Box>
         ) : null}
         <>
-        {roleData.location ? (
-          <Box
-          sx={{
-            typography: 'bodyLarge',
-            fontWeight: 'bold',
-            lineHeight: '0.5rem',
-            mt: '1rem',
-          }}
-          >
-            {'Location: '}
-            <span style={{ fontWeight: 'normal' }}>{roleData.location}</span>
-          </Box>
-        ) : null}
-        {roleData.duration ? (
-          <Box
-          sx={{
-            typography: 'bodyLarge',
-            fontWeight: 'bold',
-            lineHeight: '0.5rem',
-            mb: '1rem',
-          }}
-          >
-            {'Duration: '}
-            <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
-          </Box>
-        ) : null}
+          {roleData.location ? (
+            <Box
+              sx={{
+                typography: 'bodyLarge',
+                fontWeight: 'bold',
+                lineHeight: '0.5rem',
+                mt: '1rem',
+              }}
+            >
+              {'Location: '}
+              <span style={{ fontWeight: 'normal' }}>{roleData.location}</span>
+            </Box>
+          ) : null}
+          {roleData.duration ? (
+            <Box
+              sx={{
+                typography: 'bodyLarge',
+                fontWeight: 'bold',
+                lineHeight: '0.5rem',
+                mb: '1rem',
+              }}
+            >
+              {'Duration: '}
+              <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
+            </Box>
+          ) : null}
         </>
         {roleData.aboutUs ? (
           <RoleDescriptionSubSection
@@ -227,15 +227,13 @@ const VolunteerRolePage = () => {
       <Masthead title={'Volunteer Opening'} />
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-          {loading && <CircularProgress />}
-
-          {!loading && role && (
+          {role && (
             <>
               <BreadCrumbSection roleName={String(role.role)} />
               <RoleDescriptionSection roleData={role} />
             </>
           )}
-          {!loading && !role && <RoleUnavailableSection />}
+          {!role && <RoleUnavailableSection />}
         </Stack>
       </SectionContainer>
     </>

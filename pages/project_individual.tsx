@@ -1,19 +1,18 @@
 /*
  * @2023 Digital Aid Seattle
  */
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Box,
   Button,
-  CircularProgress,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 
 import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -81,9 +80,10 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
 
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
+    setLoading(true);
     const params = new URLSearchParams(window.location.search)
     dasProjectsService
       .getOne(params.get('project'))
@@ -142,11 +142,6 @@ const ProjectIndividualPage = () => {
 
   return (
     <>
-      {loading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
-      )}
       <ProjectHeaderSection project={project} />
       {project ? getBody() : <></>}
       <ProjectFooterSection />

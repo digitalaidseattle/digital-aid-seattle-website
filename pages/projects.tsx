@@ -2,18 +2,19 @@ import { Box, CircularProgress, Stack, useTheme } from '@mui/material'
 import Masthead from 'components/Masthead'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import { withBasicLayout } from 'components/layouts'
-import { useEffect, useState } from 'react'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { useContext, useEffect, useState } from 'react'
 import { dasProjectsService } from './api/ProjectsService'
 
 const ProjectsPage = () => {
   const theme = useTheme()
 
   const title = 'Projects';
-  const [loading, setLoading] = useState(true);
+  const { setLoading } = useContext(LoadingContext);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     dasProjectsService.getAll()
       .then(projs => setProjects(projs
         .filter(proj => proj.display || proj.display === undefined)
@@ -50,9 +51,6 @@ const ProjectsPage = () => {
           }}
           maxWidth={'880px'}
         >
-          {loading &&
-            <CircularProgress />
-          }
           <CardGridContainer>
             {projects.map((project) => (
               <CardProject
