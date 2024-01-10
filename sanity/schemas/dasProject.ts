@@ -116,20 +116,19 @@ export default {
                 type: 'string',
                 options: {
                     list: [
-                        {title: 'Community Engagement Liason', value: 'communityEngagementLiason'},
-                        {title: 'Data Analyst', value: 'dataAnalyst'},
-                        {title: 'Designer', value: 'designer'},
-                        {title: 'Grant Writer', value: 'grantWriter'},
-                        {title: 'Legal Help', value: 'legalHelp'},
-                        {title: 'Product Manager', value: 'productManager'},
-                        {title: 'Project Manager', value: 'projectManager'},
-                        {title: 'UX Researcher', value: 'uxResearcher'},
-                        {title: 'Social Media Designer', value: 'socialMediaDesigner'},
-                        {title: 'Social Media Specialist', value: 'socialMediaSpecialist'},
-                        {title: 'Software Engineer', value: 'softwareEngineer'},
-                        {title: 'Solution Architect', value: 'solutionArchitect'},
-                        {title: 'Storyteller', value: 'storyteller'},
-                        {title: 'QA Specialist', value: 'qaSpecialist'}
+                        {title: 'Community Engagement Liason', value: 'community-engagement-liaison'},
+                        {title: 'Data Analyst', value: 'data-analyst'},
+                        {title: 'UX/UI designer', value: 'ux-ui-designer'},
+                        {title: 'Grant Writer', value: 'grant-writer'},
+                        {title: 'Product Manager', value: 'product-manager'},
+                        {title: 'Project Manager', value: 'project-manager'},
+                        {title: 'User Experience Researcher', value: 'user-experience-researcher'},
+                        {title: 'Social Media Designer', value: 'social-media-designer'},
+                        {title: 'Social Media Specialist', value: 'social-media-specialist'},
+                        {title: 'Software Engineer', value: 'software-developer'},
+                        {title: 'Solution Architect', value: 'solution-architect'},
+                        {title: 'Storyteller', value: 'storyteller-and-content-writer'},
+                        {title: 'QA/Test Engineer', value: 'qa-test-engineer'}
                     ]
                 }
             }]

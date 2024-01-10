@@ -130,7 +130,7 @@ const WhatWeDoSection = ({ theme }) => (
     <Box textAlign="center">
       <Button
         variant="contained"
-        href={'/project_individual?project=the-cadre'}
+        href={'/cadre'}
         sx={{ width: 'fit-content' }}
       >
         View our leadership team

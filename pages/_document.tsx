@@ -11,7 +11,7 @@ export default function Document() {
         <link
           rel="icon"
           sizes="any"
-          href="/images/logo-light-icon-sm.svg"
+          href="/images/logo-light-icon.svg"
           type="image/svg+xml"
         />
         <link
