@@ -63,7 +63,7 @@ const EventsPage = () => {
       .then((evs) => setEvents(evs))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   return (
     <div>

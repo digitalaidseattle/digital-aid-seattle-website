@@ -39,7 +39,7 @@ const TheCadrePage = () => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
 

@@ -21,7 +21,7 @@ const ProjectsPage = () => {
         .sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))))
       .catch(error => console.log(error))
       .finally(() => setLoading(false))
-  }, []);
+  }, [setLoading]);
 
   return (
     <>

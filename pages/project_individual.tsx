@@ -90,7 +90,7 @@ const ProjectIndividualPage = () => {
       .then((data) => setProject(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
   function getBody() {

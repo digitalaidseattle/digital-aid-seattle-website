@@ -28,7 +28,7 @@ const VolunteerRolePage = () => {
       .then((role) => setRole(role))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
 

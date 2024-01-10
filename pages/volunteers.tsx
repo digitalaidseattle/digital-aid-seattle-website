@@ -152,7 +152,7 @@ const VolunteerPage = () => {
       .then(roles => setVolunteerRoles(roles))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
   const palette = theme.palette
