@@ -33,7 +33,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Link } from '@mui/material'
+import { Box, Chip, Link, Stack } from '@mui/material'
 import { ReactNode } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
@@ -146,11 +146,22 @@ const RoleListing = ({
   )
 }
 
+const CategoryChips = () => {
+  // TODO: get categs from airtable
+  const categories = ['business', 'community', 'creative', 'engineering', 'people', 'product']
+  return (
+    <Stack direction="row" gap="1.5rem" marginBottom="3rem">
+      {categories.map((category)=><Chip label={category} variant="outlined"/>)}
+    </Stack>
+  )
+}
+
 const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
   return (
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
+        <CategoryChips/>
         <Box
           sx={{
             display: 'grid',
