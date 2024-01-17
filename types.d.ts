@@ -22,6 +22,7 @@ type TeamMember = {
     name: string,
     role: string,
     image: Image,
+    url: string
 }
 
 type DASProject = {
