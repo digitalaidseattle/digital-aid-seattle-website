@@ -145,7 +145,7 @@ const RoleListing = ({
   )
 }
 
-const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
+const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
   return (
     roles.length > 0 && (
       <Section>
@@ -154,9 +154,9 @@ const RolesSection = ({ title, columns = 3, showLink = false, roles = [], childr
           sx={{
             display: 'grid',
             gridAutoFlow: 'columns',
-            gridTemplateColumns: `repeat(${columns}, minmax(15rem, 1fr))`,
+            gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
             justifyContent: 'center',
-            gap: '2rem',
+            gap: { xs: '1rem', md: '2rem' },
             width: '100%',
           }}
         >
