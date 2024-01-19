@@ -26,7 +26,7 @@ import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext)
   const [members, setMembers] = useState<TeamMember[]>([])
 
 
