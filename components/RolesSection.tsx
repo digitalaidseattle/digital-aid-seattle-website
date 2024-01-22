@@ -93,12 +93,9 @@ const getRoleUrl = (roleKey: string) => {
 }
 
 const RoleListing = ({
-  index,
   role,
-  key,
   showLink,
 }: {
-  index: number
   role: any
   showLink?: boolean
 }) => {
@@ -111,7 +108,6 @@ const RoleListing = ({
   ) => {
     return (
       <ListItemWithIcon
-        key={`${index}-${role?.key}` || `${index}-${role}`}
         listIcon={
           rolesMap[role.key]?.icon ||
           rolesMap[role]?.icon ||
@@ -164,7 +160,6 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
           {roles.map((singleRole, i) => (
             <RoleListing
               key={i}
-              index={i}
               role={singleRole}
               showLink={showLink} />
           ))
