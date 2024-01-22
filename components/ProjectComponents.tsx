@@ -338,18 +338,15 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
           }}
           component="ul"
         >
-          {members.map((person, idx) => (
-            <CardWithPhoto
+          {members.map((person, idx) => {
+            const url = person.url ? person.url : person.image ? urlForImage(person.image).url() : NoPhotoPerson;
+            return <CardWithPhoto
               key={idx}
               title={person.name}
               description={person.role}
-              image={
-                person.image
-                  ? urlForImage(person.image).url()
-                  : NoPhotoPerson
-              }
+              image={url}
             />
-          ))}
+          })}
         </Box>
       </ProjectSection>
     )

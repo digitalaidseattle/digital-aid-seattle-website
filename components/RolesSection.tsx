@@ -93,9 +93,12 @@ const getRoleUrl = (roleKey: string) => {
 }
 
 const RoleListing = ({
+  index,
   role,
+  key,
   showLink,
 }: {
+  index: number
   role: any
   showLink?: boolean
 }) => {
@@ -108,6 +111,7 @@ const RoleListing = ({
   ) => {
     return (
       <ListItemWithIcon
+        key={`${index}-${role?.key}` || `${index}-${role}`}
         listIcon={
           rolesMap[role.key]?.icon ||
           rolesMap[role]?.icon ||
@@ -142,7 +146,7 @@ const RoleListing = ({
   )
 }
 
-const RolesSection = ({ title, columns = 3, showLink = false, roles = [], children }: RolesSectionProps) => {
+const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
   return (
     roles.length > 0 && (
       <Section>
@@ -151,19 +155,19 @@ const RolesSection = ({ title, columns = 3, showLink = false, roles = [], childr
           sx={{
             display: 'grid',
             gridAutoFlow: 'columns',
-            gridTemplateColumns: `repeat(${columns}, minmax(15rem, 1fr))`,
+            gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
             justifyContent: 'center',
-            gap: '2rem',
+            gap: { xs: '1rem', md: '2rem' },
             width: '100%',
           }}
         >
-          {roles.length > 0 &&
-            roles.map((singleRole, i) => (
-              <RoleListing
-                key={i}
-                role={singleRole}
-                showLink={showLink} />
-            ))
+          {roles.map((singleRole, i) => (
+            <RoleListing
+              key={i}
+              index={i}
+              role={singleRole}
+              showLink={showLink} />
+          ))
           }
         </Box>
         {children}

@@ -141,23 +141,18 @@ const processContent = [
 ]
 
 const VolunteerPage = () => {
-  const [volunteerRoles, setVolunteerRoles] = useState<
-    DASVolunteerRoleBasicInfo[]
-  >([])
+  const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const roles: DASVolunteerRoleBasicInfo[] =
-        await (dasVolunteerRoleService.getAllActiveRoles())
-      setVolunteerRoles(roles)
-    }
-
-    fetchData()
+    dasVolunteerRoleService.getAllActiveRoles()
+      .then(roles => setVolunteerRoles(roles))
+      .catch(err => console.error(err));
   }, [])
 
   const theme = useTheme()
   const palette = theme.palette
-  const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const isSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+
   const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
     string | false
   >(false)

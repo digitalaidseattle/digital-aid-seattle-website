@@ -2,7 +2,7 @@
  * @2023 Digital Aid Seattle
  */
 
-import Airtable, { FieldSet } from 'airtable'
+import Airtable, { FieldSet, Records } from 'airtable'
 
 // Documentation: Airtable provides an excellent guide to using their API.
 // To access documentation for our unique base, visit: https://airtable.com/{{baseID}}/api/docs#javascript/table:roles
@@ -27,7 +27,7 @@ class AirtableService {
     tableId: string,
     maxRecords?: number,
     filterByFormula?: string
-  ): Promise<any> {
+  ): Promise<Records<FieldSet>> {
     this.table = this.base(tableId)
     try {
       const records = await this.table
