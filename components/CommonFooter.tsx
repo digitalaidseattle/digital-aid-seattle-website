@@ -148,7 +148,7 @@ const copyrightBox = () => {
           Freepik
         </Link>
       </SubText>
-      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
     </Box>
   )
 }
