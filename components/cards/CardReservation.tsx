@@ -6,23 +6,19 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import Link from 'next/link'
 
 import { useEffect, useState } from 'react'
 import { OSEvent } from 'types'
 
 const CardReservation = (props: { event: OSEvent }) => {
   const [event, setEvent] = useState<OSEvent>()
-  const [rsvpLink, setRsvpLink] = useState<string>("")
 
   useEffect(() => {
     setEvent(props.event)
   }, [props])
 
-  useEffect(() => {
-    setRsvpLink("test")
-  }, [event])
-
-  return (
+  return (event &&
     <Card
       sx={{
         boxShadow:
@@ -39,20 +35,21 @@ const CardReservation = (props: { event: OSEvent }) => {
           height: '100%',
         }}
       >
-        <Stack alignItems="center"
-          direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
+        <Stack alignItems="center" gap="1.5rem">
           <Typography variant="titleLarge" textAlign="center">
             Registration required
           </Typography>
           <Typography variant="labelLarge" textAlign="center">
             Free to attend
           </Typography>
-          <Button
-            variant="contained"
-            href={rsvpLink}
-            sx={{ width: { md: 'max-content' } }}>
-            RSVP
-          </Button>
+          <Link href={event.rsvpLink} target="_blank" passHref>
+            <Button
+              variant="contained"
+              href={event.rsvpLink}
+              sx={{ width: { md: 'max-content' } }}>
+              RSVP
+            </Button>
+          </Link>
         </Stack>
       </CardContent>
     </Card>

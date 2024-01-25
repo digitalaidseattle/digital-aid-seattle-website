@@ -1,12 +1,13 @@
 /*
  * @2024 Digital Aid Seattle
  */
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 
 import { urlForImage } from '../sanity/lib/image';
 
 import {
   Box,
+  Breadcrumbs,
   Button,
   ListItem,
   ListItemIcon,
@@ -18,7 +19,7 @@ import {
 } from '@mui/material';
 import SectionContainer from 'components/layout/SectionContainer';
 
-import { withBasicLayout } from 'components/layouts';
+import { LoadingContext, withBasicLayout } from 'components/layouts';
 // icons for role cards
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -27,6 +28,8 @@ import { Section, Subheader } from 'components/style-utils';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
 import Markdown from 'react-markdown';
+import Link from 'next/link';
+import { NavigateNextSharp } from '@mui/icons-material';
 /*********/
 
 const HeaderSection = (props: { event: OSEvent }) => {
@@ -196,42 +199,58 @@ const InfoSection = (props: {
   useEffect(() => {
     setEvent(props.event)
   }, [props])
+  const renderItem = (title: string,
+    icon: ReactNode,
+    description: string[]) => {
+    return <>
+      <Typography variant="headlineMedium">
+        {title}
+      </Typography>
+      <Box mt="2rem">
+        <ListItem
+          sx={{
+            borderColor: theme.palette.background.default,
+            backgroundColor: theme.palette.background.default
+          }}>
+          <ListItemIcon >
+            {icon}
+          </ListItemIcon>
+          <ListItemText>
+            <Stack>
+              {description.map((d, idx) =>
+                <Box key={idx}>{d}</Box>
+              )}
+            </Stack>
+          </ListItemText>
+        </ListItem>
+      </Box>
+    </>
+  }
 
   function MobileSection() {
-    return (
-      <div>mobile</div>
+    return (event &&
+      <Stack>
+        <CardReservation event={event} />
+        <Box marginTop={"2rem"}>
+          {renderItem(
+            "Date and time",
+            <EventAvailableOutlinedIcon />,
+            [event.date, eventsService.getTimeString(event)]
+          )}
+        </Box>
+        <Box>
+          {renderItem(
+            "Location",
+            <LocationOnIcon />,
+            [event.location]
+          )}
+        </Box>
+      </Stack>
     )
   }
 
   function DesktopSection() {
 
-    const renderItem = (title: string,
-      icon: ReactNode,
-      description: string[]) => {
-      return <>
-        <Typography variant="headlineMedium">
-          {title}
-        </Typography>
-        <Box mt="2rem">
-          <ListItem
-            sx={{
-              borderColor: theme.palette.background.default,
-              backgroundColor: theme.palette.background.default
-            }}>
-            <ListItemIcon >
-              {icon}
-            </ListItemIcon>
-            <ListItemText>
-              <Stack>
-                {description.map((d, idx) =>
-                  <Box key={idx}>{d}</Box>
-                )}
-              </Stack>
-            </ListItemText>
-          </ListItem>
-        </Box>
-      </>
-    }
     return (event &&
       <>
         <Box
@@ -269,7 +288,7 @@ const InfoSection = (props: {
     )
   }
 
-  return extraSmallScreen ? <MobileSection /> : <DesktopSection />
+  return event ? extraSmallScreen ? <MobileSection /> : <DesktopSection /> : <></>
 }
 
 const AboutSection = (props: { event: OSEvent }) => {
@@ -280,7 +299,7 @@ const AboutSection = (props: { event: OSEvent }) => {
     setEvent(props.event)
   }, [props])
 
-  return (
+  return (event &&
     <Stack>
       <Typography variant="headlineLarge" component="h1">
         About this event
@@ -306,28 +325,58 @@ const AboutSection = (props: { event: OSEvent }) => {
   )
 }
 
-const ContactUsSection = (props: { title: string }) => {
-  return <Section>
-    <Subheader variant="headlineMedium">
-      {props.title}
-    </Subheader>
-    <Button variant="contained" href="mailto:info@digitalaidseattle.org">
-      Contact us
-    </Button>
-  </Section>
-}
+const ContactUsSection = (props: { event: OSEvent }) => {
+  const theme = useTheme()
 
-const LogoSection = (props: { event: OSEvent }) => {
   const [event, setEvent] = useState<OSEvent>()
 
   useEffect(() => {
     setEvent(props.event)
   }, [props])
 
-  return (event &&
+  return (event && event.rsvpLink &&
+    <SectionContainer backgroundColor={theme.palette.background.paper}>
+      <Section>
+        <Subheader variant="headlineMedium">
+          Interested in this event?
+        </Subheader>
+        <Link href={event.rsvpLink} target="_blank"
+          passHref>
+          <Button variant="contained">RSVP</Button>
+        </Link>
+      </Section>
+    </SectionContainer>)
+}
+
+const BreadCrumbSection = ({ roleName }) => {
+  return (
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
+    >
+      <Link href={'./'} color="primary">
+        Home
+      </Link>
+      <Link href={'./events'} color="primary">
+        Volunteers
+      </Link>
+      <Typography color="textPrimary">{roleName}</Typography>
+    </Breadcrumbs>
+  )
+}
+
+
+const ActivitySection = (props: { event: OSEvent }) => {
+  const [event, setEvent] = useState<OSEvent>()
+
+  useEffect(() => {
+    setEvent(props.event)
+  }, [props])
+
+  return (event && event.activity &&
     <Section sx={{ alignItems: 'center' }} >
       <img
-        src={urlForImage(event.image).url()}
+        src={urlForImage(event.activity).url()}
         style={{
           width: "33%",
           display: 'block',
@@ -344,7 +393,7 @@ const EventPage = () => {
   const theme = useTheme()
 
   const [event, setEvent] = useState<OSEvent>()
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext)
 
   useEffect(() => {
     setLoading(true);
@@ -358,25 +407,18 @@ const EventPage = () => {
 
   return (
     <>
-      {event &&
-        <>
-          <HeaderSection event={event} />
-          <SectionContainer backgroundColor={theme.palette.background.default}>
-            <Stack
-              gap={{ xs: '64px', lg: '80px' }}
-              maxWidth="880px"
-              margin="0 auto"
-            >
-              <InfoSection event={event} />
-              <AboutSection event={event} />
-              <LogoSection event={event} />
-            </Stack>
-          </SectionContainer>
-        </>
-      }
-      <SectionContainer backgroundColor={theme.palette.background.paper}>
-        <ContactUsSection title="Interested in this event?" />
+      <HeaderSection event={event} />
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto" >
+          <InfoSection event={event} />
+          <AboutSection event={event} />
+          <ActivitySection event={event} />
+        </Stack>
       </SectionContainer>
+      <ContactUsSection event={event} />
     </>
   )
 }

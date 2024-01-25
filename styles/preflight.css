@@ -401,9 +401,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 /*
-  Markdown assumes HTML has formatting which collides with our site styles.
-  This class, which should be augmented, allows markdown elements to use HTML styling.
-*/
+   Markdown assumes HTML has formatting which collides with our site styles.
+   This class, which should be augmented, allows markdown elements to use HTML styling.
+ */
 .markdown li {
   list-style: inside;
   margin-left: 2rem;

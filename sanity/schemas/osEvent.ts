@@ -101,6 +101,19 @@ export default {
                     ]
                 }
             ]
+        },
+        {
+            name: 'activity',
+            type: 'image',
+            title: 'Activity',
+            options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string'
+                }
+            ]
         }
     ]
 } 

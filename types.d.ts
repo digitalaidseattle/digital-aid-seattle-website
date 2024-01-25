@@ -18,11 +18,11 @@ type OSEvent = {
   details: boolean,
   partner: string,
   id: string,
-  interest: Image
   about: {
     title: string,
     details: string[]
-  }[]
+  }[],
+  activity: Image
 }
 
 type TeamMember = {
