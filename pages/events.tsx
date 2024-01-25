@@ -4,15 +4,14 @@
 
 import {
   Box,
-  CircularProgress,
   Container,
   Stack,
   Typography,
-  useTheme,
+  useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
-import { withBasicLayout } from 'components/layouts'
-import { useEffect, useState } from 'react'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { useContext, useEffect, useState } from 'react'
 
 import SectionContainer from 'components/layout/SectionContainer'
 import { eventsService } from './api/EventsService'
@@ -54,16 +53,17 @@ const EventsPage = () => {
   const theme = useTheme()
 
   const title = 'Events'
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext);
   const [events, setEvents] = useState([])
 
   useEffect(() => {
+    setLoading(true);
     eventsService
       .getActiveEvents()
       .then((evs) => setEvents(evs))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   return (
     <div>
@@ -78,14 +78,12 @@ const EventsPage = () => {
           maxWidth={'880px'}
         >
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-            {loading && <CircularProgress />}
 
-            {!loading &&
-              events.map((event) => (
-                <CardEvent key={event.title} event={event} />
-              ))}
+            {events.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
 
-            {!loading && events.length === 0 && (
+            {events.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
                 All upcoming events are invite-only. Please check back in the
                 future for public events.
