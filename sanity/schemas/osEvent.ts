@@ -54,6 +54,39 @@ export default {
             name: 'rsvpLink',
             type: 'string',
             title: 'RSVP Link'
+        },
+        {
+            name: 'active',
+            type: 'boolean',
+            title: 'Active'
+        },
+        {
+            name: 'partner',
+            type: 'string',
+            title: 'Partner'
+        },
+        {
+            name: 'details',
+            type: 'boolean',
+            title: 'Details'
+        },
+        {
+            name: 'id',
+            type: 'string',
+            title: 'ID'
+        },
+        {
+            name: 'interest',
+            type: 'image',
+            title: 'Image',
+            options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string'
+                }
+            ]
         }
     ]
 } 

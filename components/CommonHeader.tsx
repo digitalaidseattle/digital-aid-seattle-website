@@ -32,8 +32,9 @@ const PATH_TO_SECTION = {
   '/project_individual': 'Projects',
   '/partners': 'Partners',
   '/volunteers': 'Volunteer',
-  '/volunteer_individual': 'Volunteer',
-  '/events': 'Events'
+  '/volunteer_role': 'Volunteer',
+  '/events': 'Events',
+  '/event': 'Events'
 }
 
 

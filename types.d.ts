@@ -4,25 +4,30 @@
 import { Image } from 'sanity';
 
 type OSEvent = {
-    _id: string,
-    _createdAt: Date,
-    title: string,
-    date: string,
-    start: string,
-    end: string,
-    location: string,
-    description: string,
-    image: Image,
-    rsvpLink: string
+  _id: string,
+  _createdAt: Date,
+  title: string,
+  date: string,
+  start: string,
+  end: string,
+  location: string,
+  description: string,
+  image: Image,
+  rsvpLink: string,
+  active: boolean,
+  details: boolean,
+  partner: string,
+  id: string,
+  interest: Image
 }
 
 type TeamMember = {
-    _id: string,
-    _createdAt: Date,
-    name: string,
-    role: string,
-    image: Image,
-    url: string
+  _id: string,
+  _createdAt: Date,
+  name: string,
+  role: string,
+  image: Image,
+  url: string
 }
 
 type DASProject = {
