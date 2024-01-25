@@ -403,7 +403,7 @@ const EventPage = () => {
       .then((data) => setEvent(data))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   return (
     <>
