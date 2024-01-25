@@ -19,6 +19,10 @@ type OSEvent = {
   partner: string,
   id: string,
   interest: Image
+  about: {
+    title: string,
+    details: string[]
+  }[]
 }
 
 type TeamMember = {

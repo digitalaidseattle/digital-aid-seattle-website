@@ -8,7 +8,6 @@ import { urlForImage } from '../sanity/lib/image';
 import {
   Box,
   Button,
-  Grid,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -23,10 +22,11 @@ import { withBasicLayout } from 'components/layouts';
 // icons for role cards
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CardReservation from 'components/cards/CardReservation';
 import { Section, Subheader } from 'components/style-utils';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
-import CardReservation from 'components/cards/CardReservation';
+import Markdown from 'react-markdown';
 /*********/
 
 const HeaderSection = (props: { event: OSEvent }) => {
@@ -276,78 +276,32 @@ const AboutSection = (props: { event: OSEvent }) => {
 
   const [event, setEvent] = useState<OSEvent>()
 
-  const description = [
-    {
-      title: "Building a Better Tomorrow: Leverage a Career in Tech for Social Impact",
-      details: [
-        "Interested in learning how to use your tech skills for good? Curious about how code can fuel a better future? Want to build your community in the socially conscious tech space?",
-        "Join Yolk Labs digital studio and Digital Aid Seattle non-profit development shop to learn how you can leverage your skills to make a difference with technology.",
-        "This co-sponsored event will serve as a dynamic platform for connecting tech enthusiasts, startups, freelancers, volunteers, and nonprofits, all aligned in their mission to make a positive impact through technology.",
-        "Whether you're a seasoned developer or product manager, bookkeeper or operations lead looking to get involved in the tech space, or a startup founder curious about building in this space – this event is for you.",
-        "You'll hear short presentations from each partner (Yolk Labs & Digital Aid Seattle), followed by a guided discussion with breakout groups.",
-        "This event is free with RSVP and includes a food spread and beverages. We request everyone join for the full time and take the opportunity to meet new connections."
-      ]
-    }]
-
-  const agenda =
-  {
-    title: "Evening Agenda",
-    details: [
-      "5:30 - 5:45: Initial mingle and drinks",
-      "5:45 - 6:45: Welcome and introductions from each partner",
-      "   * Yolk Labs will discuss their recent incubation of a socially conscious business(My Beacon) and distinct approaches for startups in this space.",
-      "   * Digital Aid Seattle will present an overview of ongoing projects, their company mission, and ways to make a difference through volunteering.",
-      "6:45 - 7:05: Q & A and guided discussion",
-      "7:05 - 7:30: Networking with food"
-    ]
-  }
-  const closing =
-    [{
-      title: undefined,
-      details: ["We hope you leave the event inspired and ready to create a positive impact in the tech community."]
-    }]
-
   useEffect(() => {
     setEvent(props.event)
   }, [props])
 
   return (
     <Stack>
-      <Typography variant="headlineLarge" component="h2">
+      <Typography variant="headlineLarge" component="h1">
         About this event
       </Typography>
-      {description.map((desc, idx) =>
-        <Stack key={idx}>
-          {desc.title &&
-            <Typography variant="labelMedium" marginTop={'2rem'}>
-              {desc.title}
-            </Typography>}
-          {desc.details.map((det, jdx) =>
-            <Typography key={jdx} marginTop={'2rem'}>
-              {det}
-            </Typography>)}
-        </Stack>)}
       <Stack>
-        {agenda.title &&
-          <Typography variant="labelMedium" marginTop={'2rem'}>
-            {agenda.title}
-          </Typography>}
-        {agenda.details.map((det, jdx) =>
-          <Typography key={jdx} marginTop={'0.5rem'}>
-            {det}
-          </Typography>)}
+        {event && event.about
+          && event.about.map((a, idx) =>
+            <Stack key={idx}>
+              {a.title &&
+                <Typography variant="labelLarge" marginTop={'2rem'}>
+                  {a.title}
+                </Typography>
+              }
+              {a.details && a.details.map((det, ddx) =>
+                <Box className="markdown" key={ddx} marginTop={'2rem'}>
+                  <Markdown>{det}</Markdown>
+                </Box>
+              )}
+            </Stack>
+          )}
       </Stack>
-      {closing.map((desc, idx) =>
-        <Stack key={idx}>
-          {desc.title &&
-            <Typography variant="labelMedium" marginTop={'2rem'}>
-              {desc.title}
-            </Typography>}
-          {desc.details.map((det, jdx) =>
-            <Typography key={jdx} marginTop={'2rem'}>
-              {det}
-            </Typography>)}
-        </Stack>)}
     </Stack>
   )
 }
@@ -421,7 +375,7 @@ const EventPage = () => {
         </>
       }
       <SectionContainer backgroundColor={theme.palette.background.paper}>
-        <ContactUsSection title="Questions about this event?" />
+        <ContactUsSection title="Interested in this event?" />
       </SectionContainer>
     </>
   )

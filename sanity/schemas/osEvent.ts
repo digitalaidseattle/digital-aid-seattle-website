@@ -87,6 +87,20 @@ export default {
                     type: 'string'
                 }
             ]
+        },
+        {
+            title: 'About',
+            name: 'about',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'details', type: 'array', title: 'Details', of: [{ type: 'text' }] }
+                    ]
+                }
+            ]
         }
     ]
 } 
