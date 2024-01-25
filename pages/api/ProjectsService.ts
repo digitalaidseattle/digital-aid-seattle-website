@@ -40,7 +40,7 @@ class DASProjectsService {
                 return {
                     name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
                     role: r.fields["Position"],
-                    url: r.fields.pic[0].thumbnails.large.url
+                    url: r.fields.pic && r.fields.pic[0] && r.fields.pic[0].thumbnails.large.url || undefined
                 } as TeamMember
             });
     }
