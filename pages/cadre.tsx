@@ -1,18 +1,16 @@
 /*
  * @2023 Digital Aid Seattle
  */
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
-  Box,
-  CircularProgress,
   Stack,
   useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService } from './api/ProjectsService'
 
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 // icons for role cards
 import {
   ProjectBodyTextSection,
@@ -28,10 +26,12 @@ import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext)
   const [members, setMembers] = useState<TeamMember[]>([])
 
+
   useEffect(() => {
+    setLoading(true);
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
       dasProjectsService.getOne('the-cadre'),
@@ -44,7 +44,7 @@ const TheCadrePage = () => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
 
@@ -69,11 +69,6 @@ const TheCadrePage = () => {
 
   return (
     <>
-      {loading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
-      )}
       <ProjectHeaderSection project={project} />
       {project ? getBody() : <></>}
       <ProjectFooterSection />
