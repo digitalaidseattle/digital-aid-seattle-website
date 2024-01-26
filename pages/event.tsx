@@ -377,7 +377,7 @@ const ActivitySection = (props: { event: OSEvent }) => {
       <img
         src={urlForImage(event.activity).url()}
         style={{
-          width: "33%",
+          width: "50%",
           display: 'block',
           borderRadius: '20px',
           boxShadow:
