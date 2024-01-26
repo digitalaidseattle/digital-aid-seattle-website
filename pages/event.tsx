@@ -42,9 +42,28 @@ const HeaderSection = (props: { event: OSEvent }) => {
     setEvent(props.event)
   }, [props])
 
+  const BreadCrumbSection = (props: { event: OSEvent }) => {
+    return (
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
+      >
+        <Link href={'./'} >
+          <Typography color="textPrimary">Home</Typography>
+        </Link>
+        <Link href={'./events'}>
+          <Typography color="textPrimary">Events</Typography>
+        </Link>
+        <Typography color="textPrimary">{props.event.title}</Typography>
+      </Breadcrumbs>
+    )
+  }
+
   function MobileSection() {
     return (
-      <>
+      <Box sx={{
+        backgroundColor: theme.palette.background.default
+      }}>
         <Box
           sx={{
             backgroundColor: theme.palette.primary.main,
@@ -73,11 +92,6 @@ const HeaderSection = (props: { event: OSEvent }) => {
               {event.date}
             </Typography>
           </Stack>
-          <Stack spacing="1rem">
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">{event.partner}</Typography>
-            </Stack>
-          </Stack>
 
           <img
             src={urlForImage(event.image).url()}
@@ -90,8 +104,11 @@ const HeaderSection = (props: { event: OSEvent }) => {
                 '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
             }}
           />
+          <Stack spacing="1rem">
+            <BreadCrumbSection event={event} />
+          </Stack>
         </Stack>
-      </>
+      </Box>
     )
   }
 
@@ -174,9 +191,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
               paddingLeft: { md: '2rem', lg: '0' },
             }}
           >
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">{event.partner}</Typography>
-            </Stack>
+            <BreadCrumbSection event={event} />
           </Stack>
         </Box>
       </>
@@ -348,22 +363,6 @@ const ContactUsSection = (props: { event: OSEvent }) => {
     </SectionContainer>)
 }
 
-const BreadCrumbSection = ({ roleName }) => {
-  return (
-    <Breadcrumbs
-      aria-label="breadcrumb"
-      separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
-    >
-      <Link href={'./'} color="primary">
-        Home
-      </Link>
-      <Link href={'./events'} color="primary">
-        Volunteers
-      </Link>
-      <Typography color="textPrimary">{roleName}</Typography>
-    </Breadcrumbs>
-  )
-}
 
 
 const ActivitySection = (props: { event: OSEvent }) => {
