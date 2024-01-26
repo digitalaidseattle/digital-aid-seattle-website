@@ -98,10 +98,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
             style={{
               width: '100%',
               aspectRatio: '1 / 1',
-              display: 'block',
-              borderRadius: '20px',
-              boxShadow:
-                '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+              display: 'block'
             }}
           />
           <Stack spacing="1rem">
@@ -165,10 +162,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
                 src={urlForImage(event.image).url()}
                 style={{
                   width: '100%',
-                  display: 'block',
-                  borderRadius: '20px',
-                  boxShadow:
-                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                  display: 'block'
                 }}
               />
             </Box>
@@ -373,15 +367,14 @@ const ActivitySection = (props: { event: OSEvent }) => {
   }, [props])
 
   return (event && event.activity &&
-    <Section sx={{ alignItems: 'center' }} >
+    <Section  >
       <img
         src={urlForImage(event.activity).url()}
         style={{
           width: "50%",
-          display: 'block',
-          borderRadius: '20px',
-          boxShadow:
-            '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+          // borderRadius: '20px',
+          // boxShadow:
+          //   '0px 0px 0px 0px rgba(52, 61, 62, 0.08), 1px 1px 1px 1px rgba(52, 61, 62, 0.08)',
         }}
       />
     </Section>)
