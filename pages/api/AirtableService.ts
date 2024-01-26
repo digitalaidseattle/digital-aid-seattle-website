@@ -2,7 +2,7 @@
  * @2023 Digital Aid Seattle
  */
 
-import Airtable, { FieldSet } from 'airtable'
+import Airtable, { FieldSet, Records } from 'airtable'
 
 // Documentation: Airtable provides an excellent guide to using their API.
 // To access documentation for our unique base, visit: https://airtable.com/{{baseID}}/api/docs#javascript/table:roles
@@ -15,19 +15,15 @@ class AirtableService {
   private table: Airtable.Table<Airtable.FieldSet>
 
   constructor(apiKey: string, baseId: string) {
-    this.airtable = new Airtable({
-      apiKey: apiKey || process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
-    })
-    this.base = this.airtable.base(
-      baseId || process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID_DAS
-    )
+    this.airtable = new Airtable({ apiKey: apiKey })
+    this.base = this.airtable.base(baseId)
   }
 
   async getTableRecords(
     tableId: string,
     maxRecords?: number,
     filterByFormula?: string
-  ): Promise<any> {
+  ): Promise<Records<FieldSet>> {
     this.table = this.base(tableId)
     try {
       const records = await this.table
@@ -76,7 +72,7 @@ class AirtableService {
   }
 }
 
-const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_API_KEY
+const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_ANON_KEY
 const baseId = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID_DAS
 
 const airtableService = new AirtableService(apiKey, baseId)

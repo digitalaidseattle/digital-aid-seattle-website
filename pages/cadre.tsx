@@ -1,18 +1,16 @@
 /*
  * @2023 Digital Aid Seattle
  */
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
-  Box,
-  CircularProgress,
   Stack,
   useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService } from './api/ProjectsService'
 
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 // icons for role cards
 import {
   ProjectBodyTextSection,
@@ -22,25 +20,31 @@ import {
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
-import { DASProject, DASVolunteerRoleBasicInfo } from 'types'
+import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
-  const [loading, setLoading] = useState(true)
+  const { setLoading } = useContext(LoadingContext)
+  const [members, setMembers] = useState<TeamMember[]>([])
+
 
   useEffect(() => {
+    setLoading(true);
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
-      dasProjectsService.getOne('the-cadre')])
+      dasProjectsService.getOne('the-cadre'),
+      dasProjectsService.getPeople('ongoing')
+    ])
       .then(resps => {
         setVolunteerRoles(resps[0]);
         setProject(resps[1]);
+        setMembers(resps[2].sort((r1, r2) => r1.name.localeCompare(r2.name)));
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
 
@@ -55,7 +59,7 @@ const TheCadrePage = () => {
           <ProjectBodyTextSection title="Problem" texts={project.problem} />
           <ProjectBodyTextSection title="Solution" texts={project.solution} />
           <ProjectBodyTextSection title="Impact" texts={project.impact} />
-          <ProjectTeamSection title="Current team" members={project.currentTeam} />
+          <ProjectTeamSection title="Current team" members={members} />
           <RolesSection title="Roles needed" roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
@@ -65,11 +69,6 @@ const TheCadrePage = () => {
 
   return (
     <>
-      {loading && (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
-      )}
       <ProjectHeaderSection project={project} />
       {project ? getBody() : <></>}
       <ProjectFooterSection />

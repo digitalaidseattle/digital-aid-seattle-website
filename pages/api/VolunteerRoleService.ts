@@ -26,7 +26,7 @@ class DASVolunteerRoleService {
       volunteerRolesTable,
       maxRecords,
       activeRoleFilter
-    )
+    ) as any[];
 
     activeRoles.sort((a, b) => {
       return a.fields.Role.localeCompare(b.fields.Role)
@@ -54,7 +54,7 @@ class DASVolunteerRoleService {
       volunteerRolesTable,
       maxRecords,
       filterByFormula
-    )
+    ) as any[];
     if (recordData.length === 0) {
       return null
     }
