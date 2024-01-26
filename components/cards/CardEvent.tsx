@@ -102,7 +102,7 @@ const CardEvent = ({ event }: CardEventProps) => {
                   Learn More
                 </Button>
               )}
-              {event.rsvpLink && (
+              {!event.details && event.rsvpLink && (
                 <Button
                   variant="contained"
                   sx={{

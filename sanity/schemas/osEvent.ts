@@ -87,6 +87,33 @@ export default {
                     type: 'string'
                 }
             ]
+        },
+        {
+            title: 'About',
+            name: 'about',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'details', type: 'array', title: 'Details', of: [{ type: 'text' }] }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'activity',
+            type: 'image',
+            title: 'Activity',
+            options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string'
+                }
+            ]
         }
     ]
 } 
