@@ -37,6 +37,7 @@ class DASVolunteerRoleService {
         id: record.id,
         role: getStringFieldRecord(record, 'Role'),
         key: getStringFieldRecord(record, 'Key'),
+        category: getStringFieldRecord(record, 'Category'),
       }
     })
     return volunteerRolesData

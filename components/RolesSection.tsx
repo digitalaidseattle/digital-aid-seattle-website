@@ -34,7 +34,7 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { Box, Chip, Link, Stack } from '@mui/material'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
@@ -145,32 +145,25 @@ const RoleListing = ({
   )
 }
 
-const CategoryChips = () => {
-  // TODO: get categs from airtable
-  const categories = ['business', 'community', 'creative', 'engineering', 'people', 'product']
-  return (
-    <Stack direction="row" gap="1.5rem" marginBottom="3rem">
-      {categories.map((category)=><Chip label={category} variant="outlined"/>)}
-    </Stack>
-  )
-}
 
-const CategoryChips = () => {
-  // TODO: get categs from airtable
-  const categories = ['business', 'community', 'creative', 'engineering', 'people', 'product']
-  return (
-    <Stack direction="row" gap="1.5rem" marginBottom="3rem">
-      {categories.map((category)=><Chip label={category} variant="outlined"/>)}
-    </Stack>
-  )
-}
+
 
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
+  const categories = ['business', 'community', 'creative', 'engineering', 'people', 'product']
+  const [filteredRoles, setFilteredRoles] = useState([...roles])
+
+  function filterRolesByCategory(category) {
+      console.log(roles)
+    // setFilteredRoles(filteredRoles.filter(r => r.fields.Category.includes(category)))
+  }
+
   return (
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
-        <CategoryChips/>
+        <Stack direction="row" gap="1.5rem" marginBottom="3rem">
+          {categories.map((category)=><Chip label={category} variant="outlined" onClick={()=>filterRolesByCategory(category)}/>)}
+        </Stack>
         <Box
           sx={{
             display: 'grid',
@@ -185,7 +178,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
             <RoleListing
               key={i}
               index={i}
-              role={singleRole}
+              role={singleRole            }
               showLink={showLink} />
           ))
           }
