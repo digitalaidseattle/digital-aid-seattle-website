@@ -149,19 +149,20 @@ const RoleListing = ({
 
 
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
-  const categories = ['business', 'community', 'creative', 'engineering', 'people', 'product']
-  const [filteredRoles, setFilteredRoles] = useState([...roles])
+  const categories = ['Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
+  const [rolesToDisplay, setRolesToDisplay] = useState([...roles])
 
-  function filterRolesByCategory(category) {
-      console.log(roles)
-    // setFilteredRoles(filteredRoles.filter(r => r.fields.Category.includes(category)))
-  }
+  function filterRolesByCategory(selectedCategory) {
+    const filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+    setRolesToDisplay(filteredRoles);
+    }
 
   return (
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem">
+        <Chip label='All' variant="outlined" onClick={()=>setRolesToDisplay(roles)}/>
           {categories.map((category)=><Chip label={category} variant="outlined" onClick={()=>filterRolesByCategory(category)}/>)}
         </Stack>
         <Box
@@ -174,7 +175,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
             width: '100%',
           }}
         >
-          {roles.map((singleRole, i) => (
+          {rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
               index={i}
