@@ -54,6 +54,66 @@ export default {
             name: 'rsvpLink',
             type: 'string',
             title: 'RSVP Link'
+        },
+        {
+            name: 'active',
+            type: 'boolean',
+            title: 'Active'
+        },
+        {
+            name: 'partner',
+            type: 'string',
+            title: 'Partner'
+        },
+        {
+            name: 'details',
+            type: 'boolean',
+            title: 'Details'
+        },
+        {
+            name: 'id',
+            type: 'string',
+            title: 'ID'
+        },
+        {
+            name: 'interest',
+            type: 'image',
+            title: 'Image',
+            options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string'
+                }
+            ]
+        },
+        {
+            title: 'About',
+            name: 'about',
+            type: 'array',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'details', type: 'array', title: 'Details', of: [{ type: 'text' }] }
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'activity',
+            type: 'image',
+            title: 'Activity',
+            options: { hotspot: true },
+            fields: [
+                {
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string'
+                }
+            ]
         }
     ]
 } 

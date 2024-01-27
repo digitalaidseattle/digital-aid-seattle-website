@@ -8,10 +8,12 @@ import { theme } from 'theme/theme'
 import { useEffect, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { dasProjectsService } from 'pages/api/ProjectsService'
+import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
 const TAG_NAMES = {
+  event: 'Events | Digital Aid Seattle',
   events: 'Events | Digital Aid Seattle',
   volunteers: 'Volunteer with us | Digital Aid Seattle',
   partners: 'Get help with your nonprofit | Digital Aid Seattle',
@@ -38,8 +40,10 @@ export default function App({ Component, pageProps }: AppProps) {
           const project = searchParams.get('project')
           const p = await dasProjectsService.getOne(project)
           return p ? p.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
-        case 'volunteer_individual':
-          return 'TBD' // When role pages come online
+        case 'volunteer_role':
+          const role = searchParams.get('role')
+          const r = await dasVolunteerRoleService.getRoleDetailsByName(role)
+          return r ? r.role.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         default:
           const tag = TAG_NAMES[pageName]
           return tag ?? DEFAULT_TAG

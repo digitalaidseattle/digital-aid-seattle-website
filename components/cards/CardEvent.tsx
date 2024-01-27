@@ -89,7 +89,20 @@ const CardEvent = ({ event }: CardEventProps) => {
               >
                 {event.description}
               </Typography>
-              {event.rsvpLink && (
+              {event.details && (
+                <Button
+                  variant="contained"
+                  sx={{
+                    marginTop: { xs: '2rem', lg: '2.5rem' },
+                    textAlign: 'center',
+                    maxWidth: { xs: '100%', lg: 'min-content' },
+                  }}
+                  href={`/event?name=${event.id}`}
+                >
+                  Learn More
+                </Button>
+              )}
+              {!event.details && event.rsvpLink && (
                 <Button
                   variant="contained"
                   sx={{
