@@ -2,7 +2,7 @@
 * RolesNeededSection.tsx
 * example: 
  
-<RolesSection title="Current volunteer openings"
+<RolesSection title="Active volunteer openings"
  roles={[]}
  showLink={true}
  columns={2} >
@@ -150,9 +150,10 @@ const RoleListing = ({
 
 
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
+  // TODO: remove hardcoded array; extract from airtable
   const categories = ['Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
   
-  const [currentFilters, setCurrentFilters] = useState([]);
+  const [activeFilters, setActiveFilters] = useState([]);
   const [rolesToDisplay, setRolesToDisplay] = useState([])
  
   useEffect(() => {
@@ -160,16 +161,29 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
   }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
-    if (currentFilters.includes(selectedCategory)) {
-      let updatedFilters = currentFilters.filter(f=>f!==selectedCategory)
-      setCurrentFilters(updatedFilters)
+    // if a category is already active (the chip is checked)
+    if (activeFilters.includes(selectedCategory)) {
+      // remove the category from the list of active filters
+      let updatedFilters = activeFilters.filter(f=>f!==selectedCategory)
+
+      // filter the roles to include only the ones in the new list of active filters
       setRolesToDisplay(rolesToDisplay.filter(r=>r.category.some(c => updatedFilters.includes(c))))
-    } else {
-      setCurrentFilters([...currentFilters, selectedCategory])
-      let filteredRoles = roles.filter((r)=> r.category && r.category.includes(selectedCategory) && !r.category.some(c=>currentFilters.includes(c)))
-      if (currentFilters.length === 0) {
+
+      // update the active filters state
+      setActiveFilters(updatedFilters)
+
+    } else { // the chip was unchecked at time of clicking on it
+      // add selected category to list of filters
+      setActiveFilters([...activeFilters, selectedCategory])
+
+      // filter the roles to include only the roles that match the selected category,
+      // and does not already have a category in the list of active filters (to prevent duplicates)
+      let filteredRoles = roles.filter((r) => r.category && r.category.includes(selectedCategory) && !r.category.some(c => activeFilters.includes(c)))
+
+      // if the active filters state is empty at the moment (first filter to be applied)
+      if (activeFilters.length === 0) {
         setRolesToDisplay(filteredRoles);
-      } else {
+      } else { // if there is at least one filter active at the moment, append to the state.
         setRolesToDisplay(rolesToDisplay.concat(filteredRoles))
       }
     }
@@ -180,7 +194,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
-          {categories.map((category)=><Chip key={category} label={category} variant={currentFilters.includes(category) ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category)}/>)}
+          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category)}/>)}
         </Stack>
         <Box
           sx={{
@@ -192,7 +206,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
             width: '100%',
           }}
         >
-          {currentFilters.length ? rolesToDisplay.map((singleRole, i) => (
+          {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
               index={i}
