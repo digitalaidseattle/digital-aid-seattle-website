@@ -33,6 +33,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import CheckIcon from '@mui/icons-material/Check'; // for chip
 import { Box, Chip, Link, Stack } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -40,7 +41,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
-import { set } from 'sanity'
+import { Check } from '@mui/icons-material'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
@@ -194,7 +195,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
-          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category) }/>)}
+          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
         </Stack>
         <Box
           sx={{
