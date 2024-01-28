@@ -194,7 +194,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
-          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category)}/>)}
+          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category) }/>)}
         </Stack>
         <Box
           sx={{

@@ -331,6 +331,25 @@ export const theme = createTheme({
         },
       },
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontWeight: '600',
+          borderRadius: '8px'
+        },
+        outlined: {
+          color: '#3F4849',
+          borderColor: '#6F797A',
+          '&:hover': {
+            backgroundColor: designColor.yellow.light,
+          }
+        },
+        filled: {
+          backgroundColor: designColor.yellow.main,
+          border: 'none',
+        }
+      },
+    }
   },
 })
 
