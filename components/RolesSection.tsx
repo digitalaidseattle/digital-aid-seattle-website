@@ -84,7 +84,7 @@ type RolesSectionProps = {
   title: string
   columns?: number
   showLink?: boolean
-  roles?: DASVolunteerRoleBasicInfo[] | String[]
+  roles?: DASVolunteerRoleBasicInfo[]
   children?: ReactNode
 }
 

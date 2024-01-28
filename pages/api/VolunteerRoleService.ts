@@ -20,7 +20,7 @@ class DASVolunteerRoleService {
     const maxRecords = 100
     const activeRoleFilter = '{Status} = "Active"'
 
-    const { getStringFieldRecord } = airtableService
+    const { getStringFieldRecord, getStringArrayFieldRecord } = airtableService
 
     const activeRoles = await airtableService.getTableRecords(
       volunteerRolesTable,
@@ -37,7 +37,7 @@ class DASVolunteerRoleService {
         id: record.id,
         role: getStringFieldRecord(record, 'Role'),
         key: getStringFieldRecord(record, 'Key'),
-        category: getStringFieldRecord(record, 'Category'),
+        category: getStringArrayFieldRecord(record, 'Category'),
       }
     })
     return volunteerRolesData
@@ -71,11 +71,13 @@ class DASVolunteerRoleService {
         getNumberFieldRecord,
         getSplitFieldRecord,
         getStringFieldRecord,
+        getStringArrayFieldRecord,
       } = airtableService;
 
       const volunteerRoleData: DASVolunteerRole = {
         role: getStringFieldRecord(record, 'Role'),
         key: getStringFieldRecord(record, 'Key'),
+        category: getStringArrayFieldRecord(record, 'Category'),
         location: getStringFieldRecord(record, 'Location'),
         duration: getStringFieldRecord(record, 'Duration'),
         headline: getStringFieldRecord(record, 'Headline'),

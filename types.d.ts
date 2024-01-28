@@ -49,6 +49,7 @@ type DASProject = {
 type DASVolunteerRoleBasicInfo = {
   role: string
   key: string
+  category: string[]
 }
 
 type DASVolunteerRole = {
