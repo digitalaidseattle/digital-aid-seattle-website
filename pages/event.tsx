@@ -273,16 +273,20 @@ const InfoSection = (props: {
           }}
         >
           <Stack>
-            {renderItem(
-              "Date and time",
-              <EventAvailableOutlinedIcon />,
-              [event.date, eventsService.getTimeString(event)]
-            )}
-            {renderItem(
-              "Location",
-              <LocationOnIcon />,
-              [event.location]
-            )}
+            <Box>
+              {renderItem(
+                "Date and time",
+                <EventAvailableOutlinedIcon />,
+                [event.date, eventsService.getTimeString(event)]
+              )}
+            </Box>
+            <Box marginTop={"4rem"}>
+              {renderItem(
+                "Location",
+                <LocationOnIcon />,
+                [event.location]
+              )}
+            </Box>
           </Stack>
           <Stack sx={{ alignItems: "flex-end" }}>
             <Box
