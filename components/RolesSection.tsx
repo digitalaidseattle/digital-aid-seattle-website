@@ -149,7 +149,8 @@ const RoleListing = ({
 
 
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
-  const categories = ['Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
+  const categories = ['All', 'Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
+  const [currentFilter, setCurrentFilter] = useState('All');
   const [rolesToDisplay, setRolesToDisplay] = useState([])
  
   useEffect(() => {
@@ -157,17 +158,22 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
   }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
-    const filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
-    setRolesToDisplay(filteredRoles);
+    setCurrentFilter(selectedCategory)
+    let filteredRoles;
+    if (selectedCategory !== 'All') {
+      filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+    } else {
+      filteredRoles = [...roles]
     }
+    setRolesToDisplay(filteredRoles);
+  }
 
   return (
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem">
-        <Chip label='All' variant="outlined" onClick={()=>setRolesToDisplay(roles)}/>
-          {categories.map((category)=><Chip key={category} label={category} variant="outlined" onClick={()=>filterRolesByCategory(category)}/>)}
+          {categories.map((category)=><Chip key={category} label={category} variant={currentFilter === category ? "filled" : "outlined"} onClick={()=>filterRolesByCategory(category)}/>)}
         </Stack>
         <Box
           sx={{
