@@ -34,7 +34,7 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import { Box, Chip, Link, Stack } from '@mui/material'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
@@ -150,7 +150,11 @@ const RoleListing = ({
 
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
   const categories = ['Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
-  const [rolesToDisplay, setRolesToDisplay] = useState([...roles])
+  const [rolesToDisplay, setRolesToDisplay] = useState([])
+ 
+  useEffect(() => {
+    setRolesToDisplay([...roles]);
+  }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
     const filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
@@ -163,7 +167,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
         <Subheader variant="headlineMedium">{title}</Subheader>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem">
         <Chip label='All' variant="outlined" onClick={()=>setRolesToDisplay(roles)}/>
-          {categories.map((category)=><Chip label={category} variant="outlined" onClick={()=>filterRolesByCategory(category)}/>)}
+          {categories.map((category)=><Chip key={category} label={category} variant="outlined" onClick={()=>filterRolesByCategory(category)}/>)}
         </Stack>
         <Box
           sx={{
