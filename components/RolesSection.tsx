@@ -160,18 +160,20 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
   }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
+    // currentF = ['people', 'creative'], and creative is clicked again
     if (currentFilters.includes(selectedCategory)) {
-      setCurrentFilters(currentFilters.filter(f=>f!==selectedCategory))
+      let updatedFilters = currentFilters.filter(f=>f!==selectedCategory)
+      setCurrentFilters(updatedFilters)
+      // filter the displaying roles to only those that match any of the updated filters ['people']
+      setRolesToDisplay(rolesToDisplay.filter(r=>r.category.some(c => updatedFilters.includes(c))))
     } else {
       setCurrentFilters([...currentFilters, selectedCategory])
-
-      let filteredRoles;
-      if (selectedCategory !== 'All') {
-        filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+      let filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+      if (currentFilters.length === 0) {
+        setRolesToDisplay(filteredRoles);
       } else {
-        filteredRoles = [...roles]
+        setRolesToDisplay(rolesToDisplay.concat(filteredRoles))
       }
-      setRolesToDisplay(filteredRoles);
     }
   }
 
