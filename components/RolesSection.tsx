@@ -40,6 +40,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
+import { set } from 'sanity'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
@@ -159,15 +160,19 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
   }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
-    setCurrentFilters([...currentFilters, selectedCategory])
-
-    let filteredRoles;
-    if (selectedCategory !== 'All') {
-      filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+    if (currentFilters.includes(selectedCategory)) {
+      setCurrentFilters(currentFilters.filter(f=>f!==selectedCategory))
     } else {
-      filteredRoles = [...roles]
+      setCurrentFilters([...currentFilters, selectedCategory])
+
+      let filteredRoles;
+      if (selectedCategory !== 'All') {
+        filteredRoles = roles.filter((r)=>r.category && r.category.includes(selectedCategory))
+      } else {
+        filteredRoles = [...roles]
+      }
+      setRolesToDisplay(filteredRoles);
     }
-    setRolesToDisplay(filteredRoles);
   }
 
   return (
@@ -187,11 +192,18 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
             width: '100%',
           }}
         >
-          {rolesToDisplay.map((singleRole, i) => (
+          {currentFilters.length ? rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
               index={i}
-              role={singleRole            }
+              role={singleRole}
+              showLink={showLink} />
+          ))
+          : roles.map((singleRole, i) => (
+            <RoleListing
+              key={i}
+              index={i}
+              role={singleRole}
               showLink={showLink} />
           ))
           }
