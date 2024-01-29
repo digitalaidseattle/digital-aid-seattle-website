@@ -171,15 +171,28 @@ const CardEvent = ({ event }: CardEventProps) => {
           >
             {event.description}
           </Typography>
-          {event.rsvpLink && (
+          {event.details && (
             <Button
               variant="contained"
-              href={event.rsvpLink}
               sx={{
                 maxWidth: 'min-content',
                 display: 'block',
                 marginTop: '2rem',
               }}
+              href={`/event?name=${event.id}`}
+            >
+              Learn More
+            </Button>
+          )}
+          {!event.details && event.rsvpLink && (
+            <Button
+              variant="contained"
+              sx={{
+                maxWidth: 'min-content',
+                display: 'block',
+                marginTop: '2rem',
+              }}
+              href={event.rsvpLink}
             >
               RVSP
             </Button>
