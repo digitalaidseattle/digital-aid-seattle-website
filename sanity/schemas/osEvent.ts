@@ -76,19 +76,6 @@ export default {
             title: 'ID'
         },
         {
-            name: 'interest',
-            type: 'image',
-            title: 'Image',
-            options: { hotspot: true },
-            fields: [
-                {
-                    name: 'alt',
-                    title: 'Alt',
-                    type: 'string'
-                }
-            ]
-        },
-        {
             title: 'About',
             name: 'about',
             type: 'array',
