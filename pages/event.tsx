@@ -200,7 +200,6 @@ const InfoSection = (props: {
 }) => {
   const theme = useTheme()
 
-  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const [event, setEvent] = useState<OSEvent>()
@@ -364,6 +363,10 @@ const ContactUsSection = (props: { event: OSEvent }) => {
 
 
 const ActivitySection = (props: { event: OSEvent }) => {
+  const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const width = extraSmallScreen ? "100%" : "50%"
+
   const [event, setEvent] = useState<OSEvent>()
 
   useEffect(() => {
@@ -375,7 +378,8 @@ const ActivitySection = (props: { event: OSEvent }) => {
       <img
         src={urlForImage(event.activity).url()}
         style={{
-          width: "50%",
+          width: width,
+          // TODO A drop shadow would be nice, but centering needs work
           // borderRadius: '20px',
           // boxShadow:
           //   '0px 0px 0px 0px rgba(52, 61, 62, 0.08), 1px 1px 1px 1px rgba(52, 61, 62, 0.08)',
