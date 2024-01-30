@@ -147,8 +147,7 @@ const RoleListing = ({
 }
 
 
-const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
-  
+const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {  
   const [activeFilters, setActiveFilters] = useState([]);
   const [rolesToDisplay, setRolesToDisplay] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -156,7 +155,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
   useEffect(() => {
     setRolesToDisplay([...roles]);
 
-    // add categories to a set to obtain only unique values
+    // using a set to build a list of unique categories
     const uniqueCategories = new Set()
     roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
     setCategories(Array.from(uniqueCategories))
@@ -169,7 +168,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
       let updatedFilters = activeFilters.filter(f=>f!==selectedCategory)
 
       // filter the roles to include only the ones in the new list of active filters
-      setRolesToDisplay(rolesToDisplay.filter(r=>r.category.some(c => updatedFilters.includes(c))))
+      setRolesToDisplay(rolesToDisplay.filter(r=>r.category && r.category.some(c => updatedFilters.includes(c))))
 
       // update the active filters state
       setActiveFilters(updatedFilters)
