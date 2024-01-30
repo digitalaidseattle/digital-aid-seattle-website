@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { OSEvent } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
+import { eventsService } from 'pages/api/EventsService'
 
 type CardEventProps = {
   event: OSEvent
@@ -22,8 +23,46 @@ const CardEvent = ({ event }: CardEventProps) => {
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
-  const getTimeString = (event: OSEvent): string => {
-    return event.start + (event.end ? ' - ' + event.end : '');
+  const getButton = () => {
+    const buttonSX = (extraSmallScreen || largeScreen)
+      ? {
+        marginTop: { xs: '2rem', lg: '2.5rem' },
+        textAlign: 'center',
+        maxWidth: { xs: '100%', lg: 'min-content' },
+      }
+      : {
+        maxWidth: 'min-content',
+        display: 'block',
+        marginTop: '2rem',
+      }
+
+    if (event.details) {
+      return (
+        <Button
+          variant="contained"
+          sx={buttonSX}
+          href={`/event?name=${event.id}`}
+        >
+          Learn More
+        </Button>
+      )
+    }
+    else
+      if (event.rsvpLink) {
+        return (
+          <Button
+            variant="contained"
+            sx={buttonSX}
+            href={event.rsvpLink}
+          >
+            RVSP
+          </Button>
+        )
+      } else {
+        return (
+          <></>
+        )
+      }
   }
 
   if (extraSmallScreen || largeScreen) {
@@ -52,7 +91,7 @@ const CardEvent = ({ event }: CardEventProps) => {
               overflow: 'hidden',
             }}
           >
-            {event.image &&
+            {event.image && event.image.asset &&
               <CardMedia
                 component="img"
                 image={urlForImage(event.image).url()}
@@ -71,13 +110,11 @@ const CardEvent = ({ event }: CardEventProps) => {
           >
             <Stack justifyContent="center" sx={{ height: '100%' }}>
               <Stack spacing="1rem">
-                <Typography variant="titleLarge" component="h2">
-                  {event.title}
-                </Typography>
+                <Typography variant="titleLarge">{event.title}</Typography>
                 <Stack direction="row" spacing="1rem">
                   <Typography variant="labelLarge">{event.date}</Typography>
                   <Typography variant="labelLarge">
-                    {getTimeString(event)}
+                    {eventsService.getTimeString(event)}
                   </Typography>
                 </Stack>
                 <Typography variant="labelMedium">{event.location}</Typography>
@@ -89,32 +126,7 @@ const CardEvent = ({ event }: CardEventProps) => {
               >
                 {event.description}
               </Typography>
-              {event.details && (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginTop: { xs: '2rem', lg: '2.5rem' },
-                    textAlign: 'center',
-                    maxWidth: { xs: '100%', lg: 'min-content' },
-                  }}
-                  href={`/event?name=${event.id}`}
-                >
-                  Learn More
-                </Button>
-              )}
-              {!event.details && event.rsvpLink && (
-                <Button
-                  variant="contained"
-                  sx={{
-                    marginTop: { xs: '2rem', lg: '2.5rem' },
-                    textAlign: 'center',
-                    maxWidth: { xs: '100%', lg: 'min-content' },
-                  }}
-                  href={event.rsvpLink}
-                >
-                  RVSP
-                </Button>
-              )}
+              {getButton()}
             </Stack>
           </CardContent>
         </Stack>
@@ -138,7 +150,7 @@ const CardEvent = ({ event }: CardEventProps) => {
                 height: '10rem',
                 width: '10rem',
               }}>
-              {event.image &&
+              {event.image && event.image.asset &&
                 <CardMedia
                   component="img"
                   image={urlForImage(event.image).url()}
@@ -159,7 +171,7 @@ const CardEvent = ({ event }: CardEventProps) => {
               <Stack direction="row" spacing="1rem">
                 <Typography variant="labelLarge">{event.date}</Typography>
                 <Typography variant="labelLarge">
-                  {getTimeString(event)}
+                  {eventsService.getTimeString(event)}
                 </Typography>
               </Stack>
               <Typography variant="labelMedium">{event.location}</Typography>
@@ -171,19 +183,7 @@ const CardEvent = ({ event }: CardEventProps) => {
           >
             {event.description}
           </Typography>
-          {event.rsvpLink && (
-            <Button
-              variant="contained"
-              href={event.rsvpLink}
-              sx={{
-                maxWidth: 'min-content',
-                display: 'block',
-                marginTop: '2rem',
-              }}
-            >
-              RVSP
-            </Button>
-          )}
+          {getButton()}
         </CardContent>
       </Card>
     )

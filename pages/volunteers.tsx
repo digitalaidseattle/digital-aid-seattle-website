@@ -93,7 +93,7 @@ const oathContent = [
   {
     label: 'Safeguard partner information.',
     content:
-      'I will safeguard our partners’ personal information, preserving and personal data encountered in my role as an Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
+      'I will safeguard our partners’ personal information, preserving any personal data encountered in my role as a Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
   },
   {
     label: 'Maintain open communication.',
