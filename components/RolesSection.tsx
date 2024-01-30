@@ -147,16 +147,14 @@ const RoleListing = ({
   )
 }
 
-
-const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {  
+const FilterableRoles = ({ roles, showLink }) => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [rolesToDisplay, setRolesToDisplay] = useState([]);
   const [categories, setCategories] = useState([]);
  
   useEffect(() => {
     setRolesToDisplay([...roles]);
-
-    // using a set to build a list of unique categories
+    // using a set to build a list of categories that occur in roles data
     const uniqueCategories = new Set()
     roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
     setCategories(Array.from(uniqueCategories))
@@ -170,17 +168,15 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
 
       // filter the roles to include only the ones in the new list of active filters
       setRolesToDisplay(rolesToDisplay.filter(r=>r.category && r.category.some(c => updatedFilters.includes(c))))
-
-      // update the active filters state
       setActiveFilters(updatedFilters)
 
     } else { // the chip was unchecked at time of clicking on it
-      // add selected category to list of filters
-      setActiveFilters([...activeFilters, selectedCategory])
-
       // filter the roles to include only the roles that match the selected category,
       // and does not already have a category in the list of active filters (to prevent duplicates)
       let filteredRoles = roles.filter((r) => r.category && r.category.includes(selectedCategory) && !r.category.some(c => activeFilters.includes(c)))
+
+      // add selected category to list of filters
+      setActiveFilters([...activeFilters, selectedCategory])
 
       // if the active filters state is empty at the moment (first filter to be applied)
       if (activeFilters.length === 0) {
@@ -193,12 +189,11 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
 
   return (
     roles.length > 0 && (
-      <Section>
-        <Subheader variant="headlineMedium">{title}</Subheader>
-        {showFilters && <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
+      <>
+        <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
           {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
-        </Stack>}
-        {<Box
+        </Stack>
+        <Box
           sx={{
             display: 'grid',
             gridAutoFlow: 'columns',
@@ -208,7 +203,7 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
             width: '100%',
           }}
         >
-          {showFilters && activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
+          {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
               index={i}
@@ -224,6 +219,42 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
           ))
           }
         </Box>
+        </>
+    )
+  )
+}
+
+const RolesOnly = ({ roles, showLink }) => {
+  return (
+      <Box
+        sx={{
+          display: 'grid',
+          gridAutoFlow: 'columns',
+          gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
+          justifyContent: 'center',
+          gap: { xs: '1rem', md: '2rem' },
+          width: '100%',
+        }}
+      >
+        {roles.map((singleRole, i) => (
+          <RoleListing
+            key={i}
+            index={i}
+            role={singleRole}
+            showLink={showLink} />
+        ))
+        }
+      </Box>
+  )
+}
+
+const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {  
+
+  return (
+    roles.length > 0 && (
+      <Section>
+        <Subheader variant="headlineMedium">{title}</Subheader>
+        {showFilters ? <FilterableRoles roles={roles} showLink={showLink}/> : <RolesOnly roles={roles} showLink={showLink}/>
         }
         {children}
       </Section>
