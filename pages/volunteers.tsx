@@ -175,7 +175,7 @@ const VolunteerPage = () => {
       }}
       maxWidth={'880px'}
     >
-      <RolesSection title='Current Volunteer Openings' showLink={true} roles={volunteerRoles} />
+      <RolesSection title='Current Volunteer Openings' showLink={true} showFilters={true} roles={volunteerRoles} />
       <Typography variant="bodyLarge">
         All of our volunteers are vetted for experience, and sign a volunteer
         agreement before commencing work with Digital Aid Seattle.

@@ -86,6 +86,7 @@ type RolesSectionProps = {
   title: string
   columns?: number
   showLink?: boolean
+  showFilters?: boolean
   roles?: DASVolunteerRoleBasicInfo[]
   children?: ReactNode
 }
@@ -147,7 +148,7 @@ const RoleListing = ({
 }
 
 
-const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {  
+const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {  
   const [activeFilters, setActiveFilters] = useState([]);
   const [rolesToDisplay, setRolesToDisplay] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -194,9 +195,9 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
-        <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
+        {showFilters && <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
           {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
-        </Stack>
+        </Stack>}
         {<Box
           sx={{
             display: 'grid',
@@ -207,7 +208,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
             width: '100%',
           }}
         >
-          {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
+          {showFilters && activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
               index={i}
@@ -224,8 +225,6 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
           }
         </Box>
         }
-        {/* TODO: show text when no roles match current filters */}
-        {/* TODO: make sure the filters work when inside project pages */}
         {children}
       </Section>
     )
