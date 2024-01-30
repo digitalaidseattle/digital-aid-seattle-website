@@ -34,7 +34,7 @@ import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import CheckIcon from '@mui/icons-material/Check'; // for chip
-import { Box, Chip, Link, Stack } from '@mui/material'
+import { Box, Chip, Link, Stack, Typography } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
@@ -130,7 +130,6 @@ const RoleListing = ({
     <Link href={`${getRoleUrl(role.key)}`} sx={{ textDecoration: 'none' }}>
       <RoleBase
         sxProps={{
-
           '&': {
             '&:hover': {
               background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
@@ -148,17 +147,19 @@ const RoleListing = ({
 }
 
 
-
-
 const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
-  // TODO: remove hardcoded array; extract from airtable
-  const categories = ['Business', 'Community', 'Creative', 'Engineering', 'People', 'Product']
   
   const [activeFilters, setActiveFilters] = useState([]);
-  const [rolesToDisplay, setRolesToDisplay] = useState([])
+  const [rolesToDisplay, setRolesToDisplay] = useState([]);
+  const [categories, setCategories] = useState([]);
  
   useEffect(() => {
     setRolesToDisplay([...roles]);
+
+    // add categories to a set to obtain only unique values
+    const uniqueCategories = new Set()
+    roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
+    setCategories(Array.from(uniqueCategories))
   }, [roles]); 
 
   function filterRolesByCategory(selectedCategory) {
@@ -197,7 +198,7 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
           {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
         </Stack>
-        <Box
+        {<Box
           sx={{
             display: 'grid',
             gridAutoFlow: 'columns',
@@ -223,6 +224,9 @@ const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSe
           ))
           }
         </Box>
+        }
+        {/* TODO: show text when no roles match current filters */}
+        {/* TODO: make sure the filters work when inside project pages */}
         {children}
       </Section>
     )
