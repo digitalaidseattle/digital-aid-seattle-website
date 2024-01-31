@@ -204,30 +204,28 @@ const FilterableRoles = ({ roles, showLink }) => {
   }
 
   return (
-    roles.length > 0 && (
       <>
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
           {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
         </Stack>
-      <RoleContainer>
-          {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
-            <RoleListing
-              key={i}
-              index={i}
-              role={singleRole}
-              showLink={showLink} />
-          ))
-          : roles.map((singleRole, i) => (
-            <RoleListing
-              key={i}
-              index={i}
-              role={singleRole}
-              showLink={showLink} />
-          ))
-          }
-        </RoleContainer>
+        <RoleContainer>
+            {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
+              <RoleListing
+                key={i}
+                index={i}
+                role={singleRole}
+                showLink={showLink} />
+            ))
+            : roles.map((singleRole, i) => (
+              <RoleListing
+                key={i}
+                index={i}
+                role={singleRole}
+                showLink={showLink} />
+            ))
+            }
+          </RoleContainer>
         </>
-    )
   )
 }
 
