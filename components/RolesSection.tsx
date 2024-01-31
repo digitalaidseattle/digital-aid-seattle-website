@@ -33,7 +33,6 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import CheckIcon from '@mui/icons-material/Check'; // for chip
 import { Box, Chip, Link, Stack, Typography } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -147,6 +146,23 @@ const RoleListing = ({
   )
 }
 
+const RoleContainer = ({ children }) => {
+  return (
+    <Box
+    sx={{
+      display: 'grid',
+      gridAutoFlow: 'columns',
+      gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
+      justifyContent: 'center',
+      gap: { xs: '1rem', md: '2rem' },
+      width: '100%',
+    }}
+  >
+    {children}
+    </Box>
+  )
+}
+
 const FilterableRoles = ({ roles, showLink }) => {
   const [activeFilters, setActiveFilters] = useState([]);
   const [rolesToDisplay, setRolesToDisplay] = useState([]);
@@ -193,16 +209,7 @@ const FilterableRoles = ({ roles, showLink }) => {
         <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
           {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
         </Stack>
-        <Box
-          sx={{
-            display: 'grid',
-            gridAutoFlow: 'columns',
-            gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
-            justifyContent: 'center',
-            gap: { xs: '1rem', md: '2rem' },
-            width: '100%',
-          }}
-        >
+      <RoleContainer>
           {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
             <RoleListing
               key={i}
@@ -218,7 +225,7 @@ const FilterableRoles = ({ roles, showLink }) => {
               showLink={showLink} />
           ))
           }
-        </Box>
+        </RoleContainer>
         </>
     )
   )
@@ -226,16 +233,7 @@ const FilterableRoles = ({ roles, showLink }) => {
 
 const RolesOnly = ({ roles, showLink }) => {
   return (
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
-          justifyContent: 'center',
-          gap: { xs: '1rem', md: '2rem' },
-          width: '100%',
-        }}
-      >
+      <RoleContainer>
         {roles.map((singleRole, i) => (
           <RoleListing
             key={i}
@@ -244,12 +242,11 @@ const RolesOnly = ({ roles, showLink }) => {
             showLink={showLink} />
         ))
         }
-      </Box>
+      </RoleContainer>
   )
 }
 
 const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {  
-
   return (
     roles.length > 0 && (
       <Section>
