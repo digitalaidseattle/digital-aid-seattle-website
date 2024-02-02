@@ -373,7 +373,7 @@ const ActivitySection = (props: { event: OSEvent }) => {
     setEvent(props.event)
   }, [props])
 
-  return (event && event.activity &&
+  return (event && event.activity && event.activity.asset &&
     <Section  >
       <img
         src={urlForImage(event.activity).url()}
