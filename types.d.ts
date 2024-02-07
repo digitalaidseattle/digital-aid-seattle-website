@@ -50,7 +50,7 @@ type DASProject = {
   problem: string[]
   solution: string[]
   impact: string[]
-  rolesNeeded: string[]
+  rolesNeeded: DASVolunteerRoleBasicInfo[]
   currentTeam: TeamMember[]
   display: boolean
 }
@@ -58,6 +58,7 @@ type DASProject = {
 type DASVolunteerRoleBasicInfo = {
   role: string
   key: string
+  category: string[]
 }
 
 type DASVolunteerRole = {

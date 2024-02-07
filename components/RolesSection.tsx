@@ -2,7 +2,7 @@
 * RolesNeededSection.tsx
 * example: 
  
-<RolesSection title="Current volunteer openings"
+<RolesSection title="Active volunteer openings"
  roles={[]}
  showLink={true}
  columns={2} >
@@ -33,13 +33,14 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Link } from '@mui/material'
-import { ReactNode } from 'react'
+import { Box, Chip, Link, Stack, Typography } from '@mui/material'
+import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
+import { Check } from '@mui/icons-material'
 
 // TODO: standardize roles between sanity and airtable
 const rolesMap = {
@@ -84,7 +85,8 @@ type RolesSectionProps = {
   title: string
   columns?: number
   showLink?: boolean
-  roles?: DASVolunteerRoleBasicInfo[] | String[]
+  showFilters?: boolean
+  roles?: DASVolunteerRoleBasicInfo[]
   children?: ReactNode
 }
 
@@ -128,7 +130,6 @@ const RoleListing = ({
     <Link href={`${getRoleUrl(role.key)}`} sx={{ textDecoration: 'none' }}>
       <RoleBase
         sxProps={{
-
           '&': {
             '&:hover': {
               background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
@@ -145,30 +146,111 @@ const RoleListing = ({
   )
 }
 
-const RolesSection = ({ title, showLink = false, roles = [], children }: RolesSectionProps) => {
+const RoleContainer = ({ children }) => {
+  return (
+    <Box
+    sx={{
+      display: 'grid',
+      gridAutoFlow: 'columns',
+      gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
+      justifyContent: 'center',
+      gap: { xs: '1rem', md: '2rem' },
+      width: '100%',
+    }}
+  >
+    {children}
+    </Box>
+  )
+}
+
+const FilterableRoles = ({ roles, showLink }) => {
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [rolesToDisplay, setRolesToDisplay] = useState([]);
+  const [categories, setCategories] = useState([]);
+ 
+  useEffect(() => {
+    setRolesToDisplay([...roles]);
+    // using a set to build a list of categories that occur in roles data
+    const uniqueCategories = new Set()
+    roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
+    setCategories(Array.from(uniqueCategories))
+  }, [roles]); 
+
+  function filterRolesByCategory(selectedCategory) {
+    // if a category is already active (the chip is checked)
+    if (activeFilters.includes(selectedCategory)) {
+      // remove the category from the list of active filters
+      let updatedFilters = activeFilters.filter(f=>f!==selectedCategory)
+
+      // filter the roles to include only the ones in the new list of active filters
+      setRolesToDisplay(rolesToDisplay.filter(r=>r.category && r.category.some(c => updatedFilters.includes(c))))
+      setActiveFilters(updatedFilters)
+
+    } else { // the chip was unchecked at time of clicking on it
+      // filter the roles to include only the roles that match the selected category,
+      // and does not already have a category in the list of active filters (to prevent duplicates)
+      let filteredRoles = roles.filter((r) => r.category && r.category.includes(selectedCategory) && !r.category.some(c => activeFilters.includes(c)))
+
+      // add selected category to list of filters
+      setActiveFilters([...activeFilters, selectedCategory])
+
+      // if the active filters state is empty at the moment (first filter to be applied)
+      if (activeFilters.length === 0) {
+        setRolesToDisplay(filteredRoles);
+      } else { // if there is at least one filter active at the moment, append to the state.
+        setRolesToDisplay(rolesToDisplay.concat(filteredRoles))
+      }
+    }
+  }
+
+  return (
+      <>
+        <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{flexWrap: 'wrap', justifyContent: 'center'}}>
+          {categories.map((category)=><Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check/>} onClick={()=>filterRolesByCategory(category) }/>)}
+        </Stack>
+        <RoleContainer>
+            {activeFilters.length ? rolesToDisplay.map((singleRole, i) => (
+              <RoleListing
+                key={i}
+                index={i}
+                role={singleRole}
+                showLink={showLink} />
+            ))
+            : roles.map((singleRole, i) => (
+              <RoleListing
+                key={i}
+                index={i}
+                role={singleRole}
+                showLink={showLink} />
+            ))
+            }
+          </RoleContainer>
+        </>
+  )
+}
+
+const RolesOnly = ({ roles, showLink }) => {
+  return (
+      <RoleContainer>
+        {roles.map((singleRole, i) => (
+          <RoleListing
+            key={i}
+            index={i}
+            role={singleRole}
+            showLink={showLink} />
+        ))
+        }
+      </RoleContainer>
+  )
+}
+
+const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {  
   return (
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
-        <Box
-          sx={{
-            display: 'grid',
-            gridAutoFlow: 'columns',
-            gridTemplateColumns: { xs: 'repeat(1), minmax(15rem, 1fr)', md: `repeat(2, minmax(15rem, 1fr))`, lg: 'repeat(3, minmax(15rem, 1fr))' },
-            justifyContent: 'center',
-            gap: { xs: '1rem', md: '2rem' },
-            width: '100%',
-          }}
-        >
-          {roles.map((singleRole, i) => (
-            <RoleListing
-              key={i}
-              index={i}
-              role={singleRole}
-              showLink={showLink} />
-          ))
-          }
-        </Box>
+        {showFilters ? <FilterableRoles roles={roles} showLink={showLink}/> : <RolesOnly roles={roles} showLink={showLink}/>
+        }
         {children}
       </Section>
     )

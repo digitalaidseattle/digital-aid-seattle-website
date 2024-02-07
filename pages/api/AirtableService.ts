@@ -60,6 +60,17 @@ class AirtableService {
     }
   }
 
+  getStringArrayFieldRecord(
+    record: Airtable.Record<FieldSet>,
+    field: string
+  ): string[] {
+    if (record.get(field) === undefined) {
+      return null
+    } else {
+      return record.get(field) as string[]
+    }
+  }
+
   getSplitFieldRecord(
     record: Airtable.Record<FieldSet>,
     field: string
