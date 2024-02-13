@@ -5,12 +5,12 @@ import { Box, useTheme } from '@mui/material'
 import ErrorComponent from 'components/ErrorComponent'
 import Masthead from 'components/Masthead'
 import { withBasicLayout } from 'components/layouts'
-import ErrorImage from '../assets/404-error.png'
+import ErrorImage from '../assets/500-error.png'
 
-function Page404() {
+function Page500() {
   const theme = useTheme()
 
-  const title = '404';
+  const title = 'Oops!';
 
   return (
     <>
@@ -24,13 +24,13 @@ function Page404() {
           alignItems: 'center',
         }}
       >
-        <ErrorComponent title="Page Not Found"
-          description="Unfortunately, the page you are trying to access could not be located. Please return to our home page to continue your journey."
+        <ErrorComponent title="System Error"
+          description="Something went wrong. Please head back to our home page to continue your journey."
           imageSrc={ErrorImage.src}
-          imageTitle="404 Error Image" />
+          imageTitle="System Error Image" />
       </Box>
     </>
   )
 }
 
-export default withBasicLayout(Page404)
+export default withBasicLayout(Page500)
