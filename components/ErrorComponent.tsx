@@ -1,6 +1,7 @@
 /*
 * @2023 Digital Aid Seattle
 */
+import { Group } from '@mui/icons-material'
 import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 
@@ -16,7 +17,7 @@ const ErrorComponent = ({ title, description, imageSrc, imageTitle }: ErrorCompo
   const theme = useTheme()
   const smallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
-
+  const alignment = largeScreen ? 'left' : 'center';
   return <SectionContainer backgroundColor={theme.palette.background}>
     <Box
       sx={{
@@ -34,14 +35,22 @@ const ErrorComponent = ({ title, description, imageSrc, imageTitle }: ErrorCompo
           flexDirection: 'column',
           gap: '2rem',
         }}>
-        <Typography
-          variant={smallScreen ? 'headlineMedium' : 'headlineLarge'}>
-          {title}
-        </Typography>
+        <Box sx={{
+          textAlign: `${alignment}`,
+          width: '100%'
+        }}>
+          <Typography
+            variant={smallScreen ? 'headlineMedium' : 'headlineLarge'}>
+            {title}
+          </Typography>
+        </Box>
         <Typography variant="bodyLarge" >
           {description}
         </Typography>
-        <Box >
+        <Box sx={{
+          textAlign: `${alignment}`,
+          width: '100%'
+        }}>
           <Button
             title="Back Home"
             variant="contained"
