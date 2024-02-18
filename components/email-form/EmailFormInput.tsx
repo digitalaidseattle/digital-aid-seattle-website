@@ -18,7 +18,6 @@ const EmailFormInput = ({ userEmail, handleEmailInput, error }) => {
       }}
     >
       <TextField
-        type="email"
         value={userEmail}
         placeholder='email address'
         onChange={(e) => handleEmailInput(e.target.value)}
