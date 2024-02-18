@@ -9,7 +9,6 @@ import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 import { ReactNode } from 'react'
-import EmailFormInput from './email-form/EmailFormInput'
 import EmailFormContainer from './email-form/EmailFormContainer'
 
 // const GridItem = styled(Grid)(() => {
@@ -324,7 +323,7 @@ const CommonFooter = () => {
     <>
       <Container>
         
-        {/* <EmailFormContainer /> */}
+        <EmailFormContainer />
 
         <Box
           sx={{
