@@ -4,7 +4,8 @@
 
 import { groq } from 'next-sanity';
 import { sanityClient } from '../../sanity/lib/client';
-import { DASProject } from 'types';
+import { DASProject, TeamMember } from 'types';
+import airtableService from './AirtableService';
 
 
 class DASProjectsService {
@@ -27,6 +28,21 @@ class DASProjectsService {
             ? `${project.duration.start ? project.duration.start : ''} ${project.duration.end ? (' - ' + project.duration.end) : ''}`
             : 'Ongoing'
         return timeline
+    }
+
+    async getPeople(status: string): Promise<TeamMember[]> {
+        return (await airtableService.getTableRecords(
+            process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE
+            , 100
+            , `{Manual Status} = "${status}"`
+        ))
+            .map(r => {
+                return {
+                    name: `${r.fields["First name"]} ${r.fields["Last name"]}`,
+                    role: r.fields["Position"],
+                    url: r.fields.pic && r.fields.pic[0] && r.fields.pic[0].thumbnails.large.url || undefined
+                } as TeamMember
+            });
     }
 }
 

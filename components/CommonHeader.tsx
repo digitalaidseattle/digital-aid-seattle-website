@@ -4,8 +4,8 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
-import AppBar from '@mui/material/AppBar'
 import { Box, Button } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
@@ -32,8 +32,9 @@ const PATH_TO_SECTION = {
   '/project_individual': 'Projects',
   '/partners': 'Partners',
   '/volunteers': 'Volunteer',
-  '/volunteer_individual': 'Volunteer',
-  '/events': 'Events'
+  '/volunteer_role': 'Volunteer',
+  '/events': 'Events',
+  '/event': 'Events'
 }
 
 
@@ -168,10 +169,11 @@ const CommonHeader = () => {
                 >
                   <Link
                     sx={{
-                      fontSize: '14px',
-                      fontWeight: '700',
                       color: theme.palette.primary.contrastText,
-                      textDecoration: 'none'
+                      textUnderlineOffset: '0.5rem',
+                      textDecoration: isCurrent(name)
+                        ? 'underline'
+                        : 'none'
                     }}
                     href={SECTION_TO_PATH[name]}
                   >
