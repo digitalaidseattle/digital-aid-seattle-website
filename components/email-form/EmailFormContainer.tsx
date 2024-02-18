@@ -1,8 +1,12 @@
 import { Button, Stack, Typography, useTheme } from '@mui/material'
+import { useState } from 'react'
+
 import EmailFormInput from './EmailFormInput'
 
 const EmailFormContainer = () => {
   const theme = useTheme()
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('LOL');
 
   return (
     <Stack
@@ -27,22 +31,31 @@ const EmailFormContainer = () => {
           Stay in the know!
         </Typography>
       </Stack>
-      <Stack
-        gap={'2rem'}
-        sx={{
-          flexDirection: { xs: 'column', md: 'row' },
-          width: { xs: '100%', lg: 'auto' },
-        }}
-      >
-        <EmailFormInput />
-        <Button
+      <Stack gap='1rem' sx={{width: { xs: '100%', lg: 'auto' }}}>
+        <Stack
+          gap='2rem'
           sx={{
-            color: theme.palette.primary.contrastText,
-            backgroundColor: theme.palette.primary.dark,
+            flexDirection: { xs: 'column', md: 'row' },
           }}
         >
-          Sign up
-        </Button>
+          <EmailFormInput 
+            userEmail={email}
+            handleEmailInput={(formInput)=>setEmail(formInput)}
+            error={error}
+          />
+          <Button
+            sx={{
+              color: theme.palette.primary.contrastText,
+              backgroundColor: theme.palette.primary.dark,
+            }}
+          >
+            Sign up
+          </Button>
+        </Stack>
+        {error && <Typography sx={{
+          paddingLeft: '1rem',
+          color: theme.palette.error.main, 
+          }}>Error: {error}</Typography>}
       </Stack>
     </Stack>
   )

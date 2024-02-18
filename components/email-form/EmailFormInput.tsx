@@ -1,8 +1,7 @@
-import { Box, TextField } from '@mui/material'
-import { useState } from 'react'
+import { Box, TextField, useTheme } from '@mui/material'
 
-const EmailFormInput = () => {
-  const [email, setEmail] = useState('')
+const EmailFormInput = ({ userEmail, handleEmailInput, error }) => {
+  const theme = useTheme()
 
   return (
     <Box
@@ -10,6 +9,7 @@ const EmailFormInput = () => {
       sx={{
         backgroundColor: 'white',
         borderRadius: '28px',
+        border: error ? `3px solid ${theme.palette.error.main}` : 'none',
         padding: '0.25rem 1rem',
         width: { xs: 'auto', lg: '25rem' },
         flex: { xs: '1', lg: 'none' },
@@ -18,9 +18,10 @@ const EmailFormInput = () => {
       }}
     >
       <TextField
-        value={email}
+        type="email"
+        value={userEmail}
         placeholder='email address'
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => handleEmailInput(e.target.value)}
         variant="standard"
         InputProps={{
           disableUnderline: true
