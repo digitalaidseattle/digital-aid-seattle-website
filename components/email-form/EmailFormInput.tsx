@@ -13,13 +13,22 @@ const EmailFormInput = () => {
         padding: '0 1rem',
         width: { xs: 'auto', lg: '25rem' },
         flex: { xs: '1', lg: 'none' },
+        display: 'flex',
+        alignItems: 'center'
       }}
     >
       <TextField
-        variant="standard"
         value={email}
+        placeholder='email address'
         onChange={(e) => setEmail(e.target.value)}
-        sx={{ width: '100%' }}
+        variant="standard"
+        InputProps={{
+          disableUnderline: true
+        }}
+        sx={{ 
+          width: '100%', 
+          height: 'min-content'
+        }}
       />
     </Box>
   )
