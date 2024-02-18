@@ -18,7 +18,7 @@ import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
-  const { setLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     setLoading(true);
@@ -233,7 +233,7 @@ const VolunteerRolePage = () => {
               <RoleDescriptionSection roleData={role} />
             </>
           )}
-          {!role && <RoleUnavailableSection />}
+          {!role && !loading && <RoleUnavailableSection />}
         </Stack>
       </SectionContainer>
     </>
