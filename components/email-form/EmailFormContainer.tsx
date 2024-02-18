@@ -23,6 +23,7 @@ const EmailFormContainer = () => {
     <form onSubmit={handleSubmit}>
     <Stack
       sx={{
+        paddingTop: { xs: '4rem', lg: '5rem' },
         flexDirection: { xs: 'column', lg: 'row' },
         alignItems: { xs: 'flex-start', lg: 'center' },
         gap: '2rem',

@@ -3,7 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Container, Grid, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
@@ -322,13 +322,10 @@ const CommonFooterSmallScreen = () => (
 const CommonFooter = () => {
   return (
     <>
-      <Container
-        sx={{
-          paddingTop: { xs: '4rem', lg: '5rem' },
-          paddingX: { md: '2rem', lg: '0' },
-        }}
-      >
-        <EmailFormContainer />
+      <Container>
+        
+        {/* <EmailFormContainer /> */}
+
         <Box
           sx={{
             paddingY: '5rem',
