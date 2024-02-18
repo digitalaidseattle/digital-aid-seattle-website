@@ -209,7 +209,6 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          // height: '100%',
         }}
       >
         {contactUsBox()}
@@ -223,7 +222,6 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          // height: '100%',
         }}
       >
         {aboutBox()}
@@ -322,9 +320,7 @@ const CommonFooter = () => {
   return (
     <>
       <Container>
-        
         <EmailFormContainer />
-
         <Box
           sx={{
             paddingY: '5rem',
