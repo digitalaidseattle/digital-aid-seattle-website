@@ -10,7 +10,7 @@ const EmailFormInput = () => {
       sx={{
         backgroundColor: 'white',
         borderRadius: '28px',
-        padding: '0 1rem',
+        padding: '0.25rem 1rem',
         width: { xs: 'auto', lg: '25rem' },
         flex: { xs: '1', lg: 'none' },
         display: 'flex',
