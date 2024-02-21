@@ -53,7 +53,7 @@ const EventsPage = () => {
   const theme = useTheme()
 
   const title = 'Events'
-  const { setLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
   const [events, setEvents] = useState([])
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const EventsPage = () => {
               <CardEvent key={event.title} event={event} />
             ))}
 
-            {events.length === 0 && (
+            {events.length === 0 && !loading && (
               <Typography sx={{ textAlign: 'center' }}>
                 All upcoming events are invite-only. Please check back in the
                 future for public events.
