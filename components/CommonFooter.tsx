@@ -3,13 +3,14 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
-import OSLogo from '../assets/darkThemeLogo.svg'
 import { ReactNode } from 'react'
+import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
+import { useFeature } from 'pages/api/FeatureService'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -317,10 +318,11 @@ const CommonFooterSmallScreen = () => (
 )
 
 const CommonFooter = () => {
+  const { data: newsLetter } = useFeature('newsletter');
   return (
     <>
       <Container>
-        <EmailFormContainer />
+        {newsLetter && <EmailFormContainer />}
         <Box
           sx={{
             paddingY: '5rem',

@@ -55,6 +55,13 @@ type DASProject = {
   display: boolean
 }
 
+type DASFeature = {
+  _id: string
+  _createdAt: Date
+  name: string
+  enabled: boolean
+}
+
 type DASVolunteerRoleBasicInfo = {
   role: string
   key: string
