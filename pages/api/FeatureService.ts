@@ -33,7 +33,7 @@ const useFeature = (name: string) => {
         };
 
         fetchData();
-    }, []);
+    }, [name]);
 
     return { status, data };
 };
