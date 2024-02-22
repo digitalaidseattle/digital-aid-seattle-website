@@ -3,7 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Container, Grid, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
@@ -137,7 +137,8 @@ const supportUsBox = () => {
 
 const copyrightBox = () => {
   return (
-    <Box>
+    <Stack gap="0.25rem">
+      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
       <SubText>
         Illustrations by{' '}
         <Link
@@ -150,8 +151,7 @@ const copyrightBox = () => {
           Freepik
         </Link>
       </SubText>
-      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
-    </Box>
+    </Stack>
   )
 }
 
@@ -195,11 +195,12 @@ const CommonFooterLargeScreen = () => (
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           height: '100%',
+          gap: '2rem'
         }}
       >
-        {logoBox({ height: '80%', width: '120px' })}
+        {logoBox({ height: 'auto', width: '75%' })}
         {copyrightBox()}
       </Box>
     </GridItem>
@@ -248,15 +249,16 @@ const CommonFooterLargeScreen = () => (
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
     <GridItem md={5}>
-      <Box
+    <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           height: '100%',
+          gap: '2rem'
         }}
       >
-        {logoBox({ height: 'auto', width: '120px' })}
+        {logoBox({ height: 'auto', width: '75%' })}
         {copyrightBox()}
       </Box>
     </GridItem>
