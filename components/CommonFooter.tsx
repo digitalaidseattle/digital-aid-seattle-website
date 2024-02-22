@@ -235,7 +235,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          marginLeft: '4rem',
+          alignItems: 'flex-end'
         }}
       >
         {linkedInLink()}
@@ -282,6 +282,7 @@ const CommonFooterMidScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
+          alignItems: 'flex-end',
         }}
       >
         {linkedInLink()}
@@ -296,7 +297,7 @@ const CommonFooterSmallScreen = () => (
     container
     direction="column"
     columns={1}
-    sx={{ alignItems: 'center', textAlign: 'center', gap: '4rem' }}
+    sx={{ alignItems: 'center', textAlign: 'center', gap: '2rem' }}
   >
     <GridItem>{logoBox({ height: '3rem', width: 'auto' })}</GridItem>
 
