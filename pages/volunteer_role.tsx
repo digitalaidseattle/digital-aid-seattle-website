@@ -9,7 +9,7 @@ import {
   useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
 import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
@@ -240,4 +240,4 @@ const VolunteerRolePage = () => {
   )
 }
 
-export default withBasicLayout(VolunteerRolePage)
+export default withBasicLayoutLoading(VolunteerRolePage)

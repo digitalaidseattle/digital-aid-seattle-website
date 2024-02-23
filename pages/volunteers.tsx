@@ -34,7 +34,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
@@ -380,4 +380,4 @@ const VolunteerPage = () => {
   )
 }
 
-export default withBasicLayout(VolunteerPage)
+export default withBasicLayoutLoading(VolunteerPage)
