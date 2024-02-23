@@ -71,6 +71,29 @@ export const withBasicLayout = (Page: () => JSX.Element) => () =>
     />
     <CommonHeader />
 
+    <MainContainer>
+      <Page />
+    </MainContainer>
+    <FooterContainer>
+      <CommonFooter />
+    </FooterContainer>
+  </>
+)
+
+export const withBasicLayoutLoading  = (Page: () => JSX.Element) => () =>
+(
+  <>
+    <CssBaseline />
+    <GlobalStyles
+      styles={{
+        a: {
+          color: 'inherit',
+          textDecoration: 'inherit',
+        },
+      }}
+    />
+    <CommonHeader />
+
     <WrappdMainContainer>
       <Page />
     </WrappdMainContainer>

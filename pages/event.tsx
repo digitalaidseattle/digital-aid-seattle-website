@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import SectionContainer from 'components/layout/SectionContainer';
 
-import { LoadingContext, withBasicLayout } from 'components/layouts';
+import { LoadingContext, withBasicLayoutLoading } from 'components/layouts';
 // icons for role cards
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -423,4 +423,4 @@ const EventPage = () => {
   )
 }
 
-export default withBasicLayout(EventPage)
+export default withBasicLayoutLoading(EventPage)

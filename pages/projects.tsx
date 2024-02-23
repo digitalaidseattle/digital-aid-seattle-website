@@ -2,7 +2,7 @@ import { Box, CircularProgress, Stack, useTheme } from '@mui/material'
 import Masthead from 'components/Masthead'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 import { dasProjectsService } from './api/ProjectsService'
 
@@ -65,4 +65,4 @@ const ProjectsPage = () => {
   )
 }
 
-export default withBasicLayout(ProjectsPage)
+export default withBasicLayoutLoading(ProjectsPage)

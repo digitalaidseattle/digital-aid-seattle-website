@@ -10,7 +10,7 @@ import {
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 
 import SectionContainer from 'components/layout/SectionContainer'
@@ -96,4 +96,4 @@ const EventsPage = () => {
   )
 }
 
-export default withBasicLayout(EventsPage)
+export default withBasicLayoutLoading(EventsPage)
