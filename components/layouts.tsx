@@ -24,7 +24,7 @@ export const FooterContainer = styled.footer`
 `
 
 export const LoadingContext = createContext({
-  loading: false,
+  loading: true,
   setLoading: (b: boolean) => { },
 })
 
@@ -44,7 +44,7 @@ const LoadingIndicator = (): ReactJSXElement => {
 }
 
 const WrappdMainContainer = (props: { children: ReactNode }): ReactJSXElement => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
