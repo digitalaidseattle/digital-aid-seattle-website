@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 
-import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
+import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
 
 import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -141,12 +141,12 @@ const ProjectIndividualPage = () => {
   }
 
   return (
-    <>
+    <LoadingBlock>
       <ProjectHeaderSection project={project} />
       {project ? getBody() : <></>}
       <ProjectFooterSection />
-    </>
+    </ LoadingBlock>
   )
 }
 
-export default withBasicLayoutLoading(ProjectIndividualPage)
+export default withBasicLayout(ProjectIndividualPage)

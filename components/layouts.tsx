@@ -3,11 +3,12 @@ import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import { theme } from 'theme/theme'
 
+import { useTheme } from '@emotion/react'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+import { Box, Grid, LinearProgress } from '@mui/material'
+import { ReactNode, createContext, useContext, useState } from 'react'
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
-import { ReactNode, createContext, useContext, useState } from 'react'
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Box, CircularProgress, LinearProgress } from '@mui/material'
 
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
@@ -28,6 +29,28 @@ export const LoadingContext = createContext({
   setLoading: (b: boolean) => { },
 })
 
+export const LoadingBlock = (props: { children: ReactNode, showImage?: boolean }): ReactJSXElement => {
+  const theme: any = useTheme();
+  const { loading } = useContext(LoadingContext);
+  return (
+    loading
+      ? <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        bgcolor={theme.palette.background.default}
+        sx={{ minHeight: '50vh', opacity: '0.1' }}
+      >
+        <Grid item xs={3}>
+          {!props.showImage && <img src="/logo-light-icon.svg" />}
+        </Grid>
+      </Grid>
+      : <>{props.children}</>
+  )
+}
+
 const LoadingIndicator = (): ReactJSXElement => {
   const { loading, setLoading } = useContext(LoadingContext);
 
@@ -44,7 +67,7 @@ const LoadingIndicator = (): ReactJSXElement => {
 }
 
 const WrappdMainContainer = (props: { children: ReactNode }): ReactJSXElement => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
@@ -58,30 +81,6 @@ const WrappdMainContainer = (props: { children: ReactNode }): ReactJSXElement =>
 
 // eslint-disable-next-line react/display-name
 export const withBasicLayout = (Page: () => JSX.Element) => () =>
-(
-  <>
-    <CssBaseline />
-    <GlobalStyles
-      styles={{
-        a: {
-          color: 'inherit',
-          textDecoration: 'inherit',
-        },
-      }}
-    />
-    <CommonHeader />
-
-    <MainContainer>
-      <Page />
-    </MainContainer>
-    <FooterContainer>
-      <CommonFooter />
-    </FooterContainer>
-  </>
-)
-
-// eslint-disable-next-line react/display-name
-export const withBasicLayoutLoading = (Page: () => JSX.Element) => () =>
 (
   <>
     <CssBaseline />

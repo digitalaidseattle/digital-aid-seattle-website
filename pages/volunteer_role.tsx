@@ -9,7 +9,7 @@ import {
   useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
+import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
 import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
@@ -225,19 +225,21 @@ const VolunteerRolePage = () => {
   return (
     <>
       <Masthead title={'Volunteer Opening'} />
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-          {role && (
-            <>
-              <BreadCrumbSection roleName={String(role.role)} />
-              <RoleDescriptionSection roleData={role} />
-            </>
-          )}
-          {!role && !loading && <RoleUnavailableSection />}
-        </Stack>
-      </SectionContainer>
+      <LoadingBlock>
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+            {role && (
+              <>
+                <BreadCrumbSection roleName={String(role.role)} />
+                <RoleDescriptionSection roleData={role} />
+              </>
+            )}
+            {!role && !loading && <RoleUnavailableSection />}
+          </Stack>
+        </SectionContainer>
+      </LoadingBlock>
     </>
   )
 }
 
-export default withBasicLayoutLoading(VolunteerRolePage)
+export default withBasicLayout(VolunteerRolePage)

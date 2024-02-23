@@ -10,7 +10,7 @@ import {
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
-import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
+import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 
 import SectionContainer from 'components/layout/SectionContainer'
@@ -66,34 +66,36 @@ const EventsPage = () => {
   }, [setLoading])
 
   return (
-    <div>
+    <>
       <Masthead title={title} />
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-          maxWidth={'880px'}
-        >
-          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+      <LoadingBlock>
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+            maxWidth={'880px'}
+          >
+            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
 
-            {events.map((event) => (
-              <CardEvent key={event.title} event={event} />
-            ))}
+              {events.map((event) => (
+                <CardEvent key={event.title} event={event} />
+              ))}
 
-            {events.length === 0 && !loading && (
-              <Typography sx={{ textAlign: 'center' }}>
-                All upcoming events are invite-only. Please check back in the
-                future for public events.
-              </Typography>
-            )}
-          </Stack>
-        </Box>
-      </SectionContainer>
-    </div>
+              {events.length === 0 && !loading && (
+                <Typography sx={{ textAlign: 'center' }}>
+                  All upcoming events are invite-only. Please check back in the
+                  future for public events.
+                </Typography>
+              )}
+            </Stack>
+          </Box>
+        </SectionContainer>
+      </LoadingBlock>
+    </>
   )
 }
 
-export default withBasicLayoutLoading(EventsPage)
+export default withBasicLayout(EventsPage)

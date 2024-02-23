@@ -34,7 +34,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
+import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
@@ -362,22 +362,24 @@ const VolunteerPage = () => {
           </Typography>
         </>
       </MastheadWithImage>
-      <Box
-        sx={{
-          width: '100%',
-          backgroundColor: theme.palette.background.default,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        {rolesSection()}
-        {oathAndValuesSection()}
-        {processSection()}
-        {volunteerApplication()}
-      </Box>
+      <LoadingBlock>
+        <Box
+          sx={{
+            width: '100%',
+            backgroundColor: theme.palette.background.default,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {rolesSection()}
+          {oathAndValuesSection()}
+          {processSection()}
+          {volunteerApplication()}
+        </Box>
+      </LoadingBlock>
     </Container>
   )
 }
 
-export default withBasicLayoutLoading(VolunteerPage)
+export default withBasicLayout(VolunteerPage)
