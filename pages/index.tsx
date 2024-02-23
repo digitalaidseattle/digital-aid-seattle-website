@@ -4,13 +4,12 @@ import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout, LoadingContext } from 'components/layouts'
+import { withBasicLayout } from 'components/layouts'
 
 import CardGridContainer from 'components/cards/CardGridContainer'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.jpg'
-import { useContext, useEffect } from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -23,11 +22,6 @@ const Home = () => {
       quality || 75
     }`
   }
-
-  const { loading, setLoading } = useContext(LoadingContext);
-  useEffect(() => {
-    setLoading(false);
-  }, [])
 
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
 

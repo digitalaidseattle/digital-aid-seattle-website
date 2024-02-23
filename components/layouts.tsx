@@ -80,7 +80,8 @@ export const withBasicLayout = (Page: () => JSX.Element) => () =>
   </>
 )
 
-export const withBasicLayoutLoading  = (Page: () => JSX.Element) => () =>
+// eslint-disable-next-line react/display-name
+export const withBasicLayoutLoading = (Page: () => JSX.Element) => () =>
 (
   <>
     <CssBaseline />
