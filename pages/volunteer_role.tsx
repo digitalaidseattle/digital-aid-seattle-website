@@ -15,7 +15,6 @@ import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
-import { useRouter } from 'next/navigation'
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
@@ -34,7 +33,7 @@ const VolunteerRolePage = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [setLoading])
 
   const theme = useTheme()
 
