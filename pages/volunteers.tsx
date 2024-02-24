@@ -34,7 +34,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
@@ -145,13 +145,18 @@ const processContent = [
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext);
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     dasVolunteerRoleService.getAllActiveRoles()
       .then(roles => setVolunteerRoles(roles))
       .catch(err => console.error(err))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false)
+        setInit(true)
+      }
+      );
   }, [setLoading])
 
   const theme = useTheme()
@@ -362,7 +367,7 @@ const VolunteerPage = () => {
           </Typography>
         </>
       </MastheadWithImage>
-      <LoadingBlock>
+      <BlockComponent block={!init}>
         <Box
           sx={{
             width: '100%',
@@ -377,7 +382,7 @@ const VolunteerPage = () => {
           {processSection()}
           {volunteerApplication()}
         </Box>
-      </LoadingBlock>
+      </BlockComponent>
     </Container>
   )
 }

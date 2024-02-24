@@ -29,11 +29,10 @@ export const LoadingContext = createContext({
   setLoading: (b: boolean) => { },
 })
 
-export const LoadingBlock = (props: { children: ReactNode, showImage?: boolean }): ReactJSXElement => {
+export const BlockComponent = (props: { children: ReactNode, block: boolean }): ReactJSXElement => {
   const theme: any = useTheme();
-  const { loading } = useContext(LoadingContext);
   return (
-    loading
+    props.block
       ? <Grid
         container
         spacing={0}
@@ -44,7 +43,7 @@ export const LoadingBlock = (props: { children: ReactNode, showImage?: boolean }
         sx={{ minHeight: '50vh', opacity: '0.1' }}
       >
         <Grid item xs={3}>
-          {!props.showImage && <img src="/logo-light-icon.svg" />}
+          <img src="/logo-light-icon.svg" />
         </Grid>
       </Grid>
       : <>{props.children}</>

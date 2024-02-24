@@ -1,9 +1,10 @@
-import { Box, CircularProgress, Stack, useTheme } from '@mui/material'
+import { Box, Stack, useTheme } from '@mui/material'
 import Masthead from 'components/Masthead'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
+import { DASProject } from 'types'
 import { dasProjectsService } from './api/ProjectsService'
 
 const ProjectsPage = () => {
@@ -11,7 +12,8 @@ const ProjectsPage = () => {
 
   const title = 'Projects';
   const { setLoading } = useContext(LoadingContext);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<DASProject[]>([]);
+  const [init, setInit] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -20,13 +22,16 @@ const ProjectsPage = () => {
         .filter(proj => proj.display || proj.display === undefined)
         .sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))))
       .catch(error => console.log(error))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setInit(true)
+        setLoading(false)
+      })
   }, [setLoading]);
 
   return (
     <>
       <Masthead title={title} />
-      <LoadingBlock>
+      <BlockComponent block={!init}>
         <Box
           sx={{
             width: '100%',
@@ -62,7 +67,7 @@ const ProjectsPage = () => {
             </CardGridContainer>
           </Stack>
         </Box>
-      </LoadingBlock>
+      </BlockComponent>
     </>
   )
 }

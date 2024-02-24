@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import SectionContainer from 'components/layout/SectionContainer';
 
-import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts';
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts';
 // icons for role cards
 import { NavigateNextSharp } from '@mui/icons-material';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
@@ -400,15 +400,18 @@ const EventPage = () => {
     const params = new URLSearchParams(window.location.search)
     eventsService
       .getOne(params.get('name'))
-      .then((data) => setEvent(data))
+      .then((data) => {
+        // should reroute if no data
+        setEvent(data)
+      })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [setLoading])
 
   return (
     <>
-      <HeaderSection event={event} />
-      <LoadingBlock>
+      <BlockComponent block={!event}>
+        <HeaderSection event={event} />
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack
             gap={{ xs: '64px', lg: '80px' }}
@@ -420,7 +423,7 @@ const EventPage = () => {
           </Stack>
         </SectionContainer>
         <ContactUsSection event={event} />
-      </LoadingBlock>
+      </BlockComponent>
     </>
   )
 }

@@ -10,7 +10,7 @@ import {
 import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService } from './api/ProjectsService'
 
-import { LoadingBlock, LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 // icons for role cards
 import {
   ProjectBodyTextSection,
@@ -68,11 +68,11 @@ const TheCadrePage = () => {
   }
 
   return (
-    <LoadingBlock>
+    <BlockComponent block={!project}>
       <ProjectHeaderSection project={project} />
       {project ? getBody() : <></>}
       <ProjectFooterSection />
-    </ LoadingBlock>
+    </ BlockComponent>
   )
 }
 
