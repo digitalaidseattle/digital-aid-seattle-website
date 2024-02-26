@@ -10,10 +10,11 @@ import {
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
-import { LoadingContext, withBasicLayoutLoading } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 
 import SectionContainer from 'components/layout/SectionContainer'
+import { OSEvent } from 'types'
 import { eventsService } from './api/EventsService'
 
 type MastheadProps = {
@@ -53,8 +54,9 @@ const EventsPage = () => {
   const theme = useTheme()
 
   const title = 'Events'
-  const { loading, setLoading } = useContext(LoadingContext);
-  const [events, setEvents] = useState([])
+  const { setLoading } = useContext(LoadingContext);
+  const [events, setEvents] = useState<OSEvent[] | null>([])
+  const [init, setInit] = useState(false)
 
   useEffect(() => {
     setLoading(true);
@@ -62,38 +64,43 @@ const EventsPage = () => {
       .getActiveEvents()
       .then((evs) => setEvents(evs))
       .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+        setInit(true)
+      })
   }, [setLoading])
 
   return (
-    <div>
+    <>
       <Masthead title={title} />
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-          maxWidth={'880px'}
-        >
-          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+      <BlockComponent block={!init}>
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+            maxWidth={'880px'}
+          >
+            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
 
-            {events.map((event) => (
-              <CardEvent key={event.title} event={event} />
-            ))}
+              {events.map((event) => (
+                <CardEvent key={event.title} event={event} />
+              ))}
 
-            {events.length === 0 && !loading && (
-              <Typography sx={{ textAlign: 'center' }}>
-                All upcoming events are invite-only. Please check back in the
-                future for public events.
-              </Typography>
-            )}
-          </Stack>
-        </Box>
-      </SectionContainer>
-    </div>
+              {events.length === 0 && (
+                <Typography sx={{ textAlign: 'center' }}>
+                  All upcoming events are invite-only. Please check back in the
+                  future for public events.
+                </Typography>
+              )}
+            </Stack>
+          </Box>
+        </SectionContainer>
+      </BlockComponent>
+    </>
   )
 }
 
-export default withBasicLayoutLoading(EventsPage)
+export default withBasicLayout(EventsPage)
