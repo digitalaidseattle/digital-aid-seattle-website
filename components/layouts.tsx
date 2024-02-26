@@ -3,11 +3,12 @@ import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import { theme } from 'theme/theme'
 
+import { useTheme } from '@emotion/react'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+import { Box, Grid, LinearProgress } from '@mui/material'
+import { ReactNode, createContext, useContext, useState } from 'react'
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
-import { ReactNode, createContext, useContext, useState } from 'react'
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Box, CircularProgress, LinearProgress } from '@mui/material'
 
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
@@ -24,9 +25,30 @@ export const FooterContainer = styled.footer`
 `
 
 export const LoadingContext = createContext({
-  loading: false,
+  loading: true,
   setLoading: (b: boolean) => { },
 })
+
+export const BlockComponent = (props: { children: ReactNode, block: boolean }): ReactJSXElement => {
+  const theme: any = useTheme();
+  return (
+    props.block
+      ? <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        bgcolor={theme.palette.background.default}
+        sx={{ minHeight: '50vh', opacity: '0.1' }}
+      >
+        <Grid item xs={3}>
+          <img src="/logo-light-icon.svg" />
+        </Grid>
+      </Grid>
+      : <>{props.children}</>
+  )
+}
 
 const LoadingIndicator = (): ReactJSXElement => {
   const { loading, setLoading } = useContext(LoadingContext);

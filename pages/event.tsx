@@ -19,17 +19,17 @@ import {
 } from '@mui/material';
 import SectionContainer from 'components/layout/SectionContainer';
 
-import { LoadingContext, withBasicLayout } from 'components/layouts';
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts';
 // icons for role cards
+import { NavigateNextSharp } from '@mui/icons-material';
 import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CardReservation from 'components/cards/CardReservation';
 import { Section, Subheader } from 'components/style-utils';
+import Link from 'next/link';
+import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
-import Markdown from 'react-markdown';
-import Link from 'next/link';
-import { NavigateNextSharp } from '@mui/icons-material';
 /*********/
 
 const HeaderSection = (props: { event: OSEvent }) => {
@@ -400,25 +400,30 @@ const EventPage = () => {
     const params = new URLSearchParams(window.location.search)
     eventsService
       .getOne(params.get('name'))
-      .then((data) => setEvent(data))
+      .then((data) => {
+        // should reroute if no data
+        setEvent(data)
+      })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [setLoading])
 
   return (
     <>
-      <HeaderSection event={event} />
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack
-          gap={{ xs: '64px', lg: '80px' }}
-          maxWidth="880px"
-          margin="0 auto" >
-          <InfoSection event={event} />
-          <AboutSection event={event} />
-          <ActivitySection event={event} />
-        </Stack>
-      </SectionContainer>
-      <ContactUsSection event={event} />
+      <BlockComponent block={!event}>
+        <HeaderSection event={event} />
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack
+            gap={{ xs: '64px', lg: '80px' }}
+            maxWidth="880px"
+            margin="0 auto" >
+            <InfoSection event={event} />
+            <AboutSection event={event} />
+            <ActivitySection event={event} />
+          </Stack>
+        </SectionContainer>
+        <ContactUsSection event={event} />
+      </BlockComponent>
     </>
   )
 }

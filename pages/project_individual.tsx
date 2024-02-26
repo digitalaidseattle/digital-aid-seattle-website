@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
 
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 
 import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -87,7 +87,10 @@ const ProjectIndividualPage = () => {
     const params = new URLSearchParams(window.location.search)
     dasProjectsService
       .getOne(params.get('project'))
-      .then((data) => setProject(data))
+      .then((data) => {
+        // should reroute if no data
+        setProject(data)
+      })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false))
   }, [setLoading])
@@ -141,11 +144,11 @@ const ProjectIndividualPage = () => {
   }
 
   return (
-    <>
+    <BlockComponent block={!project}>
       <ProjectHeaderSection project={project} />
-      {project ? getBody() : <></>}
+      {project && getBody()}
       <ProjectFooterSection />
-    </>
+    </ BlockComponent>
   )
 }
 

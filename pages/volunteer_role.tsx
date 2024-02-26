@@ -9,7 +9,7 @@ import {
   useTheme
 } from '@mui/material'
 import SectionContainer from 'components/layout/SectionContainer'
-import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
@@ -25,9 +25,14 @@ const VolunteerRolePage = () => {
     const params = new URLSearchParams(window.location.search)
     dasVolunteerRoleService
       .getRoleDetailsByName(params.get('role'))
-      .then((role) => setRole(role))
+      .then((role) => {
+        // should reroute if no data
+        setRole(role)
+      })
       .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
+      .finally(() => {
+        setLoading(false)
+      })
   }, [setLoading])
 
   const theme = useTheme()
@@ -225,17 +230,19 @@ const VolunteerRolePage = () => {
   return (
     <>
       <Masthead title={'Volunteer Opening'} />
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-          {role && (
-            <>
-              <BreadCrumbSection roleName={String(role.role)} />
-              <RoleDescriptionSection roleData={role} />
-            </>
-          )}
-          {!role && <RoleUnavailableSection />}
-        </Stack>
-      </SectionContainer>
+      <BlockComponent block={!role}>
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+            {role && (
+              <>
+                <BreadCrumbSection roleName={String(role.role)} />
+                <RoleDescriptionSection roleData={role} />
+              </>
+            )}
+            {!role && <RoleUnavailableSection />}
+          </Stack>
+        </SectionContainer>
+      </BlockComponent>
     </>
   )
 }
