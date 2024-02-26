@@ -3,12 +3,14 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Box, Container, Grid, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
-import OSLogo from '../assets/darkThemeLogo.svg'
 import { ReactNode } from 'react'
+import OSLogo from '../assets/darkThemeLogo.svg'
+import EmailFormContainer from './email-form/EmailFormContainer'
+import { useFeature } from 'pages/api/FeatureService'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -135,7 +137,8 @@ const supportUsBox = () => {
 
 const copyrightBox = () => {
   return (
-    <Box>
+    <Stack gap="0.25rem">
+      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
       <SubText>
         Illustrations by{' '}
         <Link
@@ -148,8 +151,7 @@ const copyrightBox = () => {
           Freepik
         </Link>
       </SubText>
-      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
-    </Box>
+    </Stack>
   )
 }
 
@@ -193,11 +195,12 @@ const CommonFooterLargeScreen = () => (
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           height: '100%',
+          gap: '2rem'
         }}
       >
-        {logoBox({ height: '80%', width: '120px' })}
+        {logoBox({ height: 'auto', width: '75%' })}
         {copyrightBox()}
       </Box>
     </GridItem>
@@ -208,7 +211,6 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          height: '100%',
         }}
       >
         {contactUsBox()}
@@ -222,7 +224,6 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          height: '100%',
         }}
       >
         {aboutBox()}
@@ -235,7 +236,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          marginLeft: '4rem',
+          alignItems: 'flex-end'
         }}
       >
         {linkedInLink()}
@@ -248,15 +249,16 @@ const CommonFooterLargeScreen = () => (
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
     <GridItem md={5}>
-      <Box
+    <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           height: '100%',
+          gap: '2rem'
         }}
       >
-        {logoBox({ height: 'auto', width: '120px' })}
+        {logoBox({ height: 'auto', width: '75%' })}
         {copyrightBox()}
       </Box>
     </GridItem>
@@ -282,6 +284,7 @@ const CommonFooterMidScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
+          alignItems: 'flex-end',
         }}
       >
         {linkedInLink()}
@@ -296,7 +299,7 @@ const CommonFooterSmallScreen = () => (
     container
     direction="column"
     columns={1}
-    sx={{ alignItems: 'center', textAlign: 'center', gap: '4rem' }}
+    sx={{ alignItems: 'center', textAlign: 'center', gap: '2rem' }}
   >
     <GridItem>{logoBox({ height: '3rem', width: 'auto' })}</GridItem>
 
@@ -318,35 +321,39 @@ const CommonFooterSmallScreen = () => (
 )
 
 const CommonFooter = () => {
+  const { data: newsLetter } = useFeature('newsletter');
   return (
     <>
-      <Container
-        sx={{
-          padding: '5rem 0rem',
-          display: { xs: 'none', md: 'none', lg: 'flex' },
-          height: '28rem',
-        }}
-      >
-        <CommonFooterLargeScreen />
-      </Container>
+      <Container>
+        {newsLetter && <EmailFormContainer />}
+        <Box
+          sx={{
+            paddingY: '5rem',
+            display: { xs: 'none', md: 'none', lg: 'flex' },
+            height: '28rem',
+          }}
+        >
+          <CommonFooterLargeScreen />
+        </Box>
 
-      <Container
-        sx={{
-          padding: '4rem 2rem',
-          display: { xs: 'none', md: 'flex', lg: 'none' },
-          height: '29rem',
-        }}
-      >
-        <CommonFooterMidScreen />
-      </Container>
+        <Box
+          sx={{
+            paddingY: '4rem',
+            display: { xs: 'none', md: 'flex', lg: 'none' },
+            height: '29rem',
+          }}
+        >
+          <CommonFooterMidScreen />
+        </Box>
 
-      <Container
-        sx={{
-          padding: '4rem 0rem',
-          display: { xs: 'flex', md: 'none', lg: 'none' },
-        }}
-      >
-        <CommonFooterSmallScreen />
+        <Box
+          sx={{
+            paddingY: '4rem',
+            display: { xs: 'flex', md: 'none', lg: 'none' },
+          }}
+        >
+          <CommonFooterSmallScreen />
+        </Box>
       </Container>
     </>
   )

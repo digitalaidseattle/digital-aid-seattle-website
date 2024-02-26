@@ -146,6 +146,9 @@ export const theme = createTheme({
       primary: designColor.black,
       secondary: neutralPalette[97],
     },
+    error: {
+      main: '#FF897D',
+    }
   },
   typography: {
     fontFamily: 'Montserrat, Arial, sans-serif',
