@@ -36,7 +36,7 @@ const VolunteerRolePage = () => {
   }, [setLoading])
 
   const theme = useTheme()
-
+  
   const buildListItems = (content: string[]) => {
     return (
       <ul
@@ -172,8 +172,8 @@ const VolunteerRolePage = () => {
         {roleData.preferredQualifications ? (
           <RoleDescriptionSubSection
             title={'Preferred Qualifications'}
-            content={roleData.preferredQualifications}
-            list={false}
+            content={roleData.preferredQualifications.split(/\r?\n/g)}
+            list={true}
           />
         ) : null}
         {roleData.keyAttributesToSuccess ? (
