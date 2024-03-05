@@ -21,61 +21,11 @@ type CardEventProps = {
 
 const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
-  const mobileScreen = useMediaQuery(theme.breakpoints.down('md'))
-  const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
+  const tabletScreen = useMediaQuery(theme.breakpoints.only('md'))
 
-  const getButton = () => {
-    const buttonSX = (mobileScreen || largeScreen)
-      ? {
-        marginTop: { xs: '2rem', lg: '2.5rem' },
-        textAlign: 'center',
-        maxWidth: { xs: '100%', lg: 'min-content' },
-      }
-      : {
-        maxWidth: 'min-content',
-        display: 'block',
-        marginTop: '2rem',
-      }
-
-    if (event.details) {
-      return (
-        <Button
-          variant="contained"
-          sx={buttonSX}
-          href={`/event?name=${event.id}`}
-        >
-          Learn More
-        </Button>
-      )
-    }
-    else
-      if (event.rsvpLink) {
-        return (
-          <Button
-            variant="contained"
-            sx={buttonSX}
-            href={event.rsvpLink}
-          >
-            RVSP
-          </Button>
-        )
-      } else {
-        return (
-          <></>
-        )
-      }
-  }
-
-  if (mobileScreen || largeScreen) {
+  const MobileAndDesktopCard = () => {
     return (
-      <Card
-        sx={{
-          boxShadow:
-            '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
-        }}
-      >
-        <CardActionArea href={`/event?name=${event.id}`}>
-        <Stack
+      <Stack
           direction={{ xs: 'column', lg: 'row' }}
           spacing={{ xs: '0', lg: '1.5rem' }}
         >
@@ -131,66 +81,68 @@ const CardEvent = ({ event }: CardEventProps) => {
             </Stack>
           </CardContent>
         </Stack>
-        </CardActionArea>
-      </Card>
-    )
-  } else {
-    // mediumScreen (tablet)
-    return (
-      <Card
-        sx={{
-          boxShadow:
-            '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
-        }}
-      >
-        <CardActionArea href={`/event?name=${event.id}`}>
-        <CardContent>
-          <Stack direction="row">
-            <Box
-              sx={{
-                position: 'relative',
-                border: '2px solid #EAF1F1',
-                height: '10rem',
-                width: '10rem',
-              }}>
-              {event.image && event.image.asset &&
-                <CardMedia
-                  component="img"
-                  image={urlForImage(event.image).url()}
-                  sx={{
-                    position: 'static',
-                    height: '100%',
-                    borderRadius: '8px',
-                  }}
-                />
-              }
-            </Box>
-            <Stack
-              spacing="1rem"
-              justifyContent="center"
-              sx={{ marginLeft: '1.5rem' }}
-            >
-              <Typography variant="titleLarge">{event.title}</Typography>
-              <Stack direction="row" spacing="1rem">
-                <Typography variant="labelLarge">{event.date}</Typography>
-                <Typography variant="labelLarge">
-                  {eventsService.getTimeString(event)}
-                </Typography>
-              </Stack>
-              <Typography variant="labelMedium">{event.location}</Typography>
-            </Stack>
-          </Stack>
-          <Typography
-            variant="bodyMedium"
-            sx={{ display: 'block', marginTop: '1rem !important' }}
-          >
-            {event.description}
-          </Typography>
-        </CardContent>
-        </CardActionArea>
-      </Card>
     )
   }
+
+  const TabletCard = () => {
+    return (
+      <>
+      <Stack direction="row">
+        <Box
+          sx={{
+            position: 'relative',
+            border: '2px solid #EAF1F1',
+            height: '10rem',
+            width: '10rem',
+          }}>
+          {event.image && event.image.asset &&
+            <CardMedia
+              component="img"
+              image={urlForImage(event.image).url()}
+              sx={{
+                position: 'static',
+                height: '100%',
+                borderRadius: '8px',
+              }}
+            />
+          }
+        </Box>
+        <Stack
+          spacing="1rem"
+          justifyContent="center"
+          sx={{ marginLeft: '1.5rem' }}
+        >
+          <Typography variant="titleLarge">{event.title}</Typography>
+          <Stack direction="row" spacing="1rem">
+            <Typography variant="labelLarge">{event.date}</Typography>
+            <Typography variant="labelLarge">
+              {eventsService.getTimeString(event)}
+            </Typography>
+          </Stack>
+          <Typography variant="labelMedium">{event.location}</Typography>
+        </Stack>
+      </Stack>
+      <Typography
+        variant="bodyMedium"
+        sx={{ display: 'block', marginTop: '1rem !important' }}
+      >
+        {event.description}
+      </Typography>
+    </>
+    )
+  }
+
+  return (
+    <Card
+      sx={{
+        boxShadow:
+          '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
+      }}
+    >
+      <CardActionArea href={`/event?name=${event.id}`}>
+      {tabletScreen ? <TabletCard /> : <MobileAndDesktopCard/>}
+      </CardActionArea>
+    </Card>)
 }
 
 export default CardEvent
