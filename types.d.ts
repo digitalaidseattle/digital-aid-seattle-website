@@ -76,7 +76,7 @@ type DASVolunteerRole = {
   whyJoin: string
   aboutUs: string
   responsibilities: string[]
-  preferredQualifications: string
+  preferredQualifications: string[]
   keyAttributesToSuccess: string[]
   keyTechnologies?: string[]
   venture?: string

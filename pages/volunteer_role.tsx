@@ -172,7 +172,7 @@ const VolunteerRolePage = () => {
         {roleData.preferredQualifications ? (
           <RoleDescriptionSubSection
             title={'Preferred Qualifications'}
-            content={roleData.preferredQualifications.split(/\r?\n/g)}
+            content={roleData.preferredQualifications}
             list={true}
           />
         ) : null}

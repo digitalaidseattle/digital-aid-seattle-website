@@ -85,7 +85,7 @@ class DASVolunteerRoleService {
         whyJoin: getStringFieldRecord(record, 'Why Join Us'),
         aboutUs: getStringFieldRecord(record, 'About Us'),
         responsibilities: getSplitFieldRecord(record, 'Responsibilities'),
-        preferredQualifications: getStringFieldRecord(
+        preferredQualifications: getSplitFieldRecord(
           record,
           'Preferred Qualifications'
         ),
