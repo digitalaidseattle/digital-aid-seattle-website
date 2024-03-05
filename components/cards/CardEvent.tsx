@@ -21,11 +21,11 @@ type CardEventProps = {
 
 const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
-  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  const mobileScreen = useMediaQuery(theme.breakpoints.down('md'))
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
 
   const getButton = () => {
-    const buttonSX = (extraSmallScreen || largeScreen)
+    const buttonSX = (mobileScreen || largeScreen)
       ? {
         marginTop: { xs: '2rem', lg: '2.5rem' },
         textAlign: 'center',
@@ -66,7 +66,7 @@ const CardEvent = ({ event }: CardEventProps) => {
       }
   }
 
-  if (extraSmallScreen || largeScreen) {
+  if (mobileScreen || largeScreen) {
     return (
       <Card
         sx={{
