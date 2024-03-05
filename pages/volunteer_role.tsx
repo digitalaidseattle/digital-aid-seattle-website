@@ -46,14 +46,18 @@ const VolunteerRolePage = () => {
           paddingLeft: '1rem',
         }}
       >
-        {content.map((item: string, i) => (
-          <li
-            style={{ display: 'list-item', paddingLeft: '1rem', marginBottom: '1rem' }}
-            key={`${i}-${item}`}
-          >
-            {item}
-          </li>
-        ))}
+        {content.map((item: string, i) => {
+          const whiteSpaceOnlyRegex = /^\s*$/;
+          if (!item || whiteSpaceOnlyRegex.test(item)) { return; }
+          return (
+            <li
+              style={{ display: 'list-item', paddingLeft: '1rem', marginBottom: '1rem' }}
+              key={`${i}-${item}`}
+            >
+              {item}
+            </li>
+          )
+        })}
       </ul>
     )
   }
