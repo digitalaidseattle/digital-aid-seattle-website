@@ -1,4 +1,3 @@
-import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -9,6 +8,7 @@ import { dasProjectsService } from 'pages/api/ProjectsService'
 import { DASProject } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
 import StateBadge from './StateBadge'
+import { CardActionArea } from '@mui/material'
 
 type CardProjectProps = {
   project: DASProject
@@ -22,55 +22,58 @@ const CardProject = ({ project }: CardProjectProps) => {
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <CardContent
-        sx={{
-          padding: { xs: '2rem 1rem', lg: '2rem' },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          justifyContent: 'space-between',
-          height: '100%',
-        }}
-      >
-        <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
-          <CardMedia
-            component="img"
-            image={urlForImage(project.image).url()}
-            sx={{
-              width: { md: '7rem', lg: '100%' },
-              aspectRatio: '1 / 1',
-              border: '2px solid #EAF1F1',
-              borderRadius: '8px',
-              display: { xs: 'none', md: 'block' },
-            }}
-          />
-          <Stack spacing="1rem" sx={{width:'100%'}}>
-            <Typography variant="titleLarge" component="h2">
-              {project.title}
-            </Typography>
-            <Stack spacing="1rem">
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center">
-                  <Typography variant="labelLarge">{project.partner}</Typography>
-                  <StateBadge state={project.status} />
-                </Stack>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between">
-                  <Typography variant="labelMedium">
-                    {(project.programAreas ? project.programAreas : []).join(', ')}
-                  </Typography>
-                  <Typography variant="labelMedium">
-                    {dasProjectsService.getTimeline(project)}
-                  </Typography>
-                </Stack>
+      <CardActionArea 
+        href={project.projectLink}
+        sx={{ height: '100%' }}>
+        <CardContent
+          sx={{
+            padding: { xs: '2rem 1rem', lg: '2rem' },
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
+            <CardMedia
+              component="img"
+              image={urlForImage(project.image).url()}
+              sx={{
+                width: { md: '7rem', lg: '100%' },
+                aspectRatio: '1 / 1',
+                border: '2px solid #EAF1F1',
+                borderRadius: '8px',
+                display: { xs: 'none', md: 'block' },
+              }}
+            />
+            <Stack spacing="1rem" sx={{width:'100%'}}>
+              <Typography variant="titleLarge" component="h2">
+                {project.title}
+              </Typography>
+              <Stack spacing="1rem">
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center">
+                    <Typography variant="labelLarge">{project.partner}</Typography>
+                    <StateBadge state={project.status} />
+                  </Stack>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between">
+                    <Typography variant="labelMedium">
+                      {(project.programAreas ? project.programAreas : []).join(', ')}
+                    </Typography>
+                    <Typography variant="labelMedium">
+                      {dasProjectsService.getTimeline(project)}
+                    </Typography>
+                  </Stack>
+              </Stack>
             </Stack>
           </Stack>
-        </Stack>
-        <Typography variant="bodyMedium">{project.description}</Typography>
-      </CardContent>
+          <Typography variant="bodyMedium">{project.description}</Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   )
 }
