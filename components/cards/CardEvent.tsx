@@ -13,6 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { OSEvent } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
 import { eventsService } from 'pages/api/EventsService'
+import { CardActionArea } from '@mui/material'
 
 type CardEventProps = {
   event: OSEvent
@@ -73,6 +74,7 @@ const CardEvent = ({ event }: CardEventProps) => {
             '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
         }}
       >
+        <CardActionArea href={`/event?name=${event.id}`}>
         <Stack
           direction={{ xs: 'column', lg: 'row' }}
           spacing={{ xs: '0', lg: '1.5rem' }}
@@ -126,10 +128,10 @@ const CardEvent = ({ event }: CardEventProps) => {
               >
                 {event.description}
               </Typography>
-              {getButton()}
             </Stack>
           </CardContent>
         </Stack>
+        </CardActionArea>
       </Card>
     )
   } else {
@@ -141,6 +143,7 @@ const CardEvent = ({ event }: CardEventProps) => {
             '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
         }}
       >
+        <CardActionArea href={`/event?name=${event.id}`}>
         <CardContent>
           <Stack direction="row">
             <Box
@@ -183,8 +186,8 @@ const CardEvent = ({ event }: CardEventProps) => {
           >
             {event.description}
           </Typography>
-          {getButton()}
         </CardContent>
+        </CardActionArea>
       </Card>
     )
   }
