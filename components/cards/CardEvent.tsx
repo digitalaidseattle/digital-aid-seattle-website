@@ -2,7 +2,6 @@
  * @2024 Digital Aid Seattle
  */
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -26,109 +25,110 @@ const CardEvent = ({ event }: CardEventProps) => {
   const MobileAndDesktopCard = () => {
     return (
       <Stack
-          direction={{ xs: 'column', lg: 'row' }}
-          spacing={{ xs: '0', lg: '1.5rem' }}
+        direction={{ xs: 'column', lg: 'row' }}
+        spacing={{ xs: '0', lg: '1.5rem' }}
+      >
+        <Box
+          sx={{
+            position: 'relative',
+            border: '2px solid #EAF1F1',
+            height: { xs: '0', lg: '20rem' },
+            width: { xs: '100%', lg: '20rem' },
+            paddingBottom: { xs: '100%', lg: '0' },
+            flexShrink: '0',
+            margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
+            minWidth: '0',
+            borderRadius: '8px',
+            overflow: 'hidden',
+          }}
         >
-          <Box
-            sx={{
-              position: 'relative',
-              border: '2px solid #EAF1F1',
-              height: { xs: '0', lg: '20rem' },
-              width: { xs: '100%', lg: '20rem' },
-              paddingBottom: { xs: '100%', lg: '0' },
-              flexShrink: '0',
-              margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
-              minWidth: '0',
-              borderRadius: '8px',
-              overflow: 'hidden',
-            }}
-          >
-            {event.image && event.image.asset &&
-              <CardMedia
-                component="img"
-                image={urlForImage(event.image).url()}
-                sx={{
-                  position: { xs: 'absolute', lg: 'static' },
-                  height: '100%',
-                }}
-              />
-            }
-          </Box>
-          <CardContent
-            sx={{
-              padding: { xs: '2rem 1rem 1rem 1rem', lg: '2rem 2rem 2rem 0' },
-              paddingBottom: { xs: '1rem !important', lg: '2rem !important' },
-            }}
-          >
-            <Stack justifyContent="center" sx={{ height: '100%' }}>
-              <Stack spacing="1rem">
-                <Typography variant="titleLarge">{event.title}</Typography>
-                <Stack direction="row" spacing="1rem">
-                  <Typography variant="labelLarge">{event.date}</Typography>
-                  <Typography variant="labelLarge">
-                    {eventsService.getTimeString(event)}
-                  </Typography>
-                </Stack>
-                <Typography variant="labelMedium">{event.location}</Typography>
+          {event.image && event.image.asset && (
+            <CardMedia
+              component="img"
+              image={urlForImage(event.image).url()}
+              sx={{
+                position: { xs: 'absolute', lg: 'static' },
+                height: '100%',
+              }}
+            />
+          )}
+        </Box>
+        <CardContent
+          sx={{
+            padding: { xs: '2rem 1rem 1rem 1rem', lg: '2rem 2rem 2rem 0' },
+            paddingBottom: { xs: '1rem !important', lg: '2rem !important' },
+          }}
+        >
+          <Stack justifyContent="center" sx={{ height: '100%' }}>
+            <Stack spacing="1rem">
+              <Typography variant="titleLarge">{event.title}</Typography>
+              <Stack direction="row" spacing="1rem">
+                <Typography variant="labelLarge">{event.date}</Typography>
+                <Typography variant="labelLarge">
+                  {eventsService.getTimeString(event)}
+                </Typography>
               </Stack>
-
-              <Typography
-                variant="bodyMedium"
-                sx={{ display: 'block', marginTop: '1.5rem' }}
-              >
-                {event.description}
-              </Typography>
+              <Typography variant="labelMedium">{event.location}</Typography>
             </Stack>
-          </CardContent>
-        </Stack>
+
+            <Typography
+              variant="bodyMedium"
+              sx={{ display: 'block', marginTop: '1.5rem' }}
+            >
+              {event.description}
+            </Typography>
+          </Stack>
+        </CardContent>
+      </Stack>
     )
   }
 
   const TabletCard = () => {
     return (
-      <>
-      <Stack direction="row">
-        <Box
-          sx={{
-            position: 'relative',
-            border: '2px solid #EAF1F1',
-            height: '10rem',
-            width: '10rem',
-          }}>
-          {event.image && event.image.asset &&
-            <CardMedia
-              component="img"
-              image={urlForImage(event.image).url()}
-              sx={{
-                position: 'static',
-                height: '100%',
-                borderRadius: '8px',
-              }}
-            />
-          }
-        </Box>
-        <Stack
-          spacing="1rem"
-          justifyContent="center"
-          sx={{ marginLeft: '1.5rem' }}
-        >
-          <Typography variant="titleLarge">{event.title}</Typography>
-          <Stack direction="row" spacing="1rem">
-            <Typography variant="labelLarge">{event.date}</Typography>
-            <Typography variant="labelLarge">
-              {eventsService.getTimeString(event)}
-            </Typography>
+      <CardContent>
+        <Stack direction="row">
+          <Box
+            sx={{
+              position: 'relative',
+              border: '2px solid #EAF1F1',
+              height: '10rem',
+              width: '10rem',
+            }}
+          >
+            {event.image && event.image.asset && (
+              <CardMedia
+                component="img"
+                image={urlForImage(event.image).url()}
+                sx={{
+                  position: 'static',
+                  height: '100%',
+                  borderRadius: '8px',
+                }}
+              />
+            )}
+          </Box>
+          <Stack
+            spacing="1rem"
+            justifyContent="center"
+            sx={{ marginLeft: '1.5rem' }}
+          >
+            <Typography variant="titleLarge">{event.title}</Typography>
+            <Stack direction="row" spacing="1rem">
+              <Typography variant="labelLarge">{event.date}</Typography>
+              <Typography variant="labelLarge">
+                {eventsService.getTimeString(event)}
+              </Typography>
+            </Stack>
+            <Typography variant="labelMedium">{event.location}</Typography>
           </Stack>
-          <Typography variant="labelMedium">{event.location}</Typography>
         </Stack>
-      </Stack>
-      <Typography
-        variant="bodyMedium"
-        sx={{ display: 'block', marginTop: '1rem !important' }}
-      >
-        {event.description}
-      </Typography>
-    </>
+        <Typography
+          variant="bodyMedium"
+          sx={{ display: 'block', marginTop: '1rem !important' }}
+        >
+          {event.description}
+        </Typography>
+      </CardContent>
     )
   }
 
@@ -140,9 +140,10 @@ const CardEvent = ({ event }: CardEventProps) => {
       }}
     >
       <CardActionArea href={`/event?name=${event.id}`}>
-      {tabletScreen ? <TabletCard /> : <MobileAndDesktopCard/>}
+        {tabletScreen ? <TabletCard /> : <MobileAndDesktopCard />}
       </CardActionArea>
-    </Card>)
+    </Card>
+  )
 }
 
 export default CardEvent

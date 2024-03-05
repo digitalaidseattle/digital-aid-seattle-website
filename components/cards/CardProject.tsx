@@ -22,9 +22,7 @@ const CardProject = ({ project }: CardProjectProps) => {
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
       }}
     >
-      <CardActionArea 
-        href={project.projectLink}
-        sx={{ height: '100%' }}>
+      <CardActionArea href={project.projectLink} sx={{ height: '100%' }}>
         <CardContent
           sx={{
             padding: { xs: '2rem 1rem', lg: '2rem' },
@@ -46,28 +44,31 @@ const CardProject = ({ project }: CardProjectProps) => {
                 display: { xs: 'none', md: 'block' },
               }}
             />
-            <Stack spacing="1rem" sx={{width:'100%'}}>
+            <Stack spacing="1rem" sx={{ width: '100%' }}>
               <Typography variant="titleLarge" component="h2">
                 {project.title}
               </Typography>
               <Stack spacing="1rem">
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center">
-                    <Typography variant="labelLarge">{project.partner}</Typography>
-                    <StateBadge state={project.status} />
-                  </Stack>
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between">
-                    <Typography variant="labelMedium">
-                      {(project.programAreas ? project.programAreas : []).join(', ')}
-                    </Typography>
-                    <Typography variant="labelMedium">
-                      {dasProjectsService.getTimeline(project)}
-                    </Typography>
-                  </Stack>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography variant="labelLarge">
+                    {project.partner}
+                  </Typography>
+                  <StateBadge state={project.status} />
+                </Stack>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography variant="labelMedium">
+                    {(project.programAreas ? project.programAreas : []).join(
+                      ', '
+                    )}
+                  </Typography>
+                  <Typography variant="labelMedium">
+                    {dasProjectsService.getTimeline(project)}
+                  </Typography>
+                </Stack>
               </Stack>
             </Stack>
           </Stack>
