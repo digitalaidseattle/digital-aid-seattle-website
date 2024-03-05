@@ -75,10 +75,10 @@ type DASVolunteerRole = {
   description?: string
   whyJoin: string
   aboutUs: string
-  responsibilities: string[]
+  responsibilities: string
   preferredQualifications: string
-  keyAttributesToSuccess: string[]
-  keyTechnologies?: string[]
+  keyAttributesToSuccess: string
+  keyTechnologies?: string
   venture?: string
   applicationLink?: string
   urgency?: number
