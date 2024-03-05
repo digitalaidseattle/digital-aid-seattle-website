@@ -44,43 +44,32 @@ const CardProject = ({ project }: CardProjectProps) => {
               display: { xs: 'none', md: 'block' },
             }}
           />
-          <Stack spacing="1rem">
+          <Stack spacing="1rem" sx={{width:'100%'}}>
             <Typography variant="titleLarge" component="h2">
               {project.title}
             </Typography>
-            <Typography variant="labelLarge">{project.partner}</Typography>
-            <Typography variant="labelMedium">
-              {(project.programAreas ? project.programAreas : []).join(', ')}
-            </Typography>
+            <Stack spacing="1rem">
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center">
+                  <Typography variant="labelLarge">{project.partner}</Typography>
+                  <StateBadge state={project.status} />
+                </Stack>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between">
+                  <Typography variant="labelMedium">
+                    {(project.programAreas ? project.programAreas : []).join(', ')}
+                  </Typography>
+                  <Typography variant="labelMedium">
+                    {dasProjectsService.getTimeline(project)}
+                  </Typography>
+                </Stack>
+            </Stack>
           </Stack>
         </Stack>
         <Typography variant="bodyMedium">{project.description}</Typography>
-        <Stack
-          direction={{ xs: 'column-reverse', lg: 'row' }}
-          alignItems={{ xs: 'auto', lg: 'flex-end' }}
-          justifyContent="space-between"
-          spacing="1rem"
-        >
-          <Button
-            variant="contained"
-            href={project.projectLink}
-            sx={{ width: { md: 'max-content' } }}
-          >
-            View Project
-          </Button>
-          <Stack
-            direction={{ xs: 'row-reverse', lg: 'column' }}
-            justifyContent={{ xs: 'space-between', sm: 'auto' }}
-            alignItems={{ xs: 'center', sm: 'auto' }}
-            spacing="1rem"
-          >
-            <StateBadge state={project.status} />
-
-            <Typography variant="labelMedium">
-              {dasProjectsService.getTimeline(project)}
-            </Typography>
-          </Stack>
-        </Stack>
       </CardContent>
     </Card>
   )
