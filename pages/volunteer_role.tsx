@@ -15,6 +15,26 @@ import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import Markdown from 'react-markdown'
+
+const Labels = {
+  Title: "Volunteer Opening",
+  Home: 'Home',
+  Volunteers: 'Volunteers',
+  Return: "Return to Volunteer Page",
+  PreferredQualificationsPreamble: "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps.",
+  ApplyToVolunteer: "Apply to Volunteer",
+  NotAvailable: "Sorry, this volunteer role is not available.",
+  Location: "Location: ",
+  Duration: "Duration: ",
+  AboutUs: "About Us",
+  WhyJoinUs: "Why Join Us?",
+  WhatYouWillDo: "What You Will Do",
+  Responsibilities: "Responsibilities of ",
+  PreferredQualifications: "Preferred Qualifications",
+  KeyAttributesToSuccess: "Key Attributes to Success",
+  KeyTechnologies: "Key Technologies"
+}
 
 const VolunteerRolePage = () => {
   const [role, setRole] = useState<DASVolunteerRole>()
@@ -30,33 +50,10 @@ const VolunteerRolePage = () => {
         setRole(role)
       })
       .catch((error) => console.error(error))
-      .finally(() => {
-        setLoading(false)
-      })
+      .finally(() => setLoading(false))
   }, [setLoading])
 
   const theme = useTheme()
-
-  const buildListItems = (content: string[]) => {
-    return (
-      <ul
-        style={{
-          listStyleType: 'disc',
-          listStylePosition: 'outside',
-          paddingLeft: '1rem',
-        }}
-      >
-        {content.map((item: string, i) => (
-          <li
-            style={{ display: 'list-item', paddingLeft: '1rem', marginBottom: '1rem' }}
-            key={`${i}-${item}`}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    )
-  }
 
   const BreadCrumbSection = ({ roleName }) => {
     return (
@@ -65,41 +62,41 @@ const VolunteerRolePage = () => {
         separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
       >
         <Link href={'./'} color="primary" underline="hover">
-          Home
+          {Labels.Home}
         </Link>
         <Link href={'./volunteers'} color="primary" underline="hover">
-          Volunteers
+          {Labels.Volunteers}
         </Link>
         <Typography color="textPrimary">{roleName}</Typography>
       </Breadcrumbs>
     )
   }
 
-  const RoleDescriptionSubSection = ({ title, content, list }) => {
-    return (
+  const RoleDescriptionSubSection = ({ title, content, prefix = null }) => {
+    return (content &&
       <>
         <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold' }}>
           {title}
         </Box>
-        {title === 'Preferred Qualifications' ? (
-          <Typography
-            variant="bodyLarge"
-            sx={{ display: 'block', fontStyle: 'italic' }}
-          >
-            {
-              "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps."
-            }
-          </Typography>
-        ) : null}
-        {list ? (
-          <>{buildListItems(content)}</>
-        ) : (
-          <Typography variant="bodyLarge">
-            {content}
-          </Typography>
-        )}
-      </>
-    )
+        {prefix}
+        <Markdown className='markdown'>
+          {content}
+        </Markdown>
+      </>)
+  }
+
+  const PreferredRoleDescriptionSubSection = ({ title, content }) => {
+    return <RoleDescriptionSubSection
+      title={title}
+      content={content}
+      prefix={
+        <Typography
+          variant="bodyLarge"
+          sx={{ display: 'block', fontStyle: 'italic' }}
+        >
+          {Labels.PreferredQualificationsPreamble}
+        </Typography>
+      } />
   }
 
   const RoleDescriptionSection = ({ roleData }) => {
@@ -123,7 +120,7 @@ const VolunteerRolePage = () => {
                 mt: '1rem',
               }}
             >
-              {'Location: '}
+              {Labels.Location}
               <span style={{ fontWeight: 'normal' }}>{roleData.location}</span>
             </Box>
           ) : null}
@@ -136,60 +133,39 @@ const VolunteerRolePage = () => {
                 mb: '1rem',
               }}
             >
-              {'Duration: '}
+              {Labels.Duration}
               <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
             </Box>
           ) : null}
         </>
-        {roleData.aboutUs ? (
-          <RoleDescriptionSubSection
-            title={'About Us'}
-            content={roleData.aboutUs}
-            list={false}
-          />
-        ) : null}
-        {roleData.whyJoin ? (
-          <RoleDescriptionSubSection
-            title={'Why Join Us?'}
-            content={roleData.whyJoin}
-            list={false}
-          />
-        ) : null}
-        {roleData.whatYouWillDo ? (
-          <RoleDescriptionSubSection
-            title={'What You Will Do'}
-            content={roleData.whatYouWillDo}
-            list={false}
-          />
-        ) : null}
-        {roleData.responsibilities ? (
-          <RoleDescriptionSubSection
-            title={`Responsibilities of ${roleData.role}`}
-            content={roleData.responsibilities}
-            list={true}
-          />
-        ) : null}
-        {roleData.preferredQualifications ? (
-          <RoleDescriptionSubSection
-            title={'Preferred Qualifications'}
-            content={roleData.preferredQualifications}
-            list={false}
-          />
-        ) : null}
-        {roleData.keyAttributesToSuccess ? (
-          <RoleDescriptionSubSection
-            title={'Key Attributes to Success'}
-            content={roleData.keyAttributesToSuccess}
-            list={true}
-          />
-        ) : null}
-        {roleData.keyTechnologies ? (
-          <RoleDescriptionSubSection
-            title={'Key Technologies'}
-            content={roleData.keyTechnologies}
-            list={true}
-          />
-        ) : null}
+        <RoleDescriptionSubSection
+          title={Labels.AboutUs}
+          content={roleData.aboutUs}
+        />
+        <RoleDescriptionSubSection
+          title={Labels.WhyJoinUs}
+          content={roleData.whyJoin}
+        />
+        <RoleDescriptionSubSection
+          title={Labels.WhatYouWillDo}
+          content={roleData.whatYouWillDo}
+        />
+        <RoleDescriptionSubSection
+          title={Labels.Responsibilities + roleData.role}
+          content={roleData.responsibilities}
+        />
+        <PreferredRoleDescriptionSubSection
+          title={Labels.PreferredQualifications}
+          content={roleData.preferredQualifications}
+        />
+        <RoleDescriptionSubSection
+          title={Labels.KeyAttributesToSuccess}
+          content={roleData.keyAttributesToSuccess}
+        />
+        <RoleDescriptionSubSection
+          title={Labels.KeyTechnologies}
+          content={roleData.keyTechnologies}
+        />
         {roleData.applicationLink ? (
           <Box
             sx={{
@@ -200,7 +176,7 @@ const VolunteerRolePage = () => {
             }}
           >
             <Link href={roleData.applicationLink} target="_blank">
-              <Button variant="contained">Apply to Volunteer</Button>
+              <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
             </Link>
           </Box>
         ) : null}
@@ -218,10 +194,10 @@ const VolunteerRolePage = () => {
         }}
       >
         <Typography variant="headlineLarge" sx={{ mt: '2rem', mb: '2rem' }}>
-          {'Sorry, this volunteer role is not available.'}
+          {Labels.NotAvailable}
         </Typography>
         <Link href={'./volunteers'}>
-          <Button variant="contained">Return to Volunteer Page</Button>
+          <Button variant="contained">{Labels.Return}</Button>
         </Link>
       </Box>
     )
@@ -229,7 +205,7 @@ const VolunteerRolePage = () => {
 
   return (
     <>
-      <Masthead title={'Volunteer Opening'} />
+      <Masthead title={Labels.Title} />
       <BlockComponent block={!role}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>

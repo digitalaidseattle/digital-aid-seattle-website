@@ -69,10 +69,11 @@ class DASVolunteerRoleService {
 
       const {
         getNumberFieldRecord,
-        getSplitFieldRecord,
         getStringFieldRecord,
         getStringArrayFieldRecord,
       } = airtableService;
+
+
 
       const volunteerRoleData: DASVolunteerRole = {
         role: getStringFieldRecord(record, 'Role'),
@@ -84,20 +85,11 @@ class DASVolunteerRoleService {
         description: getStringFieldRecord(record, 'Description'),
         whyJoin: getStringFieldRecord(record, 'Why Join Us'),
         aboutUs: getStringFieldRecord(record, 'About Us'),
-        responsibilities: getSplitFieldRecord(record, 'Responsibilities'),
-        preferredQualifications: getStringFieldRecord(
-          record,
-          'Preferred Qualifications'
-        ),
-        keyAttributesToSuccess: getSplitFieldRecord(
-          record,
-          'Key attributes for success'
-        ),
+        responsibilities: getStringFieldRecord(record, 'Responsibilities'),
+        preferredQualifications: getStringFieldRecord(record, 'Preferred Qualifications'),
+        keyAttributesToSuccess: getStringFieldRecord(record, 'Key attributes for success'),
         keyTechnologies: keyTechnologies,
-        venture: getStringFieldRecord(
-          record,
-          'Venture (from Partner Needs Link)'
-        ),
+        venture: getStringFieldRecord(record, 'Venture (from Partner Needs Link)'),
         applicationLink: getStringFieldRecord(record, 'url to apply'),
         urgency: getNumberFieldRecord(record, 'Urgency'),
       }
@@ -135,7 +127,7 @@ class DASVolunteerRoleService {
           a.localeCompare(b)
         }
       })
-      return keyTechnologies
+      return keyTechnologies.map(k => "- " + k).join('\n')
     } else {
       return null
     }
