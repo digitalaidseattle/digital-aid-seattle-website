@@ -138,7 +138,7 @@ const supportUsBox = () => {
 const copyrightBox = () => {
   return (
     <Stack gap="0.25rem">
-      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
       <SubText>
         Illustrations by{' '}
         <Link
@@ -197,7 +197,7 @@ const CommonFooterLargeScreen = () => (
           flexDirection: 'column',
           justifyContent: 'flex-start',
           height: '100%',
-          gap: '2rem'
+          gap: '2rem',
         }}
       >
         {logoBox({ height: 'auto', width: '75%' })}
@@ -236,7 +236,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          alignItems: 'flex-end'
+          alignItems: 'flex-end',
         }}
       >
         {linkedInLink()}
@@ -249,13 +249,13 @@ const CommonFooterLargeScreen = () => (
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
     <GridItem md={5}>
-    <Box
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
           height: '100%',
-          gap: '2rem'
+          gap: '2rem',
         }}
       >
         {logoBox({ height: 'auto', width: '75%' })}
@@ -321,7 +321,7 @@ const CommonFooterSmallScreen = () => (
 )
 
 const CommonFooter = () => {
-  const { data: newsLetter } = useFeature('newsletter');
+  const { data: newsLetter } = useFeature('newsletter')
   return (
     <>
       <Container>
