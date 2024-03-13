@@ -264,7 +264,7 @@ const Home = () => {
               }
             />
             <CardOne
-              description="Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
+              description="Join Digital Aid Seattle to make a difference in the lives of others! We have a wide range of volunteer opportunities available."
               buttonText="Volunteer With Us"
               buttonLink="/volunteers"
               icon={

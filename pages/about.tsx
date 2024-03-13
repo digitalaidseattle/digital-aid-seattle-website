@@ -109,7 +109,7 @@ const AboutUsHeroSection = () => {
           Digital Aid Seattle comprises a group of seasoned professionals with
           experience in web development, software engineering, digital strategy,
           visual and content design, and more. We leverage this vast experience
-          to transform the nonprofit sector—to make it more efficient,
+          to transform the nonprofit sector to make it more efficient,
           effective, and accessible to all.
         </Typography>
       </>
@@ -127,11 +127,7 @@ const WhatWeDoSection = ({ theme }) => (
       and to uplift communities through the power of technology.
     </Typography>
     <Box textAlign="center">
-      <Button
-        variant="contained"
-        href={'/cadre'}
-        sx={{ width: 'fit-content' }}
-      >
+      <Button variant="contained" href={'/cadre'} sx={{ width: 'fit-content' }}>
         View our leadership team
       </Button>
     </Box>
