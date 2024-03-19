@@ -79,15 +79,11 @@ const SubText = styled(Typography)(({ theme }) => ({
   fontSize: '0.75rem',
 }))
 
-const logoBox = (imageStyle) => {
+const logoBox = () => {
   return (
     <Box>
       <Link href="/" title="Go back to home" aria-label="Go back to home">
-        <img
-          src={OSLogo.src}
-          style={imageStyle}
-          alt="Digital Aid Seattle Logo"
-        />
+        <img src={OSLogo.src} width="120px" alt="Digital Aid Seattle Logo" />
       </Link>
     </Box>
   )
@@ -197,10 +193,10 @@ const CommonFooterLargeScreen = () => (
           flexDirection: 'column',
           justifyContent: 'flex-start',
           height: '100%',
-          gap: '2rem'
+          gap: '2rem',
         }}
       >
-        {logoBox({ height: 'auto', width: '75%' })}
+        {logoBox()}
         {copyrightBox()}
       </Box>
     </GridItem>
@@ -236,7 +232,7 @@ const CommonFooterLargeScreen = () => (
           display: 'flex',
           flexDirection: 'column',
           gap: '2rem',
-          alignItems: 'flex-end'
+          alignItems: 'flex-end',
         }}
       >
         {linkedInLink()}
@@ -249,16 +245,16 @@ const CommonFooterLargeScreen = () => (
 const CommonFooterMidScreen = () => (
   <Grid container direction="column" columns={3}>
     <GridItem md={5}>
-    <Box
+      <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
           height: '100%',
-          gap: '2rem'
+          gap: '2rem',
         }}
       >
-        {logoBox({ height: 'auto', width: '75%' })}
+        {logoBox()}
         {copyrightBox()}
       </Box>
     </GridItem>
@@ -301,7 +297,7 @@ const CommonFooterSmallScreen = () => (
     columns={1}
     sx={{ alignItems: 'center', textAlign: 'center', gap: '2rem' }}
   >
-    <GridItem>{logoBox({ height: '3rem', width: 'auto' })}</GridItem>
+    <GridItem>{logoBox()}</GridItem>
 
     <GridItem>{contactUsBox()}</GridItem>
 
@@ -321,7 +317,7 @@ const CommonFooterSmallScreen = () => (
 )
 
 const CommonFooter = () => {
-  const { data: newsLetter } = useFeature('newsletter');
+  const { data: newsLetter } = useFeature('newsletter')
   return (
     <>
       <Container>
