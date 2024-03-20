@@ -352,6 +352,16 @@ export const theme = createTheme({
           border: 'none',
         }
       },
+    },
+    MuiCardActionArea: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        focusHighlight: {
+          background: 'transparent',
+        }
+      }
     }
   },
 })
