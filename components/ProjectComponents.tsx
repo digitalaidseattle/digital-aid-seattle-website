@@ -74,7 +74,7 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
-const ProjectHeaderSection = (props: { project: DASProject }) => {
+const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean }) => {
   const theme = useTheme()
   const [project, setProject] = useState<DASProject>()
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
@@ -109,15 +109,17 @@ const ProjectHeaderSection = (props: { project: DASProject }) => {
               {project.title}
             </Typography>
           </Stack>
-          <Stack spacing="1rem">
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+          {!props.hideStatus &&
+            <Stack spacing="1rem">
+              <Stack direction="row" alignItems="center" spacing="1.5rem">
+                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing="1.5rem">
+                <Typography variant="labelLarge">Project Status:</Typography>
+                <StateBadge state={project.status} />
+              </Stack>
             </Stack>
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">Project Status:</Typography>
-              <StateBadge state={project.status} />
-            </Stack>
-          </Stack>
+          }
 
           <img
             src={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
@@ -192,31 +194,33 @@ const ProjectHeaderSection = (props: { project: DASProject }) => {
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            width: '100%',
-            paddingY: '1rem',
-          }}
-        >
-          <Stack
-            spacing="1rem"
-            width={{ md: 'auto', lg: '880px' }}
+        {!props.hideStatus &&
+          <Box
             sx={{
-              color: theme.palette.primary.main,
-              margin: '0 auto',
-              paddingLeft: { md: '2rem', lg: '0' },
+              backgroundColor: theme.palette.background.default,
+              width: '100%',
+              paddingY: '1rem',
             }}
           >
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+            <Stack
+              spacing="1rem"
+              width={{ md: 'auto', lg: '880px' }}
+              sx={{
+                color: theme.palette.primary.main,
+                margin: '0 auto',
+                paddingLeft: { md: '2rem', lg: '0' },
+              }}
+            >
+              <Stack direction="row" alignItems="center" spacing="1.5rem">
+                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing="1.5rem">
+                <Typography variant="labelLarge">Project Status:</Typography>
+                <StateBadge state={project.status} />
+              </Stack>
             </Stack>
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">Project Status:</Typography>
-              <StateBadge state={project.status} />
-            </Stack>
-          </Stack>
-        </Box>
+          </Box>
+        }
       </>
     )
   }
