@@ -56,9 +56,9 @@ const TheCadrePage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <ProjectBodyTextSection title="Problem" texts={project.problem} />
-          <ProjectBodyTextSection title="Solution" texts={project.solution} />
-          <ProjectBodyTextSection title="Impact" texts={project.impact} />
+          <ProjectBodyTextSection title="Problem" texts={project.problem as unknown as string[]} />
+          <ProjectBodyTextSection title="Solution" texts={project.solution as unknown as string[]} />
+          <ProjectBodyTextSection title="Impact" texts={project.impact as unknown as string[]} />
           <ProjectTeamSection title="Current team" members={members} />
           <RolesSection title="Roles needed" roles={volunteerRoles} />
           <ProjectContactUsSection />
