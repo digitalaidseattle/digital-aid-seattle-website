@@ -2,16 +2,6 @@
 /*
  * @2024 Digital Aid Seattle
  */
-import { useEffect, useState } from 'react'
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-  styled,
-  useTheme,
-} from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery'
 // icons for role cards
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined'
 import AutoStoriesOutlinedIcon from '@mui/icons-material/AutoStoriesOutlined'
@@ -26,15 +16,24 @@ import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-
-
-import { urlForImage } from '../sanity/lib/image'
-import StateBadge from './cards/StateBadge'
-import { DASProject, TeamMember } from 'types'
-import NoPhotoPerson from '../assets/no-photo-person.svg'
+import {
+  Box,
+  Button,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+} from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { dasProjectsService } from 'pages/api/ProjectsService'
-import SectionContainer from './layout/SectionContainer'
+import { useEffect, useState } from 'react'
+import { DASProject, TeamMember } from 'types'
+
+import NoPhotoPerson from '../assets/no-photo-person.svg'
+import { urlForImage } from '../sanity/lib/image'
 import CardWithPhoto from './cards/CardWithPhoto'
+import StateBadge from './cards/StateBadge'
+import SectionContainer from './layout/SectionContainer'
 import ListItemWithIcon from './list/ListItemWithIcon'
 
 const rolesMap = {
@@ -109,24 +108,23 @@ const ProjectHeaderSection = (props: { project: DASProject }) => {
             <Typography variant="displayMedium" component="h1">
               {project.title}
             </Typography>
-            <Typography variant="headlineMedium" component="span">
-              {project.partner}
-            </Typography>
           </Stack>
           <Stack spacing="1rem">
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+            </Stack>
             <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
               <StateBadge state={project.status} />
             </Stack>
-            <Typography variant="labelLarge">
-              Expected Timeline: Ongoing
-            </Typography>
           </Stack>
 
           <img
-            src={urlForImage(project.image).url()}
+            src={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
             style={{
-              width: '100%',
+              width: '50%',
+              margin: '0 auto',
+              marginTop: '1rem',
               aspectRatio: '1 / 1',
               display: 'block',
               borderRadius: '20px',
@@ -170,25 +168,18 @@ const ProjectHeaderSection = (props: { project: DASProject }) => {
               >
                 {project.title}
               </Typography>
-              <Typography
-                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="span"
-              >
-                {project.partner}
-              </Typography>
             </Stack>
-
             <Box
               sx={{
-                width: { md: 'min(40vw, 18rem)', lg: '25rem' },
+                width: { md: 'min(40vw, 18rem)', lg: 'min(40vw, 18rem)' },
                 position: 'absolute',
-                right: { xs: '1rem', md: '2rem', lg: '0' },
+                right: { xs: '2rem', md: '2rem', lg: '2rem' },
                 bottom: '-6rem',
                 zIndex: '2',
               }}
             >
               <img
-                src={urlForImage(project.image).url()}
+                src={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
                 style={{
                   width: '100%',
                   display: 'block',
@@ -218,15 +209,11 @@ const ProjectHeaderSection = (props: { project: DASProject }) => {
             }}
           >
             <Stack direction="row" alignItems="center" spacing="1.5rem">
+              <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing="1.5rem">
               <Typography variant="labelLarge">Project Status:</Typography>
               <StateBadge state={project.status} />
-            </Stack>
-
-            <Stack direction="row" alignItems="center" spacing="1.5rem">
-              <Typography variant="labelLarge">Expected Timeline:</Typography>
-              <Typography variant="labelLarge">
-                {dasProjectsService.getTimeline(project)}
-              </Typography>
             </Stack>
           </Stack>
         </Box>
@@ -339,6 +326,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
         >
           {members.map((person, idx) => {
             const url = person.url ? person.url : person.image ? urlForImage(person.image).url() : NoPhotoPerson.src;
+            console.log(url)
             return <CardWithPhoto
               key={idx}
               title={person.name}
@@ -415,13 +403,13 @@ const ProjectContactUsSection = () => {
 }
 
 export {
-  ProjectTextSection,
-  ProjectSection,
   ProjectBodyTextSection,
-  ProjectSubheader,
+  ProjectContactUsSection,
   ProjectFooterSection,
   ProjectHeaderSection,
-  ProjectTeamSection,
   ProjectRolesSection,
-  ProjectContactUsSection
+  ProjectSection,
+  ProjectSubheader,
+  ProjectTeamSection,
+  ProjectTextSection
 }
