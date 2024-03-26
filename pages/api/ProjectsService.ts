@@ -1,5 +1,5 @@
 /*
-* @2023 Digital Aid Seattle
+* @2024 Digital Aid Seattle
 */
 
 import { groq } from 'next-sanity';
@@ -56,7 +56,7 @@ class AirtableProjectsService {
         return {
           id: fields['AirTable ID'],
           title: resp.fields['Org name'],
-          partner: fields['Painpoint Shorthand'],
+          painpoint: fields['Painpoint Shorthand'],
           status: STATUS[fields['Status'] as string],
           problem: fields['Problem (for DAS website)'],
           solution: fields['Solution (for DAS website)'],

@@ -41,6 +41,7 @@ type DASProject = {
   id: string
   title: string
   partner: string
+  painpoint: string
   programAreas: string[]
   description: string
   status: 'active' | 'recruiting' | 'complete'

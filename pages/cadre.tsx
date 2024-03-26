@@ -1,5 +1,5 @@
 /*
- * @2023 Digital Aid Seattle
+ * @2024 Digital Aid Seattle
  */
 import { useContext, useEffect, useState } from 'react'
 
@@ -8,16 +8,16 @@ import {
   Stack,
   useTheme
 } from '@mui/material'
+
 import SectionContainer from 'components/layout/SectionContainer'
 import { dasProjectsService, sanityProjectsService } from './api/ProjectsService'
-
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-// icons for role cards
 import {
   ProjectBodyTextSection,
   ProjectContactUsSection,
   ProjectFooterSection,
   ProjectHeaderSection,
+  ProjectLabels,
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -57,11 +57,11 @@ const TheCadrePage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <ProjectBodyTextSection title="Problem" texts={project.problem as unknown as string[]} />
-          <ProjectBodyTextSection title="Solution" texts={project.solution as unknown as string[]} />
-          <ProjectBodyTextSection title="Impact" texts={project.impact as unknown as string[]} />
-          <ProjectTeamSection title="Current team" members={members} />
-          <RolesSection title="Roles needed" roles={volunteerRoles} />
+          <ProjectBodyTextSection title={ProjectLabels.problem} texts={project.problem as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.solution} texts={project.solution as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.impact} texts={project.impact as unknown as string[]} />
+          <ProjectTeamSection title={ProjectLabels.current_team} members={members} />
+          <RolesSection title={ProjectLabels.roles_needed} roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
       </SectionContainer>

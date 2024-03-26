@@ -1,5 +1,5 @@
 /*
- * @2023 Digital Aid Seattle
+ * @2024 Digital Aid Seattle
  */
 import {
   Box,
@@ -7,32 +7,15 @@ import {
   Stack,
   useTheme
 } from '@mui/material'
+import { ProjectBodyMarkdownSection, ProjectFooterSection, ProjectHeaderSection, ProjectLabels, ProjectTeamSection } from 'components/ProjectComponents'
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-import { ProjectFooterSection, ProjectHeaderSection, ProjectTeamSection } from 'components/ProjectComponents'
-import RolesSection from 'components/RolesSection'
 import { Section, Subheader } from 'components/style-utils'
 import { useContext, useEffect, useState } from 'react'
-import Markdown from 'react-markdown'
 import { DASProject } from 'types'
-
 import { dasProjectsService } from './api/ProjectsService'
 
-type BodyTextSectionProps = {
-  title: string
-  text: string
-}
 
-const BodyTextSection = ({ title, text }: BodyTextSectionProps) => {
-  return (text &&
-    <Section>
-      <Subheader variant="headlineMedium">{title}</Subheader>
-      <Markdown className='markdown'>
-        {text}
-      </Markdown>
-    </Section>
-  )
-}
 
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
@@ -57,7 +40,9 @@ const ProjectIndividualPage = () => {
       .finally(() => setLoading(false))
   }, [setLoading])
 
+
   const theme = useTheme()
+
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
@@ -66,38 +51,19 @@ const ProjectIndividualPage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <BodyTextSection title="Problem" text={project.problem} />
-          <BodyTextSection title="Solution" text={project.solution} />
-          <BodyTextSection title="Impact" text={project.impact} />
+          <ProjectBodyMarkdownSection title={ProjectLabels.problem} text={project.problem} />
+          <ProjectBodyMarkdownSection title={ProjectLabels.solution} text={project.solution} />
+          <ProjectBodyMarkdownSection title={ProjectLabels.impact} text={project.impact} />
           <ProjectTeamSection title="Current team" members={project.currentTeam} />
           <Section>
             <Subheader variant="headlineMedium">
-              Questions about this project?
+              {ProjectLabels.questions}
             </Subheader>
             <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-              Contact us
+              {ProjectLabels.contact_us}
             </Button>
           </Section>
         </Stack>
-      </SectionContainer>
-    )
-  }
-
-  function getFooter() {
-    return (
-      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
-        <Section>
-          <Subheader variant="headlineMedium">
-            Interested in volunteering with Digital Aid Seattle?
-          </Subheader>
-          <Button
-            variant="contained"
-            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-            target="_blank"
-          >
-            Apply to volunteer
-          </Button>
-        </Section>
       </SectionContainer>
     )
   }

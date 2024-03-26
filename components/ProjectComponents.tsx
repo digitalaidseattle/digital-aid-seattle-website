@@ -25,16 +25,29 @@ import {
   useTheme,
 } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { dasProjectsService } from 'pages/api/ProjectsService'
 import { useEffect, useState } from 'react'
-import { DASProject, TeamMember } from 'types'
 
+import { DASProject, TeamMember } from 'types'
 import NoPhotoPerson from '../assets/no-photo-person.svg'
 import { urlForImage } from '../sanity/lib/image'
 import CardWithPhoto from './cards/CardWithPhoto'
 import StateBadge from './cards/StateBadge'
 import SectionContainer from './layout/SectionContainer'
 import ListItemWithIcon from './list/ListItemWithIcon'
+import { Section, Subheader } from './style-utils'
+import Markdown from 'react-markdown'
+
+const ProjectLabels = {
+  contact_us: 'Contact us',
+  questions: 'Questions about this project?',
+  project_label: 'Project: ',
+  project_status: 'Project Status: ',
+  problem: 'Problem',
+  solution: 'Solution',
+  impact: 'Impact',
+  current_team: 'Current team',
+  roles_needed: 'Roles Needed'
+}
 
 const rolesMap = {
   communityEngagementLiason: {
@@ -115,7 +128,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">Project Status:</Typography>
+                <Typography variant="labelLarge">{ProjectLabels.project_status}</Typography>
                 <StateBadge state={project.status} />
               </Stack>
             </Stack>
@@ -232,6 +245,23 @@ const ProjectSection = styled(Stack)(({ theme }) => ({
   width: '100%',
   color: theme.palette.primary.main,
 }))
+
+type BodyTextSectionProps = {
+  title: string
+  text: string
+}
+
+const ProjectBodyMarkdownSection = ({ title, text }: BodyTextSectionProps) => {
+  return (text &&
+    <Section>
+      <Subheader variant="headlineMedium">{title}</Subheader>
+      <Markdown className='markdown'>
+        {text}
+      </Markdown>
+    </Section>
+  )
+}
+
 
 const ProjectSubheader = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -410,10 +440,10 @@ export {
   ProjectBodyTextSection,
   ProjectContactUsSection,
   ProjectFooterSection,
-  ProjectHeaderSection,
-  ProjectRolesSection,
+  ProjectHeaderSection, ProjectLabels, ProjectRolesSection,
   ProjectSection,
   ProjectSubheader,
   ProjectTeamSection,
-  ProjectTextSection
+  ProjectTextSection,
+  ProjectBodyMarkdownSection
 }

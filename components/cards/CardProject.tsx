@@ -9,6 +9,7 @@ import { DASProject } from 'types'
 
 import { urlForImage } from '../../sanity/lib/image'
 import StateBadge from './StateBadge'
+import { ProjectLabels } from 'components/ProjectComponents'
 
 type CardProjectProps = {
   project: DASProject
@@ -66,7 +67,7 @@ const CardProject = ({ project }: CardProjectProps) => {
                   {project.programAreas &&
                     <Stack direction="row" justifyContent="space-between">
                       <Typography variant="labelLarge">
-                        {project.partner}
+                        {ProjectLabels.project_label + project.painpoint}
                       </Typography>
                     </Stack>
                   }
