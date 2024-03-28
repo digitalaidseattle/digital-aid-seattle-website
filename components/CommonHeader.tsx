@@ -58,7 +58,8 @@ const CommonHeader = () => {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
+      elevation={0}
       sx={{
         background: theme.palette.primary.main,
       }}

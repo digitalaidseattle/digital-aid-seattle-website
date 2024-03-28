@@ -21,7 +21,7 @@ export default function Document() {
           type="image/png"
         />
       </Head>
-      <body className="bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100">
+      <body>
         <Main />
         <NextScript />
       </body>
