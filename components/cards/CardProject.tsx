@@ -8,7 +8,7 @@ import { dasProjectsService } from 'pages/api/ProjectsService'
 import { DASProject } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
 import StateBadge from './StateBadge'
-import { CardActionArea } from '@mui/material'
+import { CardActionArea, styled } from '@mui/material'
 
 type CardProjectProps = {
   project: DASProject
@@ -20,9 +20,18 @@ const CardProject = ({ project }: CardProjectProps) => {
       sx={{
         boxShadow:
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
+        '&:hover': {
+          boxShadow:
+            '0px 2px 4px 0px rgba(52, 61, 62, 0.1), 0px 4px 8px 2px rgba(52, 61, 62, 0.1)',
+        },
       }}
     >
-      <CardActionArea href={project.projectLink} sx={{ height: '100%' }}>
+      <CardActionArea
+        href={project.projectLink}
+        sx={{
+          height: '100%',
+        }}
+      >
         <CardContent
           sx={{
             padding: { xs: '2rem 1rem', lg: '2rem' },
