@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
+
 import { ReactNode } from 'react'
 
 type MobileMenuProps = {
@@ -17,11 +18,17 @@ type MobileMenuProps = {
 }
 
 const MobileMenu = ({ children }: MobileMenuProps) => {
+  const theme = useTheme()
+
   return (
   <Stack sx={{
-    backgroundColor: 'green',
-    height: '100vh',
-  }}>
+    position: 'absolute',
+    width: '100%',
+    alignItems: 'center',
+    gap: '1.5rem',
+    paddingY: '2.5rem',
+    backgroundColor: theme.palette.primary.main,
+}}>
     {children}
   </Stack>
 

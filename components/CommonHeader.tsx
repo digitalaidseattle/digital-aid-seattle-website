@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
@@ -67,6 +67,7 @@ const CommonHeader = () => {
         background: theme.palette.primary.main,
       }}
     >
+      <Box sx={{position: 'relative'}}>
       <Toolbar sx={{ padding: '0 !important' }}>
         <Box
           sx={{
@@ -183,15 +184,18 @@ const CommonHeader = () => {
                 <Link
                   underline="hover"
                   sx={{
-                    color: theme.palette.primary.dark,
+                    color: theme.palette.primary.contrastText,
                   }}
                   href={SECTION_TO_PATH[name]}
                 >
-                  {name}
+                  <Typography variant="labelLarge">
+                    {name}
+                  </Typography>
                 </Link>
               </MenuItem>
             ))}
           </MobileMenu>}
+          </Box>
     </AppBar>
   )
 }
