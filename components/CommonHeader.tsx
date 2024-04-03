@@ -4,6 +4,7 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
 import { Box, Button, Typography } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
@@ -100,27 +101,8 @@ const CommonHeader = () => {
             onClick={()=>setShowMobileMenu(!showMobileMenu)}
             sx={{ color: theme.palette.primary.contrastText }}
           >
-            <MenuIcon />
+            {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
-          {/* <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: 'block', lg: 'none' },
-              width: '100vw',
-              backgroundColor: 'red'
-            }} */}
         </Box>
         {/* Menu items that are shown on desktop */}
         <Container
