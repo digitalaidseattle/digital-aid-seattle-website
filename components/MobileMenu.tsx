@@ -7,7 +7,6 @@ import {
   Stack,
   useTheme,
 } from '@mui/material'
-
 import { ReactNode } from 'react'
 
 type MobileMenuProps = {
@@ -28,8 +27,7 @@ const MobileMenu = ({ children, yTranslate }: MobileMenuProps) => {
     backgroundColor: theme.palette.primary.main,
     borderBottom: `2px solid ${theme.palette.text.primary}`,
     transform: `translateY(${yTranslate})`,
-    transition: 'all 0.4s ease-in-out',
-    zIndex: '-100'
+    transition: 'all 0.66s ease',
 }}>
     {children}
   </Stack>
