@@ -10,7 +10,6 @@ import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
-import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
@@ -155,8 +154,8 @@ const CommonHeader = () => {
           </nav>
         </Container>
       </Toolbar>
-      {showMobileMenu && 
-        <MobileMenu> 
+      {
+        <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}> 
             {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
