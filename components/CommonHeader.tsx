@@ -15,6 +15,7 @@ import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { theme } from 'theme/theme'
+import MobileMenu from './MobileMenu'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 
@@ -49,6 +50,8 @@ const CommonHeader = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
+
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   const router = useRouter()
 
@@ -93,12 +96,12 @@ const CommonHeader = () => {
             aria-label="page-info"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={handleOpenNavMenu}
+            onClick={()=>setShowMobileMenu(!showMobileMenu)}
             sx={{ color: theme.palette.primary.contrastText }}
           >
             <MenuIcon />
           </IconButton>
-          <Menu
+          {/* <Menu
             id="menu-appbar"
             anchorEl={anchorElNav}
             anchorOrigin={{
@@ -114,26 +117,9 @@ const CommonHeader = () => {
             onClose={handleCloseNavMenu}
             sx={{
               display: { xs: 'block', lg: 'none' },
-            }}
-          >
-            {Object.keys(SECTION_TO_PATH).map((name) => (
-              <MenuItem
-                key={name}
-                onClick={handleCloseNavMenu}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.dark,
-                  }}
-                  href={SECTION_TO_PATH[name]}
-                >
-                  {name}
-                </Link>
-              </MenuItem>
-            ))}
-          </Menu>
+              width: '100vw',
+              backgroundColor: 'red'
+            }} */}
         </Box>
         {/* Menu items that are shown on desktop */}
         <Container
@@ -186,6 +172,26 @@ const CommonHeader = () => {
           </nav>
         </Container>
       </Toolbar>
+      {showMobileMenu && 
+        <MobileMenu> 
+            {Object.keys(SECTION_TO_PATH).map((name) => (
+              <MenuItem
+                key={name}
+                onClick={handleCloseNavMenu}
+                style={{ borderRadius: '0px' }}
+              >
+                <Link
+                  underline="hover"
+                  sx={{
+                    color: theme.palette.primary.dark,
+                  }}
+                  href={SECTION_TO_PATH[name]}
+                >
+                  {name}
+                </Link>
+              </MenuItem>
+            ))}
+          </MobileMenu>}
     </AppBar>
   )
 }
