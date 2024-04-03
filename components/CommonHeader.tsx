@@ -5,7 +5,7 @@
 /* eslint-disable @next/next/no-img-element */
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
@@ -13,7 +13,7 @@ import Link from '@mui/material/Link'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
@@ -41,7 +41,7 @@ const PATH_TO_SECTION = {
 
 const CommonHeader = () => {
   // React states and functions for handling the hamburger menu.
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -51,7 +51,8 @@ const CommonHeader = () => {
     setAnchorElNav(null)
   }
 
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
 
   const router = useRouter()
 
@@ -157,6 +158,8 @@ const CommonHeader = () => {
           </Container>
         </Toolbar>
       </AppBar>
+      {/* the mobile slide-out menu */}
+      {smallScreen &&
       <Box sx={{ position: 'relative', zIndex: -1 }}>
         <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}> 
             {Object.keys(SECTION_TO_PATH).map((name) => (
@@ -179,7 +182,7 @@ const CommonHeader = () => {
               </MenuItem>
             ))}
           </MobileMenu>
-      </Box>
+      </Box>}
     </Box>
   )
 }
