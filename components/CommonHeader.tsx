@@ -13,7 +13,7 @@ import Link from '@mui/material/Link'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
@@ -40,17 +40,7 @@ const PATH_TO_SECTION = {
 
 
 const CommonHeader = () => {
-  // React states and functions for handling the hamburger menu.
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
-  }
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
-
+  // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
 
@@ -62,7 +52,7 @@ const CommonHeader = () => {
 
   return (
     // Containing Box is given AppBar's z-index; ensures it always stays on top.
-    // MUI z-index reference: https://mui.com/material-ui/customization/z-index/
+    // z-index taken from docs: https://mui.com/material-ui/customization/z-index/
     <Box sx={{ position: 'sticky', top: 0, zIndex: 1100 }}>
       <AppBar
         position="static"
@@ -132,7 +122,6 @@ const CommonHeader = () => {
                 {Object.keys(SECTION_TO_PATH).map((name) => (
                   <Button
                     key={name}
-                    onClick={handleCloseNavMenu}
                     variant="contained"
                     color={isCurrent(name)
                       ? 'success'
@@ -158,14 +147,13 @@ const CommonHeader = () => {
           </Container>
         </Toolbar>
       </AppBar>
-      {/* the mobile slide-out menu */}
+      {/* mobile slide-out menu */}
       {smallScreen &&
       <Box sx={{ position: 'relative', zIndex: -1 }}>
         <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}> 
             {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
-                onClick={handleCloseNavMenu}
                 style={{ borderRadius: '0px' }}
               >
                 <Link
