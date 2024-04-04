@@ -51,7 +51,8 @@ type DASProject = {
   currentTeam: TeamMember[]
   display: boolean,
   imageSrc: string,
-  ventureCode: string
+  ventureCode: string,
+  airtableStatus: string
 }
 
 type DASFeature = {
