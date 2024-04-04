@@ -1,82 +1,21 @@
 /*
- * @2023 Digital Aid Seattle
+ * @2024 Digital Aid Seattle
  */
-import { useContext, useEffect, useState } from 'react'
-
 import {
   Box,
   Button,
   Stack,
-  Typography,
   useTheme
 } from '@mui/material'
+import { ProjectBodyMarkdownSection, ProjectFooterSection, ProjectHeaderSection, ProjectLabels, ProjectTeamSection } from 'components/ProjectComponents'
 import SectionContainer from 'components/layout/SectionContainer'
-
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-
-import { ProjectFooterSection, ProjectHeaderSection } from 'components/ProjectComponents'
-import RolesSection from 'components/RolesSection'
-import CardWithPhoto from 'components/cards/CardWithPhoto'
-import { Section, Subheader, TextSection } from 'components/style-utils'
-import { DASProject, TeamMember } from 'types'
-import { urlForImage } from '../sanity/lib/image'
+import { Section, Subheader } from 'components/style-utils'
+import { useContext, useEffect, useState } from 'react'
+import { DASProject } from 'types'
 import { dasProjectsService } from './api/ProjectsService'
 
-type BodyTextSectionProps = {
-  title: string
-  texts?: string[]
-}
 
-const BodyTextSection = ({ title, texts }: BodyTextSectionProps) => {
-  return (
-    texts &&
-    texts.length > 0 && (
-      <Section>
-        <Subheader variant="headlineMedium">{title}</Subheader>
-        <TextSection>
-          {texts.map((t, index) => (
-            <Typography key={index} variant="bodyLarge">
-              {t}
-            </Typography>
-          ))}
-        </TextSection>
-      </Section>
-    )
-  )
-}
-
-type TeamSectionProps = {
-  title: string
-  members?: TeamMember[]
-}
-
-const TeamSection = ({ title, members }: TeamSectionProps) => {
-  return (members && members.length > 0) &&
-    <Section>
-      <Subheader variant="headlineMedium">
-        {title}
-      </Subheader>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'columns',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
-          justifyContent: 'center',
-          gap: '2rem',
-          width: '100%',
-        }}
-      >
-        {members.map((person) => (
-          <CardWithPhoto
-            key={person._id}
-            title={person.name}
-            description={person.role}
-            image={person.image ? urlForImage(person.image).url() : undefined}
-          />
-        ))}
-      </Box>
-    </Section>
-}
 
 const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
@@ -85,17 +24,25 @@ const ProjectIndividualPage = () => {
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams(window.location.search)
-    dasProjectsService
-      .getOne(params.get('project'))
-      .then((data) => {
+    dasProjectsService.getOne(params.get('project'))
+      .then((resps) => {
+        const project = resps
         // should reroute if no data
-        setProject(data)
+        dasProjectsService.getSquad(project.ventureCode)
+          .then(team => {
+            project.currentTeam = team;
+            setProject(project)
+          })
+          .catch((error) => console.error(error))
+          .finally(() => setLoading(false))
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [setLoading])
 
+
   const theme = useTheme()
+
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
@@ -104,19 +51,16 @@ const ProjectIndividualPage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <BodyTextSection title="Problem" texts={project.problem} />
-          <BodyTextSection title="Solution" texts={project.solution} />
-          <BodyTextSection title="Impact" texts={project.impact} />
-          <TeamSection title="Current team" members={project.currentTeam} />
-          {project.rolesNeeded && project.rolesNeeded.length > 0 && (
-            <RolesSection title="Roles needed" roles={project.rolesNeeded} />
-          )}
+          <ProjectBodyMarkdownSection title={ProjectLabels.problem} text={project.problem} />
+          <ProjectBodyMarkdownSection title={ProjectLabels.solution} text={project.solution} />
+          <ProjectBodyMarkdownSection title={ProjectLabels.impact} text={project.impact} />
+          <ProjectTeamSection title="Current team" members={project.currentTeam} />
           <Section>
             <Subheader variant="headlineMedium">
-              Questions about this project?
+              {ProjectLabels.questions}
             </Subheader>
             <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-              Contact us
+              {ProjectLabels.contact_us}
             </Button>
           </Section>
         </Stack>
@@ -124,30 +68,16 @@ const ProjectIndividualPage = () => {
     )
   }
 
-  function getFooter() {
-    return (
-      <SectionContainer backgroundColor={theme.palette.primary.contrastText}>
-        <Section>
-          <Subheader variant="headlineMedium">
-            Interested in volunteering with Digital Aid Seattle?
-          </Subheader>
-          <Button
-            variant="contained"
-            href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
-            target="_blank"
-          >
-            Apply to volunteer
-          </Button>
-        </Section>
-      </SectionContainer>
-    )
-  }
-
   return (
     <BlockComponent block={!project}>
-      <ProjectHeaderSection project={project} />
-      {project && getBody()}
-      <ProjectFooterSection />
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.default
+        }}>
+        <ProjectHeaderSection project={project} />
+        {project && getBody()}
+        <ProjectFooterSection />
+      </Box>
     </ BlockComponent>
   )
 }

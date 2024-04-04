@@ -1,22 +1,23 @@
 /*
- * @2023 Digital Aid Seattle
+ * @2024 Digital Aid Seattle
  */
 import { useContext, useEffect, useState } from 'react'
 
 import {
+  Box,
   Stack,
   useTheme
 } from '@mui/material'
-import SectionContainer from 'components/layout/SectionContainer'
-import { dasProjectsService } from './api/ProjectsService'
 
+import SectionContainer from 'components/layout/SectionContainer'
+import { dasProjectsService, sanityProjectsService } from './api/ProjectsService'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-// icons for role cards
 import {
   ProjectBodyTextSection,
   ProjectContactUsSection,
   ProjectFooterSection,
   ProjectHeaderSection,
+  ProjectLabels,
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
@@ -34,7 +35,7 @@ const TheCadrePage = () => {
     setLoading(true);
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
-      dasProjectsService.getOne('the-cadre'),
+      sanityProjectsService.getOne('the-cadre'),
       dasProjectsService.getPeople('ongoing')
     ])
       .then(resps => {
@@ -56,11 +57,11 @@ const TheCadrePage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <ProjectBodyTextSection title="Problem" texts={project.problem} />
-          <ProjectBodyTextSection title="Solution" texts={project.solution} />
-          <ProjectBodyTextSection title="Impact" texts={project.impact} />
-          <ProjectTeamSection title="Current team" members={members} />
-          <RolesSection title="Roles needed" roles={volunteerRoles} />
+          <ProjectBodyTextSection title={ProjectLabels.problem} texts={project.problem as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.solution} texts={project.solution as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.impact} texts={project.impact as unknown as string[]} />
+          <ProjectTeamSection title={ProjectLabels.current_team} members={members} />
+          <RolesSection title={ProjectLabels.roles_needed} roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
       </SectionContainer>
@@ -69,9 +70,14 @@ const TheCadrePage = () => {
 
   return (
     <BlockComponent block={!project}>
-      <ProjectHeaderSection project={project} />
-      {project ? getBody() : <></>}
-      <ProjectFooterSection />
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.default
+        }}>
+        <ProjectHeaderSection project={project} hideStatus={true} />
+        {project ? getBody() : <></>}
+        <ProjectFooterSection />
+      </Box>
     </ BlockComponent>
   )
 }

@@ -37,18 +37,21 @@ type DASProject = {
   id: string
   title: string
   partner: string
+  painpoint: string
   programAreas: string[]
   description: string
   status: 'active' | 'recruiting' | 'complete'
   projectLink: string
   duration?: { start: string; end: string }
   image: Image
-  problem: string[]
-  solution: string[]
-  impact: string[]
+  problem: string
+  solution: string
+  impact: string
   rolesNeeded: DASVolunteerRoleBasicInfo[]
   currentTeam: TeamMember[]
-  display: boolean
+  display: boolean,
+  imageSrc: string,
+  ventureCode: string
 }
 
 type DASFeature = {
