@@ -70,8 +70,14 @@ const EventsPage = () => {
       })
   }, [setLoading])
 
-  let futureEvents = events.filter((event) => Date.parse(event.date) > Date.now());
-  let pastEvents = events.filter((event) => Date.parse(event.date) < Date.now());
+  const today = new Date();
+
+  let futureEvents = events.filter((event) => event.date >= today);
+  let pastEvents = events.filter((event) => event.date < today);
+  events.forEach((e) => {
+    console.log(e.date)
+    console.log('today', today)
+  })
 
   return (
     <>

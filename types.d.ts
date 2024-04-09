@@ -7,7 +7,7 @@ type OSEvent = {
   _id: string,
   _createdAt: Date,
   title: string,
-  date: string,
+  date: Date,
   start: string,
   end: string,
   location: string,
