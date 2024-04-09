@@ -76,10 +76,10 @@ class AirtableProjectsService {
 
   async getAll(): Promise<DASProject[]> {
     const MAX_RECORDS = 100;
-    const ACTIVE_FILTER = `OR(${this.filteredStatuses.map(s => `{Status} = "${s}"`).join(", ")})`;
+    const FILTER = `OR(${this.filteredStatuses.map(s => `{Status} = "${s}"`).join(", ")})`;
     // const ACTIVE_FILTER = '';
     return await airtableService
-      .getTableRecords(VENTURES_TABLE, MAX_RECORDS, ACTIVE_FILTER)
+      .getTableRecords(VENTURES_TABLE, MAX_RECORDS, FILTER)
       .then(records => Promise.all(records.map(record => this.airtableTransform(record.fields))))
   }
 

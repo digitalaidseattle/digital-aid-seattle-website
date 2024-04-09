@@ -27,7 +27,7 @@ const ProjectsPage = () => {
           .forEach(project => map.get(project.airtableStatus).push(project));
         setProjects(map);
       })
-      .catch(error => console.log(error))
+      .catch(error => console.error(error))
       .finally(() => {
         setInit(true)
         setLoading(false)
