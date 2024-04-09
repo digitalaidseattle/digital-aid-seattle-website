@@ -10,11 +10,11 @@ import {
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
+import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
-
-import SectionContainer from 'components/layout/SectionContainer'
 import { OSEvent } from 'types'
+
 import { eventsService } from './api/EventsService'
 
 type MastheadProps = {
@@ -70,33 +70,33 @@ const EventsPage = () => {
       })
   }, [setLoading])
 
+  let futureEvents = events.filter((event) => Date.parse(event.date) > Date.now());
+  let pastEvents = events.filter((event) => Date.parse(event.date) < Date.now());
+
   return (
     <>
       <Masthead title={title} />
       <BlockComponent block={!init}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-            maxWidth={'880px'}
-          >
-            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-
-              {events.map((event) => (
+          <Stack alignItems='center' gap='4rem' maxWidth='880px'>
+            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+              {futureEvents.map((event) => (
                 <CardEvent key={event.title} event={event} />
               ))}
 
-              {events.length === 0 && (
+              {futureEvents.length === 0 && (
                 <Typography sx={{ textAlign: 'center' }}>
                   All upcoming events are invite-only. Please check back in the
                   future for public events.
                 </Typography>
               )}
             </Stack>
-          </Box>
+            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+              <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
+              {pastEvents.map((event) => (<CardEvent key={event.title} event={event} />
+              ))}
+            </Stack>
+          </Stack>
         </SectionContainer>
       </BlockComponent>
     </>
