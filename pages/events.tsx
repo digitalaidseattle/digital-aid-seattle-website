@@ -78,24 +78,24 @@ const EventsPage = () => {
       <Masthead title={title} />
       <BlockComponent block={!init}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
-          <Stack alignItems='center' gap='4rem' maxWidth='880px'>
-            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
-              {futureEvents.map((event) => (
-                <CardEvent key={event.title} event={event} />
-              ))}
-
-              {futureEvents.length === 0 && (
-                <Typography sx={{ textAlign: 'center' }}>
-                  All upcoming events are invite-only. Please check back in the
-                  future for public events.
-                </Typography>
-              )}
-            </Stack>
-            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
-              <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
-              {pastEvents.map((event) => (<CardEvent key={event.title} event={event} />
-              ))}
-            </Stack>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+            {futureEvents.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
+            {futureEvents.length === 0 && (
+              <Typography sx={{ textAlign: 'center' }}>
+                All upcoming events are invite-only. Please check back in the
+                future for public events.
+              </Typography>
+            )}
+          </Stack>
+        </SectionContainer>
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
+            {pastEvents.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
           </Stack>
         </SectionContainer>
       </BlockComponent>
