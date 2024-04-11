@@ -83,7 +83,15 @@ const CardProject = ({ project }: CardProjectProps) => {
               </Stack>
             </Stack>
           </Stack>
-          <Typography variant="bodyMedium">{project.description}</Typography>
+          <Typography
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: "5",
+              WebkitBoxOrient: "vertical"
+            }}
+            variant="bodyMedium" >{project.description}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
