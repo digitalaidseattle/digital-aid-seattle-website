@@ -88,7 +88,7 @@ const CardProject = ({ project }: CardProjectProps) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
-              WebkitLineClamp: "5",
+              WebkitLineClamp: "4",
               WebkitBoxOrient: "vertical"
             }}
             variant="bodyMedium" >{project.description}</Typography>
