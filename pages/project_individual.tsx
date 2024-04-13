@@ -51,6 +51,7 @@ const ProjectIndividualPage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
+          <ProjectBodyMarkdownSection title={ProjectLabels.description} text={project.description} />
           <ProjectBodyMarkdownSection title={ProjectLabels.problem} text={project.problem} />
           <ProjectBodyMarkdownSection title={ProjectLabels.solution} text={project.solution} />
           <ProjectBodyMarkdownSection title={ProjectLabels.impact} text={project.impact} />
