@@ -18,6 +18,7 @@ import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDes
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
 import {
   Box,
+  Breadcrumbs,
   Button,
   Stack,
   styled,
@@ -36,6 +37,8 @@ import SectionContainer from './layout/SectionContainer'
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
 import Markdown from 'react-markdown'
+import { NavigateNextSharp } from '@mui/icons-material'
+import Link from 'next/link'
 
 const ProjectLabels = {
   contact_us: 'Contact us',
@@ -46,7 +49,10 @@ const ProjectLabels = {
   solution: 'Solution',
   impact: 'Impact',
   current_team: 'Current team',
-  roles_needed: 'Roles Needed'
+  roles_needed: 'Roles Needed',
+  description: 'About',
+  homeCrumb: 'Home',
+  projectsCrumb: 'Projects'
 }
 
 const rolesMap = {
@@ -87,6 +93,24 @@ const rolesMap = {
   qaSpecialist: { role: 'QA specialist', icon: <BugReportOutlinedIcon /> },
 }
 
+
+const BreadCrumbSection = (props: { project: DASProject }) => {
+  return (
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
+    >
+      <Link href={'./'} >
+        <Typography color="textPrimary">{ProjectLabels.homeCrumb}</Typography>
+      </Link>
+      <Link href={'./projects'}>
+        <Typography color="textPrimary">{ProjectLabels.projectsCrumb}</Typography>
+      </Link>
+      <Typography color="textPrimary">{props.project.title}</Typography>
+    </Breadcrumbs>
+  )
+}
+
 const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean }) => {
   const theme = useTheme()
   const [project, setProject] = useState<DASProject>()
@@ -104,9 +128,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           sx={{
             backgroundColor: theme.palette.primary.main,
             width: '100%',
-            height: '28.75rem',
+            height: '30rem',
             position: 'absolute',
-            zIndex: '0',
+            zIndex: '0'
           }}
         ></Box>
         <Stack
@@ -114,7 +138,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           sx={{
             position: 'relative',
             padding: '4rem 1rem 0rem 1rem',
-            color: theme.palette.primary.contrastText,
+            color: theme.palette.primary.contrastText
           }}
         >
           <Stack>
@@ -147,11 +171,11 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
             }}
           />
+          <BreadCrumbSection project={props.project} />
         </Stack>
       </>
     )
   }
-
 
   function DesktopHeader() {
     return (
@@ -224,6 +248,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 paddingLeft: { md: '2rem', lg: '0' },
               }}
             >
+              <Box marginBottom={'2rem'}>
+                <BreadCrumbSection project={props.project} />
+              </Box>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
@@ -254,7 +281,11 @@ type BodyTextSectionProps = {
 const ProjectBodyMarkdownSection = ({ title, text }: BodyTextSectionProps) => {
   return (text &&
     <Section>
-      <Subheader variant="headlineMedium">{title}</Subheader>
+      <ProjectSubheader
+        variant="headlineMedium"
+        sx={{ textAlign: 'left', width: '100%' }}>
+        {title}
+      </ProjectSubheader>
       <Markdown className='markdown'>
         {text}
       </Markdown>
@@ -311,7 +342,8 @@ const ProjectBodyTextSection = (props: { title: string, texts?: string[] }) => {
     props.texts &&
     props.texts.length > 0 && (
       <ProjectSection>
-        <ProjectSubheader variant="headlineMedium" component="h2">
+        <ProjectSubheader variant="headlineMedium"
+          component="h2">
           {props.title}
         </ProjectSubheader>
         <ProjectTextSection>
@@ -374,7 +406,6 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
   )
 }
 
-
 type RolesSectionProps = {
   title: string
   roles?: string[]
@@ -417,6 +448,7 @@ const ProjectRolesSection = ({ title, roles }: RolesSectionProps) => {
     )
   )
 }
+
 const ProjectContactUsSection = () => {
   return <ProjectSection
     sx={{
