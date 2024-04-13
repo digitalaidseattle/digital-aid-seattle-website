@@ -64,7 +64,7 @@ class AirtableProjectsService {
           problem: fields['Problem (for DAS website)'],
           solution: fields['Solution (for DAS website)'],
           impact: fields['Impact (for DAS website)'],
-          description: resp.fields['Internal thoughts'],
+          description: resp.fields['Org description'],
           imageSrc: resp.fields.logo[0].url,
           programAreas: fields['Foci (from Partner)'],
           projectLink: `project_individual?project=${fields['AirTable ID']}`,
