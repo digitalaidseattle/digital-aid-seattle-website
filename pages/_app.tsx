@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { Analytics } from '@vercel/analytics/react';
+
 import { dasProjectsService } from 'pages/api/ProjectsService'
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -61,6 +63,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
+        <Analytics />
       </ThemeProvider>
     </>
   )
