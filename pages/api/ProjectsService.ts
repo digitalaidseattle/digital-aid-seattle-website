@@ -44,8 +44,8 @@ const VENTURE_ROLES_TABLE = 'tbllAEHFTFX5IZDZL';
 // map terms used in Airtable to website
 const STATUS = {
   'Active': 'active',
-  'Submitted by Partner': 'recruiting',
-  'Under evaluation': 'recruiting',
+  'Submitted by Partner': 'evaluating',
+  'Under evaluation': 'evaluating',
   'Declined': 'complete',
 }
 

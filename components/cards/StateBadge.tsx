@@ -2,12 +2,12 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 type StateBadgeProps = {
-  state: 'active' | 'recruiting' | 'complete'
+  state: 'active' | 'evaluating' | 'complete'
 }
 
 const stateColors = {
   active: '#FFFAD8',
-  recruiting: '#DDFFAF',
+  evaluating: '#DDFFAF',
   complete: '#FFF0EE',
 }
 const StateBadge = ({ state }: StateBadgeProps) => {

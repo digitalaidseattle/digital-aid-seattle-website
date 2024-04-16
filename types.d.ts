@@ -40,7 +40,7 @@ type DASProject = {
   painpoint: string
   programAreas: string[]
   description: string
-  status: 'active' | 'recruiting' | 'complete'
+  status: 'active' | 'evaluating' | 'complete'
   projectLink: string
   duration?: { start: string; end: string }
   image: Image
