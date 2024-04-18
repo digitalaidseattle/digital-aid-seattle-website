@@ -18,6 +18,7 @@ function getTimeline(project: DASProject): string {
   return timeline
 }
 
+// Cadre page info is stored in Sanity
 class SantiyProjectService {
 
   query = groq`*[_type == "das-project"]`
@@ -43,12 +44,13 @@ const VENTURE_ROLES_TABLE = 'tbllAEHFTFX5IZDZL';
 // map terms used in Airtable to website
 const STATUS = {
   'Active': 'active',
-  'Submitted by Partner': 'recruiting',
-  'Under evaluation': 'recruiting',
+  'Submitted by Partner': 'evaluating',
+  'Under evaluation': 'evaluating',
   'Declined': 'complete',
 }
 
 class AirtableProjectsService {
+  filteredStatuses = ['Active', 'Under evaluation']
 
   async airtableTransform(fields: FieldSet): Promise<DASProject> {
     return airtableService.getRecord(PARTNER_TABLE, fields.Partner[0])
@@ -57,11 +59,12 @@ class AirtableProjectsService {
           id: fields['AirTable ID'],
           title: resp.fields['Org name'],
           painpoint: fields['Painpoint Shorthand'],
+          airtableStatus: fields['Status'],
           status: STATUS[fields['Status'] as string],
           problem: fields['Problem (for DAS website)'],
           solution: fields['Solution (for DAS website)'],
           impact: fields['Impact (for DAS website)'],
-          description: resp.fields['Internal thoughts'],
+          description: resp.fields['Org description'],
           imageSrc: resp.fields.logo[0].url,
           programAreas: fields['Foci (from Partner)'],
           projectLink: `project_individual?project=${fields['AirTable ID']}`,
@@ -73,9 +76,10 @@ class AirtableProjectsService {
 
   async getAll(): Promise<DASProject[]> {
     const MAX_RECORDS = 100;
-    const ACTIVE_FILTER = '{Status} = "Active"';
+    const FILTER = `OR(${this.filteredStatuses.map(s => `{Status} = "${s}"`).join(", ")})`;
+    // const ACTIVE_FILTER = '';
     return await airtableService
-      .getTableRecords(VENTURES_TABLE, MAX_RECORDS, ACTIVE_FILTER)
+      .getTableRecords(VENTURES_TABLE, MAX_RECORDS, FILTER)
       .then(records => Promise.all(records.map(record => this.airtableTransform(record.fields))))
   }
 

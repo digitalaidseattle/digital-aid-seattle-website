@@ -1,4 +1,4 @@
-import { Box, Stack, useTheme } from '@mui/material'
+import { Box, Divider, Stack, useTheme } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
@@ -13,17 +13,21 @@ const ProjectsPage = () => {
 
   const title = 'Projects';
   const { setLoading } = useContext(LoadingContext);
-  const [projects, setProjects] = useState<DASProject[]>([]);
+  const [projects, setProjects] = useState<Map<string, DASProject[]>>(new Map());
   const [init, setInit] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
     dasProjectsService.getAll()
-      .then(projs => setProjects(projs
-        .filter(proj => proj.display || proj.display === undefined)
-        // .sort((p1, p2) => p1.orderRank.localeCompare(p2.orderRank))
-      ))
-      .catch(error => console.log(error))
+      .then(projs => {
+        const map = new Map();
+        dasProjectsService.filteredStatuses.forEach(st => map.set(st, []))
+        projs
+          .filter(proj => proj.display || proj.display === undefined)
+          .forEach(project => map.get(project.airtableStatus).push(project));
+        setProjects(map);
+      })
+      .catch(error => console.error(error))
       .finally(() => {
         setInit(true)
         setLoading(false)
@@ -59,14 +63,21 @@ const ProjectsPage = () => {
             }}
             maxWidth={'880px'}
           >
-            <CardGridContainer>
-              {projects.map((project) => (
-                <CardProject
-                  key={project.id}
-                  project={project}
-                />
-              ))}
-            </CardGridContainer>
+            {dasProjectsService.filteredStatuses.map((st, idx) =>
+              projects.get(st) &&
+              <Box key={idx}>
+                <CardGridContainer>
+                  {projects.get(st)
+                    .map((project) => (
+                      <CardProject
+                        key={project.id}
+                        project={project}
+                      />
+                    ))}
+                </CardGridContainer>
+                {(idx < dasProjectsService.filteredStatuses.length - 1) && <Divider sx={{ margin: '1rem' }} flexItem />}
+              </Box>
+            )}
           </Stack>
         </Box>
       </BlockComponent>

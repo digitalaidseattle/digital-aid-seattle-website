@@ -7,7 +7,7 @@ import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-li
   partner: string
   programAreas: string[]
   description: string
-  status: 'active' | 'recruiting' | 'complete'
+  status: 'active' | 'evaluating' | 'complete'
   projectLink: string
   duration?: { start: string; end: string }
   imageSrc: string
@@ -52,7 +52,7 @@ export default {
             type: 'string',
             title: 'Status',
             options: {
-                list: ['active', 'recruiting', 'complete']
+                list: ['active', 'evaluating', 'complete']
             }
         },
         {
@@ -116,19 +116,19 @@ export default {
                 type: 'string',
                 options: {
                     list: [
-                        {title: 'Community Engagement Liason', value: 'community-engagement-liaison'},
-                        {title: 'Data Analyst', value: 'data-analyst'},
-                        {title: 'UX/UI designer', value: 'ux-ui-designer'},
-                        {title: 'Grant Writer', value: 'grant-writer'},
-                        {title: 'Product Manager', value: 'product-manager'},
-                        {title: 'Project Manager', value: 'project-manager'},
-                        {title: 'User Experience Researcher', value: 'user-experience-researcher'},
-                        {title: 'Social Media Designer', value: 'social-media-designer'},
-                        {title: 'Social Media Specialist', value: 'social-media-specialist'},
-                        {title: 'Software Engineer', value: 'software-developer'},
-                        {title: 'Solution Architect', value: 'solution-architect'},
-                        {title: 'Storyteller', value: 'storyteller-and-content-writer'},
-                        {title: 'QA/Test Engineer', value: 'qa-test-engineer'}
+                        { title: 'Community Engagement Liason', value: 'community-engagement-liaison' },
+                        { title: 'Data Analyst', value: 'data-analyst' },
+                        { title: 'UX/UI designer', value: 'ux-ui-designer' },
+                        { title: 'Grant Writer', value: 'grant-writer' },
+                        { title: 'Product Manager', value: 'product-manager' },
+                        { title: 'Project Manager', value: 'project-manager' },
+                        { title: 'User Experience Researcher', value: 'user-experience-researcher' },
+                        { title: 'Social Media Designer', value: 'social-media-designer' },
+                        { title: 'Social Media Specialist', value: 'social-media-specialist' },
+                        { title: 'Software Engineer', value: 'software-developer' },
+                        { title: 'Solution Architect', value: 'solution-architect' },
+                        { title: 'Storyteller', value: 'storyteller-and-content-writer' },
+                        { title: 'QA/Test Engineer', value: 'qa-test-engineer' }
                     ]
                 }
             }]
