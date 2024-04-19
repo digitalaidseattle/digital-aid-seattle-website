@@ -70,7 +70,8 @@ const EventsPage = () => {
       })
   }, [setLoading])
 
-  const today = new Date().toISOString().substring(0, 10);
+  //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
+  const today = new Date().toLocaleDateString("sv");
 
   let futureEvents = events.filter((event) => event.date >= today);
   let pastEvents = events.filter((event) => event.date < today);
