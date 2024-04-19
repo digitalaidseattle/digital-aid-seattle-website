@@ -73,8 +73,9 @@ const EventsPage = () => {
   //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
   const today = new Date().toLocaleDateString("sv");
 
-  let futureEvents = events.filter((event) => event.date >= today);
-  let pastEvents = events.filter((event) => event.date < today);
+  const eventsDateDesc = events.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  let futureEvents = eventsDateDesc.filter((event) => event.date >= today);
+  let pastEvents = eventsDateDesc.filter((event) => event.date < today);
 
 
   events.forEach((e) => {
