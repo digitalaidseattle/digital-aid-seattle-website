@@ -77,12 +77,6 @@ const EventsPage = () => {
   let futureEvents = eventsDateDesc.filter((event) => event.date >= today);
   let pastEvents = eventsDateDesc.filter((event) => event.date < today);
 
-
-  events.forEach((e) => {
-    console.log(e.title, e.date)
-    console.log('today', today)
-  })
-
   return (
     <>
       <Masthead title={title} />
