@@ -3,7 +3,6 @@
  */
 
 import {
-  Box,
   Container,
   Stack,
   Typography,
@@ -55,27 +54,27 @@ const EventsPage = () => {
 
   const title = 'Events'
   const { setLoading } = useContext(LoadingContext);
-  const [events, setEvents] = useState<OSEvent[] | null>([])
+  const [futureEvents, setFutureEvents] = useState<OSEvent[] | null>([])
+  const [pastEvents, setPastEvents] = useState<OSEvent[] | null>([])
   const [init, setInit] = useState(false)
 
   useEffect(() => {
     setLoading(true);
     eventsService
       .getActiveEvents()
-      .then((evs) => setEvents(evs))
+      .then((evs) => {
+        //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
+        const today = new Date().toLocaleDateString("sv");
+        const eventsDescending = evs.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+        setFutureEvents(eventsDescending.filter((event) => event.date >= today))
+        setPastEvents(eventsDescending.filter((event) => event.date < today))
+      })
       .catch((error) => console.log(error))
       .finally(() => {
         setLoading(false)
         setInit(true)
       })
   }, [setLoading])
-
-  //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
-  const today = new Date().toLocaleDateString("sv");
-
-  const eventsDateDesc = events.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-  let futureEvents = eventsDateDesc.filter((event) => event.date >= today);
-  let pastEvents = eventsDateDesc.filter((event) => event.date < today);
 
   return (
     <>
