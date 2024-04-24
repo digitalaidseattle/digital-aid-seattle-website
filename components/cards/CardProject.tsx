@@ -47,9 +47,9 @@ const CardProject = ({ project }: CardProjectProps) => {
               component="img"
               image={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
               sx={{
+                objectFit: "contain",
                 width: { md: '7rem', lg: '100%' },
                 aspectRatio: '1 / 1',
-                border: '2px solid #EAF1F1',
                 borderRadius: '8px',
                 display: { xs: 'none', md: 'block' },
               }}
