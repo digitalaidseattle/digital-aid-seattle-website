@@ -3,18 +3,17 @@
  */
 
 import {
-  Box,
   Container,
   Stack,
   Typography,
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
+import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
-
-import SectionContainer from 'components/layout/SectionContainer'
 import { OSEvent } from 'types'
+
 import { eventsService } from './api/EventsService'
 
 type MastheadProps = {
@@ -55,14 +54,21 @@ const EventsPage = () => {
 
   const title = 'Events'
   const { setLoading } = useContext(LoadingContext);
-  const [events, setEvents] = useState<OSEvent[] | null>([])
+  const [futureEvents, setFutureEvents] = useState<OSEvent[] | null>([])
+  const [pastEvents, setPastEvents] = useState<OSEvent[] | null>([])
   const [init, setInit] = useState(false)
 
   useEffect(() => {
     setLoading(true);
     eventsService
       .getActiveEvents()
-      .then((evs) => setEvents(evs))
+      .then((evs) => {
+        //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
+        const today = new Date().toLocaleDateString("sv");
+        const eventsDescending = evs.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+        setFutureEvents(eventsDescending.filter((event) => event.date >= today))
+        setPastEvents(eventsDescending.filter((event) => event.date < today))
+      })
       .catch((error) => console.log(error))
       .finally(() => {
         setLoading(false)
@@ -75,29 +81,26 @@ const EventsPage = () => {
       <Masthead title={title} />
       <BlockComponent block={!init}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-            maxWidth={'880px'}
-          >
-            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-
-              {events.map((event) => (
-                <CardEvent key={event.title} event={event} />
-              ))}
-
-              {events.length === 0 && (
-                <Typography sx={{ textAlign: 'center' }}>
-                  All upcoming events are invite-only. Please check back in the
-                  future for public events.
-                </Typography>
-              )}
-            </Stack>
-          </Box>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+            {futureEvents.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
+            {futureEvents.length === 0 && (
+              <Typography sx={{ textAlign: 'center' }}>
+                All upcoming events are invite-only. Please check back in the
+                future for public events.
+              </Typography>
+            )}
+          </Stack>
         </SectionContainer>
+        {pastEvents.length > 0 && <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
+            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
+            {pastEvents.map((event) => (
+              <CardEvent key={event.title} event={event} />
+            ))}
+          </Stack>
+        </SectionContainer>}
       </BlockComponent>
     </>
   )
