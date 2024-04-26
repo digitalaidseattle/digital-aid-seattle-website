@@ -40,7 +40,7 @@ export const BlockComponent = (props: { children: ReactNode, block: boolean }): 
         alignItems="center"
         justifyContent="center"
         bgcolor={theme.palette.background.default}
-        sx={{ minHeight: '50vh', opacity: '0.1' }}
+        sx={{ minHeight: '100vh', opacity: '0.1' }}
       >
         <Grid item xs={3}>
           <img src="/logo-light-icon.svg" />
