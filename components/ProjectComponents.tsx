@@ -35,7 +35,7 @@ import CardWithPhoto from './cards/CardWithPhoto'
 import StateBadge from './cards/StateBadge'
 import SectionContainer from './layout/SectionContainer'
 import ListItemWithIcon from './list/ListItemWithIcon'
-import { Section, Subheader } from './style-utils'
+import { Section } from './style-utils'
 import Markdown from 'react-markdown'
 import { NavigateNextSharp } from '@mui/icons-material'
 import Link from 'next/link'
@@ -53,6 +53,12 @@ const ProjectLabels = {
   description: 'About',
   homeCrumb: 'Home',
   projectsCrumb: 'Projects'
+}
+
+const StatusLabels = {
+  'Active': 'Active',
+  'Under evaluation': 'Evaluating',
+  'Completed': 'Completed',
 }
 
 const rolesMap = {
@@ -472,7 +478,10 @@ export {
   ProjectBodyTextSection,
   ProjectContactUsSection,
   ProjectFooterSection,
-  ProjectHeaderSection, ProjectLabels, ProjectRolesSection,
+  ProjectHeaderSection,
+  ProjectLabels,
+  StatusLabels,
+  ProjectRolesSection,
   ProjectSection,
   ProjectSubheader,
   ProjectTeamSection,

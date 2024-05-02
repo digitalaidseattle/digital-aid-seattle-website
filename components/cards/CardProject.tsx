@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { dasProjectsService } from 'pages/api/ProjectsService'
 import { DASProject } from 'types'
 
 import { urlForImage } from '../../sanity/lib/image'

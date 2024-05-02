@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, useTheme } from '@mui/material'
+import { Box, Chip, Divider, Stack, useTheme } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
@@ -7,14 +7,23 @@ import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
 
 import { dasProjectsService } from './api/ProjectsService'
+import { Check } from '@mui/icons-material'
+import { StatusLabels } from 'components/ProjectComponents'
+
+
+// TODO consider moving into Sanity
+const LABELS = {
+  PAGE_TITLE: 'Projects',
+}
 
 const ProjectsPage = () => {
   const theme = useTheme()
 
-  const title = 'Projects';
   const { setLoading } = useContext(LoadingContext);
-  const [projects, setProjects] = useState<Map<string, DASProject[]>>(new Map());
   const [init, setInit] = useState<boolean>(false);
+  const [projects, setProjects] = useState<Map<string, DASProject[]>>(new Map());
+  const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
+  const [displayedProjects, setDisplayedProjects] = useState<DASProject[][]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +33,7 @@ const ProjectsPage = () => {
         dasProjectsService.filteredStatuses.forEach(st => map.set(st, []))
         projs
           .filter(proj => proj.display || proj.display === undefined)
-          .forEach(project => map.get(project.airtableStatus).push(project));
+          .forEach(project => map.get(project.status).push(project));
         setProjects(map);
       })
       .catch(error => console.error(error))
@@ -34,9 +43,30 @@ const ProjectsPage = () => {
       })
   }, [setLoading]);
 
+  useEffect(() => {
+    if (init) {
+      const displayedStatuses = filterStatuses.length === 0
+        ? dasProjectsService.filteredStatuses
+        : filterStatuses
+
+      // to preserve order, use dasProjectsService.filteredStatuses
+      setDisplayedProjects(dasProjectsService.filteredStatuses
+        .filter(st => displayedStatuses.includes(st) && projects.get(st).length > 0)
+        .map(st => projects.get(st)));
+    }
+  }, [init, filterStatuses]);
+
+  const toggleStatus = (status: string) => {
+    if (filterStatuses.includes(status)) {
+      setFilterStatuses(filterStatuses.filter(s => s !== status));
+    } else {
+      setFilterStatuses(filterStatuses.concat(status));
+    }
+  }
+
   return (
     <>
-      <Masthead title={title} />
+      <Masthead title={LABELS.PAGE_TITLE} />
       <BlockComponent block={!init}>
         <Box
           sx={{
@@ -63,11 +93,18 @@ const ProjectsPage = () => {
             }}
             maxWidth={'880px'}
           >
-            {dasProjectsService.filteredStatuses.map((st, idx) =>
-              projects.get(st) &&
+            <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+              {dasProjectsService.filteredStatuses.map((status) =>
+                <Chip key={status} label={StatusLabels[status]}
+                  variant={filterStatuses.includes(status) ? "filled" : "outlined"}
+                  icon={filterStatuses.includes(status) && <Check />}
+                  onClick={() => toggleStatus(status)} />)}
+            </Stack>
+            {displayedProjects.map((projects, idx) =>
               <Box key={idx}>
+                {(idx > 0) && <Divider sx={{ margin: '1rem' }} flexItem />}
                 <CardGridContainer>
-                  {projects.get(st)
+                  {projects
                     .map((project) => (
                       <CardProject
                         key={project.id}
@@ -75,7 +112,6 @@ const ProjectsPage = () => {
                       />
                     ))}
                 </CardGridContainer>
-                {(idx < dasProjectsService.filteredStatuses.length - 1) && <Divider sx={{ margin: '1rem' }} flexItem />}
               </Box>
             )}
           </Stack>
