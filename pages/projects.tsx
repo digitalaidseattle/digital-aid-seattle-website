@@ -54,7 +54,7 @@ const ProjectsPage = () => {
         .filter(st => displayedStatuses.includes(st) && projects.get(st).length > 0)
         .map(st => projects.get(st)));
     }
-  }, [init, filterStatuses]);
+  }, [init, filterStatuses, projects]);
 
   const toggleStatus = (status: string) => {
     if (filterStatuses.includes(status)) {
