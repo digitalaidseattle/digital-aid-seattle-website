@@ -40,7 +40,12 @@ type DASProject = {
   painpoint: string
   programAreas: string[]
   description: string
-  status: 'active' | 'evaluating' | 'complete'
+  status: "Submitted by Partner"
+  | "Ready for consideration"
+  | "Active"
+  | "Under evaluation"
+  | "Declined"
+  | "Completed"
   projectLink: string
   duration?: { start: string; end: string }
   image: Image
@@ -51,8 +56,7 @@ type DASProject = {
   currentTeam: TeamMember[]
   display: boolean,
   imageSrc: string,
-  ventureCode: string,
-  airtableStatus: string
+  ventureCode: string
 }
 
 type DASFeature = {

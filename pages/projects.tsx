@@ -1,4 +1,4 @@
-import { Box, Divider, Stack, useTheme } from '@mui/material'
+import { Box, Chip, Stack, Typography, useTheme } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
@@ -6,27 +6,30 @@ import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
 
+import { Check } from '@mui/icons-material'
+import { StatusLabels } from 'components/ProjectComponents'
 import { dasProjectsService } from './api/ProjectsService'
+
+
+// TODO consider moving into Sanity
+const LABELS = {
+  PAGE_TITLE: 'Projects',
+  NO_MATCHES: 'No matching projects found.'
+}
 
 const ProjectsPage = () => {
   const theme = useTheme()
 
-  const title = 'Projects';
   const { setLoading } = useContext(LoadingContext);
-  const [projects, setProjects] = useState<Map<string, DASProject[]>>(new Map());
   const [init, setInit] = useState<boolean>(false);
+  const [projects, setProjects] = useState<DASProject[]>([]);
+  const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
+  const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
   useEffect(() => {
     setLoading(true);
     dasProjectsService.getAll()
-      .then(projs => {
-        const map = new Map();
-        dasProjectsService.filteredStatuses.forEach(st => map.set(st, []))
-        projs
-          .filter(proj => proj.display || proj.display === undefined)
-          .forEach(project => map.get(project.airtableStatus).push(project));
-        setProjects(map);
-      })
+      .then(projs => setProjects(projs))
       .catch(error => console.error(error))
       .finally(() => {
         setInit(true)
@@ -34,9 +37,29 @@ const ProjectsPage = () => {
       })
   }, [setLoading]);
 
+  useEffect(() => {
+    if (init) {
+      const displayedStatuses = filterStatuses.length === 0
+        ? dasProjectsService.filteredStatuses
+        : filterStatuses
+
+      setDisplayedProjects(projects
+        .filter(p => displayedStatuses.includes(p.status))
+      )
+    }
+  }, [init, filterStatuses, projects]);
+
+  const toggleStatus = (status: string) => {
+    if (filterStatuses.includes(status)) {
+      setFilterStatuses(filterStatuses.filter(s => s !== status));
+    } else {
+      setFilterStatuses(filterStatuses.concat(status));
+    }
+  }
+
   return (
     <>
-      <Masthead title={title} />
+      <Masthead title={LABELS.PAGE_TITLE} />
       <BlockComponent block={!init}>
         <Box
           sx={{
@@ -63,21 +86,27 @@ const ProjectsPage = () => {
             }}
             maxWidth={'880px'}
           >
-            {dasProjectsService.filteredStatuses.map((st, idx) =>
-              projects.get(st) &&
-              <Box key={idx}>
-                <CardGridContainer>
-                  {projects.get(st)
-                    .map((project) => (
-                      <CardProject
-                        key={project.id}
-                        project={project}
-                      />
-                    ))}
-                </CardGridContainer>
-                {(idx < dasProjectsService.filteredStatuses.length - 1) && <Divider sx={{ margin: '1rem' }} flexItem />}
-              </Box>
-            )}
+            <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+              {dasProjectsService.filteredStatuses.map((status) =>
+                <Chip key={status} label={StatusLabels[status]}
+                  variant={filterStatuses.includes(status) ? "filled" : "outlined"}
+                  icon={filterStatuses.includes(status) && <Check />}
+                  onClick={() => toggleStatus(status)} />)}
+            </Stack>
+            {displayedProjects.length === 0 &&
+              <Typography>{LABELS.NO_MATCHES}</Typography>
+            }
+            {displayedProjects.length > 0 &&
+              <CardGridContainer>
+                {displayedProjects
+                  .map((project) => (
+                    <CardProject
+                      key={project.id}
+                      project={project}
+                    />
+                  ))}
+              </CardGridContainer>
+            }
           </Stack>
         </Box>
       </BlockComponent>

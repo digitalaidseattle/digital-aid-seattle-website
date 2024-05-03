@@ -41,16 +41,8 @@ const PARTNER_TABLE = 'tblqttKinLZJ2JXo7';
 const VENTURES_TABLE = 'tblRpJek5SjacLaen'; // VENTURE SEEDS/PAINPOINTS TABLE
 const VENTURE_ROLES_TABLE = 'tbllAEHFTFX5IZDZL';
 
-// map terms used in Airtable to website
-const STATUS = {
-  'Active': 'active',
-  'Submitted by Partner': 'evaluating',
-  'Under evaluation': 'evaluating',
-  'Declined': 'complete',
-}
-
 class AirtableProjectsService {
-  filteredStatuses = ['Active', 'Under evaluation']
+  filteredStatuses = ['Active', 'Under evaluation'];
 
   async airtableTransform(fields: FieldSet): Promise<DASProject> {
     return airtableService.getRecord(PARTNER_TABLE, fields.Partner[0])
@@ -59,8 +51,7 @@ class AirtableProjectsService {
           id: fields['AirTable ID'],
           title: resp.fields['Org name'],
           painpoint: fields['Painpoint Shorthand'],
-          airtableStatus: fields['Status'],
-          status: STATUS[fields['Status'] as string],
+          status: fields['Status'],
           problem: fields['Problem (for DAS website)'],
           solution: fields['Solution (for DAS website)'],
           impact: fields['Impact (for DAS website)'],

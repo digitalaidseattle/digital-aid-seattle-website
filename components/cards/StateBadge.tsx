@@ -1,14 +1,19 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { StatusLabels } from 'components/ProjectComponents'
 
 type StateBadgeProps = {
-  state: 'active' | 'evaluating' | 'complete'
+  state: "Submitted by Partner"
+  | "Ready for consideration"
+  | "Active"
+  | "Under evaluation"
+  | "Declined"
+  | "Completed"
 }
-
 const stateColors = {
-  active: '#FFFAD8',
-  evaluating: '#DDFFAF',
-  complete: '#FFF0EE',
+  'Active': '#FFFAD8',
+  'Under evaluation': '#DDFFAF',
+  'Completed': '#FFF0EE',
 }
 const StateBadge = ({ state }: StateBadgeProps) => {
   return (
@@ -25,7 +30,7 @@ const StateBadge = ({ state }: StateBadgeProps) => {
       }}
     >
       <Typography variant="titleSmall" sx={{ fontWeight: '600' }}>
-        {state}
+        {StatusLabels[state]}
       </Typography>
     </Box>
   )
