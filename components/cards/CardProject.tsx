@@ -1,4 +1,4 @@
-import { CardActionArea, styled } from '@mui/material'
+import { CardActionArea } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -6,9 +6,9 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { DASProject } from 'types'
 
+import { ProjectLabels } from 'components/ProjectComponents'
 import { urlForImage } from '../../sanity/lib/image'
 import StateBadge from './StateBadge'
-import { ProjectLabels } from 'components/ProjectComponents'
 
 type CardProjectProps = {
   project: DASProject

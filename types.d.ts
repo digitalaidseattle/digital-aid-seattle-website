@@ -3,17 +3,6 @@
 */
 import { Image } from 'sanity';
 
-// map terms used in Airtable to website
-//
-enum VentureStatus {
-  "Submitted by Partner",
-  "Ready for consideration",
-  "Under evaluation",
-  "Active",
-  "Declined",
-  "Completed"
-}
-
 type OSEvent = {
   _id: string,
   _createdAt: Date,
@@ -51,7 +40,12 @@ type DASProject = {
   painpoint: string
   programAreas: string[]
   description: string
-  status: VentureStatus
+  status: "Submitted by Partner"
+  | "Ready for consideration"
+  | "Active"
+  | "Under evaluation"
+  | "Declined"
+  | "Completed"
   projectLink: string
   duration?: { start: string; end: string }
   image: Image

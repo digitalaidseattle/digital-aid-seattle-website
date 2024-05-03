@@ -42,7 +42,7 @@ const VENTURES_TABLE = 'tblRpJek5SjacLaen'; // VENTURE SEEDS/PAINPOINTS TABLE
 const VENTURE_ROLES_TABLE = 'tbllAEHFTFX5IZDZL';
 
 class AirtableProjectsService {
-  filteredStatuses = ['Active', 'Under evaluation', 'Completed']
+  filteredStatuses = ['Active', 'Under evaluation'];
 
   async airtableTransform(fields: FieldSet): Promise<DASProject> {
     return airtableService.getRecord(PARTNER_TABLE, fields.Partner[0])
