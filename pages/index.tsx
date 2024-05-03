@@ -11,16 +11,25 @@ import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.jpg'
 
-/* eslint-disable @next/next/no-img-element */
+// TODO consider moving into Sanity
+const LABELS = {
+  HERO_TEXT: 'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
+  OUR_MISSION: 'Our mission',
+  MISSION_TEXT: 'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
+  LEARN_BTN: 'Learn About Us',
+  PARTNER_DESC: 'Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free.',
+  PARTNER_BTN: 'Partner With Us',
+  VOLUNTEER_DESC: 'Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available.',
+  VOLUNTEER_BTN: 'Volunteer With Us'
+}
 
 const Home = () => {
   const theme = useTheme()
   const palette = theme.palette
 
   const loader = ({ src, width, quality }) => {
-    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}\?w=${width}&q=${
-      quality || 75
-    }`
+    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}\?w=${width}&q=${quality || 75
+      }`
   }
 
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -89,9 +98,9 @@ const Home = () => {
             <Typography
               color={'text.secondary'}
               sx={{}}
-              variant={isMediumScreen ? 'displayMedium' : 'displayLarge'}
+              variant={isMediumScreen ? 'displaySmall' : 'displayMedium'}
             >
-              Connecting Puget Sound nonprofits with free tech solutions.
+              {LABELS.HERO_TEXT}
             </Typography>
             <Box
               sx={{
@@ -106,7 +115,7 @@ const Home = () => {
                 size="small"
                 href={'/partners'}
               >
-                Partner With Us
+                {LABELS.PARTNER_BTN}
               </Button>
               <Button
                 variant="contained"
@@ -118,7 +127,7 @@ const Home = () => {
                 }}
                 href={'/volunteers'}
               >
-                Volunteer With Us
+                {LABELS.VOLUNTEER_BTN}
               </Button>
             </Box>
           </Box>
@@ -229,17 +238,13 @@ const Home = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge" component="h2">
-            Our mission
+            {LABELS.OUR_MISSION}
           </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}
           >
-            We believe community organizations are the heart of Seattle, and
-            deserve the same tools and advantages enjoyed by our largest tech
-            companies. Our mission is to create scalable, customized solutions
-            to enable other nonprofits to reach their full potential and achieve
-            their own mission-driven goals.
+            {LABELS.MISSION_TEXT}
           </Typography>
           <Button
             variant="contained"
@@ -249,12 +254,12 @@ const Home = () => {
               marginBottom: { sm: 4, lg: 10 },
             }}
           >
-            Learn About Us
+            {LABELS.LEARN_BTN}
           </Button>
           <CardGridContainer columns={2}>
             <CardOne
-              description="Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free."
-              buttonText="Partner With Us"
+              description={LABELS.PARTNER_DESC}
+              buttonText={LABELS.PARTNER_BTN}
               buttonLink="/partners"
               icon={
                 <HandshakeOutlinedIcon
@@ -264,8 +269,8 @@ const Home = () => {
               }
             />
             <CardOne
-              description="Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available."
-              buttonText="Volunteer With Us"
+              description={LABELS.VOLUNTEER_DESC}
+              buttonText={LABELS.VOLUNTEER_BTN}
               buttonLink="/volunteers"
               icon={
                 <Groups2OutlinedIcon
