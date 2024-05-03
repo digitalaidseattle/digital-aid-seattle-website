@@ -98,7 +98,7 @@ const Home = () => {
             <Typography
               color={'text.secondary'}
               sx={{}}
-              variant={isMediumScreen ? 'displayMedium' : 'displayLarge'}
+              variant={isMediumScreen ? 'displaySmall' : 'displayMedium'}
             >
               {LABELS.HERO_TEXT}
             </Typography>
