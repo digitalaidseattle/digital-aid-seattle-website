@@ -1,10 +1,14 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { StatusLabels } from 'components/ProjectComponents'
-import { VentureStatus } from 'types'
 
 type StateBadgeProps = {
-  state: VentureStatus
+  state: "Submitted by Partner"
+  | "Ready for consideration"
+  | "Active"
+  | "Under evaluation"
+  | "Declined"
+  | "Completed"
 }
 const stateColors = {
   'Active': '#FFFAD8',
