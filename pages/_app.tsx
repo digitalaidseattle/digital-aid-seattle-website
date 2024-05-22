@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import { eventsService } from './api/EventsService'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
@@ -47,6 +48,10 @@ export default function App({ Component, pageProps }: AppProps) {
           const role = searchParams.get('role')
           const r = await dasVolunteerRoleService.getRoleDetailsByName(role)
           return r ? r.role.concat(' | Digital Aid Seattle') : DEFAULT_TAG
+        case 'event':
+          const eventName = searchParams.get('name')
+          const e = await eventsService.getOne(eventName)
+          return e ? e.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         default:
           const tag = TAG_NAMES[pageName]
           return tag ?? DEFAULT_TAG
