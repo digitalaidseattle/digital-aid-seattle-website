@@ -203,12 +203,14 @@ const VolunteerRolePage = () => {
     <>
       <Masthead title={Labels.Title} />
       <BlockComponent block={!role}>
-        <SectionContainer backgroundColor={theme.palette.background.default}>
-          <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-            <BreadCrumbSection roleName={String(role.role)} />
-            <RoleDescriptionSection roleData={role} />
-          </Stack>
-        </SectionContainer>
+        {role &&
+          <SectionContainer backgroundColor={theme.palette.background.default}>
+            <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
+              <BreadCrumbSection roleName={String(role.role)} />
+              <RoleDescriptionSection roleData={role} />
+            </Stack>
+          </SectionContainer>
+        }
       </BlockComponent>
     </>
   )
