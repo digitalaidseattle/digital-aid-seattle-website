@@ -16,12 +16,12 @@ import { DASVolunteerRole } from 'types'
 
 import { dasVolunteerRoleService } from './api/VolunteerRoleService'
 import Markdown from 'react-markdown'
+import { useRouter } from 'next/navigation'
 
 const Labels = {
   Title: "Volunteer Opening",
   Home: 'Home',
   Volunteers: 'Volunteers',
-  Return: "Return to Volunteer Page",
   PreferredQualificationsPreamble: "If you don't meet every qualification but have some of these skills, please consider applying. Our collaborative team often complements individual expertise to bridge gaps.",
   ApplyToVolunteer: "Apply to Volunteer",
   NotAvailable: "Sorry, this volunteer role is not available.",
@@ -37,19 +37,34 @@ const Labels = {
 }
 
 const VolunteerRolePage = () => {
+  const router = useRouter();
+
   const [role, setRole] = useState<DASVolunteerRole>()
   const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams(window.location.search)
+    const roleName = params.get('role')
     dasVolunteerRoleService
-      .getRoleDetailsByName(params.get('role'))
-      .then((role) => {
-        // should reroute if no data
-        setRole(role)
+      .getRoleDetailsByName(roleName)
+      .then((resp: DASVolunteerRole) => {
+        if (resp === null) {
+          console.error(`Volunteer role '${roleName} not found.`);
+          router.push('/404')
+        } else {
+          dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
+            .then(keys => {
+              resp.keyTechnologies = keys;
+              setRole(resp)
+            })
+            .catch((error) => console.error(error))
+        }
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error);
+        router.push('/404')
+      })
       .finally(() => setLoading(false))
   }, [setLoading])
 
@@ -184,38 +199,14 @@ const VolunteerRolePage = () => {
     )
   }
 
-  const RoleUnavailableSection = () => {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="headlineLarge" sx={{ mt: '2rem', mb: '2rem' }}>
-          {Labels.NotAvailable}
-        </Typography>
-        <Link href={'./volunteers'}>
-          <Button variant="contained">{Labels.Return}</Button>
-        </Link>
-      </Box>
-    )
-  }
-
   return (
     <>
       <Masthead title={Labels.Title} />
       <BlockComponent block={!role}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth={'880px'}>
-            {role && (
-              <>
-                <BreadCrumbSection roleName={String(role.role)} />
-                <RoleDescriptionSection roleData={role} />
-              </>
-            )}
-            {!role && <RoleUnavailableSection />}
+            <BreadCrumbSection roleName={String(role.role)} />
+            <RoleDescriptionSection roleData={role} />
           </Stack>
         </SectionContainer>
       </BlockComponent>

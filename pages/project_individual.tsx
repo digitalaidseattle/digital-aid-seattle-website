@@ -11,32 +11,40 @@ import { ProjectBodyMarkdownSection, ProjectFooterSection, ProjectHeaderSection,
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
+import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
 import { dasProjectsService } from './api/ProjectsService'
 
-
-
 const ProjectIndividualPage = () => {
+  const router = useRouter();
+
   const [project, setProject] = useState<DASProject>()
   const { setLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams(window.location.search)
-    dasProjectsService.getOne(params.get('project'))
-      .then((resps) => {
-        const project = resps
-        // should reroute if no data
-        dasProjectsService.getSquad(project.ventureCode)
-          .then(team => {
-            project.currentTeam = team;
-            setProject(project)
-          })
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false))
+    const projectId = params.get('project')
+    dasProjectsService.getOne(projectId)
+      .then((resp) => {
+        if (resp == null) {
+          console.error(`Project '${projectId} not found.`);
+          router.push('/404');
+        } else {
+          dasProjectsService.getSquad(resp.ventureCode)
+            .then(team => {
+              resp.currentTeam = team;
+              setProject(resp)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false))
+        }
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        console.error(error);
+        router.push('/404');
+      })
       .finally(() => setLoading(false))
   }, [setLoading])
 

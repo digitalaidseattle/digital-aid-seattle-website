@@ -5,6 +5,7 @@
 import { DASVolunteerRole, DASVolunteerRoleBasicInfo } from 'types'
 
 import airtableService from './AirtableService'
+import Airtable, { FieldSet } from 'airtable'
 
 // Documentation: Airtable provides an excellent guide to using their API.
 // To access documentation for our unique base, visit: https://airtable.com/{{baseID}}/api/docs#javascript/table:roles
@@ -51,49 +52,33 @@ class DASVolunteerRoleService {
     const maxRecords = 1
     const filterByFormula = `{Key} = '${roleKey}'`
 
-    const recordData = await airtableService.getTableRecords(
-      volunteerRolesTable,
-      maxRecords,
-      filterByFormula
-    ) as any[];
-    if (recordData.length === 0) {
-      return null
-    }
-    const record = recordData[0];
-    if (record.fields.Status !== 'Active') {
-      return null
-    } else {
-      let keyTechnologies = await this.getAndGroupTechnologies(
-        record.fields['Key technologies']
+    return airtableService
+      .getTableRecords(
+        volunteerRolesTable, maxRecords, filterByFormula
+      ).then(records => records.length === 0
+        ? null
+        : this.transformRecord(records[0])
       )
+  }
 
-      const {
-        getNumberFieldRecord,
-        getStringFieldRecord,
-        getStringArrayFieldRecord,
-      } = airtableService;
-
-
-
-      const volunteerRoleData: DASVolunteerRole = {
-        role: getStringFieldRecord(record, 'Role'),
-        key: getStringFieldRecord(record, 'Key'),
-        category: getStringArrayFieldRecord(record, 'Category'),
-        location: getStringFieldRecord(record, 'Location'),
-        duration: getStringFieldRecord(record, 'Duration'),
-        headline: getStringFieldRecord(record, 'Headline'),
-        description: getStringFieldRecord(record, 'Description'),
-        whyJoin: getStringFieldRecord(record, 'Why Join Us'),
-        aboutUs: getStringFieldRecord(record, 'About Us'),
-        responsibilities: getStringFieldRecord(record, 'Responsibilities'),
-        preferredQualifications: getStringFieldRecord(record, 'Preferred Qualifications'),
-        keyAttributesToSuccess: getStringFieldRecord(record, 'Key attributes for success'),
-        keyTechnologies: keyTechnologies,
-        venture: getStringFieldRecord(record, 'Venture (from Partner Needs Link)'),
-        applicationLink: getStringFieldRecord(record, 'url to apply'),
-        urgency: getNumberFieldRecord(record, 'Urgency'),
-      }
-      return volunteerRoleData
+  transformRecord(record: Airtable.Record<FieldSet>): DASVolunteerRole {
+    return {
+      role: airtableService.getStringFieldRecord(record, 'Role'),
+      key: airtableService.getStringFieldRecord(record, 'Key'),
+      category: airtableService.getStringArrayFieldRecord(record, 'Category'),
+      location: airtableService.getStringFieldRecord(record, 'Location'),
+      duration: airtableService.getStringFieldRecord(record, 'Duration'),
+      headline: airtableService.getStringFieldRecord(record, 'Headline'),
+      description: airtableService.getStringFieldRecord(record, 'Description'),
+      whyJoin: airtableService.getStringFieldRecord(record, 'Why Join Us'),
+      aboutUs: airtableService.getStringFieldRecord(record, 'About Us'),
+      responsibilities: airtableService.getStringFieldRecord(record, 'Responsibilities'),
+      preferredQualifications: airtableService.getStringFieldRecord(record, 'Preferred Qualifications'),
+      keyAttributesToSuccess: airtableService.getStringFieldRecord(record, 'Key attributes for success'),
+      venture: airtableService.getStringFieldRecord(record, 'Venture (from Partner Needs Link)'),
+      applicationLink: airtableService.getStringFieldRecord(record, 'url to apply'),
+      urgency: airtableService.getNumberFieldRecord(record, 'Urgency'),
+      keyTechnologiesIds: airtableService.getStringArrayFieldRecord(record, 'Key technologies')
     }
   }
 

@@ -86,4 +86,5 @@ type DASVolunteerRole = {
   venture?: string
   applicationLink?: string
   urgency?: number
+  keyTechnologiesIds?: string[]
 } & DASVolunteerRoleBasicInfo

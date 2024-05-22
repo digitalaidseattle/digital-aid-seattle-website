@@ -30,6 +30,7 @@ import Link from 'next/link';
 import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
+import { useRouter } from 'next/navigation';
 /*********/
 
 const Labels = {
@@ -351,6 +352,7 @@ const ActivitySection = (props: { event: OSEvent }) => {
 
 const EventPage = () => {
   const theme = useTheme()
+  const router = useRouter();
 
   const [event, setEvent] = useState<OSEvent>()
   const { setLoading } = useContext(LoadingContext)
@@ -358,13 +360,21 @@ const EventPage = () => {
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams(window.location.search)
+    const eventName = params.get('name')
     eventsService
-      .getOne(params.get('name'))
+      .getOne(eventName)
       .then((data) => {
-        // should reroute if no data
-        setEvent(data)
+        if (data === null) {
+          console.error(`Event '${eventName} not found.`);
+          router.push('/404')
+        } else {
+          setEvent(data)
+        }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error);
+        router.push('/404')
+      })
       .finally(() => setLoading(false))
   }, [setLoading])
 
