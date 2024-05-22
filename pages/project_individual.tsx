@@ -46,7 +46,7 @@ const ProjectIndividualPage = () => {
         router.push('/404');
       })
       .finally(() => setLoading(false))
-  }, [setLoading])
+  }, [setLoading, router])
 
 
   const theme = useTheme()
