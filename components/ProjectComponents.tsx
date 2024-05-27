@@ -398,7 +398,6 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
         >
           {members.map((person, idx) => {
             const url = person.url ? person.url : person.image ? urlForImage(person.image).url() : NoPhotoPerson.src;
-            console.log(url)
             return <CardWithPhoto
               key={idx}
               title={person.name}

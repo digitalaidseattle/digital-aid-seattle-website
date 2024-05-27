@@ -372,7 +372,7 @@ const EventPage = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         router.push('/404')
       })
       .finally(() => setLoading(false))
