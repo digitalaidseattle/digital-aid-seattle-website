@@ -47,6 +47,7 @@ class AirtableProjectsService {
   async airtableTransform(fields: FieldSet): Promise<DASProject> {
     return airtableService.getRecord(PARTNER_TABLE, fields.Partner[0])
       .then(resp => {
+        const logos: any[] = resp.fields['logo'] as any[];
         return {
           id: fields['AirTable ID'],
           title: resp.fields['Org name'],
@@ -56,7 +57,7 @@ class AirtableProjectsService {
           solution: fields['Solution (for DAS website)'],
           impact: fields['Impact (for DAS website)'],
           description: resp.fields['Org description'],
-          imageSrc: resp.fields.logo[0].url,
+          imageSrc: (logos && logos.length > 0) ? logos[0].url : '',
           programAreas: fields['Foci (from Partner)'],
           projectLink: `project_individual?project=${fields['AirTable ID']}`,
           ventureCode: fields['Prospective Venture Code']

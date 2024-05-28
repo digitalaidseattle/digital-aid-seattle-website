@@ -44,7 +44,7 @@ const CardProject = ({ project }: CardProjectProps) => {
           <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
             <CardMedia
               component="img"
-              image={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
+              image={project.imageSrc ? project.imageSrc : project.image ? urlForImage(project.image).url() : null}
               sx={{
                 objectFit: "contain",
                 width: { md: '7rem', lg: '100%' },
