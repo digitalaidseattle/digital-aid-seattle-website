@@ -39,6 +39,9 @@ import { Section } from './style-utils'
 import Markdown from 'react-markdown'
 import { NavigateNextSharp } from '@mui/icons-material'
 import Link from 'next/link'
+import ProjectImage from '../assets/project-image.png'
+
+const PROJECT_IMAGE = ProjectImage.src;
 
 const ProjectLabels = {
   contact_us: 'Contact us',
@@ -165,7 +168,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           }
 
           <img
-            src={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
+            src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
             style={{
               width: '50%',
               margin: '0 auto',
@@ -224,7 +227,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               }}
             >
               <img
-                src={project.imageSrc ? project.imageSrc : urlForImage(project.image).url()}
+                src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
                 style={{
                   width: '100%',
                   display: 'block',
