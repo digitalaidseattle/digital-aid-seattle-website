@@ -1,3 +1,8 @@
+/**
+ * CardProject.tsx
+ * 
+ * @2024 Digital Aid Seattle
+ */
 import { CardActionArea } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -7,8 +12,10 @@ import Typography from '@mui/material/Typography'
 import { DASProject } from 'types'
 
 import { ProjectLabels } from 'components/ProjectComponents'
-import { urlForImage } from '../../sanity/lib/image'
+import ProjectImage from '../../assets/project-image.png'
 import StateBadge from './StateBadge'
+
+const PROJECT_IMAGE = ProjectImage.src;
 
 type CardProjectProps = {
   project: DASProject
@@ -44,7 +51,7 @@ const CardProject = ({ project }: CardProjectProps) => {
           <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
             <CardMedia
               component="img"
-              image={project.imageSrc ? project.imageSrc : project.image ? urlForImage(project.image).url() : null}
+              image={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
               sx={{
                 objectFit: "contain",
                 width: { md: '7rem', lg: '100%' },
