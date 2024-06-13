@@ -69,7 +69,7 @@ const EventsPage = () => {
         setFutureEvents(eventsDescending.filter((event) => event.date >= today))
         setPastEvents(eventsDescending.filter((event) => event.date < today))
       })
-      .catch((error) => console.log(error))
+      .catch((error) => console.error(error))
       .finally(() => {
         setLoading(false)
         setInit(true)

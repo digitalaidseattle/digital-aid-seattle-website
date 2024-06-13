@@ -95,7 +95,7 @@ class AirtableProjectsService {
     const ACTIVE_FILTER = `{AirTable ID} = "${id}"`;
     return await airtableService
       .getTableRecords(VENTURES_TABLE, MAX_RECORDS, ACTIVE_FILTER)
-      .then(records => this.airtableTransform(records[0].fields))
+      .then(records => records.length === 0 ? null : this.airtableTransform(records[0].fields))
   }
 
   async getPeople(status: string): Promise<TeamMember[]> {
