@@ -87,3 +87,13 @@ type DASVolunteerRole = {
   applicationLink?: string
   urgency?: number
 } & DASVolunteerRoleBasicInfo
+
+type DASEvent = {
+  airtableId: string,
+  title: string,
+  sequence: number,
+  eventDate: Date,
+  duration: number,
+  location: string,
+  description: string
+}
