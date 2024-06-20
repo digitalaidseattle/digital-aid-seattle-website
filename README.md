@@ -5,7 +5,7 @@
     <h1 align='center'>Digital Aid Seattle Website</h1>
 </p>
 <p align='center'>
-    <img alt="GitHub commit activity (main)" src="https://img.shields.io/github/commit-activity/m/openseattle/open-seattle-website/main">
+    <img alt="GitHub commit activity (main)" src="https://img.shields.io/github/commit-activity/m/digitalaidseattle/digital-aid-seattle-website/main">
 </p>
 
 ## Introduction
@@ -41,8 +41,8 @@ The website is built using **Next.js**, a React-based framework for server-side 
 1. Setup the frontend environment
 
    ```bash
-   git clone https://github.com/openseattle/open-seattle-website
-   cd open-seattle-website
+   git clone https://github.com/digitalaidseattle/digital-aid-seattle-website
+   cd digital-aid-seattle-website
    git checkout main
    yarn install
    ```
@@ -98,8 +98,8 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 1. Set up local environment.
 2. Ensure access to appropriate accounts:
-   - Github: Must be member of [Digital Aid Seattle Github Org](https://github.com/openseattle) in order to push changes to the repo.
-   - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/openseattle/open-seattle-website)to approve staged changes to production.
+   - Github: Must be member of [Digital Aid Seattle Github Org](https://github.com/digitalaidseattle) in order to push changes to the repo.
+   - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/digitalaidseattle/digital-aid-seattle-website)to approve staged changes to production.
    - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.digitalaidseattle.org/studio)
    - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
 3. Get issue from group Asana board.
