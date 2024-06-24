@@ -177,6 +177,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             backgroundColor: '#fff',
             display: 'grid',
             placeItems: 'center',
+            overflow: 'hidden'
           }}>
             <img
               src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
@@ -234,6 +235,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 borderRadius: '20px',
                 boxShadow:
                   '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                overflow: 'hidden'
               }}
             >
               <img
