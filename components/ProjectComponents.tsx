@@ -196,7 +196,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           sx={{
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
-            paddingTop: { md: '5.5rem', lg: '14.5rem' },
+            paddingTop: '12rem',
             paddingBottom: '1rem',
             width: '100%',
           }}
@@ -206,7 +206,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               position: 'relative',
               margin: '0 auto',
               maxWidth: '880px',
-              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
+              paddingX: { md: '2rem', lg: '0' },
             }}
           >
             <Stack>
@@ -222,7 +222,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Stack>
             <Box
               sx={{
-                width: { md: '14rem', lg: '18rem' },
+                width: '18rem',
                 position: 'absolute',
                 right: '2rem',
                 bottom: '-6rem',
