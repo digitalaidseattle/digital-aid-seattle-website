@@ -260,7 +260,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 paddingLeft: { md: '2rem', lg: '0' },
               }}
             >
-              <Box marginBottom={'2rem'}>
+              <Box marginBottom={'2rem'} width='40vw'>
                 <BreadCrumbSection project={props.project} />
               </Box>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
