@@ -166,20 +166,23 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               </Stack>
             </Stack>
           }
+          <Box sx={{
+            width: '50%',
+            margin: '0 auto',
+            marginTop: '1rem',
+            aspectRatio: '1 / 1',
+            borderRadius: '20px',
+            boxShadow:
+              '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+            backgroundColor: '#fff',
+            display: 'grid',
+            placeItems: 'center',
+          }}>
+            <img
+              src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+            />
+          </Box>
 
-          <img
-            src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-            style={{
-              width: '50%',
-              margin: '0 auto',
-              marginTop: '1rem',
-              aspectRatio: '1 / 1',
-              display: 'block',
-              borderRadius: '20px',
-              boxShadow:
-                '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-            }}
-          />
           <BreadCrumbSection project={props.project} />
         </Stack>
       </>
@@ -224,17 +227,17 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 right: { xs: '2rem', md: '2rem', lg: '2rem' },
                 bottom: '-6rem',
                 zIndex: '2',
+                aspectRatio: '1/1',
+                backgroundColor: '#fff',
+                display: 'grid',
+                placeItems: 'center',
+                borderRadius: '20px',
+                boxShadow:
+                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
               }}
             >
               <img
                 src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-                style={{
-                  width: '100%',
-                  display: 'block',
-                  borderRadius: '20px',
-                  boxShadow:
-                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-                }}
               />
             </Box>
           </Box>
