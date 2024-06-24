@@ -123,7 +123,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
           sx={{
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
-            paddingTop: { md: '5.5rem', lg: '14.5rem' },
+            paddingTop: { md: '5.5rem', lg: '12rem' },
             paddingBottom: '1rem',
             width: '100%',
           }}
@@ -182,15 +182,16 @@ const HeaderSection = (props: { event: OSEvent }) => {
             backgroundColor: theme.palette.background.default,
             width: '100%',
             paddingY: '1rem',
+            margin: '0 auto',
+            paddingX: { xs: '1rem', md: '2rem', lg: '0' },
           }}
         >
           <Stack
             spacing="1rem"
-            width={{ md: 'auto', lg: '880px' }}
+            width={{ md: '40vw', lg: '880px' }}
             sx={{
               color: theme.palette.primary.main,
-              margin: '0 auto',
-              paddingLeft: { md: '2rem', lg: '0' },
+              margin: { md: '0', lg: '0 auto' },
             }}
           >
             <BreadCrumbSection event={props.event} />
