@@ -222,9 +222,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Stack>
             <Box
               sx={{
-                width: { md: 'min(40vw, 18rem)', lg: 'min(40vw, 18rem)' },
+                width: { md: '14rem', lg: '18rem' },
                 position: 'absolute',
-                right: { xs: '2rem', md: '2rem', lg: '2rem' },
+                right: '2rem',
                 bottom: '-6rem',
                 zIndex: '2',
                 aspectRatio: '1/1',
