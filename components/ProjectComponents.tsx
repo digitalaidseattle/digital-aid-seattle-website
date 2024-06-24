@@ -167,8 +167,8 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Stack>
           }
           <Box sx={{
-            width: '50%',
-            margin: '0 auto',
+            width: '75%',
+            margin: 'auto',
             marginTop: '1rem',
             aspectRatio: '1 / 1',
             borderRadius: '20px',
