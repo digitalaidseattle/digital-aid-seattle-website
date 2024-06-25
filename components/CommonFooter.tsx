@@ -170,7 +170,7 @@ const linkedInLink = () => {
 const githubLink = () => {
   return (
     <Link
-      href="https://github.com/openseattle"
+      href="https://github.com/digitalaidseattle"
       target="_blank"
       rel="noopener noreferrer"
       title="GitHub"
