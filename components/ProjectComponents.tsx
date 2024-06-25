@@ -200,12 +200,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             backgroundColor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,
             width: '100%',
-            paddingX: { md: '32px', lg: 0 },
-            // paddingTop: '5rem',
-            paddingBottom: '1rem',
           }}
         >
-          {/* is there a way to wrap the content in a container? instead of hardcoding the width */}
+          {/* TODO: max-width of 880px is hardcoded throughout the site */}
           <Box sx={{
             maxWidth: '880px',
             minHeight: '15rem',
@@ -214,11 +211,14 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             alignItems: 'flex-end',
             justifyContent: 'flex-start',
             position: 'relative',
+            paddingY: '1rem',
+            paddingX: { md: '32px', lg: 0 },
+
           }}>
             <Typography
               variant={largeScreen ? 'displayLarge' : 'displayMedium'}
               sx={{
-                width: '40vw',
+                width: { md: '40vw', lg: '35vw' },
               }}
               component="h1"
             >
@@ -226,7 +226,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Typography>
             <Box
               sx={{
-                width: '18rem',
+                width: { md: '16rem', lg: '18rem' },
                 position: 'absolute',
                 right: '2rem',
                 bottom: '-6rem',
@@ -246,8 +246,6 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               />
             </Box>
           </Box>
-
-
         </Box>
       </Stack>
     )
