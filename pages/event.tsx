@@ -133,7 +133,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
               position: 'relative',
               margin: '0 auto',
               maxWidth: '880px',
-              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
+              paddingX: { md: '2rem', lg: '0' },
             }}>
             <Stack>
               <Typography
@@ -183,7 +183,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
             width: '100%',
             paddingY: '1rem',
             margin: '0 auto',
-            paddingX: { xs: '1rem', md: '2rem', lg: '0' },
+            paddingX: { md: '2rem', lg: '0' },
           }}
         >
           <Stack

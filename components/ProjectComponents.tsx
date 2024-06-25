@@ -190,7 +190,70 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     )
   }
 
+  // new version wraps everything in a single box, so flow is maintained.
   function DesktopHeader() {
+    return (
+      <Stack>
+        {/* green section */}
+        <Box
+          sx={{
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.primary.contrastText,
+            width: '100%',
+            paddingX: { md: '32px', lg: 0 },
+            // paddingTop: '5rem',
+            paddingBottom: '1rem',
+          }}
+        >
+          {/* is there a way to wrap the content in a container? instead of hardcoding the width */}
+          <Box sx={{
+            maxWidth: '880px',
+            minHeight: '15rem',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-start',
+            position: 'relative',
+          }}>
+            <Typography
+              variant={largeScreen ? 'displayLarge' : 'displayMedium'}
+              sx={{
+                width: '40vw',
+              }}
+              component="h1"
+            >
+              {project.title}
+            </Typography>
+            <Box
+              sx={{
+                width: '18rem',
+                position: 'absolute',
+                right: '2rem',
+                bottom: '-6rem',
+                zIndex: '2',
+                aspectRatio: '1/1',
+                backgroundColor: '#fff',
+                display: 'grid',
+                placeItems: 'center',
+                borderRadius: '20px',
+                boxShadow:
+                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+                overflow: 'hidden'
+              }}
+            >
+              <img
+                src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+              />
+            </Box>
+          </Box>
+
+
+        </Box>
+      </Stack>
+    )
+  }
+
+  function DesktopHeaderOld() {
     return (
       <>
         <Box
