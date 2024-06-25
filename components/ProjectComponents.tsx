@@ -190,10 +190,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     )
   }
 
-  // new version wraps everything in a single box, so flow is maintained.
   function DesktopHeader() {
     return (
-      <Stack>
+      <>
         {/* green section */}
         <Box
           sx={{
@@ -205,7 +204,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           {/* TODO: max-width of 880px is hardcoded throughout the site */}
           <Box sx={{
             maxWidth: '880px',
-            minHeight: '15rem',
+            minHeight: '18rem',
             margin: '0 auto',
             display: 'flex',
             alignItems: 'flex-end',
@@ -229,7 +228,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 width: { md: '16rem', lg: '18rem' },
                 position: 'absolute',
                 right: '2rem',
-                bottom: '-6rem',
+                bottom: { md: '-4rem', lg: '-5rem' },
                 zIndex: '2',
                 aspectRatio: '1/1',
                 backgroundColor: '#fff',
@@ -247,65 +246,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Box>
           </Box>
         </Box>
-      </Stack>
-    )
-  }
-
-  function DesktopHeaderOld() {
-    return (
-      <>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
-            paddingTop: '12rem',
-            paddingBottom: '1rem',
-            width: '100%',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              margin: '0 auto',
-              maxWidth: '880px',
-              paddingX: { md: '2rem', lg: '0' },
-            }}
-          >
-            <Stack>
-              <Typography
-                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
-                sx={{
-                  width: { md: '40vw', lg: '25rem' },
-                }}
-                component="h1"
-              >
-                {project.title}
-              </Typography>
-            </Stack>
-            <Box
-              sx={{
-                width: '18rem',
-                position: 'absolute',
-                right: '2rem',
-                bottom: '-6rem',
-                zIndex: '2',
-                aspectRatio: '1/1',
-                backgroundColor: '#fff',
-                display: 'grid',
-                placeItems: 'center',
-                borderRadius: '20px',
-                boxShadow:
-                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-                overflow: 'hidden'
-              }}
-            >
-              <img
-                src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-              />
-            </Box>
-          </Box>
-        </Box>
-
+        {/* light section */}
         {!props.hideStatus &&
           <Box
             sx={{
