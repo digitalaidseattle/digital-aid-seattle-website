@@ -26,7 +26,7 @@ This website is for organizations that want to [learn more about partnering with
 
 The website is built using **Next.js**, a React-based framework for server-side rendering and static site generation. Learn more about Next.js [here](https://nextjs.org/docs/getting-started).
 
-**Airtable** is integrated to create forms for volunteers and partners to sign up, providing a database for storing and managing their information. Explore Airtable's documentation [here](https://airtable.com/developers/).
+**Airtable** is integrated to create forms for volunteers and partners to sign up, providing a database for storing and managing their information. Explore Airtable's documentation [here](https://airtable.com/developers).
 
 **Sanity.io** serves as the content management system (CMS), providing a flexible and customizable platform for team members to manage and publish content. Check out Sanity.io's documentation [here](https://www.sanity.io/docs).
 
@@ -99,7 +99,7 @@ The website is built using **Next.js**, a React-based framework for server-side 
 1. Set up local environment.
 2. Ensure access to appropriate accounts:
    - Github: Must be member of [Digital Aid Seattle Github Org](https://github.com/digitalaidseattle) in order to push changes to the repo.
-   - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/digitalaidseattle/digital-aid-seattle-website)to approve staged changes to production.
+   - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/digitalaidseattle/digital-aid-seattle-website) to approve staged changes to production.
    - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.digitalaidseattle.org/studio)
    - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
 3. Get issue from group Asana board.
