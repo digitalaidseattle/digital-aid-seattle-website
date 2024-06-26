@@ -40,6 +40,7 @@ import Markdown from 'react-markdown'
 import { NavigateNextSharp } from '@mui/icons-material'
 import Link from 'next/link'
 import ProjectImage from '../assets/project-image.png'
+import { HeaderWithImage } from './HeaderWithImage'
 
 const PROJECT_IMAGE = ProjectImage.src;
 
@@ -194,58 +195,17 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     return (
       <>
         {/* green section */}
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
-            width: '100%',
-          }}
-        >
-          {/* TODO: max-width of 880px is hardcoded throughout the site */}
-          <Box sx={{
-            maxWidth: '880px',
-            minHeight: '18rem',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'flex-start',
-            position: 'relative',
-            paddingY: '1rem',
-            paddingX: { md: '32px', lg: 0 },
-
-          }}>
-            <Typography
-              variant={largeScreen ? 'displayLarge' : 'displayMedium'}
-              sx={{
-                width: { md: '40vw', lg: '35vw' },
-              }}
-              component="h1"
-            >
-              {project.title}
-            </Typography>
-            <Box
-              sx={{
-                width: { md: '16rem', lg: '18rem' },
-                position: 'absolute',
-                right: '2rem',
-                bottom: { md: '-4rem', lg: '-5rem' },
-                zIndex: '2',
-                aspectRatio: '1/1',
-                backgroundColor: '#fff',
-                display: 'grid',
-                placeItems: 'center',
-                borderRadius: '20px',
-                boxShadow:
-                  '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-                overflow: 'hidden'
-              }}
-            >
-              <img
-                src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-              />
-            </Box>
-          </Box>
-        </Box>
+        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+          <Typography
+            variant={largeScreen ? 'displayLarge' : 'displayMedium'}
+            sx={{
+              width: { md: '40vw', lg: '35vw' },
+            }}
+            component="h1"
+          >
+            {project.title}
+          </Typography>
+        </HeaderWithImage>
         {/* light section */}
         {!props.hideStatus &&
           <Box

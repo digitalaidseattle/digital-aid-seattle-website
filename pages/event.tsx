@@ -31,7 +31,11 @@ import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
 import { useRouter } from 'next/navigation';
+import { HeaderWithImage } from 'components/HeaderWithImage';
 /*********/
+
+import ProjectImage from '../assets/project-image.png'
+const DEFAULT_IMAGE = ProjectImage.src;
 
 const Labels = {
   contact: 'Interested in this event?',
@@ -119,63 +123,28 @@ const HeaderSection = (props: { event: OSEvent }) => {
   function DesktopSection() {
     return (
       <>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
-            paddingTop: { md: '5.5rem', lg: '12rem' },
-            paddingBottom: '1rem',
-            width: '100%',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              margin: '0 auto',
-              maxWidth: '880px',
-              paddingX: { md: '2rem', lg: '0' },
-            }}>
-            <Stack>
-              <Typography
-                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="h2" >
-                Event
-              </Typography>
-              <Typography
-                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
-                sx={{
-                  width: { md: '40vw', lg: '25rem' },
-                }}
-                component="h1" >
-                {props.event.title}
-              </Typography>
-              <Typography
-                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="h2" >
-                {props.event.date}
-              </Typography>
-            </Stack>
-
-            {props.event.image && props.event.image.asset &&
-              <Box
-                sx={{
-                  width: { md: 'min(40vw, 18rem)', lg: '25rem' },
-                  position: 'absolute',
-                  right: { xs: '1rem', md: '2rem', lg: '0' },
-                  bottom: '-6rem',
-                  zIndex: '2',
-                }}
-              >
-                <img
-                  src={urlForImage(props.event.image).url()}
-                  style={{
-                    width: '100%',
-                    display: 'block'
-                  }} />
-              </Box>
-            }
-          </Box>
-        </Box>
+        <HeaderWithImage imageSrc={props.event.image && props.event.image.asset ? urlForImage(props.event.image).url() : DEFAULT_IMAGE}>
+          <Stack>
+            <Typography
+              variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              component="h2" >
+              Event
+            </Typography>
+            <Typography
+              variant={largeScreen ? 'displayLarge' : 'displayMedium'}
+              sx={{
+                width: { md: '40vw', lg: '25rem' },
+              }}
+              component="h1" >
+              {props.event.title}
+            </Typography>
+            <Typography
+              variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              component="h2" >
+              {props.event.date}
+            </Typography>
+          </Stack>
+        </HeaderWithImage>
 
         <Box
           sx={{
