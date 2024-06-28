@@ -40,6 +40,7 @@ import Markdown from 'react-markdown'
 import { NavigateNextSharp } from '@mui/icons-material'
 import Link from 'next/link'
 import ProjectImage from '../assets/project-image.png'
+import { HeaderWithImage } from './HeaderWithImage'
 
 const PROJECT_IMAGE = ProjectImage.src;
 
@@ -133,28 +134,11 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function MobileHeader() {
     return (
       <>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            width: '100%',
-            height: '30rem',
-            position: 'absolute',
-            zIndex: '0'
-          }}
-        ></Box>
-        <Stack
-          spacing="2rem"
-          sx={{
-            position: 'relative',
-            padding: '4rem 1rem 0rem 1rem',
-            color: theme.palette.primary.contrastText
-          }}
-        >
-          <Stack>
-            <Typography variant="displayMedium" component="h1">
-              {project.title}
-            </Typography>
-          </Stack>
+        {/* green section */}
+        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+          <Typography variant="displayMedium" component="h1">
+            {project.title}
+          </Typography>
           {!props.hideStatus &&
             <Stack spacing="1rem">
               <Stack direction="row" alignItems="center" spacing="1.5rem">
@@ -166,22 +150,15 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               </Stack>
             </Stack>
           }
-
-          <img
-            src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-            style={{
-              width: '50%',
-              margin: '0 auto',
-              marginTop: '1rem',
-              aspectRatio: '1 / 1',
-              display: 'block',
-              borderRadius: '20px',
-              boxShadow:
-                '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-            }}
-          />
+        </HeaderWithImage>
+        {/* light section */}
+        <Box
+          sx={{
+            padding: '2rem 1rem 0rem 1rem',
+          }}
+        >
           <BreadCrumbSection project={props.project} />
-        </Stack>
+        </Box>
       </>
     )
   }
@@ -189,87 +166,49 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function DesktopHeader() {
     return (
       <>
+        {/* green section */}
+        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+          <Typography
+            variant={largeScreen ? 'displayLarge' : 'displayMedium'}
+            sx={{
+              width: { md: '40vw', lg: '35vw' },
+            }}
+            component="h1"
+          >
+            {project.title}
+          </Typography>
+        </HeaderWithImage>
+        {/* light section */}
         <Box
           sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
-            paddingTop: { md: '5.5rem', lg: '14.5rem' },
-            paddingBottom: '1rem',
+            backgroundColor: theme.palette.background.default,
             width: '100%',
+            paddingY: '1rem',
           }}
         >
-          <Box
+          <Stack
+            spacing="1rem"
+            width={{ md: 'auto', lg: '880px' }}
             sx={{
-              position: 'relative',
+              color: theme.palette.primary.main,
               margin: '0 auto',
-              maxWidth: '880px',
-              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
+              paddingLeft: { md: '2rem', lg: '0' },
             }}
           >
-            <Stack>
-              <Typography
-                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
-                sx={{
-                  width: { md: '40vw', lg: '25rem' },
-                }}
-                component="h1"
-              >
-                {project.title}
-              </Typography>
-            </Stack>
-            <Box
-              sx={{
-                width: { md: 'min(40vw, 18rem)', lg: 'min(40vw, 18rem)' },
-                position: 'absolute',
-                right: { xs: '2rem', md: '2rem', lg: '2rem' },
-                bottom: '-6rem',
-                zIndex: '2',
-              }}
-            >
-              <img
-                src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-                style={{
-                  width: '100%',
-                  display: 'block',
-                  borderRadius: '20px',
-                  boxShadow:
-                    '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-                }}
-              />
+            <Box marginBottom={'2rem'} width='40vw'>
+              <BreadCrumbSection project={props.project} />
             </Box>
-          </Box>
-        </Box>
-
-        {!props.hideStatus &&
-          <Box
-            sx={{
-              backgroundColor: theme.palette.background.default,
-              width: '100%',
-              paddingY: '1rem',
-            }}
-          >
-            <Stack
-              spacing="1rem"
-              width={{ md: 'auto', lg: '880px' }}
-              sx={{
-                color: theme.palette.primary.main,
-                margin: '0 auto',
-                paddingLeft: { md: '2rem', lg: '0' },
-              }}
-            >
-              <Box marginBottom={'2rem'}>
-                <BreadCrumbSection project={props.project} />
-              </Box>
+            {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
                 <StateBadge state={project.status} />
-              </Stack>
-            </Stack>
-          </Box>
-        }
+              </Stack></>}
+          </Stack>
+        </Box>
+
       </>
     )
   }

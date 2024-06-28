@@ -31,7 +31,11 @@ import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
 import { eventsService } from './api/EventsService';
 import { useRouter } from 'next/navigation';
+import { HeaderWithImage } from 'components/HeaderWithImage';
 /*********/
+
+import ProjectImage from '../assets/project-image.png'
+const DEFAULT_IMAGE = ProjectImage.src;
 
 const Labels = {
   contact: 'Interested in this event?',
@@ -64,29 +68,10 @@ const HeaderSection = (props: { event: OSEvent }) => {
       </Breadcrumbs>
     )
   }
-
   function MobileSection() {
     return (
-      <Box sx={{
-        backgroundColor: theme.palette.background.default
-      }}>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            width: '100%',
-            height: '28.75rem',
-            position: 'absolute',
-            zIndex: '0',
-          }}
-        ></Box>
-        <Stack
-          spacing="2rem"
-          sx={{
-            position: 'relative',
-            padding: '4rem 1rem 0rem 1rem',
-            color: theme.palette.primary.contrastText,
-          }}
-        >
+      <>
+        <HeaderWithImage imageSrc={props.event.image && props.event.image.asset ? urlForImage(props.event.image).url() : DEFAULT_IMAGE}>
           <Stack>
             <Typography variant="headlineMedium" component="h2">
               Event
@@ -98,99 +83,59 @@ const HeaderSection = (props: { event: OSEvent }) => {
               {props.event.date}
             </Typography>
           </Stack>
-
-          {props.event.image && props.event.image.asset && <img
-            src={urlForImage(props.event.image).url()}
-            style={{
-              width: '100%',
-              aspectRatio: '1 / 1',
-              display: 'block'
-            }}
-          />
-          }
-          <Stack spacing="1rem">
-            <BreadCrumbSection event={props.event} />
-          </Stack>
-        </Stack>
-      </Box>
+        </HeaderWithImage>
+        {/* light section */}
+        <Box
+          sx={{
+            padding: '2rem 1rem 0rem 1rem',
+          }}
+        >
+          <BreadCrumbSection event={props.event} />
+        </Box>
+      </>
     )
   }
 
   function DesktopSection() {
     return (
       <>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
-            paddingTop: { md: '5.5rem', lg: '14.5rem' },
-            paddingBottom: '1rem',
-            width: '100%',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              margin: '0 auto',
-              maxWidth: '880px',
-              paddingX: { xs: '1rem', md: '2rem', lg: '0' },
-            }}>
-            <Stack>
-              <Typography
-                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="h2" >
-                Event
-              </Typography>
-              <Typography
-                variant={largeScreen ? 'displayLarge' : 'displayMedium'}
-                sx={{
-                  width: { md: '40vw', lg: '25rem' },
-                }}
-                component="h1" >
-                {props.event.title}
-              </Typography>
-              <Typography
-                variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
-                component="h2" >
-                {props.event.date}
-              </Typography>
-            </Stack>
-
-            {props.event.image && props.event.image.asset &&
-              <Box
-                sx={{
-                  width: { md: 'min(40vw, 18rem)', lg: '25rem' },
-                  position: 'absolute',
-                  right: { xs: '1rem', md: '2rem', lg: '0' },
-                  bottom: '-6rem',
-                  zIndex: '2',
-                }}
-              >
-                <img
-                  src={urlForImage(props.event.image).url()}
-                  style={{
-                    width: '100%',
-                    display: 'block'
-                  }} />
-              </Box>
-            }
-          </Box>
-        </Box>
+        <HeaderWithImage imageSrc={props.event.image && props.event.image.asset ? urlForImage(props.event.image).url() : DEFAULT_IMAGE}>
+          <Stack>
+            <Typography
+              variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              component="h2" >
+              Event
+            </Typography>
+            <Typography
+              variant={largeScreen ? 'displayLarge' : 'displayMedium'}
+              sx={{
+                width: { md: '40vw', lg: '25rem' },
+              }}
+              component="h1" >
+              {props.event.title}
+            </Typography>
+            <Typography
+              variant={largeScreen ? 'headlineLarge' : 'headlineMedium'}
+              component="h2" >
+              {props.event.date}
+            </Typography>
+          </Stack>
+        </HeaderWithImage>
 
         <Box
           sx={{
-            backgroundColor: theme.palette.background.default,
             width: '100%',
             paddingY: '1rem',
+            margin: '0 auto',
+            paddingX: { md: '2rem', lg: '0' },
           }}
         >
           <Stack
             spacing="1rem"
-            width={{ md: 'auto', lg: '880px' }}
+            width={{ md: '40vw', lg: '880px' }}
             sx={{
               color: theme.palette.primary.main,
-              margin: '0 auto',
-              paddingLeft: { md: '2rem', lg: '0' },
+              margin: { md: '0', lg: '0 auto' },
             }}
           >
             <BreadCrumbSection event={props.event} />
@@ -379,26 +324,29 @@ const EventPage = () => {
   }, [setLoading, router])
 
   return (
-    <>
-      <BlockComponent block={!event}>
-        {event &&
-          <>
+    <BlockComponent block={!event}>
+      {event &&
+        <>
+          <Box
+            sx={{
+              backgroundColor: theme.palette.background.default
+            }}>
             <HeaderSection event={event} />
-            <SectionContainer backgroundColor={theme.palette.background.default}>
-              <Stack
-                gap={{ xs: '1rem', lg: '2rem' }}
-                maxWidth="880px"
-                margin="0 auto" >
-                <InfoSection event={event} />
-                <AboutSection event={event} />
-                <ActivitySection event={event} />
-              </Stack>
-            </SectionContainer>
-            {event.rsvpLink && <ContactUsSection event={event} />}
-          </>
-        }
-      </BlockComponent>
-    </>
+          </Box>
+          <SectionContainer backgroundColor={theme.palette.background.default}>
+            <Stack
+              gap={{ xs: '1rem', lg: '2rem' }}
+              maxWidth="880px"
+              margin="0 auto" >
+              <InfoSection event={event} />
+              <AboutSection event={event} />
+              <ActivitySection event={event} />
+            </Stack>
+          </SectionContainer>
+          {event.rsvpLink && <ContactUsSection event={event} />}
+        </>
+      }
+    </BlockComponent>
   )
 }
 
