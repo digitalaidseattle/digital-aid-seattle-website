@@ -74,13 +74,13 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
         <Box sx={{
           maxWidth: '880px',
           minHeight: '18rem',
-          margin: '0 auto',
+          margin: { md: '0', lg: '0 auto' },
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'flex-start',
           position: 'relative',
           paddingY: '1rem',
-          paddingX: { md: '32px', lg: 0 },
+          paddingX: { md: '2rem', lg: 0 },
         }}>
           {props.children}
           <Box
