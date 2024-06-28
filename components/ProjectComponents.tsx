@@ -134,28 +134,10 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function MobileHeader() {
     return (
       <>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-            width: '100%',
-            height: '30rem',
-            position: 'absolute',
-            zIndex: '0'
-          }}
-        ></Box>
-        <Stack
-          spacing="2rem"
-          sx={{
-            position: 'relative',
-            padding: '4rem 1rem 0rem 1rem',
-            color: theme.palette.primary.contrastText
-          }}
-        >
-          <Stack>
-            <Typography variant="displayMedium" component="h1">
-              {project.title}
-            </Typography>
-          </Stack>
+        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+          <Typography variant="displayMedium" component="h1">
+            {project.title}
+          </Typography>
           {!props.hideStatus &&
             <Stack spacing="1rem">
               <Stack direction="row" alignItems="center" spacing="1.5rem">
@@ -167,26 +149,15 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               </Stack>
             </Stack>
           }
-          <Box sx={{
-            width: '75%',
-            margin: 'auto',
-            marginTop: '1rem',
-            aspectRatio: '1 / 1',
-            borderRadius: '20px',
-            boxShadow:
-              '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
-            backgroundColor: '#fff',
-            display: 'grid',
-            placeItems: 'center',
-            overflow: 'hidden'
-          }}>
-            <img
-              src={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-            />
-          </Box>
-
+        </HeaderWithImage>
+        {/* content below image */}
+        <Box
+          sx={{
+            padding: '2rem 1rem 0rem 1rem',
+          }}
+        >
           <BreadCrumbSection project={props.project} />
-        </Stack>
+        </Box>
       </>
     )
   }
@@ -194,7 +165,6 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function DesktopHeader() {
     return (
       <>
-        {/* green section */}
         <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
@@ -206,7 +176,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             {project.title}
           </Typography>
         </HeaderWithImage>
-        {/* light section */}
+        {/* content below image */}
         {!props.hideStatus &&
           <Box
             sx={{

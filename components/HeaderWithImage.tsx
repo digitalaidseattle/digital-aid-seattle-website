@@ -5,21 +5,64 @@
 */
 import {
   Box,
+  Stack,
   useTheme,
 } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
+
 import { ReactNode } from 'react'
 
 type HeaderWithImageProps = {
   imageSrc: string,
-  children: ReactNode // takes the JSX for header text 
+  children: ReactNode // takes the JSX for content that is put above/to left of image
 }
 
 export const HeaderWithImage = (props: HeaderWithImageProps) => {
   const theme = useTheme()
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
-  return (
-    <>
-      {/* green section */}
+  return extraSmallScreen ?
+    // mobile design
+    (<>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.primary.main,
+          width: '100%',
+          height: '30rem',
+          position: 'absolute',
+          zIndex: '0'
+        }}
+      ></Box>
+      <Stack
+        spacing="2rem"
+        sx={{
+          position: 'relative',
+          padding: '4rem 1rem 0rem 1rem',
+          color: theme.palette.primary.contrastText
+        }}
+      >
+        {props.children}
+        <Box sx={{
+          width: '75%',
+          margin: 'auto',
+          marginTop: '1rem',
+          aspectRatio: '1 / 1',
+          borderRadius: '20px',
+          boxShadow:
+            '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
+          backgroundColor: '#fff',
+          display: 'grid',
+          placeItems: 'center',
+          overflow: 'hidden'
+        }}>
+          <img
+            src={props.imageSrc}
+          />
+        </Box>
+      </Stack>
+    </>)
+    : // desktop design
+    (<>
       <Box
         sx={{
           backgroundColor: theme.palette.primary.main,
@@ -56,7 +99,6 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
                 '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
               overflow: 'hidden',
               objectFit: 'cover'
-
             }}
           >
             <img
@@ -70,5 +112,6 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
       </Box>
 
     </>
-  )
+    )
+
 }
