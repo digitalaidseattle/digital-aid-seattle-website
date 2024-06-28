@@ -48,31 +48,32 @@ const CardProject = ({ project }: CardProjectProps) => {
             justifyContent: 'space-between',
           }}
         >
-          <Stack direction={{ xs: 'row', lg: 'column' }} gap="1.5rem">
+          <Stack direction={{ xs: 'row', lg: 'column' }} gap='1.5rem'>
             <CardMedia
-              component="img"
+              component='img'
               image={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
               sx={{
-                objectFit: "contain",
+                objectFit: 'contain',
                 width: { md: '7rem', lg: '100%' },
                 aspectRatio: '1 / 1',
                 borderRadius: '8px',
                 display: { xs: 'none', md: 'block' },
+                backgroundColor: 'white',
               }}
             />
-            <Stack spacing="1rem" sx={{ width: '100%' }}>
-              <Typography variant="titleLarge" component="h2">
+            <Stack spacing='1rem' sx={{ width: '100%' }}>
+              <Typography variant='titleLarge' component='h2'>
                 {project.title}
               </Typography>
-              <Stack spacing="1rem">
+              <Stack spacing='1rem'>
                 <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
+                  direction='row'
+                  justifyContent='space-between'
+                  alignItems='center'
                 >
                   {project.programAreas &&
-                    <Stack direction="row" justifyContent="space-between">
-                      <Typography variant="labelLarge">
+                    <Stack direction='row' justifyContent='space-between'>
+                      <Typography variant='labelLarge'>
                         {ProjectLabels.project_label + project.painpoint}
                       </Typography>
                     </Stack>
@@ -80,8 +81,8 @@ const CardProject = ({ project }: CardProjectProps) => {
                   <StateBadge state={project.status} />
                 </Stack>
                 {project.programAreas &&
-                  <Stack direction="row" justifyContent="space-between">
-                    <Typography variant="labelMedium">
+                  <Stack direction='row' justifyContent='space-between'>
+                    <Typography variant='labelMedium'>
                       {project.programAreas.join(', ')}
                     </Typography>
                   </Stack>
@@ -91,13 +92,13 @@ const CardProject = ({ project }: CardProjectProps) => {
           </Stack>
           <Typography
             sx={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitLineClamp: "4",
-              WebkitBoxOrient: "vertical"
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '4',
+              WebkitBoxOrient: 'vertical'
             }}
-            variant="bodyMedium" >{project.description}</Typography>
+            variant='bodyMedium' >{project.description}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
