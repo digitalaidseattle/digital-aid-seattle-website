@@ -91,7 +91,7 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
             {props.children}
             <Box
               sx={{
-                width: { md: '16rem', lg: '18rem' },
+                width: { md: '16rem', lg: '20rem' },
                 position: 'absolute',
                 right: { md: '2rem', lg: '0px' },
                 bottom: { md: '-4rem', lg: '-5rem' },
