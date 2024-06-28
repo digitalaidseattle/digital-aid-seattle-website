@@ -134,6 +134,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function MobileHeader() {
     return (
       <>
+        {/* green section */}
         <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
           <Typography variant="displayMedium" component="h1">
             {project.title}
@@ -150,7 +151,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Stack>
           }
         </HeaderWithImage>
-        {/* content below image */}
+        {/* light section */}
         <Box
           sx={{
             padding: '2rem 1rem 0rem 1rem',
@@ -165,6 +166,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
   function DesktopHeader() {
     return (
       <>
+        {/* green section */}
         <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
@@ -176,37 +178,37 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             {project.title}
           </Typography>
         </HeaderWithImage>
-        {/* content below image */}
-        {!props.hideStatus &&
-          <Box
+        {/* light section */}
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            width: '100%',
+            paddingY: '1rem',
+          }}
+        >
+          <Stack
+            spacing="1rem"
+            width={{ md: 'auto', lg: '880px' }}
             sx={{
-              backgroundColor: theme.palette.background.default,
-              width: '100%',
-              paddingY: '1rem',
+              color: theme.palette.primary.main,
+              margin: '0 auto',
+              paddingLeft: { md: '2rem', lg: '0' },
             }}
           >
-            <Stack
-              spacing="1rem"
-              width={{ md: 'auto', lg: '880px' }}
-              sx={{
-                color: theme.palette.primary.main,
-                margin: '0 auto',
-                paddingLeft: { md: '2rem', lg: '0' },
-              }}
-            >
-              <Box marginBottom={'2rem'} width='40vw'>
-                <BreadCrumbSection project={props.project} />
-              </Box>
+            <Box marginBottom={'2rem'} width='40vw'>
+              <BreadCrumbSection project={props.project} />
+            </Box>
+            {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
                 <StateBadge state={project.status} />
-              </Stack>
-            </Stack>
-          </Box>
-        }
+              </Stack></>}
+          </Stack>
+        </Box>
+
       </>
     )
   }
