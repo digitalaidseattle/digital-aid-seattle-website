@@ -145,7 +145,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{ProjectLabels.project_status}</Typography>
+                <Typography variant="labelLarge" >{ProjectLabels.project_status}</Typography>
                 <StateBadge state={project.status} />
               </Stack>
             </Stack>

@@ -38,6 +38,7 @@ const CardProject = ({ project }: CardProjectProps) => {
         sx={{
           height: '100%',
         }}
+        aria-label={`navigate to project page for ${project.title}`}
       >
         <CardContent
           sx={{
@@ -99,7 +100,7 @@ const CardProject = ({ project }: CardProjectProps) => {
               WebkitLineClamp: '4',
               WebkitBoxOrient: 'vertical'
             }}
-            variant='bodyMedium' >{project.description}</Typography>
+            variant='bodyMedium'>{project.description}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
