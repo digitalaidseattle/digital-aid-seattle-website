@@ -52,6 +52,7 @@ const CardProject = ({ project }: CardProjectProps) => {
             <CardMedia
               component='img'
               image={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+              alt={project.title + " logo"}
               sx={{
                 objectFit: 'contain',
                 width: { md: '7rem', lg: '100%' },
