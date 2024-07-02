@@ -345,6 +345,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
               title={person.name}
               description={person.role}
               image={url}
+              alt={`headshot of ${person.name}`}
             />
           })}
         </Box>
