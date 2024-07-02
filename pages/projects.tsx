@@ -86,7 +86,7 @@ const ProjectsPage = () => {
             }}
             maxWidth={'880px'}
           >
-            <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Stack aria-label="filter projects by status" direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
               {dasProjectsService.filteredStatuses.map((status) =>
                 <Chip key={status} label={StatusLabels[status]}
                   variant={filterStatuses.includes(status) ? "filled" : "outlined"}
