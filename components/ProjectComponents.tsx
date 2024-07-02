@@ -167,7 +167,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     return (
       <>
         {/* green section */}
-        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+        <HeaderWithImage
+          imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+          imageAlt={project.title + " logo"}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
             sx={{
