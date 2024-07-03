@@ -30,10 +30,10 @@ const SECTION_TO_PATH = {
 const PATH_TO_SECTION = {
   '/about': 'About',
   '/projects': 'Projects',
-  '/project_individual': 'Projects',
+  '/project': 'Projects',
   '/partners': 'Partners',
   '/volunteers': 'Volunteer',
-  '/volunteer_role': 'Volunteer',
+  '/volunteer': 'Volunteer',
   '/events': 'Events',
   '/event': 'Events'
 }
@@ -90,7 +90,7 @@ const CommonHeader = () => {
               aria-label="page-info"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={()=>setShowMobileMenu(!showMobileMenu)}
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
               {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
@@ -149,8 +149,8 @@ const CommonHeader = () => {
       </AppBar>
       {/* mobile slide-out menu */}
       {smallScreen &&
-      <Box sx={{ position: 'relative', zIndex: -1 }}>
-        <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}> 
+        <Box sx={{ position: 'relative', zIndex: -1 }}>
+          <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
             {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
@@ -170,7 +170,7 @@ const CommonHeader = () => {
               </MenuItem>
             ))}
           </MobileMenu>
-      </Box>}
+        </Box>}
     </Box>
   )
 }

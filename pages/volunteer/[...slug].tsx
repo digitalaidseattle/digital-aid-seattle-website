@@ -14,9 +14,9 @@ import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import { dasVolunteerRoleService } from '../api/VolunteerRoleService'
 import Markdown from 'react-markdown'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 const Labels = {
   Title: "Volunteer Opening",
@@ -44,28 +44,29 @@ const VolunteerRolePage = () => {
 
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams(window.location.search)
-    const roleName = params.get('role')
-    dasVolunteerRoleService
-      .getRoleDetailsByName(roleName)
-      .then((resp: DASVolunteerRole) => {
-        if (resp === null) {
-          console.error(`Volunteer role '${roleName} not found.`);
+    const roleName = router.query.slug ? router.query.slug[0] : null;
+    if (roleName) {
+      dasVolunteerRoleService
+        .getRoleDetailsByName(roleName)
+        .then((resp: DASVolunteerRole) => {
+          if (resp === null) {
+            console.error(`Volunteer role '${roleName} not found.`);
+            router.push('/404')
+          } else {
+            dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
+              .then(keys => {
+                resp.keyTechnologies = keys;
+                setRole(resp)
+              })
+              .catch((error) => console.error(error))
+          }
+        })
+        .catch((error) => {
+          console.error(error);
           router.push('/404')
-        } else {
-          dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
-            .then(keys => {
-              resp.keyTechnologies = keys;
-              setRole(resp)
-            })
-            .catch((error) => console.error(error))
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        router.push('/404')
-      })
-      .finally(() => setLoading(false))
+        })
+        .finally(() => setLoading(false))
+    }
   }, [setLoading, router])
 
   const theme = useTheme()
@@ -76,10 +77,10 @@ const VolunteerRolePage = () => {
         aria-label="breadcrumb"
         separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
       >
-        <Link href={'./'} color="primary" underline="hover">
+        <Link href={'../'} color="primary" underline="hover">
           {Labels.Home}
         </Link>
-        <Link href={'./volunteers'} color="primary" underline="hover">
+        <Link href={'../volunteers'} color="primary" underline="hover">
           {Labels.Volunteers}
         </Link>
         <Typography color="textPrimary">{roleName}</Typography>
