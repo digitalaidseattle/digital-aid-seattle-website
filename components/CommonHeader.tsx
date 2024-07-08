@@ -90,7 +90,7 @@ const CommonHeader = () => {
               aria-label="page-info"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={()=>setShowMobileMenu(!showMobileMenu)}
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
               {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
@@ -120,27 +120,27 @@ const CommonHeader = () => {
             <nav>
               <ul>
                 {Object.keys(SECTION_TO_PATH).map((name) => (
-                  <Button
-                    key={name}
-                    variant="contained"
-                    color={isCurrent(name)
-                      ? 'success'
-                      : 'primary'}
-                    disableRipple={true}
+                  <Link
+                    sx={{
+                      color: theme.palette.primary.contrastText,
+                      textUnderlineOffset: '0.5rem',
+                      textDecoration: isCurrent(name)
+                        ? 'underline'
+                        : 'none'
+                    }}
+                    href={SECTION_TO_PATH[name]}
                   >
-                    <Link
-                      sx={{
-                        color: theme.palette.primary.contrastText,
-                        textUnderlineOffset: '0.5rem',
-                        textDecoration: isCurrent(name)
-                          ? 'underline'
-                          : 'none'
-                      }}
-                      href={SECTION_TO_PATH[name]}
+                    <Button
+                      key={name}
+                      variant="contained"
+                      color={isCurrent(name)
+                        ? 'success'
+                        : 'primary'}
+                      disableRipple={true}
                     >
                       {name}
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 ))}
               </ul>
             </nav>
@@ -149,8 +149,8 @@ const CommonHeader = () => {
       </AppBar>
       {/* mobile slide-out menu */}
       {smallScreen &&
-      <Box sx={{ position: 'relative', zIndex: -1 }}>
-        <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}> 
+        <Box sx={{ position: 'relative', zIndex: -1 }}>
+          <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
             {Object.keys(SECTION_TO_PATH).map((name) => (
               <MenuItem
                 key={name}
@@ -170,7 +170,7 @@ const CommonHeader = () => {
               </MenuItem>
             ))}
           </MobileMenu>
-      </Box>}
+        </Box>}
     </Box>
   )
 }
