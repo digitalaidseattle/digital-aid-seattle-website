@@ -121,6 +121,7 @@ const CommonHeader = () => {
               <ul>
                 {Object.keys(SECTION_TO_PATH).map((name) => (
                   <Link
+                    key={name}
                     sx={{
                       color: theme.palette.primary.contrastText,
                       textUnderlineOffset: '0.5rem',
@@ -129,9 +130,9 @@ const CommonHeader = () => {
                         : 'none'
                     }}
                     href={SECTION_TO_PATH[name]}
+                    tabIndex={-1}
                   >
                     <Button
-                      key={name}
                       variant="contained"
                       color={isCurrent(name)
                         ? 'success'
