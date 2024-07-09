@@ -59,7 +59,7 @@ class AirtableProjectsService {
           description: resp.fields['Org description'],
           imageSrc: (logos && logos.length > 0) ? logos[0].url : null,
           programAreas: fields['Foci (from Partner)'],
-          projectLink: `project_individual?project=${fields['AirTable ID']}`,
+          projectLink: `project/${fields['AirTable ID']}`,
           ventureCode: fields['Prospective Venture Code']
         } as DASProject
       })

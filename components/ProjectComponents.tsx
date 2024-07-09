@@ -110,10 +110,10 @@ const BreadCrumbSection = (props: { project: DASProject }) => {
       aria-label="breadcrumb"
       separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
     >
-      <Link href={'./'} >
+      <Link href={'../'} >
         <Typography color="textPrimary">{ProjectLabels.homeCrumb}</Typography>
       </Link>
-      <Link href={'./projects'}>
+      <Link href={'../projects'}>
         <Typography color="textPrimary">{ProjectLabels.projectsCrumb}</Typography>
       </Link>
       <Typography color="textPrimary">{props.project.title}</Typography>

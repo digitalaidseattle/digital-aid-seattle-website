@@ -143,7 +143,7 @@ const CardEvent = ({ event }: CardEventProps) => {
         },
       }}
     >
-      <CardActionArea href={`/event?name=${event.id}`}>
+      <CardActionArea href={`/event/${event.id}`}>
         {tabletScreen ? <TabletCard /> : <MobileAndDesktopCard />}
       </CardActionArea>
     </Card>
