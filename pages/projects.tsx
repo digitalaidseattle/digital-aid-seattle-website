@@ -14,7 +14,8 @@ import { dasProjectsService } from './api/ProjectsService'
 // TODO consider moving into Sanity
 const LABELS = {
   PAGE_TITLE: 'Projects',
-  NO_MATCHES: 'No matching projects found.'
+  NO_MATCHES: 'No matching projects found.',
+  ARIA_LABEL_FILTERS: 'filter projects by status'
 }
 
 const ProjectsPage = () => {
@@ -86,7 +87,7 @@ const ProjectsPage = () => {
             }}
             maxWidth={'880px'}
           >
-            <Stack aria-label="filter projects by status" direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Stack aria-label={LABELS.ARIA_LABEL_FILTERS} direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
               {dasProjectsService.filteredStatuses.map((status) =>
                 <Chip key={status} label={StatusLabels[status]}
                   variant={filterStatuses.includes(status) ? "filled" : "outlined"}
