@@ -85,17 +85,14 @@ const CommonHeader = () => {
             }}
           >
             {/* Hamburger menu when the screen is small. */}
-            {/* LOGO */}
             <LogoBox/>
             <IconButton
               size="large"
-              aria-label="page-info"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              aria-hidden="true"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
-              {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
+              {showMobileMenu ? <CloseIcon/> : <MenuIcon/>}
             </IconButton>
           </Box>
           {/* Menu items that are shown on desktop */}
@@ -109,7 +106,6 @@ const CommonHeader = () => {
               padding: '1.25rem 2.5rem !important',
             }}
           >
-            {/* LOGO */}
             <LogoBox/>
             <nav>
               <ul>
@@ -141,31 +137,33 @@ const CommonHeader = () => {
             </nav>
           </Container>
         </Toolbar>
+        {/* mobile slide-out menu */}
+        {smallScreen &&
+          <Box sx={{ position: 'relative', zIndex: -1 }}>
+            <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
+              {Object.keys(SECTION_TO_PATH).map((name) => (
+                <li>
+                  <MenuItem
+                    key={name}
+                    style={{ borderRadius: '0px' }}
+                  >
+                    <Link
+                      underline="hover"
+                      sx={{
+                        color: theme.palette.primary.contrastText,
+                      }}
+                      href={SECTION_TO_PATH[name]}
+                    >
+                      <Typography variant="labelLarge">
+                        {name}
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                </li>
+              ))}
+            </MobileMenu>
+          </Box>}
       </AppBar>
-      {/* mobile slide-out menu */}
-      {smallScreen &&
-        <Box sx={{ position: 'relative', zIndex: -1 }}>
-          <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-            {Object.keys(SECTION_TO_PATH).map((name) => (
-              <MenuItem
-                key={name}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                  }}
-                  href={SECTION_TO_PATH[name]}
-                >
-                  <Typography variant="labelLarge">
-                    {name}
-                  </Typography>
-                </Link>
-              </MenuItem>
-            ))}
-          </MobileMenu>
-        </Box>}
     </Box>
   )
 }
