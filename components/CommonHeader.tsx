@@ -30,10 +30,10 @@ const SECTION_TO_PATH = {
 const PATH_TO_SECTION = {
   '/about': 'About',
   '/projects': 'Projects',
-  '/project_individual': 'Projects',
+  '/project': 'Projects',
   '/partners': 'Partners',
   '/volunteers': 'Volunteer',
-  '/volunteer_role': 'Volunteer',
+  '/volunteer': 'Volunteer',
   '/events': 'Events',
   '/event': 'Events'
 }
