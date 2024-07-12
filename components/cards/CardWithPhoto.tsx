@@ -4,12 +4,13 @@ import CardMedia from '@mui/material/CardMedia'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { Box } from '@mui/material'
+
 type CardWithPhotoProps = {
   title: string
   description: string
   image: string
   imageWidth?: number
+  alt?: string
 }
 
 const CardWithPhoto = ({
@@ -17,6 +18,7 @@ const CardWithPhoto = ({
   description,
   image,
   imageWidth = 196,
+  alt = ""
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
@@ -35,7 +37,9 @@ const CardWithPhoto = ({
             minWidth: imageWidth,
             aspectRatio: '1/1',
           }}
+          component="img"
           image={image}
+          alt={alt}
         />
       )}
       <CardContent

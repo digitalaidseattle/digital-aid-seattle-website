@@ -38,6 +38,7 @@ const CardProject = ({ project }: CardProjectProps) => {
         sx={{
           height: '100%',
         }}
+        aria-label={`navigate to project page for ${project.title}`}
       >
         <CardContent
           sx={{
@@ -52,6 +53,7 @@ const CardProject = ({ project }: CardProjectProps) => {
             <CardMedia
               component='img'
               image={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+              alt={project.title + " logo"}
               sx={{
                 objectFit: 'contain',
                 width: { md: '7rem', lg: '100%' },
@@ -98,7 +100,7 @@ const CardProject = ({ project }: CardProjectProps) => {
               WebkitLineClamp: '4',
               WebkitBoxOrient: 'vertical'
             }}
-            variant='bodyMedium' >{project.description}</Typography>
+            variant='bodyMedium'>{project.description}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

@@ -205,7 +205,7 @@ const FilterableRoles = ({ roles, showLink }) => {
 
   return (
     <>
-      <Stack direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Stack aria-label="filter openings by skill area" direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
         {categories.map((category) => <Chip key={category} label={category} variant={activeFilters.includes(category) ? "filled" : "outlined"} icon={activeFilters.includes(category) && <Check />} onClick={() => filterRolesByCategory(category)} />)}
       </Stack>
       <RoleContainer>
@@ -249,8 +249,8 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
-        {showFilters
-          ? <FilterableRoles roles={roles} showLink={showLink} />
+        {showFilters ? 
+          <FilterableRoles roles={roles} showLink={showLink} /> 
           : <RolesOnly roles={roles} showLink={showLink} />
         }
         {children}

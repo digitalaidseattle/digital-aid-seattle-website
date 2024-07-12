@@ -15,10 +15,15 @@ import { ReactNode } from 'react'
 
 type HeaderWithImageProps = {
   imageSrc: string,
+  imageAlt?: string,
   children: ReactNode // takes the JSX for content that is put in the green section
 }
 
-export const HeaderWithImage = (props: HeaderWithImageProps) => {
+export const HeaderWithImage = ({
+  imageSrc,
+  imageAlt = "",
+  children
+}: HeaderWithImageProps) => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -42,7 +47,7 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
             color: theme.palette.primary.contrastText
           }}
         >
-          {props.children}
+          {children}
           <Box sx={{
             width: '75%',
             margin: 'auto',
@@ -57,7 +62,8 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
             overflow: 'hidden'
           }}>
             <img
-              src={props.imageSrc}
+              src={imageSrc}
+              alt={imageAlt}
               style={{ width: '100%' }}
             />
           </Box>
@@ -88,7 +94,7 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
             paddingY: '1rem',
             paddingX: { md: '2rem', lg: 0 },
           }}>
-            {props.children}
+            {children}
             <Box
               sx={{
                 width: { md: '16rem', lg: '20rem' },
@@ -108,7 +114,8 @@ export const HeaderWithImage = (props: HeaderWithImageProps) => {
               }}
             >
               <img
-                src={props.imageSrc}
+                src={imageSrc}
+                alt={imageAlt}
                 style={{
                   width: '100%',
                 }}

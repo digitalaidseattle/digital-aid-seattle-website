@@ -50,6 +50,16 @@ const CommonHeader = () => {
     return name === PATH_TO_SECTION[router.route];
   }
 
+  const LogoBox = () => {
+    return (
+      <Box>
+        <Link href="/" title="Go back to home" aria-label="Go back to home">
+          <img src={OSLogo.src} width="120px" alt="Digital Aid Seattle Logo" />
+        </Link>
+      </Box>
+    )
+  }
+
   return (
     // Containing Box is given AppBar's z-index; ensures it always stays on top.
     // z-index taken from docs: https://mui.com/material-ui/customization/z-index/
@@ -75,25 +85,14 @@ const CommonHeader = () => {
             }}
           >
             {/* Hamburger menu when the screen is small. */}
-            {/* LOGO */}
-            <Link href="/">
-              <img
-                src={OSLogo.src}
-                style={{
-                  width: '120px',
-                }}
-                alt="Digital Aid Seattle Home"
-              />
-            </Link>
+            <LogoBox/>
             <IconButton
               size="large"
-              aria-label="page-info"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              aria-hidden="true"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
-              {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
+              {showMobileMenu ? <CloseIcon/> : <MenuIcon/>}
             </IconButton>
           </Box>
           {/* Menu items that are shown on desktop */}
@@ -107,70 +106,62 @@ const CommonHeader = () => {
               padding: '1.25rem 2.5rem !important',
             }}
           >
-            {/* LOGO */}
-            <Link href="/">
-              <img
-                src={OSLogo.src}
-                style={{
-                  width: '120px',
-                }}
-                alt="Digital Aid Seattle Home"
-              />
-            </Link>
+            <LogoBox/>
             <nav>
               <ul>
                 {Object.keys(SECTION_TO_PATH).map((name) => (
-                  <Button
+                  <Link
                     key={name}
-                    variant="contained"
-                    color={isCurrent(name)
-                      ? 'success'
-                      : 'primary'}
-                    disableRipple={true}
+                    sx={{
+                      color: theme.palette.primary.contrastText,
+                      textUnderlineOffset: '0.5rem',
+                      textDecoration: isCurrent(name)
+                        ? 'underline'
+                        : 'none'
+                    }}
+                    href={SECTION_TO_PATH[name]}
+                    tabIndex={-1}
                   >
-                    <Link
-                      sx={{
-                        color: theme.palette.primary.contrastText,
-                        textUnderlineOffset: '0.5rem',
-                        textDecoration: isCurrent(name)
-                          ? 'underline'
-                          : 'none'
-                      }}
-                      href={SECTION_TO_PATH[name]}
+                    <Button
+                      variant="contained"
+                      color={isCurrent(name)
+                        ? 'success'
+                        : 'primary'}
+                      disableRipple={true}
                     >
                       {name}
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 ))}
               </ul>
             </nav>
           </Container>
         </Toolbar>
-      </AppBar>
-      {/* mobile slide-out menu */}
-      {smallScreen &&
-        <Box sx={{ position: 'relative', zIndex: -1 }}>
-          <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-            {Object.keys(SECTION_TO_PATH).map((name) => (
-              <MenuItem
-                key={name}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                  }}
-                  href={SECTION_TO_PATH[name]}
+        {/* mobile slide-out menu */}
+        {smallScreen &&
+          <Box sx={{ position: 'relative', zIndex: -1 }}>
+            <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
+              {Object.keys(SECTION_TO_PATH).map((name) => (
+                <MenuItem
+                  key={name}
+                  style={{ borderRadius: '0px' }}
                 >
-                  <Typography variant="labelLarge">
-                    {name}
-                  </Typography>
-                </Link>
-              </MenuItem>
-            ))}
-          </MobileMenu>
-        </Box>}
+                  <Link
+                    underline="hover"
+                    sx={{
+                      color: theme.palette.primary.contrastText,
+                    }}
+                    href={SECTION_TO_PATH[name]}
+                  >
+                    <Typography variant="labelLarge">
+                      {name}
+                    </Typography>
+                  </Link>
+                </MenuItem>
+              ))}
+            </MobileMenu>
+          </Box>}
+      </AppBar>
     </Box>
   )
 }
