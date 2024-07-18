@@ -13,41 +13,122 @@ import Link from '@mui/material/Link'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
 import OSLogo from '../assets/darkThemeLogo.svg'
 import MobileMenu from './MobileMenu'
+import { useFeature } from 'pages/api/FeatureService'
 
-const SECTION_TO_PATH = {
-  About: '/about',
-  Projects: '/projects',
-  Partners: '/partners',
-  Volunteer: '/volunteers',
-  Events: '/events',
-}
 
-const PATH_TO_SECTION = {
-  '/about': 'About',
-  '/projects': 'Projects',
-  '/project': 'Projects',
-  '/partners': 'Partners',
-  '/volunteers': 'Volunteer',
-  '/volunteer': 'Volunteer',
-  '/events': 'Events',
-  '/event': 'Events'
-}
-
+const DEFAULT_MENU_ITEMS = [
+  { label: 'About', path: '/about', style: 'primary', pages: ['about'] },
+  { label: 'Projects', path: '/projects', style: 'primary', pages: ['projects', 'project'] },
+  { label: 'Partners', path: '/partners', style: 'primary', pages: ['partners'] },
+  { label: 'Volunteer', path: '/volunteers', style: 'primary', pages: ['volunteers', 'volunteer'] },
+  { label: 'Events', path: '/events', style: 'primary', pages: ['events', 'event'] },
+]
 
 const CommonHeader = () => {
   // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
+  const { data: supportUs } = useFeature('support-us')
+  const [menuItems, setMenuItems] = useState<any[]>([]);
+
+  useEffect(() => {
+    const items = DEFAULT_MENU_ITEMS.slice()
+    if (supportUs) {
+      items.push({ label: 'Support us', path: '/support', style: 'secondary', pages: ['support'] })
+    }
+    setMenuItems(items)
+  }, [supportUs])
 
   const router = useRouter()
 
-  const isCurrent = (name: string) => {
-    return name === PATH_TO_SECTION[router.route];
+  const isCurrent = (menuItem: any) => {
+    const paths = router.route.split('/')
+    return menuItem.pages.includes(paths[1]);
+  }
+
+  const desktopMenuItem = (menuItem: any) => {
+
+    // Couldn't find highlight color for secondary
+    const buttonColor = ('primary' === menuItem.style)
+      ? isCurrent(menuItem)
+        ? 'success'
+        : 'primary'
+      : isCurrent(menuItem)
+        ? 'secondary'
+        : 'secondary';
+
+    const linkColor = ('primary' === menuItem.style)
+      ? theme.palette.primary.contrastText
+      : theme.palette.secondary.contrastText;
+
+    return (<Button
+      key={menuItem.path}
+      variant="contained"
+      color={buttonColor}
+      disableRipple={true}>
+      <Link
+        sx={{
+          color: linkColor,
+          textUnderlineOffset: '0.5rem',
+          textDecoration: isCurrent(menuItem)
+            ? 'underline'
+            : 'none'
+        }}
+        href={menuItem.path}
+      >
+        {menuItem.label}
+      </Link>
+    </Button>)
+  }
+
+  const mobilePrimaryMenuItem = (menuItem: any) => {
+    return (<MenuItem
+      key={menuItem.path}
+      style={{ borderRadius: '0px' }}
+    >
+      <Link
+        underline="hover"
+        sx={{
+          color: theme.palette.primary.contrastText,
+        }}
+        href={menuItem.path}
+      >
+        <Typography variant="labelLarge">
+          {menuItem.label}
+        </Typography>
+      </Link>
+    </MenuItem>)
+  }
+  const mobileSecondaryMenuItem = (menuItem: any) => {
+    const buttonColor = isCurrent(menuItem)
+      ? 'secondary'
+      : 'secondary';
+    return (
+      <MenuItem
+        key={menuItem.path}
+        style={{ borderRadius: '0px' }}
+      >
+        <Button
+          key={menuItem.path}
+          variant="contained"
+          color={buttonColor}
+          disableRipple={true}>
+          <Link
+            sx={{
+              color: theme.palette.secondary.contrastText,
+              textDecoration: 'none'
+            }}
+            href={menuItem.path}
+          >
+            {menuItem.label}
+          </Link>
+        </Button>
+      </MenuItem>)
   }
 
   return (
@@ -119,29 +200,7 @@ const CommonHeader = () => {
             </Link>
             <nav>
               <ul>
-                {Object.keys(SECTION_TO_PATH).map((name) => (
-                  <Button
-                    key={name}
-                    variant="contained"
-                    color={isCurrent(name)
-                      ? 'success'
-                      : 'primary'}
-                    disableRipple={true}
-                  >
-                    <Link
-                      sx={{
-                        color: theme.palette.primary.contrastText,
-                        textUnderlineOffset: '0.5rem',
-                        textDecoration: isCurrent(name)
-                          ? 'underline'
-                          : 'none'
-                      }}
-                      href={SECTION_TO_PATH[name]}
-                    >
-                      {name}
-                    </Link>
-                  </Button>
-                ))}
+                {menuItems.map((section) => desktopMenuItem(section))}
               </ul>
             </nav>
           </Container>
@@ -151,23 +210,10 @@ const CommonHeader = () => {
       {smallScreen &&
         <Box sx={{ position: 'relative', zIndex: -1 }}>
           <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-            {Object.keys(SECTION_TO_PATH).map((name) => (
-              <MenuItem
-                key={name}
-                style={{ borderRadius: '0px' }}
-              >
-                <Link
-                  underline="hover"
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                  }}
-                  href={SECTION_TO_PATH[name]}
-                >
-                  <Typography variant="labelLarge">
-                    {name}
-                  </Typography>
-                </Link>
-              </MenuItem>
+            {menuItems.map((section) => (
+              (section.style === 'primary')
+                ? mobilePrimaryMenuItem(section)
+                : mobileSecondaryMenuItem(section)
             ))}
           </MobileMenu>
         </Box>}
