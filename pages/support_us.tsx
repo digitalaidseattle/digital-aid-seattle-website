@@ -3,9 +3,9 @@
  */
 import { Typography, useTheme } from '@mui/material'
 import { withBasicLayout } from 'components/layouts'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useFeature } from './api/FeatureService'
-import { useRouter } from 'next/router'
 
 const SupportUsPage = () => {
   const theme = useTheme()
@@ -17,7 +17,7 @@ const SupportUsPage = () => {
       console.error(`Support Us feature not implemented.`);
       router.push('/404')
     }
-  }, [supportUs])
+  }, [supportUs, router])
 
   return (
     <>
