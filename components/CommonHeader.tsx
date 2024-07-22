@@ -131,6 +131,16 @@ const CommonHeader = () => {
       </MenuItem>)
   }
 
+  const LogoBox = () => {
+    return (
+      <Box>
+        <Link href="/" title="Go back to home" aria-label="Go back to home">
+          <img src={OSLogo.src} width="120px" alt="Digital Aid Seattle Logo" />
+        </Link>
+      </Box>
+    )
+  }
+
   return (
     // Containing Box is given AppBar's z-index; ensures it always stays on top.
     // z-index taken from docs: https://mui.com/material-ui/customization/z-index/
@@ -156,16 +166,7 @@ const CommonHeader = () => {
             }}
           >
             {/* Hamburger menu when the screen is small. */}
-            {/* LOGO */}
-            <Link href="/">
-              <img
-                src={OSLogo.src}
-                style={{
-                  width: '120px',
-                }}
-                alt="Digital Aid Seattle Home"
-              />
-            </Link>
+            <LogoBox />
             <IconButton
               size="large"
               aria-label="page-info"
@@ -188,16 +189,7 @@ const CommonHeader = () => {
               padding: '1.25rem 2.5rem !important',
             }}
           >
-            {/* LOGO */}
-            <Link href="/">
-              <img
-                src={OSLogo.src}
-                style={{
-                  width: '120px',
-                }}
-                alt="Digital Aid Seattle Home"
-              />
-            </Link>
+            <LogoBox />
             <nav>
               <ul>
                 {menuItems.map((section) => desktopMenuItem(section))}

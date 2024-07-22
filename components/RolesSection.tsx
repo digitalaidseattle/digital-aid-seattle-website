@@ -92,6 +92,7 @@ type RolesSectionProps = {
 
 const getRoleUrl = (roleKey: string) => {
   return `/volunteer/${roleKey}`
+  return `/volunteer/${roleKey}`
 }
 
 const RoleListing = ({

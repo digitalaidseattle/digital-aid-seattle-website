@@ -145,7 +145,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{ProjectLabels.project_status}</Typography>
+                <Typography variant="labelLarge" >{ProjectLabels.project_status}</Typography>
                 <StateBadge state={project.status} />
               </Stack>
             </Stack>
@@ -167,7 +167,9 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     return (
       <>
         {/* green section */}
-        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+        <HeaderWithImage
+          imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
+          imageAlt={project.title + " logo"}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
             sx={{
@@ -345,6 +347,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
               title={person.name}
               description={person.role}
               image={url}
+              alt={`headshot of ${person.name}`}
             />
           })}
         </Box>
