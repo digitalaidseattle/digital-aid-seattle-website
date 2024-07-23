@@ -5,7 +5,7 @@
 /* eslint-disable @next/next/no-img-element */
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box, Button, Typography, useMediaQuery } from '@mui/material'
+import { Box, Button, List, Typography, useMediaQuery } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
@@ -66,11 +66,7 @@ const CommonHeader = () => {
       ? theme.palette.primary.contrastText
       : theme.palette.secondary.contrastText;
 
-    return (<Button
-      key={menuItem.path}
-      variant="contained"
-      color={buttonColor}
-      disableRipple={true}>
+    return (
       <Link
         sx={{
           color: linkColor,
@@ -81,13 +77,19 @@ const CommonHeader = () => {
         }}
         href={menuItem.path}
       >
-        {menuItem.label}
-      </Link>
-    </Button>)
+        <Button
+          key={menuItem.path}
+          variant="contained"
+          color={buttonColor}
+          disableRipple={true}>
+          {menuItem.label}
+        </Button>
+      </Link>)
   }
 
   const mobilePrimaryMenuItem = (menuItem: any) => {
     return (<MenuItem
+      aria-hidden="true"
       key={menuItem.path}
       style={{ borderRadius: '0px' }}
     >
@@ -169,9 +171,6 @@ const CommonHeader = () => {
             <LogoBox />
             <IconButton
               size="large"
-              aria-label="page-info"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
@@ -191,9 +190,9 @@ const CommonHeader = () => {
           >
             <LogoBox />
             <nav>
-              <ul>
+              <List sx={{ display: 'flex', gap: '0.5rem' }}>
                 {menuItems.map((section) => desktopMenuItem(section))}
-              </ul>
+              </List>
             </nav>
           </Container>
         </Toolbar>
