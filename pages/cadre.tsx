@@ -36,7 +36,7 @@ const TheCadrePage = () => {
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
       sanityProjectsService.getOne('the-cadre'),
-      dasProjectsService.getPeople('ongoing')
+      dasProjectsService.getPeople('Cadre')
     ])
       .then(resps => {
         setVolunteerRoles(resps[0]);
