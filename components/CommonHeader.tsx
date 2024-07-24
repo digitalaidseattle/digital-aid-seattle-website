@@ -39,7 +39,7 @@ const CommonHeader = () => {
   useEffect(() => {
     const items = DEFAULT_MENU_ITEMS.slice()
     if (supportUs) {
-      items.push({ label: 'Support us', path: '/support', style: 'secondary', pages: ['support'] })
+      items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
     }
     setMenuItems(items)
   }, [supportUs])
