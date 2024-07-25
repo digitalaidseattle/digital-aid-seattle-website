@@ -36,7 +36,7 @@ const TheCadrePage = () => {
     Promise.all([
       dasVolunteerRoleService.getAllActiveRoles(),
       sanityProjectsService.getOne('the-cadre'),
-      dasProjectsService.getPeople('ongoing')
+      dasProjectsService.getPeople('Cadre')
     ])
       .then(resps => {
         setVolunteerRoles(resps[0]);
@@ -61,7 +61,7 @@ const TheCadrePage = () => {
           <ProjectBodyTextSection title={ProjectLabels.solution} texts={project.solution as unknown as string[]} />
           <ProjectBodyTextSection title={ProjectLabels.impact} texts={project.impact as unknown as string[]} />
           <ProjectTeamSection title={ProjectLabels.current_team} members={members} />
-          <RolesSection title={ProjectLabels.roles_needed} roles={volunteerRoles} />
+          <RolesSection showLink={true} title={ProjectLabels.roles_needed} roles={volunteerRoles} />
           <ProjectContactUsSection />
         </Stack>
       </SectionContainer>
