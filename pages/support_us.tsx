@@ -2,7 +2,7 @@
  * @2024 Digital Aid Seattle
  */
 import { Typography, useTheme } from '@mui/material'
-import { withBasicLayout } from 'components/layouts'
+import { BlockComponent, withBasicLayout } from 'components/layouts'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useFeature } from './api/FeatureService'
@@ -21,9 +21,11 @@ const SupportUsPage = () => {
 
   return (
     <>
-      <Typography sx={{ color: theme.palette.primary.main }}>
-        This is where we ask people to give us money and free stuff :D
-      </Typography>
+      <BlockComponent block={true}>
+        <Typography sx={{ color: theme.palette.primary.main }}>
+          Support Us Page.
+        </Typography>
+      </BlockComponent>
     </>
   )
 }
