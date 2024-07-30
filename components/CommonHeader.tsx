@@ -162,7 +162,7 @@ const CommonHeader = () => {
             </MobileMenu>
           </Box>}
         {/* dark overlay */}
-        {showMobileMenu &&
+        {showMobileMenu && smallScreen &&
           <Box
             sx={{
               width: '100%',
