@@ -85,14 +85,14 @@ const CommonHeader = () => {
             }}
           >
             {/* Hamburger menu when the screen is small. */}
-            <LogoBox/>
+            <LogoBox />
             <IconButton
               size="large"
               aria-hidden="true"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               sx={{ color: theme.palette.primary.contrastText }}
             >
-              {showMobileMenu ? <CloseIcon/> : <MenuIcon/>}
+              {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
           </Box>
           {/* Menu items that are shown on desktop */}
@@ -106,7 +106,7 @@ const CommonHeader = () => {
               padding: '1.25rem 2.5rem !important',
             }}
           >
-            <LogoBox/>
+            <LogoBox />
             <nav>
               <ul>
                 {Object.keys(SECTION_TO_PATH).map((name) => (
@@ -161,6 +161,17 @@ const CommonHeader = () => {
               ))}
             </MobileMenu>
           </Box>}
+        {/* dark overlay */}
+        {showMobileMenu &&
+          <Box
+            sx={{
+              width: '100%',
+              height: '100vh',
+              background: 'rgba(0,0,0,0.6)',
+              position: 'absolute',
+              zIndex: '-2'
+            }}
+          ></Box>}
       </AppBar>
     </Box>
   )
