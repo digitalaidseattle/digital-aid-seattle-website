@@ -59,6 +59,23 @@ type DASProject = {
   ventureCode: string
 }
 
+type DASQandA = {
+  _id: string
+  _createdAt: Date
+  question: string
+  answer: string
+}
+
+
+type DASFaq = {
+  _id: string
+  _createdAt: Date
+  name: string
+  title: string
+  description: string
+  qandas: DASQandA[]
+}
+
 type DASFeature = {
   _id: string
   _createdAt: Date
