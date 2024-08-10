@@ -33,6 +33,13 @@ const FaqPage = () => {
   const { setLoading } = useContext(LoadingContext)
   const theme = useTheme()
 
+  const [expandedQuestion, setExpandedQuestion] = useState<number | boolean>(false);
+
+  const handleExpandedQuestionChange =
+  (questionId: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+    setExpandedQuestion(newExpanded ? questionId : false)
+  }
+
   useEffect(() => {
     setLoading(true)
     faqService
@@ -122,18 +129,35 @@ const FaqPage = () => {
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
-          <>
+          <Stack sx={{ gap: '2rem' }}>
             <Typography variant="headlineLarge">{section.title}</Typography>
+            <Box sx={{ display: 'block' }}>
             {section.qandas &&
-              section.qandas.map((item) => (
-                <>
-                  <Typography variant="headlineMedium">
-                    {item.question}
-                  </Typography>
-                  <Typography variant="bodyLarge">{item.answer}</Typography>
-                </>
+              section.qandas.map((item, index) => (
+                <Accordion
+                  key={index}
+                  expanded={expandedQuestion === index}
+                  onChange={handleExpandedQuestionChange(index)}>
+                  <AccordionSummary
+                    expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+                    id={`question-${index}-header`}
+                    sx={{
+                      paddingLeft: '0px',
+                      paddingRight: '0px',
+                      paddingTop: '1rem',
+                      paddingBottom: '1rem',
+                    }}>
+                    <Typography variant="headlineMedium">
+                      {item.question}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography variant="bodyLarge">{item.answer}</Typography>
+                  </AccordionDetails>
+                </Accordion>
               ))}
-          </>
+            </Box>
+          </Stack>
         ))}
       </FaqSection>
     )
