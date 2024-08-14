@@ -123,7 +123,13 @@ const FaqPage = () => {
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
           <Stack sx={{ gap: '2rem' }} key={section._id}>
-            <Typography variant="headlineLarge" id={section.name}>{section.title}</Typography>
+            <Typography 
+              variant="headlineLarge" 
+              id={section.name}
+              // styles are for offsetting the sticky header when jumped to from anchor link
+              sx={{paddingTop: '6rem', marginTop: '-6rem'}}>
+                {section.title}
+            </Typography>
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
               section.qandas.map((item, index) => (
