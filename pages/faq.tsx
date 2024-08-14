@@ -109,6 +109,7 @@ const FaqPage = () => {
         </Typography>
         <CardRowContainer>
           {faqSections.map((section) => (
+            <a href={`#${section.name}`}>
             <CardOne
               title={section.title}
               description={section.description || ''}
@@ -118,7 +119,7 @@ const FaqPage = () => {
                   style={{ color: designColor.white, fontSize: '40px' }}
                 />
               }
-            />
+            /></a>
           ))}
         </CardRowContainer>
       </FaqSection>
@@ -130,7 +131,7 @@ const FaqPage = () => {
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
           <Stack sx={{ gap: '2rem' }}>
-            <Typography variant="headlineLarge">{section.title}</Typography>
+            <Typography variant="headlineLarge" id={section.name}>{section.title}</Typography>
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
               section.qandas.map((item, index) => (
