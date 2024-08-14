@@ -31,14 +31,6 @@ import { useState, useEffect, useContext } from 'react'
 const FaqPage = () => {
   const [faqSections, setFaqSections] = useState<DASFaq[]>([])
   const { setLoading } = useContext(LoadingContext)
-  const theme = useTheme()
-
-  const [expandedQuestion, setExpandedQuestion] = useState<number | boolean>(false);
-
-  const handleExpandedQuestionChange =
-  (questionId: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-    setExpandedQuestion(newExpanded ? questionId : false)
-  }
 
   useEffect(() => {
     setLoading(true)
@@ -135,13 +127,11 @@ const FaqPage = () => {
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
               section.qandas.map((item, index) => (
-                <Accordion
-                  key={index}
-                  expanded={expandedQuestion === index}
-                  onChange={handleExpandedQuestionChange(index)}>
+                <Accordion key={index}>
                   <AccordionSummary
                     expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                     id={`question-${index}-header`}
+                    aria-controls={`question-${index}-content`}
                     sx={{
                       paddingLeft: '0px',
                       paddingRight: '0px',
