@@ -41,7 +41,7 @@ const FaqPage = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -95,13 +95,13 @@ const FaqPage = () => {
         </Typography>
         <Typography variant="bodyLarge">
           Find answers to common questions quickly and efficiently. Whether
-          you're considering volunteering with Digital Aid Seattle (DAS) or
+          you&apos;re considering volunteering with Digital Aid Seattle (DAS) or
           looking for more information about our organization and processes,
           this section provides the essential details you need.
         </Typography>
         <CardRowContainer>
           {faqSections.map((section) => (
-            <a href={`#${section.name}`}>
+            <a href={`#${section.name}`} key={section._id}>
             <CardOne
               title={section.title}
               description={section.description || ''}
@@ -122,7 +122,7 @@ const FaqPage = () => {
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
-          <Stack sx={{ gap: '2rem' }}>
+          <Stack sx={{ gap: '2rem' }} key={section._id}>
             <Typography variant="headlineLarge" id={section.name}>{section.title}</Typography>
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
