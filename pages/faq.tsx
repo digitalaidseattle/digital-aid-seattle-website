@@ -144,7 +144,7 @@ const FaqPage = () => {
                       paddingTop: '1rem',
                       paddingBottom: '1rem',
                     }}>
-                    <Typography variant="headlineMedium">
+                    <Typography variant="titleLarge">
                       {item.question}
                     </Typography>
                   </AccordionSummary>
