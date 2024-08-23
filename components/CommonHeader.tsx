@@ -200,37 +200,13 @@ const CommonHeader = () => {
         {smallScreen &&
           <Box sx={{ position: 'relative', zIndex: -1 }}>
             <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-              {Object.keys(SECTION_TO_PATH).map((name) => (
-                <MenuItem
-                  key={name}
-                  style={{ borderRadius: '0px' }}
-                >
-                  <Link
-                    underline="hover"
-                    sx={{
-                      color: theme.palette.primary.contrastText,
-                    }}
-                    href={SECTION_TO_PATH[name]}
-                  >
-                    <Typography variant="labelLarge">
-                      {name}
-                    </Typography>
-                  </Link>
-                </MenuItem>
+              {menuItems.map((section) => (
+                (section.style === 'primary')
+                  ? mobilePrimaryMenuItem(section)
+                  : mobileSecondaryMenuItem(section)
               ))}
             </MobileMenu>
           </Box>}
-        {/* dark overlay */}
-        {showMobileMenu && smallScreen &&
-          <Box
-            sx={{
-              width: '100%',
-              height: '100vh',
-              background: 'rgba(0,0,0,0.6)',
-              position: 'absolute',
-              zIndex: '-2'
-            }}
-          ></Box>}
       </AppBar>
     </Box>
   )
