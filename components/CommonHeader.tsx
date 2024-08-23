@@ -196,18 +196,18 @@ const CommonHeader = () => {
             </nav>
           </Container>
         </Toolbar>
-        {/* mobile slide-out menu */}
-        {smallScreen &&
-          <Box sx={{ position: 'relative', zIndex: -1 }}>
-            <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-              {menuItems.map((section) => (
-                (section.style === 'primary')
-                  ? mobilePrimaryMenuItem(section)
-                  : mobileSecondaryMenuItem(section)
-              ))}
-            </MobileMenu>
-          </Box>}
       </AppBar>
+      {/* mobile slide-out menu */}
+      {smallScreen &&
+        <Box sx={{ position: 'relative', zIndex: -1 }}>
+          <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
+            {menuItems.map((section) => (
+              (section.style === 'primary')
+                ? mobilePrimaryMenuItem(section)
+                : mobileSecondaryMenuItem(section)
+            ))}
+          </MobileMenu>
+        </Box>}
     </Box>
   )
 }
