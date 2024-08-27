@@ -1,7 +1,7 @@
 /*
  * @2024 Digital Aid Seattle
  */
-import { Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Button, Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -15,6 +15,9 @@ import { useFeature } from './api/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
 
 const LABELS = {
+  hero_title: 'Support us',
+  donate_title: 'Donate now',
+  donate_button: 'Download the check donation form',
   impact_title: 'What people say about us'
 }
 
@@ -41,6 +44,17 @@ const QUOTES = [
     role: 'Partner'
   }
 ]
+
+const COPY = {
+  hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.',
+  donate_instructions: 'We currently accept donations by mail. Please download and complete the check donation form. You can mail the form and your check to us at the following address:',
+}
+
+const ADDRESS = {
+  title: 'Digital Aid Seattle',
+  street: '107 Spring St',
+  statezip: 'Seattle, WA 98104'
+}
 
 const SupportUsSection = ({ backgroundColor, children }) => (
   <SectionContainer backgroundColor={backgroundColor}>
@@ -114,7 +128,7 @@ const SupportUsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            Support us
+            {LABELS.hero_title}
           </Typography>
           <Typography
             variant="bodyLarge"
@@ -122,12 +136,29 @@ const SupportUsPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.
+            {COPY.hero_description}
           </Typography>
         </>
       </MastheadWithImage>
     )
   }
+
+  const DonateSection = ({ theme }) => (
+    <SupportUsSection backgroundColor={theme.palette.background.white}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.donate_title}
+      </Typography>
+     <Stack gap="2rem">
+     <Typography variant="bodyLarge" align="left">
+        {COPY.donate_instructions}
+      </Typography>
+      <Typography variant="bodyLarge" align="left">
+        {ADDRESS.title},<br/>{ADDRESS.street},<br/>{ADDRESS.statezip}
+      </Typography>
+      <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
+      </Stack> 
+    </SupportUsSection>
+  )
 
   return (
     <>
@@ -138,7 +169,7 @@ const SupportUsPage = () => {
           sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
           <SupportUsHeroSection />
-          {/* <DonateSection theme={theme} /> */}
+          <DonateSection theme={theme} />
           <WhatPeopleSaySection theme={theme} />
         </Container>
       </BlockComponent>
