@@ -1,7 +1,7 @@
 /*
  * @2024 Digital Aid Seattle
  */
-import { Container, Stack, Typography, useTheme } from '@mui/material'
+import { Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -9,8 +9,10 @@ import { BlockComponent, withBasicLayout } from 'components/layouts'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Placeholder from '../assets/placeholder-person.png'
+import SupportUsImage from '../assets/supportUs.png'
 
 import { useFeature } from './api/FeatureService'
+import MastheadWithImage from 'components/MastheadWithImage'
 
 const LABELS = {
   impact_title: 'What people say about us'
@@ -85,6 +87,48 @@ const SupportUsPage = () => {
     </SupportUsSection>
   )
 
+  const AboutUsSection = ({ backgroundColor, children }) => (
+  <SectionContainer backgroundColor={backgroundColor}>
+    <Stack
+      gap={{ xs: '64px', md: '80px' }}
+      sx={{
+        textAlign: 'center',
+      }}
+      maxWidth={'880px'}
+    >
+      {children}
+    </Stack>
+  </SectionContainer>
+)
+
+  const SupportUsHeroSection = () => {
+    const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+    return (
+      <MastheadWithImage
+        imageSrc={SupportUsImage.src}
+        imageText="Support Us page graphic"
+      >
+        <>
+          <Typography
+            variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+            component="h1"
+          >
+            Support us
+          </Typography>
+          <Typography
+            variant="bodyLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.
+          </Typography>
+        </>
+      </MastheadWithImage>
+    )
+  }
+
   return (
     <>
       <BlockComponent block={false}>
@@ -93,8 +137,8 @@ const SupportUsPage = () => {
           disableGutters
           sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
-          {/* <SupportUsHeroSection />
-          <DonateSection theme={theme} /> */}
+          <SupportUsHeroSection />
+          {/* <DonateSection theme={theme} /> */}
           <WhatPeopleSaySection theme={theme} />
         </Container>
       </BlockComponent>
