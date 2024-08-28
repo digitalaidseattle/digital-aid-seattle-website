@@ -68,6 +68,7 @@ const CommonHeader = () => {
 
     return (
       <Link
+        key={menuItem.path}
         sx={{
           color: linkColor,
           textUnderlineOffset: '0.5rem',
