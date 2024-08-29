@@ -23,7 +23,7 @@ import {
   HelpOutlineOutlined
 } from '@mui/icons-material';
 
-import AboutUsImage from '../assets/aboutUs.png'
+import FaqImage from '../assets/faq.png'
 
 import { withBasicLayout, LoadingContext } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
@@ -72,7 +72,7 @@ const FaqPage = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
     return (
       <MastheadWithImage
-        imageSrc={AboutUsImage.src}
+        imageSrc={FaqImage.src}
         imageText="About Us page graphic"
       >
         <>
@@ -81,15 +81,15 @@ const FaqPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            FAQ
+            Frequently Asked Questions
           </Typography>
           <Typography
-            variant="bodyLarge"
+            variant="headlineMedium"
             sx={{
               color: theme.palette.primary.contrastText,
             }}
           >
-            Find answers to all your questions
+            Discover many ways to get involved with Digital Aid Seattle
           </Typography>
         </>
       </MastheadWithImage>
