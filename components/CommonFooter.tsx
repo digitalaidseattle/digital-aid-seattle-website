@@ -94,6 +94,7 @@ const aboutBox = () => {
     <Box>
       <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
+      <LinkSubItem url="/faq" name="FAQ" />
     </Box>
   )
 }
