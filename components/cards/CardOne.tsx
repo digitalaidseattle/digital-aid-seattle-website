@@ -33,6 +33,7 @@ const CardOne = ({
   return (
     <Card
       sx={{
+        height: '100%',
         padding: { xs: '2rem', md: '1.5rem' },
         flex: '1',
         minWidth: { xs: '100%', sm: 'auto' },

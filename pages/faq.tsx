@@ -6,6 +6,7 @@ import {
   Button,
   Container,
   Grid,
+  Link,
   Stack,
   Typography,
   useMediaQuery,
@@ -130,8 +131,8 @@ const FaqPage = () => {
                   style={{ color: designColor.white, fontSize: '40px' }}
                 />
               }
-            /></a>
-          )}
+            />
+            </a>)}
           )}
         </CardRowContainer>
       </FaqSection>
