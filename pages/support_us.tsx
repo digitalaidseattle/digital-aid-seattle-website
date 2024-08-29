@@ -155,7 +155,7 @@ const SupportUsPage = () => {
         <Typography variant="bodyLarge" align="left">
           {ADDRESS.title},<br />{ADDRESS.street},<br />{ADDRESS.statezip}
         </Typography>
-        <a href="/document.pdf" target="_blank">
+        <a href="/donation-form.pdf" target="_blank">
           <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
         </a>
       </Stack>
