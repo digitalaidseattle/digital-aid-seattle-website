@@ -102,18 +102,18 @@ const SupportUsPage = () => {
   )
 
   const AboutUsSection = ({ backgroundColor, children }) => (
-  <SectionContainer backgroundColor={backgroundColor}>
-    <Stack
-      gap={{ xs: '64px', md: '80px' }}
-      sx={{
-        textAlign: 'center',
-      }}
-      maxWidth={'880px'}
-    >
-      {children}
-    </Stack>
-  </SectionContainer>
-)
+    <SectionContainer backgroundColor={backgroundColor}>
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+        }}
+        maxWidth={'880px'}
+      >
+        {children}
+      </Stack>
+    </SectionContainer>
+  )
 
   const SupportUsHeroSection = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -148,15 +148,17 @@ const SupportUsPage = () => {
       <Typography variant="headlineMedium" component="h2">
         {LABELS.donate_title}
       </Typography>
-     <Stack gap="2rem">
-     <Typography variant="bodyLarge" align="left">
-        {COPY.donate_instructions}
-      </Typography>
-      <Typography variant="bodyLarge" align="left">
-        {ADDRESS.title},<br/>{ADDRESS.street},<br/>{ADDRESS.statezip}
-      </Typography>
-      <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
-      </Stack> 
+      <Stack gap="2rem">
+        <Typography variant="bodyLarge" align="left">
+          {COPY.donate_instructions}
+        </Typography>
+        <Typography variant="bodyLarge" align="left">
+          {ADDRESS.title},<br />{ADDRESS.street},<br />{ADDRESS.statezip}
+        </Typography>
+        <a href="/document.pdf" target="_blank">
+          <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
+        </a>
+      </Stack>
     </SupportUsSection>
   )
 
