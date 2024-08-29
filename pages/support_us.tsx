@@ -134,11 +134,11 @@ const SupportUsPage = () => {
       <Typography variant="headlineMedium" component="h2">
         {LABELS.donate_title}
       </Typography>
-      <Stack gap="2rem">
-        <Typography variant="bodyLarge" align="left">
+      <Stack gap="2rem" textAlign="left">
+        <Typography variant="bodyLarge">
           {COPY.donate_instructions}
         </Typography>
-        <Typography variant="bodyLarge" align="left">
+        <Typography variant="bodyLarge">
           {ADDRESS.title},<br />{ADDRESS.street},<br />{ADDRESS.statezip}
         </Typography>
         <a href="/donation-form.pdf" target="_blank">
