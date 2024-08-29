@@ -101,7 +101,9 @@ const FaqPage = () => {
       'involvementOpportunities': HandshakeOutlined,
       'projectAndTeamStructure': SettingsOutlined,
       'onboardingProcess': FlightTakeoffOutlined,
-      'additionalQuestions': HelpOutlineOutlined
+      'additionalQuestions': HelpOutlineOutlined,
+      // a fallback icon
+      'default': HelpOutlineOutlined
     }
 
     return (
@@ -117,7 +119,7 @@ const FaqPage = () => {
         </Typography>
         <CardRowContainer>
           {faqSections.map((section) => { 
-            const MuiIcon = sectionIconMapping[section.name];
+            const MuiIcon = sectionIconMapping[section.name] || sectionIconMapping['default'];
             return (
             <a href={`#${section.name}`} key={section._id}>
             <CardOne
