@@ -12,7 +12,15 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { AddOutlined, VolunteerActivismOutlined } from '@mui/icons-material'
+import {
+  AddOutlined,
+  LanguageOutlined,
+  CalendarTodayOutlined,
+  HandshakeOutlined,
+  SettingsOutlined,
+  FlightTakeoffOutlined,
+  HelpOutlineOutlined
+} from '@mui/icons-material';
 
 import AboutUsImage from '../assets/aboutUs.png'
 
@@ -88,6 +96,16 @@ const FaqPage = () => {
   }
 
   const FaqCardSection = () => {
+    
+    const sectionIconMapping = {
+      'generalInfo': LanguageOutlined,
+      'volunteeringCommitment': CalendarTodayOutlined,
+      'involvementOpportunities': HandshakeOutlined,
+      'projectAndTeamStructure': SettingsOutlined,
+      'onboardingProcess': FlightTakeoffOutlined,
+      'additionalQuestions': HelpOutlineOutlined
+    }
+
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="center">
         <Typography variant="headlineLarge" component="h2">
@@ -100,19 +118,21 @@ const FaqPage = () => {
           this section provides the essential details you need.
         </Typography>
         <CardRowContainer>
-          {faqSections.map((section) => (
+          {faqSections.map((section) => { 
+            const MuiIcon = sectionIconMapping[section.name];
+            return (
             <a href={`#${section.name}`} key={section._id}>
             <CardOne
               title={section.title}
               description={section.description || ''}
               icon={
-                // placeholder icon
-                <VolunteerActivismOutlined
+                <MuiIcon
                   style={{ color: designColor.white, fontSize: '40px' }}
                 />
               }
             /></a>
-          ))}
+          )}
+          )}
         </CardRowContainer>
       </FaqSection>
     )
