@@ -101,20 +101,6 @@ const SupportUsPage = () => {
     </SupportUsSection>
   )
 
-  const AboutUsSection = ({ backgroundColor, children }) => (
-    <SectionContainer backgroundColor={backgroundColor}>
-      <Stack
-        gap={{ xs: '64px', md: '80px' }}
-        sx={{
-          textAlign: 'center',
-        }}
-        maxWidth={'880px'}
-      >
-        {children}
-      </Stack>
-    </SectionContainer>
-  )
-
   const SupportUsHeroSection = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
     return (
