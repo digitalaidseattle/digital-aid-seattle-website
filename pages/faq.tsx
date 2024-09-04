@@ -122,6 +122,7 @@ const FaqPage = () => {
             const MuiIcon = sectionIconMapping[section.name] || sectionIconMapping['default'];
             return (
             <CardOne
+              key={section._id}
               title={section.title}
               description={section.description || ''}
               cardHref={`#${section.name}`}
