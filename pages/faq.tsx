@@ -121,17 +121,16 @@ const FaqPage = () => {
           {faqSections.map((section) => { 
             const MuiIcon = sectionIconMapping[section.name] || sectionIconMapping['default'];
             return (
-            <a href={`#${section.name}`} key={section._id}>
             <CardOne
               title={section.title}
               description={section.description || ''}
+              cardHref={`#${section.name}`}
               icon={
                 <MuiIcon
                   style={{ color: designColor.white, fontSize: '40px' }}
                 />
               }
-            />
-            </a>)}
+            />)}
           )}
         </CardRowContainer>
       </FaqSection>
