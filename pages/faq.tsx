@@ -38,6 +38,13 @@ const FaqPage = () => {
   const [faqSections, setFaqSections] = useState<DASFaq[]>([])
   const { setLoading } = useContext(LoadingContext)
 
+  const [faqSectionExpanded, setFaqSectionExpanded] = useState<string | false>(false);
+
+  const handleFaqSectionChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setFaqSectionExpanded(newExpanded ? panel : false)
+    }
+
   useEffect(() => {
     setLoading(true)
     faqService
@@ -152,8 +159,12 @@ const FaqPage = () => {
             </Typography>
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
-              section.qandas.map((item, index) => (
-                <Accordion key={index}>
+              section.qandas.map((item, index) => {
+                return (
+                <Accordion 
+                  key={section.name + index}
+                  expanded={faqSectionExpanded === section.name + index}
+                  onChange={handleFaqSectionChange(section.name + index)}>
                   <AccordionSummary
                     expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
                     id={`question-${index}-header`}
@@ -172,7 +183,9 @@ const FaqPage = () => {
                     <Typography variant="bodyLarge">{item.answer}</Typography>
                   </AccordionDetails>
                 </Accordion>
-              ))}
+                )}
+              )
+            }
             </Box>
           </Stack>
         ))}
