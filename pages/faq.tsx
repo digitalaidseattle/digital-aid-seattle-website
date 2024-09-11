@@ -14,22 +14,29 @@ import {
   useTheme
 } from '@mui/material'
 
-import { AddOutlined, VolunteerActivismOutlined } from '@mui/icons-material'
+import {
+  AddOutlined,
+  LanguageOutlined,
+  CalendarTodayOutlined,
+  HandshakeOutlined,
+  SettingsOutlined,
+  FlightTakeoffOutlined,
+  HelpOutlineOutlined
+} from '@mui/icons-material';
 
-import AboutUsImage from '../assets/aboutUs.png'
+import FaqImage from '../assets/faq.png'
 
-import { withBasicLayout, LoadingContext } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-import MastheadWithImage from 'components/MastheadWithImage'
 import { designColor } from 'theme/theme'
 
 import { DASFaq } from 'types'
 import { faqService } from './api/FaqService'
 
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { useFeature } from './api/FeatureService'
 
