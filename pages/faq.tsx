@@ -14,12 +14,12 @@ import {
   useTheme
 } from '@mui/material'
 
-import { useRouter } from 'next/router'
-
 import { AddOutlined, VolunteerActivismOutlined } from '@mui/icons-material'
 
 import AboutUsImage from '../assets/aboutUs.png'
 
+import { withBasicLayout, LoadingContext } from 'components/layouts'
+import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -86,7 +86,7 @@ const FaqPage = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
     return (
       <MastheadWithImage
-        imageSrc={AboutUsImage.src}
+        imageSrc={FaqImage.src}
         imageText="About Us page graphic"
       >
         <>
@@ -95,15 +95,15 @@ const FaqPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            FAQ
+            Frequently Asked Questions
           </Typography>
           <Typography
-            variant="bodyLarge"
+            variant="headlineMedium"
             sx={{
               color: theme.palette.primary.contrastText,
             }}
           >
-            Find answers to all your questions
+            Discover many ways to get involved with Digital Aid Seattle
           </Typography>
         </>
       </MastheadWithImage>
@@ -111,6 +111,18 @@ const FaqPage = () => {
   }
 
   const FaqCardSection = () => {
+
+    const sectionIconMapping = {
+      'generalInfo': LanguageOutlined,
+      'volunteeringCommitment': CalendarTodayOutlined,
+      'involvementOpportunities': HandshakeOutlined,
+      'projectAndTeamStructure': SettingsOutlined,
+      'onboardingProcess': FlightTakeoffOutlined,
+      'additionalQuestions': HelpOutlineOutlined,
+      // a fallback icon
+      'default': HelpOutlineOutlined
+    }
+
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="center">
         <Typography variant="headlineLarge" component="h2">
@@ -123,19 +135,22 @@ const FaqPage = () => {
           this section provides the essential details you need.
         </Typography>
         <CardRowContainer>
-          {faqSections.map((section) => (
-            <a href={`#${section.name}`} key={section._id}>
+          {faqSections.map((section) => {
+            const MuiIcon = sectionIconMapping[section.name] || sectionIconMapping['default'];
+            return (
               <CardOne
+                key={section._id}
                 title={section.title}
                 description={section.description || ''}
+                cardHref={`#${section.name}`}
                 icon={
-                  // placeholder icon
-                  <VolunteerActivismOutlined
+                  <MuiIcon
                     style={{ color: designColor.white, fontSize: '40px' }}
                   />
                 }
-              /></a>
-          ))}
+              />)
+          }
+          )}
         </CardRowContainer>
       </FaqSection>
     )
@@ -146,7 +161,13 @@ const FaqPage = () => {
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
           <Stack sx={{ gap: '2rem' }} key={section._id}>
-            <Typography variant="headlineLarge" id={section.name}>{section.title}</Typography>
+            <Typography
+              variant="headlineLarge"
+              id={section.name}
+              // styles are for offsetting the sticky header when jumped to from anchor link
+              sx={{ paddingTop: '6rem', marginTop: '-6rem' }}>
+              {section.title}
+            </Typography>
             <Box sx={{ display: 'block' }}>
               {section.qandas &&
                 section.qandas.map((item, index) => (
@@ -161,7 +182,7 @@ const FaqPage = () => {
                         paddingTop: '1rem',
                         paddingBottom: '1rem',
                       }}>
-                      <Typography variant="headlineMedium">
+                      <Typography variant="titleLarge">
                         {item.question}
                       </Typography>
                     </AccordionSummary>
