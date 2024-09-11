@@ -90,14 +90,16 @@ const logoBox = () => {
 }
 
 const aboutBox = () => {
+  const { data: faq } = useFeature('faq')
   return (
     <Box>
       <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
-      <LinkSubItem url="/faq" name="FAQ" />
+      {faq && <LinkSubItem url="/faq" name="FAQ" />}
     </Box>
   )
 }
+
 const contactUsBox = () => {
   return (
     <Box>
