@@ -1,47 +1,70 @@
+/*
+* faq.tsx
+* @2024 Digital Aid Seattle
+*/
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
-  Button,
   Container,
-  Grid,
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from '@mui/material'
+
+import { useRouter } from 'next/router'
 
 import { AddOutlined, VolunteerActivismOutlined } from '@mui/icons-material'
 
 import AboutUsImage from '../assets/aboutUs.png'
 
-import { withBasicLayout, LoadingContext } from 'components/layouts'
-import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
+import MastheadWithImage from 'components/MastheadWithImage'
 import { designColor } from 'theme/theme'
 
-import { DASFaq, DASQandA } from 'types'
+import { DASFaq } from 'types'
 import { faqService } from './api/FaqService'
 
-import { useState, useEffect, useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useFeature } from './api/FeatureService'
 
 const FaqPage = () => {
-  const [faqSections, setFaqSections] = useState<DASFaq[]>([])
+  const faqFeature = useFeature('faq');
+  const router = useRouter();
+
   const { setLoading } = useContext(LoadingContext)
+  const [faqSections, setFaqSections] = useState<DASFaq[]>([]);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true)
-    faqService
-      .getAll()
-      .then((data) => setFaqSections(data))
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [setLoading])
+    if (faqFeature && faqFeature.status === 'fetched') {
+      if (faqFeature.data) {
+        refresh();
+      } else {
+        console.log(`FAQ feature not implemented.`);
+        router.push('/404')
+      }
+    }
+  }, [faqFeature, router])
+
+  const refresh = () => {
+    if (!initialized) {
+      setLoading(true)
+      faqService
+        .getAll()
+        .then((data) => {
+          setFaqSections(data)
+          setInitialized(true)
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setLoading(false))
+    }
+  }
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -102,16 +125,16 @@ const FaqPage = () => {
         <CardRowContainer>
           {faqSections.map((section) => (
             <a href={`#${section.name}`} key={section._id}>
-            <CardOne
-              title={section.title}
-              description={section.description || ''}
-              icon={
-                // placeholder icon
-                <VolunteerActivismOutlined
-                  style={{ color: designColor.white, fontSize: '40px' }}
-                />
-              }
-            /></a>
+              <CardOne
+                title={section.title}
+                description={section.description || ''}
+                icon={
+                  // placeholder icon
+                  <VolunteerActivismOutlined
+                    style={{ color: designColor.white, fontSize: '40px' }}
+                  />
+                }
+              /></a>
           ))}
         </CardRowContainer>
       </FaqSection>
@@ -125,28 +148,28 @@ const FaqPage = () => {
           <Stack sx={{ gap: '2rem' }} key={section._id}>
             <Typography variant="headlineLarge" id={section.name}>{section.title}</Typography>
             <Box sx={{ display: 'block' }}>
-            {section.qandas &&
-              section.qandas.map((item, index) => (
-                <Accordion key={index}>
-                  <AccordionSummary
-                    expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
-                    id={`question-${index}-header`}
-                    aria-controls={`question-${index}-content`}
-                    sx={{
-                      paddingLeft: '0px',
-                      paddingRight: '0px',
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem',
-                    }}>
-                    <Typography variant="headlineMedium">
-                      {item.question}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant="bodyLarge">{item.answer}</Typography>
-                  </AccordionDetails>
-                </Accordion>
-              ))}
+              {section.qandas &&
+                section.qandas.map((item, index) => (
+                  <Accordion key={index}>
+                    <AccordionSummary
+                      expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+                      id={`question-${index}-header`}
+                      aria-controls={`question-${index}-content`}
+                      sx={{
+                        paddingLeft: '0px',
+                        paddingRight: '0px',
+                        paddingTop: '1rem',
+                        paddingBottom: '1rem',
+                      }}>
+                      <Typography variant="headlineMedium">
+                        {item.question}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography variant="bodyLarge">{item.answer}</Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                ))}
             </Box>
           </Stack>
         ))}
@@ -154,15 +177,17 @@ const FaqPage = () => {
     )
   }
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
-      <FaqHeroSection />
-      <FaqCardSection />
-      <FaqQuestionSection />
-    </Container>
+    <BlockComponent block={!initialized}>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        <FaqHeroSection />
+        <FaqCardSection />
+        <FaqQuestionSection />
+      </Container>
+    </BlockComponent>
   )
 }
 
