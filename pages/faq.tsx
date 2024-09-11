@@ -145,6 +145,35 @@ const FaqPage = () => {
     )
   }
 
+  const FaqQuestion = (questionItem: DASQandA, sectionName, index) => {
+    return (
+      <Accordion 
+      key={sectionName+index}
+      expanded={faqSectionExpanded === sectionName+index}
+      onChange={handleFaqSectionChange(sectionName+index)}
+      >
+      
+      <AccordionSummary
+        expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+        id={`question-${index}-header`}
+        aria-controls={`question-${index}-content`}
+        sx={{
+          paddingLeft: '0px',
+          paddingRight: '0px',
+          paddingTop: '1rem',
+          paddingBottom: '1rem',
+        }}>
+        <Typography variant="titleLarge">
+          {questionItem.question}
+        </Typography>
+      </AccordionSummary>
+
+      <AccordionDetails>
+        <Typography variant="bodyLarge">{questionItem.answer}</Typography>
+      </AccordionDetails>
+    </Accordion>
+    )
+  } 
   const FaqQuestionSection = () => {
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
@@ -159,33 +188,7 @@ const FaqPage = () => {
             </Typography>
             <Box sx={{ display: 'block' }}>
             {section.qandas &&
-              section.qandas.map((item, index) => {
-                return (
-                <Accordion 
-                  key={section.name + index}
-                  expanded={faqSectionExpanded === section.name + index}
-                  onChange={handleFaqSectionChange(section.name + index)}>
-                  <AccordionSummary
-                    expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
-                    id={`question-${index}-header`}
-                    aria-controls={`question-${index}-content`}
-                    sx={{
-                      paddingLeft: '0px',
-                      paddingRight: '0px',
-                      paddingTop: '1rem',
-                      paddingBottom: '1rem',
-                    }}>
-                    <Typography variant="titleLarge">
-                      {item.question}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography variant="bodyLarge">{item.answer}</Typography>
-                  </AccordionDetails>
-                </Accordion>
-                )}
-              )
-            }
+              section.qandas.map((item, index) => FaqQuestion(item, section.name, index))}
             </Box>
           </Stack>
         ))}
