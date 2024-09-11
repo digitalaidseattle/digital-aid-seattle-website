@@ -89,7 +89,7 @@ const logoBox = () => {
   )
 }
 
-const aboutBox = () => {
+const AboutBox = () => {
   const { data: faq } = useFeature('faq')
   return (
     <Box>
@@ -225,7 +225,7 @@ const CommonFooterLargeScreen = () => (
           justifyContent: 'space-between',
         }}
       >
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
@@ -273,7 +273,7 @@ const CommonFooterMidScreen = () => (
       >
         {contactUsBox()}
         {workWithUsBox()}
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
@@ -306,7 +306,7 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>{workWithUsBox()}</GridItem>
 
-    <GridItem>{aboutBox()}</GridItem>
+    <GridItem><AboutBox /></GridItem>
 
     <GridItem>
       <Box display="flex" sx={{ gap: '1rem' }}>
