@@ -51,27 +51,23 @@ const FaqPage = () => {
   useEffect(() => {
     if (faqFeature && faqFeature.status === 'fetched') {
       if (faqFeature.data) {
-        refresh();
+        if (!initialized) {
+          setLoading(true)
+          faqService
+            .getAll()
+            .then((data) => {
+              setFaqSections(data)
+              setInitialized(true)
+            })
+            .catch((err) => console.error(err))
+            .finally(() => setLoading(false))
+        }
       } else {
         console.log(`FAQ feature not implemented.`);
         router.push('/404')
       }
     }
-  }, [faqFeature, router])
-
-  const refresh = () => {
-    if (!initialized) {
-      setLoading(true)
-      faqService
-        .getAll()
-        .then((data) => {
-          setFaqSections(data)
-          setInitialized(true)
-        })
-        .catch((err) => console.error(err))
-        .finally(() => setLoading(false))
-    }
-  }
+  }, [faqFeature, router, initialized, setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
