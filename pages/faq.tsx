@@ -33,7 +33,7 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 
-import { DASFaq } from 'types'
+import { DASFaq, DASQandA } from 'types'
 import { faqService } from './api/FaqService'
 
 import { useRouter } from 'next/router'
