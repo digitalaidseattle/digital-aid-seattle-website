@@ -1,7 +1,3 @@
-/*
-* faq.tsx
-* @2024 Digital Aid Seattle
-*/
 import {
   Accordion,
   AccordionDetails,
@@ -11,7 +7,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material'
 
 import {
@@ -26,27 +22,21 @@ import {
 
 import FaqImage from '../assets/faq.png'
 
+import { withBasicLayout, LoadingContext } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
-import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 
 import { DASFaq, DASQandA } from 'types'
 import { faqService } from './api/FaqService'
 
-import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
-import { useFeature } from './api/FeatureService'
+import { useState, useEffect, useContext } from 'react'
 
 const FaqPage = () => {
-  const faqFeature = useFeature('faq');
-  const router = useRouter();
-
+  const [faqSections, setFaqSections] = useState<DASFaq[]>([])
   const { setLoading } = useContext(LoadingContext)
-  const [faqSections, setFaqSections] = useState<DASFaq[]>([]);
-  const [initialized, setInitialized] = useState<boolean>(false);
 
   const [faqSectionExpanded, setFaqSectionExpanded] = useState<string | false>(false);
 
@@ -56,25 +46,15 @@ const FaqPage = () => {
     }
 
   useEffect(() => {
-    if (faqFeature && faqFeature.status === 'fetched') {
-      if (faqFeature.data) {
-        if (!initialized) {
-          setLoading(true)
-          faqService
-            .getAll()
-            .then((data) => {
-              setFaqSections(data)
-              setInitialized(true)
-            })
-            .catch((err) => console.error(err))
-            .finally(() => setLoading(false))
-        }
-      } else {
-        console.log(`FAQ feature not implemented.`);
-        router.push('/404')
-      }
-    }
-  }, [faqFeature, router, initialized, setLoading])
+    setLoading(true)
+    faqService
+      .getAll()
+      .then((data) => setFaqSections(data))
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -217,17 +197,15 @@ const FaqPage = () => {
     )
   }
   return (
-    <BlockComponent block={!initialized}>
-      <Container
-        maxWidth={false}
-        disableGutters
-        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-      >
-        <FaqHeroSection />
-        <FaqCardSection />
-        <FaqQuestionSection />
-      </Container>
-    </BlockComponent>
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <FaqHeroSection />
+      <FaqCardSection />
+      <FaqQuestionSection />
+    </Container>
   )
 }
 
