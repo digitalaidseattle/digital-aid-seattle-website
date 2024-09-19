@@ -10,6 +10,8 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Placeholder from '../assets/placeholder-person.png'
 import SupportUsImage from '../assets/supportUs.png'
+import dillonOlearyImage from '../assets/dillon_oleary.jpeg'
+import silviniafigueroaImage from '../assets/silvinia_figueroa.jpeg'
 
 import { useFeature } from './api/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
@@ -23,17 +25,17 @@ const LABELS = {
 
 const QUOTES = [
   {
-    title: 'Inspirational',
-    quote: 'Volunteering with DAS has been truly inspirational, as it’s shown me the profound impact we can make together.',
-    avatar: Placeholder.src,
-    person: 'Ella Grayson',
+    title: 'Amazing',
+    quote: "Don't forget that once you're working with DAS, you're part of an amazing community of professionals. Meet the community through the social events and Slack and don't be shy to proposing events for the community.",
+    avatar: dillonOlearyImage.src,
+    person: "Dillon O'Leary",
     role: 'Volunteer'
   },
   {
-    title: 'Transformative',
-    quote: 'The support from DAS has been transformative, helping us achieve goals we never thought possible.',
-    avatar: Placeholder.src,
-    person: 'Liam Mercer',
+    title: 'Professionals',
+    quote: "Remember that you're volunteering inside an organization with other professionals who also believe in the DAS's mission. We're a pool of professionals alike with the same goals. If you have a question or need something, this is the place to do it.",
+    avatar: silviniafigueroaImage.src,
+    person: 'Silvina Figueroa',
     role: 'Partner'
   },
   {
@@ -139,7 +141,7 @@ const SupportUsPage = () => {
           {COPY.donate_instructions}
         </Typography>
         <Typography variant="bodyLarge">
-          {ADDRESS.title},<br />{ADDRESS.street},<br />{ADDRESS.statezip}
+          {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
         </Typography>
         <a href="/donation-form.pdf" target="_blank">
           <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
