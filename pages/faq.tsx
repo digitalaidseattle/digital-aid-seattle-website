@@ -1,3 +1,7 @@
+/*
+ * faq.tsx
+ * @2024 Digital Aid Seattle
+ */
 import {
   Accordion,
   AccordionDetails,
@@ -22,7 +26,7 @@ import {
 
 import FaqImage from '../assets/faq.png'
 
-import { withBasicLayout, LoadingContext } from 'components/layouts'
+import { withBasicLayout, LoadingContext, BlockComponent } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
@@ -33,8 +37,14 @@ import { DASFaq, DASQandA } from 'types'
 import { faqService } from './api/FaqService'
 
 import { useState, useEffect, useContext } from 'react'
+import { useFeature } from './api/FeatureService';
+import { useRouter } from 'next/navigation';
 
 const FaqPage = () => {
+  const faqFeature = useFeature('faq');
+  const router = useRouter();
+  const [initialized, setInitialized] = useState<boolean>(false);
+
   const [faqSections, setFaqSections] = useState<DASFaq[]>([])
   const { setLoading } = useContext(LoadingContext)
 
@@ -46,15 +56,24 @@ const FaqPage = () => {
     }
 
   useEffect(() => {
-    setLoading(true)
-    faqService
-      .getAll()
-      .then((data) => setFaqSections(data))
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [setLoading])
+    if (faqFeature && faqFeature.status === 'fetched') {
+      if (faqFeature.data) {
+        if (!initialized) {
+          setLoading(true)
+          faqService
+            .getAll()
+            .then((data) => {
+              setFaqSections(data);
+              setInitialized(true);
+            })
+            .catch((err) => console.error(err))
+            .finally(() => {
+              setLoading(false)
+            })
+        }
+      }
+    }
+  }, [faqFeature, router, initialized, setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -197,15 +216,17 @@ const FaqPage = () => {
     )
   }
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
-      <FaqHeroSection />
-      <FaqCardSection />
-      <FaqQuestionSection />
-    </Container>
+    <BlockComponent block={!initialized}>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        <FaqHeroSection />
+        <FaqCardSection />
+        <FaqQuestionSection />
+      </Container>
+    </BlockComponent>
   )
 }
 
