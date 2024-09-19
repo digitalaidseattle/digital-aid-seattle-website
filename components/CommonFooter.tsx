@@ -135,17 +135,17 @@ const supportUsBox = () => {
 const copyrightBox = () => {
   return (
     <Stack gap="0.25rem">
-      <FooterItemTitle>© Digital Aid Seattle 2023</FooterItemTitle>
+      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
       <SubText>
         Illustrations by{' '}
         <Link
-          href="https://www.freepik.com"
+          href="https://storyset.com"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Freepik, which opens in a new window."
+          aria-label="Storyset, which opens in a new window."
           sx={{ color: theme.palette.primary.contrastText }}
         >
-          Freepik
+          Storyset
         </Link>
       </SubText>
     </Stack>
