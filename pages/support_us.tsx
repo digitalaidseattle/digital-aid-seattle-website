@@ -39,7 +39,7 @@ const QUOTES = [
     role: 'Volunteer'
   },
   {
-    title: 'Impactful',
+    title: 'Enrichment',
     quote: "Volunteering with DAS not only provides hands-on experience in a variety of industries, helping you discover new passions or career paths, but it also broadens your perspective by allowing you to collaborate with diverse groups.",
     avatar: YuliaBalenkoImage.src,
     person: 'Yulia Balenko',
