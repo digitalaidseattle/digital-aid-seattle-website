@@ -172,7 +172,6 @@ const CommonHeader = () => {
           >
             {/* Hamburger menu when the screen is small. */}
             <LogoBox />
-            <LogoBox />
             <IconButton
               size="large"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -193,7 +192,6 @@ const CommonHeader = () => {
               padding: '1.25rem 2.5rem !important',
             }}
           >
-            <LogoBox />
             <LogoBox />
             <nav>
               <List sx={{ display: 'flex', gap: '0.5rem' }}>
