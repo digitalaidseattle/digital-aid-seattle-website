@@ -33,18 +33,18 @@ const CommonHeader = () => {
   // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
-  const { data: supportUs, status: supportFetched } = useFeature('support-us')
+  const supportUs = useFeature('support-us')
   const [menuItems, setMenuItems] = useState<any[]>([]);
 
   useEffect(() => {
-    if (supportFetched === 'fetched') {
+    if (supportUs.status === 'fetched') {
       const items = DEFAULT_MENU_ITEMS.slice()
-      if (supportUs) {
+      if (supportUs.data) {
         items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
       }
       setMenuItems(items)
     }
-  }, [supportUs, supportFetched])
+  }, [supportUs])
 
   const router = useRouter()
 
