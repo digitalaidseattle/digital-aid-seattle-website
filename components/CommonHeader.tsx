@@ -20,6 +20,13 @@ import { useFeature } from 'pages/api/FeatureService'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import MobileMenu from './MobileMenu'
 
+const SECTION_TO_PATH = {
+  About: '/about',
+  Projects: '/projects',
+  Partners: '/partners',
+  Volunteer: '/volunteers',
+  Events: '/events',
+}
 
 const DEFAULT_MENU_ITEMS = [
   { label: 'About', path: '/about', style: 'primary', pages: ['about'] },
@@ -53,7 +60,7 @@ const CommonHeader = () => {
     return menuItem.pages.includes(paths[1]);
   }
 
-  const desktopMenuItem = (menuItem: any) => {
+  const desktopMenuItem = (menuItem: any, idx: number) => {
 
     // Couldn't find highlight color for secondary
     const buttonColor = ('primary' === menuItem.style)
@@ -70,7 +77,7 @@ const CommonHeader = () => {
 
     return (
       <Link
-        key={menuItem.path}
+        key={'menu' + idx}
         sx={{
           color: linkColor,
           textUnderlineOffset: '0.5rem',
@@ -81,7 +88,6 @@ const CommonHeader = () => {
         href={menuItem.path}
       >
         <Button
-          key={menuItem.path}
           variant="contained"
           color={buttonColor}
           disableRipple={true}>
@@ -90,51 +96,25 @@ const CommonHeader = () => {
       </Link>)
   }
 
-  const mobilePrimaryMenuItem = (menuItem: any) => {
-    return (<MenuItem
-      aria-hidden="true"
-      key={menuItem.path}
-      style={{ borderRadius: '0px' }}
-    >
-      <Link
-        underline="hover"
-        sx={{
-          color: theme.palette.primary.contrastText,
-        }}
-        href={menuItem.path}
-      >
-        <Typography variant="labelLarge">
-          {menuItem.label}
-        </Typography>
-      </Link>
-    </MenuItem>)
-  }
-  const mobileSecondaryMenuItem = (menuItem: any) => {
-    const buttonColor = isCurrent(menuItem)
-      ? 'secondary'
-      : 'secondary';
+  const mobileMenuItem = (menuItem: any, idx: number) => {
     return (
       <MenuItem
-        key={menuItem.path}
+        key={'menu' + idx}
         style={{ borderRadius: '0px' }}
       >
-        <Button
-          key={menuItem.path}
-          variant="contained"
-          color={buttonColor}
-          disableRipple={true}>
-          <Link
-            sx={{
-              color: theme.palette.secondary.contrastText,
-              textDecoration: 'none'
-            }}
-            href={menuItem.path}
-          >
+        <Link
+          underline="hover"
+          sx={{
+            color: theme.palette.primary.contrastText,
+          }}
+          href={menuItem.path}
+        >
+          <Typography variant="labelLarge">
             {menuItem.label}
-          </Link>
-        </Button>
+          </Typography>
+        </Link>
       </MenuItem>)
-  }
+  };
 
   const LogoBox = () => {
     return (
@@ -178,7 +158,6 @@ const CommonHeader = () => {
               sx={{ color: theme.palette.primary.contrastText }}
             >
               {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
-              {showMobileMenu ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
           </Box>
           {/* Menu items that are shown on desktop */}
@@ -195,7 +174,7 @@ const CommonHeader = () => {
             <LogoBox />
             <nav>
               <List sx={{ display: 'flex', gap: '0.5rem' }}>
-                {menuItems.map((section) => desktopMenuItem(section))}
+                {menuItems.map((section, idx) => desktopMenuItem(section, idx))}
               </List>
             </nav>
           </Container>
@@ -204,24 +183,9 @@ const CommonHeader = () => {
         {smallScreen &&
           <Box sx={{ position: 'relative', zIndex: -1 }}>
             <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
-              {Object.keys(SECTION_TO_PATH).map((name) => (
-                <MenuItem
-                  key={name}
-                  style={{ borderRadius: '0px' }}
-                >
-                  <Link
-                    underline="hover"
-                    sx={{
-                      color: theme.palette.primary.contrastText,
-                    }}
-                    href={SECTION_TO_PATH[name]}
-                  >
-                    <Typography variant="labelLarge">
-                      {name}
-                    </Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              {menuItems.map((menuItem, idx) =>
+                mobileMenuItem(menuItem, idx)
+              )}
             </MobileMenu>
           </Box>}
         {/* dark overlay */}
