@@ -1,5 +1,5 @@
 /*
- * @2023 Digital Aid Seattle
+ * @2024 Digital Aid Seattle
  */
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
@@ -16,9 +16,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
+import { useFeature } from 'pages/api/FeatureService'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import MobileMenu from './MobileMenu'
-import { useFeature } from 'pages/api/FeatureService'
 
 
 const DEFAULT_MENU_ITEMS = [
@@ -26,23 +26,25 @@ const DEFAULT_MENU_ITEMS = [
   { label: 'Projects', path: '/projects', style: 'primary', pages: ['projects', 'project'] },
   { label: 'Partners', path: '/partners', style: 'primary', pages: ['partners'] },
   { label: 'Volunteer', path: '/volunteers', style: 'primary', pages: ['volunteers', 'volunteer'] },
-  { label: 'Events', path: '/events', style: 'primary', pages: ['events', 'event'] },
+  { label: 'Events', path: '/events', style: 'primary', pages: ['events', 'event'] }
 ]
 
 const CommonHeader = () => {
   // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
-  const { data: supportUs } = useFeature('support-us')
+  const { data: supportUs, status: supportFetched } = useFeature('support-us')
   const [menuItems, setMenuItems] = useState<any[]>([]);
 
   useEffect(() => {
-    const items = DEFAULT_MENU_ITEMS.slice()
-    if (supportUs) {
-      items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
+    if (supportFetched === 'fetched') {
+      const items = DEFAULT_MENU_ITEMS.slice()
+      if (supportUs) {
+        items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
+      }
+      setMenuItems(items)
     }
-    setMenuItems(items)
-  }, [supportUs])
+  }, [supportUs, supportFetched])
 
   const router = useRouter()
 
