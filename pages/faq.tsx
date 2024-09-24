@@ -1,3 +1,7 @@
+/*
+ * faq.tsx
+ * @2024 Digital Aid Seattle
+ */
 import {
   Accordion,
   AccordionDetails,
@@ -22,7 +26,7 @@ import {
 
 import FaqImage from '../assets/faq.png'
 
-import { withBasicLayout, LoadingContext } from 'components/layouts'
+import { withBasicLayout, LoadingContext, BlockComponent } from 'components/layouts'
 import MastheadWithImage from 'components/MastheadWithImage'
 import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
@@ -33,8 +37,14 @@ import { DASFaq, DASQandA } from 'types'
 import { faqService } from './api/FaqService'
 
 import { useState, useEffect, useContext } from 'react'
+import { useFeature } from './api/FeatureService';
+import { useRouter } from 'next/navigation';
 
 const FaqPage = () => {
+  const faqFeature = useFeature('faq');
+  const router = useRouter();
+  const [initialized, setInitialized] = useState<boolean>(false);
+
   const [faqSections, setFaqSections] = useState<DASFaq[]>([])
   const { setLoading } = useContext(LoadingContext)
 
@@ -46,15 +56,24 @@ const FaqPage = () => {
     }
 
   useEffect(() => {
-    setLoading(true)
-    faqService
-      .getAll()
-      .then((data) => setFaqSections(data))
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [setLoading])
+    if (faqFeature && faqFeature.status === 'fetched') {
+      if (faqFeature.data) {
+        if (!initialized) {
+          setLoading(true)
+          faqService
+            .getAll()
+            .then((data) => {
+              setFaqSections(data);
+              setInitialized(true);
+            })
+            .catch((err) => console.error(err))
+            .finally(() => {
+              setLoading(false)
+            })
+        }
+      }
+    }
+  }, [faqFeature, router, initialized, setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -101,7 +120,7 @@ const FaqPage = () => {
   }
 
   const FaqCardSection = () => {
-    
+
     const sectionIconMapping = {
       'generalInfo': LanguageOutlined,
       'volunteeringCommitment': CalendarTodayOutlined,
@@ -125,20 +144,21 @@ const FaqPage = () => {
           this section provides the essential details you need.
         </Typography>
         <CardRowContainer>
-          {faqSections.map((section) => { 
+          {faqSections.map((section) => {
             const MuiIcon = sectionIconMapping[section.name] || sectionIconMapping['default'];
             return (
-            <CardOne
-              key={section._id}
-              title={section.title}
-              description={section.description || ''}
-              cardHref={`#${section.name}`}
-              icon={
-                <MuiIcon
-                  style={{ color: designColor.white, fontSize: '40px' }}
-                />
-              }
-            />)}
+              <CardOne
+                key={section._id}
+                title={section.title}
+                description={section.description || ''}
+                cardHref={`#${section.name}`}
+                icon={
+                  <MuiIcon
+                    style={{ color: designColor.white, fontSize: '40px' }}
+                  />
+                }
+              />)
+          }
           )}
         </CardRowContainer>
       </FaqSection>
@@ -147,48 +167,48 @@ const FaqPage = () => {
 
   const FaqQuestion = (questionItem: DASQandA, sectionName, index) => {
     return (
-      <Accordion 
-      key={sectionName+index}
-      expanded={faqSectionExpanded === sectionName+index}
-      onChange={handleFaqSectionChange(sectionName+index)}
+      <Accordion
+        key={sectionName + index}
+        expanded={faqSectionExpanded === sectionName + index}
+        onChange={handleFaqSectionChange(sectionName + index)}
       >
-      
-      <AccordionSummary
-        expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
-        id={`question-${index}-header`}
-        aria-controls={`question-${index}-content`}
-        sx={{
-          paddingLeft: '0px',
-          paddingRight: '0px',
-          paddingTop: '1rem',
-          paddingBottom: '1rem',
-        }}>
-        <Typography variant="titleLarge">
-          {questionItem.question}
-        </Typography>
-      </AccordionSummary>
 
-      <AccordionDetails>
-        <Typography variant="bodyLarge">{questionItem.answer}</Typography>
-      </AccordionDetails>
-    </Accordion>
+        <AccordionSummary
+          expandIcon={<AddOutlined sx={{ color: designColor.black }} />}
+          id={`question-${index}-header`}
+          aria-controls={`question-${index}-content`}
+          sx={{
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+          }}>
+          <Typography variant="titleLarge">
+            {questionItem.question}
+          </Typography>
+        </AccordionSummary>
+
+        <AccordionDetails>
+          <Typography variant="bodyLarge">{questionItem.answer}</Typography>
+        </AccordionDetails>
+      </Accordion>
     )
-  } 
+  }
   const FaqQuestionSection = () => {
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="left">
         {faqSections.map((section) => (
           <Stack sx={{ gap: '2rem' }} key={section._id}>
-            <Typography 
-              variant="headlineLarge" 
+            <Typography
+              variant="headlineLarge"
               id={section.name}
               // styles are for offsetting the sticky header when jumped to from anchor link
-              sx={{paddingTop: '6rem', marginTop: '-6rem'}}>
-                {section.title}
+              sx={{ paddingTop: '6rem', marginTop: '-6rem' }}>
+              {section.title}
             </Typography>
             <Box sx={{ display: 'block' }}>
-            {section.qandas &&
-              section.qandas.map((item, index) => FaqQuestion(item, section.name, index))}
+              {section.qandas &&
+                section.qandas.map((item, index) => FaqQuestion(item, section.name, index))}
             </Box>
           </Stack>
         ))}
@@ -196,15 +216,17 @@ const FaqPage = () => {
     )
   }
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
-      <FaqHeroSection />
-      <FaqCardSection />
-      <FaqQuestionSection />
-    </Container>
+    <BlockComponent block={!initialized}>
+      <Container
+        maxWidth={false}
+        disableGutters
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        <FaqHeroSection />
+        <FaqCardSection />
+        <FaqQuestionSection />
+      </Container>
+    </BlockComponent>
   )
 }
 
