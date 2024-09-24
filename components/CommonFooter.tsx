@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 
-import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
@@ -20,6 +22,8 @@ import { useFeature } from 'pages/api/FeatureService'
 //     alignItems: 'center'
 //   }
 // })
+
+
 type GridItemProps = {
   children: ReactNode
   md?: number
@@ -89,11 +93,13 @@ const logoBox = () => {
   )
 }
 
-const aboutBox = () => {
+const AboutBox = () => {
+  const { data: faq } = useFeature('faq')
   return (
     <Box>
       <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
+      {faq && <LinkSubItem url="/faq" name="FAQ" />}
     </Box>
   )
 }
@@ -120,21 +126,20 @@ const workWithUsBox = () => {
   )
 }
 
-const supportUsBox = () => {
-  return (
+const SupportUsBox = () => {
+  const { data: supportUs } = useFeature('support-us')
+  return (supportUs &&
     <Box>
       <FooterItemTitle>Support us</FooterItemTitle>
       <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
+        <a href="mailto:info@digitalaidseattle.org">Donate</a>
       </FooterSubItem>
-    </Box>
-  )
+    </Box>)
 }
 
 const copyrightBox = () => {
   return (
     <Stack gap="0.25rem">
-      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
       <SubText>
         Illustrations by{' '}
         <Link
@@ -147,6 +152,7 @@ const copyrightBox = () => {
           Storyset
         </Link>
       </SubText>
+      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
     </Stack>
   )
 }
@@ -167,6 +173,7 @@ const linkedInLink = () => {
     </Link>
   )
 }
+
 const githubLink = () => {
   return (
     <Link
@@ -184,23 +191,50 @@ const githubLink = () => {
   )
 }
 
-const CommonFooterLargeScreen = () => (
-  <Grid container direction="column" columns={4}>
-    <GridItem md={3}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          height: '100%',
-          gap: '2rem',
-        }}
-      >
-        {logoBox()}
-        {copyrightBox()}
-      </Box>
-    </GridItem>
+const facebookLink = () => {
+  return (
+    <Link
+      href="https://facebook.com/digitalaidseattle"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Facebook"
+      aria-label="Our Facebook page, which opens in a new window."
+    >
+      <FacebookIcon
+        sx={{ color: theme.palette.primary.contrastText }}
+        fontSize="large"
+      />
+    </Link>
+  )
+}
 
+const instagramLink = () => {
+  return (
+    <Link
+      href="https://instagram.com/digitalaidseattle"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Instagram"
+      aria-label="Our Instagram page, which opens in a new window."
+    >
+      <InstagramIcon
+        sx={{ color: theme.palette.primary.contrastText }}
+        fontSize="large"
+      />
+    </Link>
+  )
+}
+
+const START_BOX_STYLE = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  height: '100%',
+  gap: '2rem',
+}
+
+const CommonFooterLargeScreen = () => (
+  <Grid container spacing={5}>
     <GridItem md={4}>
       <Box
         sx={{
@@ -209,7 +243,18 @@ const CommonFooterLargeScreen = () => (
           gap: '2rem',
         }}
       >
-        {contactUsBox()}
+        {logoBox()}
+      </Box>
+    </GridItem>
+
+    <GridItem md={4}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+      >
         {workWithUsBox()}
       </Box>
     </GridItem>
@@ -222,21 +267,51 @@ const CommonFooterLargeScreen = () => (
           justifyContent: 'space-between',
         }}
       >
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
-    <GridItem md={1}>
+    <GridItem md={4}>
+      <Box sx={START_BOX_STYLE}>
+      </Box>
+    </GridItem>
+    <GridItem md={4}>
+      <Box sx={START_BOX_STYLE}>
+        <SupportUsBox />
+      </Box>
+    </GridItem>
+
+    <GridItem md={4}>
+      <Box sx={START_BOX_STYLE}>
+        {contactUsBox()}
+      </Box>
+    </GridItem>
+
+    <GridItem md={4}>
+      <Box sx={START_BOX_STYLE}>
+        {copyrightBox()}
+      </Box>
+    </GridItem>
+    <GridItem md={8}>
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           gap: '2rem',
           alignItems: 'flex-end',
         }}
       >
-        {linkedInLink()}
-        {githubLink()}
+        <Box >
+          <FooterItemTitle>Follow us on social media</FooterItemTitle>
+          <FooterSubItem>
+            <Stack direction={'row'} spacing={2}>
+              {linkedInLink()}
+              {githubLink()}
+              {facebookLink()}
+              {instagramLink()}
+            </Stack>
+          </FooterSubItem>
+        </Box>
       </Box>
     </GridItem>
   </Grid>
@@ -270,7 +345,7 @@ const CommonFooterMidScreen = () => (
       >
         {contactUsBox()}
         {workWithUsBox()}
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
@@ -285,6 +360,8 @@ const CommonFooterMidScreen = () => (
       >
         {linkedInLink()}
         {githubLink()}
+        {facebookLink()}
+        {instagramLink()}
       </Box>
     </GridItem>
   </Grid>
@@ -303,12 +380,14 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>{workWithUsBox()}</GridItem>
 
-    <GridItem>{aboutBox()}</GridItem>
+    <GridItem><AboutBox /></GridItem>
 
     <GridItem>
       <Box display="flex" sx={{ gap: '1rem' }}>
         {linkedInLink()}
         {githubLink()}
+        {facebookLink()}
+        {instagramLink()}
       </Box>
     </GridItem>
 
