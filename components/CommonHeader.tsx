@@ -1,4 +1,5 @@
-/*
+/**
+ * CommonHeader.tsx
  * @2024 Digital Aid Seattle
  */
 /* eslint-disable jsx-a11y/alt-text  */
@@ -13,20 +14,12 @@ import Link from '@mui/material/Link'
 import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { theme } from 'theme/theme'
 
 import { useFeature } from 'pages/api/FeatureService'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import MobileMenu from './MobileMenu'
-
-const SECTION_TO_PATH = {
-  About: '/about',
-  Projects: '/projects',
-  Partners: '/partners',
-  Volunteer: '/volunteers',
-  Events: '/events',
-}
 
 const DEFAULT_MENU_ITEMS = [
   { label: 'About', path: '/about', style: 'primary', pages: ['about'] },
@@ -36,24 +29,26 @@ const DEFAULT_MENU_ITEMS = [
   { label: 'Events', path: '/events', style: 'primary', pages: ['events', 'event'] }
 ]
 
+const lookup = (supportUs: any): any[] => {
+  if (supportUs.status === 'fetched') {
+    const items = DEFAULT_MENU_ITEMS.slice()
+    if (supportUs.data) {
+      items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
+    }
+    return items;
+  }
+  else {
+    return [];
+  }
+}
+
 const CommonHeader = () => {
   // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))
   const supportUs = useFeature('support-us')
-  const [menuItems, setMenuItems] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (supportUs.status === 'fetched') {
-      const items = DEFAULT_MENU_ITEMS.slice()
-      if (supportUs.data) {
-        items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
-      }
-      setMenuItems(items)
-    }
-  }, [supportUs])
-
   const router = useRouter()
+  const menuItems = useMemo(() => lookup(supportUs), [supportUs]);
 
   const isCurrent = (menuItem: any) => {
     const paths = router.route.split('/')
