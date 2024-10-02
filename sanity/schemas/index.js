@@ -6,10 +6,14 @@ import teamMember from './teamMember'
 import dasProject from './dasProject'
 import osEvent from './osEvent'
 import dasFeature from './dasFeature'
+import dasFaq from './dasFaq'
+import dasQandA from './dasQandA'
 
 export const schemaTypes = [
   osEvent,
   teamMember,
   dasProject,
-  dasFeature
+  dasFeature,
+  dasFaq,
+  dasQandA
 ]

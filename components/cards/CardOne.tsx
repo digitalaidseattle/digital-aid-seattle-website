@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 import { designColor } from 'theme/theme'
 
 import IconContainer from './IconContainer'
-import { Box } from '@mui/material'
+import { Box, CardActionArea } from '@mui/material'
 
 export const ICON_STYLE = {
   color: designColor.white,
@@ -20,6 +20,7 @@ type CardOneProps = {
   buttonText?: string
   buttonLink?: string
   smallerTitle?: boolean
+  cardHref?: string
 }
 
 const CardOne = ({
@@ -29,17 +30,19 @@ const CardOne = ({
   buttonText,
   buttonLink,
   smallerTitle,
+  cardHref
 }: CardOneProps) => {
   return (
     <Card
       sx={{
         padding: { xs: '2rem', md: '1.5rem' },
-        flex: '1',
+        flexGrow: '1',
         minWidth: { xs: '100%', sm: 'auto' },
         boxShadow:
           '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
       }}
     >
+      <CardActionArea disabled={!cardHref} href={cardHref}>        
       <Box
         sx={{
           display: 'flex',
@@ -65,6 +68,7 @@ const CardOne = ({
           </Button>
         )}
       </Box>
+      </CardActionArea>
     </Card>
   )
 }
