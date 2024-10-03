@@ -52,7 +52,7 @@ const QUOTES = [
 
 const COPY = {
   hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.',
-  donate_instructions: 'We’re currently accepting donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  donate_instructions: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
 const ADDRESS = {
