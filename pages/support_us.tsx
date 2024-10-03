@@ -156,7 +156,7 @@ const SupportUsPage = () => {
           <Stack gap="1rem" textAlign="center" width="350px"
           >
             <Button variant="contained"
-              onClick={() => window.open('/donation-form.pd', '_blank')}>{LABELS.donate_button}</Button>
+              onClick={() => window.open('/donation-form.pdf', '_blank')}>{LABELS.donate_button}</Button>
 
             <Typography fontWeight={700} >or</Typography>
             <Button variant="outlined"
