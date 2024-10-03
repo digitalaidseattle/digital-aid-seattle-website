@@ -3,6 +3,7 @@
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
+
 import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
@@ -11,6 +12,7 @@ import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
 import { useFeature } from 'pages/api/FeatureService'
+import { Facebook, Instagram } from '@mui/icons-material'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -89,14 +91,17 @@ const logoBox = () => {
   )
 }
 
-const aboutBox = () => {
+const AboutBox = () => {
+  const { data: faq } = useFeature('faq')
   return (
     <Box>
       <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
+      {faq && <LinkSubItem url="/faq" name="FAQ" />}
     </Box>
   )
 }
+
 const contactUsBox = () => {
   return (
     <Box>
@@ -184,6 +189,39 @@ const githubLink = () => {
   )
 }
 
+const instaLink = () => {
+  return (
+    <Link
+      href="https://instagram.com/digitalaidseattle"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Instagram"
+      aria-label="Our Instagram, which opens in a new window."
+    >
+      <Instagram
+        sx={{ color: theme.palette.primary.contrastText }}
+        fontSize="large"
+      />
+    </Link>
+  )
+}
+
+const facebookLink = () => {
+  return (
+    <Link
+      href="https://facebook.com/digitalaidseattle"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Facebook"
+      aria-label="Our Facebook, which opens in a new window."
+    >
+      <Facebook
+        sx={{ color: theme.palette.primary.contrastText }}
+        fontSize="large"
+      />
+    </Link>
+  )
+}
 const CommonFooterLargeScreen = () => (
   <Grid container direction="column" columns={4}>
     <GridItem md={3}>
@@ -222,7 +260,7 @@ const CommonFooterLargeScreen = () => (
           justifyContent: 'space-between',
         }}
       >
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
@@ -237,6 +275,8 @@ const CommonFooterLargeScreen = () => (
       >
         {linkedInLink()}
         {githubLink()}
+        {instaLink()}
+        {facebookLink()}
       </Box>
     </GridItem>
   </Grid>
@@ -270,7 +310,7 @@ const CommonFooterMidScreen = () => (
       >
         {contactUsBox()}
         {workWithUsBox()}
-        {aboutBox()}
+        <AboutBox />
       </Box>
     </GridItem>
 
@@ -285,6 +325,8 @@ const CommonFooterMidScreen = () => (
       >
         {linkedInLink()}
         {githubLink()}
+        {instaLink()}
+        {facebookLink()}
       </Box>
     </GridItem>
   </Grid>
@@ -303,12 +345,14 @@ const CommonFooterSmallScreen = () => (
 
     <GridItem>{workWithUsBox()}</GridItem>
 
-    <GridItem>{aboutBox()}</GridItem>
+    <GridItem><AboutBox /></GridItem>
 
     <GridItem>
       <Box display="flex" sx={{ gap: '1rem' }}>
         {linkedInLink()}
         {githubLink()}
+        {instaLink()}
+        {facebookLink()}
       </Box>
     </GridItem>
 
