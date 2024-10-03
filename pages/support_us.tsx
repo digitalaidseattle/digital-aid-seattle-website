@@ -1,7 +1,8 @@
-/*
+/**
+ * support_us.tsx
  * @2024 Digital Aid Seattle
  */
-import { Button, Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Button, Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -12,6 +13,7 @@ import SupportUsImage from '../assets/supportUs.png'
 import dillonOlearyImage from '../assets/dillon_oleary.jpeg'
 import silviniafigueroaImage from '../assets/silvinia_figueroa.jpeg'
 import YuliaBalenkoImage from '../assets/Yulia_Balenko.jpg'
+import VenmoImage from '../assets/venmo.png'
 
 import { useFeature } from './api/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
@@ -20,7 +22,8 @@ const LABELS = {
   hero_title: 'Support us',
   donate_title: 'Donate now',
   donate_button: 'Download the check donation form',
-  impact_title: 'What people say about us'
+  impact_title: 'What people say about us',
+  donate_with: 'Donate with'
 }
 
 const QUOTES = [
@@ -49,7 +52,7 @@ const QUOTES = [
 
 const COPY = {
   hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.',
-  donate_instructions: 'We currently accept donations by mail. Please download and complete the check donation form. You can mail the form and your check to us at the following address:',
+  donate_instructions: 'We’re currently accepting donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
 const ADDRESS = {
@@ -143,9 +146,31 @@ const SupportUsPage = () => {
         <Typography variant="bodyLarge">
           {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
         </Typography>
-        <a href="/donation-form.pdf" target="_blank">
-          <Button variant="contained" sx={{ width: 'fit-content' }}>{LABELS.donate_button}</Button>
-        </a>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Stack gap="1rem" textAlign="center" width="350px"
+          >
+            <Button variant="contained"
+              onClick={() => window.open('/donation-form.pd', '_blank')}>{LABELS.donate_button}</Button>
+
+            <Typography fontWeight={700} >or</Typography>
+            <Button variant="outlined"
+              onClick={() => window.open('https://venmo.com/DASeattle', '_blank')}>
+              {LABELS.donate_with}
+              <img
+                style={{ marginLeft: '1rem' }}
+                src={VenmoImage.src}
+                alt="Venmo wordmark"
+                width="100px"
+              />
+            </Button>
+          </Stack>
+        </Box>
       </Stack>
     </SupportUsSection>
   )
