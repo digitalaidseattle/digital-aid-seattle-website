@@ -149,6 +149,7 @@ const FaqPage = () => {
             return (
               <CardOne
                 key={section._id}
+                smallerTitle
                 title={section.title}
                 description={section.description || ''}
                 cardHref={`#${section.name}`}
