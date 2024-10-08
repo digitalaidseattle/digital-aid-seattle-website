@@ -1,6 +1,8 @@
-/*
+/**
  * faq.tsx
+ * 
  * @2024 Digital Aid Seattle
+ * 
  */
 import {
   Accordion,
@@ -38,11 +40,10 @@ import { faqService } from './api/FaqService'
 
 import { useState, useEffect, useContext } from 'react'
 import { useFeature } from './api/FeatureService';
-import { useRouter } from 'next/navigation';
+import Markdown from 'react-markdown';
 
 const FaqPage = () => {
   const faqFeature = useFeature('faq');
-  const router = useRouter();
   const [initialized, setInitialized] = useState<boolean>(false);
 
   const [faqSections, setFaqSections] = useState<DASFaq[]>([])
@@ -67,13 +68,11 @@ const FaqPage = () => {
               setInitialized(true);
             })
             .catch((err) => console.error(err))
-            .finally(() => {
-              setLoading(false)
-            })
+            .finally(() => setLoading(false))
         }
       }
     }
-  }, [faqFeature, router, initialized, setLoading])
+  }, [faqFeature, initialized, setLoading])
 
   const FaqSection = ({ backgroundColor, textAlignment, children }) => (
     <SectionContainer backgroundColor={backgroundColor}>
@@ -149,6 +148,7 @@ const FaqPage = () => {
             return (
               <CardOne
                 key={section._id}
+                smallerTitle
                 title={section.title}
                 description={section.description || ''}
                 cardHref={`#${section.name}`}
@@ -189,7 +189,7 @@ const FaqPage = () => {
         </AccordionSummary>
 
         <AccordionDetails>
-          <Typography variant="bodyLarge">{questionItem.answer}</Typography>
+          <Markdown className='markdown'>{questionItem.answer}</Markdown>
         </AccordionDetails>
       </Accordion>
     )
