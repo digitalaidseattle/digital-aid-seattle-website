@@ -24,11 +24,11 @@ export default defineConfig({
           .title('Content')
           .items([
             // Minimum required configuration
-            orderableDocumentListDeskItem({ type: 'team-member', S, context }),
             orderableDocumentListDeskItem({ type: 'os-event', S, context }),
             orderableDocumentListDeskItem({ type: 'das-project', S, context }),
             orderableDocumentListDeskItem({ type: 'das-feature', S, context }),
-            orderableDocumentListDeskItem({ type: 'das-faq', S, context })
+            orderableDocumentListDeskItem({ type: 'das-faq', S, context }),
+            orderableDocumentListDeskItem({ type: 'das-testimonial', S, context })
           ])
       }
     }

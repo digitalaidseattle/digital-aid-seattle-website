@@ -8,6 +8,7 @@ import osEvent from './osEvent'
 import dasFeature from './dasFeature'
 import dasFaq from './dasFaq'
 import dasQandA from './dasQandA'
+import dasTestimonial from './dasTestimonial';
 
 export const schemaTypes = [
   osEvent,
@@ -15,5 +16,6 @@ export const schemaTypes = [
   dasProject,
   dasFeature,
   dasFaq,
-  dasQandA
+  dasQandA,
+  dasTestimonial
 ]

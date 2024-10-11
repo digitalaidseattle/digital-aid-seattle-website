@@ -66,7 +66,6 @@ type DASQandA = {
   answer: string
 }
 
-
 type DASFaq = {
   _id: string
   _createdAt: Date
@@ -105,3 +104,14 @@ type DASVolunteerRole = {
   urgency?: number
   keyTechnologiesIds?: string[]
 } & DASVolunteerRoleBasicInfo
+
+type DASTestimonial = {
+  _id: string
+  _createdAt: Date
+  title: string,
+  quote: string,
+  name: string,
+  avatar: Image,
+  role: string,
+  active: boolean
+}
