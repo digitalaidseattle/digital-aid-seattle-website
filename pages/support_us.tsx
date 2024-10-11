@@ -62,7 +62,7 @@ const WhatPeopleSaySection = ({ theme }) => {
   useEffect(() => {
     setLoading(true);
     testimonialService.getActiveTestimonials()
-      .then(ts => setTestimonials(ts))
+      .then(ts => setTestimonials(ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank))))
       .catch(error => console.error(error))
       .finally(() => setLoading(false))
   }, [setLoading]);
