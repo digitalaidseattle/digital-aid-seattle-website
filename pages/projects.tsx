@@ -89,9 +89,11 @@ const ProjectsPage = () => {
           >
             <Stack aria-label={LABELS.ARIA_LABEL_FILTERS} direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
               {dasProjectsService.filteredStatuses.map((status) =>
-                <Chip key={status} label={StatusLabels[status]}
+                <Chip
+                  key={status}
+                  label={StatusLabels[status]}
                   variant={filterStatuses.includes(status) ? "filled" : "outlined"}
-                  icon={filterStatuses.includes(status) && <Check />}
+                  icon={filterStatuses.includes(status) ? <Check /> : undefined}
                   onClick={() => toggleStatus(status)} />)}
             </Stack>
             {displayedProjects.length === 0 &&
