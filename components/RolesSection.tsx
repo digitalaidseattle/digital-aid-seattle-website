@@ -249,8 +249,8 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
     roles.length > 0 && (
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
-        {showFilters ? 
-          <FilterableRoles roles={roles} showLink={showLink} /> 
+        {showFilters
+          ? <FilterableRoles roles={roles} showLink={showLink} />
           : <RolesOnly roles={roles} showLink={showLink} />
         }
         {children}

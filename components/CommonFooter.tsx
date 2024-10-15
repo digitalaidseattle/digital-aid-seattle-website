@@ -13,6 +13,7 @@ import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
 import { useFeature } from 'pages/api/FeatureService'
+import { Facebook, Instagram } from '@mui/icons-material'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -103,6 +104,7 @@ const AboutBox = () => {
     </Box>
   )
 }
+
 const contactUsBox = () => {
   return (
     <Box>
