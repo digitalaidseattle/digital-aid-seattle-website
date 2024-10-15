@@ -1,27 +1,27 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 
-import GitHubIcon from '@mui/icons-material/GitHub'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-
 import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
+import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
+import { useFeature } from 'pages/api/FeatureService'
 import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
-import { useFeature } from 'pages/api/FeatureService'
-import { Facebook, Instagram } from '@mui/icons-material'
 
-// const GridItem = styled(Grid)(() => {
-//   return {
-//     item: true,
-//     padding: '0.5rem',
-//     justifyContent: 'left',
-//     alignItems: 'center'
-//   }
-// })
+const SubText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  fontSize: '0.75rem',
+}))
+
+const FooterItemTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  color: theme.palette.primary.contrastText,
+  fontSize: '0.875rem',
+}))
+
 type GridItemProps = {
   children: ReactNode
   md?: number
@@ -49,19 +49,6 @@ const GridItem = ({ md, children }: GridItemProps) =>
     </Grid>
   )
 
-const FooterItemTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 700,
-  color: theme.palette.primary.contrastText,
-  fontSize: '0.875rem',
-}))
-
-const FooterSubItem = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: '1rem',
-  marginTop: '1rem',
-  display: 'block',
-}))
-
 const LinkSubItem = (props: { url: string; name: string }) => (
   <Link
     sx={{
@@ -76,12 +63,7 @@ const LinkSubItem = (props: { url: string; name: string }) => (
   </Link>
 )
 
-const SubText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: '0.75rem',
-}))
-
-const logoBox = () => {
+const LogoBox = () => {
   return (
     <Box>
       <Link href="/" title="Go back to home" aria-label="Go back to home">
@@ -95,51 +77,36 @@ const AboutBox = () => {
   const { data: faq } = useFeature('faq')
   return (
     <Box>
-      <FooterItemTitle>About Digital Aid Seattle</FooterItemTitle>
+      <FooterItemTitle>About Us</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
       {faq && <LinkSubItem url="/faq" name="FAQ" />}
     </Box>
   )
 }
 
-const contactUsBox = () => {
+const ContactUsBox = () => {
   return (
     <Box>
       <FooterItemTitle>Contact us</FooterItemTitle>
-      <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">
-          info@digitalaidseattle.org
-        </a>
-      </FooterSubItem>
+      <LinkSubItem url="mailto:info@digitalaidseattle.org" name="info@digitalaidseattle.org" />
     </Box>
   )
 }
 
-const workWithUsBox = () => {
+const WorkWithUsBox = () => {
   return (
     <Box>
       <FooterItemTitle>Work with us</FooterItemTitle>
       <LinkSubItem url="/partners" name="Partner" />
       <LinkSubItem url="/volunteers" name="Volunteer" />
+      <LinkSubItem url="/support_us" name="Donate" />
     </Box>
   )
 }
 
-const supportUsBox = () => {
+const CopyrightBox = () => {
   return (
-    <Box>
-      <FooterItemTitle>Support us</FooterItemTitle>
-      <FooterSubItem>
-        <a href="mailto:info@digitalaidseattle.org">How you can help</a>
-      </FooterSubItem>
-    </Box>
-  )
-}
-
-const copyrightBox = () => {
-  return (
-    <Stack gap="0.25rem">
-      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
+    <Stack gap="1rem">
       <SubText>
         Illustrations by{' '}
         <Link
@@ -152,7 +119,22 @@ const copyrightBox = () => {
           Storyset
         </Link>
       </SubText>
+      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
     </Stack>
+  )
+}
+
+const SocialMediaBox = () => {
+  return (
+    <>
+      <FooterItemTitle>Follow us on social media</FooterItemTitle>
+      <Box display="flex" sx={{ gap: '1rem', marginTop: '0.5rem' }}>
+        {linkedInLink()}
+        {githubLink()}
+        {facebookLink()}
+        {instagramLink()}
+      </Box>
+    </>
   )
 }
 
@@ -165,13 +147,14 @@ const linkedInLink = () => {
       title="LinkedIn"
       aria-label="Our LinkedIn, which opens in a new window."
     >
-      <LinkedInIcon
+      <LinkedIn
         sx={{ color: theme.palette.primary.contrastText }}
         fontSize="large"
       />
     </Link>
   )
 }
+
 const githubLink = () => {
   return (
     <Link
@@ -181,24 +164,7 @@ const githubLink = () => {
       title="GitHub"
       aria-label="Our GitHub, which opens in a new window."
     >
-      <GitHubIcon
-        sx={{ color: theme.palette.primary.contrastText }}
-        fontSize="large"
-      />
-    </Link>
-  )
-}
-
-const instaLink = () => {
-  return (
-    <Link
-      href="https://instagram.com/digitalaidseattle"
-      target="_blank"
-      rel="noopener noreferrer"
-      title="Instagram"
-      aria-label="Our Instagram, which opens in a new window."
-    >
-      <Instagram
+      <GitHub
         sx={{ color: theme.palette.primary.contrastText }}
         fontSize="large"
       />
@@ -213,7 +179,7 @@ const facebookLink = () => {
       target="_blank"
       rel="noopener noreferrer"
       title="Facebook"
-      aria-label="Our Facebook, which opens in a new window."
+      aria-label="Our Facebook page, which opens in a new window."
     >
       <Facebook
         sx={{ color: theme.palette.primary.contrastText }}
@@ -222,180 +188,82 @@ const facebookLink = () => {
     </Link>
   )
 }
-const CommonFooterLargeScreen = () => (
-  <Grid container direction="column" columns={4}>
-    <GridItem md={3}>
+
+const instagramLink = () => {
+  return (
+    <Link
+      href="https://instagram.com/digitalaidseattle"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Instagram"
+      aria-label="Our Instagram page, which opens in a new window."
+    >
+      <Instagram
+        sx={{ color: theme.palette.primary.contrastText }}
+        fontSize="large"
+      />
+    </Link>
+  )
+}
+
+const CommonFooterLargeScreen = () => {
+  return (
+    <Stack>
+      <EmailFormContainer />
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          height: '100%',
-          gap: '2rem',
+          paddingY: '5rem',
+          height: '28rem'
         }}
       >
-        {logoBox()}
-        {copyrightBox()}
+        <Grid container spacing={4}>
+          <GridItem md={4}><LogoBox /></GridItem>
+          <GridItem md={4}><WorkWithUsBox /></GridItem>
+          <GridItem md={4}><AboutBox /></GridItem>
+
+          <GridItem md={4}><Box /></GridItem>
+          <GridItem md={4}><ContactUsBox /></GridItem>
+          <GridItem md={4}><Box /></GridItem>
+
+          <GridItem md={4}><CopyrightBox /></GridItem>
+          <GridItem md={8}><SocialMediaBox /></GridItem>
+        </Grid>
       </Box>
-    </GridItem>
+    </Stack>)
+}
 
-    <GridItem md={4}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
-        }}
-      >
-        {contactUsBox()}
-        {workWithUsBox()}
-      </Box>
-    </GridItem>
-
-    <GridItem md={4}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
-        <AboutBox />
-      </Box>
-    </GridItem>
-
-    <GridItem md={1}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
-          alignItems: 'flex-end',
-        }}
-      >
-        {linkedInLink()}
-        {githubLink()}
-        {instaLink()}
-        {facebookLink()}
-      </Box>
-    </GridItem>
-  </Grid>
-)
-
-const CommonFooterMidScreen = () => (
-  <Grid container direction="column" columns={3}>
-    <GridItem md={5}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          height: '100%',
-          gap: '2rem',
-        }}
-      >
-        {logoBox()}
-        {copyrightBox()}
-      </Box>
-    </GridItem>
-
-    <GridItem md={5}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          height: '100%',
-        }}
-      >
-        {contactUsBox()}
-        {workWithUsBox()}
-        <AboutBox />
-      </Box>
-    </GridItem>
-
-    <GridItem md={2}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2rem',
-          alignItems: 'flex-end',
-        }}
-      >
-        {linkedInLink()}
-        {githubLink()}
-        {instaLink()}
-        {facebookLink()}
-      </Box>
-    </GridItem>
-  </Grid>
-)
-
-const CommonFooterSmallScreen = () => (
-  <Grid
-    container
-    direction="column"
-    columns={1}
-    sx={{ alignItems: 'center', textAlign: 'center', gap: '2rem' }}
-  >
-    <GridItem>{logoBox()}</GridItem>
-
-    <GridItem>{contactUsBox()}</GridItem>
-
-    <GridItem>{workWithUsBox()}</GridItem>
-
-    <GridItem><AboutBox /></GridItem>
-
-    <GridItem>
-      <Box display="flex" sx={{ gap: '1rem' }}>
-        {linkedInLink()}
-        {githubLink()}
-        {instaLink()}
-        {facebookLink()}
-      </Box>
-    </GridItem>
-
-    <GridItem>{copyrightBox()}</GridItem>
-  </Grid>
-)
+const CommonFooterSmallScreen = () => {
+  return (
+    <Grid
+      container
+      direction="column"
+      columns={1}
+      sx={{
+        width: '100%',
+        alignItems: 'center', textAlign: 'center', paddingY: '4rem', gap: '2rem'
+      }}
+    >
+      <GridItem><LogoBox /></GridItem>
+      <GridItem><EmailFormContainer /></GridItem>
+      <GridItem><WorkWithUsBox /></GridItem>
+      <GridItem><AboutBox /></GridItem>
+      <GridItem><ContactUsBox /></GridItem>
+      <GridItem><SocialMediaBox /></GridItem>
+      <GridItem><CopyrightBox /></GridItem>
+    </Grid>
+  )
+}
 
 const CommonFooter = () => {
-  const { data: newsLetter } = useFeature('newsletter')
   return (
-    <>
-      <Container>
-        {newsLetter && <EmailFormContainer />}
-        <Box
-          sx={{
-            paddingY: '5rem',
-            display: { xs: 'none', md: 'none', lg: 'flex' },
-            height: '28rem',
-          }}
-        >
-          <CommonFooterLargeScreen />
-        </Box>
-
-        <Box
-          sx={{
-            paddingY: '4rem',
-            display: { xs: 'none', md: 'flex', lg: 'none' },
-            height: '29rem',
-          }}
-        >
-          <CommonFooterMidScreen />
-        </Box>
-
-        <Box
-          sx={{
-            paddingY: '4rem',
-            display: { xs: 'flex', md: 'none', lg: 'none' },
-          }}
-        >
-          <CommonFooterSmallScreen />
-        </Box>
-      </Container>
-    </>
+    <Container>
+      <Box sx={{ display: { xs: 'none', md: 'flex', lg: 'flex' } }}>
+        <CommonFooterLargeScreen />
+      </Box>
+      <Box sx={{ display: { xs: 'flex', md: 'none', lg: 'none' } }}>
+        <CommonFooterSmallScreen />
+      </Box>
+    </Container >
   )
 }
 export default CommonFooter
