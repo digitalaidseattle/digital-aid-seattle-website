@@ -11,15 +11,6 @@ import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
 
-// const GridItem = styled(Grid)(() => {
-//   return {
-//     item: true,
-//     padding: '0.5rem',
-//     justifyContent: 'left',
-//     alignItems: 'center'
-//   }
-// })
-
 const SubText = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
   fontSize: '0.75rem',

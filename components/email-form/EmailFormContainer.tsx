@@ -72,8 +72,7 @@ const InputSection = () => {
               background: "green"
             }
           }}
-        >
-        </Snackbar>
+        />
         <form onSubmit={handleSubmit}>
           <Stack gap='1rem'
             sx={{
