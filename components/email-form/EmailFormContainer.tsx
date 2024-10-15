@@ -48,13 +48,11 @@ const EmailFormContainer = () => {
     return (newsLetter &&
       <Stack
         sx={{
-          width: { xs: '100%', lg: 'auto' },
           flexDirection: { xs: 'column', md: 'row', lg: 'row' },
         }}>
         <Stack>
           <Stack gap='1rem'
             sx={{
-              width: { xs: '100%', lg: 'auto' },
               flexDirection: { xs: 'column', md: 'row' },
             }}>
             <EmailFormInput
@@ -97,10 +95,9 @@ const EmailFormContainer = () => {
   return (
     <Stack
       sx={{
-        width: { xs: '80%', lg: 'auto' },
         paddingTop: { md: '5rem', lg: '5rem' },
         flexDirection: { xs: 'column', md: 'column', lg: 'row' },
-        alignItems: { xs: 'flex-start', md: 'center', lg: 'center' }
+        alignItems: { xs: 'flex-start', md: 'flex-start', lg: 'center' }
       }}
     >
       <LabelSection />

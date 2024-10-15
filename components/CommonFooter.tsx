@@ -256,10 +256,13 @@ const CommonFooterSmallScreen = () => {
       container
       direction="column"
       columns={1}
-      sx={{ alignItems: 'center', textAlign: 'center', paddingY: '4rem', gap: '2rem' }}
+      sx={{
+        width: '100%',
+        alignItems: 'center', textAlign: 'center', paddingY: '4rem', gap: '2rem'
+      }}
     >
       <GridItem><LogoBox /></GridItem>
-      <EmailFormContainer />
+      <GridItem><EmailFormContainer /></GridItem>
       <GridItem><WorkWithUsBox /></GridItem>
       <GridItem><AboutBox /></GridItem>
       <GridItem><ContactUsBox /></GridItem>
