@@ -5,11 +5,11 @@ import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
 import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
+import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
+import { useFeature } from 'pages/api/FeatureService'
 import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
-import { useFeature } from 'pages/api/FeatureService'
-import { GitHub, LinkedIn, Facebook, Instagram } from '@mui/icons-material'
 
 // const GridItem = styled(Grid)(() => {
 //   return {
@@ -133,6 +133,20 @@ const CopyrightBox = () => {
   )
 }
 
+const SocialMediaBox = () => {
+  return (
+    <>
+      <FooterItemTitle>Follow us on social media</FooterItemTitle>
+      <Box display="flex" sx={{ gap: '1rem', marginTop: '0.5rem' }}>
+        {linkedInLink()}
+        {githubLink()}
+        {facebookLink()}
+        {instagramLink()}
+      </Box>
+    </>
+  )
+}
+
 const linkedInLink = () => {
   return (
     <Link
@@ -210,11 +224,9 @@ const START_BOX_STYLE = {
 }
 
 const CommonFooterLargeScreen = () => {
-  const { data: newsLetter } = useFeature('newsletter')
-
   return (
     <Stack>
-      {newsLetter && <EmailFormContainer />}
+      <EmailFormContainer />
       <Box
         sx={{
           paddingY: '5rem',
@@ -222,90 +234,22 @@ const CommonFooterLargeScreen = () => {
         }}
       >
         <Grid container spacing={4}>
-          <GridItem md={4}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '2rem',
-              }}
-            >
-              <LogoBox />
-            </Box>
-          </GridItem>
+          <GridItem md={4}><LogoBox /></GridItem>
+          <GridItem md={4}><WorkWithUsBox /></GridItem>
+          <GridItem md={4}><AboutBox /></GridItem>
 
-          <GridItem md={4}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <WorkWithUsBox />
-            </Box>
-          </GridItem>
+          <GridItem md={4}><Box /></GridItem>
+          <GridItem md={4}><ContactUsBox /></GridItem>
+          <GridItem md={4}><Box /></GridItem>
 
-          <GridItem md={4}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <AboutBox />
-            </Box>
-          </GridItem>
-
-          <GridItem md={4}>
-            <Box sx={START_BOX_STYLE}>
-            </Box>
-          </GridItem>
-
-          <GridItem md={4}>
-            <Box sx={START_BOX_STYLE}>
-              <ContactUsBox />
-            </Box>
-          </GridItem>
-
-          <GridItem md={4}>
-            <Box sx={START_BOX_STYLE}>
-            </Box>
-          </GridItem>
-
-          <GridItem md={4}>
-            <Box sx={START_BOX_STYLE}>
-              <CopyrightBox />
-            </Box>
-          </GridItem>
-          <GridItem md={8}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: '2rem',
-                alignItems: 'flex-end',
-              }}
-            >
-              <Box >
-                <FooterItemTitle>Follow us on social media</FooterItemTitle>
-                <Stack direction={'row'} marginTop={1} spacing={2}>
-                  {linkedInLink()}
-                  {githubLink()}
-                  {facebookLink()}
-                  {instagramLink()}
-                </Stack>
-              </Box>
-            </Box>
-          </GridItem>
+          <GridItem md={4}><CopyrightBox /></GridItem>
+          <GridItem md={8}><SocialMediaBox /></GridItem>
         </Grid>
       </Box>
     </Stack>)
 }
 
 const CommonFooterSmallScreen = () => {
-  const { data: newsLetter } = useFeature('newsletter')
 
   return (
     <Grid
@@ -315,19 +259,11 @@ const CommonFooterSmallScreen = () => {
       sx={{ alignItems: 'center', textAlign: 'center', paddingY: '4rem', gap: '2rem' }}
     >
       <GridItem><LogoBox /></GridItem>
-      {newsLetter && <EmailFormContainer />}
+      <EmailFormContainer />
       <GridItem><WorkWithUsBox /></GridItem>
       <GridItem><AboutBox /></GridItem>
       <GridItem><ContactUsBox /></GridItem>
-      <GridItem>
-        <FooterItemTitle>Follow us on social media</FooterItemTitle>
-        <Box display="flex" sx={{ gap: '1rem', marginTop: '1rem' }}>
-          {linkedInLink()}
-          {githubLink()}
-          {facebookLink()}
-          {instagramLink()}
-        </Box>
-      </GridItem>
+      <GridItem><SocialMediaBox /></GridItem>
       <GridItem><CopyrightBox /></GridItem>
     </Grid>
   )

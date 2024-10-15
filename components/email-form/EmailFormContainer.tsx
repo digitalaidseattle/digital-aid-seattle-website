@@ -1,12 +1,14 @@
 import { Button, Stack, Typography, useTheme } from '@mui/material'
 import { useState } from 'react'
 
+import { useFeature } from 'pages/api/FeatureService'
 import EmailFormInput from './EmailFormInput'
 
 const EmailFormContainer = () => {
   const theme = useTheme()
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  const { data: newsLetter } = useFeature('newsletter')
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,10 +44,8 @@ const EmailFormContainer = () => {
     )
   }
 
-
-
   const InputSection = () => {
-    return (
+    return (newsLetter &&
       <Stack
         sx={{
           width: { xs: '100%', lg: 'auto' },
