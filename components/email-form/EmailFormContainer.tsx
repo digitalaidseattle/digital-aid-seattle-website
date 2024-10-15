@@ -1,56 +1,80 @@
-import { Button, Stack, Typography, useTheme } from '@mui/material'
+import { Button, Snackbar, Stack, Typography, useTheme } from '@mui/material'
 import { useState } from 'react'
 
+import { emailService } from 'pages/api/EmailService'
 import { useFeature } from 'pages/api/FeatureService'
 import EmailFormInput from './EmailFormInput'
 
-const EmailFormContainer = () => {
-  const theme = useTheme()
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+const LabelSection = () => {
+  const theme = useTheme();
+
+  return (
+    <Stack direction={'column'}
+      sx={{
+        width: { xs: '100%' }
+      }}
+    >
+      <Typography
+        variant="headlineMedium"
+        sx={{ color: theme.palette.primary.contrastText }}
+      >
+        Stay Connected!
+      </Typography>
+      <Typography
+        variant="bodyLarge"
+        sx={{ color: theme.palette.primary.contrastText }}
+      >
+        Sign up for our newsletter
+      </Typography>
+    </Stack>
+  )
+}
+
+
+const InputSection = () => {
+  const theme = useTheme();
+
   const { data: newsLetter } = useFeature('newsletter')
+  const [email, setEmail] = useState('');
+  const [subscribeMessage, setSubscribeMessage] = useState('');
+  const [error, setError] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-    if (email.match(isValidEmail)) {
-      setError('')
-      // TODO: submit email to newsletter service
+    if (emailService.isValid(email)) {
+      emailService.subscribe(email)
+        .then(success => {
+          if (success) {
+            setSubscribeMessage("Thank you for subscribing.");
+          }
+        })
+        .catch(err => console.error(err))
+        .finally(() => setError(''))
     } else {
       setError('Not a valid email address.')
     }
   }
 
-  const LabelSection = () => {
-    return (
-      <Stack direction={'column'}
-        sx={{
-          width: { xs: '100%' }
-        }}
-      >
-        <Typography
-          variant="headlineMedium"
-          sx={{ color: theme.palette.primary.contrastText }}
+  return (newsLetter &&
+    <Stack
+      sx={{
+        flexDirection: { xs: 'column', md: 'row', lg: 'row' },
+      }}>
+      <Stack>
+        <Snackbar
+          open={subscribeMessage !== ''}
+          autoHideDuration={6000}
+          onClose={() => setSubscribeMessage('')}
+          message={<><Typography fontWeight={500}>{subscribeMessage}</Typography></>}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          ContentProps={{
+            sx: {
+              background: "green"
+            }
+          }}
         >
-          Stay Connected!
-        </Typography>
-        <Typography
-          variant="bodyLarge"
-          sx={{ color: theme.palette.primary.contrastText }}
-        >
-          Sign up for our newsletter
-        </Typography>
-      </Stack>
-    )
-  }
-
-  const InputSection = () => {
-    return (newsLetter &&
-      <Stack
-        sx={{
-          flexDirection: { xs: 'column', md: 'row', lg: 'row' },
-        }}>
-        <Stack>
+        </Snackbar>
+        <form onSubmit={handleSubmit}>
           <Stack gap='1rem'
             sx={{
               flexDirection: { xs: 'column', md: 'row' },
@@ -74,7 +98,7 @@ const EmailFormContainer = () => {
                 color: theme.palette.primary.contrastText,
                 backgroundColor: theme.palette.primary.dark,
               }}
-              onClick={handleSubmit}
+              type="submit"
             >
               Sign up
             </Button>
@@ -87,11 +111,12 @@ const EmailFormContainer = () => {
                 color: theme.palette.error.main,
               }}>Error: {error}</Typography>
           }
-        </Stack>
+        </form>
       </Stack>
-    )
-  }
-
+    </Stack>
+  )
+}
+const EmailFormContainer = () => {
   return (
     <Stack
       sx={{

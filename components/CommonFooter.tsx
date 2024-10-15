@@ -215,14 +215,6 @@ const instagramLink = () => {
   )
 }
 
-const START_BOX_STYLE = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  height: '100%',
-  gap: '2rem',
-}
-
 const CommonFooterLargeScreen = () => {
   return (
     <Stack>
@@ -250,7 +242,6 @@ const CommonFooterLargeScreen = () => {
 }
 
 const CommonFooterSmallScreen = () => {
-
   return (
     <Grid
       container
