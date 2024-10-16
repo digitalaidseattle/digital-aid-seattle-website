@@ -12,6 +12,10 @@ body {
   line-height: 36px;
 }
 
+.markdown a {
+  text-decoration: underline;
+}
+
 .markdown h1 {
   font-weight: 1000;
   margin-top: 0.5rem;
