@@ -73,6 +73,7 @@ type DASFaq = {
   title: string
   description: string
   qandas: DASQandA[]
+  orderRank: string
 }
 
 type DASFeature = {

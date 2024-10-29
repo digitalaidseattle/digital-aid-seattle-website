@@ -23,7 +23,8 @@ import {
   HandshakeOutlined,
   SettingsOutlined,
   FlightTakeoffOutlined,
-  HelpOutlineOutlined
+  HelpOutlineOutlined,
+  VolunteerActivismOutlined
 } from '@mui/icons-material';
 
 import FaqImage from '../assets/faq.png'
@@ -64,7 +65,7 @@ const FaqPage = () => {
           faqService
             .getAll()
             .then((data) => {
-              setFaqSections(data);
+              setFaqSections(data.sort((f1: DASFaq, f2: DASFaq) => f1.orderRank.localeCompare(f2.orderRank)));
               setInitialized(true);
             })
             .catch((err) => console.error(err))
@@ -126,7 +127,7 @@ const FaqPage = () => {
       'involvementOpportunities': HandshakeOutlined,
       'projectAndTeamStructure': SettingsOutlined,
       'onboardingProcess': FlightTakeoffOutlined,
-      'additionalQuestions': HelpOutlineOutlined,
+      'additionalQuestions': VolunteerActivismOutlined,
       // a fallback icon
       'default': HelpOutlineOutlined
     }
