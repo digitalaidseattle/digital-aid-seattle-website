@@ -11,7 +11,7 @@ const EmailFormInput = ({ userEmail, handleEmailInput, error }) => {
         borderRadius: '28px',
         border: error ? `3px solid ${theme.palette.error.main}` : 'none',
         padding: '0.25rem 1rem',
-        width: { xs: 'auto', lg: '25rem' },
+        width: { xs: 'auto', md: '25rem', lg: '25rem' },
         flex: { xs: '1', lg: 'none' },
         display: 'flex',
         alignItems: 'center'
@@ -25,8 +25,8 @@ const EmailFormInput = ({ userEmail, handleEmailInput, error }) => {
         InputProps={{
           disableUnderline: true
         }}
-        sx={{ 
-          width: '100%', 
+        sx={{
+          width: '100%',
           height: 'min-content'
         }}
       />
