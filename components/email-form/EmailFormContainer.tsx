@@ -34,7 +34,6 @@ const LabelSection = () => {
 const InputSection = () => {
   const theme = useTheme();
 
-  const { data: newsLetter } = useFeature('newsletter')
   const [email, setEmail] = useState('');
   const [subscribeMessage, setSubscribeMessage] = useState('');
   const [error, setError] = useState('');
@@ -55,7 +54,7 @@ const InputSection = () => {
     }
   }
 
-  return (newsLetter &&
+  return (
     <Stack
       sx={{
         flexDirection: { xs: 'column', md: 'row', lg: 'row' },
@@ -115,8 +114,11 @@ const InputSection = () => {
     </Stack>
   )
 }
+
 const EmailFormContainer = () => {
-  return (
+  const { data: newsLetter } = useFeature('newsletter')
+
+  return (newsLetter &&
     <Stack
       sx={{
         paddingTop: { md: '5rem', lg: '5rem' },
