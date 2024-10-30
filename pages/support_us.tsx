@@ -78,10 +78,11 @@ const WhatPeopleSaySection = ({ theme }) => {
             key={'q-' + idx}
             title={info.title}
             description={info.quote}
-            avatar={urlForImage(info.avatar).url()}
+            avatar={urlForImage(info.avatar) ? urlForImage(info.avatar).url() : undefined}
             person={info.name}
             role={info.role}
-          />)}
+          />
+        )}
       </CardRowContainer>
     </SupportUsSection>
   )
