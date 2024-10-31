@@ -1,21 +1,29 @@
-/*
-* privacy-policy.tsx
-* @2023 Digital Aid Seattle
+/**
+* privacy.tsx
+* 
+* Page for privacy policy
+* 
+* @2024 Digital Aid Seattle
 */
-
 import {
     Box,
     Container,
     ListItemText,
-    Stack,
     Typography,
     useMediaQuery,
     useTheme
 } from '@mui/material'
-import Masthead from 'components/Masthead'
+import MastheadWithImage from 'components/MastheadWithImage'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { ReactNode } from 'react'
+import PrivacyImage from '../assets/privacy.png'
+
+const LABELS = {
+    PAGE_TITLE: 'Privacy policy',
+    TITLE_IMAGE: 'Privacy policy graphic',
+    TITLE_COPY: 'This policy outlines how we collect, use, and protect your personal information on our website.'
+}
 
 type CardCopyTextProps = {
     title?: string,
@@ -57,14 +65,37 @@ const ListItem = ({ text }: ListItemProps) => {
     );
 }
 
+
+// TODO consider using Markdown for this page
 const PrivacyPage = () => {
     const theme = useTheme()
-    const title = "Privacy policy"
     const isSmallScreen = useMediaQuery('(max-width:600px)')
 
     return (
         <>
-            <Masthead title={title} />
+            <MastheadWithImage
+                imageSrc={PrivacyImage.src}
+                imageText={LABELS.TITLE_IMAGE}
+            >
+                <>
+                    <Typography
+                        variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+                        sx={{ color: theme.palette.primary.contrastText }}
+                        component="h1"
+                    >
+                        {LABELS.PAGE_TITLE}
+                    </Typography>
+                    <Typography
+                        variant="headlineLarge"
+                        sx={{
+                            color: theme.palette.primary.contrastText,
+                        }}
+                        component="span"
+                    >
+                        {LABELS.TITLE_COPY}
+                    </Typography>
+                </>
+            </MastheadWithImage>
             <SectionContainer backgroundColor={theme.palette.background.default}>
                 <Box
                     sx={{

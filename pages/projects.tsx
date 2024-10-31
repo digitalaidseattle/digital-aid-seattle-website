@@ -1,8 +1,21 @@
-import { Box, Chip, Stack, Typography, useTheme } from '@mui/material'
+/**
+ * projects.tsx
+ *
+ * Page to display list of projects
+ * 
+ * @2024 Digital Aid Seattle
+ */
+import {
+  Box,
+  Chip,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
-import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
 
@@ -10,16 +23,21 @@ import { Check } from '@mui/icons-material'
 import { StatusLabels } from 'components/ProjectComponents'
 import { dasProjectsService } from './api/ProjectsService'
 
+import MastheadWithImage from 'components/MastheadWithImage'
+import ProjectsImage from '../assets/projects.png'
 
 // TODO consider moving into Sanity
 const LABELS = {
   PAGE_TITLE: 'Projects',
+  TITLE_IMAGE: 'Projects graphic',
+  TITLE_COPY: 'We create digital solutions that empower communities, enhance collaboration, and inspire positive change!',
   NO_MATCHES: 'No matching projects found.',
   ARIA_LABEL_FILTERS: 'filter projects by status'
 }
 
 const ProjectsPage = () => {
   const theme = useTheme()
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   const { setLoading } = useContext(LoadingContext);
   const [init, setInit] = useState<boolean>(false);
@@ -60,7 +78,29 @@ const ProjectsPage = () => {
 
   return (
     <>
-      <Masthead title={LABELS.PAGE_TITLE} />
+      <MastheadWithImage
+        imageSrc={ProjectsImage.src}
+        imageText={LABELS.TITLE_IMAGE}
+      >
+        <>
+          <Typography
+            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+            component="h1"
+          >
+            {LABELS.PAGE_TITLE}
+          </Typography>
+          <Typography
+            variant="headlineLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+            component="span"
+          >
+            {LABELS.TITLE_COPY}
+          </Typography>
+        </>
+      </MastheadWithImage>
       <BlockComponent block={!init}>
         <Box
           sx={{

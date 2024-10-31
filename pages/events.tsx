@@ -1,11 +1,14 @@
-/*
- * @2023 Digital Aid Seattle
+/**
+ * events.tsx
+ *
+ * Page to display list of events
+ * 
+ * @2024 Digital Aid Seattle
  */
-
 import {
-  Container,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme
 } from '@mui/material'
 import CardEvent from 'components/cards/CardEvent'
@@ -14,43 +17,19 @@ import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layo
 import { useContext, useEffect, useState } from 'react'
 import { OSEvent } from 'types'
 
+import MastheadWithImage from 'components/MastheadWithImage'
+import EventsImage from '../assets/events.png'
 import { eventsService } from './api/EventsService'
 
-type MastheadProps = {
-  title: string
-}
-
-const Masthead = ({ title }: MastheadProps) => {
-  const theme = useTheme()
-
-  return (
-    <Container
-      sx={{
-        backgroundColor: theme.palette.primary.main,
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        paddingY: '5rem',
-      }}
-      maxWidth={false}
-    >
-      <Typography
-        variant="displayMedium"
-        sx={{
-          color: theme.palette.primary.contrastText,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {title}
-      </Typography>
-    </Container>
-  )
+const LABELS = {
+  PAGE_TITLE: 'Events',
+  TITLE_IMAGE: 'Events graphic',
+  TITLE_COPY: 'Join vibrant in-person team-building events! Connect, share laughter, and forge friendships that inspire collaboration and creativity!'
 }
 
 const EventsPage = () => {
   const theme = useTheme()
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   const title = 'Events'
   const { setLoading } = useContext(LoadingContext);
@@ -78,7 +57,29 @@ const EventsPage = () => {
 
   return (
     <>
-      <Masthead title={title} />
+      <MastheadWithImage
+        imageSrc={EventsImage.src}
+        imageText={LABELS.TITLE_IMAGE}
+      >
+        <>
+          <Typography
+            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+            sx={{ color: theme.palette.primary.contrastText }}
+            component="h1"
+          >
+            {LABELS.PAGE_TITLE}
+          </Typography>
+          <Typography
+            variant="headlineLarge"
+            sx={{
+              color: theme.palette.primary.contrastText,
+            }}
+            component="span"
+          >
+            {LABELS.TITLE_COPY}
+          </Typography>
+        </>
+      </MastheadWithImage>
       <BlockComponent block={!init}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
