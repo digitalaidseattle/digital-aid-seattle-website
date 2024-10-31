@@ -65,14 +65,17 @@ const ListItem = ({ text }: ListItemProps) => {
     );
 }
 
-
 // TODO consider using Markdown for this page
 const PrivacyPage = () => {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery('(max-width:600px)')
 
     return (
-        <>
+        <Container
+            maxWidth={false}
+            disableGutters
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
             <MastheadWithImage
                 imageSrc={PrivacyImage.src}
                 imageText={LABELS.TITLE_IMAGE}
@@ -169,7 +172,7 @@ const PrivacyPage = () => {
                     </Container>
                 </Box>
             </SectionContainer>
-        </ >
+        </Container>
     )
 }
 
