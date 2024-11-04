@@ -114,5 +114,6 @@ type DASTestimonial = {
   name: string,
   avatar: Image,
   role: string,
-  active: boolean
+  active: boolean,
+  orderRank: string
 }

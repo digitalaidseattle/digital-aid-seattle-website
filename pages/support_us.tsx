@@ -6,9 +6,9 @@ import { Box, Button, Container, Stack, Typography, useMediaQuery, useTheme } fr
 import CardQuote from 'components/cards/CardQuote'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
-import { BlockComponent, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import dillonOlearyImage from '../assets/dillon_oleary.jpeg'
 import silviniafigueroaImage from '../assets/silvinia_figueroa.jpeg'
@@ -17,6 +17,9 @@ import VenmoImage from '../assets/venmo.png'
 
 import { useFeature } from './api/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
+import { testimonialService } from './api/TestimonialService'
+import { DASTestimonial } from 'types'
+import { urlForImage } from '../sanity/lib/image'
 
 const LABELS = {
   hero_title: 'Support us',
@@ -25,30 +28,6 @@ const LABELS = {
   impact_title: 'What people say about us',
   donate_with: 'Donate with'
 }
-
-const QUOTES = [
-  {
-    title: 'Amazing',
-    quote: "Don't forget that once you're working with DAS, you're part of an amazing community of professionals. Meet the community through the social events and Slack and don't be shy to proposing events for the community.",
-    avatar: dillonOlearyImage.src,
-    person: "Dillon O'Leary",
-    role: 'Volunteer'
-  },
-  {
-    title: 'Professionals',
-    quote: "Remember that you're volunteering inside an organization with other professionals who also believe in the DAS's mission. We're a pool of professionals alike with the same goals. If you have a question or need something, this is the place to do it.",
-    avatar: silviniafigueroaImage.src,
-    person: 'Silvina Figueroa',
-    role: 'Volunteer'
-  },
-  {
-    title: 'Enrichment',
-    quote: "Volunteering with DAS not only provides hands-on experience in a variety of industries, helping you discover new passions or career paths, but it also broadens your perspective by allowing you to collaborate with diverse groups.",
-    avatar: YuliaBalenkoImage.src,
-    person: 'Yulia Balenko',
-    role: 'Volunteer'
-  }
-]
 
 const COPY = {
   hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.',
@@ -75,6 +54,40 @@ const SupportUsSection = ({ backgroundColor, children }) => (
   </SectionContainer>
 )
 
+const WhatPeopleSaySection = ({ theme }) => {
+
+  const { setLoading } = useContext(LoadingContext);
+  const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
+
+  useEffect(() => {
+    setLoading(true);
+    testimonialService.getActiveTestimonials()
+      .then(ts => setTestimonials(ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank))))
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false))
+  }, [setLoading]);
+
+  return (
+    <SupportUsSection backgroundColor={theme.palette.background.default}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.impact_title}
+      </Typography>
+      <CardRowContainer>
+        {testimonials.map((info, idx) =>
+          <CardQuote
+            key={'q-' + idx}
+            title={info.title}
+            description={info.quote}
+            avatar={urlForImage(info.avatar) ? urlForImage(info.avatar).url() : undefined}
+            person={info.name}
+            role={info.role}
+          />
+        )}
+      </CardRowContainer>
+    </SupportUsSection>
+  )
+}
+
 const SupportUsPage = () => {
   const theme = useTheme()
   const { data: supportUs } = useFeature('support-us');
@@ -87,24 +100,7 @@ const SupportUsPage = () => {
     }
   }, [supportUs, router])
 
-  const WhatPeopleSaySection = ({ theme }) => (
-    <SupportUsSection backgroundColor={theme.palette.background.default}>
-      <Typography variant="headlineMedium" component="h2">
-        {LABELS.impact_title}
-      </Typography>
-      <CardRowContainer>
-        {QUOTES.map((info, idx) =>
-          <CardQuote
-            key={'q-' + idx}
-            title={info.title}
-            description={info.quote}
-            avatar={info.avatar}
-            person={info.person}
-            role={info.role}
-          />)}
-      </CardRowContainer>
-    </SupportUsSection>
-  )
+
 
   const SupportUsHeroSection = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
