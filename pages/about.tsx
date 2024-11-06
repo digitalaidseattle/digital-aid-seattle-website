@@ -181,7 +181,7 @@ const OurVisionSection = ({ theme }) => (
       Our vision
     </Typography>
     <Typography variant="bodyLarge" align="center" display="block">
-      We envision a network of highly functional non-profits in the Puget Sound
+      We envision a network of highly functional nonprofits in the Puget Sound
       area, working in tandem with one another and with the municipal government
       in order to enable the highest echelon of public service.
     </Typography>

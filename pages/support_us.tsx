@@ -10,9 +10,6 @@ import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layo
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
-import dillonOlearyImage from '../assets/dillon_oleary.jpeg'
-import silviniafigueroaImage from '../assets/silvinia_figueroa.jpeg'
-import YuliaBalenkoImage from '../assets/Yulia_Balenko.jpg'
 import VenmoImage from '../assets/venmo.png'
 
 import { useFeature } from './api/FeatureService'
@@ -30,7 +27,7 @@ const LABELS = {
 }
 
 const COPY = {
-  hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift non-profits with essential digital tools to support communities and create lasting change.',
+  hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
   donate_instructions: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
