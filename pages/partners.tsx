@@ -50,7 +50,7 @@ const provideContent = [
   {
     title: 'Technical problems',
     description:
-      'No matter the size, any organization in business today is bound to face technical challenges. Digital Aid Seattle partners with non-profits and other organizations to navigate these challenges.',
+      'No matter the size, any organization in business today is bound to face technical challenges. Digital Aid Seattle partners with nonprofits and other organizations to navigate these challenges.',
     icon: <HandymanOutlined style={ICON_STYLE} />,
   },
 ]
