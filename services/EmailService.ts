@@ -11,9 +11,18 @@ class EmailService {
         return email.match(EMAIL_REGEX) != null
     }
 
-    async subscribe(email: string): Promise<boolean> {
-        // Call API to subscribe
-        return true
+    async subscribe(email: string): Promise<any> {
+        fetch('/api/newsletter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                listIds: [2],
+            }),
+        })
+            .then((response) => response.json())
     }
 }
 

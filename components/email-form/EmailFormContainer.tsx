@@ -45,6 +45,7 @@ const InputSection = () => {
         .then(success => {
           if (success) {
             setSubscribeMessage("Thank you for subscribing.");
+            setEmail('');
           }
         })
         .catch(err => console.error(err))
