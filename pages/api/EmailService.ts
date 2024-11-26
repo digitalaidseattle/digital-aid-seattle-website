@@ -11,11 +11,24 @@ class EmailService {
         return email.match(EMAIL_REGEX) != null
     }
 
-    async subscribe(email: string): Promise<boolean> {
-        // Call API to subscribe
-        return true
+    async subscribe(email: string): Promise<any> {
+        return fetch('https://api.brevo.com/v3/contacts', {
+            method: 'POST',
+            headers: {
+                'api-key': process.env.NEXT_PUBLIC_BREVO_API_KEY, // Use a backend to keep this secure
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                listIds: [2],
+            }),
+        })
+            .then((response) => response.json())
+
+        return true;
     }
 }
 
 const emailService = new EmailService();
 export { emailService };
+
