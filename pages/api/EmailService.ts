@@ -14,10 +14,7 @@ class EmailService {
     async subscribe(email: string): Promise<any> {
         return fetch('/api/newsletter', {
             method: 'POST',
-            headers: {
-                'api-key': process.env.NEXT_PUBLIC_BREVO_API_KEY, // Use a backend to keep this secure
-                'Content-Type': 'application/json',
-            } as any,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: email,
                 listIds: [2],
