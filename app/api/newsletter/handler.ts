@@ -5,6 +5,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('reaching handler:', req);
   if (req.method === 'POST') {
     const data = req.body; // Access the POST data
 
