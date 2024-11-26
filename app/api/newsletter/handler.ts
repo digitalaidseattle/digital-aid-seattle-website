@@ -4,12 +4,13 @@
 // import { ContactsApiApiKeys } from '@getbrevo/brevo';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   if (req.method === 'POST') {
-    const data = JSON.parse(req.body); // Access the POST data
+    const data = req.body; // Access the POST data
 
     // Process the data
     console.log('Received data:', data);
+    console.log('Received data stringify:', JSON.stringify(data));
 
     // let contactsClient = new Brevo.ContactsApi();
     // contactsClient.setApiKey(ContactsApiApiKeys.apiKey, process.env.NEXT_PUBLIC_BREVO_API_KEY!);
