@@ -5,7 +5,7 @@
 import { groq } from 'next-sanity';
 import { DASProject, TeamMember } from 'types';
 
-import { sanityClient } from '../../sanity/lib/client';
+import { sanityClient } from '../sanity/lib/client';
 import airtableService from './AirtableService';
 import { FieldSet } from 'airtable';
 

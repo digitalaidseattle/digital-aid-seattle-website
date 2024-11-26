@@ -12,9 +12,9 @@ import { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
 
-import { useFeature } from './api/FeatureService'
+import { useFeature } from '../services/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
-import { testimonialService } from './api/TestimonialService'
+import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
 

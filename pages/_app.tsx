@@ -7,12 +7,12 @@ import Head from 'next/head'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/react';
 
-import { dasProjectsService } from 'pages/api/ProjectsService'
+import { dasProjectsService } from 'services/ProjectsService'
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
-import { eventsService } from './api/EventsService'
+import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
+import { eventsService } from '../services/EventsService'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'

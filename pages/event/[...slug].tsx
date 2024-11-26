@@ -29,7 +29,7 @@ import { Section, Subheader } from 'components/style-utils';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
-import { eventsService } from '../api/EventsService';
+import { eventsService } from '../../services/EventsService';
 import { useRouter } from 'next/router';
 /*********/
 

@@ -37,10 +37,10 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { designColor } from 'theme/theme'
 
 import { DASFaq, DASQandA } from 'types'
-import { faqService } from './api/FaqService'
+import { faqService } from '../services/FaqService'
 
 import { useState, useEffect, useContext } from 'react'
-import { useFeature } from './api/FeatureService';
+import { useFeature } from '../services/FeatureService';
 import Markdown from 'react-markdown';
 
 const FaqPage = () => {

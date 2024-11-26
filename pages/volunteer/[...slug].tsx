@@ -14,7 +14,7 @@ import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService } from '../api/VolunteerRoleService'
+import { dasVolunteerRoleService } from '../../services/VolunteerRoleService'
 import Markdown from 'react-markdown'
 import { useRouter } from 'next/router'
 

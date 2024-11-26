@@ -21,7 +21,7 @@ import { DASProject } from 'types'
 
 import { Check } from '@mui/icons-material'
 import { StatusLabels } from 'components/ProjectComponents'
-import { dasProjectsService } from './api/ProjectsService'
+import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
 import ProjectsImage from '../assets/projects.png'

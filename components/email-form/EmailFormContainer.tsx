@@ -1,8 +1,8 @@
 import { Button, Snackbar, Stack, Typography, useTheme } from '@mui/material'
 import { useState } from 'react'
 
-import { emailService } from 'pages/api/EmailService'
-import { useFeature } from 'pages/api/FeatureService'
+import { emailService } from 'services/EmailService'
+import { useFeature } from 'services/FeatureService'
 import EmailFormInput from './EmailFormInput'
 
 const LabelSection = () => {
