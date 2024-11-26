@@ -4,8 +4,6 @@
 */
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-// let contactsClient = new Brevo.ContactsApi();
-// contactsClient.setApiKey(ContactsApiApiKeys.apiKey, process.env.NEXT_PUBLIC_BREVO_API_KEY);
 
 class EmailService {
 
@@ -14,24 +12,17 @@ class EmailService {
     }
 
     async subscribe(email: string): Promise<any> {
-        return fetch('https://api.brevo.com/v3/contacts', {
+        return fetch('/api/newsletter', {
             method: 'POST',
             headers: {
                 'api-key': process.env.NEXT_PUBLIC_BREVO_API_KEY, // Use a backend to keep this secure
                 'Content-Type': 'application/json',
-            },
+            } as any,
             body: JSON.stringify({
                 email: email,
                 listIds: [2],
             }),
-        })
-            .then((response) => response.json())
-
-        return true;
-        // const contact = new Brevo.CreateContact();
-        // contact.email = email;
-        // contact.listIds[2];
-        // return contactsClient.createContact(contact)
+        }).then((response) => response.json())
     }
 }
 

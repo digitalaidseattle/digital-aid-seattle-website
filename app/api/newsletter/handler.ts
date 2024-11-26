@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const contact = new Brevo.CreateContact();
     contact.email = data.email;
-    contact.listIds![2];
+    contact.listIds = data.listIds;
     const response = await contactsClient.createContact(contact)
     res.status(200).json({ message: 'Data posted successfully', response });
   } else {
