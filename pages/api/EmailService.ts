@@ -12,7 +12,7 @@ class EmailService {
     }
 
     async subscribe(email: string): Promise<any> {
-        return fetch('/api/newsletter/handler', {
+        return fetch('/api/newsletter', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
