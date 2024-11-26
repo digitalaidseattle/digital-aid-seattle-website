@@ -34,23 +34,23 @@ export default function App({ Component, pageProps }: AppProps) {
   const [title, setTitle] = useState(DEFAULT_TAG)
   useEffect(() => {
     const lookupTitle = async (pathName: string) => {
-      let pageName = null
+      let pageName: string = ''
       if (pathName) {
         const path = pathName.split('/')
         pageName = path[path.length - 1]
       }
       switch (pageName) {
         case 'project_individual':
-          const id = searchParams.get('project')
+          const id = searchParams!.get('project')
           const p = id ? await dasProjectsService.getOne(id) : null;
           return p ? p.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         case 'volunteer_role':
-          const role = searchParams.get('role')
-          const r = await dasVolunteerRoleService.getRoleDetailsByName(role)
+          const role = searchParams!.get('role')
+          const r = await dasVolunteerRoleService.getRoleDetailsByName(role!)
           return r ? r.role.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         case 'event':
-          const eventName = searchParams.get('name')
-          const e = await eventsService.getOne(eventName)
+          const eventName = searchParams!.get('name')
+          const e = await eventsService.getOne(eventName!)
           return e ? e.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         default:
           const tag = TAG_NAMES[pageName]

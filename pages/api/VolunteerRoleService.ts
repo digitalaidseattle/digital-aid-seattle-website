@@ -17,7 +17,7 @@ class DASVolunteerRoleService {
 
   async getAllActiveRoles(): Promise<DASVolunteerRoleBasicInfo[]> {
     const volunteerRolesTable =
-      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_VOLUNTEER_ROLES
+      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_VOLUNTEER_ROLES!
     const maxRecords = 100
     const activeRoleFilter = '{Status} = "Active"'
 
@@ -39,7 +39,7 @@ class DASVolunteerRoleService {
         role: getStringFieldRecord(record, 'Role'),
         key: getStringFieldRecord(record, 'Key'),
         category: getStringArrayFieldRecord(record, 'Category'),
-      }
+      } as DASVolunteerRoleBasicInfo
     })
     return volunteerRolesData
   }
@@ -48,7 +48,7 @@ class DASVolunteerRoleService {
     roleKey: string
   ): Promise<DASVolunteerRole | null> {
     const volunteerRolesTable =
-      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_VOLUNTEER_ROLES
+      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_VOLUNTEER_ROLES!
     const maxRecords = 1
     const filterByFormula = `{Key} = '${roleKey}'`
 
@@ -79,13 +79,13 @@ class DASVolunteerRoleService {
       applicationLink: airtableService.getStringFieldRecord(record, 'url to apply'),
       urgency: airtableService.getNumberFieldRecord(record, 'Urgency'),
       keyTechnologiesIds: airtableService.getStringArrayFieldRecord(record, 'Key technologies')
-    }
+    } as DASVolunteerRole
   }
 
   async getAndGroupTechnologies(roleTechnologyRecordIds: string[]) {
     if (roleTechnologyRecordIds && Array.isArray(roleTechnologyRecordIds)) {
       const keyTechnologiesData = await airtableService.getTableRecords(
-        process.env.NEXT_PUBLIC_AIRTABLE_TABLE_TOOLS_WE_USE
+        process.env.NEXT_PUBLIC_AIRTABLE_TABLE_TOOLS_WE_USE!
       )
       const roleTechnologies = keyTechnologiesData.filter((tech) => {
         return roleTechnologyRecordIds.includes(tech.id)
@@ -99,7 +99,7 @@ class DASVolunteerRoleService {
         }
         technologiesMap.get(category).push(name)
       })
-      let keyTechnologies = []
+      let keyTechnologies: string[] = [];
       technologiesMap.forEach((value, key) => {
         keyTechnologies.push(`${key}: ${value.join(', ')}`)
       })
@@ -109,7 +109,7 @@ class DASVolunteerRoleService {
         } else if (b.startsWith('Other')) {
           return -1
         } else {
-          a.localeCompare(b)
+          return a.localeCompare(b)
         }
       })
       return keyTechnologies.map(k => "- " + k).join('\n')

@@ -45,7 +45,7 @@ const CardEvent = ({ event }: CardEventProps) => {
           {event.image && event.image.asset && (
             <CardMedia
               component="img"
-              image={urlForImage(event.image).url()}
+              image={urlForImage(event.image) ? urlForImage(event.image)!.url() : undefined}
               sx={{
                 position: { xs: 'absolute', lg: 'static' },
                 height: '100%',
@@ -98,7 +98,7 @@ const CardEvent = ({ event }: CardEventProps) => {
             {event.image && event.image.asset && (
               <CardMedia
                 component="img"
-                image={urlForImage(event.image).url()}
+                image={urlForImage(event.image) ? urlForImage(event.image)!.url() : undefined}
                 sx={{
                   position: 'static',
                   height: '100%',

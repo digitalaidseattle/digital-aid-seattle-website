@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { useEffect, useRef,useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const SearchToggle = () => {
   const theme = useTheme()
@@ -15,7 +15,7 @@ const SearchToggle = () => {
   const [query, setQuery] = useState('')
 
   // useRef to target the TextField input, so we can make it auto-focus.
-  const textInput = useRef(null)
+  const textInput = useRef<any>(null)
 
   // For setting the ref to the TextField when it appears in the DOM.
   useEffect(() => {

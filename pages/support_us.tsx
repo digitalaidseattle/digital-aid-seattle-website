@@ -75,7 +75,7 @@ const WhatPeopleSaySection = ({ theme }) => {
             key={'q-' + idx}
             title={info.title}
             description={info.quote}
-            avatar={urlForImage(info.avatar) ? urlForImage(info.avatar).url() : undefined}
+            avatar={urlForImage(info.avatar) ? urlForImage(info.avatar)!.url() : ''}
             person={info.name}
             role={info.role}
           />

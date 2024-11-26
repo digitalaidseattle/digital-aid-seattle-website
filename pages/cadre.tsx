@@ -57,9 +57,9 @@ const TheCadrePage = () => {
           maxWidth="880px"
           margin="0 auto"
         >
-          <ProjectBodyTextSection title={ProjectLabels.problem} texts={project.problem as unknown as string[]} />
-          <ProjectBodyTextSection title={ProjectLabels.solution} texts={project.solution as unknown as string[]} />
-          <ProjectBodyTextSection title={ProjectLabels.impact} texts={project.impact as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.problem} texts={project!.problem as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.solution} texts={project!.solution as unknown as string[]} />
+          <ProjectBodyTextSection title={ProjectLabels.impact} texts={project!.impact as unknown as string[]} />
           <ProjectTeamSection title={ProjectLabels.current_team} members={members} />
           <RolesSection showLink={true} title={ProjectLabels.roles_needed} roles={volunteerRoles} />
           <ProjectContactUsSection />
@@ -74,7 +74,7 @@ const TheCadrePage = () => {
         sx={{
           backgroundColor: theme.palette.background.default
         }}>
-        <ProjectHeaderSection project={project} hideStatus={true} />
+        <ProjectHeaderSection project={project!} hideStatus={true} />
         {project ? getBody() : <></>}
         <ProjectFooterSection />
       </Box>

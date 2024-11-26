@@ -135,18 +135,18 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
     return (
       <>
         {/* green section */}
-        <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
+        <HeaderWithImage imageSrc={project!.imageSrc ? project!.imageSrc : PROJECT_IMAGE}>
           <Typography variant="displayMedium" component="h1">
-            {project.title}
+            {project!.title}
           </Typography>
           {!props.hideStatus &&
             <Stack spacing="1rem">
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{project!.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge" >{ProjectLabels.project_status}</Typography>
-                <StateBadge state={project.status} />
+                <StateBadge state={project!.status} />
               </Stack>
             </Stack>
           }
@@ -168,8 +168,8 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
       <>
         {/* green section */}
         <HeaderWithImage
-          imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-          imageAlt={project.title + " logo"}>
+          imageSrc={project!.imageSrc ? project!.imageSrc : PROJECT_IMAGE}
+          imageAlt={project!.title + " logo"}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
             sx={{
@@ -177,7 +177,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             }}
             component="h1"
           >
-            {project.title}
+            {project!.title}
           </Typography>
         </HeaderWithImage>
         {/* light section */}
@@ -202,11 +202,11 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             </Box>
             {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{project!.programAreas.join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
-                <StateBadge state={project.status} />
+                <StateBadge state={project!.status} />
               </Stack></>}
           </Stack>
         </Box>
@@ -229,17 +229,21 @@ type BodyTextSectionProps = {
 }
 
 const ProjectBodyMarkdownSection = ({ title, text }: BodyTextSectionProps) => {
-  return (text &&
-    <Section>
-      <ProjectSubheader
-        variant="headlineMedium"
-        sx={{ textAlign: 'left', width: '100%' }}>
-        {title}
-      </ProjectSubheader>
-      <Markdown className='markdown'>
-        {text}
-      </Markdown>
-    </Section>
+  return (
+    <>
+      {text &&
+        <Section>
+          <ProjectSubheader
+            variant="headlineMedium"
+            sx={{ textAlign: 'left', width: '100%' }}>
+            {title}
+          </ProjectSubheader>
+          <Markdown className='markdown'>
+            {text}
+          </Markdown>
+        </Section>
+      }
+    </>
   )
 }
 
@@ -289,22 +293,23 @@ const ProjectTextSection = styled(Stack)(() => ({
 
 const ProjectBodyTextSection = (props: { title: string, texts?: string[] }) => {
   return (
-    props.texts &&
-    props.texts.length > 0 && (
-      <ProjectSection>
-        <ProjectSubheader variant="headlineMedium"
-          component="h2">
-          {props.title}
-        </ProjectSubheader>
-        <ProjectTextSection>
-          {props.texts.map((t, index) => (
-            <Typography key={index} variant="bodyLarge">
-              {t}
-            </Typography>
-          ))}
-        </ProjectTextSection>
-      </ProjectSection>
-    )
+    <>
+      {props.texts && props.texts.length > 0 && (
+        <ProjectSection>
+          <ProjectSubheader variant="headlineMedium"
+            component="h2">
+            {props.title}
+          </ProjectSubheader>
+          <ProjectTextSection>
+            {props.texts.map((t, index) => (
+              <Typography key={index} variant="bodyLarge">
+                {t}
+              </Typography>
+            ))}
+          </ProjectTextSection>
+        </ProjectSection>
+      )}
+    </>
   )
 }
 
@@ -319,8 +324,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
   }, [props])
 
   return (
-    members &&
-    members.length > 0 && (
+    <>{members && members.length > 0 && (
       <ProjectSection>
         <ProjectSubheader
           variant="headlineMedium"
@@ -341,7 +345,11 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
           component="ul"
         >
           {members.map((person, idx) => {
-            const url = person.url ? person.url : person.image ? urlForImage(person.image).url() : NoPhotoPerson.src;
+            const url = person.url
+              ? person.url
+              : person.image
+                ? urlForImage(person.image) ? urlForImage(person.image)!.url() : NoPhotoPerson.src
+                : NoPhotoPerson.src;
             return <CardWithPhoto
               key={idx}
               title={person.name}
@@ -353,7 +361,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
         </Box>
       </ProjectSection>
     )
-  )
+    }</>)
 }
 
 type RolesSectionProps = {
@@ -363,8 +371,7 @@ type RolesSectionProps = {
 
 const ProjectRolesSection = ({ title, roles }: RolesSectionProps) => {
   return (
-    roles &&
-    roles.length > 0 && (
+    <>{roles && roles.length > 0 &&
       <ProjectSection>
         <ProjectSubheader
           variant="headlineMedium"
@@ -395,27 +402,29 @@ const ProjectRolesSection = ({ title, roles }: RolesSectionProps) => {
             ))}
         </Box>
       </ProjectSection>
-    )
+    } </>
   )
 }
 
 const ProjectContactUsSection = () => {
-  return <ProjectSection
-    sx={{
-      alignItems: 'center',
-    }}
-  >
-    <ProjectSubheader
-      variant="headlineMedium"
-      sx={{ textAlign: 'center' }}
-      component="h2"
+  return (
+    <ProjectSection
+      sx={{
+        alignItems: 'center',
+      }}
     >
-      Questions about this project?
-    </ProjectSubheader>
-    <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-      Contact us
-    </Button>
-  </ProjectSection>
+      <ProjectSubheader
+        variant="headlineMedium"
+        sx={{ textAlign: 'center' }}
+        component="h2"
+      >
+        Questions about this project?
+      </ProjectSubheader>
+      <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+        Contact us
+      </Button>
+    </ProjectSection>
+  )
 }
 
 export {

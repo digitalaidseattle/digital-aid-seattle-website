@@ -10,7 +10,7 @@ import { sanityClient } from '../../sanity/lib/client';
 class FaqService {
 
     async getAll(): Promise<DASFaq[]> {
-        return sanityClient()
+        return sanityClient()!
             .fetch(groq`*[_type == "das-faq"] | order(orderRank)`);
     }
 

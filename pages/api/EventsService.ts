@@ -14,12 +14,12 @@ class EventsService {
     }
 
     async getActiveEvents(): Promise<OSEvent[]> {
-        return sanityClient()
+        return sanityClient()!
             .fetch(groq`*[_type == "os-event" && active == true]`);
     }
 
     async getOne(id: string): Promise<OSEvent> {
-        return sanityClient()
+        return sanityClient()!
             .fetch(groq`*[_type == "os-event" && id == "${id}"]`)
             .then(results => results.length === 0 ? null : results[0]);
     }

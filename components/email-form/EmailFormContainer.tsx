@@ -118,17 +118,21 @@ const InputSection = () => {
 const EmailFormContainer = () => {
   const { data: newsLetter } = useFeature('newsletter')
 
-  return (newsLetter &&
-    <Stack
-      sx={{
-        paddingTop: { md: '5rem', lg: '5rem' },
-        flexDirection: { xs: 'column', md: 'column', lg: 'row' },
-        alignItems: { xs: 'flex-start', md: 'flex-start', lg: 'center' }
-      }}
-    >
-      <LabelSection />
-      <InputSection />
-    </Stack>
+  return (
+    <>
+      {newsLetter &&
+        <Stack
+          sx={{
+            paddingTop: { md: '5rem', lg: '5rem' },
+            flexDirection: { xs: 'column', md: 'column', lg: 'row' },
+            alignItems: { xs: 'flex-start', md: 'flex-start', lg: 'center' }
+          }}
+        >
+          <LabelSection />
+          <InputSection />
+        </Stack>
+      }
+    </>
   )
 }
 

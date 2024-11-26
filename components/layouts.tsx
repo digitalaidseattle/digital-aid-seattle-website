@@ -54,14 +54,16 @@ const LoadingIndicator = (): ReactJSXElement => {
   const { loading, setLoading } = useContext(LoadingContext);
 
   // creating an overlay effect
-  return (loading &&
-    <Box sx={{
-      zIndex: 2,
-      position: 'fixed',
-      width: '100%'
-    }}>
-      <LinearProgress color="success" />
-    </Box>
+  return (
+    <>{loading &&
+      <Box sx={{
+        zIndex: 2,
+        position: 'fixed',
+        width: '100%'
+      }}>
+        <LinearProgress color="success" />
+      </Box>
+    }</>
   )
 }
 

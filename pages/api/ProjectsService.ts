@@ -25,12 +25,12 @@ class SantiyProjectService {
   querySingle = groq`*[_type == "das-project"]`
 
   async getAll(): Promise<DASProject[]> {
-    return sanityClient()
+    return sanityClient()!
       .fetch(this.query)
   }
 
   async getOne(id: string): Promise<DASProject> {
-    return sanityClient()
+    return sanityClient()!
       .fetch(groq`*[_type == "das-project" && id == "${id}"]`)
       .then(results => results[0]);
   }
@@ -45,7 +45,7 @@ class AirtableProjectsService {
   filteredStatuses = ['Active', 'Under evaluation'];
 
   async airtableTransform(fields: FieldSet): Promise<DASProject> {
-    return airtableService.getRecord(PARTNER_TABLE, fields.Partner[0])
+    return airtableService.getRecord(PARTNER_TABLE, fields.Partner![0])
       .then(resp => {
         const logos: any[] = resp.fields['logo'] as any[];
         return {
@@ -90,7 +90,7 @@ class AirtableProjectsService {
         }))
   }
 
-  async getOne(id: string): Promise<DASProject> {
+  async getOne(id: string): Promise<DASProject | null> {
     const MAX_RECORDS = 1;
     const ACTIVE_FILTER = `{AirTable ID} = "${id}"`;
     return await airtableService
@@ -102,7 +102,7 @@ class AirtableProjectsService {
     const MAX_RECORDS = 100;
     const ACTIVE_FILTER = `{Manual Status} = "${status}"`
     return (await airtableService.getTableRecords(
-      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE,
+      process.env.NEXT_PUBLIC_AIRTABLE_TABLE_PEOPLE_REFERENCE!,
       MAX_RECORDS,
       ACTIVE_FILTER
     )).map(r => {

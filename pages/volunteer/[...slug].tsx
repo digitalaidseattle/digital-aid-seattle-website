@@ -53,9 +53,9 @@ const VolunteerRolePage = () => {
             console.error(`Volunteer role '${roleName} not found.`);
             router.push('/404')
           } else {
-            dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
+            dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds!)
               .then(keys => {
-                resp.keyTechnologies = keys;
+                resp.keyTechnologies = keys!;
                 setRole(resp)
               })
               .catch((error) => console.error(error))
@@ -88,17 +88,20 @@ const VolunteerRolePage = () => {
     )
   }
 
-  const RoleDescriptionSubSection = ({ title, content, prefix = null }) => {
-    return (content &&
-      <>
-        <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold' }}>
-          {title}
-        </Box>
-        {prefix}
-        <Markdown className='markdown'>
-          {content}
-        </Markdown>
-      </>)
+  const RoleDescriptionSubSection = ({ title, content, prefix }) => {
+    return (
+      <>{content &&
+        <>
+          <Box sx={{ typography: 'bodyLarge', fontWeight: 'bold' }}>
+            {title}
+          </Box>
+          {prefix}
+          <Markdown className='markdown'>
+            {content}
+          </Markdown>
+        </>
+      }</>
+    )
   }
 
   const PreferredRoleDescriptionSubSection = ({ title, content }) => {
@@ -157,18 +160,22 @@ const VolunteerRolePage = () => {
         <RoleDescriptionSubSection
           title={Labels.AboutUs}
           content={roleData.aboutUs}
+          prefix={undefined}
         />
         <RoleDescriptionSubSection
           title={Labels.WhyJoinUs}
           content={roleData.whyJoin}
+          prefix={undefined}
         />
         <RoleDescriptionSubSection
           title={Labels.WhatYouWillDo}
           content={roleData.whatYouWillDo}
+          prefix={undefined}
         />
         <RoleDescriptionSubSection
           title={Labels.Responsibilities + roleData.role}
           content={roleData.responsibilities}
+          prefix={undefined}
         />
         <PreferredRoleDescriptionSubSection
           title={Labels.PreferredQualifications}
@@ -177,10 +184,12 @@ const VolunteerRolePage = () => {
         <RoleDescriptionSubSection
           title={Labels.KeyAttributesToSuccess}
           content={roleData.keyAttributesToSuccess}
+          prefix={undefined}
         />
         <RoleDescriptionSubSection
           title={Labels.KeyTechnologies}
           content={roleData.keyTechnologies}
+          prefix={undefined}
         />
         {roleData.applicationLink ? (
           <Box

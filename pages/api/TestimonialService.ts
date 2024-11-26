@@ -9,7 +9,7 @@ import { DASTestimonial, OSEvent } from 'types';
 class TestimonialService {
 
   async getActiveTestimonials(): Promise<DASTestimonial[]> {
-    return sanityClient()
+    return sanityClient()!
       .fetch(groq`*[_type == "das-testimonial" && active == true]`);
   }
 

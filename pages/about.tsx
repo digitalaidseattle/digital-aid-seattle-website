@@ -215,7 +215,7 @@ const OurTeamSection = () => {
           <Grid item xs={6} md={4} key={item.label}>
             <ListItemWithIcon
               listIcon={item.icon}
-              listText={!isMediumOrSmallerScreen && item.label}
+              listText={!isMediumOrSmallerScreen ? item.label : undefined}
             />
           </Grid>
         ))}
@@ -232,7 +232,7 @@ const OurTeamSection = () => {
         {experienceContent.map((item) => (
           <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
-              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              sxProps={!isMediumOrSmallerScreen ? { height: '56px' } : undefined}
               listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />
@@ -251,7 +251,7 @@ const OurTeamSection = () => {
         {degreeContent.map((item) => (
           <Grid item xs={12} sm={6} lg={4} key={item.label}>
             <ListItemWithIcon
-              sxProps={!isMediumOrSmallerScreen && { height: '56px' }}
+              sxProps={!isMediumOrSmallerScreen ? { height: '56px' } : undefined}
               listIcon={!isMediumOrSmallerScreen && item.icon}
               listText={item.label}
             />

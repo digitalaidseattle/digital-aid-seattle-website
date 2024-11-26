@@ -22,7 +22,7 @@ const useFeature = (name: string) => {
                 setStatus('fetched');
             } else {
 
-                const response = await sanityClient()
+                const response = await sanityClient()!
                     .fetch(groq`*[_type == "das-feature"]`)
                 response.forEach((feature: DASFeature) => {
                     cache[feature.name] = feature.enabled

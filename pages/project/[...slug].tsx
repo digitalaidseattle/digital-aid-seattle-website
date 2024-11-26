@@ -55,41 +55,46 @@ const ProjectIndividualPage = () => {
 
   function getBody() {
     return (
-      <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack
-          gap={{ xs: '64px', lg: '80px' }}
-          maxWidth="880px"
-          margin="0 auto"
-        >
-          <ProjectBodyMarkdownSection title={ProjectLabels.description} text={project.description} />
-          <ProjectBodyMarkdownSection title={ProjectLabels.problem} text={project.problem} />
-          <ProjectBodyMarkdownSection title={ProjectLabels.solution} text={project.solution} />
-          <ProjectBodyMarkdownSection title={ProjectLabels.impact} text={project.impact} />
-          <ProjectTeamSection title="Current team" members={project.currentTeam} />
-          <Section>
-            <Subheader variant="headlineMedium">
-              {ProjectLabels.questions}
-            </Subheader>
-            <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
-              {ProjectLabels.contact_us}
-            </Button>
-          </Section>
-        </Stack>
-      </SectionContainer>
+      <>{project &&
+        <SectionContainer backgroundColor={theme.palette.background.default}>
+          <Stack
+            gap={{ xs: '64px', lg: '80px' }}
+            maxWidth="880px"
+            margin="0 auto"
+          >
+            <ProjectBodyMarkdownSection title={ProjectLabels.description} text={project.description} />
+            <ProjectBodyMarkdownSection title={ProjectLabels.problem} text={project.problem} />
+            <ProjectBodyMarkdownSection title={ProjectLabels.solution} text={project.solution} />
+            <ProjectBodyMarkdownSection title={ProjectLabels.impact} text={project.impact} />
+            <ProjectTeamSection title="Current team" members={project.currentTeam} />
+            <Section>
+              <Subheader variant="headlineMedium">
+                {ProjectLabels.questions}
+              </Subheader>
+              <Button variant="outlined" href="mailto:info@digitalaidseattle.org">
+                {ProjectLabels.contact_us}
+              </Button>
+            </Section>
+          </Stack>
+        </SectionContainer>
+      }</>
+
     )
   }
 
   return (
-    <BlockComponent block={!project}>
-      <Box
-        sx={{
-          backgroundColor: theme.palette.background.default
-        }}>
-        <ProjectHeaderSection project={project} />
-        {project && getBody()}
-        <ProjectFooterSection />
-      </Box>
-    </ BlockComponent>
+    <>{project &&
+      <BlockComponent block={!project}>
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.default
+          }}>
+          <ProjectHeaderSection project={project} />
+          {project && getBody()}
+          <ProjectFooterSection />
+        </Box>
+      </ BlockComponent>
+    }</>
   )
 }
 

@@ -31,7 +31,7 @@ export default async function preview(
   // that can handle checking secrets, you may use https://github.com/sanity-io/sanity-studio-secrets
   // to store the secret in your dataset.
   const storedSecret = await getPreviewSecret({
-    client: authClient,
+    client: authClient!,
     id: previewSecretDocumentId,
   })
 

@@ -100,7 +100,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
           </Stack>
 
           {props.event.image && props.event.image.asset && <img
-            src={urlForImage(props.event.image).url()}
+            src={urlForImage(props.event.image) ? urlForImage(props.event.image)!.url() : undefined}
             style={{
               width: '100%',
               aspectRatio: '1 / 1',
@@ -167,7 +167,7 @@ const HeaderSection = (props: { event: OSEvent }) => {
                 }}
               >
                 <img
-                  src={urlForImage(props.event.image).url()}
+                  src={urlForImage(props.event.image) ? urlForImage(props.event.image)!.url() : undefined}
                   style={{
                     width: '100%',
                     display: 'block'
@@ -303,31 +303,35 @@ const InfoSection = (props: { event: OSEvent }) => {
 
 const AboutSection = (props: { event: OSEvent }) => {
 
-  return (props.event && props.event.about &&
-    <Stack>
-      <Typography variant="headlineLarge" component="h1">
-        {Labels.about}
-      </Typography>
-      <Markdown className='markdown'>{props.event.about}</Markdown>
-    </Stack>
+  return (
+    <>{props.event && props.event.about &&
+      <Stack>
+        <Typography variant="headlineLarge" component="h1">
+          {Labels.about}
+        </Typography>
+        <Markdown className='markdown'>{props.event.about}</Markdown>
+      </Stack>
+    }</>
   )
 }
 
 const ContactUsSection = (props: { event: OSEvent }) => {
   const theme = useTheme()
 
-  return (props.event.rsvpLink &&
-    <SectionContainer backgroundColor={theme.palette.background.paper}>
-      <Section>
-        <Subheader variant="headlineMedium">
-          {Labels.contact}
-        </Subheader>
-        <Link href={props.event.rsvpLink} target="_blank"
-          passHref>
-          <Button variant="contained">{Labels.rsvp}</Button>
-        </Link>
-      </Section>
-    </SectionContainer>)
+  return (
+    <>{props.event.rsvpLink &&
+      <SectionContainer backgroundColor={theme.palette.background.paper}>
+        <Section>
+          <Subheader variant="headlineMedium">
+            {Labels.contact}
+          </Subheader>
+          <Link href={props.event.rsvpLink} target="_blank"
+            passHref>
+            <Button variant="contained">{Labels.rsvp}</Button>
+          </Link>
+        </Section>
+      </SectionContainer>
+    }</>)
 }
 
 const ActivitySection = (props: { event: OSEvent }) => {
@@ -335,19 +339,21 @@ const ActivitySection = (props: { event: OSEvent }) => {
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const width = extraSmallScreen ? "100%" : "50%"
 
-  return (props.event.activity && props.event.activity.asset &&
-    <Section  >
-      <img
-        src={urlForImage(props.event.activity).url()}
-        style={{
-          width: width,
-          // TODO A drop shadow would be nice, but centering needs work
-          // borderRadius: '20px',
-          // boxShadow:
-          //   '0px 0px 0px 0px rgba(52, 61, 62, 0.08), 1px 1px 1px 1px rgba(52, 61, 62, 0.08)',
-        }}
-      />
-    </Section>)
+  return (
+    <>{props.event.activity && props.event.activity.asset &&
+      <Section >
+        <img
+          src={urlForImage(props.event.activity) ? urlForImage(props.event.activity)!.url() : undefined}
+          style={{
+            width: width,
+            // TODO A drop shadow would be nice, but centering needs work
+            // borderRadius: '20px',
+            // boxShadow:
+            //   '0px 0px 0px 0px rgba(52, 61, 62, 0.08), 1px 1px 1px 1px rgba(52, 61, 62, 0.08)',
+          }}
+        />
+      </Section>
+    }</>)
 }
 
 const EventPage = () => {

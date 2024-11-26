@@ -43,13 +43,14 @@ class AirtableService {
       return records
     } catch (error) {
       console.error(error)
+      throw error
     }
   }
 
   getNumberFieldRecord(
     record: Airtable.Record<FieldSet>,
     field: string
-  ): number {
+  ): number | null {
     if (record.get(field) === undefined) {
       return null
     } else {
@@ -60,7 +61,7 @@ class AirtableService {
   getStringFieldRecord(
     record: Airtable.Record<FieldSet>,
     field: string
-  ): string {
+  ): string | null {
     if (record.get(field) === undefined) {
       return null
     } else {
@@ -71,7 +72,7 @@ class AirtableService {
   getStringArrayFieldRecord(
     record: Airtable.Record<FieldSet>,
     field: string
-  ): string[] {
+  ): string[] | null {
     if (record.get(field) === undefined) {
       return null
     } else {
@@ -82,7 +83,7 @@ class AirtableService {
   getSplitFieldRecord(
     record: Airtable.Record<FieldSet>,
     field: string
-  ): string[] {
+  ): string[] | null {
     if (record.get(field) === undefined) {
       return null
     } else {
@@ -94,6 +95,6 @@ class AirtableService {
 const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_ANON_KEY
 const baseId = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID_DAS
 
-const airtableService = new AirtableService(apiKey, baseId)
+const airtableService = new AirtableService(apiKey!, baseId!)
 
 export default airtableService

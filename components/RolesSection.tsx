@@ -164,14 +164,14 @@ const RoleContainer = ({ children }) => {
 }
 
 const FilterableRoles = ({ roles, showLink }) => {
-  const [activeFilters, setActiveFilters] = useState([]);
-  const [rolesToDisplay, setRolesToDisplay] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [rolesToDisplay, setRolesToDisplay] = useState<any[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     setRolesToDisplay([...roles]);
     // using a set to build a list of categories that occur in roles data
-    const uniqueCategories = new Set()
+    const uniqueCategories = new Set<any>()
     roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
     setCategories(Array.from(uniqueCategories))
   }, [roles]);
@@ -252,7 +252,7 @@ const RolesOnly = ({ roles, showLink }) => {
 
 const RolesSection = ({ title, showLink = false, roles = [], showFilters = false, children }: RolesSectionProps) => {
   return (
-    roles.length > 0 && (
+    <>{roles.length > 0 &&
       <Section>
         <Subheader variant="headlineMedium">{title}</Subheader>
         {showFilters
@@ -261,8 +261,7 @@ const RolesSection = ({ title, showLink = false, roles = [], showFilters = false
         }
         {children}
       </Section>
-    )
-  )
+    }</>)
 }
 
 export default RolesSection
