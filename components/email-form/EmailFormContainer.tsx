@@ -42,11 +42,9 @@ const InputSection = () => {
     e.preventDefault();
     if (emailService.isValid(email)) {
       emailService.subscribe(email)
-        .then(success => {
-          if (success) {
-            setSubscribeMessage("Thank you for subscribing.");
-            setEmail('');
-          }
+        .then(() => {
+          setSubscribeMessage("Thank you for subscribing.");
+          setEmail('');
         })
         .catch(err => console.error(err))
         .finally(() => setError(''))
