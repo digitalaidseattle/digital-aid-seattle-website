@@ -8,26 +8,20 @@
 */
 
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import Brevo, { ContactsApiApiKeys } from '@getbrevo/brevo';
+import SibApiV3Sdk from 'sib-api-v3-typescript';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  console.log('reaching handler:', req);
   if (req.method === 'POST') {
-    const data = req.body; // Access the POST data
+    let contactsClient = new SibApiV3Sdk.ContactsApi();
+    contactsClient.setApiKey(SibApiV3Sdk.ContactsApiApiKeys.apiKey, process.env.NEXT_PUBLIC_BREVO_API_KEY!);
 
-    // Process the data
-    console.log('Received data:', data);
-    console.log('Received data:', JSON.stringify(data));
-
-    let contactsClient = new Brevo.ContactsApi();
-    contactsClient.setApiKey(ContactsApiApiKeys.apiKey, process.env.NEXT_PUBLIC_BREVO_API_KEY!);
-
-    const contact = new Brevo.CreateContact();
-    contact.email = data.email;
-    contact.listIds = data.listIds;
+    const contact = new SibApiV3Sdk.CreateContact();
+    contact.email = req.body.email;
+    contact.listIds = req.body.listIds;
     const response = await contactsClient.createContact(contact)
-    res.status(200).json({ message: 'Data posted successfully', data });
+    res.status(200).json({ message: 'Data posted successfully', response });
   } else {
     res.status(405).json({ error: `Method not allowed: ${req.method}` });
   }
 }
+
