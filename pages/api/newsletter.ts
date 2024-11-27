@@ -8,7 +8,7 @@
 */
 
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import SibApiV3Sdk from 'sib-api-v3-typescript';
+const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'POST') {
