@@ -11,7 +11,7 @@ import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { OSEvent } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
-import { eventsService } from 'pages/api/EventsService'
+import { eventsService } from 'services/EventsService'
 import { CardActionArea } from '@mui/material'
 
 type CardEventProps = {

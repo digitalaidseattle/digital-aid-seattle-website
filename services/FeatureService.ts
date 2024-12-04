@@ -6,7 +6,7 @@
 import { groq } from "next-sanity";
 import { useEffect, useRef, useState } from "react";
 import { DASFeature } from "types";
-import { sanityClient } from '../../sanity/lib/client';
+import { sanityClient } from '../sanity/lib/client';
 
 const useFeature = (name: string) => {
     const cache: any = useRef({});

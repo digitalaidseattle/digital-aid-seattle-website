@@ -42,9 +42,7 @@ import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
-
-
+import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 

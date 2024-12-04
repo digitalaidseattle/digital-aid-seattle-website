@@ -6,7 +6,7 @@ import Link from '@mui/material/Link'
 import { theme } from 'theme/theme'
 
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
-import { useFeature } from 'pages/api/FeatureService'
+import { useFeature } from 'services/FeatureService'
 import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'

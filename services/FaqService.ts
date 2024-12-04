@@ -5,7 +5,7 @@
 
 import { groq } from "next-sanity";
 import { DASFaq } from "types";
-import { sanityClient } from '../../sanity/lib/client';
+import { sanityClient } from '../sanity/lib/client';
 
 class FaqService {
 

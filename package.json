@@ -25,6 +25,7 @@
     "@sanity/vision": "^3.1.4",
     "@types/material-ui": "^0.21.12",
     "@vercel/analytics": "^1.2.2",
+    "@vercel/node": "^3.2.27",
     "airtable": "^0.11.6",
     "next": "^14.2.15",
     "next-sanity": "^3.1.9",
@@ -33,6 +34,7 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "sanity": "^3.1.4",
+    "sib-api-v3-sdk": "^8.5.0",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

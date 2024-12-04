@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 import { theme } from 'theme/theme'
 
-import { useFeature } from 'pages/api/FeatureService'
+import { useFeature } from '../services/FeatureService'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import MobileMenu from './MobileMenu'
 
