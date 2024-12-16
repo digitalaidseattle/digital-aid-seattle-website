@@ -1,8 +1,8 @@
 import { Button, Snackbar, Stack, Typography, useTheme } from '@mui/material'
 import { useState } from 'react'
 
-import { emailService } from 'pages/api/EmailService'
-import { useFeature } from 'pages/api/FeatureService'
+import { emailService } from 'services/EmailService'
+import { useFeature } from 'services/FeatureService'
 import EmailFormInput from './EmailFormInput'
 
 const LabelSection = () => {
@@ -42,10 +42,9 @@ const InputSection = () => {
     e.preventDefault();
     if (emailService.isValid(email)) {
       emailService.subscribe(email)
-        .then(success => {
-          if (success) {
-            setSubscribeMessage("Thank you for subscribing.");
-          }
+        .then(() => {
+          setSubscribeMessage("Thank you for subscribing.");
+          setEmail('');
         })
         .catch(err => console.error(err))
         .finally(() => setError(''))

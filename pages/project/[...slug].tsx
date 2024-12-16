@@ -14,7 +14,7 @@ import { Section, Subheader } from 'components/style-utils'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
-import { dasProjectsService } from '../api/ProjectsService'
+import { dasProjectsService } from '../../services/ProjectsService'
 
 const ProjectIndividualPage = () => {
   const router = useRouter();

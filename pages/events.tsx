@@ -19,7 +19,7 @@ import { OSEvent } from 'types'
 
 import MastheadWithImage from 'components/MastheadWithImage'
 import EventsImage from '../assets/events.png'
-import { eventsService } from './api/EventsService'
+import { eventsService } from '../services/EventsService'
 
 const LABELS = {
   PAGE_TITLE: 'Events',

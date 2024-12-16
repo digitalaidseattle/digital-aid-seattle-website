@@ -3,7 +3,7 @@
 */
 
 import { groq } from 'next-sanity';
-import { sanityClient } from '../../sanity/lib/client';
+import { sanityClient } from '../sanity/lib/client';
 import { DASTestimonial, OSEvent } from 'types';
 
 class TestimonialService {

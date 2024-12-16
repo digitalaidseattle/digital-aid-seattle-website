@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 
 import SectionContainer from 'components/layout/SectionContainer'
-import { dasProjectsService, sanityProjectsService } from './api/ProjectsService'
+import { dasProjectsService, sanityProjectsService } from '../services/ProjectsService'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import {
   ProjectBodyTextSection,
@@ -22,7 +22,7 @@ import {
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
 import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
-import { dasVolunteerRoleService } from './api/VolunteerRoleService'
+import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 const TheCadrePage = () => {
   const [project, setProject] = useState<DASProject>()
