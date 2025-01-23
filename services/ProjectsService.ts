@@ -77,7 +77,7 @@ class AirtableProjectsService {
 
   async getSquad(ventureCode: string): Promise<TeamMember[]> {
     const MAX_RECORDS = 100;
-    const FILTER = `AND({Status} = "Filled", FIND(ARRAYJOIN({Prospective Ventures}), "${ventureCode}"))`;
+    const FILTER = `AND({Status} = "Filled", {Staffing for:} = "Contributor Squad", FIND(ARRAYJOIN({Prospective Ventures}), "${ventureCode}"))`;
     return airtableService
       .getTableRecords(VENTURE_ROLES_TABLE, MAX_RECORDS, FILTER)
       .then(records => records
