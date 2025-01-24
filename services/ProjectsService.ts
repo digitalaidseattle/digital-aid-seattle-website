@@ -81,6 +81,7 @@ class AirtableProjectsService {
     return airtableService
       .getTableRecords(VENTURE_ROLES_TABLE, MAX_RECORDS, FILTER)
       .then(records => records
+        .filter(rec => rec.fields["Volunteer Assigned"])
         .map(rec => {
           return {
             name: rec.fields["Contributor in text for website"],
