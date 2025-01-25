@@ -49,3 +49,4 @@ yarn-error.log*
 .env
 studio/.env.development
 package-lock.json
+test.json
