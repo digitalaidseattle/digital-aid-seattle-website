@@ -15,7 +15,7 @@ const Labels = {
 }
 function Page404() {
   const theme = useTheme()
-
+  console.error("404 test log")
   return (
     <>
       <Masthead title={Labels.masthead} />
