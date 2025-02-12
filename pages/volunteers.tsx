@@ -46,98 +46,81 @@ import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
-const gridContent = [
-  { label: 'Front-end Development', icon: <Code /> },
-  { label: 'Data Science', icon: <Storage /> },
-  { label: 'Back-end Development', icon: <DataObject /> },
-  { label: 'Marketing', icon: <Campaign /> },
-  { label: 'UX / UI Design', icon: <DrawOutlined /> },
-  { label: 'Operations/Project Management', icon: <PeopleAlt /> },
-  { label: 'UX Research', icon: <ScreenSearchDesktop /> },
-  { label: 'Legal Counsel', icon: <Gavel /> },
-]
+const LABELS = {
+  HERO_TITLE: 'Volunteer with us',
+  HERO_TXT: 'Join Digital Aid Seattle to make a difference in the lives of others! We have a wide range of volunteer opportunities available.',
+  VOLUNTEER_TITLE: 'Current Volunteer Openings',
+  VOLUNTEER_TXT: 'All of our volunteers are vetted for experience, and sign a volunteer agreement before commencing work with Digital Aid Seattle.',
+  EXPECTATION_SKILL_TITLE: 'Skill',
+  EXPECTATION_SKILL_TXT: 'You demonstrate proficiency in your craft and operate with both autonomy and transparency.',
+  EXPECTATIONS_TITLE: 'Our expectations',
+  EXPECTATION_EXPERIENCE_TITLE: 'Experience',
+  EXPECTATION_EXPERIENCE_TXT: 'You are a seasoned professional, capable of leading yourself and others in your discipline.',
+  EXPECTATION_AVAILABILITY_TITLE: 'Availability',
+  EXPECTATION_AVAILABILITY_TXT: 'You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle.',
+  OATH_TITLE: 'Our oath',
+  OATH_TXT: 'We champion these values and ask you as a volunteer to adopt them too.',
+  PROCESS_TITLE: 'The process',
+  PROCESS_STEP_1_TXT: 'Read our oath, then apply to volunteer using the button below.',
+  PROCESS_STEP_2_TXT: 'You will receive an invitation for an interview within a few days.',
+  PROCESS_STEP_3_TXT: 'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
+  PROCESS_STEP_4_TXT: 'Contribute weekly to your project, and make a difference for your community!',
+  APPLY_TITLE: 'Interested in volunteering with Digital Aid Seattle?',
+  APPLY_BTN: 'Apply to volunteer',
 
+  OATH_SERVE_TITLE: 'Serve wholeheartedly.',
+  OATH_SERVE_TXT:
+    'I will selflessly fulfill the needs identified by our partners, the glamorous and the mundane. I will gladly handle any necessary tasks, both analog and digital.',
+  OATH_SUPPORT_TITLE: 'Prioritize support.',
+  OATH_SUPPORT_TXT:
+    'I will always begin by asking how I can be of assistance, placing the needs of the team and projects above personal ideas or approaches.',
+  OATH_COLLABORATION_TITLE: 'Foster collaboration.',
+  OATH_COLLABORATION_TXT:
+    'Before initiating any work, I will explore existing projects, individuals, or organizations working in related fields. I will actively seek opportunities for collaboration and alignment whenever feasible.',
+  OATH_CURIOSITY_TITLE: 'Embrace curiosity.',
+  OATH_CURIOSITY_TXT:
+    'I will ask "why" when faced with uncertainty, recognizing the inherent value in diverse perspectives, skills, and contributions from all team members.',
+  OATH_LISTEN_TITLE: 'Listen intently.',
+  OATH_LISTEN_TXT:
+    'I will prioritize active listening, valuing the insights and ideas shared by others.',
+  OATH_PRIVACY_TITLE: 'Uphold privacy standards.',
+  OATH_PRIVACY_TXT:
+    'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless OS explicitly endorses such discussions through published materials or media outlets.',
+  OATH_SAFEGUARD_TITLE: 'Safeguard partner information.',
+  OATH_SAFEGUARD_TXT:
+    'I will safeguard our partners’ personal information, preserving any personal data encountered in my role as a Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
+  OATH_COMMUNICATION_TITLE: 'Maintain open communication.',
+  OATH_COMMUNICATION_TXT:
+    'I will promptly notify Digital Aid Seattle of any changes in my availability, project status, or progress. Additionally, I will report any issues or updates to ensure transparency and effective coordination.',
+  OATH_INCLUSIVITY_TITLE: 'Promote inclusivity.',
+  OATH_INCLUSIVITY_TXT:
+    'I will contribute to fostering an environment free from harassment and discrimination, upholding the principles of equality and respect. I will not engage in any form of discrimination.',
+  OATH_COMPLY_TITLE: 'Comply and collaborate.',
+  OATH_COMPLY_TXT:
+    'I will comply with all applicable laws and adhere to the operating procedures set by our partners, promoting harmonious collaboration and mutual respect.',
+  OATH_MISSION_TITLE: 'Uphold our mission.',
+  OATH_MISSION_TXT:
+    "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
+}
 const oathContent = [
-  {
-    label: 'Serve wholeheartedly.',
-    content:
-      'I will selflessly fulfill the needs identified by our partners, the glamorous and the mundane. I will gladly handle any necessary tasks, both analog and digital.',
-  },
-  {
-    label: 'Prioritize support.',
-    content:
-      'I will always begin by asking how I can be of assistance, placing the needs of the team and projects above personal ideas or approaches.',
-  },
-  {
-    label: 'Foster collaboration.',
-    content:
-      'Before initiating any work, I will explore existing projects, individuals, or organizations working in related fields. I will actively seek opportunities for collaboration and alignment whenever feasible.',
-  },
-  {
-    label: 'Embrace curiosity.',
-    content:
-      'I will ask "why" when faced with uncertainty, recognizing the inherent value in diverse perspectives, skills, and contributions from all team members.',
-  },
-  {
-    label: 'Listen intently.',
-    content:
-      'I will prioritize active listening, valuing the insights and ideas shared by others.',
-  },
-  {
-    label: 'Uphold privacy standards.',
-    content:
-      'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless OS explicitly endorses such discussions through published materials or media outlets.',
-  },
-  {
-    label: 'Safeguard partner information.',
-    content:
-      'I will safeguard our partners’ personal information, preserving any personal data encountered in my role as a Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
-  },
-  {
-    label: 'Maintain open communication.',
-    content:
-      'I will promptly notify Digital Aid Seattle of any changes in my availability, project status, or progress. Additionally, I will report any issues or updates to ensure transparency and effective coordination.',
-  },
-  {
-    label: 'Promote inclusivity.',
-    content:
-      'I will contribute to fostering an environment free from harassment and discrimination, upholding the principles of equality and respect. I will not engage in any form of discrimination.',
-  },
-  {
-    label: 'Comply and collaborate.',
-    content:
-      'I will comply with all applicable laws and adhere to the operating procedures set by our partners, promoting harmonious collaboration and mutual respect.',
-  },
-  {
-    label: 'Uphold our mission.',
-    content:
-      "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
-  },
-]
-
-const expectationsContent = [
-  {
-    label: 'Skill',
-    content: 'You demonstrate proficiency in your craft and operate with both autonomy and transparency.',
-    icon: StarsOutlined
-  },
-  {
-    label: 'Experience',
-    content: 'You are a seasoned professional, capable of leading yourself and others in your discipline.',
-    icon: WorkHistoryOutlined
-  },
-  {
-    label: 'Availability',
-    content: 'You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle.',
-    icon: EventAvailableOutlined
-  },
+  { label: LABELS.OATH_SERVE_TITLE, content: LABELS.OATH_SERVE_TXT },
+  { label: LABELS.OATH_SUPPORT_TITLE, content: LABELS.OATH_SUPPORT_TXT },
+  { label: LABELS.OATH_COLLABORATION_TITLE, content: LABELS.OATH_COLLABORATION_TXT },
+  { label: LABELS.OATH_CURIOSITY_TITLE, content: LABELS.OATH_CURIOSITY_TXT },
+  { label: LABELS.OATH_LISTEN_TITLE, content: LABELS.OATH_LISTEN_TXT },
+  { label: LABELS.OATH_PRIVACY_TITLE, content: LABELS.OATH_PRIVACY_TXT },
+  { label: LABELS.OATH_SAFEGUARD_TITLE, content: LABELS.OATH_SAFEGUARD_TXT },
+  { label: LABELS.OATH_COMMUNICATION_TITLE, content: LABELS.OATH_COMMUNICATION_TXT },
+  { label: LABELS.OATH_INCLUSIVITY_TITLE, content: LABELS.OATH_INCLUSIVITY_TXT },
+  { label: LABELS.OATH_COMPLY_TITLE, content: LABELS.OATH_COMPLY_TXT },
+  { label: LABELS.OATH_MISSION_TITLE, content: LABELS.OATH_MISSION_TXT }
 ]
 
 const processContent = [
-  'Read our oath, then apply to volunteer using the button below.',
-  'You will receive an invitation for an interview within a few days.',
-  'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
-  'Contribute weekly to your project, and make a difference for your community!',
+  LABELS.PROCESS_STEP_1_TXT,
+  LABELS.PROCESS_STEP_2_TXT,
+  LABELS.PROCESS_STEP_3_TXT,
+  LABELS.PROCESS_STEP_4_TXT
 ]
 
 const VolunteerPage = () => {
@@ -169,6 +152,26 @@ const VolunteerPage = () => {
     }
 
   const rolesSection = () => {
+
+    const rolesContext = [
+      {
+        title: LABELS.EXPECTATION_SKILL_TITLE,
+        description: LABELS.EXPECTATION_SKILL_TXT,
+        icon: <StarsOutlined sx={{ color: palette.text.secondary }} fontSize="large" />
+      },
+      {
+        title: LABELS.EXPECTATION_EXPERIENCE_TITLE,
+        description: LABELS.EXPECTATION_EXPERIENCE_TXT,
+        icon: <WorkHistoryOutlined sx={{ color: palette.text.secondary }} fontSize="large" />
+      },
+      {
+        title: LABELS.EXPECTATION_AVAILABILITY_TITLE,
+        description: LABELS.EXPECTATION_AVAILABILITY_TXT,
+        icon: <EventAvailableOutlined sx={{ color: palette.text.secondary }} fontSize="large" />
+      },
+
+    ];
+
     return <Stack
       gap={{ xs: '64px', md: '80px' }}
       sx={{
@@ -178,12 +181,13 @@ const VolunteerPage = () => {
       }}
       maxWidth={'880px'}
     >
-      <RolesSection title='Current Volunteer Openings' showLink={true} showFilters={true} roles={volunteerRoles} />
+      <RolesSection title={LABELS.VOLUNTEER_TITLE} showLink={true} showFilters={true} roles={volunteerRoles} />
+
       <Typography variant="bodyLarge">
-        All of our volunteers are vetted for experience, and sign a volunteer
-        agreement before commencing work with Digital Aid Seattle.
+        {LABELS.VOLUNTEER_TXT}
       </Typography>
-      <Typography variant="headlineLarge">Our expectations</Typography>
+
+      <Typography variant="headlineLarge">{LABELS.EXPECTATIONS_TITLE}</Typography>
       <Box
         sx={{
           display: 'grid',
@@ -191,36 +195,13 @@ const VolunteerPage = () => {
           gap: '2rem',
         }}
       >
-        <CardOne
-          title="Skill"
-          icon={
-            <StarsOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You demonstrate proficiency in your craft and operate with both autonomy and transparency."
-        />
-        <CardOne
-          title="Experience"
-          icon={
-            <WorkHistoryOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You are a seasoned professional, capable of leading yourself and others in your discipline."
-        />
-        <CardOne
-          title="Availability"
-          icon={
-            <EventAvailableOutlined
-              sx={{ color: palette.text.secondary }}
-              fontSize="large"
-            />
-          }
-          description="You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle."
-        />
+        {rolesContext.map(cont =>
+          <CardOne
+            title={cont.title}
+            icon={cont.icon}
+            description={cont.description}
+          />
+        )}
       </Box>
     </Stack>
   }
@@ -238,11 +219,10 @@ const VolunteerPage = () => {
             }}
           >
             <Typography variant="headlineLarge" component="h2">
-              Our oath
+              {LABELS.OATH_TITLE}
             </Typography>
             <Typography variant="bodyLarge">
-              We champion these values and ask you as a volunteer to adopt them,
-              too.
+              {LABELS.OATH_TXT}
             </Typography>
             <Box sx={{ display: 'block' }}>
               {oathContent.map((item, index) => (
@@ -290,7 +270,7 @@ const VolunteerPage = () => {
             }}
           >
             <Typography variant="headlineLarge" component="h2">
-              The process
+              {LABELS.PROCESS_TITLE}
             </Typography>
             <ol>
               {processContent.map((item, index) => (
@@ -318,7 +298,7 @@ const VolunteerPage = () => {
           <Typography
             variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}
           >
-            Interested in volunteering with Digital Aid Seattle?
+            {LABELS.APPLY_TITLE}
           </Typography>
         </Subheader>
 
@@ -328,7 +308,7 @@ const VolunteerPage = () => {
           passHref
         >
           <Button variant="contained" color="primary">
-            Apply to volunteer
+            {LABELS.APPLY_BTN}
           </Button>
         </Link>
       </Section>
@@ -351,7 +331,7 @@ const VolunteerPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            Volunteer with us
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineLarge"
@@ -360,8 +340,7 @@ const VolunteerPage = () => {
             }}
             component="span"
           >
-            Join Digital Aid Seattle to make a difference in the lives of
-            others! We have a wide range of volunteer opportunities available.
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>

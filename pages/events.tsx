@@ -22,9 +22,11 @@ import EventsImage from '../assets/events.png'
 import { eventsService } from '../services/EventsService'
 
 const LABELS = {
-  PAGE_TITLE: 'Events',
+  HERO_TITLE: 'Events',
+  HERO_TXT: 'Join vibrant in-person team-building events! Connect, share laughter, and forge friendships that inspire collaboration and creativity!',
   TITLE_IMAGE: 'Events graphic',
-  TITLE_COPY: 'Join vibrant in-person team-building events! Connect, share laughter, and forge friendships that inspire collaboration and creativity!'
+  UPCOMING_TXT: 'All upcoming events are invite-only. Please check back in the future for public events.',
+  PAST_TITLE: 'Past Events'
 }
 
 const EventsPage = () => {
@@ -67,7 +69,7 @@ const EventsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            {LABELS.PAGE_TITLE}
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineLarge"
@@ -76,7 +78,7 @@ const EventsPage = () => {
             }}
             component="span"
           >
-            {LABELS.TITLE_COPY}
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>
@@ -88,15 +90,16 @@ const EventsPage = () => {
             ))}
             {futureEvents.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
-                All upcoming events are invite-only. Please check back in the
-                future for public events.
+                {LABELS.UPCOMING_TXT}
               </Typography>
             )}
           </Stack>
         </SectionContainer>
         {pastEvents.length > 0 && <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
-            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
+            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>
+              {LABELS.PAST_TITLE}
+            </Typography>
             {pastEvents.map((event) => (
               <CardEvent key={event.title} event={event} />
             ))}

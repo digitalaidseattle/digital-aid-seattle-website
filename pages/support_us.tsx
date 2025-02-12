@@ -19,16 +19,13 @@ import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
 
 const LABELS = {
-  hero_title: 'Support us',
-  donate_title: 'Donate now',
-  donate_button: 'Download the check donation form',
-  impact_title: 'What people say about us',
-  donate_with: 'Donate with'
-}
-
-const COPY = {
-  hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
-  donate_instructions: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  HERO_TITLE: 'Support us',
+  HERO_TXT: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
+  DONATE_TITLE: 'Donate now',
+  DONATE_BTN: 'Download the check donation form',
+  IMPACT_TITLE: 'What people say about us',
+  DONATE_WITH: 'Donate with',
+  DONATE_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
 const ADDRESS = {
@@ -67,7 +64,7 @@ const WhatPeopleSaySection = ({ theme }) => {
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
-        {LABELS.impact_title}
+        {LABELS.IMPACT_TITLE}
       </Typography>
       <CardRowContainer>
         {testimonials.map((info, idx) =>
@@ -112,7 +109,7 @@ const SupportUsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            {LABELS.hero_title}
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="bodyLarge"
@@ -120,7 +117,7 @@ const SupportUsPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            {COPY.hero_description}
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>
@@ -130,11 +127,11 @@ const SupportUsPage = () => {
   const DonateSection = ({ theme }) => (
     <SupportUsSection backgroundColor={theme.palette.background.white}>
       <Typography variant="headlineMedium" component="h2">
-        {LABELS.donate_title}
+        {LABELS.DONATE_TITLE}
       </Typography>
       <Stack gap="2rem" textAlign="left">
         <Typography variant="bodyLarge">
-          {COPY.donate_instructions}
+          {LABELS.DONATE_INSTRUCTIONS}
         </Typography>
         <Typography variant="bodyLarge">
           {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
@@ -149,12 +146,12 @@ const SupportUsPage = () => {
           <Stack gap="1rem" textAlign="center" width="350px"
           >
             <Button variant="contained"
-              onClick={() => window.open('/donation-form.pdf', '_blank')}>{LABELS.donate_button}</Button>
+              onClick={() => window.open('/donation-form.pdf', '_blank')}>{LABELS.DONATE_BTN}</Button>
 
             <Typography fontWeight={700} >or</Typography>
             <Button variant="outlined"
               onClick={() => window.open('https://venmo.com/DASeattle', '_blank')}>
-              {LABELS.donate_with}
+              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={VenmoImage.src}
