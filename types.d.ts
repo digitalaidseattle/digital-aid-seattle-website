@@ -117,3 +117,11 @@ type DASTestimonial = {
   active: boolean,
   orderRank: string
 }
+
+type DASPageCopy = {
+  _id: string
+  _createdAt: Date
+  page: string
+  key: string
+  copy: string
+}

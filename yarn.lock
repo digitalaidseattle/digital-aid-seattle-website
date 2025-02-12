@@ -2806,6 +2806,11 @@ date-now@1.0.1:
   resolved "https://registry.npmjs.org/date-now/-/date-now-1.0.1.tgz"
   integrity sha512-yiizelQCqYLUEVT4zqYihOW6Ird7Qyc6fD3Pv5xGxk4+Jz0rsB1dMN2KyNV6jgOHYh5K+sPGCSOknQN4Upa3pg==
 
+dayjs@^1.11.13:
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.13.tgz#92430b0139055c3ebb60150aa13e860a4b5a366c"
+  integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
+
 debounce@1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/debounce/-/debounce-1.0.0.tgz"
