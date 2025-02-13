@@ -195,8 +195,9 @@ const VolunteerPage = () => {
           gap: '2rem',
         }}
       >
-        {rolesContext.map(cont =>
+        {rolesContext.map((cont, idx) =>
           <CardOne
+            key={'card-' + idx}
             title={cont.title}
             icon={cont.icon}
             description={cont.description}
