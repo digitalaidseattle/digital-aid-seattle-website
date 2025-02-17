@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
+import PaypalImage from '../assets/paypal.png'
 
 import { useFeature } from '../services/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
@@ -28,7 +29,8 @@ const LABELS = {
 
 const COPY = {
   hero_description: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
-  donate_instructions: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  donate_instructions: 'We currently accept tax-deductible donations by mail, as well as through Venmo and PayPal.',
+  mail_instructions: 'You can mail the form and your check to us at the following address:'
 }
 
 const ADDRESS = {
@@ -136,35 +138,78 @@ const SupportUsPage = () => {
         <Typography variant="bodyLarge">
           {COPY.donate_instructions}
         </Typography>
-        <Typography variant="bodyLarge">
-          {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
-        </Typography>
-        <Box
+      </Stack>
+
+      <Box
           sx={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: 'space-between', // To make the boxes side by side
+            gap: '2rem', // Space between the boxes
           }}
+      >
+        {/* Mail Donation Box*/}
+        <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+              backgroundColor: '#f5f5f5',
+              padding: '2rem',
+              borderRadius: '8px',
+            }}
         >
-          <Stack gap="1rem" textAlign="center" width="350px"
-          >
-            <Button variant="contained"
-              onClick={() => window.open('/donation-form.pdf', '_blank')}>{LABELS.donate_button}</Button>
-
-            <Typography fontWeight={700} >or</Typography>
-            <Button variant="outlined"
-              onClick={() => window.open('https://venmo.com/DASeattle', '_blank')}>
-              {LABELS.donate_with}
-              <img
-                style={{ marginLeft: '1rem' }}
-                src={VenmoImage.src}
-                alt="Venmo wordmark"
-                width="100px"
-              />
+          <Stack gap="1rem" textAlign="left" width="350px">
+            <Typography variant="bodyLarge">
+              {COPY.mail_instructions}
+              <br />
+              <br />
+              {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
+            </Typography>
+            <Button variant="contained" onClick={() => window.open('/donation-form.pdf', '_blank')}>
+              {LABELS.donate_button}
             </Button>
           </Stack>
         </Box>
-      </Stack>
+
+        {/* Paypal/Venmo Box */}
+        <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+              backgroundColor: '#f5f5f5',
+              padding: '2rem',
+              borderRadius: '8px',
+            }}
+        >
+          <Stack gap="1rem" textAlign="center" width="350px">
+            <Typography variant="bodyLarge">or donate through</Typography>
+              <Button
+                  variant="outlined"
+                  onClick={() => window.open('https://venmo.com/DASeattle', '_blank')}
+                  sx={{
+                      backgroundColor: '#FFFFFF',
+                  }}
+              >
+                  {LABELS.donate_with}
+                  <img style={{ marginLeft: '1rem' }} src={VenmoImage.src} alt="Venmo wordmark" width="100px" />
+              </Button>
+
+              <Button
+                  variant="outlined"
+                  onClick={() => window.open('https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ', '_blank')}
+                  sx={{
+                      backgroundColor: '#FFB02E', // Text color matching PayPal Orange
+                  }}
+              >
+                  {LABELS.donate_with}
+                  <img style={{ marginLeft: '1rem' }} src={PaypalImage.src} alt="Paypal wordmark" width="100px" />
+              </Button>
+          </Stack>
+        </Box>
+      </Box>
     </SupportUsSection>
   )
 
