@@ -121,7 +121,7 @@ const BreadCrumbSection = (props: { project: DASProject }) => {
   )
 }
 
-const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean }) => {
+const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean, hideBreadcrumbs?: boolean }) => {
   const theme = useTheme()
   const [project, setProject] = useState<DASProject>()
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
@@ -152,13 +152,15 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           }
         </HeaderWithImage>
         {/* light section */}
-        <Box
-          sx={{
-            padding: '2rem 1rem 0rem 1rem',
-          }}
-        >
-          <BreadCrumbSection project={props.project} />
-        </Box>
+        {!props.hideBreadcrumbs &&
+          <Box
+            sx={{
+              padding: '2rem 1rem 0rem 1rem',
+            }}
+          >
+            <BreadCrumbSection project={props.project} />
+          </Box>
+        }
       </>
     )
   }
@@ -197,9 +199,11 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               paddingLeft: { md: '2rem', lg: '0' },
             }}
           >
-            <Box marginBottom={'2rem'} width='40vw'>
-              <BreadCrumbSection project={props.project} />
-            </Box>
+            {!props.hideBreadcrumbs &&
+              <Box marginBottom={'2rem'} width='40vw'>
+                <BreadCrumbSection project={props.project} />
+              </Box>
+            }
             {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
@@ -207,7 +211,8 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
                 <StateBadge state={project.status} />
-              </Stack></>}
+              </Stack></>
+            }
           </Stack>
         </Box>
 

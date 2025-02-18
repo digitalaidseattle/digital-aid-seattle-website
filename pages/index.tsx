@@ -16,7 +16,7 @@ import { pageCopyService } from 'services/PageCopyService'
 // TODO consider moving into Sanity
 const LABELS = {
   HERO_TXT: 'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
-  OUR_MISSION: 'Our mission',
+  MISSION_LBL: 'Our mission',
   MISSION_TXT: 'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
   LEARN_BTN: 'Learn About Us',
   PARTNER_DESC: 'Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free.',
@@ -41,9 +41,7 @@ const Home = () => {
     if (!initialized) {
       pageCopyService.getByPage('home')
         .then((texts) => {
-          LABELS.MISSION_TXT = texts.find(pc => pc.key === 'mission_TXT')?.copy;
-          LABELS.PARTNER_DESC = texts.find(pc => pc.key === 'partner_desc')?.copy;
-          LABELS.VOLUNTEER_DESC = texts.find(pc => pc.key === 'volunteer_desc')?.copy;
+          Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
           setInitialized(true);
         })
     }
@@ -253,7 +251,7 @@ const Home = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge" component="h2">
-            {LABELS.OUR_MISSION}
+            {LABELS.MISSION_LBL}
           </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}

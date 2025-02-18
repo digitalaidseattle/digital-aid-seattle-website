@@ -58,7 +58,7 @@ const LABELS = {
 
   WE_DO_LBL: 'What we do',
   WE_DO_TXT: 'Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.',
-  CADRE_LBL: 'View our leadership team',
+  CADRE_BTN: 'View our leadership team',
 
   VALUES_LBL: 'Our values',
   EXCELLENCE_TXT: 'Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver.',
@@ -80,15 +80,14 @@ const AboutPage = () => {
   const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    // if (!initialized) {
-    //   pageCopyService.getByPage('about')
-    //     .then((texts) => {
-    //       LABELS.HERO_TXT = texts.find(pc => pc.key === 'hero_TXT')?.copy;
-    //       setInitialized(true);
-    //     })
-    // }
+    if (!initialized) {
+      pageCopyService.getByPage('about')
+        .then((texts) => {
+          Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
+          setInitialized(true);
+        })
+    }
   }, [initialized]);
-
 
   return (
     <Container
@@ -164,7 +163,7 @@ const WhatWeDoSection = ({ theme }) => (
         href={'/cadre'}
         sx={{ width: 'fit-content' }}
       >
-        {LABELS.CADRE_LBL}
+        {LABELS.CADRE_BTN}
       </Button>
     </Box>
   </AboutUsSection>
