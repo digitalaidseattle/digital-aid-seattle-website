@@ -111,6 +111,8 @@ const criteriaContent = [
   },
 ]
 
+const AIRTABLE_FORM = 'https://airtable.com/app6duHw2djMIOYnh/paguUW1sRDdwsPdWN/form';
+
 const PartnersPage = () => {
   const theme = useTheme()
   const palette = theme.palette
@@ -146,7 +148,7 @@ const PartnersPage = () => {
           <Button
             variant="contained"
             color="secondary"
-            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            href={AIRTABLE_FORM}
             target="_blank"
             sx={{
               alignSelf: 'flex-start',
@@ -234,7 +236,7 @@ const PartnersPage = () => {
               <Button
                 variant="contained"
                 color="primary"
-                href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+                href={AIRTABLE_FORM}
                 target="_blank"
               >
                 {LABELS.PARTNER_BTN}
@@ -274,7 +276,7 @@ const PartnersPage = () => {
           <Button
             variant="contained"
             color="secondary"
-            href={'https://airtable.com/shrVmFy3j3TVWxVBG'}
+            href={AIRTABLE_FORM}
             target="_blank"
             sx={{
               alignSelf: 'center',
