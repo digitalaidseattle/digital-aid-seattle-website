@@ -81,11 +81,9 @@ const AboutPage = () => {
 
   useEffect(() => {
     if (!initialized) {
-      pageCopyService.getByPage('about')
-        .then((texts) => {
-          Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
-          setInitialized(true);
-        })
+      pageCopyService
+        .updateCopy(LABELS, 'about')
+        .then(() => setInitialized(true))
     }
   }, [initialized]);
 

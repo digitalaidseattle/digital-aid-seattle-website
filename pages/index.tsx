@@ -39,11 +39,9 @@ const Home = () => {
 
   useEffect(() => {
     if (!initialized) {
-      pageCopyService.getByPage('home')
-        .then((texts) => {
-          Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
-          setInitialized(true);
-        })
+      pageCopyService
+        .updateCopy(LABELS, 'home')
+        .then(() => setInitialized(true))
     }
   }, [initialized]);
 

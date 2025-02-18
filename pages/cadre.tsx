@@ -49,9 +49,9 @@ const TheCadrePage = () => {
 
   useEffect(() => {
     if (!initialized) {
-      pageCopyService.getByPage('cadre')
-        .then((texts) => {
-          Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
+      pageCopyService
+        .updateCopy(LABELS, 'cadre')
+        .then(() => {
           setProject({
             imageSrc: ProjectImage.src,
             title: LABELS.HERO_LBL
