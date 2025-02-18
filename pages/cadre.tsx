@@ -40,11 +40,7 @@ Digital Aid Seattle fosters connections between volunteers and the orgs that can
   ROLES_NEEDED_LBL: `Roles Needed`
 }
 const TheCadrePage = () => {
-  const [project, setProject] = useState<DASProject>(
-    {
-      imageSrc: ProjectImage.src
-    } as DASProject
-  )
+  const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext)
   const [members, setMembers] = useState<TeamMember[]>([])
@@ -57,9 +53,9 @@ const TheCadrePage = () => {
         .then((texts) => {
           Object.keys(LABELS).forEach(key => LABELS[key] = texts.find(pc => pc.key === key)?.copy)
           setProject({
-            ...project,
+            imageSrc: ProjectImage.src,
             title: LABELS.HERO_LBL
-          })
+          } as DASProject)
           setInitialized(true);
         })
     }
