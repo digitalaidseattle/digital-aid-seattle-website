@@ -17,6 +17,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import SectionContainer from 'components/layout/SectionContainer'
 import { withBasicLayout } from 'components/layouts'
 import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import PrivacyImage from '../assets/privacy.png'
 import Markdown from 'react-markdown'
 import { pageCopyService } from 'services/PageCopyService'
@@ -125,6 +126,12 @@ const PrivacyPage = () => {
                 >
                     <Container >
                         <Typography variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}>Digital Aid Seattle Privacy Policy</Typography>
+
+                        <CardCopyText>
+                            <Typography variant={isSmallScreen ? 'titleSmall' : 'titleMedium'}>Last updated:</Typography>
+                            <Typography variant={isSmallScreen ? 'bodySmall' : 'bodyMedium'} sx={{ marginLeft: 1 }} >{lastUpdated}</Typography>
+                        </CardCopyText>
+
                         <Box sx={{ marginTop: 3 }}>
                             <Markdown className='markdown'>
                                 {privacyText}
