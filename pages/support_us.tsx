@@ -2,15 +2,28 @@
  * support_us.tsx
  * @2024 Digital Aid Seattle
  */
-import { Box, Button, Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
-import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
+import {
+  BlockComponent,
+  LoadingContext,
+  withBasicLayout,
+} from 'components/layouts'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
+import PaypalImage from '../assets/paypal.png'
 
 import { useFeature } from '../services/FeatureService'
 import MastheadWithImage from 'components/MastheadWithImage'
@@ -31,7 +44,7 @@ const LABELS = {
 const ADDRESS = {
   title: 'Digital Aid Seattle',
   street: '107 Spring St',
-  statezip: 'Seattle, WA 98104'
+  statezip: 'Seattle, WA 98104',
 }
 
 const SupportUsSection = ({ backgroundColor, children }) => (
@@ -49,17 +62,21 @@ const SupportUsSection = ({ backgroundColor, children }) => (
 )
 
 const WhatPeopleSaySection = ({ theme }) => {
-
-  const { setLoading } = useContext(LoadingContext);
+  const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
 
   useEffect(() => {
-    setLoading(true);
-    testimonialService.getActiveTestimonials()
-      .then(ts => setTestimonials(ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank))))
-      .catch(error => console.error(error))
+    setLoading(true)
+    testimonialService
+      .getActiveTestimonials()
+      .then((ts) =>
+        setTestimonials(
+          ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)),
+        ),
+      )
+      .catch((error) => console.error(error))
       .finally(() => setLoading(false))
-  }, [setLoading]);
+  }, [setLoading])
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
@@ -67,16 +84,20 @@ const WhatPeopleSaySection = ({ theme }) => {
         {LABELS.IMPACT_TITLE}
       </Typography>
       <CardRowContainer>
-        {testimonials.map((info, idx) =>
+        {testimonials.map((info, idx) => (
           <CardQuote
             key={'q-' + idx}
             title={info.title}
             description={info.quote}
-            avatar={urlForImage(info.avatar) ? urlForImage(info.avatar).url() : undefined}
+            avatar={
+              urlForImage(info.avatar)
+                ? urlForImage(info.avatar).url()
+                : undefined
+            }
             person={info.name}
             role={info.role}
           />
-        )}
+        ))}
       </CardRowContainer>
     </SupportUsSection>
   )
@@ -84,17 +105,15 @@ const WhatPeopleSaySection = ({ theme }) => {
 
 const SupportUsPage = () => {
   const theme = useTheme()
-  const { data: supportUs } = useFeature('support-us');
-  const router = useRouter();
+  const { data: supportUs } = useFeature('support-us')
+  const router = useRouter()
 
   useEffect(() => {
     if (supportUs !== undefined && supportUs === false) {
-      console.error(`Support Us feature not implemented.`);
+      console.error(`Support Us feature not implemented.`)
       router.push('/404')
     }
   }, [supportUs, router])
-
-
 
   const SupportUsHeroSection = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
@@ -130,28 +149,77 @@ const SupportUsPage = () => {
         {LABELS.DONATE_TITLE}
       </Typography>
       <Stack gap="2rem" textAlign="left">
-        <Typography variant="bodyLarge">
-          {LABELS.DONATE_INSTRUCTIONS}
-        </Typography>
-        <Typography variant="bodyLarge">
-          {ADDRESS.title}<br />{ADDRESS.street}<br />{ADDRESS.statezip}
-        </Typography>
+        <Typography variant="bodyLarge">{COPY.donate_instructions}</Typography>
+      </Stack>
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '2rem',
+          flexWrap: 'wrap', // Allows items to wrap on smaller screens
+          width: '100%', // Takes full width of container
+        }}
+      >
+        {/* Mail Donation Box */}
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            flex: '1 1 300px', // Allows grow, shrink, and sets min width before wrap
+            maxWidth: '350px',
+            backgroundColor: '#f5f5f5',
+            padding: '2rem',
+            borderRadius: '8px',
+            margin: '0 auto', // Centers when wrapped
           }}
         >
-          <Stack gap="1rem" textAlign="center" width="350px"
-          >
-            <Button variant="contained"
-              onClick={() => window.open('/donation-form.pdf', '_blank')}>{LABELS.DONATE_BTN}</Button>
-
-            <Typography fontWeight={700} >or</Typography>
-            <Button variant="outlined"
-              onClick={() => window.open('https://venmo.com/DASeattle', '_blank')}>
-              {LABELS.DONATE_WITH}
+          <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
+            <Typography variant="bodyLarge">
+              {COPY.mail_instructions}
+              <br />
+              <br />
+              {ADDRESS.title}
+              <br />
+              {ADDRESS.street}
+              <br />
+              {ADDRESS.statezip}
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => window.open('/donation-form.pdf', '_blank')}
+            >
+              {LABELS.donate_button}
+            </Button>
+          </Stack>
+        </Box>
+        {/* Paypal/Venmo Box */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: '1 1 300px', // Allows grow, shrink, and sets min width before wrap
+            maxWidth: '350px',
+            backgroundColor: '#f5f5f5',
+            padding: '2rem',
+            borderRadius: '8px',
+            margin: '0 auto', // Centers when wrapped
+          }}
+        >
+          <Stack gap="1rem" textAlign="center" sx={{ width: '100%' }}>
+            <Typography variant="bodyLarge">or donate through</Typography>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                window.open('https://venmo.com/DASeattle', '_blank')
+              }
+              sx={{
+                backgroundColor: '#FFFFFF',
+              }}
+            >
+              {LABELS.donate_with}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={VenmoImage.src}
@@ -159,9 +227,29 @@ const SupportUsPage = () => {
                 width="100px"
               />
             </Button>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                window.open(
+                  'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
+                  '_blank',
+                )
+              }
+              sx={{
+                backgroundColor: '#FFB02E',
+              }}
+            >
+              {LABELS.donate_with}
+              <img
+                style={{ marginLeft: '1rem' }}
+                src={PaypalImage.src}
+                alt="Paypal wordmark"
+                width="95px"
+              />
+            </Button>
           </Stack>
         </Box>
-      </Stack>
+      </Box>
     </SupportUsSection>
   )
 
@@ -171,7 +259,11 @@ const SupportUsPage = () => {
         <Container
           maxWidth={false}
           disableGutters
-          sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
           <SupportUsHeroSection />
           <DonateSection theme={theme} />

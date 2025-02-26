@@ -71,7 +71,6 @@ const ListItem = ({ text }: ListItemProps) => {
 const PrivacyPage = () => {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery('(max-width:600px)')
-    const [lastUpdated, setLastUpdated] = useState<string>('February 21, 2023');
     const [privacyText, setPrivacyText] = useState<string>();
 
     useEffect(() => {
@@ -81,7 +80,6 @@ const PrivacyPage = () => {
                     const pageCopy = texts.find(t => t.key === 'main');
                     if (pageCopy) {
                         setPrivacyText(pageCopy.copy);
-                        setLastUpdated(dayjs(pageCopy['_updatedAt']).format('MMMM D, YYYY'));
                     }
                 })
         }
@@ -127,12 +125,6 @@ const PrivacyPage = () => {
                 >
                     <Container >
                         <Typography variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}>Digital Aid Seattle Privacy Policy</Typography>
-
-                        <CardCopyText>
-                            <Typography variant={isSmallScreen ? 'titleSmall' : 'titleMedium'}>Last updated:</Typography>
-                            <Typography variant={isSmallScreen ? 'bodySmall' : 'bodyMedium'} sx={{ marginLeft: 1 }} >{lastUpdated}</Typography>
-                        </CardCopyText>
-
                         <Box sx={{ marginTop: 3 }}>
                             <Markdown className='markdown'>
                                 {privacyText}
