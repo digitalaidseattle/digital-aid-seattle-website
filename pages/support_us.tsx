@@ -30,6 +30,7 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
+import { pageCopyService } from 'services/PageCopyService'
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -38,7 +39,7 @@ const LABELS = {
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
-  DONATE_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  MAILING_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
 const ADDRESS = {
@@ -107,6 +108,15 @@ const SupportUsPage = () => {
   const theme = useTheme()
   const { data: supportUs } = useFeature('support-us')
   const router = useRouter()
+  const [initialized, setInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      pageCopyService
+        .updateCopy(LABELS, 'support_us')
+        .then(() => setInitialized(true))
+    }
+  }, [initialized]);
 
   useEffect(() => {
     if (supportUs !== undefined && supportUs === false) {
@@ -149,7 +159,7 @@ const SupportUsPage = () => {
         {LABELS.DONATE_TITLE}
       </Typography>
       <Stack gap="2rem" textAlign="left">
-        <Typography variant="bodyLarge">{COPY.donate_instructions}</Typography>
+        <Typography variant="bodyLarge">{LABELS.MAILING_INSTRUCTIONS}</Typography>
       </Stack>
 
       <Box
@@ -177,7 +187,7 @@ const SupportUsPage = () => {
         >
           <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
             <Typography variant="bodyLarge">
-              {COPY.mail_instructions}
+              {LABELS.MAILING_INSTRUCTIONS}
               <br />
               <br />
               {ADDRESS.title}
@@ -190,7 +200,7 @@ const SupportUsPage = () => {
               variant="contained"
               onClick={() => window.open('/donation-form.pdf', '_blank')}
             >
-              {LABELS.donate_button}
+              {LABELS.DONATE_BTN}
             </Button>
           </Stack>
         </Box>
@@ -219,7 +229,7 @@ const SupportUsPage = () => {
                 backgroundColor: '#FFFFFF',
               }}
             >
-              {LABELS.donate_with}
+              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={VenmoImage.src}
@@ -239,7 +249,7 @@ const SupportUsPage = () => {
                 backgroundColor: '#FFB02E',
               }}
             >
-              {LABELS.donate_with}
+              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={PaypalImage.src}
