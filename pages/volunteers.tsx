@@ -138,7 +138,7 @@ const VolunteerPage = () => {
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
     }
-  }, [initialized]);
+  }, [initialized, setLoading]);
 
 
 

@@ -34,7 +34,6 @@ const EventsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
 
-  const title = 'Events'
   const { setLoading } = useContext(LoadingContext);
   const [futureEvents, setFutureEvents] = useState<OSEvent[] | null>([])
   const [pastEvents, setPastEvents] = useState<OSEvent[] | null>([])
@@ -59,7 +58,7 @@ const EventsPage = () => {
         .catch((error) => console.error(error))
         .finally(() => setLoading(false))
     }
-  }, [initialized])
+  }, [initialized, setLoading])
 
 
   return (

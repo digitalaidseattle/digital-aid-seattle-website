@@ -60,7 +60,7 @@ const ProjectsPage = () => {
         .catch(error => console.error(error))
         .finally(() => setLoading(false))
     }
-  }, [init])
+  }, [init, setLoading])
 
   useEffect(() => {
     if (init) {

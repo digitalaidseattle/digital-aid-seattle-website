@@ -82,7 +82,7 @@ const WhatPeopleSaySection = ({ theme }) => {
         .catch(error => console.error(error))
         .finally(() => setLoading(false))
     }
-  }, [initialized])
+  }, [initialized, setLoading])
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>

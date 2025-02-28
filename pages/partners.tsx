@@ -132,7 +132,7 @@ const PartnersPage = () => {
         .catch((error) => console.error(error))
         .finally(() => setLoading(false))
     }
-  }, [initialized])
+  }, [initialized, setLoading])
 
   return (
     <Container
