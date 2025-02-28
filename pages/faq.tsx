@@ -24,7 +24,8 @@ import {
   SettingsOutlined,
   FlightTakeoffOutlined,
   HelpOutlineOutlined,
-  VolunteerActivismOutlined
+  VolunteerActivismOutlined,
+  Label
 } from '@mui/icons-material';
 
 import FaqImage from '../assets/faq.png'
@@ -42,6 +43,14 @@ import { faqService } from '../services/FaqService'
 import { useState, useEffect, useContext } from 'react'
 import { useFeature } from '../services/FeatureService';
 import Markdown from 'react-markdown';
+import { pageCopyService } from 'services/PageCopyService';
+
+const LABELS = {
+  HERO_TITLE: 'Frequently Asked Questions',
+  HERO_TXT: 'Discover many ways to get involved with Digital Aid Seattle',
+  FAQ_TITLE: 'Frequently Asked Questions',
+  FAQ_TXT: `Find answers to common questions quickly and efficiently. Whether you're considering volunteering with Digital Aid Seattle (DAS) or looking for more information about our organization and processes, this section provides the essential details you need.`
+}
 
 const FaqPage = () => {
   const faqFeature = useFeature('faq');
@@ -62,10 +71,13 @@ const FaqPage = () => {
       if (faqFeature.data) {
         if (!initialized) {
           setLoading(true)
-          faqService
-            .getAll()
-            .then((data) => {
-              setFaqSections(data.sort((f1: DASFaq, f2: DASFaq) => f1.orderRank.localeCompare(f2.orderRank)));
+          Promise
+            .all([
+              pageCopyService.updateCopy(LABELS, 'faq'),
+              faqService.getAll()
+            ])
+            .then((resps) => {
+              setFaqSections(resps[1].sort((f1: DASFaq, f2: DASFaq) => f1.orderRank.localeCompare(f2.orderRank)));
               setInitialized(true);
             })
             .catch((err) => console.error(err))
@@ -104,7 +116,7 @@ const FaqPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            Frequently Asked Questions
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineMedium"
@@ -112,7 +124,7 @@ const FaqPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            Discover many ways to get involved with Digital Aid Seattle
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>
@@ -135,13 +147,10 @@ const FaqPage = () => {
     return (
       <FaqSection backgroundColor={designColor.white} textAlignment="center">
         <Typography variant="headlineLarge" component="h2">
-          Frequently Asked Questions
+          {LABELS.FAQ_TITLE}
         </Typography>
         <Typography variant="bodyLarge">
-          Find answers to common questions quickly and efficiently. Whether
-          you&apos;re considering volunteering with Digital Aid Seattle (DAS) or
-          looking for more information about our organization and processes,
-          this section provides the essential details you need.
+          {LABELS.FAQ_TXT}
         </Typography>
         <CardRowContainer>
           {faqSections.map((section) => {

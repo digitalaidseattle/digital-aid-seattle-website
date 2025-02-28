@@ -22,6 +22,12 @@ export default {
             type: 'text',
             title: 'Answer'
         }
-    ]
+    ],
+    preview: {
+        select: {
+            title: "question",
+            subtitle: "answer"
+        },
+    }
 }
 

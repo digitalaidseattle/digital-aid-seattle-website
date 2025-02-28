@@ -20,40 +20,46 @@ import { OSEvent } from 'types'
 import MastheadWithImage from 'components/MastheadWithImage'
 import EventsImage from '../assets/events.png'
 import { eventsService } from '../services/EventsService'
+import { pageCopyService } from 'services/PageCopyService'
 
 const LABELS = {
-  PAGE_TITLE: 'Events',
+  HERO_TITLE: 'Events',
+  HERO_TXT: 'Join vibrant in-person team-building events! Connect, share laughter, and forge friendships that inspire collaboration and creativity!',
   TITLE_IMAGE: 'Events graphic',
-  TITLE_COPY: 'Join vibrant in-person team-building events! Connect, share laughter, and forge friendships that inspire collaboration and creativity!'
+  UPCOMING_TXT: 'All upcoming events are invite-only. Please check back in the future for public events.',
+  PAST_TITLE: 'Past Events'
 }
 
 const EventsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
 
-  const title = 'Events'
   const { setLoading } = useContext(LoadingContext);
   const [futureEvents, setFutureEvents] = useState<OSEvent[] | null>([])
   const [pastEvents, setPastEvents] = useState<OSEvent[] | null>([])
-  const [init, setInit] = useState(false)
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
-    setLoading(true);
-    eventsService
-      .getActiveEvents()
-      .then((evs) => {
-        //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
-        const today = new Date().toLocaleDateString("sv");
-        const eventsDescending = evs.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-        setFutureEvents(eventsDescending.filter((event) => event.date >= today))
-        setPastEvents(eventsDescending.filter((event) => event.date < today))
-      })
-      .catch((error) => console.error(error))
-      .finally(() => {
-        setLoading(false)
-        setInit(true)
-      })
-  }, [setLoading])
+    if (!initialized) {
+      setLoading(true);
+      Promise
+        .all([
+          pageCopyService.updateCopy(LABELS, 'events'),
+          eventsService.getActiveEvents()
+        ])
+        .then(resps => {
+          //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
+          const today = new Date().toLocaleDateString("sv");
+          const eventsDescending = resps[1].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+          setFutureEvents(eventsDescending.filter((event) => event.date >= today))
+          setPastEvents(eventsDescending.filter((event) => event.date < today))
+          setInitialized(true);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized, setLoading])
+
 
   return (
     <>
@@ -67,7 +73,7 @@ const EventsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            {LABELS.PAGE_TITLE}
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineLarge"
@@ -76,11 +82,11 @@ const EventsPage = () => {
             }}
             component="span"
           >
-            {LABELS.TITLE_COPY}
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>
-      <BlockComponent block={!init}>
+      <BlockComponent block={!initialized}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
             {futureEvents.map((event) => (
@@ -88,15 +94,16 @@ const EventsPage = () => {
             ))}
             {futureEvents.length === 0 && (
               <Typography sx={{ textAlign: 'center' }}>
-                All upcoming events are invite-only. Please check back in the
-                future for public events.
+                {LABELS.UPCOMING_TXT}
               </Typography>
             )}
           </Stack>
         </SectionContainer>
         {pastEvents.length > 0 && <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
-            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>Past Events</Typography>
+            <Typography variant="headlineLarge" sx={{ textAlign: 'center' }}>
+              {LABELS.PAST_TITLE}
+            </Typography>
             {pastEvents.map((event) => (
               <CardEvent key={event.title} event={event} />
             ))}

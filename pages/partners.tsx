@@ -20,64 +20,95 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
 import CardLeft from 'components/cards/CardLeft'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 import PartnerImage from '../assets/partnerWithUs.png'
 import MastheadWithImage from 'components/MastheadWithImage'
+import { useContext, useEffect, useState } from 'react'
+import { pageCopyService } from 'services/PageCopyService'
 
 /* eslint-disable @next/next/no-img-element */
+const LABELS = {
+  HERO_TITLE: 'Partner with us',
+  HERO_TXT: 'Digital Aid Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
+  PARTNER_BTN: 'Partner with us',
+
+  CRITERIA_TITLE: 'Our criteria',
+  HOW_HELP_TITLE: 'How we can help',
+  PROCESS_TITLE: 'The process',
+
+  EXPECTATIONS_TITLE: 'Partner expectations',
+  EXPECTATIONS_TXT: 'Partners should plan to maintain projects after handoff, and to provide Digital Aid Seattle volunteers with the necessary documentation for timely project completion. All Digital Aid Seattle projects are open and accessible by default.',
+  VOLUNTEER_TITLE: 'Volunteer expectations',
+  VOLUNTEER_TXT: 'All of our volunteers are vetted for experience, and sign a volunteer agreement before commencing work with Digital Aid Seattle.',
+
+  INTERESTED_TITLE: 'Interested in partnering with Digital Aid Seattle?',
+  PROCESS_STEP_1: 'Apply for help using the “Partner with us” button.',
+  PROCESS_STEP_2: 'You will receive an invitation for an interview within a few days.',
+  PROCESS_STEP_3: "By detailing your situation, experiences, and aspirations, help us compose a vision of the solution we'll be creating for you.",
+  PROCESS_STEP_4: 'Once work has begun, you will get weekly updates on the progress.',
+
+  HELP_INTERNAL_TOOLS_TITLE: 'Internal tools',
+  HELP_INTERNAL_TOOLS_TXT: 'Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too.',
+  HELP_EXTERNAL_TOOLS_TITLE: 'External tools',
+  HELP_EXTERNAL_TOOLS_TXT: 'The organizations we support serve individuals in need. Those folks often do not have access to resources and our aim is to streamline and facilitate success, whatever shape that takes.',
+  HELP_TECH_PROBLEMS_TITLE: 'Technical problems',
+  HELP_TECH_PROBLEMS: 'No matter the size, any organization in business today is bound to face technical challenges. Digital Aid Seattle partners with nonprofits and other organizations to navigate these challenges.',
+
+  CRITERIA_NONPROFITS_TITLE: 'Nonprofits',
+  CRITERIA_NONPROFITS_TXT: 'We strive to bring enterprise-level operational maturity to nonprofits in need.',
+  CRITERIA_GOVERNMENTS_TITLE: 'Governments',
+  CRITERIA_GOVERNMENTS_TXT: 'Local governmental organizations aimed at building a better community deserve a helping hand.',
+  CRITERIA_OPEN_SOURCE_TITLE: 'Open Source',
+  CRITERIA_OPEN_SOURCE_TXT: 'Whenever possible, we will cooperate using open source assets that can be leveraged by anyone.',
+  CRITERIA_MAINTAINABILITY_TITLE: 'Maintainability',
+  CRITERIA_MAINTAINABILITY_TXT: `When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.`,
+}
 
 const processContent = [
-  'Apply for help using the “Partner with us” button.',
-  'You will receive an invitation for an interview within a few days.',
-  "By detailing your situation, experiences, and aspirations, help us compose a vision of the solution we'll be creating for you.",
-  'Once work has begun, you will get weekly updates on the progress.',
+  LABELS.PROCESS_STEP_1,
+  LABELS.PROCESS_STEP_2,
+  LABELS.PROCESS_STEP_3,
+  LABELS.PROCESS_STEP_4
 ]
 
 const provideContent = [
   {
-    title: 'Internal tools',
-    description:
-      'Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too.',
+    title: LABELS.HELP_INTERNAL_TOOLS_TITLE,
+    description: LABELS.HELP_INTERNAL_TOOLS_TXT,
     icon: <AdminPanelSettingsOutlined style={ICON_STYLE} />,
   },
   {
-    title: 'External tools',
-    description:
-      'The organizations we support serve individuals in need. Those folks often do not have access to resources and our aim is to streamline and facilitate success, whatever shape that takes.',
+    title: LABELS.HELP_EXTERNAL_TOOLS_TITLE,
+    description: LABELS.HELP_EXTERNAL_TOOLS_TXT,
     icon: <DevicesOutlined style={ICON_STYLE} />,
   },
   {
-    title: 'Technical problems',
-    description:
-      'No matter the size, any organization in business today is bound to face technical challenges. Digital Aid Seattle partners with nonprofits and other organizations to navigate these challenges.',
+    title: LABELS.HELP_TECH_PROBLEMS_TITLE,
+    description: LABELS.HELP_TECH_PROBLEMS,
     icon: <HandymanOutlined style={ICON_STYLE} />,
   },
 ]
 
 const criteriaContent = [
   {
-    title: 'Nonprofits',
-    description:
-      'We strive to bring enterprise-level operational maturity to nonprofits in need.',
+    title: LABELS.CRITERIA_NONPROFITS_TITLE,
+    description: LABELS.CRITERIA_NONPROFITS_TXT,
     icon: <VolunteerActivismOutlined style={ICON_STYLE} />,
   },
   {
-    title: 'Governments',
-    description:
-      'Local governmental organizations aimed at building a better community deserve a helping hand.',
+    title: LABELS.CRITERIA_GOVERNMENTS_TITLE,
+    description: LABELS.CRITERIA_GOVERNMENTS_TXT,
     icon: <AccountBalanceOutlined style={ICON_STYLE} />,
   },
   {
-    title: 'Open Source',
-    description:
-      'Whenever possible, we will cooperate using open source assets that can be leveraged by anyone.',
+    title: LABELS.CRITERIA_OPEN_SOURCE_TITLE,
+    description: LABELS.CRITERIA_OPEN_SOURCE_TXT,
     icon: <DataObjectOutlined style={ICON_STYLE} />,
   },
   {
-    title: 'Maintainability',
-    description:
-      "When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.",
+    title: LABELS.CRITERIA_MAINTAINABILITY_TITLE,
+    description: LABELS.CRITERIA_MAINTAINABILITY_TXT,
     icon: <ConstructionOutlined style={ICON_STYLE} />,
   },
 ]
@@ -88,6 +119,20 @@ const PartnersPage = () => {
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+
+  const { setLoading } = useContext(LoadingContext);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      setLoading(true);
+      pageCopyService
+        .updateCopy(LABELS, 'partners')
+        .then(() => setInitialized(true))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized, setLoading])
 
   return (
     <Container
@@ -105,7 +150,7 @@ const PartnersPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            Partner with us
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineLarge"
@@ -114,8 +159,7 @@ const PartnersPage = () => {
             }}
             component="span"
           >
-            Digital Aid Seattle works with Seattle-based nonprofits to create
-            customized digital solutions for their needs, for free.
+            {LABELS.HERO_TXT}
           </Typography>
           <Button
             variant="contained"
@@ -126,7 +170,7 @@ const PartnersPage = () => {
               alignSelf: 'flex-start',
             }}
           >
-            Partner with us
+            {LABELS.PARTNER_BTN}
           </Button>
         </>
       </MastheadWithImage>
@@ -139,7 +183,7 @@ const PartnersPage = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge" component="h2">
-            Our criteria
+            {LABELS.CRITERIA_TITLE}
           </Typography>
 
           <Box
@@ -165,7 +209,7 @@ const PartnersPage = () => {
             ))}
           </Box>
           <Typography variant="headlineLarge" component="h2">
-            How we can help
+            {LABELS.HOW_HELP_TITLE}
           </Typography>
           <CardGridContainer columns={3}>
             {provideContent.map((item) => (
@@ -189,7 +233,7 @@ const PartnersPage = () => {
         >
           <Stack gap={{ xs: 2, md: 4 }}>
             <Typography variant="headlineLarge" component="h2">
-              The process
+              {LABELS.PROCESS_TITLE}
             </Typography>
             <ol>
               {processContent.map((item, index) => (
@@ -211,29 +255,24 @@ const PartnersPage = () => {
                 href={AIRTABLE_FORM}
                 target="_blank"
               >
-                Partner with us
+                {LABELS.PARTNER_BTN}
               </Button>
             </div>
           </Stack>
           <Stack gap={{ xs: 2, md: 4 }}>
             <Typography variant="headlineLarge" component="h2">
-              Partner expectations
+              {LABELS.EXPECTATIONS_TITLE}
             </Typography>
             <Typography variant="bodyLarge">
-              Partners should plan to maintain projects after handoff, and to
-              provide Digital Aid Seattle volunteers with the necessary
-              documentation for timely project completion. All Digital Aid
-              Seattle projects are open and accessible by default.
+              {LABELS.EXPECTATIONS_TXT}
             </Typography>
           </Stack>
           <Stack gap={{ xs: 2, md: 4 }}>
             <Typography variant="headlineLarge" component="h2">
-              Volunteer expectations
+              {LABELS.VOLUNTEER_TITLE}
             </Typography>
             <Typography variant="bodyLarge">
-              All of our volunteers are vetted for experience, and sign a
-              volunteer agreement before commencing work with Digital Aid
-              Seattle.
+              {LABELS.VOLUNTEER_TXT}
             </Typography>
           </Stack>
         </Stack>
@@ -247,7 +286,7 @@ const PartnersPage = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge" component="h2">
-            Interested in partnering with Digital Aid Seattle?
+            {LABELS.INTERESTED_TITLE}
           </Typography>
 
           <Button
@@ -259,7 +298,7 @@ const PartnersPage = () => {
               alignSelf: 'center',
             }}
           >
-            Partner with us
+            {LABELS.PARTNER_BTN}
           </Button>
         </Stack>
       </SectionContainer>

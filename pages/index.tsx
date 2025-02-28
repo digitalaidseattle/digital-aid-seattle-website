@@ -10,12 +10,14 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import HeroLines from '../public/images/homeHeroLines.svg'
 import HeroLinesMobile from '../public/images/homeHeroLinesMobile.svg'
 import HeroImage from '../public/images/SeattleSkyline.jpg'
+import { useEffect, useState } from 'react'
+import { pageCopyService } from 'services/PageCopyService'
 
 // TODO consider moving into Sanity
 const LABELS = {
-  HERO_TEXT: 'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
-  OUR_MISSION: 'Our mission',
-  MISSION_TEXT: 'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
+  HERO_TXT: 'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
+  MISSION_LBL: 'Our mission',
+  MISSION_TXT: 'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
   LEARN_BTN: 'Learn About Us',
   PARTNER_DESC: 'Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free.',
   PARTNER_BTN: 'Partner With Us',
@@ -32,7 +34,16 @@ const Home = () => {
       }`
   }
 
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [initialized, setInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      pageCopyService
+        .updateCopy(LABELS, 'home')
+        .then(() => setInitialized(true))
+    }
+  }, [initialized]);
 
   return (
     <>
@@ -100,7 +111,7 @@ const Home = () => {
               sx={{}}
               variant={isMediumScreen ? 'displaySmall' : 'displayMedium'}
             >
-              {LABELS.HERO_TEXT}
+              {LABELS.HERO_TXT}
             </Typography>
             <Box
               sx={{
@@ -238,13 +249,13 @@ const Home = () => {
           maxWidth={'880px'}
         >
           <Typography variant="headlineLarge" component="h2">
-            {LABELS.OUR_MISSION}
+            {LABELS.MISSION_LBL}
           </Typography>
           <Typography
             variant={isMediumScreen ? 'bodyMedium' : 'bodyLarge'}
             textAlign={'center'}
           >
-            {LABELS.MISSION_TEXT}
+            {LABELS.MISSION_TXT}
           </Typography>
           <Button
             variant="contained"
