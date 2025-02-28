@@ -25,6 +25,7 @@ import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
 import ProjectsImage from '../assets/projects.png'
+import { pageCopyService } from 'services/PageCopyService'
 
 const LABELS = {
   HERO_TITLE: 'Projects',
@@ -45,15 +46,21 @@ const ProjectsPage = () => {
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
   useEffect(() => {
-    setLoading(true);
-    dasProjectsService.getAll()
-      .then(projs => setProjects(projs))
-      .catch(error => console.error(error))
-      .finally(() => {
-        setInit(true)
-        setLoading(false)
-      })
-  }, [setLoading]);
+    if (!init) {
+      setLoading(true);
+      Promise
+        .all([
+          dasProjectsService.getAll(),
+          pageCopyService.updateCopy(LABELS, 'projects')
+        ])
+        .then(resps => {
+          setProjects(resps[0]);
+          setInit(true)
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [init])
 
   useEffect(() => {
     if (init) {

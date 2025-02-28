@@ -20,6 +20,7 @@ import { OSEvent } from 'types'
 import MastheadWithImage from 'components/MastheadWithImage'
 import EventsImage from '../assets/events.png'
 import { eventsService } from '../services/EventsService'
+import { pageCopyService } from 'services/PageCopyService'
 
 const LABELS = {
   HERO_TITLE: 'Events',
@@ -37,25 +38,29 @@ const EventsPage = () => {
   const { setLoading } = useContext(LoadingContext);
   const [futureEvents, setFutureEvents] = useState<OSEvent[] | null>([])
   const [pastEvents, setPastEvents] = useState<OSEvent[] | null>([])
-  const [init, setInit] = useState(false)
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
-    setLoading(true);
-    eventsService
-      .getActiveEvents()
-      .then((evs) => {
-        //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
-        const today = new Date().toLocaleDateString("sv");
-        const eventsDescending = evs.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
-        setFutureEvents(eventsDescending.filter((event) => event.date >= today))
-        setPastEvents(eventsDescending.filter((event) => event.date < today))
-      })
-      .catch((error) => console.error(error))
-      .finally(() => {
-        setLoading(false)
-        setInit(true)
-      })
-  }, [setLoading])
+    if (!initialized) {
+      setLoading(true);
+      Promise
+        .all([
+          pageCopyService.updateCopy(LABELS, 'events'),
+          eventsService.getActiveEvents()
+        ])
+        .then(resps => {
+          //  gets today's date in the user's timezone, in ISO format (YYYY-MM-DD)
+          const today = new Date().toLocaleDateString("sv");
+          const eventsDescending = resps[1].sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+          setFutureEvents(eventsDescending.filter((event) => event.date >= today))
+          setPastEvents(eventsDescending.filter((event) => event.date < today))
+          setInitialized(true);
+        })
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized])
+
 
   return (
     <>
@@ -82,7 +87,7 @@ const EventsPage = () => {
           </Typography>
         </>
       </MastheadWithImage>
-      <BlockComponent block={!init}>
+      <BlockComponent block={!initialized}>
         <SectionContainer backgroundColor={theme.palette.background.default}>
           <Stack gap={{ xs: '2.5rem', md: '2rem' }} maxWidth='880px'>
             {futureEvents.map((event) => (

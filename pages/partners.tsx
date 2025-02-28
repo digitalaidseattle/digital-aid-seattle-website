@@ -20,10 +20,12 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
 import CardLeft from 'components/cards/CardLeft'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout } from 'components/layouts'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
 import { designColor } from 'theme/theme'
 import PartnerImage from '../assets/partnerWithUs.png'
 import MastheadWithImage from 'components/MastheadWithImage'
+import { useContext, useEffect, useState } from 'react'
+import { pageCopyService } from 'services/PageCopyService'
 
 /* eslint-disable @next/next/no-img-element */
 const LABELS = {
@@ -117,6 +119,20 @@ const PartnersPage = () => {
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+
+  const { setLoading } = useContext(LoadingContext);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      setLoading(true);
+      pageCopyService
+        .updateCopy(LABELS, 'partners')
+        .then(() => setInitialized(true))
+        .catch((error) => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized])
 
   return (
     <Container

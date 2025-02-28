@@ -65,19 +65,24 @@ const SupportUsSection = ({ backgroundColor, children }) => (
 const WhatPeopleSaySection = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true)
-    testimonialService
-      .getActiveTestimonials()
-      .then((ts) =>
-        setTestimonials(
-          ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)),
-        ),
-      )
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
-  }, [setLoading])
+    if (!initialized) {
+      setLoading(true);
+      Promise
+        .all([
+          testimonialService.getActiveTestimonials(),
+          pageCopyService.updateCopy(LABELS, 'support_us')
+        ])
+        .then(resps => {
+          setTestimonials(resps[0].sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)));
+          setInitialized(true)
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized])
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>

@@ -6,17 +6,9 @@
 
 import {
   AddOutlined,
-  Campaign,
-  Code,
-  DataObject,
-  DrawOutlined,
   EventAvailableOutlined,
-  Gavel,
-  PeopleAlt,
-  ScreenSearchDesktop,
   StarsOutlined,
-  Storage,
-  WorkHistoryOutlined,
+  WorkHistoryOutlined
 } from '@mui/icons-material'
 import {
   Accordion,
@@ -41,6 +33,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
+import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
@@ -126,19 +119,28 @@ const processContent = [
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext);
-  const [init, setInit] = useState(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true);
-    dasVolunteerRoleService.getAllActiveRoles()
-      .then(roles => setVolunteerRoles(roles))
-      .catch(err => console.error(err))
-      .finally(() => {
-        setLoading(false)
-        setInit(true)
-      }
-      );
-  }, [setLoading])
+    if (!initialized) {
+      setLoading(true);
+
+      Promise.all([
+        dasVolunteerRoleService.getAllActiveRoles(),
+
+        pageCopyService
+          .updateCopy(LABELS, 'volunteers')
+      ])
+        .then((resps) => {
+          setVolunteerRoles(resps[0]);
+          setInitialized(true);
+        })
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized]);
+
+
 
   const theme = useTheme()
   const palette = theme.palette
@@ -345,7 +347,7 @@ const VolunteerPage = () => {
           </Typography>
         </>
       </MastheadWithImage>
-      <BlockComponent block={!init}>
+      <BlockComponent block={!initialized}>
         <Box
           sx={{
             width: '100%',
