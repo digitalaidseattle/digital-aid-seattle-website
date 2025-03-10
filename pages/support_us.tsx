@@ -30,6 +30,10 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const LABELS = {
   hero_title: 'Support us',
@@ -84,28 +88,28 @@ const WhatPeopleSaySection = ({ theme }) => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [setLoading])
+    console.log('Testimonials:', testimonials);
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
         {LABELS.impact_title}
       </Typography>
-      <CardRowContainer>
-        {testimonials.map((info, idx) => (
-          <CardQuote
-            key={'q-' + idx}
-            title={info.title}
-            description={info.quote}
-            avatar={
-              urlForImage(info.avatar)
-                ? urlForImage(info.avatar).url()
-                : undefined
-            }
-            person={info.name}
-            role={info.role}
-          />
-        ))}
-      </CardRowContainer>
+        <Swiper spaceBetween={20} slidesPerView={1}>
+            {testimonials.map((info, idx) => (
+                <SwiperSlide key={'q-' + idx}>
+                    <CardQuote
+                        title={info.title}
+                        description={info.quote}
+                        avatar={
+                            urlForImage(info.avatar)?.url()
+                        }
+                        person={info.name}
+                        role={info.role}
+                    />
+                </SwiperSlide>
+            ))}
+        </Swiper>
     </SupportUsSection>
   )
 }

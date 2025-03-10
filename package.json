@@ -36,7 +36,8 @@
     "react-markdown": "^9.0.1",
     "sanity": "^3.1.4",
     "sib-api-v3-sdk": "^8.5.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "swiper": "^11.2.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
