@@ -15,17 +15,17 @@ import {
 } from '@mui/material'
 import MastheadWithImage from 'components/MastheadWithImage'
 import SectionContainer from 'components/layout/SectionContainer'
-import { withBasicLayout } from 'components/layouts'
-import { ReactNode, useEffect, useState } from 'react'
+import { LoadingContext, withBasicLayout } from 'components/layouts'
+import { ReactNode, useContext, useEffect, useState } from 'react'
 import PrivacyImage from '../assets/privacy.png'
 import Markdown from 'react-markdown'
 import { pageCopyService } from 'services/PageCopyService'
 import dayjs from 'dayjs'
 
 const LABELS = {
-    PAGE_TITLE: 'Privacy policy',
-    TITLE_IMAGE: 'Privacy policy graphic',
-    TITLE_COPY: 'This policy outlines how we collect, use, and protect your personal information on our website.'
+    HERO_TITLE: 'Privacy policy',
+    HERO_TXT: 'This policy outlines how we collect, use, and protect your personal information on our website.',
+    main: 'This policy outlines how we collect, use, and protect your personal information on our website.'
 }
 
 type CardCopyTextProps = {
@@ -71,19 +71,19 @@ const ListItem = ({ text }: ListItemProps) => {
 const PrivacyPage = () => {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery('(max-width:600px)')
-    const [privacyText, setPrivacyText] = useState<string>();
+
+    const { setLoading } = useContext(LoadingContext);
+    const [initialized, setInitialized] = useState(false)
 
     useEffect(() => {
-        if (!privacyText) {
-            pageCopyService.getByPage('privacy')
-                .then((texts) => {
-                    const pageCopy = texts.find(t => t.key === 'main');
-                    if (pageCopy) {
-                        setPrivacyText(pageCopy.copy);
-                    }
-                })
+        if (!initialized) {
+            setLoading(true);
+            pageCopyService.updateCopy(LABELS, 'privacy')
+                .then(() => setInitialized(true))
+                .catch((error) => console.error(error))
+                .finally(() => setLoading(false))
         }
-    }, [privacyText]);
+    }, [initialized, setLoading])
 
     return (
         <Container
@@ -93,7 +93,7 @@ const PrivacyPage = () => {
         >
             <MastheadWithImage
                 imageSrc={PrivacyImage.src}
-                imageText={LABELS.TITLE_IMAGE}
+                imageText={'Privacy policy graphic'}
             >
                 <>
                     <Typography
@@ -101,7 +101,7 @@ const PrivacyPage = () => {
                         sx={{ color: theme.palette.primary.contrastText }}
                         component="h1"
                     >
-                        {LABELS.PAGE_TITLE}
+                        {LABELS.HERO_TITLE}
                     </Typography>
                     <Typography
                         variant="headlineLarge"
@@ -110,7 +110,7 @@ const PrivacyPage = () => {
                         }}
                         component="span"
                     >
-                        {LABELS.TITLE_COPY}
+                        {LABELS.HERO_TXT}
                     </Typography>
                 </>
             </MastheadWithImage>
@@ -127,7 +127,7 @@ const PrivacyPage = () => {
                         <Typography variant={isSmallScreen ? 'headlineMedium' : 'headlineLarge'}>Digital Aid Seattle Privacy Policy</Typography>
                         <Box sx={{ marginTop: 3 }}>
                             <Markdown className='markdown'>
-                                {privacyText}
+                                {LABELS.main}
                             </Markdown>
                         </Box>
                     </Container>

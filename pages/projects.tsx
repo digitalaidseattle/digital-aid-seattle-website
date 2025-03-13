@@ -25,12 +25,12 @@ import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
 import ProjectsImage from '../assets/projects.png'
+import { pageCopyService } from 'services/PageCopyService'
 
-// TODO consider moving into Sanity
 const LABELS = {
-  PAGE_TITLE: 'Projects',
+  HERO_TITLE: 'Projects',
   TITLE_IMAGE: 'Projects graphic',
-  TITLE_COPY: 'We create digital solutions that empower communities, enhance collaboration, and inspire positive change!',
+  HERO_TXT: 'We create digital solutions that empower communities, enhance collaboration, and inspire positive change!',
   NO_MATCHES: 'No matching projects found.',
   ARIA_LABEL_FILTERS: 'filter projects by status'
 }
@@ -46,15 +46,21 @@ const ProjectsPage = () => {
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
   useEffect(() => {
-    setLoading(true);
-    dasProjectsService.getAll()
-      .then(projs => setProjects(projs))
-      .catch(error => console.error(error))
-      .finally(() => {
-        setInit(true)
-        setLoading(false)
-      })
-  }, [setLoading]);
+    if (!init) {
+      setLoading(true);
+      Promise
+        .all([
+          dasProjectsService.getAll(),
+          pageCopyService.updateCopy(LABELS, 'projects')
+        ])
+        .then(resps => {
+          setProjects(resps[0]);
+          setInit(true)
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [init, setLoading])
 
   useEffect(() => {
     if (init) {
@@ -88,7 +94,7 @@ const ProjectsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            {LABELS.PAGE_TITLE}
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="headlineLarge"
@@ -97,7 +103,7 @@ const ProjectsPage = () => {
             }}
             component="span"
           >
-            {LABELS.TITLE_COPY}
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>

@@ -30,22 +30,16 @@ import MastheadWithImage from 'components/MastheadWithImage'
 import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
+import { pageCopyService } from 'services/PageCopyService'
 
 const LABELS = {
-  hero_title: 'Support us',
-  donate_title: 'Donate now',
-  donate_button: 'Download the check donation form',
-  impact_title: 'What people say about us',
-  donate_with: 'Donate with',
-}
-
-const COPY = {
-  hero_description:
-    'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
-  donate_instructions:
-    'We currently accept tax-deductible donations by mail, as well as through Venmo and PayPal.',
-  mail_instructions:
-    'You can mail the form and your check to us at the following address:',
+  HERO_TITLE: 'Support us',
+  HERO_TXT: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
+  DONATE_TITLE: 'Donate now',
+  DONATE_BTN: 'Download the check donation form',
+  IMPACT_TITLE: 'What people say about us',
+  DONATE_WITH: 'Donate with',
+  MAILING_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
 }
 
 const ADDRESS = {
@@ -71,24 +65,29 @@ const SupportUsSection = ({ backgroundColor, children }) => (
 const WhatPeopleSaySection = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    setLoading(true)
-    testimonialService
-      .getActiveTestimonials()
-      .then((ts) =>
-        setTestimonials(
-          ts.sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)),
-        ),
-      )
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
-  }, [setLoading])
+    if (!initialized) {
+      setLoading(true);
+      Promise
+        .all([
+          testimonialService.getActiveTestimonials(),
+          pageCopyService.updateCopy(LABELS, 'support_us')
+        ])
+        .then(resps => {
+          setTestimonials(resps[0].sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)));
+          setInitialized(true)
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false))
+    }
+  }, [initialized, setLoading])
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
-        {LABELS.impact_title}
+        {LABELS.IMPACT_TITLE}
       </Typography>
       <CardRowContainer>
         {testimonials.map((info, idx) => (
@@ -114,6 +113,15 @@ const SupportUsPage = () => {
   const theme = useTheme()
   const { data: supportUs } = useFeature('support-us')
   const router = useRouter()
+  const [initialized, setInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      pageCopyService
+        .updateCopy(LABELS, 'support_us')
+        .then(() => setInitialized(true))
+    }
+  }, [initialized]);
 
   useEffect(() => {
     if (supportUs !== undefined && supportUs === false) {
@@ -135,7 +143,7 @@ const SupportUsPage = () => {
             sx={{ color: theme.palette.primary.contrastText }}
             component="h1"
           >
-            {LABELS.hero_title}
+            {LABELS.HERO_TITLE}
           </Typography>
           <Typography
             variant="bodyLarge"
@@ -143,7 +151,7 @@ const SupportUsPage = () => {
               color: theme.palette.primary.contrastText,
             }}
           >
-            {COPY.hero_description}
+            {LABELS.HERO_TXT}
           </Typography>
         </>
       </MastheadWithImage>
@@ -153,10 +161,10 @@ const SupportUsPage = () => {
   const DonateSection = ({ theme }) => (
     <SupportUsSection backgroundColor={theme.palette.background.white}>
       <Typography variant="headlineMedium" component="h2">
-        {LABELS.donate_title}
+        {LABELS.DONATE_TITLE}
       </Typography>
       <Stack gap="2rem" textAlign="left">
-        <Typography variant="bodyLarge">{COPY.donate_instructions}</Typography>
+        <Typography variant="bodyLarge">{LABELS.MAILING_INSTRUCTIONS}</Typography>
       </Stack>
 
       <Box
@@ -184,7 +192,7 @@ const SupportUsPage = () => {
         >
           <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
             <Typography variant="bodyLarge">
-              {COPY.mail_instructions}
+              {LABELS.MAILING_INSTRUCTIONS}
               <br />
               <br />
               {ADDRESS.title}
@@ -197,7 +205,7 @@ const SupportUsPage = () => {
               variant="contained"
               onClick={() => window.open('/donation-form.pdf', '_blank')}
             >
-              {LABELS.donate_button}
+              {LABELS.DONATE_BTN}
             </Button>
           </Stack>
         </Box>
@@ -226,7 +234,7 @@ const SupportUsPage = () => {
                 backgroundColor: '#FFFFFF',
               }}
             >
-              {LABELS.donate_with}
+              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={VenmoImage.src}
@@ -246,7 +254,7 @@ const SupportUsPage = () => {
                 backgroundColor: '#FFB02E',
               }}
             >
-              {LABELS.donate_with}
+              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={PaypalImage.src}

@@ -2,12 +2,10 @@
 * @2024 Digital Aid Seattle
 */
 
-import { groq } from 'next-sanity';
 import { DASProject, TeamMember } from 'types';
 
-import { sanityClient } from '../sanity/lib/client';
-import airtableService from './AirtableService';
 import { FieldSet } from 'airtable';
+import airtableService from './AirtableService';
 
 
 // No longer used, preserving just in case
@@ -18,24 +16,6 @@ function getTimeline(project: DASProject): string {
   return timeline
 }
 
-// Cadre page info is stored in Sanity
-class SantiyProjectService {
-
-  query = groq`*[_type == "das-project"]`
-  querySingle = groq`*[_type == "das-project"]`
-
-  async getAll(): Promise<DASProject[]> {
-    return sanityClient()
-      .fetch(this.query)
-  }
-
-  async getOne(id: string): Promise<DASProject> {
-    return sanityClient()
-      .fetch(groq`*[_type == "das-project" && id == "${id}"]`)
-      .then(results => results[0]);
-  }
-
-}
 
 const PARTNER_TABLE = 'tblqttKinLZJ2JXo7';
 const VENTURES_TABLE = 'tblRpJek5SjacLaen'; // VENTURE SEEDS/PAINPOINTS TABLE
@@ -118,6 +98,5 @@ class AirtableProjectsService {
 }
 
 const dasProjectsService = new AirtableProjectsService();
-const sanityProjectsService = new SantiyProjectService();
 
-export { dasProjectsService, sanityProjectsService };
+export { dasProjectsService };

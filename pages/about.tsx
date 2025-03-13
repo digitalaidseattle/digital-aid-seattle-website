@@ -49,9 +49,43 @@ import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_managemen
 import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
 import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
+import { useEffect, useState } from 'react'
+import { pageCopyService } from 'services/PageCopyService'
+
+const LABELS = {
+  HERO_LBL: 'About us',
+  HERO_TXT: 'Digital Aid Seattle comprises a group of seasoned professionals with experience in web development, software engineering, digital strategy, visual and content design, and more. We leverage this vast experience to transform the nonprofit sector—to make it more efficient, effective, and accessible to all.',
+
+  WE_DO_LBL: 'What we do',
+  WE_DO_TXT: 'Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.',
+  CADRE_BTN: 'View our leadership team',
+
+  VALUES_LBL: 'Our values',
+  EXCELLENCE_TXT: 'Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver.',
+  EFFICACY_TXT: 'What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery.',
+  EFFICIENCY_TXT: 'We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work.',
+
+  VISION_LBL: 'Our vision',
+  VISION_TXT: 'We envision a network of highly functional nonprofits in the Puget Sound area, working in tandem with one another and with the municipal government in order to enable the highest echelon of public service.',
+
+  OUR_TEAM_LBL: 'Our Team',
+  OUR_TEAM_TXT: 'The Digital Aid Seattle cadre is made up of highly skilled and committed volunteers, dedicated to serving the greater Seattle area.',
+  COMPANIES_TXT: 'We’ve worked in tech and management for companies like:',
+  EXPERIENCE_TXT: 'We collectively hold experience in:',
+  DEGREES_TXT: 'We have graduate and post-graduate degrees in:'
+}
 
 const AboutPage = () => {
   const theme = useTheme()
+  const [initialized, setInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      pageCopyService
+        .updateCopy(LABELS, 'about')
+        .then(() => setInitialized(true))
+    }
+  }, [initialized]);
 
   return (
     <Container
@@ -98,7 +132,7 @@ const AboutUsHeroSection = () => {
           sx={{ color: theme.palette.primary.contrastText }}
           component="h1"
         >
-          About us
+          {LABELS.HERO_LBL}
         </Typography>
         <Typography
           variant="bodyLarge"
@@ -106,11 +140,7 @@ const AboutUsHeroSection = () => {
             color: theme.palette.primary.contrastText,
           }}
         >
-          Digital Aid Seattle comprises a group of seasoned professionals with
-          experience in web development, software engineering, digital strategy,
-          visual and content design, and more. We leverage this vast experience
-          to transform the nonprofit sector—to make it more efficient,
-          effective, and accessible to all.
+          {LABELS.HERO_TXT}
         </Typography>
       </>
     </MastheadWithImage>
@@ -120,11 +150,10 @@ const AboutUsHeroSection = () => {
 const WhatWeDoSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium" component="h2">
-      What we do
+      {LABELS.WE_DO_LBL}
     </Typography>
     <Typography variant="bodyLarge">
-      Digital Aid Seattle partners with other nonprofits to amplify their impact
-      and to uplift communities through the power of technology.
+      {LABELS.WE_DO_TXT}
     </Typography>
     <Box textAlign="center">
       <Button
@@ -132,7 +161,7 @@ const WhatWeDoSection = ({ theme }) => (
         href={'/cadre'}
         sx={{ width: 'fit-content' }}
       >
-        View our leadership team
+        {LABELS.CADRE_BTN}
       </Button>
     </Box>
   </AboutUsSection>
@@ -141,12 +170,12 @@ const WhatWeDoSection = ({ theme }) => (
 const OurValueSection = ({ theme }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>
     <Typography variant="headlineMedium" component="h2">
-      Our values
+      {LABELS.VALUES_LBL}
     </Typography>
     <CardRowContainer>
       <CardOne
         title="Excellence"
-        description="Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver."
+        description={LABELS.EXCELLENCE_TXT}
         icon={
           <MilitaryTechOutlined
             style={{ color: designColor.white, fontSize: '40px' }}
@@ -155,7 +184,7 @@ const OurValueSection = ({ theme }) => (
       />
       <CardOne
         title="Efficacy"
-        description="What we do will have impact. We will apply the pareto principle (and other frameworks) to ensure that we are optimizing our efforts at every step in our process from engagement to delivery."
+        description={LABELS.EFFICACY_TXT}
         icon={
           <AutoGraphOutlined
             style={{ color: designColor.white, fontSize: '40px' }}
@@ -164,7 +193,7 @@ const OurValueSection = ({ theme }) => (
       />
       <CardOne
         title="Efficiency"
-        description="We work with a steady and speedy cadence whenever possible. We maintain a MLP (minimum loveable product) mindset without sacrificing the quality of our work."
+        description={LABELS.EFFICIENCY_TXT}
         icon={
           <AccessAlarmOutlined
             style={{ color: designColor.white, fontSize: '40px' }}
@@ -178,12 +207,10 @@ const OurValueSection = ({ theme }) => (
 const OurVisionSection = ({ theme }) => (
   <AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium" component="h2">
-      Our vision
+      {LABELS.VISION_LBL}
     </Typography>
     <Typography variant="bodyLarge" align="center" display="block">
-      We envision a network of highly functional nonprofits in the Puget Sound
-      area, working in tandem with one another and with the municipal government
-      in order to enable the highest echelon of public service.
+      {LABELS.VISION_TXT}
     </Typography>
   </AboutUsSection>
 )
@@ -196,11 +223,10 @@ const OurTeamSection = () => {
   return (
     <AboutUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
-        Our team
+        {LABELS.OUR_TEAM_LBL}
       </Typography>
       <Typography variant="bodyLarge" align="center" display="block">
-        The Digital Aid Seattle cadre is made up of highly skilled and committed
-        volunteers, dedicated to serving the greater Seattle area.
+        {LABELS.OUR_TEAM_TXT}
       </Typography>
       <Typography
         variant="titleMedium"
@@ -208,7 +234,7 @@ const OurTeamSection = () => {
         display="block"
         component="h3"
       >
-        We’ve worked in tech and management for companies like:
+        {LABELS.COMPANIES_TXT}
       </Typography>
       <Grid container spacing={2} component="ul">
         {companiesList.map((item) => (
@@ -226,7 +252,7 @@ const OurTeamSection = () => {
         display="block"
         component="h3"
       >
-        We collectively hold experience in:
+        {LABELS.EXPERIENCE_TXT}
       </Typography>
       <Grid container spacing={2} component="ul">
         {experienceContent.map((item) => (
@@ -245,7 +271,7 @@ const OurTeamSection = () => {
         display="block"
         component="h3"
       >
-        We have graduate and post-graduate degrees in:
+        {LABELS.DEGREES_TXT}
       </Typography>
       <Grid container spacing={2} component="ul">
         {degreeContent.map((item) => (
