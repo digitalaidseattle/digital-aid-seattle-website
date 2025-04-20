@@ -20,7 +20,7 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
 import PaypalImage from '../assets/paypal.png'
@@ -62,51 +62,71 @@ const SupportUsSection = ({ backgroundColor, children }) => (
   </SectionContainer>
 )
 
-const WhatPeopleSaySection = ({ theme }) => {
-  const { setLoading } = useContext(LoadingContext)
-  const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
-  const [initialized, setInitialized] = useState<boolean>(false);
+const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
+    const { setLoading } = useContext(LoadingContext)
+    const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
+    const [initialized, setInitialized] = useState(false)
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-  useEffect(() => {
-    if (!initialized) {
-      setLoading(true);
-      Promise
-        .all([
-          testimonialService.getActiveTestimonials(),
-          pageCopyService.updateCopy(LABELS, 'support_us')
-        ])
-        .then(resps => {
-          setTestimonials(resps[0].sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)));
-          setInitialized(true)
-        })
-        .catch(error => console.error(error))
-        .finally(() => setLoading(false))
+    useEffect(() => {
+        if (!initialized) {
+            setLoading(true)
+            testimonialService
+                .getActiveTestimonials()
+                .then((data) => {
+                    setTestimonials(
+                        data.sort((a, b) => a.orderRank.localeCompare(b.orderRank))
+                    )
+                    setInitialized(true)
+                })
+                .catch(console.error)
+                .finally(() => setLoading(false))
+        }
+    }, [initialized, setLoading])
+
+    // Slider configuration with custom arrows and responsive settings
+    const settings = {
+        dots: true,
+        infinite: testimonials.length > 1,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        adaptiveHeight: false,
+        centerMode: false,
+        centerPadding: '0px',
     }
-  }, [initialized, setLoading])
 
-  return (
-    <SupportUsSection backgroundColor={theme.palette.background.default}>
-      <Typography variant="headlineMedium" component="h2">
-        {LABELS.IMPACT_TITLE}
-      </Typography>
-      <CardRowContainer>
-        {testimonials.map((info, idx) => (
-          <CardQuote
-            key={'q-' + idx}
-            title={info.title}
-            description={info.quote}
-            avatar={
-              urlForImage(info.avatar)
-                ? urlForImage(info.avatar).url()
-                : undefined
-            }
-            person={info.name}
-            role={info.role}
-          />
-        ))}
-      </CardRowContainer>
-    </SupportUsSection>
-  )
+    return (
+        <SupportUsSection backgroundColor={theme.palette.background.default}>
+            <Typography variant="headlineMedium" component="h2">
+                {LABELS.IMPACT_TITLE}
+            </Typography>
+            <Box
+                sx={{
+                    width: '100%',
+                    position: 'relative',
+                    px: { xs: 4, sm: 2 },
+                }}
+            >
+                <Slider {...settings}>
+                    {testimonials.map((t, idx) => (
+                        <div key={idx}>
+                            <CardQuote
+                                title={t.title}
+                                description={t.quote}
+                                avatar={urlForImage(t.avatar)?.url()}
+                                person={t.name}
+                                role={t.role}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            </Box>
+        </SupportUsSection>
+    )
 }
 
 const SupportUsPage = () => {
