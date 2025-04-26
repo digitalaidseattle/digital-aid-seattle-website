@@ -12,6 +12,7 @@ import {
   useTheme,
 } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
+import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import {
@@ -31,6 +32,12 @@ import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
 import { pageCopyService } from 'services/PageCopyService'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import IconButton from "@mui/material/IconButton"
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -39,7 +46,7 @@ const LABELS = {
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
-  MAILING_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  MAILING_INSTRUCTIONS: "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
 }
 
 const ADDRESS = {
@@ -47,6 +54,69 @@ const ADDRESS = {
   street: '107 Spring St',
   statezip: 'Seattle, WA 98104',
 }
+
+// Custom arrow components with chevrons
+interface ArrowProps {
+    className?: string;
+    style?: React.CSSProperties;
+    onClick?: () => void;
+}
+
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+    return (
+        <IconButton
+            onClick={onClick}
+            sx={{
+                position: 'absolute',
+                right: { xs: 0, sm: -20 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 2,
+                color: 'primary.main',
+                bgcolor: 'background.paper',
+                boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+                '&:hover': {
+                    bgcolor: 'background.paper',
+                    opacity: 0.9,
+                },
+                width: { xs: 32, sm: 40 },
+                height: { xs: 32, sm: 40 },
+            }}
+            aria-label="Next"
+        >
+            <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
+        </IconButton>
+    );
+};
+
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+    return (
+        <IconButton
+            onClick={onClick}
+            sx={{
+                position: 'absolute',
+                left: { xs: 0, sm: -20 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 2,
+                color: 'primary.main',
+                bgcolor: 'background.paper',
+                boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+                '&:hover': {
+                    bgcolor: 'background.paper',
+                    opacity: 0.9,
+                },
+                width: { xs: 32, sm: 40 },
+                height: { xs: 32, sm: 40 },
+            }}
+            aria-label="Previous"
+        >
+            <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
+        </IconButton>
+    );
+};
 
 const SupportUsSection = ({ backgroundColor, children }) => (
   <SectionContainer backgroundColor={backgroundColor}>
@@ -89,7 +159,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
         dots: true,
         infinite: testimonials.length > 1,
         speed: 500,
-        slidesToShow: 1,
+        slidesToShow: 2,
         slidesToScroll: 1,
         arrows: true,
         nextArrow: <NextArrow />,
@@ -97,6 +167,14 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
         adaptiveHeight: false,
         centerMode: false,
         centerPadding: '0px',
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
     }
 
     return (
@@ -108,18 +186,56 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
                 sx={{
                     width: '100%',
                     position: 'relative',
-                    px: { xs: 4, sm: 2 },
+                    px: { xs: 4, sm: 2 }
                 }}
             >
+                <style jsx global>{`
+                    .slick-list, .slick-track {
+                        display: flex !important;
+                    }
+                    .slick-slide {
+                        height: inherit !important;
+                        display: flex !important;
+                    }
+                    .slick-slide > div {
+                        width: 100%;
+                        display: flex;
+                        padding: 12px 12px;
+                    }
+                    .slick-slide .MuiCard-root {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #FFFFFF;
+                        border: 1px solid #f0f0f0;
+                        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+                    }
+                    .slick-slide .MuiCardContent-root {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                `}</style>
                 <Slider {...settings}>
                     {testimonials.map((t, idx) => (
                         <div key={idx}>
-                            <CardQuote
+                            <CardOne
                                 title={t.title}
                                 description={t.quote}
-                                avatar={urlForImage(t.avatar)?.url()}
-                                person={t.name}
-                                role={t.role}
+                                icon={
+                                    <img 
+                                        src={urlForImage(t.avatar)?.url()} 
+                                        alt={t.name}
+                                        style={{ 
+                                            width: '100%', 
+                                            height: '100%', 
+                                            borderRadius: '50%',
+                                            objectFit: 'cover' 
+                                        }}
+                                    />
+                                }
+                                smallerTitle={true}
                             />
                         </div>
                     ))}
