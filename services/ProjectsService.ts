@@ -38,7 +38,7 @@ class AirtableProjectsService {
           impact: fields['Impact (for DAS website)'],
           description: resp.fields['Org description'],
           imageSrc: (logos && logos.length > 0) ? logos[0].url : null,
-          programAreas: fields['Foci (from Partner)'],
+          programAreas: fields['Foci (from Partner)'] ?? [],
           projectLink: `project/${fields['AirTable ID']}`,
           ventureCode: fields['Prospective Venture Code']
         } as DASProject
