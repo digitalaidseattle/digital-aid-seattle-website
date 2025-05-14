@@ -12,6 +12,7 @@ import {
   useTheme,
 } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
+import CardOne from 'components/cards/CardOne'
 import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import {
@@ -20,7 +21,7 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
 import PaypalImage from '../assets/paypal.png'
@@ -31,6 +32,12 @@ import { testimonialService } from '../services/TestimonialService'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
 import { pageCopyService } from 'services/PageCopyService'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import IconButton from "@mui/material/IconButton"
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -39,7 +46,7 @@ const LABELS = {
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
-  MAILING_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  MAILING_INSTRUCTIONS: "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
 }
 
 const ADDRESS = {
@@ -47,6 +54,69 @@ const ADDRESS = {
   street: '107 Spring St',
   statezip: 'Seattle, WA 98104',
 }
+
+// Custom arrow components with chevrons
+interface ArrowProps {
+    className?: string;
+    style?: React.CSSProperties;
+    onClick?: () => void;
+}
+
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+    return (
+        <IconButton
+            onClick={onClick}
+            sx={{
+                position: 'absolute',
+                right: { xs: 0, sm: -20 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 2,
+                color: 'primary.main',
+                bgcolor: 'background.paper',
+                boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+                '&:hover': {
+                    bgcolor: 'background.paper',
+                    opacity: 0.9,
+                },
+                width: { xs: 32, sm: 40 },
+                height: { xs: 32, sm: 40 },
+            }}
+            aria-label="Next"
+        >
+            <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
+        </IconButton>
+    );
+};
+
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
+    const isMobile = useMediaQuery('(max-width:600px)');
+    return (
+        <IconButton
+            onClick={onClick}
+            sx={{
+                position: 'absolute',
+                left: { xs: 0, sm: -20 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 2,
+                color: 'primary.main',
+                bgcolor: 'background.paper',
+                boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+                '&:hover': {
+                    bgcolor: 'background.paper',
+                    opacity: 0.9,
+                },
+                width: { xs: 32, sm: 40 },
+                height: { xs: 32, sm: 40 },
+            }}
+            aria-label="Previous"
+        >
+            <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
+        </IconButton>
+    );
+};
 
 const SupportUsSection = ({ backgroundColor, children }) => (
   <SectionContainer backgroundColor={backgroundColor}>
@@ -62,51 +132,117 @@ const SupportUsSection = ({ backgroundColor, children }) => (
   </SectionContainer>
 )
 
-const WhatPeopleSaySection = ({ theme }) => {
-  const { setLoading } = useContext(LoadingContext)
-  const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
-  const [initialized, setInitialized] = useState<boolean>(false);
+const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
+    const { setLoading } = useContext(LoadingContext)
+    const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
+    const [initialized, setInitialized] = useState(false)
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
-  useEffect(() => {
-    if (!initialized) {
-      setLoading(true);
-      Promise
-        .all([
-          testimonialService.getActiveTestimonials(),
-          pageCopyService.updateCopy(LABELS, 'support_us')
-        ])
-        .then(resps => {
-          setTestimonials(resps[0].sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)));
-          setInitialized(true)
-        })
-        .catch(error => console.error(error))
-        .finally(() => setLoading(false))
-    }
-  }, [initialized, setLoading])
+    useEffect(() => {
+        if (!initialized) {
+            setLoading(true)
+            testimonialService
+                .getActiveTestimonials()
+                .then((data) => {
+                    setTestimonials(
+                        data.sort((a, b) => a.orderRank.localeCompare(b.orderRank))
+                    )
+                    setInitialized(true)
+                })
+                .catch(console.error)
+                .finally(() => setLoading(false))
+        }
+    }, [initialized, setLoading])
 
-  return (
-    <SupportUsSection backgroundColor={theme.palette.background.default}>
-      <Typography variant="headlineMedium" component="h2">
-        {LABELS.IMPACT_TITLE}
-      </Typography>
-      <CardRowContainer>
-        {testimonials.map((info, idx) => (
-          <CardQuote
-            key={'q-' + idx}
-            title={info.title}
-            description={info.quote}
-            avatar={
-              urlForImage(info.avatar)
-                ? urlForImage(info.avatar).url()
-                : undefined
+    // Slider configuration with custom arrows and responsive settings
+    const settings = {
+        dots: true,
+        infinite: testimonials.length > 1,
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        adaptiveHeight: false,
+        centerMode: false,
+        centerPadding: '0px',
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                }
             }
-            person={info.name}
-            role={info.role}
-          />
-        ))}
-      </CardRowContainer>
-    </SupportUsSection>
-  )
+        ]
+    }
+
+    return (
+        <SupportUsSection backgroundColor={theme.palette.background.default}>
+            <Typography variant="headlineMedium" component="h2">
+                {LABELS.IMPACT_TITLE}
+            </Typography>
+            <Box
+                sx={{
+                    width: '100%',
+                    position: 'relative',
+                    px: { xs: 4, sm: 2 }
+                }}
+            >
+                <style jsx global>{`
+                    .slick-list, .slick-track {
+                        display: flex !important;
+                    }
+                    .slick-slide {
+                        height: inherit !important;
+                        display: flex !important;
+                    }
+                    .slick-slide > div {
+                        width: 100%;
+                        display: flex;
+                        padding: 12px 12px;
+                    }
+                    .slick-slide .MuiCard-root {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #FFFFFF;
+                        border: 1px solid #f0f0f0;
+                        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+                    }
+                    .slick-slide .MuiCardContent-root {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                `}</style>
+                <Slider {...settings}>
+                    {testimonials.map((t, idx) => (
+                        <div key={idx}>
+                            <CardOne
+                                title={t.title}
+                                description={t.quote}
+                                icon={
+                                    <img 
+                                        src={urlForImage(t.avatar)?.url()} 
+                                        alt={t.name}
+                                        style={{ 
+                                            width: '100%', 
+                                            height: '100%', 
+                                            borderRadius: '50%',
+                                            objectFit: 'cover' 
+                                        }}
+                                    />
+                                }
+                                smallerTitle={true}
+                            />
+                        </div>
+                    ))}
+                </Slider>
+            </Box>
+        </SupportUsSection>
+    )
 }
 
 const SupportUsPage = () => {
