@@ -69,7 +69,7 @@ const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
             onClick={onClick}
             sx={{
                 position: 'absolute',
-                right: { xs: 0, sm: -20 },
+                right: { xs: 0, sm: 0 },
                 top: '50%',
                 transform: 'translateY(-50%)',
                 zIndex: 2,
@@ -97,7 +97,7 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
             onClick={onClick}
             sx={{
                 position: 'absolute',
-                left: { xs: 0, sm: -20 },
+                left: { xs: 0, sm: 0 },
                 top: '50%',
                 transform: 'translateY(-50%)',
                 zIndex: 2,
@@ -159,24 +159,17 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
         dots: true,
         infinite: testimonials.length > 1,
         speed: 500,
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
         adaptiveHeight: false,
         centerMode: false,
-        centerPadding: '0px',
+        centerPadding: '10px',
         responsive: [
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
         ]
     }
-
     return (
         <SupportUsSection backgroundColor={theme.palette.background.default}>
             <Typography variant="headlineMedium" component="h2">
@@ -184,62 +177,41 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
             </Typography>
             <Box
                 sx={{
-                    width: '100%',
+                    maxWidth: {xs: 400, sm: 400, md: 600, lg: 600, xl: 600,},
                     position: 'relative',
-                    px: { xs: 4, sm: 2 }
+                    overflow: 'visible',
                 }}
             >
-                <style jsx global>{`
-                    .slick-list, .slick-track {
-                        display: flex !important;
-                    }
-                    .slick-slide {
-                        height: inherit !important;
-                        display: flex !important;
-                    }
-                    .slick-slide > div {
-                        width: 100%;
-                        display: flex;
-                        padding: 12px 12px;
-                    }
-                    .slick-slide .MuiCard-root {
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        background-color: #FFFFFF;
-                        border: 1px solid #f0f0f0;
-                        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-                    }
-                    .slick-slide .MuiCardContent-root {
-                        flex: 1;
-                        display: flex;
-                        flex-direction: column;
-                    }
-                `}</style>
-                <Slider {...settings}>
-                    {testimonials.map((t, idx) => (
-                        <div key={idx}>
-                            <CardOne
-                                title={t.title}
-                                description={t.quote}
-                                icon={
-                                    <img 
-                                        src={urlForImage(t.avatar)?.url()} 
-                                        alt={t.name}
-                                        style={{ 
-                                            width: '100%', 
-                                            height: '100%', 
-                                            borderRadius: '50%',
-                                            objectFit: 'cover' 
-                                        }}
-                                    />
-                                }
-                                smallerTitle={true}
+            <Slider {...settings}>
+                {testimonials.map((t, idx) => (
+                    <CardOne
+                        key={idx}
+                        title={t.title}
+                        description={t.quote}
+                        icon={
+                            <img
+                                src={urlForImage(t.avatar)?.url()}
+                                alt={t.name}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    borderRadius: '50%',
+                                    objectFit: 'cover',
+                                }}
                             />
-                        </div>
-                    ))}
-                </Slider>
+                        }
+                        smallerTitle
+                        cardStyles={{
+                            height: 600,
+                            width: 400,
+                            margin: '0 auto',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flex: '0 0 auto', // disable grow/shrink, fix size per slide
+                        }}
+                    />
+                ))}
+            </Slider>
             </Box>
         </SupportUsSection>
     )
