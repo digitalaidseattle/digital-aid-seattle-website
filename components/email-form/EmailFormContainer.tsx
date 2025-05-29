@@ -35,18 +35,37 @@ const InputSection = () => {
   const theme = useTheme();
 
   const [email, setEmail] = useState('');
-  const [subscribeMessage, setSubscribeMessage] = useState('');
+  const [snackMessage, setSnackMessage] = useState('');
+  const [snackColor, setSnackColor] = useState('red');
   const [error, setError] = useState('');
+
+  function setErrorNotification(message: string) {
+    setSnackMessage(message);
+    setSnackColor('red');
+  }
+
+  function setSucessNotification(message: string) {
+    setSnackMessage(message);
+    setSnackColor('green');
+  }
+
+  function clearNotification() {
+    setSnackMessage('');
+    setSnackColor('green');
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (emailService.isValid(email)) {
       emailService.subscribe(email)
         .then(() => {
-          setSubscribeMessage("Thank you for subscribing.");
           setEmail('');
+          setSucessNotification("Thank you for subscribing.");
         })
-        .catch(err => console.error(err))
+        .catch(err => {
+          console.error(err);
+          setErrorNotification("We are experiencing technical issues.  Please try again later.");
+        })
         .finally(() => setError(''))
     } else {
       setError('Not a valid email address.')
@@ -60,14 +79,14 @@ const InputSection = () => {
       }}>
       <Stack>
         <Snackbar
-          open={subscribeMessage !== ''}
+          open={snackMessage !== ''}
           autoHideDuration={6000}
-          onClose={() => setSubscribeMessage('')}
-          message={<><Typography fontWeight={500}>{subscribeMessage}</Typography></>}
+          onClose={() => clearNotification()}
+          message={<><Typography fontWeight={500}>{snackMessage}</Typography></>}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           ContentProps={{
             sx: {
-              background: "green"
+              background: snackColor
             }
           }}
         />
