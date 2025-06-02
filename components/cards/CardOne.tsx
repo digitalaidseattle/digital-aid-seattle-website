@@ -21,7 +21,7 @@ type CardOneProps = {
   buttonLink?: string
   smallerTitle?: boolean
   cardHref?: string
-  cardStyles?: object
+  cardStyles?: any
 }
 
 const CardOne = ({
@@ -32,7 +32,7 @@ const CardOne = ({
   buttonLink,
   smallerTitle,
   cardHref,
-  cardStyles,
+  cardStyles
 }: CardOneProps) => {
 
   const content = (<Box
@@ -65,11 +65,12 @@ const CardOne = ({
     <Card
       sx={{
         padding: { xs: '2rem', md: '1.5rem' },
+        display: 'flex',
         flexGrow: '1',
         minWidth: { xs: '100%', sm: 'auto' },
         boxShadow:
           '0px 12px 24px rgba(86, 96, 97, 0.12), 0px 6px 12px rgba(86, 96, 97, 0.12)',
-          ...cardStyles,
+        ...cardStyles
       }}
     >
       {cardHref &&

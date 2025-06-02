@@ -177,9 +177,10 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
             </Typography>
             <Box
                 sx={{
-                    maxWidth: {xs: 400, sm: 400, md: 600, lg: 600, xl: 600,},
+                    maxWidth: {xs: 400, sm: 400, md: 600, lg: 600, xl: 600},
                     position: 'relative',
                     overflow: 'visible',
+                    padding: {xs: '0 16px', sm: '0 24px', md: '0 32px'},
                 }}
             >
             <Slider {...settings}>
@@ -202,12 +203,13 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
                         }
                         smallerTitle
                         cardStyles={{
-                            height: 600,
-                            width: 400,
+                            width: {xs: '100%', sm: '350px', md: '400px'},
                             margin: '0 auto',
                             display: 'flex',
                             flexDirection: 'column',
-                            flex: '0 0 auto', // disable grow/shrink, fix size per slide
+                            flex: '0 0 auto',
+                            height: 'auto',
+                            minHeight: {xs: '300px', sm: '350px'},
                         }}
                     />
                 ))}
