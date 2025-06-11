@@ -15,14 +15,18 @@ import { pageCopyService } from 'services/PageCopyService'
 
 // TODO consider moving into Sanity
 const LABELS = {
-  HERO_TXT: 'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
+  HERO_TXT:
+    'Building the free tech tools Puget Sound nonprofits need to have greater impact.',
   MISSION_LBL: 'Our mission',
-  MISSION_TXT: 'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
+  MISSION_TXT:
+    'We believe community organizations are the heart of Seattle, and deserve the same tools and advantages enjoyed by our largest tech companies. Our mission is to create scalable, customized solutions to enable other nonprofits to reach their full potential and achieve their own mission-driven goals.',
   LEARN_BTN: 'Learn About Us',
-  PARTNER_DESC: 'Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free.',
+  PARTNER_DESC:
+    'Reach out to Digital Aid Seattle! We work with Washington-based nonprofits to create customized digital solutions for free.',
   PARTNER_BTN: 'Partner With Us',
-  VOLUNTEER_DESC: 'Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available.',
-  VOLUNTEER_BTN: 'Volunteer With Us'
+  VOLUNTEER_DESC:
+    'Join Digital Aid Seattle to make a difference in the lives of others—we have a wide range of volunteer opportunities available.',
+  VOLUNTEER_BTN: 'Volunteer With Us',
 }
 
 const Home = () => {
@@ -30,12 +34,13 @@ const Home = () => {
   const palette = theme.palette
 
   const loader = ({ src, width, quality }) => {
-    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}\?w=${width}&q=${quality || 75
-      }`
+    return `${process.env.NEXT_PUBLIC_BASE_PATH}${src}\?w=${width}&q=${
+      quality || 75
+    }`
   }
 
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [initialized, setInitialized] = useState<boolean>(false);
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const [initialized, setInitialized] = useState<boolean>(false)
 
   useEffect(() => {
     if (!initialized) {
@@ -43,7 +48,7 @@ const Home = () => {
         .updateCopy(LABELS, 'home')
         .then(() => setInitialized(true))
     }
-  }, [initialized]);
+  }, [initialized])
 
   return (
     <>
@@ -173,7 +178,7 @@ const Home = () => {
                 <img
                   src={HeroImage.src}
                   title="Seattle skyline by Stephen Plopper"
-                  alt=""
+                  alt="Seattle skyline picture"
                   style={{
                     objectFit: 'cover',
                     width: '100%',

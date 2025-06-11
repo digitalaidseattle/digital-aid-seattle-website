@@ -45,7 +45,7 @@ const MastheadWithImage = ({
         </Box>
         <img
           src={imageSrc}
-          alt="" // left blank for decorative images
+          alt={imageText}
           width="418px"
           style={{
             objectFit: 'cover',
