@@ -180,7 +180,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
                     maxWidth: {xs: 400, sm: 400, md: 600, lg: 600, xl: 600},
                     position: 'relative',
                     overflow: 'visible',
-                    padding: {xs: '0 16px', sm: '0 24px', md: '0 32px'},
+                    padding: {xs: '0 16px 24px', sm: '0 24px 32px', md: '0 32px 40px'},
                 }}
             >
             <Slider {...settings}>

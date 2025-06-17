@@ -68,6 +68,8 @@ const CardOne = ({
         display: 'flex',
         flexGrow: '1',
         minWidth: { xs: '100%', sm: 'auto' },
+        boxShadow: 'none',
+        bgcolor: 'white',
         ...cardStyles
       }}
     >
