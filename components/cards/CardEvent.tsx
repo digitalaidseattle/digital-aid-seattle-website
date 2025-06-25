@@ -137,7 +137,11 @@ const CardEvent = ({ event }: CardEventProps) => {
       tabIndex={0}
       sx={{
         boxShadow:
-          '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)'
+          '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
+        '&:hover': {
+          boxShadow:
+            '0px 2px 4px 0px rgba(52, 61, 62, 0.1), 0px 4px 8px 2px rgba(52, 61, 62, 0.1)',
+        },
       }}
     >
       <CardActionArea href={`/event/${event.id}`}>
