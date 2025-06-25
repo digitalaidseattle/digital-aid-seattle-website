@@ -138,8 +138,10 @@ const CardEvent = ({ event }: CardEventProps) => {
         boxShadow:
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
         '&:hover': {
+          background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
+          border: `2px solid ${theme.palette.primary.main}`,
           boxShadow:
-            '0px 2px 4px 0px rgba(52, 61, 62, 0.1), 0px 4px 8px 2px rgba(52, 61, 62, 0.1)',
+            '0px 8px 8px 2px rgba(52, 61, 62, 0.1), 0px 8px 4px rgba(52, 61, 62, 0.1)',
         },
       }}
     >
