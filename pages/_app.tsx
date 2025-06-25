@@ -14,6 +14,12 @@ import { theme } from 'theme/theme'
 import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 import { eventsService } from '../services/EventsService'
 
+import Script from "next/script";
+import { useRouter } from "next/router";
+import * as gtag from "../lib/gtag";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
 const TAG_NAMES = {
@@ -32,6 +38,19 @@ export default function App({ Component, pageProps }: AppProps) {
   const searchParams = useSearchParams()
 
   const [title, setTitle] = useState(DEFAULT_TAG)
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   useEffect(() => {
     const lookupTitle = async (pathName: string) => {
       let pageName = null
@@ -67,8 +86,26 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>{title}</title>
       </Head>
       <ThemeProvider theme={theme}>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
         <Component {...pageProps} />
-        <Analytics />
+        {/* <Analytics /> */}
       </ThemeProvider>
     </>
   )
