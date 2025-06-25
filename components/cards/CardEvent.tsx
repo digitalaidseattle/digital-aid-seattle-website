@@ -24,7 +24,6 @@ type CardEventProps = {
 const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
   const tabletScreen = useMediaQuery(theme.breakpoints.only('md'))
-  console.log('event', event);
 
   const imageSrc = event.image && event.image.asset
     ? urlForImage(event.image).url()
