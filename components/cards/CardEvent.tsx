@@ -14,6 +14,9 @@ import { urlForImage } from '../../sanity/lib/image'
 import { eventsService } from 'services/EventsService'
 import { CardActionArea } from '@mui/material'
 
+import ProjectImage from '../../assets/project-image.png'
+const PLACEHOLDER_IMAGE = ProjectImage.src;
+
 type CardEventProps = {
   event: OSEvent
 }
@@ -21,6 +24,10 @@ type CardEventProps = {
 const CardEvent = ({ event }: CardEventProps) => {
   const theme = useTheme()
   const tabletScreen = useMediaQuery(theme.breakpoints.only('md'))
+
+  const imageSrc = event.image && event.image.asset
+    ? urlForImage(event.image).url()
+    : PLACEHOLDER_IMAGE;
 
   const MobileAndDesktopCard = () => {
     return (
@@ -42,16 +49,14 @@ const CardEvent = ({ event }: CardEventProps) => {
             overflow: 'hidden',
           }}
         >
-          {event.image && event.image.asset && (
-            <CardMedia
-              component="img"
-              image={urlForImage(event.image).url()}
-              sx={{
-                position: { xs: 'absolute', lg: 'static' },
-                height: '100%',
-              }}
-            />
-          )}
+          <CardMedia
+            component="img"
+            image={imageSrc}
+            sx={{
+              position: { xs: 'absolute', lg: 'static' },
+              height: '100%',
+            }}
+          />
         </Box>
         <CardContent
           sx={{
@@ -95,17 +100,15 @@ const CardEvent = ({ event }: CardEventProps) => {
               width: '10rem',
             }}
           >
-            {event.image && event.image.asset && (
-              <CardMedia
-                component="img"
-                image={urlForImage(event.image).url()}
-                sx={{
-                  position: 'static',
-                  height: '100%',
-                  borderRadius: '8px',
-                }}
-              />
-            )}
+            <CardMedia
+              component="img"
+              image={imageSrc}
+              sx={{
+                position: 'static',
+                height: '100%',
+                borderRadius: '8px',
+              }}
+            />
           </Box>
           <Stack
             spacing="1rem"
@@ -134,6 +137,7 @@ const CardEvent = ({ event }: CardEventProps) => {
 
   return (
     <Card
+      tabIndex={0}
       sx={{
         boxShadow:
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
