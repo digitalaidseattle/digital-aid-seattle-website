@@ -16,6 +16,7 @@ export const ICON_STYLE = {
 type CardOneProps = {
   title?: string
   description: string
+  bottomText?: string
   icon: ReactNode
   buttonText?: string
   buttonLink?: string
@@ -27,39 +28,49 @@ type CardOneProps = {
 const CardOne = ({
   title,
   description,
+  bottomText,
   icon,
   buttonText,
   buttonLink,
   smallerTitle,
   cardHref,
-  cardStyles
+  cardStyles,
 }: CardOneProps) => {
-
-  const content = (<Box
-    sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1.5rem',
-      alignItems: 'center',
-      textAlign: 'center',
-      // only do space-between when a button is used:
-      justifyContent: buttonText && 'space-between',
-      height: '100%',
-    }}
-  >
-    <IconContainer>{icon}</IconContainer>
-    {title && (
-      <Typography variant={smallerTitle ? 'titleMedium' : 'titleLarge'}>
-        {title}
-      </Typography>
-    )}
-    <Typography variant="bodyMedium">{description}</Typography>
-    {buttonText && (
-      <Button variant="contained" color="primary" href={buttonLink}>
-        {buttonText}
-      </Button>
-    )}
-  </Box>);
+  const content = (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        alignItems: 'center',
+        textAlign: 'center',
+        // only do space-between when a button is used:
+        justifyContent: buttonText && 'space-between',
+        height: '100%',
+      }}
+    >
+      <IconContainer>{icon}</IconContainer>
+      {title && (
+        <Typography variant={smallerTitle ? 'titleMedium' : 'titleLarge'}>
+          {title}
+        </Typography>
+      )}
+      <Typography variant="bodyMedium">{description}</Typography>
+      {bottomText && (
+        <Typography
+          variant="labelLarge"
+          sx={{ position: 'absolute', bottom: '2em' }}
+        >
+          {bottomText}
+        </Typography>
+      )}
+      {buttonText && (
+        <Button variant="contained" color="primary" href={buttonLink}>
+          {buttonText}
+        </Button>
+      )}
+    </Box>
+  )
 
   return (
     <Card
@@ -70,19 +81,11 @@ const CardOne = ({
         minWidth: { xs: '100%', sm: 'auto' },
         boxShadow: 'none',
         bgcolor: 'white',
-        ...cardStyles
+        ...cardStyles,
       }}
     >
-      {cardHref &&
-        <CardActionArea href={cardHref}>
-          {content}
-        </CardActionArea>
-      }
-      {!cardHref &&
-        <CardContent>
-          {content}
-        </CardContent>
-      }
+      {cardHref && <CardActionArea href={cardHref}>{content}</CardActionArea>}
+      {!cardHref && <CardContent>{content}</CardContent>}
     </Card>
   )
 }
