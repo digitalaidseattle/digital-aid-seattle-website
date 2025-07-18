@@ -7,6 +7,7 @@ import {
   Button,
   Container,
   Stack,
+  SxProps,
   Typography,
   useMediaQuery,
   useTheme,
@@ -57,19 +58,18 @@ const ADDRESS = {
 
 // Custom arrow components with chevrons
 interface ArrowProps {
-  className?: string
-  style?: React.CSSProperties
+  ariaLabel?: string
+  sx?: SxProps
+  children?: React.ReactNode
   onClick?: () => void
 }
 
-const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
-  const isMobile = useMediaQuery('(max-width:600px)')
+const Arrow: React.FC<ArrowProps> = ({ ariaLabel, sx, children, onClick }) => {
   return (
     <IconButton
       onClick={onClick}
       sx={{
         position: 'absolute',
-        right: { xs: 0, sm: -20 },
         top: '50%',
         transform: 'translateY(-50%)',
         zIndex: 2,
@@ -82,39 +82,38 @@ const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
         },
         width: { xs: 32, sm: 40 },
         height: { xs: 32, sm: 40 },
+        ...sx,
       }}
-      aria-label="Next"
+      aria-label={ariaLabel}
     >
-      <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
+      {children}
     </IconButton>
   )
 }
 
-const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
-  const isMobile = useMediaQuery('(max-width:600px)')
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   return (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        position: 'absolute',
-        left: { xs: 0, sm: -60 },
-        top: '50%',
-        transform: 'translateY(-50%)',
-        zIndex: 2,
-        color: 'primary.main',
-        bgcolor: 'background.paper',
-        boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-        '&:hover': {
-          bgcolor: 'background.paper',
-          opacity: 0.9,
-        },
-        width: { xs: 32, sm: 40 },
-        height: { xs: 32, sm: 40 },
-      }}
-      aria-label="Previous"
-    >
+    <Arrow
+      sx={{ right: isMobile ? 'calc(50% - 250px)' : 'calc(50% - 500px)' }}
+      ariaLabel='Next slide'
+      onClick={onClick}>
+      <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
+    </Arrow>
+  )
+}
+
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
+  return (
+    <Arrow
+      sx={{ left: isMobile ? 'calc(50% - 250px)' : 'calc(50% - 500px)' }}
+      ariaLabel='Previous slide'
+      onClick={onClick}>
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
-    </IconButton>
+    </Arrow>
   )
 }
 
@@ -136,7 +135,6 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
   const [initialized, setInitialized] = useState(false)
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   useEffect(() => {
     if (!initialized) {
@@ -161,43 +159,54 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: "0px",
+    arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: theme.breakpoints.values.lg,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   }
+
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
         {LABELS.IMPACT_TITLE}
       </Typography>
-      <Box>
-        <Slider {...settings}>
-          {testimonials.map((t, idx) => (
-            <CardOne
-              key={idx}
-              title={t.title}
-              description={t.quote}
-              bottomText={'- ' + t.name}
-              icon={
-                <img
-                  src={urlForImage(t.avatar)?.url()}
-                  alt={t.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                  }}
-                />
-              }
-              smallerTitle
-              cardStyles={{
-                height: { xs: '100%', sm: '600px' },
-                width: { xs: '100%', sm: '250px', md: '400px' },
-              }}
-            />
-          ))}
-        </Slider>
-      </Box>
+      <Slider {...settings}>
+        {testimonials.map((t, idx) => (
+          <CardOne
+            key={idx}
+            title={t.title}
+            description={t.quote}
+            bottomText={'- ' + t.name}
+            icon={
+              <img
+                src={urlForImage(t.avatar)?.url()}
+                alt={t.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                }}
+              />
+            }
+            smallerTitle
+            cardStyles={{
+              height: { xs: '100%', sm: '600px' },
+              width: { xs: '100%', sm: '250px', md: '400px' },
+            }}
+          />
+        ))}
+      </Slider>
     </SupportUsSection>
   )
 }

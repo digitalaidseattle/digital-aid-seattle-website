@@ -53,3 +53,10 @@ body {
 .markdown p:not(:last-child) {
   margin-bottom: 1rem;
 }
+
+/* Slick Slider Styles */
+
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
