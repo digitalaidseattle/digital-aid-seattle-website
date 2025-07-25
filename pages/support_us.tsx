@@ -38,6 +38,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import IconButton from '@mui/material/IconButton'
+import CardOne from 'components/cards/CardOne'
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -176,30 +177,6 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
     ]
   }
 
-  // Slider configuration with custom arrows and responsive settings
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "0px",
-    arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: theme.breakpoints.values.lg,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  }
-
-
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
@@ -207,28 +184,13 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
       </Typography>
       <Slider {...settings}>
         {testimonials.map((t, idx) => (
-          <CardOne
+          <CardQuote
             key={idx}
+            avatar={urlForImage(t.avatar).url()}
             title={t.title}
             description={t.quote}
-            bottomText={'- ' + t.name}
-            icon={
-              <img
-                src={urlForImage(t.avatar)?.url()}
-                alt={t.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                }}
-              />
-            }
-            smallerTitle
-            cardStyles={{
-              height: { xs: '100%', sm: '600px' },
-              width: { xs: '100%', sm: '250px', md: '400px' },
-            }}
+            role={t.role}
+            person={t.name}
           />
         ))}
       </Slider>
