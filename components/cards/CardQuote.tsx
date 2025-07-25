@@ -69,7 +69,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
             <Typography variant="bodySmall" color='gray'>{role}</Typography>
           </Stack>
         </Stack>
-        <Typography variant="bodySmall">{seeMore ? description.slice(0, MAX_LENGTH) : description} </Typography>
+        <Typography variant="bodySmall">{seeMore ? description.slice(0, MAX_LENGTH) + '...' : description} </Typography>
         {shorten && <Typography variant="bodySmall"
           color='gray'
           sx={{ cursor: "pointer" }}
