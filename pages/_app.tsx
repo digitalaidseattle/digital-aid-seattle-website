@@ -2,18 +2,17 @@ import 'styles/global.css'
 import 'styles/preflight.css'
 
 import { ThemeProvider } from '@mui/material'
+import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { Analytics } from '@vercel/analytics/react';
 
-import { dasProjectsService } from 'services/ProjectsService'
 import { useEffect, useState } from 'react'
+import { dasProjectsService } from 'services/ProjectsService'
 import { theme } from 'theme/theme'
 
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
-import { eventsService } from '../services/EventsService'
 import { Seo } from 'components/seo'
+import { eventsService } from '../services/EventsService'
+import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
