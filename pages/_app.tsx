@@ -13,6 +13,7 @@ import { theme } from 'theme/theme'
 
 import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 import { eventsService } from '../services/EventsService'
+import { Seo } from 'components/seo'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
@@ -63,9 +64,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [pathName, searchParams])
   return (
     <>
-      <Head>
-        <title>{title}</title>
-      </Head>
+      <Seo
+        title={title}
+        description="Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology."
+        canonical="https://www.digitalaidseattle.org"
+      />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
         <Analytics />
