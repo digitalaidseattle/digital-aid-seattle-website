@@ -12,7 +12,8 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
-import CardOne from 'components/cards/CardOne'
+import CardQuote from 'components/cards/CardQuote'
+import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import {
   BlockComponent,
@@ -37,6 +38,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import IconButton from '@mui/material/IconButton'
+import CardOne from 'components/cards/CardOne'
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -182,28 +184,13 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
       </Typography>
       <Slider {...settings}>
         {testimonials.map((t, idx) => (
-          <CardOne
+          <CardQuote
             key={idx}
+            avatar={urlForImage(t.avatar).url()}
             title={t.title}
             description={t.quote}
-            bottomText={'- ' + t.name}
-            icon={
-              <img
-                src={urlForImage(t.avatar)?.url()}
-                alt={t.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                }}
-              />
-            }
-            smallerTitle
-            cardStyles={{
-              height: { xs: '100%', sm: '600px' },
-              width: { xs: '100%', sm: '250px', md: '400px' },
-            }}
+            role={t.role}
+            person={t.name}
           />
         ))}
       </Slider>
