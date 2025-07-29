@@ -45,7 +45,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
         minWidth: { xs: '100%', sm: 'auto' },
         height: { xs: '100%' },
         width: { xs: '100%', sm: '250px', md: '400px' },
-        minHeight: "350px",
+        minHeight: "400px",
         boxShadow:
           '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
       }}

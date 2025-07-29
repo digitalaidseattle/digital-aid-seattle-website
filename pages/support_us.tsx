@@ -98,7 +98,7 @@ const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   return (
     <Arrow
-      sx={{ right: isMobile ? 'calc(50% - 250px)' : 'calc(50% - 500px)' }}
+      sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 500px)' }}
       ariaLabel='Next slide'
       onClick={onClick}>
       <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
@@ -111,7 +111,7 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
   return (
     <Arrow
-      sx={{ left: isMobile ? 'calc(50% - 250px)' : 'calc(50% - 500px)' }}
+      sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 500px)' }}
       ariaLabel='Previous slide'
       onClick={onClick}>
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
@@ -136,23 +136,19 @@ const SupportUsSection = ({ backgroundColor, children }) => (
 const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
-  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
-    if (!initialized) {
-      setLoading(true)
-      testimonialService
-        .getActiveTestimonials()
-        .then((data) => {
-          setTestimonials(
-            data.sort((a, b) => a.orderRank.localeCompare(b.orderRank))
-          )
-          setInitialized(true)
-        })
-        .catch(console.error)
-        .finally(() => setLoading(false))
-    }
-  }, [initialized, setLoading])
+    setLoading(true)
+    testimonialService
+      .getActiveTestimonials()
+      .then((data) =>
+        setTestimonials(
+          data.sort((a, b) => a.orderRank.localeCompare(b.orderRank))
+        )
+      )
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [setLoading])
 
   // Slider configuration with custom arrows and responsive settings
   const settings = {
