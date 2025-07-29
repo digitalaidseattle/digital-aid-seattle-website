@@ -21,7 +21,7 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
 import PaypalImage from '../assets/paypal.png'
@@ -119,19 +119,24 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   )
 }
 
-const SupportUsSection = ({ backgroundColor, children }) => (
-  <SectionContainer backgroundColor={backgroundColor}>
+const SupportUsSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
+
+  return (<SectionContainer backgroundColor={backgroundColor}>
     <Stack
       gap={{ xs: '64px', md: '80px' }}
       sx={{
         textAlign: 'center',
       }}
+      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
       maxWidth={'880px'}
     >
       {children}
     </Stack>
   </SectionContainer>
-)
+  )
+}
 
 const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
