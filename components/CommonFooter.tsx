@@ -80,6 +80,7 @@ const AboutBox = () => {
       <FooterItemTitle>About Us</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
       {faq && <LinkSubItem url="/faq" name="FAQ" />}
+      <LinkSubItem url="/newsletters" name="Newsletters" />
     </Box>
   )
 }

@@ -13,21 +13,16 @@ import {
   useTheme,
 } from '@mui/material'
 import MastheadWithImage from 'components/MastheadWithImage'
-import RolesSection from 'components/RolesSection'
 import {
   BlockComponent,
   LoadingContext,
   withBasicLayout,
 } from 'components/layouts'
 import React, { useContext, useEffect, useState } from 'react'
-import { DASVolunteerRoleBasicInfo } from 'types'
-
-import { pageCopyService } from 'services/PageCopyService'
 import NewslettersImage from '../assets/newsletters.png'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 import EmailFormContainer from 'components/email-form/EmailFormContainer'
-
-/* eslint-disable @next/next/no-img-element */
+import NewsletterList from 'components/NewsletterList'
+import { fetchNewsletters, Newsletter } from '../services/NewsletterService'
 
 const LABELS = {
   HERO_TITLE: 'Newsletters',
@@ -36,55 +31,82 @@ const LABELS = {
   NEWSLETTERS_TITLE: 'Past News Letters',
 }
 
+// to be removed - this is just a placeholder for testing
+const link =
+  'https://img.freepik.com/free-photo/people-office-work-day_23-2150690162.jpg'
+const DUMMY_NEWSLETTERS: Newsletter[] = [
+  {
+    _id: '1',
+    title: 'AI in 2025: What’s Next?',
+    description:
+      'Explore the upcoming trends in artificial intelligence, including edge computing, AI regulation, and generative models taking center stage.',
+    date: '2025-07-07',
+    image: link,
+    blob: null,
+    active: true,
+  },
+  {
+    _id: '2',
+    title: 'June Recap: Product Updates',
+    description:
+      'Catch up on our latest product improvements, performance boosts, and roadmap reveals from the June update.',
+    date: '2025-06-30',
+    image: link,
+    blob: null,
+    active: true,
+  },
+  {
+    _id: '3',
+    title: 'Meet the Team Behind the Innovation',
+    description:
+      'We sat down with our engineering team to learn more about their process, inspiration, and what’s coming next.',
+    date: '2025-06-15',
+    image: link,
+    blob: null,
+    active: true,
+  },
+  {
+    _id: '4',
+    title: 'Security Best Practices in 2025',
+    description:
+      'Stay informed with the latest strategies for protecting user data, securing APIs, and handling cloud vulnerabilities.',
+    date: '2025-05-25',
+    image: link,
+    blob: null,
+    active: true,
+  },
+]
+
 const NewslettersPage = () => {
-  const [volunteerRoles, setVolunteerRoles] = useState<
-    DASVolunteerRoleBasicInfo[]
-  >([])
+  //const [newsletters, setNewsletters] = useState<Newsletter[]>([])
+  const [newsletters, setNewsletters] = useState<any[]>([])
+  const [error, setError] = useState<string | null>(null)
   const { setLoading } = useContext(LoadingContext)
   const [initialized, setInitialized] = useState<boolean>(false)
 
   useEffect(() => {
     if (!initialized) {
       setLoading(true)
-
-      Promise.all([
-        dasVolunteerRoleService.getAllActiveRoles(),
-
-        pageCopyService.updateCopy(LABELS, 'volunteers'),
-      ])
-        .then((resps) => {
-          setVolunteerRoles(resps[0])
-          setInitialized(true)
+      fetchNewsletters()
+        .then((data) => {
+          setNewsletters(Array.isArray(data) ? data : [])
+          setError(null)
         })
-        .catch((err) => console.error(err))
-        .finally(() => setLoading(false))
+        .catch((err) => {
+          setError('Failed to load newsletters.')
+          setNewsletters([])
+          console.error(err)
+        })
+        .finally(() => {
+          setInitialized(true)
+          setLoading(false)
+        })
     }
   }, [initialized, setLoading])
 
   const theme = useTheme()
   const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
-
-  const rolesSection = () => {
-    return (
-      <Stack
-        gap={{ xs: '64px', md: '80px' }}
-        sx={{
-          textAlign: 'center',
-          paddingY: { xs: 4, md: 8 },
-          paddingX: { xs: '1rem', md: '2rem', lg: 0 },
-        }}
-        maxWidth={'880px'}
-      >
-        <RolesSection
-          title={LABELS.NEWSLETTERS_TITLE}
-          showLink={true}
-          showFilters={true}
-          roles={volunteerRoles}
-        />
-      </Stack>
-    )
-  }
 
   return (
     <Container
@@ -126,7 +148,11 @@ const NewslettersPage = () => {
           }}
         >
           <EmailFormContainer showLabel={false} />
-          {rolesSection()}
+          <NewsletterList
+            newsletters={
+              newsletters.length > 0 ? newsletters : DUMMY_NEWSLETTERS
+            }
+          />
         </Box>
       </BlockComponent>
     </Container>
