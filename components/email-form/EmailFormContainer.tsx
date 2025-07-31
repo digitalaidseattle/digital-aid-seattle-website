@@ -152,13 +152,12 @@ const InputSection = () => {
 const EmailFormContainer = ({ showLabel }) => {
   const { data: newsLetter } = useFeature('newsletter')
   const labelSection = showLabel ? <LabelSection /> : null
-  console.log(showLabel)
 
   return (
     newsLetter && (
       <Stack
         sx={{
-          paddingTop: { md: '5rem', lg: '5rem' },
+          paddingTop: { xs: '3rem', md: '5rem', lg: '5rem' },
           flexDirection: { xs: 'column', md: 'column', lg: 'row' },
           alignItems: { xs: 'flex-start', md: 'flex-start', lg: 'center' },
         }}
