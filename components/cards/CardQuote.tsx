@@ -21,14 +21,14 @@ type CardQuoteProps = {
   role: string
 }
 
-const MAX_LENGTH = 300;
+const MAX_TEXT_LENGTH = 300;
 
 const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps) => {
   const [shorten, setShorten] = useState<boolean>(false)
   const [seeMore, setSeeMore] = useState<boolean>(false)
 
   useEffect(() => {
-    if (description && description.length > MAX_LENGTH) {
+    if (description && description.length > MAX_TEXT_LENGTH) {
       setShorten(true)
       setSeeMore(true)
     }
@@ -41,11 +41,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
   return (
     <Card
       sx={{
-        flex: '1',
-        minWidth: { xs: '100%', sm: 'auto' },
-        height: { xs: '100%' },
-        width: { xs: '100%', sm: '250px', md: '400px' },
-        minHeight: "400px",
+        minHeight: "360px",
         boxShadow:
           '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
       }}
@@ -69,7 +65,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
             <Typography variant="bodySmall" color='gray'>{role}</Typography>
           </Stack>
         </Stack>
-        <Typography variant="bodySmall">{seeMore ? description.slice(0, MAX_LENGTH) + '...' : description} </Typography>
+        <Typography variant="bodySmall">{seeMore ? description.slice(0, MAX_TEXT_LENGTH) + '...' : description} </Typography>
         {shorten && <Typography variant="bodySmall"
           color='gray'
           sx={{ cursor: "pointer" }}
