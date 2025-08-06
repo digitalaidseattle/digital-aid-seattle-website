@@ -23,6 +23,8 @@ import EmailFormContainer from 'components/email-form/EmailFormContainer'
 import NewsletterList from 'components/NewsletterList'
 import { fetchNewsletters } from '../services/NewsletterService'
 import { DASNewsletter } from 'types'
+import { useRouter } from 'next/router'
+import { useFeature } from '../services/FeatureService'
 
 const LABELS = {
   HERO_TITLE: 'Newsletters',
@@ -36,6 +38,8 @@ const NewslettersPage = () => {
   const [error, setError] = useState<string | null>(null)
   const { setLoading } = useContext(LoadingContext)
   const [initialized, setInitialized] = useState<boolean>(false)
+  const { data: newslettersFlag } = useFeature('newsletters')
+  const router = useRouter()
 
   useEffect(() => {
     if (!initialized) {
@@ -56,6 +60,13 @@ const NewslettersPage = () => {
         })
     }
   }, [initialized, setLoading])
+
+  useEffect(() => {
+    if (newslettersFlag !== undefined && newslettersFlag === false) {
+      console.error('Newsletters feature not enabled.')
+      router.push('/404')
+    }
+  }, [newslettersFlag, router])
 
   const theme = useTheme()
   const palette = theme.palette
