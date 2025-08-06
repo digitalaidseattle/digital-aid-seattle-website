@@ -13,7 +13,6 @@ import {
   useTheme,
 } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import {
   BlockComponent,
@@ -21,24 +20,23 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import PaypalImage from '../assets/paypal.png'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
-import PaypalImage from '../assets/paypal.png'
 
-import { useFeature } from '../services/FeatureService'
-import MastheadWithImage from 'components/MastheadWithImage'
-import { testimonialService } from '../services/TestimonialService'
-import { DASTestimonial } from 'types'
-import { urlForImage } from '../sanity/lib/image'
-import { pageCopyService } from 'services/PageCopyService'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import IconButton from '@mui/material/IconButton'
-import CardOne from 'components/cards/CardOne'
+import MastheadWithImage from 'components/MastheadWithImage'
+import Slider from 'react-slick'
+import { pageCopyService } from 'services/PageCopyService'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
+import { DASTestimonial } from 'types'
+import { urlForImage } from '../sanity/lib/image'
+import { useFeature } from '../services/FeatureService'
+import { testimonialService } from '../services/TestimonialService'
 
 const LABELS = {
   HERO_TITLE: 'Support us',
@@ -98,7 +96,7 @@ const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   return (
     <Arrow
-      sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 500px)' }}
+      sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
       ariaLabel='Next slide'
       onClick={onClick}>
       <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
@@ -111,7 +109,7 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
   return (
     <Arrow
-      sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 500px)' }}
+      sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
       ariaLabel='Previous slide'
       onClick={onClick}>
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
@@ -119,19 +117,24 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   )
 }
 
-const SupportUsSection = ({ backgroundColor, children }) => (
-  <SectionContainer backgroundColor={backgroundColor}>
+const SupportUsSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
+
+  return (<SectionContainer backgroundColor={backgroundColor}>
     <Stack
       gap={{ xs: '64px', md: '80px' }}
       sx={{
         textAlign: 'center',
       }}
+      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
       maxWidth={'880px'}
     >
       {children}
     </Stack>
   </SectionContainer>
-)
+  )
+}
 
 const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
@@ -180,17 +183,24 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
       </Typography>
       <Slider {...settings}>
         {testimonials.map((t, idx) => (
-          <CardQuote
+          <Box
+            id={`testimonial-${idx}`}
             key={idx}
-            avatar={urlForImage(t.avatar).url()}
-            title={t.title}
-            description={t.quote}
-            role={t.role}
-            person={t.name}
-          />
+            sx={{
+              padding: '2rem',
+            }}
+          >
+            <CardQuote
+              avatar={urlForImage(t.avatar).url()}
+              title={t.title}
+              description={t.quote}
+              role={t.role}
+              person={t.name}
+            />
+          </Box>
         ))}
       </Slider>
-    </SupportUsSection>
+    </SupportUsSection >
   )
 }
 
