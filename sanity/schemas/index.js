@@ -10,7 +10,7 @@ import dasFaq from './dasFaq'
 import dasQandA from './dasQandA'
 import dasTestimonial from './dasTestimonial'
 import dasPageCopy from './dasPageCopy'
-import newsletter from './newsletter'
+import dasNewsletter from './dasNewsletter'
 
 export const schemaTypes = [
   osEvent,
@@ -21,5 +21,5 @@ export const schemaTypes = [
   dasQandA,
   dasTestimonial,
   dasPageCopy,
-  newsletter,
+  dasNewsletter,
 ]
