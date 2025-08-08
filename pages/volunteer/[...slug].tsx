@@ -126,13 +126,12 @@ const VolunteerRolePage = () => {
             {roleData.headline}
           </Box>
         ) : null}
-        <>
+        <Stack direction="column" gap="0.5rem">
           {roleData.location ? (
             <Box
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mt: '1rem',
               }}
             >
@@ -145,7 +144,6 @@ const VolunteerRolePage = () => {
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mb: '1rem',
               }}
             >
@@ -153,7 +151,7 @@ const VolunteerRolePage = () => {
               <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
             </Box>
           ) : null}
-        </>
+        </Stack>
         <RoleDescriptionSubSection
           title={Labels.AboutUs}
           content={roleData.aboutUs}
