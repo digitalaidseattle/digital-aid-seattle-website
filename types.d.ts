@@ -41,12 +41,12 @@ type DASProject = {
   programAreas: string[]
   description: string
   status:
-    | 'Submitted by Partner'
-    | 'Ready for consideration'
-    | 'Active'
-    | 'Under evaluation'
-    | 'Declined'
-    | 'Completed'
+  | 'Submitted by Partner'
+  | 'Ready for consideration'
+  | 'Active'
+  | 'Under evaluation'
+  | 'Declined'
+  | 'Completed'
   projectLink: string
   duration?: { start: string; end: string }
   image: Image
@@ -132,7 +132,7 @@ export interface DASNewsletter {
   title: string
   date: string
   description: string
-  image: string
+  image: Image
   blob?: any
   active?: boolean
 }

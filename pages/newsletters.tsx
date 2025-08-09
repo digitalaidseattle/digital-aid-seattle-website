@@ -38,7 +38,7 @@ const NewslettersPage = () => {
   const [error, setError] = useState<string | null>(null)
   const { setLoading } = useContext(LoadingContext)
   const [initialized, setInitialized] = useState<boolean>(false)
-  const { data: newslettersFlag } = useFeature('newsletters')
+  const { data: newslettersFlag } = useFeature('newsletter')
   const router = useRouter()
 
   useEffect(() => {
