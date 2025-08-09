@@ -21,7 +21,6 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
   )
 
   useEffect(() => {
-    console.log(newsletters)
     const sorted = [...newsletters].sort((a, b) => {
       return sortOrder === 'newest'
         ? new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -65,7 +64,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
             <Box sx={{ pr: 0 }}>
               <Grid container spacing={4}>
                 {sortedNewsletters.map((n) => (
-                  <Grid item xs={12} sm={6} key={n._id}>
+                  <Grid item xs={12} md={6} key={n._id}>
                     <CardWithPhoto
                       title={n.title}
                       image={n.image}

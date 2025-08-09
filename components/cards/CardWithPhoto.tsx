@@ -35,7 +35,7 @@ const CardWithPhoto = ({
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      {!isViewportSmall && (
+      {
         <CardMedia
           sx={{
             minWidth: imageWidth,
@@ -45,7 +45,7 @@ const CardWithPhoto = ({
           image={image}
           alt={alt}
         />
-      )}
+      }
       <CardContent
         sx={{
           display: 'flex',
