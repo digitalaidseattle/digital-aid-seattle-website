@@ -11,6 +11,8 @@ type CardWithPhotoProps = {
   image: string
   imageWidth?: number
   alt?: string
+  date?: string
+  descriptionLines?: number
 }
 
 const CardWithPhoto = ({
@@ -18,7 +20,9 @@ const CardWithPhoto = ({
   description,
   image,
   imageWidth = 196,
-  alt = ""
+  alt = '',
+  date,
+  descriptionLines,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
@@ -31,7 +35,7 @@ const CardWithPhoto = ({
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
       }}
     >
-      {!isViewportSmall && (
+      {
         <CardMedia
           sx={{
             minWidth: imageWidth,
@@ -41,7 +45,7 @@ const CardWithPhoto = ({
           image={image}
           alt={alt}
         />
-      )}
+      }
       <CardContent
         sx={{
           display: 'flex',
@@ -52,7 +56,36 @@ const CardWithPhoto = ({
         }}
       >
         <Typography variant="titleMedium">{title}</Typography>
-        <Typography variant="bodyMedium">{description}</Typography>
+        {date && (
+          <Typography
+            variant="bodySmall"
+            color="text.primary"
+            sx={{ fontWeight: 700 }}
+          >
+            {new Date(date).toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </Typography>
+        )}
+
+        <Typography
+          variant="bodyMedium"
+          sx={
+            descriptionLines
+              ? {
+                  display: '-webkit-box',
+                  WebkitLineClamp: descriptionLines,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }
+              : undefined
+          }
+        >
+          {description}
+        </Typography>
       </CardContent>
     </Card>
   )
