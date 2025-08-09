@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
 import {
   Box,
   Button,
-  ButtonGroup,
   Container,
   Grid,
-  Typography,
+  Typography
 } from '@mui/material'
-import CardWithPhoto from './cards/CardWithPhoto'
+import { useEffect, useState } from 'react'
 import { DASNewsletter } from 'types'
+import { urlForImage } from '../sanity/lib/image'
+import CardWithPhoto from './cards/CardWithPhoto'
 
 type NewsletterListProps = {
   newsletters: DASNewsletter[]
@@ -67,7 +67,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                   <Grid item xs={12} md={6} key={n._id}>
                     <CardWithPhoto
                       title={n.title}
-                      image={n.image}
+                      image={urlForImage(n.image).url()}
                       alt={n.title}
                       description={n.description}
                       date={n.date}

@@ -1,10 +1,18 @@
+/*
+* dasNewsletter.ts
+* @2024 Digital Aid Seattle
+*/
 import { defineType, defineField } from 'sanity'
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export default defineType({
-  name: 'newsletter',
+  name: 'das-newsletter',
   title: 'Newsletter',
+  orderings: [orderRankOrdering],
   type: 'document',
   fields: [
+    orderRankField({ type: "das-newsletter" }),
+
     defineField({
       name: 'title',
       title: 'Title',
@@ -14,7 +22,7 @@ export default defineType({
     defineField({
       name: 'date',
       title: 'Date',
-      type: 'datetime',
+      type: 'date',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -33,9 +41,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'blob',
-      title: 'Content',
-      type: 'block',
+      name: 'file',
+      title: 'File (PDF)',
+      type: 'file',
       description: 'Optional full content of the newsletter',
     }),
     defineField({

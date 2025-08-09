@@ -75,12 +75,14 @@ const LogoBox = () => {
 
 const AboutBox = () => {
   const { data: faq } = useFeature('faq')
+  const { data: newsletter } = useFeature('newsletter')
+
   return (
     <Box>
       <FooterItemTitle>About Us</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
       {faq && <LinkSubItem url="/faq" name="FAQ" />}
-      <LinkSubItem url="/newsletters" name="Newsletters" />
+      {newsletter && <LinkSubItem url="/newsletters" name="Newsletters" />}
     </Box>
   )
 }
