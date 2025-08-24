@@ -10,7 +10,7 @@ export async function fetchNewsletters(): Promise<DASNewsletter[]> {
     date,
     description,
     image,
-    file,
+    "fileUrl": file.asset->url,
     active
   }`)
 }

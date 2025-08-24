@@ -65,6 +65,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                       alt={n.title}
                       description={n.description}
                       date={n.date}
+                      fileUrl={n.fileUrl}
                       titleSx={{
                         height: '3em',
                         display: '-webkit-box',
