@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Typography
-} from '@mui/material'
+import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { DASNewsletter } from 'types'
 import { urlForImage } from '../sanity/lib/image'
@@ -71,7 +65,22 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                       alt={n.title}
                       description={n.description}
                       date={n.date}
-                      descriptionLines={3}
+                      titleSx={{
+                        height: '3em',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                      descriptionSx={{
+                        height: '6em',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
                     />
                   </Grid>
                 ))}

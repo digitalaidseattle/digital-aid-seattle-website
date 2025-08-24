@@ -12,7 +12,8 @@ type CardWithPhotoProps = {
   imageWidth?: number
   alt?: string
   date?: string
-  descriptionLines?: number
+  titleSx?: Record<string, any>
+  descriptionSx?: Record<string, any>
 }
 
 const CardWithPhoto = ({
@@ -22,7 +23,8 @@ const CardWithPhoto = ({
   imageWidth = 196,
   alt = '',
   date,
-  descriptionLines,
+  titleSx,
+  descriptionSx,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
@@ -55,7 +57,9 @@ const CardWithPhoto = ({
           paddingBottom: '1rem !important',
         }}
       >
-        <Typography variant="titleMedium">{title}</Typography>
+        <Typography variant="titleMedium" sx={titleSx}>
+          {title}
+        </Typography>
         {date && (
           <Typography
             variant="bodySmall"
@@ -70,20 +74,7 @@ const CardWithPhoto = ({
           </Typography>
         )}
 
-        <Typography
-          variant="bodyMedium"
-          sx={
-            descriptionLines
-              ? {
-                  display: '-webkit-box',
-                  WebkitLineClamp: descriptionLines,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }
-              : undefined
-          }
-        >
+        <Typography variant="bodyMedium" sx={descriptionSx}>
           {description}
         </Typography>
       </CardContent>
