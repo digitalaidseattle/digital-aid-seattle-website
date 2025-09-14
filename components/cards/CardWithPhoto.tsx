@@ -11,10 +11,10 @@ type CardWithPhotoProps = {
   image: string
   imageWidth?: number
   alt?: string
-  date?: string
+  subtitle?: string
   titleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
-  fileUrl?: string
+  onClick?: () => void
 }
 
 const CardWithPhoto = ({
@@ -23,24 +23,13 @@ const CardWithPhoto = ({
   image,
   imageWidth = 196,
   alt = '',
-  date,
+  subtitle,
   titleSx,
   descriptionSx,
-  fileUrl,
+  onClick,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
-
-  const handleDownload = () => {
-    if (fileUrl) {
-      const link = document.createElement('a')
-      link.href = fileUrl
-      link.download = ''
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    }
-  }
 
   return (
     <Card
@@ -48,9 +37,9 @@ const CardWithPhoto = ({
         flex: '1',
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
-        cursor: fileUrl ? 'pointer' : undefined,
+        cursor: onClick ? 'pointer' : undefined,
       }}
-      onClick={fileUrl ? handleDownload : undefined}
+      onClick={onClick}
     >
       {
         <CardMedia
@@ -75,17 +64,13 @@ const CardWithPhoto = ({
         <Typography variant="titleMedium" sx={titleSx}>
           {title}
         </Typography>
-        {date && (
+        {subtitle && (
           <Typography
             variant="bodySmall"
             color="text.primary"
             sx={{ fontWeight: 700 }}
           >
-            {new Date(date).toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
+            {subtitle}
           </Typography>
         )}
 

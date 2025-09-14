@@ -8,11 +8,40 @@ type NewsletterListProps = {
   newsletters: DASNewsletter[]
 }
 
+const NEWSLETTER_TITLE_STYLES: Record<string, any> = {
+  height: '3em',
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+}
+
+const NEWSLETTER_DESCRIPTION_STYLES: Record<string, any> = {
+  height: '6em',
+  display: '-webkit-box',
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+}
+
 const NewsletterList = ({ newsletters }: NewsletterListProps) => {
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest')
   const [sortedNewsletters, setSortedNewsletters] = useState<DASNewsletter[]>(
     []
   )
+
+  const createDownloadHandler = (fileUrl: string) => {
+    return () => {
+      const link = document.createElement('a')
+      link.href = fileUrl
+      link.download = ''
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }
 
   useEffect(() => {
     const sorted = [...newsletters].sort((a, b) => {
@@ -64,24 +93,16 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                       image={urlForImage(n.image).url()}
                       alt={n.title}
                       description={n.description}
-                      date={n.date}
-                      fileUrl={n.fileUrl}
-                      titleSx={{
-                        height: '3em',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                      descriptionSx={{
-                        height: '6em',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
+                      subtitle={new Date(n.date).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                      onClick={
+                        n.fileUrl ? createDownloadHandler(n.fileUrl) : null
+                      }
+                      titleSx={NEWSLETTER_TITLE_STYLES}
+                      descriptionSx={NEWSLETTER_DESCRIPTION_STYLES}
                     />
                   </Grid>
                 ))}
