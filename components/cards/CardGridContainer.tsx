@@ -16,6 +16,7 @@ const CardGridContainer = ({ children, columns = 2 }: Props) => {
           lg: `repeat(${columns}, minmax(0, 1fr))`,
         },
         gap: '2rem',
+        maxWidth: '880px'
       }}
       component="ul"
     >

@@ -17,7 +17,7 @@ type CardOneProps = {
   title?: string
   description: string
   bottomText?: string
-  icon: ReactNode
+  icon?: ReactNode
   buttonText?: string
   buttonLink?: string
   smallerTitle?: boolean
@@ -49,7 +49,9 @@ const CardOne = ({
         height: '100%',
       }}
     >
-      <IconContainer>{icon}</IconContainer>
+      {icon && (
+        <IconContainer>{icon}</IconContainer>
+      )}
       {title && (
         <Typography variant={smallerTitle ? 'titleMedium' : 'titleLarge'}>
           {title}
