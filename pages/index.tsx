@@ -542,8 +542,9 @@ const AlliesSection: React.FC = () => {
         {LABELS.ALLIES_LABEL}
       </Typography>
       <Stack direction={'row'} spacing={4} >
-        {allies.map((item) => (
+        {allies.map((item, index) => (
           <Avatar
+            key={`logo-${index}`}
             alt={item.label}
             src={item.icon}
             sx={{ width: 124, height: 124 }} />
