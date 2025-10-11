@@ -1,6 +1,7 @@
 /*
  * @2024 Digital Aid Seattle
  */
+import { CardActionArea } from '@mui/material'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -9,112 +10,63 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { eventsService } from 'services/EventsService'
 import { OSEvent } from 'types'
 import { urlForImage } from '../../sanity/lib/image'
-import { eventsService } from 'services/EventsService'
-import { CardActionArea } from '@mui/material'
 
+import { useRouter } from 'next/router'
 import ProjectImage from '../../assets/project-image.png'
 const PLACEHOLDER_IMAGE = ProjectImage.src;
+
+function getImageSrc(event: OSEvent) {
+  return event.image && event.image.asset
+    ? urlForImage(event.image).url()
+    : PLACEHOLDER_IMAGE;
+}
 
 type CardEventProps = {
   event: OSEvent
 }
 
-const CardEvent = ({ event }: CardEventProps) => {
-  const theme = useTheme()
-  const tabletScreen = useMediaQuery(theme.breakpoints.only('md'))
+const MobileAndDesktopCard = ({ event }: CardEventProps) => {
+  const imageSrc = getImageSrc(event);
 
-  const imageSrc = event.image && event.image.asset
-    ? urlForImage(event.image).url()
-    : PLACEHOLDER_IMAGE;
-
-  const MobileAndDesktopCard = () => {
-    return (
-      <Stack
-        direction={{ xs: 'column', lg: 'row' }}
-        spacing={{ xs: '0', lg: '1.5rem' }}
+  return (
+    <Stack
+      direction={{ xs: 'column', lg: 'row' }}
+      spacing={{ xs: '0', lg: '1.5rem' }}
+    >
+      <Box
+        sx={{
+          position: 'relative',
+          border: '2px solid #EAF1F1',
+          height: { xs: '0', lg: '20rem' },
+          width: { xs: '100%', lg: '20rem' },
+          paddingBottom: { xs: '100%', lg: '0' },
+          flexShrink: '0',
+          margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
+          minWidth: '0',
+          borderRadius: '8px',
+          overflow: 'hidden',
+        }}
       >
-        <Box
+        <CardMedia
+          component="img"
+          image={imageSrc}
           sx={{
-            position: 'relative',
-            border: '2px solid #EAF1F1',
-            height: { xs: '0', lg: '20rem' },
-            width: { xs: '100%', lg: '20rem' },
-            paddingBottom: { xs: '100%', lg: '0' },
-            flexShrink: '0',
-            margin: { xs: '0', lg: '2rem 0 2rem 2rem' },
-            minWidth: '0',
-            borderRadius: '8px',
-            overflow: 'hidden',
+            position: { xs: 'absolute', lg: 'static' },
+            height: '100%',
           }}
-        >
-          <CardMedia
-            component="img"
-            image={imageSrc}
-            sx={{
-              position: { xs: 'absolute', lg: 'static' },
-              height: '100%',
-            }}
-          />
-        </Box>
-        <CardContent
-          sx={{
-            padding: { xs: '2rem 1rem 1rem 1rem', lg: '2rem 2rem 2rem 0' },
-            paddingBottom: { xs: '1rem !important', lg: '2rem !important' },
-          }}
-        >
-          <Stack justifyContent="center" sx={{ height: '100%' }}>
-            <Stack spacing="1rem">
-              <Typography variant="titleLarge">{event.title}</Typography>
-              <Stack direction="row" spacing="1rem">
-                <Typography variant="labelLarge">{event.date}</Typography>
-                <Typography variant="labelLarge">
-                  {eventsService.getTimeString(event)}
-                </Typography>
-              </Stack>
-              <Typography variant="labelMedium">{event.location}</Typography>
-            </Stack>
-
-            <Typography
-              variant="bodyMedium"
-              sx={{ display: 'block', marginTop: '1.5rem' }}
-            >
-              {event.description}
-            </Typography>
-          </Stack>
-        </CardContent>
-      </Stack>
-    )
-  }
-
-  const TabletCard = () => {
-    return (
-      <CardContent>
-        <Stack direction="row">
-          <Box
-            sx={{
-              position: 'relative',
-              border: '2px solid #EAF1F1',
-              height: '10rem',
-              width: '10rem',
-            }}
-          >
-            <CardMedia
-              component="img"
-              image={imageSrc}
-              sx={{
-                position: 'static',
-                height: '100%',
-                borderRadius: '8px',
-              }}
-            />
-          </Box>
-          <Stack
-            spacing="1rem"
-            justifyContent="center"
-            sx={{ marginLeft: '1.5rem' }}
-          >
+        />
+      </Box>
+      <CardContent
+        sx={{
+          padding: { xs: '2rem 1rem 1rem 1rem', lg: '2rem 2rem 2rem 0' },
+          paddingBottom: { xs: '1rem !important', lg: '2rem !important' },
+        }}
+      >
+        <Stack justifyContent="center" sx={{ height: '100%' }}>
+          <Stack spacing="1rem">
             <Typography variant="titleLarge">{event.title}</Typography>
             <Stack direction="row" spacing="1rem">
               <Typography variant="labelLarge">{event.date}</Typography>
@@ -124,16 +76,74 @@ const CardEvent = ({ event }: CardEventProps) => {
             </Stack>
             <Typography variant="labelMedium">{event.location}</Typography>
           </Stack>
+
+          <Typography
+            variant="bodyMedium"
+            sx={{ display: 'block', marginTop: '1.5rem' }}
+          >
+            {event.description}
+          </Typography>
         </Stack>
-        <Typography
-          variant="bodyMedium"
-          sx={{ display: 'block', marginTop: '1rem !important' }}
-        >
-          {event.description}
-        </Typography>
       </CardContent>
-    )
-  }
+    </Stack>
+  )
+}
+
+
+
+const TabletCard = ({ event }: CardEventProps) => {
+  const imageSrc = getImageSrc(event);
+
+  return (
+    <CardContent>
+      <Stack direction="row">
+        <Box
+          sx={{
+            position: 'relative',
+            border: '2px solid #EAF1F1',
+            height: '10rem',
+            width: '10rem',
+          }}
+        >
+          <CardMedia
+            component="img"
+            image={imageSrc}
+            sx={{
+              position: 'static',
+              height: '100%',
+              borderRadius: '8px',
+            }}
+          />
+        </Box>
+        <Stack
+          spacing="1rem"
+          justifyContent="center"
+          sx={{ marginLeft: '1.5rem' }}
+        >
+          <Typography variant="titleLarge">{event.title}</Typography>
+          <Stack direction="row" spacing="1rem">
+            <Typography variant="labelLarge">{event.date}</Typography>
+            <Typography variant="labelLarge">
+              {eventsService.getTimeString(event)}
+            </Typography>
+          </Stack>
+          <Typography variant="labelMedium">{event.location}</Typography>
+        </Stack>
+      </Stack>
+      <Typography
+        variant="bodyMedium"
+        sx={{ display: 'block', marginTop: '1rem !important' }}
+      >
+        {event.description}
+      </Typography>
+    </CardContent>
+  )
+}
+
+const CardEvent = ({ event }: CardEventProps) => {
+  const theme = useTheme()
+  const tabletScreen = useMediaQuery(theme.breakpoints.only('md'))
+  const router = useRouter();
 
   return (
     <Card
@@ -146,9 +156,17 @@ const CardEvent = ({ event }: CardEventProps) => {
             '0px 2px 4px 0px rgba(52, 61, 62, 0.1), 0px 4px 8px 2px rgba(52, 61, 62, 0.1)',
         },
       }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault(); // Prevent space from scrolling
+          router.push(`/event/${event.id}`)
+        }
+      }}
     >
       <CardActionArea href={`/event/${event.id}`}>
-        {tabletScreen ? <TabletCard /> : <MobileAndDesktopCard />}
+        {tabletScreen
+          ? <TabletCard event={event} />
+          : <MobileAndDesktopCard event={event} />}
       </CardActionArea>
     </Card>
   )
