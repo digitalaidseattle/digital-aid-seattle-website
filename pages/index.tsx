@@ -159,7 +159,7 @@ const HeroSection: React.FC = () => {
                 backgroundColor: '#004138',
                 marginBottom: { xs: '32px', md: '0px' },
               }}
-              href={'/volunteers'}
+              href={'/support_us'}
             >
               {LABELS.SUPPORT_BTN}
             </Button>
