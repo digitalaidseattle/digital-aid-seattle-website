@@ -6,6 +6,9 @@ import {
   DevicesOutlined,
   HandymanOutlined,
   VolunteerActivismOutlined,
+  ContentCutOutlined,
+  Diversity3Outlined,
+  HandshakeOutlined
 } from '@mui/icons-material'
 import {
   Box,
@@ -18,35 +21,43 @@ import {
 } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
-import CardLeft from 'components/cards/CardLeft'
 import SectionContainer from 'components/layout/SectionContainer'
 import { LoadingContext, withBasicLayout } from 'components/layouts'
-import { designColor } from 'theme/theme'
 import PartnerImage from '../assets/partnerWithUs.png'
 import MastheadWithImage from 'components/MastheadWithImage'
 import { useContext, useEffect, useState } from 'react'
 import { pageCopyService } from 'services/PageCopyService'
+import CardHorizontal from 'components/cards/CardHorizontal'
 
 /* eslint-disable @next/next/no-img-element */
 const LABELS = {
-  HERO_TITLE: 'Partner with us',
+  HERO_TITLE: 'Digital Aid Seattle: Partnering for Impact',
   HERO_TXT: 'Digital Aid Seattle works with Seattle-based nonprofits to create customized digital solutions for their needs, for free.',
   PARTNER_BTN: 'Partner with us',
 
+  WHAT_IS_A_PARTNER_TITLE: 'What is a Partner?',
+  WHAT_IS_A_PARTNER_TEXT: 'At Digital Aid Seattle, we believe in the power of collaboration to create positive change. We partner with Seattle area nonprofits to provide them with the essential technology solutions they need to thrive. Our partners are a diverse group of organizations, all working towards important social causes like children welfare, homelessness, elder care and many more.',
+
   CRITERIA_TITLE: 'Our criteria',
   HOW_HELP_TITLE: 'How we can help',
-  PROCESS_TITLE: 'The process',
 
-  EXPECTATIONS_TITLE: 'Partner expectations',
-  EXPECTATIONS_TXT: 'Partners should plan to maintain projects after handoff, and to provide Digital Aid Seattle volunteers with the necessary documentation for timely project completion. All Digital Aid Seattle projects are open and accessible by default.',
-  VOLUNTEER_TITLE: 'Volunteer expectations',
-  VOLUNTEER_TXT: 'All of our volunteers are vetted for experience, and sign a volunteer agreement before commencing work with Digital Aid Seattle.',
+  WHAT_WE_DO_LABEL: 'What we do',
+  WHAT_WE_DO_TXT: 'Digital Aid Seattle partners with nonprofits like Plymouth Housing and Seattle Humane to leverage technology, improving operations and extending their community reach through solutions like inventory and client request management.',
+  LEADERSHIP_BTN: 'View our leadership team',
 
+  PROCESS_TITLE: 'Process to Become a Partner',
+  PROCESS_TEXT: `We understand that every nonprofit has unique needs and goals. That's why we take a personalized approach to partnering. Here's a simple process to get started:`,
   INTERESTED_TITLE: 'Interested in partnering with Digital Aid Seattle?',
-  PROCESS_STEP_1: 'Apply for help using the “Partner with us” button.',
-  PROCESS_STEP_2: 'You will receive an invitation for an interview within a few days.',
-  PROCESS_STEP_3: "By detailing your situation, experiences, and aspirations, help us compose a vision of the solution we'll be creating for you.",
-  PROCESS_STEP_4: 'Once work has begun, you will get weekly updates on the progress.',
+  PROCESS_STEP_TITLE_1: 'Contact Us',
+  PROCESS_STEP_TITLE_2: 'Consultation',
+  PROCESS_STEP_TITLE_3: 'Needs Assessment',
+  PROCESS_STEP_TITLE_4: 'Solution Development',
+  PROCESS_STEP_TITLE_5: 'Implementation and Support',
+  PROCESS_STEP_1: 'Reach out to us through using the “Partner with us” button below ',
+  PROCESS_STEP_2: 'You will receive an invitation to a consultation call with us ',
+  PROCESS_STEP_3: "During the consultation, we will discuss your organization's mission, goals, and current technology challenges.",
+  PROCESS_STEP_4: 'We will work with you to develop a customized technology plan that aligns with your specific needs and budget.',
+  PROCESS_STEP_5: 'Our team will implement the agreed-upon solutions to ensure your success.',
 
   HELP_INTERNAL_TOOLS_TITLE: 'Internal tools',
   HELP_INTERNAL_TOOLS_TXT: 'Every organization needs infrastructure. Support comes in part from good tooling, and we help design and develop effective tools that help teams thrive. As a bonus, we help teams implement good practices and level up on those tools, too.',
@@ -63,13 +74,26 @@ const LABELS = {
   CRITERIA_OPEN_SOURCE_TXT: 'Whenever possible, we will cooperate using open source assets that can be leveraged by anyone.',
   CRITERIA_MAINTAINABILITY_TITLE: 'Maintainability',
   CRITERIA_MAINTAINABILITY_TXT: `When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.`,
+
+  BENEFITS_TITLE: 'Benefits of Partnering with Digital Aid Seattle',
+  BENEFITS_SUBTITLE: 'By partnering with Digital Aid Seattle, you can:',
+  BENEFIT_CARD_TITLE_1: 'Reduce Costs',
+  BENEFIT_CARD_TITLE_2: 'Increase Efficiency',
+  BENEFIT_CARD_TITLE_3: 'Reach a Wider Audience',
+  BENEFIT_CARD_TEXT_1: 'Our services are completely free, allowing you to stretch your resources further and focus on your core mission.',
+  BENEFIT_CARD_TEXT_2: 'Technology solutions can help you streamline your operations and free up staff time for more impactful work.',
+  BENEFIT_CARD_TEXT_3: 'Better technology amplifies your reach and helps you to connect with your target audience and supporters with more ease',
+  BENEFITS_TAGLINE: 'Become a Partner Today!',
+  BENEFITS_TAGTEXT: 'We are excited about the opportunity to partner with your organization and help you achieve your goals. Contact us today to learn more about how Digital Aid Seattle can help your nonprofit thrive in the digital age.',
+
 }
 
 const processContent = [
-  LABELS.PROCESS_STEP_1,
-  LABELS.PROCESS_STEP_2,
-  LABELS.PROCESS_STEP_3,
-  LABELS.PROCESS_STEP_4
+  { title: LABELS.PROCESS_STEP_TITLE_1, description: LABELS.PROCESS_STEP_1 },
+  { title: LABELS.PROCESS_STEP_TITLE_2, description: LABELS.PROCESS_STEP_2 },
+  { title: LABELS.PROCESS_STEP_TITLE_3, description: LABELS.PROCESS_STEP_3 },
+  { title: LABELS.PROCESS_STEP_TITLE_4, description: LABELS.PROCESS_STEP_4 },
+  { title: LABELS.PROCESS_STEP_TITLE_5, description: LABELS.PROCESS_STEP_5 }
 ]
 
 const provideContent = [
@@ -113,12 +137,295 @@ const criteriaContent = [
   },
 ]
 
+const benefitsContent = [
+  {
+    title: LABELS.BENEFIT_CARD_TITLE_1,
+    description: LABELS.BENEFIT_CARD_TEXT_1,
+    icon: <ContentCutOutlined style={ICON_STYLE} />,
+  },
+  {
+    title: LABELS.BENEFIT_CARD_TITLE_1,
+    description: LABELS.BENEFIT_CARD_TEXT_2,
+    icon: <Diversity3Outlined style={ICON_STYLE} />,
+  },
+  {
+    title: LABELS.BENEFIT_CARD_TITLE_3,
+    description: LABELS.BENEFIT_CARD_TEXT_3,
+    icon: <HandshakeOutlined style={ICON_STYLE} />,
+  },
+]
 const AIRTABLE_FORM = 'https://airtable.com/app6duHw2djMIOYnh/paguUW1sRDdwsPdWN/form';
+
+const cardStyles = {
+  boxShadow: '0px 6px 12px 0px #5660611F'
+};
+
+const HeroSection: React.FC = () => {
+  const theme = useTheme()
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
+
+  return (
+    <MastheadWithImage
+      imageSrc={PartnerImage.src}
+      imageText="Partner graphic"
+    >
+      <>
+        <Typography
+          variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
+          sx={{ color: theme.palette.primary.contrastText }}
+          component="h1"
+        >
+          {LABELS.HERO_TITLE}
+        </Typography>
+        <Typography
+          variant="headlineLarge"
+          sx={{
+            color: theme.palette.primary.contrastText,
+          }}
+          component="span"
+        >
+          {LABELS.HERO_TXT}
+        </Typography>
+        <Button
+          variant="contained"
+          color="secondary"
+          href={AIRTABLE_FORM}
+          target="_blank"
+          sx={{
+            alignSelf: 'flex-start',
+          }}
+        >
+          {LABELS.PARTNER_BTN}
+        </Button>
+      </>
+    </MastheadWithImage>
+  );
+}
+
+const WhatIsAPartnerSection: React.FC = () => {
+  return (
+    <Stack
+      sx={{
+        gap: { xs: 3, lg: 10 },
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: { sm: 4, lg: 10 },
+      }}
+      maxWidth={'880px'}
+    >
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.WHAT_IS_A_PARTNER_TITLE}
+      </Typography>
+      <Typography textAlign={'center'} >
+        {LABELS.WHAT_IS_A_PARTNER_TEXT}
+      </Typography>
+    </Stack>
+  )
+}
+
+const CriteriaSection: React.FC = () => {
+  return (
+    <>
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.CRITERIA_TITLE}
+      </Typography>
+
+      <CardGridContainer columns={criteriaContent.length}>
+        {criteriaContent.map((item) => (
+          <CardOne
+            smallerTitle
+            key={item.title}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+            cardStyles={cardStyles}
+          />
+        ))}
+      </CardGridContainer>
+    </>
+  )
+}
+
+const HowWeCanHelpSection: React.FC = () => {
+  return (
+    <>
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.HOW_HELP_TITLE}
+      </Typography>
+      <CardGridContainer columns={1}>
+        {provideContent.map((item) => (
+          <CardHorizontal
+            key={item.title}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+          />
+        ))}
+      </CardGridContainer>
+    </>
+  )
+}
+
+const WhatWeDoSection: React.FC = () => {
+  return (
+    <Stack
+      sx={{
+        gap: { xs: 3, lg: 10 },
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: { sm: 4, lg: 10 },
+      }}
+      maxWidth={'880px'}
+    >
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.WHAT_WE_DO_LABEL}
+      </Typography>
+      <Typography textAlign={'center'} >
+        {LABELS.WHAT_WE_DO_TXT}
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        href={'/cadre'}
+      >
+        {LABELS.LEADERSHIP_BTN}
+      </Button>
+    </Stack>
+  )
+}
+
+const ProcesSection: React.FC = () => {
+  const theme = useTheme()
+
+  return (
+    <>
+      <Stack gap={{ xs: 2, md: 4 }} sx={{
+        textAlign: 'left',
+      }}>
+        <Typography variant="headlineLarge" component="h2">
+          {LABELS.PROCESS_TITLE}
+        </Typography>
+        <Typography textAlign={'left'} >
+          {LABELS.PROCESS_TEXT}
+        </Typography>
+        <ol>
+          {processContent.map((item, index) => (
+            <li key={index + 1} style={{ marginBottom: '2rem' }}>
+              <Typography
+                variant="titleLarge"
+                color={theme.palette.primary.main}
+              >{`${index + 1}.`}</Typography>
+              <Typography
+                variant="bodyLarge"
+                color={theme.palette.primary.main}
+                fontWeight={600}
+                marginLeft={2}
+              >{item.title}: </Typography>
+              <Typography variant="bodyLarge" >
+                {item.description}
+              </Typography>
+            </li>
+          ))}
+        </ol>
+        <Box>
+          <Button
+            variant="contained"
+            color="primary"
+            href={AIRTABLE_FORM}
+            target="_blank"
+          >
+            {LABELS.PARTNER_BTN}
+          </Button>
+        </Box>
+      </Stack>
+    </>
+  )
+}
+
+const BenefitsSection: React.FC = () => {
+  return (
+    <Stack
+      gap={{ xs: '64px', md: '80px' }}
+      sx={{
+        textAlign: 'center',
+      }}
+      maxWidth={'880px'}
+    >
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.BENEFITS_TITLE}
+      </Typography>
+
+      <Typography variant="subtitle1" fontWeight={600}>
+        {LABELS.BENEFITS_SUBTITLE}
+      </Typography>
+
+      <CardGridContainer columns={benefitsContent.length}>
+        {benefitsContent.map((item) => (
+          <CardOne
+            smallerTitle
+            key={item.title}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+            cardStyles={cardStyles}
+          />
+        ))}
+      </CardGridContainer>
+
+      <Button
+        variant="contained"
+        color="primary"
+        href={AIRTABLE_FORM}
+        target="_blank"
+        sx={{
+          alignSelf: 'center',
+        }}
+      >
+        {LABELS.PARTNER_BTN}
+      </Button>
+
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.BENEFITS_TAGLINE}
+      </Typography>
+
+      <Typography variant="bodyMedium">
+        {LABELS.BENEFITS_TAGTEXT}
+      </Typography>
+    </Stack>
+  )
+}
+
+const InterestedSection: React.FC = () => {
+  return (
+    <Stack
+      gap={{ xs: '2rem', md: '2.5rem' }}
+      sx={{
+        textAlign: 'center',
+      }}
+      maxWidth={'880px'}
+    >
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.INTERESTED_TITLE}
+      </Typography>
+
+      <Button
+        variant="contained"
+        color="secondary"
+        href={AIRTABLE_FORM}
+        target="_blank"
+        sx={{
+          alignSelf: 'center',
+        }}
+      >
+        {LABELS.PARTNER_BTN}
+      </Button>
+    </Stack>
+  )
+}
 
 const PartnersPage = () => {
   const theme = useTheme()
-  const palette = theme.palette
-  const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   const { setLoading } = useContext(LoadingContext);
   const [initialized, setInitialized] = useState(false);
@@ -140,167 +447,39 @@ const PartnersPage = () => {
       disableGutters
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <MastheadWithImage
-        imageSrc={PartnerImage.src}
-        imageText="Partner graphic"
-      >
-        <>
-          <Typography
-            variant={isSmallScreen ? 'displayMedium' : 'displayLarge'}
-            sx={{ color: theme.palette.primary.contrastText }}
-            component="h1"
-          >
-            {LABELS.HERO_TITLE}
-          </Typography>
-          <Typography
-            variant="headlineLarge"
-            sx={{
-              color: theme.palette.primary.contrastText,
-            }}
-            component="span"
-          >
-            {LABELS.HERO_TXT}
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            href={AIRTABLE_FORM}
-            target="_blank"
-            sx={{
-              alignSelf: 'flex-start',
-            }}
-          >
-            {LABELS.PARTNER_BTN}
-          </Button>
-        </>
-      </MastheadWithImage>
-      <SectionContainer backgroundColor={designColor.background}>
-        <Stack
-          gap={{ xs: '64px', md: '80px' }}
-          sx={{
-            textAlign: 'center',
-          }}
-          maxWidth={'880px'}
-        >
-          <Typography variant="headlineLarge" component="h2">
-            {LABELS.CRITERIA_TITLE}
-          </Typography>
-
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                md: 'repeat(2, minmax(0, 1fr))',
-                lg: 'repeat(4, minmax(0, 1fr))',
-              },
-              gap: '2rem',
-            }}
-            component="ul"
-          >
-            {criteriaContent.map((item) => (
-              <CardOne
-                smallerTitle
-                key={item.title}
-                title={item.title}
-                description={item.description}
-                icon={item.icon}
-              />
-            ))}
-          </Box>
-          <Typography variant="headlineLarge" component="h2">
-            {LABELS.HOW_HELP_TITLE}
-          </Typography>
-          <CardGridContainer columns={3}>
-            {provideContent.map((item) => (
-              <CardLeft
-                key={item.title}
-                title={item.title}
-                description={item.description}
-                icon={item.icon}
-              />
-            ))}
-          </CardGridContainer>
-        </Stack>
-      </SectionContainer>
-      <SectionContainer backgroundColor={designColor.white}>
-        <Stack
-          gap={{ xs: '64px', md: '80px' }}
-          sx={{
-            textAlign: 'left',
-          }}
-          maxWidth={'880px'}
-        >
-          <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge" component="h2">
-              {LABELS.PROCESS_TITLE}
-            </Typography>
-            <ol>
-              {processContent.map((item, index) => (
-                <li key={index + 1} style={{ marginBottom: '2rem' }}>
-                  <Typography
-                    variant="titleLarge"
-                    color={palette.primary.main}
-                  >{`${index + 1}.`}</Typography>
-                  <Typography variant="bodyLarge" mx={2}>
-                    {item}
-                  </Typography>
-                </li>
-              ))}
-            </ol>
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                href={AIRTABLE_FORM}
-                target="_blank"
-              >
-                {LABELS.PARTNER_BTN}
-              </Button>
-            </div>
-          </Stack>
-          <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge" component="h2">
-              {LABELS.EXPECTATIONS_TITLE}
-            </Typography>
-            <Typography variant="bodyLarge">
-              {LABELS.EXPECTATIONS_TXT}
-            </Typography>
-          </Stack>
-          <Stack gap={{ xs: 2, md: 4 }}>
-            <Typography variant="headlineLarge" component="h2">
-              {LABELS.VOLUNTEER_TITLE}
-            </Typography>
-            <Typography variant="bodyLarge">
-              {LABELS.VOLUNTEER_TXT}
-            </Typography>
-          </Stack>
-        </Stack>
+      <HeroSection />
+      <SectionContainer backgroundColor={theme.palette.background.paper}>
+        <WhatIsAPartnerSection />
       </SectionContainer>
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack
-          gap={{ xs: '2rem', md: '2.5rem' }}
+          gap={{ xs: '64px', md: '80px' }}
           sx={{
             textAlign: 'center',
           }}
           maxWidth={'880px'}
         >
-          <Typography variant="headlineLarge" component="h2">
-            {LABELS.INTERESTED_TITLE}
-          </Typography>
-
-          <Button
-            variant="contained"
-            color="secondary"
-            href={AIRTABLE_FORM}
-            target="_blank"
-            sx={{
-              alignSelf: 'center',
-            }}
-          >
-            {LABELS.PARTNER_BTN}
-          </Button>
+          <CriteriaSection />
+          <HowWeCanHelpSection />
         </Stack>
+      </SectionContainer>
+      <SectionContainer backgroundColor={theme.palette.background.paper}>
+        <Stack
+          gap={{ xs: '64px', md: '80px' }}
+          sx={{
+            textAlign: 'center',
+          }}
+          maxWidth={'880px'}
+        >
+          <WhatWeDoSection />
+          <ProcesSection />
+        </Stack>
+      </SectionContainer>
+      <SectionContainer backgroundColor={theme.palette.background.default}>
+        <BenefitsSection />
+      </SectionContainer>
+      <SectionContainer backgroundColor={theme.palette.background.paper}>
+        <InterestedSection />
       </SectionContainer>
     </Container>
   )
