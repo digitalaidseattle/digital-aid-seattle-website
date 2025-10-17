@@ -112,7 +112,6 @@ const VolunteerPage = () => {
           .updateCopy(LABELS, 'volunteers')
       ])
         .then((resps) => {
-          console.log(LABELS)
           setVolunteerRoles(resps[0]);
           setInitialized(true);
         })
