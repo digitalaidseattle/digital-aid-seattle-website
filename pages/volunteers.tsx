@@ -78,7 +78,7 @@ const LABELS = {
     'I will prioritize active listening, valuing the insights and ideas shared by others.',
   OATH_PRIVACY_TITLE: 'Uphold privacy standards.',
   OATH_PRIVACY_TXT:
-    'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless OS explicitly endorses such discussions through published materials or media outlets.',
+    'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless DAS explicitly endorses such discussions through published materials or media outlets.',
   OATH_SAFEGUARD_TITLE: 'Safeguard partner information.',
   OATH_SAFEGUARD_TXT:
     'I will safeguard our partners’ personal information, preserving any personal data encountered in my role as a Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
@@ -95,26 +95,6 @@ const LABELS = {
   OATH_MISSION_TXT:
     "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
 }
-const oathContent = [
-  { label: LABELS.OATH_SERVE_TITLE, content: LABELS.OATH_SERVE_TXT },
-  { label: LABELS.OATH_SUPPORT_TITLE, content: LABELS.OATH_SUPPORT_TXT },
-  { label: LABELS.OATH_COLLABORATION_TITLE, content: LABELS.OATH_COLLABORATION_TXT },
-  { label: LABELS.OATH_CURIOSITY_TITLE, content: LABELS.OATH_CURIOSITY_TXT },
-  { label: LABELS.OATH_LISTEN_TITLE, content: LABELS.OATH_LISTEN_TXT },
-  { label: LABELS.OATH_PRIVACY_TITLE, content: LABELS.OATH_PRIVACY_TXT },
-  { label: LABELS.OATH_SAFEGUARD_TITLE, content: LABELS.OATH_SAFEGUARD_TXT },
-  { label: LABELS.OATH_COMMUNICATION_TITLE, content: LABELS.OATH_COMMUNICATION_TXT },
-  { label: LABELS.OATH_INCLUSIVITY_TITLE, content: LABELS.OATH_INCLUSIVITY_TXT },
-  { label: LABELS.OATH_COMPLY_TITLE, content: LABELS.OATH_COMPLY_TXT },
-  { label: LABELS.OATH_MISSION_TITLE, content: LABELS.OATH_MISSION_TXT }
-]
-
-const processContent = [
-  LABELS.PROCESS_STEP_1_TXT,
-  LABELS.PROCESS_STEP_2_TXT,
-  LABELS.PROCESS_STEP_3_TXT,
-  LABELS.PROCESS_STEP_4_TXT
-]
 
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
@@ -139,8 +119,6 @@ const VolunteerPage = () => {
         .finally(() => setLoading(false))
     }
   }, [initialized, setLoading]);
-
-
 
   const theme = useTheme()
   const palette = theme.palette
@@ -210,6 +188,20 @@ const VolunteerPage = () => {
   }
 
   const oathAndValuesSection = () => {
+    const oathContent = [
+      { label: LABELS.OATH_SERVE_TITLE, content: LABELS.OATH_SERVE_TXT },
+      { label: LABELS.OATH_SUPPORT_TITLE, content: LABELS.OATH_SUPPORT_TXT },
+      { label: LABELS.OATH_COLLABORATION_TITLE, content: LABELS.OATH_COLLABORATION_TXT },
+      { label: LABELS.OATH_CURIOSITY_TITLE, content: LABELS.OATH_CURIOSITY_TXT },
+      { label: LABELS.OATH_LISTEN_TITLE, content: LABELS.OATH_LISTEN_TXT },
+      { label: LABELS.OATH_PRIVACY_TITLE, content: LABELS.OATH_PRIVACY_TXT },
+      { label: LABELS.OATH_SAFEGUARD_TITLE, content: LABELS.OATH_SAFEGUARD_TXT },
+      { label: LABELS.OATH_COMMUNICATION_TITLE, content: LABELS.OATH_COMMUNICATION_TXT },
+      { label: LABELS.OATH_INCLUSIVITY_TITLE, content: LABELS.OATH_INCLUSIVITY_TXT },
+      { label: LABELS.OATH_COMPLY_TITLE, content: LABELS.OATH_COMPLY_TXT },
+      { label: LABELS.OATH_MISSION_TITLE, content: LABELS.OATH_MISSION_TXT }
+    ]
+
     return (
       (
         <SectionContainer backgroundColor={designColor.white}>
@@ -262,6 +254,14 @@ const VolunteerPage = () => {
   }
 
   const processSection = () => {
+
+    const processContent = [
+      LABELS.PROCESS_STEP_1_TXT,
+      LABELS.PROCESS_STEP_2_TXT,
+      LABELS.PROCESS_STEP_3_TXT,
+      LABELS.PROCESS_STEP_4_TXT
+    ]
+
     return (
       (
         <SectionContainer backgroundColor={designColor.background}>
