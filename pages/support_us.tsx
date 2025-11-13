@@ -52,8 +52,9 @@ const LABELS = {
 
 const ADDRESS = {
   title: 'Digital Aid Seattle',
-  street: '107 Spring St',
-  statezip: 'Seattle, WA 98104',
+  street: '301 Union St',
+  pobox: 'PO Box 1765',
+  statezip: 'Seattle, WA 98111',
 }
 
 // Custom arrow components with chevrons
@@ -295,6 +296,8 @@ const SupportUsPage = () => {
               {ADDRESS.title}
               <br />
               {ADDRESS.street}
+              <br />
+              {ADDRESS.pobox}
               <br />
               {ADDRESS.statezip}
             </Typography>
