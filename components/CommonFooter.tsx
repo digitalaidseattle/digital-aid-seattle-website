@@ -75,11 +75,14 @@ const LogoBox = () => {
 
 const AboutBox = () => {
   const { data: faq } = useFeature('faq')
+  const { data: newsletter } = useFeature('newsletter')
+
   return (
     <Box>
       <FooterItemTitle>About Us</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
       {faq && <LinkSubItem url="/faq" name="FAQ" />}
+      {newsletter && <LinkSubItem url="/newsletters" name="Newsletters" />}
     </Box>
   )
 }
@@ -88,7 +91,10 @@ const ContactUsBox = () => {
   return (
     <Box>
       <FooterItemTitle>Contact us</FooterItemTitle>
-      <LinkSubItem url="mailto:info@digitalaidseattle.org" name="info@digitalaidseattle.org" />
+      <LinkSubItem
+        url="mailto:info@digitalaidseattle.org"
+        name="info@digitalaidseattle.org"
+      />
     </Box>
   )
 }
@@ -209,27 +215,44 @@ const instagramLink = () => {
 const CommonFooterLargeScreen = () => {
   return (
     <Stack>
-      <EmailFormContainer />
+      <EmailFormContainer showLabel />
       <Box
         sx={{
           paddingY: '5rem',
-          height: '28rem'
+          height: '28rem',
         }}
       >
         <Grid container spacing={4}>
-          <GridItem md={4}><LogoBox /></GridItem>
-          <GridItem md={4}><WorkWithUsBox /></GridItem>
-          <GridItem md={4}><AboutBox /></GridItem>
+          <GridItem md={4}>
+            <LogoBox />
+          </GridItem>
+          <GridItem md={4}>
+            <WorkWithUsBox />
+          </GridItem>
+          <GridItem md={4}>
+            <AboutBox />
+          </GridItem>
 
-          <GridItem md={4}><Box /></GridItem>
-          <GridItem md={4}><ContactUsBox /></GridItem>
-          <GridItem md={4}><Box /></GridItem>
+          <GridItem md={4}>
+            <Box />
+          </GridItem>
+          <GridItem md={4}>
+            <ContactUsBox />
+          </GridItem>
+          <GridItem md={4}>
+            <Box />
+          </GridItem>
 
-          <GridItem md={4}><CopyrightBox /></GridItem>
-          <GridItem md={8}><SocialMediaBox /></GridItem>
+          <GridItem md={4}>
+            <CopyrightBox />
+          </GridItem>
+          <GridItem md={8}>
+            <SocialMediaBox />
+          </GridItem>
         </Grid>
       </Box>
-    </Stack>)
+    </Stack>
+  )
 }
 
 const CommonFooterSmallScreen = () => {
@@ -240,16 +263,33 @@ const CommonFooterSmallScreen = () => {
       columns={1}
       sx={{
         width: '100%',
-        alignItems: 'center', textAlign: 'center', paddingY: '4rem', gap: '2rem'
+        alignItems: 'center',
+        textAlign: 'center',
+        paddingY: '4rem',
+        gap: '2rem',
       }}
     >
-      <GridItem><LogoBox /></GridItem>
-      <GridItem><EmailFormContainer /></GridItem>
-      <GridItem><WorkWithUsBox /></GridItem>
-      <GridItem><AboutBox /></GridItem>
-      <GridItem><ContactUsBox /></GridItem>
-      <GridItem><SocialMediaBox /></GridItem>
-      <GridItem><CopyrightBox /></GridItem>
+      <GridItem>
+        <LogoBox />
+      </GridItem>
+      <GridItem>
+        <EmailFormContainer showLabel />
+      </GridItem>
+      <GridItem>
+        <WorkWithUsBox />
+      </GridItem>
+      <GridItem>
+        <AboutBox />
+      </GridItem>
+      <GridItem>
+        <ContactUsBox />
+      </GridItem>
+      <GridItem>
+        <SocialMediaBox />
+      </GridItem>
+      <GridItem>
+        <CopyrightBox />
+      </GridItem>
     </Grid>
   )
 }
@@ -263,7 +303,7 @@ const CommonFooter = () => {
       <Box sx={{ display: { xs: 'flex', md: 'none', lg: 'none' } }}>
         <CommonFooterSmallScreen />
       </Box>
-    </Container >
+    </Container>
   )
 }
 export default CommonFooter

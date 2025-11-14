@@ -11,6 +11,10 @@ type CardWithPhotoProps = {
   image: string
   imageWidth?: number
   alt?: string
+  subtitle?: string
+  titleSx?: Record<string, any>
+  descriptionSx?: Record<string, any>
+  onClick?: () => void
 }
 
 const CardWithPhoto = ({
@@ -18,7 +22,11 @@ const CardWithPhoto = ({
   description,
   image,
   imageWidth = 196,
-  alt = ""
+  alt = '',
+  subtitle,
+  titleSx,
+  descriptionSx,
+  onClick,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
   const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
@@ -29,9 +37,11 @@ const CardWithPhoto = ({
         flex: '1',
         boxShadow:
           '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
+        cursor: onClick ? 'pointer' : undefined,
       }}
+      onClick={onClick}
     >
-      {!isViewportSmall && (
+      {
         <CardMedia
           sx={{
             minWidth: imageWidth,
@@ -41,7 +51,7 @@ const CardWithPhoto = ({
           image={image}
           alt={alt}
         />
-      )}
+      }
       <CardContent
         sx={{
           display: 'flex',
@@ -51,8 +61,22 @@ const CardWithPhoto = ({
           paddingBottom: '1rem !important',
         }}
       >
-        <Typography variant="titleMedium">{title}</Typography>
-        <Typography variant="bodyMedium">{description}</Typography>
+        <Typography variant="titleMedium" sx={titleSx}>
+          {title}
+        </Typography>
+        {subtitle && (
+          <Typography
+            variant="bodySmall"
+            color="text.primary"
+            sx={{ fontWeight: 700 }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+
+        <Typography variant="bodyMedium" sx={descriptionSx}>
+          {description}
+        </Typography>
       </CardContent>
     </Card>
   )
