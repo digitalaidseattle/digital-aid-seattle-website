@@ -8,9 +8,6 @@ import {
   AddOutlined,
   ConnectWithoutContactOutlined,
   Diversity3Outlined,
-  EventAvailableOutlined,
-  StarsOutlined,
-  WorkHistoryOutlined,
   WorkspacePremiumOutlined
 } from '@mui/icons-material'
 import {
@@ -36,10 +33,10 @@ import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
+import CardGridContainer from 'components/cards/CardGridContainer'
 import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
-import CardGridContainer from 'components/cards/CardGridContainer'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -69,14 +66,6 @@ const LABELS = {
   PROCESS_STEP_2_TXT: 'You will receive an invitation for an interview within a few days.',
   PROCESS_STEP_3_TXT: 'Once accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
   PROCESS_STEP_4_TXT: 'Contribute weekly to your project, and make a difference for your community!',
-
-  EXPECTATION_SKILL_TITLE: 'Skill',
-  EXPECTATION_SKILL_TXT: 'You demonstrate proficiency in your craft and operate with both autonomy and transparency.',
-  EXPECTATIONS_TITLE: 'Our expectations',
-  EXPECTATION_EXPERIENCE_TITLE: 'Experience',
-  EXPECTATION_EXPERIENCE_TXT: 'You are a seasoned professional, capable of leading yourself and others in your discipline.',
-  EXPECTATION_AVAILABILITY_TITLE: 'Availability',
-  EXPECTATION_AVAILABILITY_TXT: 'You dedicate 4 hours a week for at least 6 months to accomplish your committed tasks with Digital Aid Seattle.',
 
   OATH_TITLE: 'Our oath',
   OATH_TEXT: `By embracing this pledge, you affirm your dedication to Digital Aid Seattle's mission and the principles it stands for.`,
