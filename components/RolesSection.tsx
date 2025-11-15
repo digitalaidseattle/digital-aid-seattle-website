@@ -33,7 +33,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Chip, Link, Stack, Typography } from '@mui/material'
+import { Box, Button, Chip, Link, Stack, SxProps, Typography } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
@@ -103,33 +103,27 @@ const RoleListing = ({
   role: any
   showLink?: boolean
 }) => {
-  const RoleBase = (
-    {
-      sxProps
-    }: {
-      sxProps?: any
-    }
-  ) => {
-    return (
-      <ListItemWithIcon
-        key={`${index}-${role?.key}` || `${index}-${role}`}
-        listIcon={
-          rolesMap[role.key]?.icon ||
-          rolesMap[role]?.icon ||
-          rolesMap['default'].icon
-        }
-        listText={role.role || rolesMap[role].role || null}
-        sxProps={{
-          alignItems: showLink ? 'flex-start' : 'center',
-          ...sxProps,
-        }}
-      />
-    )
-  }
-  return showLink ? (
-    <Link href={`${getRoleUrl(role.key)}`} sx={{ textDecoration: 'none' }}>
-      <RoleBase
-        sxProps={{
+
+  const roleUrl = getRoleUrl(role.key);
+  const listIcon = rolesMap[role.key]?.icon ||
+    rolesMap[role]?.icon ||
+    rolesMap['default'].icon;
+  const listText = role.role || rolesMap[role].role || null;
+
+  return (
+    <ListItemWithIcon
+      key={`${index}-${role?.key}` || `${index}-${role}`}
+      listIcon={listIcon}
+      listText={listText}
+      sxProps={{ alignItems: showLink ? 'flex-start' : 'center' }}
+    >
+      <Button
+        variant="outlined"
+        href={roleUrl}
+        sx={{
+          height: 20,
+          width: 100,
+          fontSize: 10,
           '&': {
             '&:hover': {
               background: 'linear-gradient(0deg, rgba(184, 233, 122, 0.32), rgba(184, 233, 122, 0.32))',
@@ -137,12 +131,9 @@ const RoleListing = ({
               boxShadow:
                 '0px 8px 8px 2px rgba(52, 61, 62, 0.1), 0px 8px 4px rgba(52, 61, 62, 0.1)',
             },
-          },
-        }}
-      />
-    </Link>
-  ) : (
-    <RoleBase />
+          }
+        }}>Learn More +</Button>
+    </ListItemWithIcon>
   )
 }
 
