@@ -96,6 +96,8 @@ const LABELS = {
     "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
 }
 
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
+
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext);
@@ -306,7 +308,7 @@ const VolunteerPage = () => {
         </Subheader>
 
         <Link
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          href={VOLUNTEER_APPLICATION_FORM_URL}
           target='_blank'
           passHref
         >
