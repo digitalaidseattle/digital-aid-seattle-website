@@ -12,6 +12,7 @@ import Airtable, { FieldSet } from 'airtable'
 // To find the baseID, visit any page in the Digital Aid Airtable base and look at the URL.
 // It will be the string of characters after the first slash, starting with "app".
 
+export const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 class DASVolunteerRoleService {
 

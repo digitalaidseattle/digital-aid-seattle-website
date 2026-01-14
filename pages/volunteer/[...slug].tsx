@@ -14,7 +14,7 @@ import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService } from '../../services/VolunteerRoleService'
+import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../../services/VolunteerRoleService'
 import Markdown from 'react-markdown'
 import { useRouter } from 'next/router'
 
@@ -189,7 +189,7 @@ const VolunteerRolePage = () => {
               mt: '2rem',
             }}
           >
-            <Link href={roleData.applicationLink} target="_blank">
+            <Link href={VOLUNTEER_APPLICATION_FORM_URL} target="_blank">
               <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
             </Link>
           </Box>

@@ -35,7 +35,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 
 import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
+import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -306,7 +306,7 @@ const VolunteerPage = () => {
         </Subheader>
 
         <Link
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          href={VOLUNTEER_APPLICATION_FORM_URL}
           target='_blank'
           passHref
         >
