@@ -41,6 +41,7 @@ import { NavigateNextSharp } from '@mui/icons-material'
 import Link from 'next/link'
 import ProjectImage from '../assets/project-image.png'
 import { HeaderWithImage } from './HeaderWithImage'
+import { VOLUNTEER_APPLICATION_FORM_URL } from 'services/VolunteerRoleService'
 
 const PROJECT_IMAGE = ProjectImage.src;
 
@@ -279,7 +280,7 @@ const ProjectFooterSection = () => {
         </ProjectSubheader>
         <Button
           variant="contained"
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          href={VOLUNTEER_APPLICATION_FORM_URL}
           target="_blank"
         >
           Apply to volunteer

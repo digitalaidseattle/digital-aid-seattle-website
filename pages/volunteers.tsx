@@ -35,7 +35,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 
 import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
+import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -95,8 +95,6 @@ const LABELS = {
   OATH_MISSION_TXT:
     "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
 }
-
-const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 const VolunteerPage = () => {
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
