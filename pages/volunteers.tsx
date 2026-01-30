@@ -36,6 +36,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
+import { CodaRoleService } from 'services/codaRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -101,12 +102,14 @@ const VolunteerPage = () => {
   const { setLoading } = useContext(LoadingContext);
   const [initialized, setInitialized] = useState<boolean>(false);
 
+  const roleService = CodaRoleService.getInstance();
+
   useEffect(() => {
     if (!initialized) {
       setLoading(true);
 
       Promise.all([
-        dasVolunteerRoleService.getAllActiveRoles(),
+        roleService.getAllActiveRoles(),
 
         pageCopyService
           .updateCopy(LABELS, 'volunteers')

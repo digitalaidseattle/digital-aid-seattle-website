@@ -89,7 +89,7 @@ type DASVolunteerRoleBasicInfo = {
   category: string[]
 }
 
-type DASVolunteerRole = {
+type DASVolunteerRole = Entity & {
   location: string
   duration: string
   headline: string

@@ -8,8 +8,7 @@
 import { Entity, EntityService, Identifier, User } from "@digitalaidseattle/core";
 
 const CODA_API_TOKEN = process.env.NEXT_PUBLIC_CODA_API_TOKEN;
-const CODA_DOC_ID = "24QYb2RP0g";
-const CODA_API_BASE = `https://coda.io/apis/v1/docs/${CODA_DOC_ID}`;
+const CODA_API_BASE = `https://coda.io/apis/v1/docs`;
 
 type CodaRow = {
     id: string;
@@ -17,13 +16,15 @@ type CodaRow = {
 }
 
 abstract class CodaService<T extends Entity> implements EntityService<T> {
+    documentId = '';
     tableName = '';
     select = '*';
     mapper = (json: any) => (json as T);
     entityToCodaMapper = (_entity: T) => ({} as any);
 
-    constructor(tableName: string, select?: string, mapper?: (json: any) => T, entityToCodaMapper?: (_entity: T) => {}) {
+    constructor(documentId: string, tableName: string, select?: string, mapper?: (json: any) => T, entityToCodaMapper?: (_entity: T) => {}) {
         this.tableName = tableName;
+        this.documentId = documentId ?? this.documentId;
         this.select = select ?? '*';
         this.mapper = mapper ?? ((json: any) => json);
         this.entityToCodaMapper = entityToCodaMapper ?? ((_entity: any) => ({} as any));
@@ -46,18 +47,36 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
     }
 
     async getAll(_count?: number, _select?: string, _mapper?: (json: any) => T): Promise<T[]> {
-        const url = `${CODA_API_BASE}/tables/${this.tableName}/rows?useColumnNames=true&valueFormat=rich`;
-        const resp = await fetch(url, {
-            headers: { 'Authorization': `Bearer ${CODA_API_TOKEN}` }
-        });
 
-        if (!resp.ok) {
-            const error = await resp.json().catch(() => ({ message: resp.statusText }));
-            throw new Error(`Failed to fetch rows: ${error.message || resp.statusText}`);
-        }
+        let rows: any[] = [];
+        let pageToken: string | undefined = undefined;
 
-        const data = await resp.json();
-        return data.items.map((json: any) => this.mapper(json))
+        do {
+            const params = new URLSearchParams({
+                limit: "200",
+                useColumnNames: "true",
+                valueFormat: "rich"
+            });
+
+            if (pageToken) {
+                params.set("pageToken", pageToken);
+            }
+
+            const res = await fetch(
+                `https://coda.io/apis/v1/docs/${this.documentId}/tables/${this.tableName}/rows?${params}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${CODA_API_TOKEN}`,
+                    },
+                }
+            );
+
+            const data = await res.json();
+            rows.push(...data.items.map((json: any) => this.mapper(json)));
+            pageToken = data.nextPageToken;
+        } while (pageToken);
+
+        return rows;
     }
 
     async batchInsert(entities: T[], _select?: string, _mapper?: (json: any) => T, _user?: User): Promise<T[]> {
@@ -65,7 +84,7 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
         // async createRows(tableId: string, rows: { cells: { column: string, value: any }[] }[]): Promise<any> {
         const rows = entities.map(entity => this.entityToCodaMapper(entity));
 
-        const resp = await fetch(`${CODA_API_BASE}/tables/${this.tableName}/rows`, {
+        const resp = await fetch(`${CODA_API_BASE}/${this.documentId}/tables/${this.tableName}/rows`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${CODA_API_TOKEN}`,
@@ -92,8 +111,12 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
     }
 
     async findBy(column: string, name: string): Promise<T[]> {
-        const url = `${CODA_API_BASE}/tables/${this.tableName}/rows?query=${column}:"${name}"`;
-        console.log(url)
+        const params = new URLSearchParams({
+            limit: "200",
+            useColumnNames: "true",
+            valueFormat: "rich"
+        });
+        const url = `${CODA_API_BASE}/${this.documentId}/tables/${this.tableName}/rows?query=${column}:"${name}"&${params}`;
         const resp = await fetch(encodeURI(url), {
             headers: { 'Authorization': `Bearer ${CODA_API_TOKEN}` }
         });

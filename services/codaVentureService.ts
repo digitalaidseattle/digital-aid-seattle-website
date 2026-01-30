@@ -32,11 +32,12 @@ type Venture = {
     imageSrc: string,
     ventureCode: string
 }
-// @ts-ignore - Environment variables are defined at runtime
+
+const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): Venture {
-    console.log(row)
+    console.log('Venture', row)
 
     const venture = {
         title: row.values['c-VmSQh523FY'] || '',
@@ -68,7 +69,7 @@ class CodaVentureService extends CodaService<Venture> {
     }
 
     constructor() {
-        super(VENTURE_TABLE_ID, undefined, coda2Entity, undefined);
+        super(CODA_DOC_ID, VENTURE_TABLE_ID, undefined, coda2Entity, undefined);
     }
 }
 
