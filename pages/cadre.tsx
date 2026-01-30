@@ -19,12 +19,11 @@ import {
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
+import { CodaRoleService } from 'services/codaRoleService'
 import { CodaVolunteerService } from 'services/codaVolunteerService'
 import { pageCopyService } from 'services/PageCopyService'
 import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
 import ProjectImage from '../assets/project-image.png'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
-import { CodaRoleService } from 'services/codaRoleService'
 
 const LABELS = {
   HERO_LBL: 'The Cadre',
@@ -48,9 +47,6 @@ const TheCadrePage = () => {
 
   const [initialized, setInitialized] = useState<boolean>(false);
 
-  const volunteerService = CodaVolunteerService.getInstance();
-  const roleService = CodaRoleService.getInstance();
-
   useEffect(() => {
     if (!initialized) {
       pageCopyService
@@ -68,20 +64,13 @@ const TheCadrePage = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      roleService.getAllActiveRoles(),
-      volunteerService.getPeople('Cadre')
+      CodaRoleService.getInstance().getAllActiveRoles(),
+      CodaVolunteerService.getInstance().getPeople('Cadre')
     ])
       .then(resps => {
         console.log('TheCadrePage', resps);
         setVolunteerRoles(resps[0]);
         setMembers(resps[1].sort((r1, r2) => r1.name.localeCompare(r2.name)));
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-
-    roleService.findBy('key', 'chief-of-staff')
-      .then(roles => {
-        console.log('Roles found by key', roles);
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
