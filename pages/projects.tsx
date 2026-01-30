@@ -26,6 +26,7 @@ import { dasProjectsService } from '../services/ProjectsService'
 import MastheadWithImage from 'components/MastheadWithImage'
 import ProjectsImage from '../assets/projects.png'
 import { pageCopyService } from 'services/PageCopyService'
+import { CodaVentureService } from 'services/codaVentureService'
 
 const LABELS = {
   HERO_TITLE: 'Projects',
@@ -44,6 +45,17 @@ const ProjectsPage = () => {
   const [projects, setProjects] = useState<DASProject[]>([]);
   const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
+
+
+  const codaVentureService = CodaVentureService.getInstance();
+  useEffect(() => {
+    codaVentureService
+      .getAll()
+      .then(ventures => {
+        console.log('Coda ventures:', ventures);
+      })
+      .catch(error => console.error('Error fetching Coda ventures:', error));
+  }, [codaVentureService])
 
   useEffect(() => {
     if (!init) {
