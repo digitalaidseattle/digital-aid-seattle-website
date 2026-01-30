@@ -34,8 +34,9 @@ import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
 import { pageCopyService } from 'services/PageCopyService'
+import { CodaRoleService } from 'services/codaRoleService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
+import { VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -106,8 +107,7 @@ const VolunteerPage = () => {
       setLoading(true);
 
       Promise.all([
-        dasVolunteerRoleService.getAllActiveRoles(),
-
+        CodaRoleService.getInstance().getAllActiveRoles(),
         pageCopyService
           .updateCopy(LABELS, 'volunteers')
       ])

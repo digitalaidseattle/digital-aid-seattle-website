@@ -171,7 +171,7 @@ const FilterableRoles = ({ roles, showLink }) => {
   useEffect(() => {
     setRolesToDisplay([...roles]);
     // using a set to build a list of categories that occur in roles data
-    const uniqueCategories = new Set()
+    const uniqueCategories = new Set();
     roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
     setCategories(Array.from(uniqueCategories))
   }, [roles]);

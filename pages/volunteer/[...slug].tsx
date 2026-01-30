@@ -17,6 +17,7 @@ import { DASVolunteerRole } from 'types'
 import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../../services/VolunteerRoleService'
 import Markdown from 'react-markdown'
 import { useRouter } from 'next/router'
+import { CodaRoleService } from 'services/codaRoleService'
 
 const Labels = {
   Title: "Volunteer Opening",
@@ -46,7 +47,8 @@ const VolunteerRolePage = () => {
     setLoading(true);
     const roleName = router.query.slug ? router.query.slug[0] : null;
     if (roleName) {
-      dasVolunteerRoleService
+      // dasVolunteerRoleService
+      CodaRoleService.getInstance()
         .getRoleDetailsByName(roleName)
         .then((resp: DASVolunteerRole) => {
           if (resp === null) {

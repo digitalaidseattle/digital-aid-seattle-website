@@ -19,11 +19,11 @@ import {
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
+import { CodaRoleService } from 'services/codaRoleService'
+import { CodaVolunteerService } from 'services/codaVolunteerService'
 import { pageCopyService } from 'services/PageCopyService'
 import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
 import ProjectImage from '../assets/project-image.png'
-import { dasProjectsService } from '../services/ProjectsService'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 const LABELS = {
   HERO_LBL: 'The Cadre',
@@ -64,15 +64,16 @@ const TheCadrePage = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      dasVolunteerRoleService.getAllActiveRoles(),
-      dasProjectsService.getPeople('Cadre')
+      CodaRoleService.getInstance().getAllActiveRoles(),
+      CodaVolunteerService.getInstance().getPeople('Cadre')
     ])
       .then(resps => {
+        console.log('TheCadrePage', resps);
         setVolunteerRoles(resps[0]);
         setMembers(resps[1].sort((r1, r2) => r1.name.localeCompare(r2.name)));
       })
       .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
+      .finally(() => setLoading(false));
   }, [setLoading])
 
   const theme = useTheme()
