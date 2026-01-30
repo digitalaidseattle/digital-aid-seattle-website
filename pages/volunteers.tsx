@@ -36,6 +36,7 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 import { pageCopyService } from 'services/PageCopyService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
 import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
+import Markdown from 'react-markdown'
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -54,7 +55,7 @@ const LABELS = {
   OATH_TITLE: 'Our oath',
   OATH_TXT: 'We champion these values and ask you as a volunteer to adopt them too.',
   PROCESS_TITLE: 'The process',
-  PROCESS_STEP_1_TXT: 'Read our oath, then apply to volunteer using the button below.',
+  PROCESS_STEP_1_TXT: 'Read our *[oath](#oath)* and *[policies](https://digital-aid-seattle.gitbook.io/digital-aid-seattle/Hk6Veo0mrttAEbFlZg18/hr-policies)*, then apply to volunteer using the button below.',
   PROCESS_STEP_2_TXT: 'You will receive an invitation for an interview within a few days.',
   PROCESS_STEP_3_TXT: 'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
   PROCESS_STEP_4_TXT: 'Contribute weekly to your project, and make a difference for your community!',
@@ -206,6 +207,7 @@ const VolunteerPage = () => {
       (
         <SectionContainer backgroundColor={designColor.white}>
           <Stack
+            id="oath"
             gap={{ xs: 4, md: 8 }}
             sx={{
               textAlign: 'left',
@@ -281,10 +283,14 @@ const VolunteerPage = () => {
                   <Typography
                     variant="titleLarge"
                     color={palette.primary.main}
-                  >{`${index + 1}.`}</Typography>
-                  <Typography variant="bodyLarge" mx={2}>
+                  >{`${index + 1}. `}</Typography>
+                  <Markdown
+                    components={{
+                      p: ({ children }) => <>{children}</>
+                    }}
+                  >
                     {item}
-                  </Typography>
+                  </Markdown>
                 </li>
               ))}
             </ol>
