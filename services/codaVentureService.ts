@@ -5,60 +5,42 @@
  *
  */
 
+import { DASProject, TeamMember } from 'types';
 import { CodaRow, CodaService } from './codaService';
-
-type Venture = {
-    _id: string
-    _createdAt: Date
-    orderRank: string
-    id: string
-    title: string
-    partner: string
-    painpoint: string
-    programAreas: string[]
-    description: string
-    status: "Submitted by Partner"
-    | "Ready for consideration"
-    | "Active"
-    | "Under evaluation"
-    | "Declined"
-    | "Completed"
-    projectLink: string
-    duration?: { start: string; end: string }
-    problem: string
-    solution: string
-    impact: string
-    display: boolean,
-    imageSrc: string,
-    ventureCode: string
-}
 
 const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
-function coda2Entity(row: CodaRow): Venture {
-    console.log('Venture', row)
-
+function coda2Entity(row: CodaRow): DASProject {
     const venture = {
-        title: row.values['c-VmSQh523FY'] || '',
-        status: row.values['c-GuJCl9qMyY'],
-
-        partner: row.values['partner'] || '',
-        painpoint: row.values['painpoint'] || '',
-        programAreas: row.values['programAreas'] ? (row.values['programAreas'] as string).split(',').map(s => s.trim()) : [],
-        description: row.values['description'] || '',
-        projectLink: row.values['projectLink'] || '',
-        problem: row.values['problem'] || '',
-        solution: row.values['solution'] || '',
-        impact: row.values['impact'] || '',
-        display: row.values['display'] || false,
-        imageSrc: row.values['imageSrc'] || '',
-        ventureCode: row.values['ventureCode'] || ''
-    } as Venture;
+        id: row.id,
+        title: row.values['Ventures'] ? row.values['Ventures'].replaceAll('```', '') : '',
+        status: row.values['Venture Status'] ? row.values['Venture Status'].replaceAll('```', '') : '',
+        imageSrc: row.values['Ventures Icon'] ? row.values['Ventures Icon'][0].url : '',
+        currentTeam: (row.values['Squad Members'] ?? [])
+            .map((member: any) => {
+                return {
+                    name: member['name'] ?? '',
+                    // TODO integrate with voulteer service to get image
+                    // TODO integrate with role service to get role
+                } as TeamMember;
+            }),
+        // partner: row.values['partner'] || '',
+        // painpoint: row.values['painpoint'] || '',
+        // programAreas: row.values['programAreas'] ? (row.values['programAreas'] as string).split(',').map(s => s.trim()) : [],
+        // description: row.values['description'] || '',
+        // projectLink: row.values['projectLink'] || '',
+        // problem: row.values['problem'] || '',
+        // solution: row.values['solution'] || '',
+        // impact: row.values['impact'] || '',
+        // display: row.values['display'] || false,
+        // imageSrc: row.values['imageSrc'] || '',
+        // ventureCode: row.values['ventureCode'] || ''
+    } as DASProject;
     return venture;
 }
 
-class CodaVentureService extends CodaService<Venture> {
+class CodaVentureService extends CodaService<DASProject> {
 
     static instance: CodaVentureService;
     static getInstance(): CodaVentureService {

@@ -23,6 +23,7 @@ const TABLE_ID = 'grid-4vzF6VuaPV';
 
 function coda2Entity(row: CodaRow): Volunteer {
     const entity = {
+        id: row.id,
         name: row.values['Name'] ? row.values['Name'].replaceAll('```', '') : '',
         role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
         url: row.values['Pic'] ? row.values['Pic'][0].url : '',

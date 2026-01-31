@@ -49,38 +49,25 @@ const ProjectsPage = () => {
   const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
+  const ventureService = CodaVentureService.getInstance();
+  const partnerService = CodaPartnerService.getInstance();
 
-  const codaVentureService = CodaVentureService.getInstance();
   useEffect(() => {
-    codaVentureService
+    ventureService
       .getAll()
       .then(ventures => {
         console.log('Coda ventures:', ventures);
       })
       .catch(error => console.error('Error fetching Coda ventures:', error));
 
-    CodaVolunteerService.getInstance()
-      .getAll()
-      .then(entities => {
-        console.log('Coda volunteers:', entities);
-      })
-      .catch(error => console.error('Error fetching Coda volunteers:', error));
-
-    CodaPartnerService.getInstance()
+    partnerService
       .getAll()
       .then(entities => {
         console.log('Coda partners:', entities);
       })
       .catch(error => console.error('Error fetching Coda partners:', error));
 
-    CodaRoleService.getInstance()
-      .getAll()
-      .then(entities => {
-        console.log('Coda roles:', entities);
-      })
-      .catch(error => console.error('Error fetching Coda roles:', error));
-
-  }, [codaVentureService])
+  }, [ventureService, partnerService]);
 
   useEffect(() => {
     if (!init) {

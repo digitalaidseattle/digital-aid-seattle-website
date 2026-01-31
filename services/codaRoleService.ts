@@ -17,6 +17,7 @@ const TABLE_ID = 'grid-YIZ0HWUd3o';
 
 function coda2Entity(row: CodaRow): Role {
     const entity = {
+        id: row.id,
         key: row.values['Key'] ? row.values['Key'].replaceAll('```', '') : '',
         role: row.values['Role'] ? row.values['Role'].replaceAll('```', '') : '',
         url: row.values['Pic'] ? row.values['Pic'][0].url : '',
