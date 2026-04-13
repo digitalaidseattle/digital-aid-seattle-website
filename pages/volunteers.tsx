@@ -32,6 +32,7 @@ import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
+import Markdown from 'react-markdown'
 
 import { pageCopyService } from 'services/PageCopyService'
 import { CodaRoleService } from 'services/codaRoleService'
@@ -283,7 +284,7 @@ const VolunteerPage = () => {
                     color={palette.primary.main}
                   >{`${index + 1}.`}</Typography>
                   <Typography variant="bodyLarge" mx={2}>
-                    {item}
+                    <Markdown className='markdown'>{item}</Markdown>
                   </Typography>
                 </li>
               ))}
