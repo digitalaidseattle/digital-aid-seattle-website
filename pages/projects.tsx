@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, LoadingIndicator, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 import { DASPartner, DASProject } from 'types'
 
@@ -34,22 +34,26 @@ const LABELS = {
   TITLE_IMAGE: 'Projects graphic',
   HERO_TXT: 'We create digital solutions that empower communities, enhance collaboration, and inspire positive change!',
   NO_MATCHES: 'No matching projects found.',
-  ARIA_LABEL_FILTERS: 'filter projects by status'
+  ARIA_LABEL_FILTERS: 'filter projects by status',
+  LOADING: 'Loading projects'
 }
 
 const ProjectsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const { data: ventures } = useProjects();
-  const { data: partners } = usePartners();
+  const { data: ventures, loading: venturesLoading } = useProjects();
+  const { data: partners, loading: partnersLoading } = usePartners();
 
-  const { setLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
   const [init, setInit] = useState<boolean>(false);
   const [projects, setProjects] = useState<DASProject[]>([]);
   const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
   const DEFAULT_STATUSES = CodaVentureService.filteredStatuses;
+  useEffect(() => {
+    setLoading(venturesLoading || partnersLoading);
+  }, [partnersLoading, venturesLoading, setLoading])
 
   useEffect(() => {
     if (ventures && partners) {
@@ -75,14 +79,12 @@ const ProjectsPage = () => {
   }, [init, setLoading])
 
   useEffect(() => {
-    if (init) {
-      const displayedStatuses = filterStatuses.length === 0
-        ? DEFAULT_STATUSES : filterStatuses
-      const filtered = projects
-        .filter(p => displayedStatuses.includes(p.status))
-      setDisplayedProjects(filtered)
-    }
-  }, [init, filterStatuses, projects, DEFAULT_STATUSES]);
+    const displayedStatuses = filterStatuses.length === 0
+      ? DEFAULT_STATUSES : filterStatuses
+    const filtered = projects
+      .filter(p => displayedStatuses.includes(p.status))
+    setDisplayedProjects(filtered)
+  }, [filterStatuses, projects, DEFAULT_STATUSES]);
 
   const toggleStatus = (status: string) => {
     if (filterStatuses.includes(status)) {
@@ -152,20 +154,25 @@ const ProjectsPage = () => {
                   icon={filterStatuses.includes(status) ? <Check /> : undefined}
                   onClick={() => toggleStatus(status)} />)}
             </Stack>
-            {displayedProjects.length === 0 &&
-              <Typography>{LABELS.NO_MATCHES}</Typography>
-            }
-            {displayedProjects.length > 0 &&
-              <CardGridContainer>
-                {displayedProjects
-                  .map((project) => (
-                    <CardProject
-                      key={project.id}
-                      project={project}
-                    />
-                  ))}
-              </CardGridContainer>
-            }
+            <>
+              {loading && init &&
+                <Typography>{LABELS.LOADING}</Typography>
+              }
+              {init && !loading && displayedProjects.length === 0 &&
+                <Typography>{LABELS.NO_MATCHES}</Typography>
+              }
+              {displayedProjects.length > 0 &&
+                <CardGridContainer>
+                  {displayedProjects
+                    .map((project) => (
+                      <CardProject
+                        key={project.id}
+                        project={project}
+                      />
+                    ))}
+                </CardGridContainer>
+              }
+            </>
           </Stack>
         </Box>
       </BlockComponent>
