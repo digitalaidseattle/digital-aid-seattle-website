@@ -162,6 +162,7 @@ const WhatWeDoSection = ({ theme }) => {
     </Typography>
     <Box textAlign="center">
       <Button
+        aria-label='Link to cadre page'
         variant="contained"
         onClick={() => router.push('/cadre')}
         sx={{ width: 'fit-content' }}

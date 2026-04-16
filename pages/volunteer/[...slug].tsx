@@ -3,7 +3,6 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Link,
   Stack,
   Typography,
   useTheme
@@ -17,6 +16,7 @@ import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layo
 import Masthead from 'components/Masthead'
 import { CodaRoleService } from 'services/codaRoleService'
 import { DASVolunteerRole } from 'types'
+import Link from 'next/link'
 
 const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
@@ -75,12 +75,14 @@ const VolunteerRolePage = () => {
         aria-label="breadcrumb"
         separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
       >
-        <Link href={'../'} color="primary" underline="hover">
-          {Labels.Home}
+        <Link href={'../'} >
+          <Typography color="textPrimary">{Labels.Home}</Typography>
         </Link>
-        <Link href={'../volunteers'} color="primary" underline="hover">
-          {Labels.Volunteers}
+
+        <Link href={'../volunteers'} >
+          <Typography color="textPrimary">{Labels.Volunteers}</Typography>
         </Link>
+
         <Typography color="textPrimary">{roleName}</Typography>
       </Breadcrumbs>
     )
