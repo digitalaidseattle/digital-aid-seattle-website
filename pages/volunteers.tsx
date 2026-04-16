@@ -4,6 +4,7 @@
 * @2023 Digital Aid Seattle
 */
 
+import React, { useContext, useEffect, useState } from 'react'
 import {
   AddOutlined,
   EventAvailableOutlined,
@@ -21,7 +22,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme
-} from '@mui/material'
+} from '@mui/material';
+import Markdown from 'react-markdown';
+
 import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
@@ -29,12 +32,11 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
-import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
-
 import { useActiveRoles } from 'components/useActiveRoles'
 import { pageCopyService } from 'services/PageCopyService'
+
 import VolunteerImage from '../assets/volunteerWithUs.png'
 
 const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
@@ -56,7 +58,7 @@ const LABELS = {
   OATH_TITLE: 'Our oath',
   OATH_TXT: 'We champion these values and ask you as a volunteer to adopt them too.',
   PROCESS_TITLE: 'The process',
-  PROCESS_STEP_1_TXT: 'Read our oath, then apply to volunteer using the button below.',
+  PROCESS_STEP_1_TXT: 'Read our *[oath](#oath)* and *[policies](https://digital-aid-seattle.gitbook.io/digital-aid-seattle/Hk6Veo0mrttAEbFlZg18/hr-policies)*, then apply to volunteer using the button below.',
   PROCESS_STEP_2_TXT: 'You will receive an invitation for an interview within a few days.',
   PROCESS_STEP_3_TXT: 'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
   PROCESS_STEP_4_TXT: 'Contribute weekly to your project, and make a difference for your community!',
@@ -204,6 +206,7 @@ const VolunteerPage = () => {
       (
         <SectionContainer backgroundColor={designColor.white}>
           <Stack
+            id="oath"
             gap={{ xs: 4, md: 8 }}
             sx={{
               textAlign: 'left',
@@ -279,10 +282,14 @@ const VolunteerPage = () => {
                   <Typography
                     variant="titleLarge"
                     color={palette.primary.main}
-                  >{`${index + 1}.`}</Typography>
-                  <Typography variant="bodyLarge" mx={2}>
+                  >{`${index + 1}. `}</Typography>
+                  <Markdown
+                    components={{
+                      p: ({ children }) => <>{children}</>
+                    }}
+                  >
                     {item}
-                  </Typography>
+                  </Markdown>
                 </li>
               ))}
             </ol>

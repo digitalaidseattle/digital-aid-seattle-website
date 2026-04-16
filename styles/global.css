@@ -60,3 +60,8 @@ body {
   display: flex !important;
   justify-content: center;
 }
+
+#oath {
+  scroll-margin-top: 120px;
+  /* height of sticky header */
+}
