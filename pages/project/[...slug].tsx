@@ -15,6 +15,7 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { DASProject } from 'types'
 import { dasProjectsService } from '../../services/ProjectsService'
+import { CodaVentureService } from 'services/codaVentureService'
 
 const ProjectIndividualPage = () => {
   const router = useRouter();
@@ -22,13 +23,15 @@ const ProjectIndividualPage = () => {
   const [project, setProject] = useState<DASProject>()
   const { setLoading } = useContext(LoadingContext);
 
+  const ventureService = CodaVentureService.getInstance();
+
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams(window.location.search)
     const projectId = router.query.slug ? router.query.slug[0] : null;
     if (projectId) {
-      dasProjectsService.getOne(projectId)
+      ventureService.getById(projectId)
         .then((resp) => {
+          console.log(resp)
           if (resp == null) {
             console.error(`Project '${projectId} not found.`);
             router.push('/404');

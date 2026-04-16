@@ -86,7 +86,7 @@ const CardProject = ({ project }: CardProjectProps) => {
                 {project.programAreas &&
                   <Stack direction='row' justifyContent='space-between'>
                     <Typography variant='labelMedium'>
-                      {project.programAreas.join(', ')}
+                      {(project.programAreas ?? []).join(', ')}
                     </Typography>
                   </Stack>
                 }

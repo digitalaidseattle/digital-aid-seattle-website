@@ -44,8 +44,22 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
         this.entityToCodaMapper = entityToCodaMapper ?? ((_entity: any) => ({} as any));
     }
 
-    getById(_id: Identifier, _select?: string, _mapper?: ((json: any) => T) | undefined): Promise<T | null> {
-        throw new Error("Method not implemented.");
+    async getById(_id: Identifier, _select?: string, _mapper?: ((json: any) => T) | undefined): Promise<T | null> {
+        const params = new URLSearchParams({
+            useColumnNames: "true",
+            valueFormat: "rich"
+        });
+
+        const res = await fetch(
+            `https://coda.io/apis/v1/docs/${this.documentId}/tables/${this.tableName}/rows/${_id}?${params}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${CODA_API_TOKEN}`,
+                },
+            }
+        );
+        const data = await res.json();
+        return this.mapper(data);
     }
 
     insert(_entity: T, _select?: string, _mapper?: ((json: any) => T) | undefined, _user?: User): Promise<T> {

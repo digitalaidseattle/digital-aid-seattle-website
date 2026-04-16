@@ -12,6 +12,7 @@ const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
+    console.log(row)
     // HACK
     // Coda should return proper names.
     const title = CodaService.removeBackTicks(row.values['Ventures']);
@@ -32,9 +33,9 @@ function coda2Entity(row: CodaRow): DASProject {
             }),
         partner: partner,
         painpoint: "",   //  The data is too long, should be a short description of problem.  CodaService.removeBackTicks(row.values['Details']),
-        // programAreas: row.values['programAreas'] ? (row.values['programAreas'] as string).split(',').map(s => s.trim()) : [],
+        programAreas: [], // Get for partner?
         // description: row.values['description'] || '',
-        // projectLink: row.values['projectLink'] || '',
+        projectLink: `project/${row.id}`,
         problem: CodaService.removeBackTicks(row.values['Problem']),
         solution: CodaService.removeBackTicks(row.values['Solution']),
         impact: CodaService.removeBackTicks(row.values['Impact']),

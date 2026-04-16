@@ -144,7 +144,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           {!props.hideStatus &&
             <Stack spacing="1rem">
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{(project.programAreas ?? []).join(', ')}</Typography >
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge" >{ProjectLabels.project_status}</Typography>
@@ -208,7 +208,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             }
             {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{(project.programAreas ?? []).join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
