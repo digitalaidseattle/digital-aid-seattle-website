@@ -6,6 +6,7 @@ import { designColor } from 'theme/theme'
 
 import IconContainer from './IconContainer'
 import { Box, CardActionArea, CardContent } from '@mui/material'
+import { useRouter } from 'next/router'
 
 export const ICON_STYLE = {
   color: designColor.white,
@@ -36,6 +37,8 @@ const CardOne = ({
   cardHref,
   cardStyles,
 }: CardOneProps) => {
+  const router = useRouter();
+
   const content = (
     <Box
       sx={{
@@ -67,7 +70,8 @@ const CardOne = ({
         </Typography>
       )}
       {buttonText && (
-        <Button variant="contained" color="primary" href={buttonLink}>
+        <Button variant="contained" color="primary"
+          onClick={() => router.push(buttonLink)}>
           {buttonText}
         </Button>
       )}
@@ -86,7 +90,7 @@ const CardOne = ({
         ...cardStyles,
       }}
     >
-      {cardHref && <CardActionArea href={cardHref}>{content}</CardActionArea>}
+      {cardHref && <CardActionArea onClick={() => router.push(cardHref)}>{content}</CardActionArea>}
       {!cardHref && <CardContent>{content}</CardContent>}
     </Card>
   )

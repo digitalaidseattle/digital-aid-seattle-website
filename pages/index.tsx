@@ -1,7 +1,7 @@
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import { Avatar, Box, Button, Icon, Stack, Typography, useTheme } from '@mui/material'
+import { Avatar, Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -19,6 +19,7 @@ import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.svg';
 import SlalomLogo from '../assets/aboutUsIcons/slalom.png';
 import CityOfSeattleLogo from '../assets/aboutUsIcons/cityofseattle.png';
 import AWSLogo from '../assets/aboutUsIcons/aws.png';
+import { useRouter } from 'next/router';
 
 // TODO consider moving into Sanity
 const LABELS = {
@@ -54,6 +55,7 @@ const LABELS = {
 }
 
 const HeroSection: React.FC = () => {
+  const router = useRouter();
   const theme = useTheme()
   const palette = theme.palette
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -135,7 +137,7 @@ const HeroSection: React.FC = () => {
               variant="contained"
               color="secondary"
               size="small"
-              href={'/partners'}
+              onClick={() => router.push('/partners')}
             >
               {LABELS.PARTNER_BTN}
             </Button>
@@ -147,7 +149,7 @@ const HeroSection: React.FC = () => {
                 backgroundColor: '#004138',
                 marginBottom: { xs: '32px', md: '0px' },
               }}
-              href={'/volunteers'}
+              onClick={() => router.push('/volunteers')}
             >
               {LABELS.VOLUNTEER_BTN}
             </Button>
@@ -159,7 +161,7 @@ const HeroSection: React.FC = () => {
                 backgroundColor: '#004138',
                 marginBottom: { xs: '32px', md: '0px' },
               }}
-              href={'/support_us'}
+              onClick={() => router.push('/support_us')}
             >
               {LABELS.SUPPORT_BTN}
             </Button>
@@ -264,6 +266,7 @@ const HeroSection: React.FC = () => {
   );
 }
 const OurMissionSection: React.FC = () => {
+  const router = useRouter();
   const theme = useTheme()
   const palette = theme.palette
   const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -288,7 +291,7 @@ const OurMissionSection: React.FC = () => {
     </Typography>
     <Button
       variant="contained"
-      href={'/about'}
+      onClick={() => router.push('/about')}
       sx={{
         backgroundColor: palette.primary.dark,
         marginBottom: { sm: 4, lg: 10 },
@@ -349,6 +352,8 @@ const OptionsSection: React.FC = () => {
 }
 
 const WhyDASSection: React.FC = () => {
+  const router = useRouter();
+
   return (<Stack
     sx={{
       gap: { xs: 3, lg: 10 },
@@ -371,7 +376,7 @@ const WhyDASSection: React.FC = () => {
       variant="contained"
       color="primary"
       size="small"
-      href={'/partners'}
+      onClick={() => router.push('/partners')}
     >
       {LABELS.PARTNER_BTN}
     </Button>
@@ -379,6 +384,7 @@ const WhyDASSection: React.FC = () => {
 }
 
 const HowItWorksSection: React.FC = () => {
+  const router = useRouter();
   const theme = useTheme()
   const palette = theme.palette
   const cardStyles = {
@@ -444,7 +450,7 @@ const HowItWorksSection: React.FC = () => {
       variant="contained"
       color="primary"
       size="small"
-      href={'/partners'}
+      onClick={() => router.push('/partners')}
     >
       {LABELS.PARTNER_BTN}
     </Button>
@@ -452,6 +458,7 @@ const HowItWorksSection: React.FC = () => {
 }
 
 const ImpactSection: React.FC = () => {
+  const router = useRouter();
   const theme = useTheme()
   const palette = theme.palette
   const cardStyles = {
@@ -496,7 +503,7 @@ const ImpactSection: React.FC = () => {
         variant="contained"
         color="primary"
         size="small"
-        href={'/projects'}
+        onClick={() => router.push('/projects')}
       >
         {LABELS.LEARN_MORE_BTN}
       </Button>
