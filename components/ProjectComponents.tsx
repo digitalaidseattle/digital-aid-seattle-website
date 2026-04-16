@@ -318,6 +318,7 @@ const ProjectBodyTextSection = (props: { title: string, texts?: string[] }) => {
 const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) => {
   const [title, setTitle] = useState<string>()
   const [members, setMembers] = useState<TeamMember[]>([])
+
   useEffect(() => {
     if (props.members) {
       setMembers(props.members)

@@ -12,10 +12,24 @@ const CODA_API_BASE = `https://coda.io/apis/v1/docs`;
 
 type CodaRow = {
     id: string;
+    name: string;
     values: Record<string, any>;
 }
 
 abstract class CodaService<T extends Entity> implements EntityService<T> {
+
+    static removeBackTicks(value: string): string {
+        if (typeof value !== 'string') {
+            return ""
+        }
+        return value ? value.replaceAll('```', '') : '';
+    }
+
+    static normalizeToArray(value: string | string[]): string[] {
+        const norm = (typeof value === 'string') ? [value] : value;
+        return norm;
+    }
+
     documentId = '';
     tableName = '';
     select = '*';
@@ -75,7 +89,6 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
             rows.push(...data.items.map((json: any) => this.mapper(json)));
             pageToken = data.nextPageToken;
         } while (pageToken);
-
         return rows;
     }
 

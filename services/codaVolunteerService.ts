@@ -24,11 +24,11 @@ const TABLE_ID = 'grid-4vzF6VuaPV';
 function coda2Entity(row: CodaRow): Volunteer {
     const entity = {
         id: row.id,
-        name: row.values['Name'] ? row.values['Name'].replaceAll('```', '') : '',
+        name: CodaService.removeBackTicks(row.values['Name']),
         role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
         url: row.values['Pic'] ? row.values['Pic'][0].url : '',
         cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
-        status: row.values['Status'] ? row.values['Status'].map((s: any) => s.replaceAll('```', '')) : [],
+        status: [...CodaService.removeBackTicks(row.values['Status'])],
     } as Volunteer;
     return entity;
 }
@@ -47,11 +47,10 @@ class CodaVolunteerService extends CodaService<Volunteer> {
         super(CODA_DOC_ID, TABLE_ID, undefined, coda2Entity, undefined);
     }
 
-    getPeople(cadreOrContributor: string): Promise<TeamMember[]> {
-        return this.getAll()
+    async getPeople(cadreOrContributor: string): Promise<TeamMember[]> {
+        return this.findBy('Status', 'Active')
             .then(volunteers => {
                 return volunteers
-                    .filter(v => v.status.includes('Active'))
                     .filter(v => v.cadreContributor.includes(cadreOrContributor))
                     .map(v => {
                         return {

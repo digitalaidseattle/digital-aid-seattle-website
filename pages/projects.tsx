@@ -17,19 +17,17 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
-import { DASProject } from 'types'
+import { DASPartner, DASProject } from 'types'
 
 import { Check } from '@mui/icons-material'
 import { StatusLabels } from 'components/ProjectComponents'
 import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
-import ProjectsImage from '../assets/projects.png'
 import { pageCopyService } from 'services/PageCopyService'
-import { CodaVentureService } from 'services/codaVentureService'
-import { CodaVolunteerService } from 'services/codaVolunteerService'
 import { CodaPartnerService } from 'services/codaPartnerService'
-import { CodaRoleService } from 'services/codaRoleService'
+import { CodaVentureService } from 'services/codaVentureService'
+import ProjectsImage from '../assets/projects.png'
 
 const LABELS = {
   HERO_TITLE: 'Projects',
@@ -53,17 +51,23 @@ const ProjectsPage = () => {
   const partnerService = CodaPartnerService.getInstance();
 
   useEffect(() => {
-    ventureService
-      .getAll()
-      .then(ventures => {
-        console.log('Coda ventures:', ventures);
-      })
-      .catch(error => console.error('Error fetching Coda ventures:', error));
 
     partnerService
-      .getAll()
-      .then(entities => {
-        console.log('Coda partners:', entities);
+      .findPartners()
+      .then((partners: DASPartner[]) => {
+        ventureService
+          .getAll()
+          .then(ventures => {
+            setProjects(ventures.map(venture => {
+              const found: DASPartner = partners.find(partner => partner.name === venture.partner);
+              return {
+                ...venture,
+                title: found ? found.name : venture.title,
+                programAreas: found ? found.foci : []
+              }
+            }))
+          })
+          .catch(error => console.error('Error fetching Coda ventures:', error));
       })
       .catch(error => console.error('Error fetching Coda partners:', error));
 
@@ -72,15 +76,8 @@ const ProjectsPage = () => {
   useEffect(() => {
     if (!init) {
       setLoading(true);
-      Promise
-        .all([
-          dasProjectsService.getAll(),
-          pageCopyService.updateCopy(LABELS, 'projects')
-        ])
-        .then(resps => {
-          setProjects(resps[0]);
-          setInit(true)
-        })
+      pageCopyService.updateCopy(LABELS, 'projects')
+        .then(() => setInit(true))
         .catch(error => console.error(error))
         .finally(() => setLoading(false))
     }
@@ -91,10 +88,9 @@ const ProjectsPage = () => {
       const displayedStatuses = filterStatuses.length === 0
         ? dasProjectsService.filteredStatuses
         : filterStatuses
-
-      setDisplayedProjects(projects
+      const filtered = projects
         .filter(p => displayedStatuses.includes(p.status))
-      )
+      setDisplayedProjects(filtered)
     }
   }, [init, filterStatuses, projects]);
 

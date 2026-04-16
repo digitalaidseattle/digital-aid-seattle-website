@@ -5,29 +5,23 @@
  *
  */
 
-import { Entity } from '@digitalaidseattle/core';
 import { CodaRow, CodaService } from './codaService';
+import { DASPartner } from 'types';
 
-type Partner = Entity & {
-    _createdAt: Date,
-    name: string,
-    role: string,
-    url: string
-}
 
 const CODA_DOC_ID = "r6VtSC7MPA";
 const TABLE_ID = 'grid-qFnhGRfW7C';
 
-function coda2Entity(row: CodaRow): Partner {
-    console.log('Partner', row)
-
+function coda2Entity(row: CodaRow): DASPartner {
     const entity = {
-
-    } as Partner;
+        name: CodaService.removeBackTicks(row.values['Org Name']),
+        foci: CodaService.normalizeToArray(row.values['Foci']).map((focus: string) => CodaService.removeBackTicks(focus)),
+        description: CodaService.removeBackTicks(row.values['Org description']),
+    } as DASPartner;
     return entity;
 }
 
-class CodaPartnerService extends CodaService<Partner> {
+class CodaPartnerService extends CodaService<DASPartner> {
 
     static instance: CodaPartnerService;
     static getInstance(): CodaPartnerService {
@@ -39,6 +33,10 @@ class CodaPartnerService extends CodaService<Partner> {
 
     constructor() {
         super(CODA_DOC_ID, TABLE_ID, undefined, coda2Entity, undefined);
+    }
+
+    async findPartners(): Promise<DASPartner[]> {
+        return this.findBy('Type', 'Partner');
     }
 }
 

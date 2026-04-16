@@ -30,6 +30,15 @@ type TeamMember = {
   url: string
 }
 
+type DASPartner = Entity & {
+  _createdAt: Date,
+  name: string,
+  role: string,
+  url: string,
+  foci: string[],
+  description: string,
+}
+
 type DASProject = {
   _id: string
   _createdAt: Date
