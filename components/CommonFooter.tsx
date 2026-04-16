@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
-import Link from '@mui/material/Link'
+import Link from 'next/link'
 import { theme } from 'theme/theme'
 
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
@@ -51,12 +51,12 @@ const GridItem = ({ md, children }: GridItemProps) =>
 
 const LinkSubItem = (props: { url: string; name: string }) => (
   <Link
-    sx={{
+    style={{
       color: theme.palette.primary.contrastText,
       marginTop: '1rem',
       display: 'block',
     }}
-    underline="hover"
+    className='link'
     href={props.url}
   >
     <Typography fontSize={'1rem'}>{props.name}</Typography>
@@ -114,7 +114,8 @@ const CopyrightBox = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Storyset, which opens in a new window."
-          sx={{ color: theme.palette.primary.contrastText }}
+          style={{ color: theme.palette.primary.contrastText }}
+          className='link'
         >
           Storyset
         </Link>
