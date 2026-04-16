@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
-import { BlockComponent, LoadingContext, LoadingIndicator, withBasicLayout } from 'components/layouts'
+import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
 import { DASPartner, DASProject } from 'types'
 
