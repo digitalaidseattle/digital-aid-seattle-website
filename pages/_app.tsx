@@ -2,7 +2,7 @@
 import { ThemeProvider } from '@mui/material'
 import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -30,7 +30,6 @@ const TAG_NAMES = {
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
-  const searchParams = useSearchParams()
 
   const ventureService = CodaVentureService.getInstance();
   const roleService = CodaRoleService.getInstance();
