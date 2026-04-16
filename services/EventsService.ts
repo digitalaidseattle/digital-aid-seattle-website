@@ -6,7 +6,7 @@ import { groq } from 'next-sanity';
 import { sanityClient } from '../sanity/lib/client';
 import { OSEvent } from 'types';
 
-// Who knows, maybe we replace this with Airtable
+// Who knows, maybe we replace this with coda
 class EventsService {
 
     getTimeString = (event: OSEvent): string => {

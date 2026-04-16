@@ -5,18 +5,9 @@
  *
  */
 
-import { Entity } from '@digitalaidseattle/core';
+import { TeamMember, Volunteer } from 'types';
 import { CodaRow, CodaService } from './codaService';
-import { TeamMember } from 'types';
 
-type Volunteer = Entity & {
-    _createdAt: Date,
-    name: string,
-    role: string,
-    status: string[],
-    url: string,
-    cadreContributor: string[],
-}
 
 const CODA_DOC_ID = "24QYb2RP0g";
 const TABLE_ID = 'grid-4vzF6VuaPV';
@@ -28,7 +19,7 @@ function coda2Entity(row: CodaRow): Volunteer {
         role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
         url: row.values['Pic'] ? row.values['Pic'][0].url : '',
         cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
-        status: [...CodaService.removeBackTicks(row.values['Status'])],
+        status: CodaService.removeBackTicks(row.values['Status']),
     } as Volunteer;
     return entity;
 }

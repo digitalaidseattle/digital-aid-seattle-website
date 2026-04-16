@@ -30,6 +30,15 @@ type TeamMember = {
   url: string
 }
 
+type Volunteer = Entity & {
+  _createdAt: Date,
+  name: string,
+  role: string,
+  status: string,
+  url: string,
+  cadreContributor: string[],
+}
+
 type DASPartner = Entity & {
   _createdAt: Date,
   name: string,

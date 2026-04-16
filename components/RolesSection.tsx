@@ -42,7 +42,7 @@ import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
 import { Check } from '@mui/icons-material'
 
-// TODO: standardize roles between sanity and airtable
+// TODO: standardize roles between sanity and coda
 const rolesMap = {
   "account-manager": { role: 'account manager', icon: <AccountTreeOutlinedIcon />, },
   "accountant": { role: 'accountant', icon: <CalculateOutlinedIcon />, },

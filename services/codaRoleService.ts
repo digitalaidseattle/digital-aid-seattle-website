@@ -51,7 +51,7 @@ class CodaRoleService extends CodaService<Role> {
         super(CODA_DOC_ID, TABLE_ID, undefined, coda2Entity, undefined);
     }
 
-    getAllActiveRoles(): Promise<DASVolunteerRoleBasicInfo[]> {
+    async getAllActiveRoles(): Promise<DASVolunteerRoleBasicInfo[]> {
         return this.getAll()
             .then(roles => roles.filter(r => r.status === 'Active')
                 .map(r => {
@@ -64,7 +64,7 @@ class CodaRoleService extends CodaService<Role> {
             );
     }
 
-    getRoleDetailsByName(key: string): Promise<DASVolunteerRole | null> {
+    async getRoleDetailsByName(key: string): Promise<DASVolunteerRole | null> {
         return this.findBy('Key', key)
             .then(roles => roles.length > 0 ? roles[0] : null)
     }

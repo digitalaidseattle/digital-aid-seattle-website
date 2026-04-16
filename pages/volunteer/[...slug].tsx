@@ -8,16 +8,17 @@ import {
   Typography,
   useTheme
 } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useContext, useEffect, useState } from 'react'
+import Markdown from 'react-markdown'
+
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import Masthead from 'components/Masthead'
-import { useContext, useEffect, useState } from 'react'
+import { CodaRoleService } from 'services/codaRoleService'
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../../services/VolunteerRoleService'
-import Markdown from 'react-markdown'
-import { useRouter } from 'next/router'
-import { CodaRoleService } from 'services/codaRoleService'
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 const Labels = {
   Title: "Volunteer Opening",
@@ -55,12 +56,7 @@ const VolunteerRolePage = () => {
             console.error(`Volunteer role '${roleName} not found.`);
             router.push('/404')
           } else {
-            dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
-              .then(keys => {
-                resp.keyTechnologies = keys;
-                setRole(resp)
-              })
-              .catch((error) => console.error(error))
+            setRole(resp)
           }
         })
         .catch((error) => {
@@ -177,10 +173,6 @@ const VolunteerRolePage = () => {
         <RoleDescriptionSubSection
           title={Labels.KeyAttributesToSuccess}
           content={roleData.keyAttributesToSuccess}
-        />
-        <RoleDescriptionSubSection
-          title={Labels.KeyTechnologies}
-          content={roleData.keyTechnologies}
         />
         {roleData.applicationLink ? (
           <Box

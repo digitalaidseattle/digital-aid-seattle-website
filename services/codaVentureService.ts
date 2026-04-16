@@ -12,7 +12,6 @@ const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
-    console.log(row)
     // HACK
     // Coda should return proper names.
     const title = CodaService.removeBackTicks(row.values['Ventures']);
@@ -46,6 +45,7 @@ function coda2Entity(row: CodaRow): DASProject {
 }
 
 class CodaVentureService extends CodaService<DASProject> {
+    static filteredStatuses = ['Active', 'Under evaluation'];
 
     static instance: CodaVentureService;
     static getInstance(): CodaVentureService {

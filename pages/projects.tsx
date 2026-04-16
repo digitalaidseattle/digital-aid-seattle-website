@@ -21,11 +21,11 @@ import { DASPartner, DASProject } from 'types'
 
 import { Check } from '@mui/icons-material'
 import { StatusLabels } from 'components/ProjectComponents'
-import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
+import { usePartners } from 'components/usePartners'
+import { useProjects } from 'components/useProjects'
 import { pageCopyService } from 'services/PageCopyService'
-import { CodaPartnerService } from 'services/codaPartnerService'
 import { CodaVentureService } from 'services/codaVentureService'
 import ProjectsImage from '../assets/projects.png'
 
@@ -40,6 +40,8 @@ const LABELS = {
 const ProjectsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const { data: ventures } = useProjects();
+  const { data: partners } = usePartners();
 
   const { setLoading } = useContext(LoadingContext);
   const [init, setInit] = useState<boolean>(false);
@@ -47,31 +49,20 @@ const ProjectsPage = () => {
   const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
-  const ventureService = CodaVentureService.getInstance();
-  const partnerService = CodaPartnerService.getInstance();
+  const DEFAULT_STATUSES = CodaVentureService.filteredStatuses;
 
   useEffect(() => {
-
-    partnerService
-      .findPartners()
-      .then((partners: DASPartner[]) => {
-        ventureService
-          .getAll()
-          .then(ventures => {
-            setProjects(ventures.map(venture => {
-              const found: DASPartner = partners.find(partner => partner.name === venture.partner);
-              return {
-                ...venture,
-                title: found ? found.name : venture.title,
-                programAreas: found ? found.foci : []
-              }
-            }))
-          })
-          .catch(error => console.error('Error fetching Coda ventures:', error));
-      })
-      .catch(error => console.error('Error fetching Coda partners:', error));
-
-  }, [ventureService, partnerService]);
+    if (ventures && partners) {
+      setProjects(ventures.map(venture => {
+        const found: DASPartner = partners.find(partner => partner.name === venture.partner);
+        return {
+          ...venture,
+          title: found ? found.name : venture.title,
+          programAreas: found ? found.foci : []
+        }
+      }))
+    }
+  }, [ventures, partners]);
 
   useEffect(() => {
     if (!init) {
@@ -86,13 +77,12 @@ const ProjectsPage = () => {
   useEffect(() => {
     if (init) {
       const displayedStatuses = filterStatuses.length === 0
-        ? dasProjectsService.filteredStatuses
-        : filterStatuses
+        ? DEFAULT_STATUSES : filterStatuses
       const filtered = projects
         .filter(p => displayedStatuses.includes(p.status))
       setDisplayedProjects(filtered)
     }
-  }, [init, filterStatuses, projects]);
+  }, [init, filterStatuses, projects, DEFAULT_STATUSES]);
 
   const toggleStatus = (status: string) => {
     if (filterStatuses.includes(status)) {
@@ -154,7 +144,7 @@ const ProjectsPage = () => {
             maxWidth={'880px'}
           >
             <Stack aria-label={LABELS.ARIA_LABEL_FILTERS} direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
-              {dasProjectsService.filteredStatuses.map((status) =>
+              {DEFAULT_STATUSES.map((status) =>
                 <Chip
                   key={status}
                   label={StatusLabels[status]}

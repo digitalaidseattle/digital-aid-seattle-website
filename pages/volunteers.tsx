@@ -33,10 +33,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
+import { useActiveRoles } from 'components/useActiveRoles'
 import { pageCopyService } from 'services/PageCopyService'
-import { CodaRoleService } from 'services/codaRoleService'
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { VOLUNTEER_APPLICATION_FORM_URL } from '../services/VolunteerRoleService'
+
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -98,41 +99,38 @@ const LABELS = {
 }
 
 const VolunteerPage = () => {
+  const { data: activeRoles } = useActiveRoles();
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext);
   const [initialized, setInitialized] = useState<boolean>(false);
 
+  const theme = useTheme()
+  const palette = theme.palette
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<string | boolean>(false)
+
+  useEffect(() => {
+    console.log(new Set((activeRoles ?? []).map(r => r.category)))
+    setVolunteerRoles(activeRoles ?? []);
+  }, [activeRoles]);
+
   useEffect(() => {
     if (!initialized) {
       setLoading(true);
-
-      Promise.all([
-        CodaRoleService.getInstance().getAllActiveRoles(),
-        pageCopyService
-          .updateCopy(LABELS, 'volunteers')
-      ])
-        .then((resps) => {
-          setVolunteerRoles(resps[0]);
-          setInitialized(true);
-        })
+      pageCopyService
+        .updateCopy(LABELS, 'volunteers')
+        .then((resps) => setInitialized(true))
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
     }
   }, [initialized, setLoading]);
 
-  const theme = useTheme()
-  const palette = theme.palette
-  const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
-    string | false
-  >(false)
   const handleOathValuesChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setOathValuesExpanded(newExpanded ? panel : false)
     }
 
   const rolesSection = () => {
-
     const rolesContext = [
       {
         title: LABELS.EXPECTATION_SKILL_TITLE,
