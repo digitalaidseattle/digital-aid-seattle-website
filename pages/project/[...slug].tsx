@@ -11,15 +11,19 @@ import { ProjectBodyMarkdownSection, ProjectFooterSection, ProjectHeaderSection,
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
+import { usePartners } from 'components/usePartners'
+import { useProjects } from 'components/useProjects'
 import { useVolunteers } from 'components/useVolunteers'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { CodaVentureService } from 'services/codaVentureService'
-import { DASProject, Volunteer } from 'types'
+import { DASPartner, DASProject, Volunteer } from 'types'
 
 const ProjectIndividualPage = () => {
   const ventureService = CodaVentureService.getInstance();
   const { data: volunteers } = useVolunteers();
+  const { data: ventures } = useProjects();
+  const { data: partners } = usePartners();
 
   const router = useRouter();
   const theme = useTheme()
@@ -29,30 +33,28 @@ const ProjectIndividualPage = () => {
   const [teamMembers, setTeamMembers] = useState<Volunteer[]>([]);
 
   useEffect(() => {
-
     function fetchData() {
       setLoading(true);
       const projectId = router.query.slug ? router.query.slug[0] : null;
-      if (projectId) {
-        ventureService.getById(projectId)
-          .then((venture) => {
-            if (venture == null) {
-              console.error(`Project '${projectId} not found.`);
-              router.push('/404');
-            } else {
-              setProject(venture);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            router.push('/404');
-          })
-          .finally(() => setLoading(false))
+      if (projectId && ventures && partners) {
+        const venture = ventures.find(v => v.id === projectId)
+        if (venture == null) {
+          console.error(`Project '${projectId} not found.`);
+          router.push('/404');
+        } else {
+          const partner: DASPartner = partners.find(pp => pp.name === venture.partner);
+          setProject({
+            ...venture,
+            programAreas: partner ? partner.foci : [],
+            description: partner ? partner.description : ''
+          });
+        }
+        setLoading(false);
       }
     }
 
     fetchData();
-  }, [router, setLoading, ventureService]);
+  }, [router, setLoading, ventureService, ventures, partners]);
 
   useEffect(() => {
     function fetchTeamMembers() {

@@ -61,8 +61,8 @@ const ProjectsPage = () => {
         const found: DASPartner = partners.find(partner => partner.name === venture.partner);
         return {
           ...venture,
-          title: found ? found.name : venture.title,
-          programAreas: found ? found.foci : []
+          programAreas: found ? found.foci : [],
+          description: found.description
         }
       }))
     }

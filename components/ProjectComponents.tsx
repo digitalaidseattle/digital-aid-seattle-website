@@ -117,7 +117,7 @@ const BreadCrumbSection = (props: { project: DASProject }) => {
       <Link href={'../projects'}>
         <Typography color="textPrimary">{ProjectLabels.projectsCrumb}</Typography>
       </Link>
-      <Typography color="textPrimary">{props.project.title}</Typography>
+      <Typography color="textPrimary">{props.project.partner}</Typography>
     </Breadcrumbs>
   )
 }
@@ -139,7 +139,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
         <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
           <Typography variant="displayMedium"
             component="h1">
-            {project.title}
+            {project.partner}
           </Typography>
           {!props.hideStatus &&
             <Stack spacing="1rem">
@@ -173,7 +173,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
         {/* green section */}
         <HeaderWithImage
           imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-          imageAlt={project.title + " logo"}>
+          imageAlt={project.partner + " logo"}>
           <Typography
             variant={largeScreen ? 'displayLarge' : 'displayMedium'}
             sx={{
@@ -181,7 +181,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             }}
             component="h1"
           >
-            {project.title}
+            {project.partner}
           </Typography>
         </HeaderWithImage>
         {/* light section */}

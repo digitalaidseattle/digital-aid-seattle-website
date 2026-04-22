@@ -12,16 +12,18 @@ const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
-    // HACK
-    // Coda should return proper names.
-    const title = CodaService.removeBackTicks(row.values['Ventures']);
-    const partner = title.split('-')[0]
-    // END HACK
+
+    const imageSrc = Array.isArray(row.values['Ventures Icon'])
+        ? row.values['Ventures Icon'][0].url
+        : (typeof row.values['Ventures Icon'] === 'object')
+            ? row.values['Ventures Icon'].url
+            : "";
+
     const venture = {
         id: row.id,
-        title: title,
+        title: row.name,
         status: CodaService.removeBackTicks(row.values['Venture Status']),
-        imageSrc: row.values['Ventures Icon'] ? row.values['Ventures Icon'][0].url : '',
+        imageSrc: imageSrc,
         currentTeam: (row.values['Squad Members'] ?? [])
             .map((member: any) => {
                 return {
@@ -30,16 +32,14 @@ function coda2Entity(row: CodaRow): DASProject {
                     // TODO integrate with role service to get role
                 } as TeamMember;
             }),
-        partner: partner,
-        painpoint: "",   //  The data is too long, should be a short description of problem.  CodaService.removeBackTicks(row.values['Details']),
-        programAreas: [], // Get for partner?
-        // description: row.values['description'] || '',
+        description: '', // Getting from partner
+        partner: CodaService.removeBackTicks(row.values['Org Name']),
+        painpoint: CodaService.removeBackTicks(row.values['Painpoint Shorthand']),  //  The data is too long, should be a short description of problem.  CodaService.removeBackTicks(row.values['Details']),
+        programAreas: [], // Getting from partner
         projectLink: `project/${row.id}`,
-        problem: CodaService.removeBackTicks(row.values['Problem']),
-        solution: CodaService.removeBackTicks(row.values['Solution']),
-        impact: CodaService.removeBackTicks(row.values['Impact']),
-        // display: row.values['display'] || false,
-        // ventureCode: row.values['ventureCode'] || ''
+        problem: CodaService.removeBackTicks(row.values['Problem - Website']),
+        solution: CodaService.removeBackTicks(row.values['Solution - Website']),
+        impact: CodaService.removeBackTicks(row.values['Impact - Website']),
     } as DASProject;
     return venture;
 }
