@@ -62,7 +62,7 @@ const ProjectsPage = () => {
         return {
           ...venture,
           programAreas: found ? found.foci : [],
-          description: found.description
+          description: found ? found.description : ""
         }
       }))
     }
