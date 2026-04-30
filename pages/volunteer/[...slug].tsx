@@ -176,20 +176,18 @@ const VolunteerRolePage = () => {
           title={Labels.KeyAttributesToSuccess}
           content={roleData.keyAttributesToSuccess}
         />
-        {roleData.applicationLink ? (
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              mt: '2rem',
-            }}
-          >
-            <Link href={VOLUNTEER_APPLICATION_FORM_URL} target="_blank">
-              <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
-            </Link>
-          </Box>
-        ) : null}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: '2rem',
+          }}
+        >
+          <Link href={VOLUNTEER_APPLICATION_FORM_URL} target="_blank">
+            <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
+          </Link>
+        </Box>
       </>
     )
   }
