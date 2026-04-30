@@ -1,7 +1,9 @@
 /**
  * Newsletters.tsx
  *
- * @2023 Digital Aid Seattle
+ * Display page for newsletters, including subscription form and list of past newsletters
+ * 
+ * @2026 Digital Aid Seattle
  */
 
 import {
@@ -69,7 +71,6 @@ const NewslettersPage = () => {
   }, [newslettersFlag, router])
 
   const theme = useTheme()
-  const palette = theme.palette
   const isSmallScreen = useMediaQuery('(max-width:600px)')
 
   return (
