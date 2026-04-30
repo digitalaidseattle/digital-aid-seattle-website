@@ -18,7 +18,10 @@ type CodaRow = {
 
 abstract class CodaService<T extends Entity> implements EntityService<T> {
 
-    static removeBackTicks(value: string): string {
+    static removeBackTicks(value: string | string[]): string | string[] {
+        if (Array.isArray(value)) {
+            return value.map(v => v.replaceAll('```', ''));
+        }
         if (typeof value !== 'string') {
             return ""
         }

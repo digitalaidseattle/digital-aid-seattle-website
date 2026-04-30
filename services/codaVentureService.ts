@@ -18,7 +18,6 @@ function coda2Entity(row: CodaRow): DASProject {
         : (typeof row.values['Ventures Icon'] === 'object')
             ? row.values['Ventures Icon'].url
             : "";
-
     const venture = {
         id: row.id,
         title: row.name,
@@ -28,14 +27,12 @@ function coda2Entity(row: CodaRow): DASProject {
             .map((member: any) => {
                 return {
                     name: member['name'] ?? '',
-                    // TODO integrate with voulteer service to get image
-                    // TODO integrate with role service to get role
                 } as TeamMember;
             }),
-        description: '', // Getting from partner
+        description: CodaService.removeBackTicks(row.values['Org description']), // Getting from partner
         partner: CodaService.removeBackTicks(row.values['Org Name']),
         painpoint: CodaService.removeBackTicks(row.values['Painpoint Shorthand']),  //  The data is too long, should be a short description of problem.  CodaService.removeBackTicks(row.values['Details']),
-        programAreas: [], // Getting from partner
+        programAreas: CodaService.removeBackTicks(row.values['Focie - Website']), // Getting from partner
         projectLink: `project/${row.id}`,
         problem: CodaService.removeBackTicks(row.values['Problem - Website']),
         solution: CodaService.removeBackTicks(row.values['Solution - Website']),
