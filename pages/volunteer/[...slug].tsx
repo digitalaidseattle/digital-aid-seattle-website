@@ -14,7 +14,7 @@ import Masthead from 'components/Masthead'
 import { useContext, useEffect, useState } from 'react'
 import { DASVolunteerRole } from 'types'
 
-import { dasVolunteerRoleService } from '../../services/VolunteerRoleService'
+import { dasVolunteerRoleService, VOLUNTEER_APPLICATION_FORM_URL } from '../../services/VolunteerRoleService'
 import Markdown from 'react-markdown'
 import { useRouter } from 'next/router'
 
@@ -126,13 +126,12 @@ const VolunteerRolePage = () => {
             {roleData.headline}
           </Box>
         ) : null}
-        <>
+        <Stack direction="column" gap="0.5rem">
           {roleData.location ? (
             <Box
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mt: '1rem',
               }}
             >
@@ -145,7 +144,6 @@ const VolunteerRolePage = () => {
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mb: '1rem',
               }}
             >
@@ -153,7 +151,7 @@ const VolunteerRolePage = () => {
               <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
             </Box>
           ) : null}
-        </>
+        </Stack>
         <RoleDescriptionSubSection
           title={Labels.AboutUs}
           content={roleData.aboutUs}
@@ -191,7 +189,7 @@ const VolunteerRolePage = () => {
               mt: '2rem',
             }}
           >
-            <Link href={roleData.applicationLink} target="_blank">
+            <Link href={VOLUNTEER_APPLICATION_FORM_URL} target="_blank">
               <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
             </Link>
           </Box>

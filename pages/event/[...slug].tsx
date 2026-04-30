@@ -31,6 +31,10 @@ import Markdown from 'react-markdown';
 import { OSEvent } from 'types';
 import { eventsService } from '../../services/EventsService';
 import { useRouter } from 'next/router';
+
+import ProjectImage from '../../assets/project-image.png'
+const PLACEHOLDER_IMAGE = ProjectImage.src;
+
 /*********/
 
 const Labels = {
@@ -47,6 +51,9 @@ const HeaderSection = (props: { event: OSEvent }) => {
   const theme = useTheme()
   const largeScreen = useMediaQuery(theme.breakpoints.up('lg'))
   const extraSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const imageSrc = props.event.image && props.event.image.asset
+    ? urlForImage(props.event.image).url()
+    : PLACEHOLDER_IMAGE;
 
   const BreadCrumbSection = (props: { event: OSEvent }) => {
     return (
@@ -99,15 +106,14 @@ const HeaderSection = (props: { event: OSEvent }) => {
             </Typography>
           </Stack>
 
-          {props.event.image && props.event.image.asset && <img
-            src={urlForImage(props.event.image).url()}
+          <img
+            src={imageSrc}
             style={{
               width: '100%',
               aspectRatio: '1 / 1',
               display: 'block'
             }}
           />
-          }
           <Stack spacing="1rem">
             <BreadCrumbSection event={props.event} />
           </Stack>
@@ -156,24 +162,22 @@ const HeaderSection = (props: { event: OSEvent }) => {
               </Typography>
             </Stack>
 
-            {props.event.image && props.event.image.asset &&
-              <Box
-                sx={{
-                  width: { md: 'min(40vw, 18rem)', lg: '25rem' },
-                  position: 'absolute',
-                  right: { xs: '1rem', md: '2rem', lg: '0' },
-                  bottom: '-6rem',
-                  zIndex: '2',
-                }}
-              >
-                <img
-                  src={urlForImage(props.event.image).url()}
-                  style={{
-                    width: '100%',
-                    display: 'block'
-                  }} />
-              </Box>
-            }
+            <Box
+              sx={{
+                width: { md: 'min(40vw, 18rem)', lg: '25rem' },
+                position: 'absolute',
+                right: { xs: '1rem', md: '2rem', lg: '0' },
+                bottom: '-6rem',
+                zIndex: '2',
+              }}
+            >
+              <img
+                src={imageSrc}
+                style={{
+                  width: '100%',
+                  display: 'block'
+                }} />
+            </Box>
           </Box>
         </Box>
 

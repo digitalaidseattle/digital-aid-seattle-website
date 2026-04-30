@@ -32,9 +32,6 @@ const CardReservation = (props: { event: OSEvent }) => {
           <Typography variant="titleLarge" textAlign="center">
             Registration required
           </Typography>
-          <Typography variant="labelLarge" textAlign="center">
-            Free to attend
-          </Typography>
           <Link href={props.event.rsvpLink} target="_blank" passHref>
             <Button
               variant="contained"
