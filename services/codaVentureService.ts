@@ -12,11 +12,13 @@ const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
+    console.log('Mapping Coda row to DASProject entity:', row);
+    console.log('Mapping Coda row to DASProject entity:', Object.keys(row.values));
 
-    const imageSrc = Array.isArray(row.values['Ventures Icon'])
-        ? row.values['Ventures Icon'][0].url
-        : (typeof row.values['Ventures Icon'] === 'object')
-            ? row.values['Ventures Icon'].url
+    const imageSrc = Array.isArray(row.values['Org Icon  - For DAS Website'])
+        ? row.values['Org Icon  - For DAS Website'][0].url
+        : (typeof row.values['Org Icon  - For DAS Website'] === 'object')
+            ? row.values['Org Icon  - For DAS Website'].url
             : "";
     const venture = {
         id: row.id,
