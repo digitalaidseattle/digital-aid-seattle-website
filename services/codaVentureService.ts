@@ -12,8 +12,6 @@ const CODA_DOC_ID = "24QYb2RP0g";
 const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
-    console.log('Mapping Coda row to DASProject entity:', row);
-    console.log('Mapping Coda row to DASProject entity:', Object.keys(row.values));
 
     const imageSrc = Array.isArray(row.values['Org Icon  - For DAS Website'])
         ? row.values['Org Icon  - For DAS Website'][0].url
@@ -44,7 +42,7 @@ function coda2Entity(row: CodaRow): DASProject {
 }
 
 class CodaVentureService extends CodaService<DASProject> {
-    static filteredStatuses = ['Active', 'Under evaluation'];
+    static filteredStatuses = ['Active', 'Under Evaluation'];
 
     static instance: CodaVentureService;
     static getInstance(): CodaVentureService {

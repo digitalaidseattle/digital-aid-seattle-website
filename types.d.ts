@@ -61,7 +61,7 @@ type DASProject = {
   status: "Submitted by Partner"
   | "Ready for consideration"
   | "Active"
-  | "Under evaluation"
+  | "Under Evaluation"
   | "Declined"
   | "Completed"
   projectLink: string

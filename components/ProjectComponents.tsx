@@ -62,7 +62,7 @@ const ProjectLabels = {
 
 const StatusLabels = {
   'Active': 'Active',
-  'Under evaluation': 'Evaluating',
+  'Under Evaluation': 'Evaluating',
   'Completed': 'Completed',
 }
 
