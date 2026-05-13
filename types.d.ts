@@ -1,32 +1,32 @@
 /*
-* @2023 Digital Aid Seattle
-*/
-import { Image } from 'sanity';
+ * @2023 Digital Aid Seattle
+ */
+import { Image } from 'sanity'
 
 type OSEvent = {
-  _id: string,
-  _createdAt: Date,
-  title: string,
-  date: string,
-  start: string,
-  end: string,
-  location: string,
-  description: string,
-  image: Image,
-  rsvpLink: string,
-  active: boolean,
-  partner: string,
-  id: string,
-  about: string,
+  _id: string
+  _createdAt: Date
+  title: string
+  date: string
+  start: string
+  end: string
+  location: string
+  description: string
+  image: Image
+  rsvpLink: string
+  active: boolean
+  partner: string
+  id: string
+  about: string
   activity: Image
 }
 
 type TeamMember = {
-  _id: string,
-  _createdAt: Date,
-  name: string,
-  role: string,
-  image: Image,
+  _id: string
+  _createdAt: Date
+  name: string
+  role: string
+  image: Image
   url: string
 }
 
@@ -72,8 +72,8 @@ type DASProject = {
   impact: string
   rolesNeeded: DASVolunteerRoleBasicInfo[]
   currentTeam: TeamMember[]
-  display: boolean,
-  imageSrc: string,
+  display: boolean
+  imageSrc: string
   ventureCode: string
 }
 
@@ -127,12 +127,12 @@ type DASVolunteerRole = Entity & {
 type DASTestimonial = {
   _id: string
   _createdAt: Date
-  title: string,
-  quote: string,
-  name: string,
-  avatar: Image,
-  role: string,
-  active: boolean,
+  title: string
+  quote: string
+  name: string
+  avatar: Image
+  role: string
+  active: boolean
   orderRank: string
 }
 
@@ -142,4 +142,14 @@ type DASPageCopy = {
   page: string
   key: string
   copy: string
+}
+
+export interface DASNewsletter {
+  _id: string
+  title: string
+  date: string
+  description: string
+  image: Image
+  fileUrl: string
+  active?: boolean
 }
