@@ -20,7 +20,7 @@ function coda2Entity(row: CodaRow): DASProject {
             : "";
     const venture = {
         id: row.id,
-        title: row.name,
+        title: CodaService.removeBackTicks(row.values['Org Name']),
         status: CodaService.removeBackTicks(row.values['Venture Status']),
         imageSrc: imageSrc,
         currentTeam: (row.values['Squad Members'] ?? [])

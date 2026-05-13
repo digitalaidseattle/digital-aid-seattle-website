@@ -139,7 +139,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
         <HeaderWithImage imageSrc={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}>
           <Typography variant="displayMedium"
             component="h1">
-            {project.partner}
+            {project.title}
           </Typography>
           {!props.hideStatus &&
             <Stack spacing="1rem">
@@ -181,7 +181,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             }}
             component="h1"
           >
-            {project.partner}
+            {project.title}
           </Typography>
         </HeaderWithImage>
         {/* light section */}
