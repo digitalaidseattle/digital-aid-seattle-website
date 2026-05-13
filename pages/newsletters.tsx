@@ -32,7 +32,7 @@ const LABELS = {
   HERO_TITLE: 'Newsletters',
   HERO_TXT:
     'Stay updated on our latest community stories, volunteer highlights, and tech-driven impact',
-  NEWSLETTERS_TITLE: 'Past News Letters',
+  NEWSLETTERS_TITLE: 'Past Newsletters',
 }
 
 const NewslettersPage = () => {

@@ -26,6 +26,11 @@ const NEWSLETTER_DESCRIPTION_STYLES: Record<string, any> = {
   textOverflow: 'ellipsis',
 }
 
+const LABELS = {
+  NEWSLETTERS_TITLE: 'Past Newsletters'
+}
+
+
 const NewsletterList = ({ newsletters }: NewsletterListProps) => {
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest')
   const [sortedNewsletters, setSortedNewsletters] = useState<DASNewsletter[]>(
@@ -55,7 +60,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="headlineMedium" component="h2" textAlign={'center'}>
-        Past News Letters
+        {LABELS.NEWSLETTERS_TITLE}
       </Typography>
       <Box marginX={2} marginY={4}>
         {newsletters.length === 0 ? (
