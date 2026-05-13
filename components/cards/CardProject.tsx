@@ -42,7 +42,7 @@ const CardProject = ({ project }: CardProjectProps) => {
         sx={{
           height: '100%',
         }}
-        aria-label={`navigate to project page for ${project.partner}`}
+        aria-label={`navigate to project page for ${project.title}`}
       >
         <CardContent
           sx={{
@@ -57,7 +57,7 @@ const CardProject = ({ project }: CardProjectProps) => {
             <CardMedia
               component='img'
               image={project.imageSrc ? project.imageSrc : PROJECT_IMAGE}
-              alt={project.partner + " logo"}
+              alt={project.title + " logo"}
               sx={{
                 objectFit: 'contain',
                 width: { md: '7rem', lg: '100%' },
@@ -69,7 +69,7 @@ const CardProject = ({ project }: CardProjectProps) => {
             />
             <Stack spacing='1rem' sx={{ width: '100%' }}>
               <Typography variant='titleLarge' component='h2'>
-                {project.partner}
+                {project.title}
               </Typography>
               <Stack spacing='1rem'>
                 <Stack
