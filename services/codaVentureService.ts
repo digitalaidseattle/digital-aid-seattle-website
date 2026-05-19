@@ -32,11 +32,11 @@ function coda2Entity(row: CodaRow): DASProject {
         description: CodaService.removeBackTicks(row.values['Org description']), // Getting from partner
         partner: CodaService.removeBackTicks(row.values['Org Name']),
         painpoint: CodaService.removeBackTicks(row.values['Painpoint Shorthand']),  //  The data is too long, should be a short description of problem.  CodaService.removeBackTicks(row.values['Details']),
-        programAreas: CodaService.removeBackTicks(row.values['Focie - Website']), // Getting from partner
+        programAreas: CodaService.removeBackTicks(row.values['Foci - For DAS Website']), // Getting from partner
         projectLink: `project/${row.id}`,
-        problem: CodaService.removeBackTicks(row.values['Problem - Website']),
-        solution: CodaService.removeBackTicks(row.values['Solution - Website']),
-        impact: CodaService.removeBackTicks(row.values['Impact - Website']),
+        problem: CodaService.removeBackTicks(row.values['Problem - For DAS Website']),
+        solution: CodaService.removeBackTicks(row.values['Solution - For DAS Website']),
+        impact: CodaService.removeBackTicks(row.values['Impact - For DAS Website']),
     } as DASProject;
     return venture;
 }
