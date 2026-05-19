@@ -19,11 +19,11 @@ import {
   ProjectTeamSection
 } from 'components/ProjectComponents'
 import RolesSection from 'components/RolesSection'
+import { useActiveRoles } from 'components/useActiveRoles'
+import { useVolunteers } from 'components/useVolunteers'
 import { pageCopyService } from 'services/PageCopyService'
-import { DASProject, DASVolunteerRoleBasicInfo, TeamMember } from 'types'
+import { DASProject, DASVolunteerRoleBasicInfo, TeamMember, Volunteer } from 'types'
 import ProjectImage from '../assets/project-image.png'
-import { dasProjectsService } from '../services/ProjectsService'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
 
 const LABELS = {
   HERO_LBL: 'The Cadre',
@@ -40,6 +40,9 @@ Digital Aid Seattle fosters connections between volunteers and the orgs that can
   ROLES_NEEDED_LBL: `Roles Needed`
 }
 const TheCadrePage = () => {
+  const { data: volunteers } = useVolunteers();
+  const { data: activeRoles } = useActiveRoles();
+
   const [project, setProject] = useState<DASProject>()
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext)
@@ -62,18 +65,17 @@ const TheCadrePage = () => {
   }, [initialized]);
 
   useEffect(() => {
-    setLoading(true);
-    Promise.all([
-      dasVolunteerRoleService.getAllActiveRoles(),
-      dasProjectsService.getPeople('Cadre')
-    ])
-      .then(resps => {
-        setVolunteerRoles(resps[0]);
-        setMembers(resps[1].sort((r1, r2) => r1.name.localeCompare(r2.name)));
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
-  }, [setLoading])
+    if (volunteers) {
+      const found = volunteers
+        .filter((v: Volunteer) => v.status === 'Active' && v.cadreContributor.includes('Cadre'))
+        .sort((r1, r2) => r1.name.localeCompare(r2.name))
+      setMembers(found);
+    }
+  }, [volunteers]);
+
+  useEffect(() => {
+    setVolunteerRoles(activeRoles ?? []);
+  }, [activeRoles]);
 
   const theme = useTheme()
 

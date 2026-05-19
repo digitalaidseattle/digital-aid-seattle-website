@@ -30,6 +30,24 @@ type TeamMember = {
   url: string
 }
 
+type Volunteer = Entity & {
+  _createdAt: Date,
+  name: string,
+  role: string,
+  status: string,
+  url: string,
+  cadreContributor: string[],
+}
+
+type DASPartner = Entity & {
+  _createdAt: Date,
+  name: string,
+  role: string,
+  url: string,
+  foci: string[],
+  description: string,
+}
+
 type DASProject = {
   _id: string
   _createdAt: Date
@@ -40,13 +58,12 @@ type DASProject = {
   painpoint: string
   programAreas: string[]
   description: string
-  status:
-    | 'Submitted by Partner'
-    | 'Ready for consideration'
-    | 'Active'
-    | 'Under evaluation'
-    | 'Declined'
-    | 'Completed'
+  status: "Submitted by Partner"
+  | "Ready for consideration"
+  | "Active"
+  | "Under Evaluation"
+  | "Declined"
+  | "Completed"
   projectLink: string
   duration?: { start: string; end: string }
   image: Image
@@ -90,7 +107,7 @@ type DASVolunteerRoleBasicInfo = {
   category: string[]
 }
 
-type DASVolunteerRole = {
+type DASVolunteerRole = Entity & {
   location: string
   duration: string
   headline: string

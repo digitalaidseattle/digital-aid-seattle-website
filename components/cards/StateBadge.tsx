@@ -6,13 +6,13 @@ type StateBadgeProps = {
   state: "Submitted by Partner"
   | "Ready for consideration"
   | "Active"
-  | "Under evaluation"
+  | "Under Evaluation"
   | "Declined"
   | "Completed"
 }
 const stateColors = {
   'Active': '#FFFAD8',
-  'Under evaluation': '#DDFFAF',
+  'Under Evaluation': '#DDFFAF',
   'Completed': '#FFF0EE',
 }
 const StateBadge = ({ state }: StateBadgeProps) => {

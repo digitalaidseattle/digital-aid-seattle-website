@@ -28,22 +28,22 @@ import {
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useEffect, useState } from 'react'
 
+import { NavigateNextSharp } from '@mui/icons-material'
+import Link from 'next/link'
+import Markdown from 'react-markdown'
 import { DASProject, TeamMember } from 'types'
 import NoPhotoPerson from '../assets/no-photo-person.svg'
+import ProjectImage from '../assets/project-image.png'
 import { urlForImage } from '../sanity/lib/image'
 import CardWithPhoto from './cards/CardWithPhoto'
 import StateBadge from './cards/StateBadge'
+import { HeaderWithImage } from './HeaderWithImage'
 import SectionContainer from './layout/SectionContainer'
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section } from './style-utils'
-import Markdown from 'react-markdown'
-import { NavigateNextSharp } from '@mui/icons-material'
-import Link from 'next/link'
-import ProjectImage from '../assets/project-image.png'
-import { HeaderWithImage } from './HeaderWithImage'
-import { VOLUNTEER_APPLICATION_FORM_URL } from 'services/VolunteerRoleService'
 
 const PROJECT_IMAGE = ProjectImage.src;
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 const ProjectLabels = {
   contact_us: 'Contact us',
@@ -62,7 +62,7 @@ const ProjectLabels = {
 
 const StatusLabels = {
   'Active': 'Active',
-  'Under evaluation': 'Evaluating',
+  'Under Evaluation': 'Evaluating',
   'Completed': 'Completed',
 }
 
@@ -144,7 +144,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
           {!props.hideStatus &&
             <Stack spacing="1rem">
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{(project.programAreas ?? []).join(', ')}</Typography >
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge" >{ProjectLabels.project_status}</Typography>
@@ -208,7 +208,7 @@ const ProjectHeaderSection = (props: { project: DASProject, hideStatus?: boolean
             }
             {!props.hideStatus && <>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
-                <Typography variant="labelLarge">{project.programAreas.join(', ')}</Typography>
+                <Typography variant="labelLarge">{(project.programAreas ?? []).join(', ')}</Typography>
               </Stack>
               <Stack direction="row" alignItems="center" spacing="1.5rem">
                 <Typography variant="labelLarge">Project Status:</Typography>
@@ -318,6 +318,7 @@ const ProjectBodyTextSection = (props: { title: string, texts?: string[] }) => {
 const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) => {
   const [title, setTitle] = useState<string>()
   const [members, setMembers] = useState<TeamMember[]>([])
+
   useEffect(() => {
     if (props.members) {
       setMembers(props.members)
@@ -426,16 +427,14 @@ const ProjectContactUsSection = () => {
 }
 
 export {
-  ProjectBodyTextSection,
+  ProjectBodyMarkdownSection, ProjectBodyTextSection,
   ProjectContactUsSection,
   ProjectFooterSection,
   ProjectHeaderSection,
-  ProjectLabels,
-  StatusLabels,
-  ProjectRolesSection,
+  ProjectLabels, ProjectRolesSection,
   ProjectSection,
   ProjectSubheader,
   ProjectTeamSection,
-  ProjectTextSection,
-  ProjectBodyMarkdownSection
+  ProjectTextSection, StatusLabels
 }
+

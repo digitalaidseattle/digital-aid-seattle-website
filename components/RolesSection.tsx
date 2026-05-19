@@ -25,7 +25,6 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
 import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined'
 import DrawOutlinedIcon from '@mui/icons-material/DrawOutlined'
 import EmojiPeopleOutlinedIcon from '@mui/icons-material/EmojiPeopleOutlined'
-import GavelRoundedIcon from '@mui/icons-material/GavelRounded'
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined'
 import IntegrationInstructionsOutlinedIcon from '@mui/icons-material/IntegrationInstructionsOutlined';
@@ -33,7 +32,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Chip, Link, Stack, Typography } from '@mui/material'
+import { Box, Chip, Stack } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
@@ -41,8 +40,9 @@ import { DASVolunteerRoleBasicInfo } from 'types'
 import ListItemWithIcon from './list/ListItemWithIcon'
 import { Section, Subheader } from './style-utils'
 import { Check } from '@mui/icons-material'
+import Link from 'next/link'
 
-// TODO: standardize roles between sanity and airtable
+// TODO: standardize roles between sanity and coda
 const rolesMap = {
   "account-manager": { role: 'account manager', icon: <AccountTreeOutlinedIcon />, },
   "accountant": { role: 'accountant', icon: <CalculateOutlinedIcon />, },
@@ -127,7 +127,7 @@ const RoleListing = ({
     )
   }
   return showLink ? (
-    <Link href={`${getRoleUrl(role.key)}`} sx={{ textDecoration: 'none' }}>
+    <Link href={`${getRoleUrl(role.key)}`} style={{ textDecoration: 'none' }}>
       <RoleBase
         sxProps={{
           '&': {
@@ -171,7 +171,7 @@ const FilterableRoles = ({ roles, showLink }) => {
   useEffect(() => {
     setRolesToDisplay([...roles]);
     // using a set to build a list of categories that occur in roles data
-    const uniqueCategories = new Set()
+    const uniqueCategories = new Set();
     roles.forEach(r => r.category && r.category.forEach(c => uniqueCategories.add(c)))
     setCategories(Array.from(uniqueCategories))
   }, [roles]);

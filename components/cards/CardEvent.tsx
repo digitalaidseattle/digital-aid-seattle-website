@@ -163,7 +163,7 @@ const CardEvent = ({ event }: CardEventProps) => {
         }
       }}
     >
-      <CardActionArea href={`/event/${event.id}`}>
+      <CardActionArea onClick={() => router.push(`/event/${event.id}`)}>
         {tabletScreen
           ? <TabletCard event={event} />
           : <MobileAndDesktopCard event={event} />}

@@ -65,8 +65,8 @@ const LABELS = {
   CRITERIA_MAINTAINABILITY_TXT: `When we build, we don't just build for today. Our services and tools are designed for long-term usability and scale.`,
 }
 
-const AIRTABLE_FORM = 'https://airtable.com/app6duHw2djMIOYnh/paguUW1sRDdwsPdWN/form';
-
+// const AIRTABLE_FORM = 'https://airtable.com/app6duHw2djMIOYnh/paguUW1sRDdwsPdWN/form';
+const CODA_FORM = 'https://coda.io/form/New-Partner-Submission-Form_d7w7uxhnkNi';
 const CriteriaSection = () => {
 
   const criteriaContent = [
@@ -186,7 +186,7 @@ const HeroSection = () => {
         <Button
           variant="contained"
           color="secondary"
-          href={AIRTABLE_FORM}
+          href={CODA_FORM}
           target="_blank"
           sx={{
             alignSelf: 'flex-start',
@@ -237,7 +237,7 @@ const ProcessSection = () => {
           <Button
             variant="contained"
             color="primary"
-            href={AIRTABLE_FORM}
+            href={CODA_FORM}
             target="_blank"
           >
             {LABELS.PARTNER_BTN}
@@ -280,7 +280,7 @@ const InterestedSection = () => {
       <Button
         variant="contained"
         color="secondary"
-        href={AIRTABLE_FORM}
+        href={CODA_FORM}
         target="_blank"
         sx={{
           alignSelf: 'center',
