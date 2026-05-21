@@ -108,6 +108,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                       }
                       titleSx={NEWSLETTER_TITLE_STYLES}
                       descriptionSx={NEWSLETTER_DESCRIPTION_STYLES}
+                      mediaSx={{}}
                     />
                   </Grid>
                 ))}
