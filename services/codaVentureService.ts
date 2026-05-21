@@ -13,11 +13,12 @@ const VENTURE_TABLE_ID = 'grid-UdXLv7wwqh';
 
 function coda2Entity(row: CodaRow): DASProject {
 
-    const imageSrc = Array.isArray(row.values['Org Icon  - For DAS Website'])
-        ? row.values['Org Icon  - For DAS Website'][0].url
-        : (typeof row.values['Org Icon  - For DAS Website'] === 'object')
-            ? row.values['Org Icon  - For DAS Website'].url
+    const imageSrc = Array.isArray(row.values['Org Icon - For DAS Website'])
+        ? row.values['Org Icon - For DAS Website'][0].url
+        : (typeof row.values['Org Icon - For DAS Website'] === 'object')
+            ? row.values['Org Icon - For DAS Website'].url
             : "";
+    console.log(imageSrc, row.values)
     const venture = {
         id: row.id,
         title: CodaService.removeBackTicks(row.values['Org Name']),
