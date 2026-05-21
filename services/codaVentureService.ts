@@ -18,7 +18,6 @@ function coda2Entity(row: CodaRow): DASProject {
         : (typeof row.values['Org Icon - For DAS Website'] === 'object')
             ? row.values['Org Icon - For DAS Website'].url
             : "";
-    console.log(imageSrc, row.values)
     const venture = {
         id: row.id,
         title: CodaService.removeBackTicks(row.values['Org Name']),
