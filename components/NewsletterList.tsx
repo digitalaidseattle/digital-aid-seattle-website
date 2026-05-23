@@ -41,6 +41,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
     return () => {
       const link = document.createElement('a')
       link.href = fileUrl
+      link.target = "_blank"
       link.download = ''
       document.body.appendChild(link)
       link.click()
