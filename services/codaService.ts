@@ -101,10 +101,11 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
                     },
                 }
             );
-
-            const data = await res.json();
-            rows.push(...data.items.map((json: any) => this.mapper(json)));
-            pageToken = data.nextPageToken;
+            if (res.status === 200) {
+                const data = await res.json();
+                rows.push(...data.items.map((json: any) => this.mapper(json)));
+                pageToken = data.nextPageToken;
+            }
         } while (pageToken);
         return rows;
     }
