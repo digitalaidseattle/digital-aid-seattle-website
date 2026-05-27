@@ -92,11 +92,11 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
 
             <Box sx={{ pr: 0 }}>
               <Grid container spacing={4}>
-                {sortedNewsletters.map((n) => (
+                {sortedNewsletters.map((n, idx) => (
                   <Grid item xs={12} md={6} key={n._id}>
                     <CardWithPhoto
                       title={n.title}
-                      image={urlForImage(n.image).url()}
+                      image={idx !== 1 ? urlForImage(n.image).url() : undefined}
                       alt={n.title}
                       description={n.description}
                       subtitle={new Date(n.date).toLocaleDateString(undefined, {

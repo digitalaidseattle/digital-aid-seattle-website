@@ -8,7 +8,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 type CardWithPhotoProps = {
   title: string
   description: string
-  image: string
+  image?: string
   imageWidth?: number
   alt?: string
   subtitle?: string
@@ -42,7 +42,7 @@ const CardWithPhoto = ({
       }}
       onClick={onClick}
     >
-      {
+      {image &&
         <CardMedia
           sx={mediaSx ?? {
             minWidth: imageWidth,
