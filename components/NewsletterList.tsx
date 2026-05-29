@@ -96,7 +96,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                   <Grid item xs={12} md={6} key={n._id}>
                     <CardWithPhoto
                       title={n.title}
-                      image={idx !== 1 ? urlForImage(n.image).url() : undefined}
+                      image={n.image ? urlForImage(n.image).url() : undefined}
                       alt={n.title}
                       description={n.description}
                       subtitle={new Date(n.date).toLocaleDateString(undefined, {
