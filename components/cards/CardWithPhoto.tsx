@@ -8,13 +8,14 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 type CardWithPhotoProps = {
   title: string
   description: string
-  image: string
+  image?: string
   imageWidth?: number
   alt?: string
   subtitle?: string
   titleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
-  onClick?: () => void
+  mediaSx?: Record<string, any>;
+  onClick?: () => void;
 }
 
 const CardWithPhoto = ({
@@ -26,10 +27,10 @@ const CardWithPhoto = ({
   subtitle,
   titleSx,
   descriptionSx,
+  mediaSx,
   onClick,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
-  const isViewportSmall = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Card
@@ -41,9 +42,9 @@ const CardWithPhoto = ({
       }}
       onClick={onClick}
     >
-      {
+      {image &&
         <CardMedia
-          sx={{
+          sx={mediaSx ?? {
             minWidth: imageWidth,
             aspectRatio: '1/1',
           }}

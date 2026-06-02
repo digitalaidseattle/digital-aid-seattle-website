@@ -41,6 +41,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
     return () => {
       const link = document.createElement('a')
       link.href = fileUrl
+      link.target = "_blank"
       link.download = ''
       document.body.appendChild(link)
       link.click()
@@ -91,11 +92,11 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
 
             <Box sx={{ pr: 0 }}>
               <Grid container spacing={4}>
-                {sortedNewsletters.map((n) => (
+                {sortedNewsletters.map((n, idx) => (
                   <Grid item xs={12} md={6} key={n._id}>
                     <CardWithPhoto
                       title={n.title}
-                      image={urlForImage(n.image).url()}
+                      image={n.image ? urlForImage(n.image).url() : undefined}
                       alt={n.title}
                       description={n.description}
                       subtitle={new Date(n.date).toLocaleDateString(undefined, {
@@ -108,6 +109,7 @@ const NewsletterList = ({ newsletters }: NewsletterListProps) => {
                       }
                       titleSx={NEWSLETTER_TITLE_STYLES}
                       descriptionSx={NEWSLETTER_DESCRIPTION_STYLES}
+                      mediaSx={{}}
                     />
                   </Grid>
                 ))}

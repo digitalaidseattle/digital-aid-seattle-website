@@ -149,7 +149,7 @@ export interface DASNewsletter {
   title: string
   date: string
   description: string
-  image: Image
+  image?: Image
   fileUrl: string
   active?: boolean
 }
