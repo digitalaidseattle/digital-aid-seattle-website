@@ -1,8 +1,10 @@
 /**
  * support_us.tsx
- * @2024 Digital Aid Seattle
+ * 
+ * @2025 Digital Aid Seattle
  */
 import {
+  Avatar,
   Box,
   Button,
   Container,
@@ -25,9 +27,12 @@ import PaypalImage from '../assets/paypal.png'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
 
+import { AutoGraphOutlined, BoltOutlined, PhonelinkOutlined, VolunteerActivismOutlined } from '@mui/icons-material'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import IconButton from '@mui/material/IconButton'
+import CardGridContainer from 'components/cards/CardGridContainer'
+import CardOne, { ICON_STYLE } from 'components/cards/CardOne'
 import MastheadWithImage from 'components/MastheadWithImage'
 import Slider from 'react-slick'
 import { pageCopyService } from 'services/PageCopyService'
@@ -38,16 +43,43 @@ import { urlForImage } from '../sanity/lib/image'
 import { useFeature } from '../services/FeatureService'
 import { testimonialService } from '../services/TestimonialService'
 
+import AWSLogo from '../assets/aboutUsIcons/aws.png'
+import CityOfSeattleLogo from '../assets/aboutUsIcons/cityofseattle.png'
+import GoogleLogo from '../assets/aboutUsIcons/google.svg'
+import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.svg'
+import SlalomLogo from '../assets/aboutUsIcons/slalom.png'
+
 const LABELS = {
-  HERO_TITLE: 'Support us',
+  HERO_TITLE: 'Support Digital Aid Seattle',
   HERO_TXT:
     'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
-  DONATE_TITLE: 'Donate now',
+  DONATE_TITLE: 'Your donation powers digital transformation for nonprofits across our community',
+  DONATE_TEXT: 'Every dollar you contribute helps us provide essential digital tools and expertise to local nonprofits, amplifying their impact and helping them serve more people in need.',
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
-  MAILING_INSTRUCTIONS:
-    "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
+
+  WHY_SUPPORT_TITLE: 'Why Your Support Matters',
+  WHY_SUPPORT_TEXT: 'When you donate to Digital Aid Seattle, you invest in the entire nonprofit ecosystem. Your contribution helps us:',
+  WHY_CAPACITY_TITLE: 'Build capacity',
+  WHY_CAPACITY_TEXT: 'for organizations doing critical community work',
+  WHY_BRIDGE_TITLE: 'Bridge the digital divide',
+  WHY_BRIDGE_TEXT: 'by providing modern tools and training',
+  WHY_MULTIPLY_TITLE: 'Multiply impact',
+  WHY_MULTIPLY_TEXT: 'through technology that helps nonprofits reach more people',
+  WHY_CREATE_TITLE: 'Create lasting change',
+  WHY_CREATE_TEXT: 'with sustainable digital solutions',
+
+  PAYMENT_TITLE: 'Ready to Make a Difference?',
+  PAYMENT_TEXT: 'We currently accept tax-deductible donations by mail, as well as through Venmo and PayPal.',
+  PAYMENT_INSTRUCTIONS: "Send your tax-deductible donation with the completed form to:",
+  PAYMENT_BY_MAIL_TITLE: 'Donate by Mail',
+  PAYMENT_ELETRONIC_TITLE: 'Donate through Venmo and PayPal',
+
+  QUESTIONS_TITLE: 'Questions About Donating?',
+  QUESTIONS_TEXT: 'Contact us at info@digitalaidseattle.org to learn more about how your contribution will be used or to discuss larger partnership opportunities.',
+
+  ALLIES_LABEL: 'Our allies'
 }
 
 const ADDRESS = {
@@ -137,7 +169,8 @@ const SupportUsSection: React.FC<{ backgroundColor: string, children: ReactNode 
   )
 }
 
-const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
+const WhatPeopleSaySection = ({ }) => {
+  const theme = useTheme();
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
 
@@ -205,65 +238,46 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   )
 }
 
-const SupportUsPage = () => {
-  const theme = useTheme()
-  const { data: supportUs } = useFeature('support-us')
-  const router = useRouter()
-  const [initialized, setInitialized] = useState<boolean>(false)
+const SupportUsHeroSection = () => {
+  const theme = useTheme();
 
-  useEffect(() => {
-    if (!initialized) {
-      pageCopyService
-        .updateCopy(LABELS, 'support_us')
-        .then(() => setInitialized(true))
-    }
-  }, [initialized])
-
-  useEffect(() => {
-    if (supportUs !== undefined && supportUs === false) {
-      console.error(`Support Us feature not implemented.`)
-      router.push('/404')
-    }
-  }, [supportUs, router])
-
-  const SupportUsHeroSection = () => {
-    const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
-    return (
-      <MastheadWithImage
-        imageSrc={SupportUsImage.src}
-        imageText="Support Us page graphic"
-      >
-        <>
-          <Typography
-            variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
-            sx={{ color: theme.palette.primary.contrastText }}
-            component="h1"
-          >
-            {LABELS.HERO_TITLE}
-          </Typography>
-          <Typography
-            variant="bodyLarge"
-            sx={{
-              color: theme.palette.primary.contrastText,
-            }}
-          >
-            {LABELS.HERO_TXT}
-          </Typography>
-        </>
-      </MastheadWithImage>
-    )
-  }
-
-  const DonateSection = ({ theme }) => (
-    <SupportUsSection backgroundColor={theme.palette.background.white}>
-      <Typography variant="headlineMedium" component="h2">
-        {LABELS.DONATE_TITLE}
-      </Typography>
-      <Stack gap="2rem" textAlign="left">
-        <Typography variant="bodyLarge">
-          {LABELS.MAILING_INSTRUCTIONS}
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+  return (
+    <MastheadWithImage
+      imageSrc={SupportUsImage.src}
+      imageText="Support Us page graphic"
+    >
+      <>
+        <Typography
+          variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+          sx={{ color: theme.palette.primary.contrastText }}
+          component="h1"
+        >
+          {LABELS.HERO_TITLE}
         </Typography>
-      </Stack>
+        <Typography
+          variant="bodyLarge"
+          sx={{
+            color: theme.palette.primary.contrastText,
+          }}
+        >
+          {LABELS.HERO_TXT}
+        </Typography>
+      </>
+    </MastheadWithImage>
+  )
+}
+
+const PaymentSection = () => {
+  const theme = useTheme();
+  return (
+    <SupportUsSection backgroundColor={theme.palette.background.paper}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.PAYMENT_TITLE}
+      </Typography>
+      <Typography variant="bodyLarge">
+        {LABELS.PAYMENT_TEXT}
+      </Typography>
 
       <Box
         sx={{
@@ -282,15 +296,18 @@ const SupportUsPage = () => {
             alignItems: 'center',
             flex: '1 1 300px',
             maxWidth: '350px',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: theme.palette.background.default,
             padding: '2rem',
             borderRadius: '8px',
             margin: '0 auto',
           }}
         >
-          <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
-            <Typography variant="bodyLarge">
-              {LABELS.MAILING_INSTRUCTIONS}
+          <Stack gap="1rem" sx={{ width: '100%' }}>
+            <Typography variant="titleSmall" component="h2">
+              {LABELS.PAYMENT_BY_MAIL_TITLE}
+            </Typography>
+            <Typography textAlign="left" variant="bodyLarge">
+              {LABELS.PAYMENT_INSTRUCTIONS}
               <br />
               <br />
               {ADDRESS.title}
@@ -314,36 +331,20 @@ const SupportUsPage = () => {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center',
+            alignItems: 'flex-start',
             flex: '1 1 300px',
             maxWidth: '350px',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: theme.palette.background.default,
             padding: '2rem',
             borderRadius: '8px',
             margin: '0 auto',
           }}
         >
-          <Stack gap="1rem" textAlign="center" sx={{ width: '100%' }}>
-            <Typography variant="bodyLarge">or donate through</Typography>
+          <Stack gap={'2rem'} sx={{ width: '100%' }}>
+            <Typography variant="titleSmall" component="h2">
+              {LABELS.PAYMENT_ELETRONIC_TITLE}
+            </Typography>
             <Button
-              variant="outlined"
-              onClick={() =>
-                window.open('https://venmo.com/DASeattle', '_blank')
-              }
-              sx={{
-                backgroundColor: '#FFFFFF',
-              }}
-            >
-              {LABELS.DONATE_WITH}
-              <img
-                style={{ marginLeft: '1rem' }}
-                src={VenmoImage.src}
-                alt="Venmo wordmark"
-                width="100px"
-              />
-            </Button>
-            <Button
-              variant="outlined"
               onClick={() =>
                 window.open(
                   'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
@@ -354,7 +355,6 @@ const SupportUsPage = () => {
                 backgroundColor: '#FFB02E',
               }}
             >
-              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={PaypalImage.src}
@@ -362,11 +362,198 @@ const SupportUsPage = () => {
                 width="95px"
               />
             </Button>
+            <Typography variant="bodyLarge">Or</Typography>
+            <Button
+              variant="outlined"
+              onClick={() =>
+                window.open('https://venmo.com/DASeattle', '_blank')
+              }
+              sx={{
+                backgroundColor: '#FFFFFF',
+              }}
+            >
+              <img
+                style={{ marginLeft: '1rem' }}
+                src={VenmoImage.src}
+                alt="Venmo wordmark"
+                width="100px"
+              />
+            </Button>
           </Stack>
         </Box>
       </Box>
     </SupportUsSection>
   )
+}
+
+const DonateSection = () => {
+  const theme = useTheme();
+  return (
+    <SupportUsSection backgroundColor={theme.palette.background.paper}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.DONATE_TITLE}
+      </Typography>
+      <Typography variant="bodyLarge">
+        {LABELS.DONATE_TEXT}
+      </Typography>
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '2rem',
+          flexWrap: 'wrap',
+          width: '100%',
+        }}
+      >
+      </Box>
+    </SupportUsSection>
+  )
+}
+
+const QuestionsSection = () => {
+  const theme = useTheme();
+  return (
+    <SupportUsSection backgroundColor={theme.palette.background.paper}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.QUESTIONS_TITLE}
+      </Typography>
+      <Typography variant="bodyLarge">
+        {LABELS.QUESTIONS_TEXT}
+      </Typography>
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '2rem',
+          flexWrap: 'wrap',
+          width: '100%',
+        }}
+      >
+      </Box>
+    </SupportUsSection>
+  )
+}
+
+const WhySupportSection = () => {
+  const theme = useTheme();
+
+  const whySupportContent = [{
+    title: LABELS.WHY_CAPACITY_TITLE,
+    description: LABELS.WHY_CAPACITY_TEXT,
+    icon: <VolunteerActivismOutlined style={ICON_STYLE} />,
+  },
+  {
+    title: LABELS.WHY_BRIDGE_TITLE,
+    description: LABELS.WHY_BRIDGE_TEXT,
+    icon: <PhonelinkOutlined style={ICON_STYLE} />,
+  },
+  {
+    title: LABELS.WHY_MULTIPLY_TITLE,
+    description: LABELS.WHY_MULTIPLY_TEXT,
+    icon: <BoltOutlined style={ICON_STYLE} />,
+  },
+  {
+    title: LABELS.WHY_CREATE_TITLE,
+    description: LABELS.WHY_CREATE_TEXT,
+    icon: <AutoGraphOutlined style={ICON_STYLE} />,
+  },
+  ]
+
+  return (
+    <SupportUsSection backgroundColor={theme.palette.background.default}>
+      <Typography variant="headlineMedium" component="h2">
+        {LABELS.WHY_SUPPORT_TITLE}
+      </Typography>
+      <Typography variant="bodyLarge">
+        {LABELS.WHY_SUPPORT_TEXT}
+      </Typography>
+      <CardGridContainer columns={4}>
+        {whySupportContent.map((item) => (
+          <CardOne
+            smallerTitle
+            key={item.title}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+          />
+        ))}
+      </CardGridContainer>
+    </SupportUsSection>)
+}
+
+const AlliesSection: React.FC = () => {
+
+  const allies = [
+    {
+      label: 'google',
+      icon: GoogleLogo.src,
+    },
+    {
+      label: 'Microsoft',
+      icon: MicrosoftLogo.src,
+    },
+    {
+      label: 'Slalom',
+      icon: SlalomLogo.src,
+    },
+    {
+      label: 'City Of Seattle',
+      icon: CityOfSeattleLogo.src,
+    },
+    {
+      label: 'Amazon Web Services',
+      icon: AWSLogo.src,
+    },
+  ]
+  return (
+    <Stack
+      sx={{
+        gap: { xs: 3, lg: 10 },
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: { sm: 4, lg: 10 },
+      }}
+      maxWidth={'880px'}
+    >
+      <Typography variant="headlineLarge" component="h2">
+        {LABELS.ALLIES_LABEL}
+      </Typography>
+      <Stack direction={'row'} spacing={4} >
+        {allies.map((item, index) => (
+          <Avatar
+            key={`logo-${index}`}
+            alt={item.label}
+            src={item.icon}
+            sx={{ width: 124, height: 124 }} />
+        ))}
+      </Stack>
+    </Stack>
+  );
+}
+
+const SupportUsPage = () => {
+  const theme = useTheme()
+  const { data: supportUs } = useFeature('support-us')
+  const router = useRouter()
+  const [initialized, setInitialized] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!initialized) {
+      pageCopyService
+        .updateCopy(LABELS, 'support_us')
+        .then(() => setInitialized(true))
+    }
+  }, [initialized])
+
+  useEffect(() => {
+    if (supportUs !== undefined && supportUs === false) {
+      console.error(`Support Us feature not implemented.`)
+      router.push('/404')
+    }
+  }, [supportUs, router])
+
 
   return (
     <>
@@ -381,8 +568,12 @@ const SupportUsPage = () => {
           }}
         >
           <SupportUsHeroSection />
-          <DonateSection theme={theme} />
-          <WhatPeopleSaySection theme={theme} />
+          <DonateSection />
+          <WhySupportSection />
+          <PaymentSection />
+          <WhatPeopleSaySection />
+          <QuestionsSection />
+          <AlliesSection />
         </Container>
       </BlockComponent>
     </>

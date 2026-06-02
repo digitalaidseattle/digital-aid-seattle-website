@@ -10,7 +10,7 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 
 import { Avatar } from '@mui/material'
-import { Stack } from '@mui/system'
+import { Stack, useTheme } from '@mui/system'
 import { useEffect, useState } from 'react'
 
 type CardQuoteProps = {
@@ -24,6 +24,7 @@ type CardQuoteProps = {
 const MAX_TEXT_LENGTH = 300;
 
 const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps) => {
+  const theme = useTheme();
   const [shorten, setShorten] = useState<boolean>(false)
   const [seeMore, setSeeMore] = useState<boolean>(false)
 
@@ -42,6 +43,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
     <Card
       sx={{
         minHeight: "360px",
+        backgroundColor: theme.palette.background.paper,
         boxShadow:
           '0px 4px 8px 0px rgba(52, 61, 62, 0.08), 0px 8px 16px 0px rgba(52, 61, 62, 0.08)',
       }}
@@ -56,7 +58,9 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
           padding: '2rem'
         }}
       >
-        <Stack direction={'row'} gap={'1rem'} sx={{ verticalAlign: 'center' }}>
+        <Stack direction={'row'}
+          gap={'1rem'}
+          sx={{ verticalAlign: 'center' }}>
           <Avatar alt="profile user"
             src={avatar}
             sx={{ width: 64, height: 64 }} />
@@ -71,7 +75,7 @@ const CardQuote = ({ title, description, avatar, person, role }: CardQuoteProps)
           sx={{ cursor: "pointer" }}
           onClick={toggle}>{seeMore ? "See more" : "See less"} </Typography>}
       </CardContent>
-    </Card>
+    </Card >
   )
 }
 
