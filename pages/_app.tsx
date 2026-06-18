@@ -1,19 +1,27 @@
 
+import { useEffect, useState } from 'react'
+
 import { ThemeProvider } from '@mui/material'
 import { Analytics } from '@vercel/analytics/react'
+
 import { AppProps } from 'next/app'
 import { usePathname } from 'next/navigation'
 
-import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
 
 import { Seo } from 'components/seo'
 import { CodaVentureService } from 'services/codaVentureService'
+import { CodaRoleService } from 'services/codaRoleService'
 import { eventsService } from '../services/EventsService'
 
-import { CodaRoleService } from 'services/codaRoleService'
+import Script from "next/script";
+import { useRouter } from "next/router";
+import * as gtag from "../lib/gtag";
+
 import 'styles/global.css'
 import 'styles/preflight.css'
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
@@ -29,13 +37,24 @@ const TAG_NAMES = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const pathName = usePathname()
-
   const ventureService = CodaVentureService.getInstance();
   const roleService = CodaRoleService.getInstance();
+  
+  const pathName = usePathname()
+  const router = useRouter();
 
   const [title, setTitle] = useState(DEFAULT_TAG);
-
+  
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+  
   useEffect(() => {
     const lookupTitle = async (pathName: string) => {
       let pageName = null;
@@ -73,8 +92,26 @@ export default function App({ Component, pageProps }: AppProps) {
         canonical="https://www.digitalaidseattle.org"
       />
       <ThemeProvider theme={theme}>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
         <Component {...pageProps} />
-        <Analytics />
+        {/* <Analytics /> */}
       </ThemeProvider>
     </>
   )
