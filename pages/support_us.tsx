@@ -7,12 +7,12 @@ import {
   Button,
   Container,
   Stack,
+  SxProps,
   Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material'
 import CardQuote from 'components/cards/CardQuote'
-import CardRowContainer from 'components/cards/CardRowContainer'
 import SectionContainer from 'components/layout/SectionContainer'
 import {
   BlockComponent,
@@ -20,92 +20,188 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import PaypalImage from '../assets/paypal.png'
 import SupportUsImage from '../assets/supportUs.png'
 import VenmoImage from '../assets/venmo.png'
-import PaypalImage from '../assets/paypal.png'
 
-import { useFeature } from '../services/FeatureService'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import IconButton from '@mui/material/IconButton'
 import MastheadWithImage from 'components/MastheadWithImage'
-import { testimonialService } from '../services/TestimonialService'
+import Slider from 'react-slick'
+import { pageCopyService } from 'services/PageCopyService'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
 import { DASTestimonial } from 'types'
 import { urlForImage } from '../sanity/lib/image'
-import { pageCopyService } from 'services/PageCopyService'
+import { useFeature } from '../services/FeatureService'
+import { testimonialService } from '../services/TestimonialService'
 
 const LABELS = {
   HERO_TITLE: 'Support us',
-  HERO_TXT: 'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
+  HERO_TXT:
+    'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
   DONATE_TITLE: 'Donate now',
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
-  MAILING_INSTRUCTIONS: 'We’re currently accepting your tax deductible donations by mail and directly through Venmo.  You can mail the form and your check to us at the following address:',
+  MAILING_INSTRUCTIONS:
+    "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
 }
 
 const ADDRESS = {
   title: 'Digital Aid Seattle',
-  street: '107 Spring St',
-  statezip: 'Seattle, WA 98104',
+  street: '301 Union St',
+  pobox: 'PO Box 1765',
+  statezip: 'Seattle, WA 98111',
 }
 
-const SupportUsSection = ({ backgroundColor, children }) => (
-  <SectionContainer backgroundColor={backgroundColor}>
+// Custom arrow components with chevrons
+interface ArrowProps {
+  ariaLabel?: string
+  sx?: SxProps
+  children?: React.ReactNode
+  onClick?: () => void
+}
+
+const Arrow: React.FC<ArrowProps> = ({ ariaLabel, sx, children, onClick }) => {
+  return (
+    <IconButton
+      onClick={onClick}
+      sx={{
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 2,
+        color: 'primary.main',
+        bgcolor: 'background.paper',
+        boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+        '&:hover': {
+          bgcolor: 'background.paper',
+          opacity: 0.9,
+        },
+        width: { xs: 32, sm: 40 },
+        height: { xs: 32, sm: 40 },
+        ...sx,
+      }}
+      aria-label={ariaLabel}
+    >
+      {children}
+    </IconButton>
+  )
+}
+
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  return (
+    <Arrow
+      sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
+      ariaLabel='Next slide'
+      onClick={onClick}>
+      <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
+    </Arrow>
+  )
+}
+
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
+  return (
+    <Arrow
+      sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
+      ariaLabel='Previous slide'
+      onClick={onClick}>
+      <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
+    </Arrow>
+  )
+}
+
+const SupportUsSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
+
+  return (<SectionContainer backgroundColor={backgroundColor}>
     <Stack
       gap={{ xs: '64px', md: '80px' }}
       sx={{
         textAlign: 'center',
       }}
+      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
       maxWidth={'880px'}
     >
       {children}
     </Stack>
   </SectionContainer>
-)
+  )
+}
 
-const WhatPeopleSaySection = ({ theme }) => {
+const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   const { setLoading } = useContext(LoadingContext)
   const [testimonials, setTestimonials] = useState<DASTestimonial[]>([])
-  const [initialized, setInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!initialized) {
-      setLoading(true);
-      Promise
-        .all([
-          testimonialService.getActiveTestimonials(),
-          pageCopyService.updateCopy(LABELS, 'support_us')
-        ])
-        .then(resps => {
-          setTestimonials(resps[0].sort((t1, t2) => t1.orderRank.localeCompare(t2.orderRank)));
-          setInitialized(true)
-        })
-        .catch(error => console.error(error))
-        .finally(() => setLoading(false))
-    }
-  }, [initialized, setLoading])
+    setLoading(true)
+    testimonialService
+      .getActiveTestimonials()
+      .then((data) =>
+        setTestimonials(
+          data.sort((a, b) => a.orderRank.localeCompare(b.orderRank))
+        )
+      )
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [setLoading])
+
+  // Slider configuration with custom arrows and responsive settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: "0px",
+    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: theme.breakpoints.values.lg,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
 
   return (
     <SupportUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
         {LABELS.IMPACT_TITLE}
       </Typography>
-      <CardRowContainer>
-        {testimonials.map((info, idx) => (
-          <CardQuote
-            key={'q-' + idx}
-            title={info.title}
-            description={info.quote}
-            avatar={
-              urlForImage(info.avatar)
-                ? urlForImage(info.avatar).url()
-                : undefined
-            }
-            person={info.name}
-            role={info.role}
-          />
+      <Slider {...settings}>
+        {testimonials.map((t, idx) => (
+          <Box
+            id={`testimonial-${idx}`}
+            key={idx}
+            sx={{
+              padding: '2rem',
+            }}
+          >
+            <CardQuote
+              avatar={urlForImage(t.avatar).url()}
+              title={t.title}
+              description={t.quote}
+              role={t.role}
+              person={t.name}
+            />
+          </Box>
         ))}
-      </CardRowContainer>
-    </SupportUsSection>
+      </Slider>
+    </SupportUsSection >
   )
 }
 
@@ -113,7 +209,7 @@ const SupportUsPage = () => {
   const theme = useTheme()
   const { data: supportUs } = useFeature('support-us')
   const router = useRouter()
-  const [initialized, setInitialized] = useState<boolean>(false);
+  const [initialized, setInitialized] = useState<boolean>(false)
 
   useEffect(() => {
     if (!initialized) {
@@ -121,7 +217,7 @@ const SupportUsPage = () => {
         .updateCopy(LABELS, 'support_us')
         .then(() => setInitialized(true))
     }
-  }, [initialized]);
+  }, [initialized])
 
   useEffect(() => {
     if (supportUs !== undefined && supportUs === false) {
@@ -164,7 +260,9 @@ const SupportUsPage = () => {
         {LABELS.DONATE_TITLE}
       </Typography>
       <Stack gap="2rem" textAlign="left">
-        <Typography variant="bodyLarge">{LABELS.MAILING_INSTRUCTIONS}</Typography>
+        <Typography variant="bodyLarge">
+          {LABELS.MAILING_INSTRUCTIONS}
+        </Typography>
       </Stack>
 
       <Box
@@ -172,8 +270,8 @@ const SupportUsPage = () => {
           display: 'flex',
           justifyContent: 'space-between',
           gap: '2rem',
-          flexWrap: 'wrap', // Allows items to wrap on smaller screens
-          width: '100%', // Takes full width of container
+          flexWrap: 'wrap',
+          width: '100%',
         }}
       >
         {/* Mail Donation Box */}
@@ -182,12 +280,12 @@ const SupportUsPage = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flex: '1 1 300px', // Allows grow, shrink, and sets min width before wrap
+            flex: '1 1 300px',
             maxWidth: '350px',
             backgroundColor: '#f5f5f5',
             padding: '2rem',
             borderRadius: '8px',
-            margin: '0 auto', // Centers when wrapped
+            margin: '0 auto',
           }}
         >
           <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
@@ -198,6 +296,8 @@ const SupportUsPage = () => {
               {ADDRESS.title}
               <br />
               {ADDRESS.street}
+              <br />
+              {ADDRESS.pobox}
               <br />
               {ADDRESS.statezip}
             </Typography>
@@ -215,12 +315,12 @@ const SupportUsPage = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flex: '1 1 300px', // Allows grow, shrink, and sets min width before wrap
+            flex: '1 1 300px',
             maxWidth: '350px',
             backgroundColor: '#f5f5f5',
             padding: '2rem',
             borderRadius: '8px',
-            margin: '0 auto', // Centers when wrapped
+            margin: '0 auto',
           }}
         >
           <Stack gap="1rem" textAlign="center" sx={{ width: '100%' }}>
@@ -247,7 +347,7 @@ const SupportUsPage = () => {
               onClick={() =>
                 window.open(
                   'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
-                  '_blank',
+                  '_blank'
                 )
               }
               sx={{

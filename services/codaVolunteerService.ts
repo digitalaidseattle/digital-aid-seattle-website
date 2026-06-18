@@ -1,0 +1,62 @@
+/**
+ *  proctorService.ts
+ *
+ *  @copyright 2024 Digital Aid Seattle
+ *
+ */
+
+import { TeamMember, Volunteer } from 'types';
+import { CodaRow, CodaService } from './codaService';
+
+
+const CODA_DOC_ID = "24QYb2RP0g";
+const TABLE_ID = 'grid-4vzF6VuaPV';
+
+function coda2Entity(row: CodaRow): Volunteer {
+    const entity = {
+        id: row.id,
+        name: CodaService.removeBackTicks(row.values['Name']),
+        role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
+        url: row.values['Pic'] ? row.values['Pic'][0].url : '',
+        cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
+        status: CodaService.removeBackTicks(row.values['Status']),
+    } as Volunteer;
+    return entity;
+}
+
+class CodaVolunteerService extends CodaService<Volunteer> {
+
+    static instance: CodaVolunteerService;
+    static getInstance(): CodaVolunteerService {
+        if (!CodaVolunteerService.instance) {
+            CodaVolunteerService.instance = new CodaVolunteerService();
+        }
+        return CodaVolunteerService.instance;
+    }
+
+    constructor() {
+        super(CODA_DOC_ID, TABLE_ID, undefined, coda2Entity, undefined);
+    }
+
+    async getPeople(cadreOrContributor: string): Promise<TeamMember[]> {
+        return this.findBy('Status', 'Active')
+            .then(volunteers => {
+                return volunteers
+                    .filter(v => v.cadreContributor.includes(cadreOrContributor))
+                    .map(v => {
+                        return {
+                            name: v.name,
+                            role: v.role,
+                            url: v.url
+                        } as TeamMember;
+                    })
+            })
+            .catch(error => {
+                console.error('Error fetching volunteers from Coda:', error);
+                return [];
+            });
+    }
+}
+
+export { CodaVolunteerService };
+

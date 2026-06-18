@@ -4,6 +4,7 @@
 * @2023 Digital Aid Seattle
 */
 
+import React, { useContext, useEffect, useState } from 'react'
 import {
   AddOutlined,
   EventAvailableOutlined,
@@ -21,7 +22,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme
-} from '@mui/material'
+} from '@mui/material';
+import Markdown from 'react-markdown';
+
 import MastheadWithImage from 'components/MastheadWithImage'
 import RolesSection from 'components/RolesSection'
 import CardOne from 'components/cards/CardOne'
@@ -29,13 +32,14 @@ import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { Section, Subheader } from 'components/style-utils'
 import Link from 'next/link'
-import React, { useContext, useEffect, useState } from 'react'
 import { designColor } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
-
+import { useActiveRoles } from 'components/useActiveRoles'
 import { pageCopyService } from 'services/PageCopyService'
+
 import VolunteerImage from '../assets/volunteerWithUs.png'
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
+
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -54,7 +58,7 @@ const LABELS = {
   OATH_TITLE: 'Our oath',
   OATH_TXT: 'We champion these values and ask you as a volunteer to adopt them too.',
   PROCESS_TITLE: 'The process',
-  PROCESS_STEP_1_TXT: 'Read our oath, then apply to volunteer using the button below.',
+  PROCESS_STEP_1_TXT: 'Read our *[oath](#oath)* and *[policies](https://digital-aid-seattle.gitbook.io/digital-aid-seattle/Hk6Veo0mrttAEbFlZg18/hr-policies)*, then apply to volunteer using the button below.',
   PROCESS_STEP_2_TXT: 'You will receive an invitation for an interview within a few days.',
   PROCESS_STEP_3_TXT: 'If accepted, complete the onboarding and start engaging with the Digital Aid Seattle community.',
   PROCESS_STEP_4_TXT: 'Contribute weekly to your project, and make a difference for your community!',
@@ -78,7 +82,7 @@ const LABELS = {
     'I will prioritize active listening, valuing the insights and ideas shared by others.',
   OATH_PRIVACY_TITLE: 'Uphold privacy standards.',
   OATH_PRIVACY_TXT:
-    'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless OS explicitly endorses such discussions through published materials or media outlets.',
+    'I acknowledge the significance of maintaining the confidentiality of our internal data. I am committed to refraining from engaging in public discussions about ongoing projects, unless DAS explicitly endorses such discussions through published materials or media outlets.',
   OATH_SAFEGUARD_TITLE: 'Safeguard partner information.',
   OATH_SAFEGUARD_TXT:
     'I will safeguard our partners’ personal information, preserving any personal data encountered in my role as a Digital Aid Seattle volunteer. I will diligently apply reasonable security practices to protect the data I have access to.',
@@ -95,66 +99,40 @@ const LABELS = {
   OATH_MISSION_TXT:
     "I commit to understanding and upholding Digital Aid Seattle's mission, values, and development guidelines, aligning my actions with the organization's purpose.",
 }
-const oathContent = [
-  { label: LABELS.OATH_SERVE_TITLE, content: LABELS.OATH_SERVE_TXT },
-  { label: LABELS.OATH_SUPPORT_TITLE, content: LABELS.OATH_SUPPORT_TXT },
-  { label: LABELS.OATH_COLLABORATION_TITLE, content: LABELS.OATH_COLLABORATION_TXT },
-  { label: LABELS.OATH_CURIOSITY_TITLE, content: LABELS.OATH_CURIOSITY_TXT },
-  { label: LABELS.OATH_LISTEN_TITLE, content: LABELS.OATH_LISTEN_TXT },
-  { label: LABELS.OATH_PRIVACY_TITLE, content: LABELS.OATH_PRIVACY_TXT },
-  { label: LABELS.OATH_SAFEGUARD_TITLE, content: LABELS.OATH_SAFEGUARD_TXT },
-  { label: LABELS.OATH_COMMUNICATION_TITLE, content: LABELS.OATH_COMMUNICATION_TXT },
-  { label: LABELS.OATH_INCLUSIVITY_TITLE, content: LABELS.OATH_INCLUSIVITY_TXT },
-  { label: LABELS.OATH_COMPLY_TITLE, content: LABELS.OATH_COMPLY_TXT },
-  { label: LABELS.OATH_MISSION_TITLE, content: LABELS.OATH_MISSION_TXT }
-]
-
-const processContent = [
-  LABELS.PROCESS_STEP_1_TXT,
-  LABELS.PROCESS_STEP_2_TXT,
-  LABELS.PROCESS_STEP_3_TXT,
-  LABELS.PROCESS_STEP_4_TXT
-]
 
 const VolunteerPage = () => {
+  const { data: activeRoles } = useActiveRoles();
   const [volunteerRoles, setVolunteerRoles] = useState<DASVolunteerRoleBasicInfo[]>([])
   const { setLoading } = useContext(LoadingContext);
   const [initialized, setInitialized] = useState<boolean>(false);
 
+  const theme = useTheme()
+  const palette = theme.palette
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<string | boolean>(false)
+
+  useEffect(() => {
+    console.log(new Set((activeRoles ?? []).map(r => r.category)))
+    setVolunteerRoles(activeRoles ?? []);
+  }, [activeRoles]);
+
   useEffect(() => {
     if (!initialized) {
       setLoading(true);
-
-      Promise.all([
-        dasVolunteerRoleService.getAllActiveRoles(),
-
-        pageCopyService
-          .updateCopy(LABELS, 'volunteers')
-      ])
-        .then((resps) => {
-          setVolunteerRoles(resps[0]);
-          setInitialized(true);
-        })
+      pageCopyService
+        .updateCopy(LABELS, 'volunteers')
+        .then((resps) => setInitialized(true))
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
     }
   }, [initialized, setLoading]);
 
-
-
-  const theme = useTheme()
-  const palette = theme.palette
-  const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const [oathValuesExpanded, setOathValuesExpanded] = React.useState<
-    string | false
-  >(false)
   const handleOathValuesChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setOathValuesExpanded(newExpanded ? panel : false)
     }
 
   const rolesSection = () => {
-
     const rolesContext = [
       {
         title: LABELS.EXPECTATION_SKILL_TITLE,
@@ -210,10 +188,25 @@ const VolunteerPage = () => {
   }
 
   const oathAndValuesSection = () => {
+    const oathContent = [
+      { label: LABELS.OATH_SERVE_TITLE, content: LABELS.OATH_SERVE_TXT },
+      { label: LABELS.OATH_SUPPORT_TITLE, content: LABELS.OATH_SUPPORT_TXT },
+      { label: LABELS.OATH_COLLABORATION_TITLE, content: LABELS.OATH_COLLABORATION_TXT },
+      { label: LABELS.OATH_CURIOSITY_TITLE, content: LABELS.OATH_CURIOSITY_TXT },
+      { label: LABELS.OATH_LISTEN_TITLE, content: LABELS.OATH_LISTEN_TXT },
+      { label: LABELS.OATH_PRIVACY_TITLE, content: LABELS.OATH_PRIVACY_TXT },
+      { label: LABELS.OATH_SAFEGUARD_TITLE, content: LABELS.OATH_SAFEGUARD_TXT },
+      { label: LABELS.OATH_COMMUNICATION_TITLE, content: LABELS.OATH_COMMUNICATION_TXT },
+      { label: LABELS.OATH_INCLUSIVITY_TITLE, content: LABELS.OATH_INCLUSIVITY_TXT },
+      { label: LABELS.OATH_COMPLY_TITLE, content: LABELS.OATH_COMPLY_TXT },
+      { label: LABELS.OATH_MISSION_TITLE, content: LABELS.OATH_MISSION_TXT }
+    ]
+
     return (
       (
         <SectionContainer backgroundColor={designColor.white}>
           <Stack
+            id="oath"
             gap={{ xs: 4, md: 8 }}
             sx={{
               textAlign: 'left',
@@ -262,6 +255,14 @@ const VolunteerPage = () => {
   }
 
   const processSection = () => {
+
+    const processContent = [
+      LABELS.PROCESS_STEP_1_TXT,
+      LABELS.PROCESS_STEP_2_TXT,
+      LABELS.PROCESS_STEP_3_TXT,
+      LABELS.PROCESS_STEP_4_TXT
+    ]
+
     return (
       (
         <SectionContainer backgroundColor={designColor.background}>
@@ -281,10 +282,14 @@ const VolunteerPage = () => {
                   <Typography
                     variant="titleLarge"
                     color={palette.primary.main}
-                  >{`${index + 1}.`}</Typography>
-                  <Typography variant="bodyLarge" mx={2}>
+                  >{`${index + 1}. `}</Typography>
+                  <Markdown
+                    components={{
+                      p: ({ children }) => <>{children}</>
+                    }}
+                  >
                     {item}
-                  </Typography>
+                  </Markdown>
                 </li>
               ))}
             </ol>
@@ -306,7 +311,7 @@ const VolunteerPage = () => {
         </Subheader>
 
         <Link
-          href="https://airtable.com/embed/appTn3HE53SyGqWTJ/shr1lbcr3qmkoIbNW"
+          href={VOLUNTEER_APPLICATION_FORM_URL}
           target='_blank'
           passHref
         >

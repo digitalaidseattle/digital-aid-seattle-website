@@ -29,7 +29,8 @@ export default defineConfig({
             orderableDocumentListDeskItem({ type: 'das-feature', S, context }),
             orderableDocumentListDeskItem({ type: 'das-faq', S, context }),
             orderableDocumentListDeskItem({ type: 'das-testimonial', S, context }),
-            orderableDocumentListDeskItem({ type: 'das-page-copy', S, context })
+            orderableDocumentListDeskItem({ type: 'das-page-copy', S, context }),
+            orderableDocumentListDeskItem({ type: 'das-newsletter', S, context })
           ])
       }
     }

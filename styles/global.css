@@ -53,3 +53,19 @@ body {
 .markdown p:not(:last-child) {
   margin-bottom: 1rem;
 }
+
+/* Slick Slider Styles */
+
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
+
+#oath {
+  scroll-margin-top: 120px;
+  /* height of sticky header */
+}
+
+.link:hover {
+  text-decoration: underline;
+}

@@ -51,6 +51,8 @@ import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 import { useEffect, useState } from 'react'
 import { pageCopyService } from 'services/PageCopyService'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const LABELS = {
   HERO_LBL: 'About us',
@@ -147,8 +149,11 @@ const AboutUsHeroSection = () => {
   )
 }
 
-const WhatWeDoSection = ({ theme }) => (
-  <AboutUsSection backgroundColor={designColor.white}>
+
+const WhatWeDoSection = ({ theme }) => {
+  const router = useRouter();
+
+  return (<AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium" component="h2">
       {LABELS.WE_DO_LBL}
     </Typography>
@@ -157,15 +162,17 @@ const WhatWeDoSection = ({ theme }) => (
     </Typography>
     <Box textAlign="center">
       <Button
+        aria-label='Link to cadre page'
         variant="contained"
-        href={'/cadre'}
+        onClick={() => router.push('/cadre')}
         sx={{ width: 'fit-content' }}
       >
         {LABELS.CADRE_BTN}
       </Button>
     </Box>
-  </AboutUsSection>
-)
+  </AboutUsSection>)
+}
+
 
 const OurValueSection = ({ theme }) => (
   <AboutUsSection backgroundColor={theme.palette.background.default}>

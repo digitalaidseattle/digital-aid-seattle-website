@@ -1,22 +1,25 @@
-import 'styles/global.css'
-import 'styles/preflight.css'
+
+import { useEffect, useState } from 'react'
 
 import { ThemeProvider } from '@mui/material'
-import { AppProps } from 'next/app'
-import Head from 'next/head'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
 
-import { dasProjectsService } from 'services/ProjectsService'
-import { useEffect, useState } from 'react'
+import { AppProps } from 'next/app'
+import { usePathname } from 'next/navigation'
+
 import { theme } from 'theme/theme'
 
-import { dasVolunteerRoleService } from '../services/VolunteerRoleService'
+import { Seo } from 'components/seo'
+import { CodaVentureService } from 'services/codaVentureService'
+import { CodaRoleService } from 'services/codaRoleService'
 import { eventsService } from '../services/EventsService'
 
 import Script from "next/script";
 import { useRouter } from "next/router";
 import * as gtag from "../lib/gtag";
+
+import 'styles/global.css'
+import 'styles/preflight.css'
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -34,13 +37,14 @@ const TAG_NAMES = {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
+  const ventureService = CodaVentureService.getInstance();
+  const roleService = CodaRoleService.getInstance();
+  
   const pathName = usePathname()
-  const searchParams = useSearchParams()
-
-  const [title, setTitle] = useState(DEFAULT_TAG)
-
   const router = useRouter();
 
+  const [title, setTitle] = useState(DEFAULT_TAG);
+  
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
@@ -50,26 +54,26 @@ export default function App({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-
+  
   useEffect(() => {
     const lookupTitle = async (pathName: string) => {
-      let pageName = null
+      let pageName = null;
+      let path = [];
+      let id = null;
       if (pathName) {
-        const path = pathName.split('/')
-        pageName = path[path.length - 1]
+        path = pathName.split('/')
+        pageName = path[path.length - 2]
+        id = path[path.length - 1]
       }
       switch (pageName) {
-        case 'project_individual':
-          const id = searchParams.get('project')
-          const p = id ? await dasProjectsService.getOne(id) : null;
+        case 'project':
+          const p = id ? await ventureService.getById(id) : null;
           return p ? p.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
-        case 'volunteer_role':
-          const role = searchParams.get('role')
-          const r = await dasVolunteerRoleService.getRoleDetailsByName(role)
+        case 'volunteer':
+          const r = await roleService.getRoleDetailsByName(id)
           return r ? r.role.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         case 'event':
-          const eventName = searchParams.get('name')
-          const e = await eventsService.getOne(eventName)
+          const e = await eventsService.getOne(id)
           return e ? e.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         default:
           const tag = TAG_NAMES[pageName]
@@ -79,12 +83,14 @@ export default function App({ Component, pageProps }: AppProps) {
     if (pathName) {
       lookupTitle(pathName).then((title) => setTitle(title))
     }
-  }, [pathName, searchParams])
+  }, [pathName, ventureService, roleService])
   return (
     <>
-      <Head>
-        <title>{title}</title>
-      </Head>
+      <Seo
+        title={title}
+        description="Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology."
+        canonical="https://www.digitalaidseattle.org"
+      />
       <ThemeProvider theme={theme}>
         <Script
           strategy="afterInteractive"

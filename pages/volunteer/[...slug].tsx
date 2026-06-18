@@ -3,20 +3,22 @@ import {
   Box,
   Breadcrumbs,
   Button,
-  Link,
   Stack,
   Typography,
   useTheme
 } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useContext, useEffect, useState } from 'react'
+import Markdown from 'react-markdown'
+
 import SectionContainer from 'components/layout/SectionContainer'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import Masthead from 'components/Masthead'
-import { useContext, useEffect, useState } from 'react'
+import { CodaRoleService } from 'services/codaRoleService'
 import { DASVolunteerRole } from 'types'
+import Link from 'next/link'
 
-import { dasVolunteerRoleService } from '../../services/VolunteerRoleService'
-import Markdown from 'react-markdown'
-import { useRouter } from 'next/router'
+const VOLUNTEER_APPLICATION_FORM_URL = "https://coda.io/form/DAS-New-Volunteer-Application_d-tzJ5bzUWN";
 
 const Labels = {
   Title: "Volunteer Opening",
@@ -46,19 +48,15 @@ const VolunteerRolePage = () => {
     setLoading(true);
     const roleName = router.query.slug ? router.query.slug[0] : null;
     if (roleName) {
-      dasVolunteerRoleService
+      // dasVolunteerRoleService
+      CodaRoleService.getInstance()
         .getRoleDetailsByName(roleName)
         .then((resp: DASVolunteerRole) => {
           if (resp === null) {
             console.error(`Volunteer role '${roleName} not found.`);
             router.push('/404')
           } else {
-            dasVolunteerRoleService.getAndGroupTechnologies(resp.keyTechnologiesIds)
-              .then(keys => {
-                resp.keyTechnologies = keys;
-                setRole(resp)
-              })
-              .catch((error) => console.error(error))
+            setRole(resp)
           }
         })
         .catch((error) => {
@@ -77,12 +75,14 @@ const VolunteerRolePage = () => {
         aria-label="breadcrumb"
         separator={<NavigateNextSharp fontSize="small" color={'primary'} />}
       >
-        <Link href={'../'} color="primary" underline="hover">
-          {Labels.Home}
+        <Link href={'../'} >
+          <Typography color="textPrimary">{Labels.Home}</Typography>
         </Link>
-        <Link href={'../volunteers'} color="primary" underline="hover">
-          {Labels.Volunteers}
+
+        <Link href={'../volunteers'} >
+          <Typography color="textPrimary">{Labels.Volunteers}</Typography>
         </Link>
+
         <Typography color="textPrimary">{roleName}</Typography>
       </Breadcrumbs>
     )
@@ -126,13 +126,12 @@ const VolunteerRolePage = () => {
             {roleData.headline}
           </Box>
         ) : null}
-        <>
+        <Stack direction="column" gap="0.5rem">
           {roleData.location ? (
             <Box
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mt: '1rem',
               }}
             >
@@ -145,7 +144,6 @@ const VolunteerRolePage = () => {
               sx={{
                 typography: 'bodyLarge',
                 fontWeight: 'bold',
-                lineHeight: '0.5rem',
                 mb: '1rem',
               }}
             >
@@ -153,7 +151,7 @@ const VolunteerRolePage = () => {
               <span style={{ fontWeight: 'normal' }}>{roleData.duration}</span>
             </Box>
           ) : null}
-        </>
+        </Stack>
         <RoleDescriptionSubSection
           title={Labels.AboutUs}
           content={roleData.aboutUs}
@@ -178,24 +176,18 @@ const VolunteerRolePage = () => {
           title={Labels.KeyAttributesToSuccess}
           content={roleData.keyAttributesToSuccess}
         />
-        <RoleDescriptionSubSection
-          title={Labels.KeyTechnologies}
-          content={roleData.keyTechnologies}
-        />
-        {roleData.applicationLink ? (
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              mt: '2rem',
-            }}
-          >
-            <Link href={roleData.applicationLink} target="_blank">
-              <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
-            </Link>
-          </Box>
-        ) : null}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: '2rem',
+          }}
+        >
+          <Link href={VOLUNTEER_APPLICATION_FORM_URL} target="_blank">
+            <Button variant="contained">{Labels.ApplyToVolunteer}</Button>
+          </Link>
+        </Box>
       </>
     )
   }

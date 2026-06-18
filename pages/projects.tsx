@@ -17,62 +17,74 @@ import CardGridContainer from 'components/cards/CardGridContainer'
 import CardProject from 'components/cards/CardProject'
 import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import { useContext, useEffect, useState } from 'react'
-import { DASProject } from 'types'
+import { DASPartner, DASProject } from 'types'
 
 import { Check } from '@mui/icons-material'
 import { StatusLabels } from 'components/ProjectComponents'
-import { dasProjectsService } from '../services/ProjectsService'
 
 import MastheadWithImage from 'components/MastheadWithImage'
-import ProjectsImage from '../assets/projects.png'
+import { usePartners } from 'components/usePartners'
+import { useProjects } from 'components/useProjects'
 import { pageCopyService } from 'services/PageCopyService'
+import { CodaVentureService } from 'services/codaVentureService'
+import ProjectsImage from '../assets/projects.png'
 
 const LABELS = {
   HERO_TITLE: 'Projects',
   TITLE_IMAGE: 'Projects graphic',
   HERO_TXT: 'We create digital solutions that empower communities, enhance collaboration, and inspire positive change!',
   NO_MATCHES: 'No matching projects found.',
-  ARIA_LABEL_FILTERS: 'filter projects by status'
+  ARIA_LABEL_FILTERS: 'filter projects by status',
+  LOADING: 'Loading projects'
 }
 
 const ProjectsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const { data: ventures, loading: venturesLoading } = useProjects();
+  const { data: partners, loading: partnersLoading } = usePartners();
 
-  const { setLoading } = useContext(LoadingContext);
+  const { loading, setLoading } = useContext(LoadingContext);
   const [init, setInit] = useState<boolean>(false);
   const [projects, setProjects] = useState<DASProject[]>([]);
   const [filterStatuses, setFilterStatuses] = useState<string[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<DASProject[]>([]);
 
+  const DEFAULT_STATUSES = CodaVentureService.filteredStatuses;
+  useEffect(() => {
+    setLoading(venturesLoading || partnersLoading);
+  }, [partnersLoading, venturesLoading, setLoading])
+
+  useEffect(() => {
+    if (ventures && partners) {
+      setProjects(ventures.map(venture => {
+        const found: DASPartner = partners.find(partner => partner.name === venture.partner);
+        return {
+          ...venture,
+          programAreas: found ? found.foci : [],
+          description: found ? found.description : ""
+        }
+      }))
+    }
+  }, [ventures, partners]);
+
   useEffect(() => {
     if (!init) {
       setLoading(true);
-      Promise
-        .all([
-          dasProjectsService.getAll(),
-          pageCopyService.updateCopy(LABELS, 'projects')
-        ])
-        .then(resps => {
-          setProjects(resps[0]);
-          setInit(true)
-        })
+      pageCopyService.updateCopy(LABELS, 'projects')
+        .then(() => setInit(true))
         .catch(error => console.error(error))
         .finally(() => setLoading(false))
     }
   }, [init, setLoading])
 
   useEffect(() => {
-    if (init) {
-      const displayedStatuses = filterStatuses.length === 0
-        ? dasProjectsService.filteredStatuses
-        : filterStatuses
-
-      setDisplayedProjects(projects
-        .filter(p => displayedStatuses.includes(p.status))
-      )
-    }
-  }, [init, filterStatuses, projects]);
+    const displayedStatuses = filterStatuses.length === 0
+      ? DEFAULT_STATUSES : filterStatuses
+    const filtered = projects
+      .filter(p => displayedStatuses.includes(p.status))
+    setDisplayedProjects(filtered)
+  }, [filterStatuses, projects, DEFAULT_STATUSES]);
 
   const toggleStatus = (status: string) => {
     if (filterStatuses.includes(status)) {
@@ -134,7 +146,7 @@ const ProjectsPage = () => {
             maxWidth={'880px'}
           >
             <Stack aria-label={LABELS.ARIA_LABEL_FILTERS} direction="row" gap="1.5rem" marginBottom="3rem" sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
-              {dasProjectsService.filteredStatuses.map((status) =>
+              {DEFAULT_STATUSES.map((status) =>
                 <Chip
                   key={status}
                   label={StatusLabels[status]}
@@ -142,20 +154,25 @@ const ProjectsPage = () => {
                   icon={filterStatuses.includes(status) ? <Check /> : undefined}
                   onClick={() => toggleStatus(status)} />)}
             </Stack>
-            {displayedProjects.length === 0 &&
-              <Typography>{LABELS.NO_MATCHES}</Typography>
-            }
-            {displayedProjects.length > 0 &&
-              <CardGridContainer>
-                {displayedProjects
-                  .map((project) => (
-                    <CardProject
-                      key={project.id}
-                      project={project}
-                    />
-                  ))}
-              </CardGridContainer>
-            }
+            <>
+              {loading && init &&
+                <Typography>{LABELS.LOADING}</Typography>
+              }
+              {init && !loading && displayedProjects.length === 0 &&
+                <Typography>{LABELS.NO_MATCHES}</Typography>
+              }
+              {displayedProjects.length > 0 &&
+                <CardGridContainer>
+                  {displayedProjects
+                    .map((project) => (
+                      <CardProject
+                        key={project.id}
+                        project={project}
+                      />
+                    ))}
+                </CardGridContainer>
+              }
+            </>
           </Stack>
         </Box>
       </BlockComponent>

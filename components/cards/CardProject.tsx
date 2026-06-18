@@ -14,6 +14,7 @@ import { DASProject } from 'types'
 import { ProjectLabels } from 'components/ProjectComponents'
 import ProjectImage from '../../assets/project-image.png'
 import StateBadge from './StateBadge'
+import { useRouter } from 'next/router'
 
 const PROJECT_IMAGE = ProjectImage.src;
 
@@ -22,8 +23,11 @@ type CardProjectProps = {
 }
 
 const CardProject = ({ project }: CardProjectProps) => {
+  const router = useRouter();
+
   return (
     <Card
+      tabIndex={0}
       sx={{
         boxShadow:
           '0px 2px 4px 0px rgba(52, 61, 62, 0.04), 0px 4px 8px 2px rgba(52, 61, 62, 0.04)',
@@ -34,7 +38,7 @@ const CardProject = ({ project }: CardProjectProps) => {
       }}
     >
       <CardActionArea
-        href={project.projectLink}
+        onClick={() => router.push(project.projectLink)}
         sx={{
           height: '100%',
         }}
@@ -73,7 +77,7 @@ const CardProject = ({ project }: CardProjectProps) => {
                   justifyContent='space-between'
                   alignItems='center'
                 >
-                  {project.programAreas &&
+                  {project.painpoint &&
                     <Stack direction='row' justifyContent='space-between'>
                       <Typography variant='labelLarge'>
                         {ProjectLabels.project_label + project.painpoint}
@@ -85,7 +89,7 @@ const CardProject = ({ project }: CardProjectProps) => {
                 {project.programAreas &&
                   <Stack direction='row' justifyContent='space-between'>
                     <Typography variant='labelMedium'>
-                      {project.programAreas.join(', ')}
+                      {(project.programAreas ?? []).join(', ')}
                     </Typography>
                   </Stack>
                 }
