@@ -9,6 +9,15 @@ const config = {
       transform: '@mui/icons-material/{{member}}',
     },
   },
+  async redirects() {
+    return [
+      {
+        source: '/support_us',
+        destination: '/donate',
+        permanent: false,
+      },
+    ]
+  },
 }
 
 export default config

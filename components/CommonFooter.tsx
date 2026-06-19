@@ -105,7 +105,7 @@ const WorkWithUsBox = () => {
       <FooterItemTitle>Work with us</FooterItemTitle>
       <LinkSubItem url="/partners" name="Partner" />
       <LinkSubItem url="/volunteers" name="Volunteer" />
-      <LinkSubItem url="/support_us" name="Donate" />
+      <LinkSubItem url="/donate" name="Donate" />
     </Box>
   )
 }
