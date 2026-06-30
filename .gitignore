@@ -50,3 +50,4 @@ yarn-error.log*
 studio/.env.development
 package-lock.json
 test.json
+.claude/CLAUDE.md

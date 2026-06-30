@@ -1,5 +1,5 @@
 /**
- * support_us.tsx
+ * donate.tsx
  * @2024 Digital Aid Seattle
  */
 import {
@@ -22,7 +22,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import PaypalImage from '../assets/paypal.png'
-import SupportUsImage from '../assets/supportUs.png'
+import DonateImage from '../assets/donate.png'
 import VenmoImage from '../assets/venmo.png'
 
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -39,7 +39,7 @@ import { useFeature } from '../services/FeatureService'
 import { testimonialService } from '../services/TestimonialService'
 
 const LABELS = {
-  HERO_TITLE: 'Support us',
+  HERO_TITLE: 'Donate',
   HERO_TXT:
     'Donate to Digital Aid Seattle and fuel our mission to uplift nonprofits with essential digital tools to support communities and create lasting change.',
   DONATE_TITLE: 'Donate now',
@@ -118,7 +118,7 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   )
 }
 
-const SupportUsSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+const DonateLayoutSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
 
@@ -178,7 +178,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
   }
 
   return (
-    <SupportUsSection backgroundColor={theme.palette.background.default}>
+    <DonateLayoutSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
         {LABELS.IMPACT_TITLE}
       </Typography>
@@ -201,11 +201,11 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
           </Box>
         ))}
       </Slider>
-    </SupportUsSection >
+    </DonateLayoutSection >
   )
 }
 
-const SupportUsPage = () => {
+const DonatePage = () => {
   const theme = useTheme()
   const { data: supportUs } = useFeature('support-us')
   const router = useRouter()
@@ -226,12 +226,12 @@ const SupportUsPage = () => {
     }
   }, [supportUs, router])
 
-  const SupportUsHeroSection = () => {
+  const DonateHeroSection = () => {
     const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
     return (
       <MastheadWithImage
-        imageSrc={SupportUsImage.src}
-        imageText="Support Us page graphic"
+        imageSrc={DonateImage.src}
+        imageText="Donate page graphic"
       >
         <>
           <Typography
@@ -255,7 +255,7 @@ const SupportUsPage = () => {
   }
 
   const DonateSection = ({ theme }) => (
-    <SupportUsSection backgroundColor={theme.palette.background.white}>
+    <DonateLayoutSection backgroundColor={theme.palette.background.white}>
       <Typography variant="headlineMedium" component="h2">
         {LABELS.DONATE_TITLE}
       </Typography>
@@ -365,7 +365,7 @@ const SupportUsPage = () => {
           </Stack>
         </Box>
       </Box>
-    </SupportUsSection>
+    </DonateLayoutSection>
   )
 
   return (
@@ -380,7 +380,7 @@ const SupportUsPage = () => {
             alignItems: 'center',
           }}
         >
-          <SupportUsHeroSection />
+          <DonateHeroSection />
           <DonateSection theme={theme} />
           <WhatPeopleSaySection theme={theme} />
         </Container>
@@ -389,4 +389,4 @@ const SupportUsPage = () => {
   )
 }
 
-export default withBasicLayout(SupportUsPage)
+export default withBasicLayout(DonatePage)

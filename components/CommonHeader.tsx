@@ -33,7 +33,7 @@ const lookup = (supportUs: any): any[] => {
   if (supportUs.status === 'fetched') {
     const items = DEFAULT_MENU_ITEMS.slice()
     if (supportUs.data) {
-      items.push({ label: 'Support us', path: '/support_us', style: 'secondary', pages: ['support_us'] })
+      items.push({ label: 'Donate', path: '/donate', style: 'secondary', pages: ['donate'] })
     }
     return items;
   }

@@ -35,9 +35,9 @@ const LABELS = {
   VOLUNTEER_DESC:
     'Make a difference by volunteering your time and expertise',
   VOLUNTEER_BTN: 'Volunteer with us',
-  SUPPORT_US_DESC:
+  DONATE_DESC:
     'Support our mission by making a financial contribution.',
-  SUPPORT_BTN: 'Support us',
+  DONATE_BTN: 'Donate',
   WHY_DAS_LABEL: 'Why Digital Aid Seattle?',
   WHY_DAS_SUBTITLE_LABEL: 'We believe in equitable technology',
   WHY_DAS_TEXT: 'Community organizations are the heartbeat of Seattle, yet too often lack the tools that drive efficiency, fundraising, and outreach. Digital Aid Seattle levels the playing field by delivering pro bono, scalable tech solutions built by local volunteers from U.S. top companies.',
@@ -161,9 +161,9 @@ const HeroSection: React.FC = () => {
                 backgroundColor: '#004138',
                 marginBottom: { xs: '32px', md: '0px' },
               }}
-              onClick={() => router.push('/support_us')}
+              onClick={() => router.push('/donate')}
             >
-              {LABELS.SUPPORT_BTN}
+              {LABELS.DONATE_BTN}
             </Button>
           </Box>
         </Box>
@@ -336,9 +336,9 @@ const OptionsSection: React.FC = () => {
         cardStyles={cardStyles}
       />
       <CardOne
-        description={LABELS.SUPPORT_US_DESC}
-        buttonText={LABELS.SUPPORT_BTN}
-        buttonLink="/support_us"
+        description={LABELS.DONATE_DESC}
+        buttonText={LABELS.DONATE_BTN}
+        buttonLink="/donate"
         icon={
           <VolunteerActivismIcon
             fontSize="large"
@@ -431,9 +431,9 @@ const HowItWorksSection: React.FC = () => {
       />
 
       <CardOne
-        description={LABELS.SUPPORT_US_DESC}
-        buttonText={LABELS.SUPPORT_BTN}
-        buttonLink="/support_us"
+        description={LABELS.DONATE_DESC}
+        buttonText={LABELS.DONATE_BTN}
+        buttonLink="/donate"
         icon={
           <VolunteerActivismIcon
             fontSize="large"
