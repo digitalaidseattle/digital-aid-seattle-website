@@ -56,7 +56,7 @@ const LinkSubItem = (props: { url: string; name: string }) => (
       marginTop: '1rem',
       display: 'block',
     }}
-    className='link'
+    className="link"
     href={props.url}
   >
     <Typography fontSize={'1rem'}>{props.name}</Typography>
@@ -111,6 +111,8 @@ const WorkWithUsBox = () => {
 }
 
 const CopyrightBox = () => {
+  const currentYear = new Date().getFullYear()
+
   return (
     <Stack gap="1rem">
       <SubText>
@@ -121,12 +123,14 @@ const CopyrightBox = () => {
           rel="noopener noreferrer"
           aria-label="Storyset, which opens in a new window."
           style={{ color: theme.palette.primary.contrastText }}
-          className='link'
+          className="link"
         >
           Storyset
         </Link>
       </SubText>
-      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
+      <FooterItemTitle suppressHydrationWarning>
+        © Digital Aid Seattle 2023 - {currentYear}
+      </FooterItemTitle>
     </Stack>
   )
 }
