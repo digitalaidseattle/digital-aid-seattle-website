@@ -56,7 +56,7 @@ const LinkSubItem = (props: { url: string; name: string }) => (
       marginTop: '1rem',
       display: 'block',
     }}
-    className='link'
+    className="link"
     href={props.url}
   >
     <Typography fontSize={'1rem'}>{props.name}</Typography>
@@ -123,13 +123,13 @@ const CopyrightBox = () => {
           rel="noopener noreferrer"
           aria-label="Storyset, which opens in a new window."
           style={{ color: theme.palette.primary.contrastText }}
-          className='link'
+          className="link"
         >
           Storyset
         </Link>
       </SubText>
       <FooterItemTitle suppressHydrationWarning>
-        © Digital Aid Seattle {currentYear}
+        © Digital Aid Seattle 2023 - {currentYear}
       </FooterItemTitle>
     </Stack>
   )

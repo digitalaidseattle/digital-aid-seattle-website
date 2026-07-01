@@ -73,8 +73,16 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
         throw new Error("Method not implemented.");
     }
 
+    upsert(_entity: T, _select?: string, _mapper?: ((json: any) => T) | undefined, _user?: User): Promise<T> {
+        throw new Error("Method not implemented.");
+    }
+
     delete(_id: Identifier, _user?: User): Promise<void> {
         throw new Error("Method not implemented.");
+    }
+
+    mapJson(json: any): T {
+        return this.mapper(json);
     }
 
     async getAll(_count?: number, _select?: string, _mapper?: (json: any) => T): Promise<T[]> {
@@ -164,4 +172,3 @@ abstract class CodaService<T extends Entity> implements EntityService<T> {
 
 export { CodaService };
 export type { CodaRow }
-
