@@ -111,6 +111,8 @@ const WorkWithUsBox = () => {
 }
 
 const CopyrightBox = () => {
+  const currentYear = new Date().getFullYear()
+
   return (
     <Stack gap="1rem">
       <SubText>
@@ -126,7 +128,9 @@ const CopyrightBox = () => {
           Storyset
         </Link>
       </SubText>
-      <FooterItemTitle>© Digital Aid Seattle 2024</FooterItemTitle>
+      <FooterItemTitle suppressHydrationWarning>
+        © Digital Aid Seattle {currentYear}
+      </FooterItemTitle>
     </Stack>
   )
 }
