@@ -58,9 +58,12 @@ const LABELS = {
   HERO_LBL: 'About us',
   HERO_TXT: 'Digital Aid Seattle comprises a group of seasoned professionals with experience in web development, software engineering, digital strategy, visual and content design, and more. We leverage this vast experience to transform the nonprofit sector—to make it more efficient, effective, and accessible to all.',
 
+  WHO_WE_ARE_LBL: 'Who we are',
+  WHO_WE_ARE_TXT: 'Digital Aid Seattle is powered by skilled volunteers—engineers, designers, strategists, and more—who give their time to help nonprofits across the greater Seattle area. Meet the people who make it happen.',
+
   WE_DO_LBL: 'What we do',
   WE_DO_TXT: 'Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology.',
-  CADRE_BTN: 'View our leadership team',
+  TEAM_BTN: 'View our team',
 
   VALUES_LBL: 'Our values',
   EXCELLENCE_TXT: 'Striving for professional excellence means taking an uncompromising approach to the service we endeavor to provide. We ensure the utmost quality in what we deliver.',
@@ -70,8 +73,8 @@ const LABELS = {
   VISION_LBL: 'Our vision',
   VISION_TXT: 'We envision a network of highly functional nonprofits in the Puget Sound area, working in tandem with one another and with the municipal government in order to enable the highest echelon of public service.',
 
-  OUR_TEAM_LBL: 'Our Team',
-  OUR_TEAM_TXT: 'The Digital Aid Seattle cadre is made up of highly skilled and committed volunteers, dedicated to serving the greater Seattle area.',
+  OUR_EXPERIENCE_LBL: 'Our experience',
+  OUR_EXPERIENCE_TXT: 'Digital Aid Seattle’s team brings together highly skilled and committed volunteers with deep experience across tech and management, dedicated to serving the greater Seattle area.',
   COMPANIES_TXT: 'We’ve worked in tech and management for companies like:',
   EXPERIENCE_TXT: 'We collectively hold experience in:',
   DEGREES_TXT: 'We have graduate and post-graduate degrees in:'
@@ -96,6 +99,7 @@ const AboutPage = () => {
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <AboutUsHeroSection />
+      <WhoWeAreSection theme={theme} />
       <WhatWeDoSection theme={theme} />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
@@ -150,9 +154,30 @@ const AboutUsHeroSection = () => {
 }
 
 
-const WhatWeDoSection = ({ theme }) => {
+const WhoWeAreSection = ({ theme }) => {
   const router = useRouter();
 
+  return (<AboutUsSection backgroundColor={theme.palette.background.default}>
+    <Typography variant="headlineMedium" component="h2">
+      {LABELS.WHO_WE_ARE_LBL}
+    </Typography>
+    <Typography variant="bodyLarge">
+      {LABELS.WHO_WE_ARE_TXT}
+    </Typography>
+    <Box textAlign="center">
+      <Button
+        aria-label='Link to team page'
+        variant="contained"
+        onClick={() => router.push('/team')}
+        sx={{ width: 'fit-content' }}
+      >
+        {LABELS.TEAM_BTN}
+      </Button>
+    </Box>
+  </AboutUsSection>)
+}
+
+const WhatWeDoSection = ({ theme }) => {
   return (<AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium" component="h2">
       {LABELS.WE_DO_LBL}
@@ -160,16 +185,6 @@ const WhatWeDoSection = ({ theme }) => {
     <Typography variant="bodyLarge">
       {LABELS.WE_DO_TXT}
     </Typography>
-    <Box textAlign="center">
-      <Button
-        aria-label='Link to cadre page'
-        variant="contained"
-        onClick={() => router.push('/cadre')}
-        sx={{ width: 'fit-content' }}
-      >
-        {LABELS.CADRE_BTN}
-      </Button>
-    </Box>
   </AboutUsSection>)
 }
 
@@ -230,10 +245,10 @@ const OurTeamSection = () => {
   return (
     <AboutUsSection backgroundColor={theme.palette.background.default}>
       <Typography variant="headlineMedium" component="h2">
-        {LABELS.OUR_TEAM_LBL}
+        {LABELS.OUR_EXPERIENCE_LBL}
       </Typography>
       <Typography variant="bodyLarge" align="center" display="block">
-        {LABELS.OUR_TEAM_TXT}
+        {LABELS.OUR_EXPERIENCE_TXT}
       </Typography>
       <Typography
         variant="titleMedium"

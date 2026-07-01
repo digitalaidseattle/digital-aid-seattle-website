@@ -16,6 +16,11 @@ const config = {
         destination: '/donate',
         permanent: false,
       },
+      {
+        source: '/cadre',
+        destination: '/team',
+        permanent: true,
+      },
     ]
   },
 }
