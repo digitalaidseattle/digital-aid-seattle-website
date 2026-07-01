@@ -4,6 +4,7 @@ import GlobalStyles from '@mui/material/GlobalStyles'
 import { theme } from 'theme/theme'
 
 import { useTheme } from '@emotion/react'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { Box, Grid, LinearProgress } from '@mui/material'
 import { ReactNode, createContext, useContext, useState } from 'react'
 import CommonFooter from './CommonFooter'
@@ -28,7 +29,7 @@ export const LoadingContext = createContext({
   setLoading: (b: boolean) => { },
 })
 
-export const BlockComponent = (props: { children: ReactNode, block: boolean }) => {
+export const BlockComponent = (props: { children: ReactNode, block: boolean }): ReactJSXElement => {
   const theme: any = useTheme();
   return (
     props.block
@@ -49,7 +50,7 @@ export const BlockComponent = (props: { children: ReactNode, block: boolean }) =
   )
 }
 
-const LoadingIndicator = () => {
+const LoadingIndicator = (): ReactJSXElement => {
   const { loading, setLoading } = useContext(LoadingContext);
 
   // creating an overlay effect
@@ -64,7 +65,7 @@ const LoadingIndicator = () => {
   )
 }
 
-const WrappdMainContainer = (props: { children: ReactNode }) => {
+const WrappdMainContainer = (props: { children: ReactNode }): ReactJSXElement => {
   const [loading, setLoading] = useState(false)
 
   return (
