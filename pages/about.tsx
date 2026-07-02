@@ -100,10 +100,10 @@ const AboutPage = () => {
     >
       <AboutUsHeroSection />
       <WhoWeAreSection theme={theme} />
-      <WhatWeDoSection theme={theme} />
+      <WhatWeDoSection />
       <OurValueSection theme={theme} />
       <OurVisionSection theme={theme} />
-      <OurTeamSection />
+      <OurExperienceSection />
     </Container>
   )
 }
@@ -177,7 +177,7 @@ const WhoWeAreSection = ({ theme }) => {
   </AboutUsSection>)
 }
 
-const WhatWeDoSection = ({ theme }) => {
+const WhatWeDoSection = () => {
   return (<AboutUsSection backgroundColor={designColor.white}>
     <Typography variant="headlineMedium" component="h2">
       {LABELS.WE_DO_LBL}
@@ -237,7 +237,7 @@ const OurVisionSection = ({ theme }) => (
   </AboutUsSection>
 )
 
-const OurTeamSection = () => {
+const OurExperienceSection = () => {
   const theme = useTheme()
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
   const isMediumOrSmallerScreen = useMediaQuery(theme.breakpoints.down('md'))

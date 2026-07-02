@@ -16,7 +16,7 @@ import {
 } from 'components/ProjectComponents'
 import { useProjects } from 'components/useProjects'
 import { useVolunteers } from 'components/useVolunteers'
-import { boardMemberNames } from 'data/boardMembers'
+import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
 import { DASProject, Volunteer } from 'types'
 import NoPhotoPerson from '../assets/no-photo-person.svg'
@@ -33,18 +33,16 @@ type MemberItem = {
   name: string
   role?: string
   image?: string
-  subtitle?: string
+  venture?: string
+  linkedInUrl?: string
 }
 
 const norm = (name: string) => name.trim().toLowerCase()
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
+function sortByFirstName<T extends { name: string }>(arr: T[]): T[] {
+  return [...arr].sort((a, b) =>
+    a.name.trim().localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
+  )
 }
 
 // Map of normalized member name -> titles of the active ventures they're on.
@@ -85,13 +83,17 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
           component="ul"
         >
           {props.members.map((member, idx) => (
+            // Card stacks title -> subtitle -> description; we show name -> role -> venture.
             <CardWithPhoto
               key={idx}
               title={member.name}
-              description={member.role ?? ''}
-              subtitle={member.subtitle}
+              description={member.venture ?? ''}
+              descriptionSx={{ fontStyle: 'italic' }}
+              subtitle={member.role}
+              subtitleSx={{ fontWeight: 500, fontSize: '14px' }}
               image={member.image}
               alt={`headshot of ${member.name}`}
+              linkedInUrl={member.linkedInUrl}
             />
           ))}
         </Box>
@@ -124,10 +126,10 @@ const TeamPage = () => {
   }, [initialized])
 
   // Split volunteers into Cadre / Contributors with no duplicates
-  // (precedence Board > Cadre > Contributors), randomized once per load.
+  // (precedence Board > Cadre > Contributors), sorted alphabetically by first name.
   useEffect(() => {
     if (volunteers) {
-      const boardNames = new Set(boardMemberNames.map((name) => norm(name)))
+      const boardNames = new Set(boardMembers.map((m) => norm(m.name)))
       const cadreVols = volunteers.filter(
         (v) =>
           v.status === 'Active' &&
@@ -142,8 +144,8 @@ const TeamPage = () => {
           !boardNames.has(norm(v.name)) &&
           !cadreNames.has(norm(v.name))
       )
-      setCadre(shuffle(cadreVols))
-      setContributors(shuffle(contributorVols))
+      setCadre(sortByFirstName(cadreVols))
+      setContributors(sortByFirstName(contributorVols))
     }
   }, [volunteers])
 
@@ -154,20 +156,24 @@ const TeamPage = () => {
   const ventureByName = useMemo(() => buildVentureMap(projects), [projects])
 
   // Board members come from the Coda volunteer data, in the order listed above.
-  const boardItems: MemberItem[] = boardMemberNames
-    .map((name) => (volunteers ?? []).find((v) => norm(v.name) === norm(name)))
-    .filter((v): v is Volunteer => !!v)
-    .map((v) => ({
+  const boardItems: MemberItem[] = boardMembers
+    .map((bm) => {
+      const v = (volunteers ?? []).find((v) => norm(v.name) === norm(bm.name))
+      return v ? { bm, v } : undefined
+    })
+    .filter((item): item is { bm: (typeof boardMembers)[number]; v: Volunteer } => !!item)
+    .map(({ bm, v }) => ({
       name: v.name,
       role: v.role,
       image: v.url || NoPhotoPerson.src,
+      linkedInUrl: bm.linkedIn ?? '',
     }))
 
   const toMemberItem = (v: Volunteer): MemberItem => ({
     name: v.name,
     role: v.role,
     image: v.url || NoPhotoPerson.src,
-    subtitle: ventureByName.get(norm(v.name))?.join(', '),
+    venture: ventureByName.get(norm(v.name))?.join(', '),
   })
 
   function getBody() {
