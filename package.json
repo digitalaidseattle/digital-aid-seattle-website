@@ -20,6 +20,7 @@
     "@mui/icons-material": "^6.5.0",
     "@mui/material": "^6.5.0",
     "@next/font": "^13.1.1",
+    "@next/third-parties": "^16.2.10",
     "@portabletext/react": "^2.0.3",
     "@sanity/image-url": "^1.2.0",
     "@sanity/orderable-document-list": "^1.1.0",
