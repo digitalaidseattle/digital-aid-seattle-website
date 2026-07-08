@@ -1,7 +1,7 @@
 /*
  * @2024 Digital Aid Seattle
  */
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Box, Stack, useTheme } from '@mui/material'
 
@@ -14,7 +14,6 @@ import {
   ProjectSection,
   ProjectSubheader,
 } from 'components/ProjectComponents'
-import { useProjects } from 'components/useProjects'
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
@@ -33,7 +32,6 @@ type MemberItem = {
   name: string
   role?: string
   image?: string
-  venture?: string
   linkedInUrl?: string
 }
 
@@ -43,21 +41,6 @@ function sortByFirstName<T extends { name: string }>(arr: T[]): T[] {
   return [...arr].sort((a, b) =>
     a.name.trim().localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
   )
-}
-
-// Map of normalized member name -> titles of the active ventures they're on.
-function buildVentureMap(projects?: DASProject[]): Map<string, string[]> {
-  const map = new Map<string, string[]>()
-  ;(projects ?? [])
-    .filter((p) => p.status === 'Active')
-    .forEach((p) => {
-      ;(p.currentTeam ?? []).forEach((m) => {
-        const key = norm(m.name)
-        if (!key) return
-        map.set(key, [...(map.get(key) ?? []), p.title])
-      })
-    })
-  return map
 }
 
 const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
@@ -83,12 +66,11 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
           component="ul"
         >
           {props.members.map((member, idx) => (
-            // Card stacks title -> subtitle -> description; we show name -> role -> venture.
+            // Card stacks title -> subtitle -> description; we show name -> role.
             <CardWithPhoto
               key={idx}
               title={member.name}
-              description={member.venture ?? ''}
-              descriptionSx={{ fontStyle: 'italic' }}
+              description=""
               subtitle={member.role}
               subtitleSx={{ fontWeight: 500, fontSize: '14px' }}
               image={member.image}
@@ -105,7 +87,6 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
 const TeamPage = () => {
   const theme = useTheme()
   const { data: volunteers, loading: volunteersLoading } = useVolunteers()
-  const { data: projects, loading: projectsLoading } = useProjects()
   const { setLoading } = useContext(LoadingContext)
 
   const [project, setProject] = useState<DASProject>()
@@ -150,10 +131,8 @@ const TeamPage = () => {
   }, [volunteers])
 
   useEffect(() => {
-    setLoading(volunteersLoading || projectsLoading)
-  }, [volunteersLoading, projectsLoading, setLoading])
-
-  const ventureByName = useMemo(() => buildVentureMap(projects), [projects])
+    setLoading(volunteersLoading)
+  }, [volunteersLoading, setLoading])
 
   // Board members come from the Coda volunteer data, in the order listed above.
   const boardItems: MemberItem[] = boardMembers
@@ -173,7 +152,6 @@ const TeamPage = () => {
     name: v.name,
     role: v.role,
     image: v.url || NoPhotoPerson.src,
-    venture: ventureByName.get(norm(v.name))?.join(', '),
   })
 
   function getBody() {
