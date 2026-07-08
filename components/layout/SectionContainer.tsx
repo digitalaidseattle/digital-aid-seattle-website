@@ -1,6 +1,8 @@
-import { Box } from '@mui/material'
-import { theme } from 'theme/theme'
+import { Box, useTheme } from '@mui/material';
 const SectionContainer = ({ backgroundColor, children }) => {
+
+  const theme = useTheme();
+
   return (
     <Box
       sx={{

@@ -6,7 +6,7 @@
 /* eslint-disable @next/next/no-img-element */
 import CloseIcon from '@mui/icons-material/Close'
 import MenuIcon from '@mui/icons-material/Menu'
-import { Box, Button, List, Typography, useMediaQuery } from '@mui/material'
+import { Box, Button, List, Typography, useMediaQuery, useTheme } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem'
 import Toolbar from '@mui/material/Toolbar'
 import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
-import { theme } from 'theme/theme'
 
 import { useFeature } from '../services/FeatureService'
 import OSLogo from '../assets/darkThemeLogo.svg'
@@ -43,6 +42,8 @@ const lookup = (supportUs: any): any[] => {
 }
 
 const CommonHeader = () => {
+  const theme = useTheme();
+
   // React states for handling the hamburger menu.
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down('lg'))

@@ -1,35 +1,43 @@
-import styled from '@emotion/styled'
 import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
-import { theme } from 'theme/theme'
 
-import { useTheme } from '@emotion/react'
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import { Box, Grid, LinearProgress } from '@mui/material'
+import { Box, Grid, LinearProgress, styled, useTheme } from '@mui/material'
 import { ReactNode, createContext, useContext, useState } from 'react'
 import CommonFooter from './CommonFooter'
 import CommonHeader from './CommonHeader'
 
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
-export const MainContainer = styled.main`
-  background: ${theme.palette.primary.contrastText};
-  position: relative;
-  width: 100%;
-`
+// export const MainContainer = styled.main`
+//   background: ${theme.palette.primary.contrastText};
+//   position: relative;
+//   width: 100%;
+// `
 
-export const FooterContainer = styled.footer`
-  background: ${theme.palette.secondary.contrastText};
-  bottom: 0;
-  width: 100%;
-`
+const MainContainer = styled(Box)(({ theme }) => ({
+  background: theme.palette.primary.contrastText,
+  position: 'relative',
+  width: '100%'
+}))
+
+// export const FooterContainer = styled.footer`
+//   background: ${theme.palette.secondary.contrastText};
+//   bottom: 0;
+//   width: 100%;
+// `
+
+const FooterContainer = styled(Box)(({ theme }) => ({
+  background: theme.palette.secondary.contrastText,
+  bottom: 0,
+  width: '100%',
+}))
 
 export const LoadingContext = createContext({
   loading: true,
   setLoading: (b: boolean) => { },
 })
 
-export const BlockComponent = (props: { children: ReactNode, block: boolean }): ReactJSXElement => {
+export const BlockComponent = (props: { children: ReactNode, block: boolean }): JSX.Element => {
   const theme: any = useTheme();
   return (
     props.block
@@ -39,7 +47,7 @@ export const BlockComponent = (props: { children: ReactNode, block: boolean }): 
         direction="column"
         alignItems="center"
         justifyContent="center"
-        bgcolor={theme.palette.background.default}
+        bgcolor={theme.palette.primary.default}
         sx={{ minHeight: '100vh', opacity: '0.1' }}
       >
         <Grid item xs={3}>
@@ -50,7 +58,7 @@ export const BlockComponent = (props: { children: ReactNode, block: boolean }): 
   )
 }
 
-const LoadingIndicator = (): ReactJSXElement => {
+const LoadingIndicator = (): JSX.Element => {
   const { loading, setLoading } = useContext(LoadingContext);
 
   // creating an overlay effect
@@ -65,7 +73,7 @@ const LoadingIndicator = (): ReactJSXElement => {
   )
 }
 
-const WrappdMainContainer = (props: { children: ReactNode }): ReactJSXElement => {
+const WrappdMainContainer = (props: { children: ReactNode }): JSX.Element => {
   const [loading, setLoading] = useState(false)
 
   return (
