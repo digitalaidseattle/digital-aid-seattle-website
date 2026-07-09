@@ -36,7 +36,7 @@ export const BlockComponent = (props: { children: ReactNode, block: boolean }): 
         direction="column"
         alignItems="center"
         justifyContent="center"
-        bgcolor={theme.palette.primary.default}
+        bgcolor={theme.palette.background.default}
         sx={{ minHeight: '100vh', opacity: '0.1' }}
       >
         <Grid item xs={3}>
