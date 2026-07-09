@@ -8,23 +8,12 @@ import CommonHeader from './CommonHeader'
 
 // bottom padding is to compensate for footer
 // added background for now to override the default tailwind..
-// export const MainContainer = styled.main`
-//   background: ${theme.palette.primary.contrastText};
-//   position: relative;
-//   width: 100%;
-// `
 
 const MainContainer = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.contrastText,
   position: 'relative',
   width: '100%'
 }))
-
-// export const FooterContainer = styled.footer`
-//   background: ${theme.palette.secondary.contrastText};
-//   bottom: 0;
-//   width: 100%;
-// `
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   background: theme.palette.secondary.contrastText,
