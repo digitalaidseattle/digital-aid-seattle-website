@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material'
 import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
 import { usePathname } from 'next/navigation'
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -27,6 +28,7 @@ const TAG_NAMES = {
   privacy: 'Privacy policy | Digital Aid Seattle',
   cadre: 'The Cadre | Digital Aid Seattle',
 }
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
@@ -75,6 +77,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
         <Analytics />
+        <GoogleAnalytics gaId={GA_ID} />
       </ThemeProvider>
     </>
   )
