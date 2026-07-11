@@ -13,20 +13,20 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material'
-import MastheadWithImage from 'components/MastheadWithImage'
+import EmailFormContainer from 'components/email-form/EmailFormContainer'
 import {
   BlockComponent,
   LoadingContext,
   withBasicLayout,
 } from 'components/layouts'
-import React, { useContext, useEffect, useState } from 'react'
-import NewslettersImage from '../assets/newsletters.png'
-import EmailFormContainer from 'components/email-form/EmailFormContainer'
+import MastheadWithImage from 'components/MastheadWithImage'
 import NewsletterList from 'components/NewsletterList'
-import { fetchNewsletters } from '../services/NewsletterService'
-import { DASNewsletter } from 'types'
 import { useRouter } from 'next/router'
+import { useContext, useEffect, useState } from 'react'
+import { DASNewsletter } from 'types'
+import NewslettersImage from '../assets/newsletters.png'
 import { useFeature } from '../services/FeatureService'
+import { fetchNewsletters } from '../services/NewsletterService'
 
 const LABELS = {
   HERO_TITLE: 'Newsletters',

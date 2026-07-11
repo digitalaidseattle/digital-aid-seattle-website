@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 
-import { Box, Container, Grid, Stack, styled, Typography } from '@mui/material'
+import { Box, Container, Grid, Stack, styled, Typography, useTheme } from '@mui/material'
 import Link from 'next/link'
-import { theme } from 'theme/theme'
 
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
 import { useFeature } from 'services/FeatureService'
@@ -49,19 +48,22 @@ const GridItem = ({ md, children }: GridItemProps) =>
     </Grid>
   )
 
-const LinkSubItem = (props: { url: string; name: string }) => (
-  <Link
-    style={{
-      color: theme.palette.primary.contrastText,
-      marginTop: '1rem',
-      display: 'block',
-    }}
-    className="link"
-    href={props.url}
-  >
-    <Typography fontSize={'1rem'}>{props.name}</Typography>
-  </Link>
-)
+const LinkSubItem = (props: { url: string; name: string }) => {
+  const theme = useTheme();
+  return (
+    <Link
+      style={{
+        color: theme.palette.primary.contrastText,
+        marginTop: '1rem',
+        display: 'block',
+      }}
+      className="link"
+      href={props.url}
+    >
+      <Typography fontSize={'1rem'}>{props.name}</Typography>
+    </Link>
+  )
+}
 
 const LogoBox = () => {
   return (
@@ -112,6 +114,7 @@ const WorkWithUsBox = () => {
 
 const CopyrightBox = () => {
   const currentYear = new Date().getFullYear()
+  const theme = useTheme();
 
   return (
     <Stack gap="1rem">
@@ -150,6 +153,8 @@ const SocialMediaBox = () => {
 }
 
 const linkedInLink = () => {
+  const theme = useTheme();
+
   return (
     <Link
       href="https://www.linkedin.com/company/digitalseattle/"
@@ -167,6 +172,8 @@ const linkedInLink = () => {
 }
 
 const githubLink = () => {
+  const theme = useTheme();
+
   return (
     <Link
       href="https://github.com/digitalaidseattle"
@@ -184,6 +191,8 @@ const githubLink = () => {
 }
 
 const facebookLink = () => {
+  const theme = useTheme();
+
   return (
     <Link
       href="https://facebook.com/digitalaidseattle"
@@ -201,6 +210,8 @@ const facebookLink = () => {
 }
 
 const instagramLink = () => {
+  const theme = useTheme();
+
   return (
     <Link
       href="https://instagram.com/digitalaidseattle"
