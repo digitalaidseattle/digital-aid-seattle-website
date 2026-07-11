@@ -32,9 +32,8 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined'
 import ScreenSearchDesktopOutlinedIcon from '@mui/icons-material/ScreenSearchDesktopOutlined'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
-import { Box, Chip, Stack } from '@mui/material'
+import { Box, Chip, Stack, useTheme } from '@mui/material'
 import { ReactNode, useEffect, useState } from 'react'
-import { theme } from 'theme/theme'
 import { DASVolunteerRoleBasicInfo } from 'types'
 
 import ListItemWithIcon from './list/ListItemWithIcon'
@@ -103,6 +102,8 @@ const RoleListing = ({
   role: any
   showLink?: boolean
 }) => {
+  const theme = useTheme();
+
   const RoleBase = (
     {
       sxProps

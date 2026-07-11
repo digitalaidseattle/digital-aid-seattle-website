@@ -17,6 +17,13 @@ export const client = createClient({
   apiVersion,
   useCdn: false,
 })
-const config = defineCliConfig({ api: { projectId, dataset } })
+const config = defineCliConfig(
+  {
+    api: { projectId, dataset },
+    reactStrictMode: true,
+    // Force the compiler to output code compatible with React 18
+    reactCompiler: { target: '18' }
+  },
+)
 
 export default config
