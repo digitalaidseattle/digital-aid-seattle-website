@@ -51,7 +51,6 @@ import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
 import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 import { useEffect, useState } from 'react'
 import { pageCopyService } from 'services/PageCopyService'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const LABELS = {

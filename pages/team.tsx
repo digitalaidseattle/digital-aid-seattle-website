@@ -57,7 +57,6 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
         <Box
           sx={{
             display: 'grid',
-            gridAutoFlow: 'columns',
             gridTemplateColumns: 'repeat(auto-fill, minmax(12.25rem, 1fr))',
             justifyContent: 'center',
             gap: '2rem',
@@ -67,16 +66,17 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
         >
           {props.members.map((member, idx) => (
             // Card stacks title -> subtitle -> description; we show name -> role.
-            <CardWithPhoto
-              key={idx}
-              title={member.name}
-              description=""
-              subtitle={member.role}
-              subtitleSx={{ fontWeight: 500, fontSize: '14px' }}
-              image={member.image}
-              alt={`headshot of ${member.name}`}
-              linkedInUrl={member.linkedInUrl}
-            />
+            <Box component="li" key={idx} sx={{ listStyle: 'none' }}>
+              <CardWithPhoto
+                title={member.name}
+                description=""
+                subtitle={member.role}
+                subtitleSx={{ fontWeight: 500, fontSize: '14px' }}
+                image={member.image}
+                alt={`headshot of ${member.name}`}
+                linkedInUrl={member.linkedInUrl}
+              />
+            </Box>
           ))}
         </Box>
       </ProjectSection>
