@@ -136,16 +136,13 @@ const TeamPage = () => {
 
   // Board members come from the Coda volunteer data, in the order listed above.
   const boardItems: MemberItem[] = boardMembers
-    .map((bm) => {
-      const v = (volunteers ?? []).find((v) => norm(v.name) === norm(bm.name))
-      return v ? { bm, v } : undefined
-    })
-    .filter((item): item is { bm: (typeof boardMembers)[number]; v: Volunteer } => !!item)
-    .map(({ bm, v }) => ({
+    .map((bm) => (volunteers ?? []).find((v) => norm(v.name) === norm(bm.name)))
+    .filter((v): v is Volunteer => !!v)
+    .map((v) => ({
       name: v.name,
       role: v.role,
       image: v.url || NoPhotoPerson.src,
-      linkedInUrl: bm.linkedIn ?? '',
+      linkedInUrl: v.linkedIn,
     }))
 
   const toMemberItem = (v: Volunteer): MemberItem => ({
