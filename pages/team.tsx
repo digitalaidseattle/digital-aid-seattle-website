@@ -28,6 +28,9 @@ const LABELS = {
   CONTRIBUTORS_LBL: 'Contributors',
 }
 
+const DIRECTOR = 'director'
+const CEO = 'ceo'
+
 type MemberItem = {
   name: string
   role?: string
@@ -73,6 +76,7 @@ const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
                 subtitle={member.role}
                 subtitleSx={{ fontWeight: 500, fontSize: '14px' }}
                 image={member.image}
+                fallbackImage={NoPhotoPerson.src}
                 alt={`headshot of ${member.name}`}
                 linkedInUrl={member.linkedInUrl}
               />
@@ -91,6 +95,7 @@ const TeamPage = () => {
 
   const [project, setProject] = useState<DASProject>()
   const [initialized, setInitialized] = useState<boolean>(false)
+  const [board, setBoard] = useState<Volunteer[]>([])
   const [cadre, setCadre] = useState<Volunteer[]>([])
   const [contributors, setContributors] = useState<Volunteer[]>([])
 
@@ -106,25 +111,36 @@ const TeamPage = () => {
     }
   }, [initialized])
 
-  // Split volunteers into Cadre / Contributors with no duplicates
-  // (precedence Board > Cadre > Contributors), sorted alphabetically by first name.
   useEffect(() => {
     if (volunteers) {
       const boardNames = new Set(boardMembers.map((m) => norm(m.name)))
+      const isBoardMember = (v: Volunteer) =>
+        v.cadreContributor.some((c) => norm(c) === DIRECTOR) ||
+        boardNames.has(norm(v.name))
+      const boardVols = volunteers.filter(isBoardMember)
+      const boardSet = new Set(boardVols.map((v) => norm(v.name)))
       const cadreVols = volunteers.filter(
         (v) =>
           v.status === 'Active' &&
           v.cadreContributor.includes('Cadre') &&
-          !boardNames.has(norm(v.name))
+          !boardSet.has(norm(v.name))
       )
       const cadreNames = new Set(cadreVols.map((v) => norm(v.name)))
       const contributorVols = volunteers.filter(
         (v) =>
           v.status === 'Active' &&
           v.cadreContributor.includes('Contributor') &&
-          !boardNames.has(norm(v.name)) &&
+          !boardSet.has(norm(v.name)) &&
           !cadreNames.has(norm(v.name))
       )
+      const isCeo = (v: Volunteer) => (v.role || '').toLowerCase().includes(CEO)
+      const sortedBoard = [...boardVols].sort((a, b) => {
+        const aCeo = isCeo(a)
+        const bCeo = isCeo(b)
+        if (aCeo !== bCeo) return aCeo ? -1 : 1
+        return a.name.trim().localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
+      })
+      setBoard(sortedBoard)
       setCadre(sortByFirstName(cadreVols))
       setContributors(sortByFirstName(contributorVols))
     }
@@ -134,28 +150,22 @@ const TeamPage = () => {
     setLoading(volunteersLoading)
   }, [volunteersLoading, setLoading])
 
-  // Board members come from the Coda volunteer data, in the order listed above.
-  const boardItems: MemberItem[] = boardMembers
-    .map((bm) => (volunteers ?? []).find((v) => norm(v.name) === norm(bm.name)))
-    .filter((v): v is Volunteer => !!v)
-    .map((v) => ({
-      name: v.name,
-      role: v.role,
-      image: v.url || NoPhotoPerson.src,
-      linkedInUrl: v.linkedIn,
-    }))
-
   const toMemberItem = (v: Volunteer): MemberItem => ({
     name: v.name,
     role: v.role,
-    image: v.url || NoPhotoPerson.src,
+    image: v.url,
+  })
+
+  const toBoardItem = (v: Volunteer): MemberItem => ({
+    ...toMemberItem(v),
+    linkedInUrl: v.linkedIn,
   })
 
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack gap={{ xs: '64px', lg: '80px' }} maxWidth="880px" margin="0 auto">
-          <MemberGridSection title={LABELS.BOARD_LBL} members={boardItems} />
+          <MemberGridSection title={LABELS.BOARD_LBL} members={board.map(toBoardItem)} />
           <MemberGridSection
             title={LABELS.CADRE_LBL}
             members={cadre.map(toMemberItem)}

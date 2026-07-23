@@ -10,6 +10,7 @@ type CardWithPhotoProps = {
   title: string
   description: string
   image?: string
+  fallbackImage?: string
   imageWidth?: number
   alt?: string
   subtitle?: string
@@ -26,6 +27,7 @@ const CardWithPhoto = ({
   title,
   description,
   image,
+  fallbackImage,
   imageWidth = 196,
   alt = '',
   subtitle,
@@ -37,6 +39,7 @@ const CardWithPhoto = ({
   onClick,
 }: CardWithPhotoProps) => {
   const theme = useTheme()
+  const src = image || fallbackImage
 
   return (
     <Card
@@ -51,15 +54,19 @@ const CardWithPhoto = ({
       }}
       onClick={onClick}
     >
-      {image &&
+      {src &&
         <CardMedia
           sx={mediaSx ?? {
             minWidth: imageWidth,
             aspectRatio: '1/1',
           }}
           component="img"
-          image={image}
+          image={src}
           alt={alt}
+          onError={(e) => {
+            const img = e.target as HTMLImageElement
+            if (fallbackImage && !img.src.endsWith(fallbackImage)) img.src = fallbackImage
+          }}
         />
       }
       <CardContent
