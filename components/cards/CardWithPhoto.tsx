@@ -64,7 +64,7 @@ const CardWithPhoto = ({
           image={src}
           alt={alt}
           onError={(e) => {
-            const img = e.target as HTMLImageElement
+            const img = e.currentTarget
             if (fallbackImage && !img.src.endsWith(fallbackImage)) img.src = fallbackImage
           }}
         />

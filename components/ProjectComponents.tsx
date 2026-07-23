@@ -350,14 +350,15 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
         >
           {members.map((person, idx) => {
             const url = person.url ? person.url : person.image ? urlForImage(person.image).url() : undefined;
-            return <CardWithPhoto
-              key={idx}
-              title={person.name}
-              description={person.role}
-              image={url}
-              fallbackImage={NoPhotoPerson.src}
-              alt={`headshot of ${person.name}`}
-            />
+            return <Box component="li" key={idx}>
+              <CardWithPhoto
+                title={person.name}
+                description={person.role}
+                image={url}
+                fallbackImage={NoPhotoPerson.src}
+                alt={`headshot of ${person.name}`}
+              />
+            </Box>
           })}
         </Box>
       </ProjectSection>
