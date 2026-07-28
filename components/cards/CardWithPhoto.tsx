@@ -3,8 +3,8 @@ import { LinkedIn } from '@mui/icons-material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import { designColor } from 'theme/theme'
 
 type CardWithPhotoProps = {
   title: string
@@ -15,7 +15,7 @@ type CardWithPhotoProps = {
   alt?: string
   subtitle?: string
   // undefined -> no LinkedIn icon; '' -> static icon (no link); url -> clickable icon
-  linkedInUrl?: string
+  linkedInUrl?: stringM
   titleSx?: Record<string, any>
   subtitleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
@@ -38,7 +38,6 @@ const CardWithPhoto = ({
   mediaSx,
   onClick,
 }: CardWithPhotoProps) => {
-  const theme = useTheme()
   const src = image || fallbackImage
 
   return (
@@ -108,13 +107,13 @@ const CardWithPhoto = ({
               onClick={(e) => e.stopPropagation()}
               sx={{ alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }}
             >
-              <LinkedIn sx={{ color: theme.palette.text.primary }} fontSize="medium" />
+              <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
             </Link>
           ) : (
             <LinkedIn
               titleAccess={`${title} on LinkedIn`}
               sx={{
-                color: theme.palette.text.primary,
+                color: designColor.linkedInBlue,
                 alignSelf: 'flex-start',
                 marginTop: 'auto',
               }}
