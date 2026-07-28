@@ -15,7 +15,7 @@ type CardWithPhotoProps = {
   alt?: string
   subtitle?: string
   // undefined -> no LinkedIn icon; '' -> static icon (no link); url -> clickable icon
-  linkedInUrl?: stringM
+  linkedInUrl?: string
   titleSx?: Record<string, any>
   subtitleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
