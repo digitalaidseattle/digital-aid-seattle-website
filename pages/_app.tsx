@@ -26,7 +26,7 @@ const TAG_NAMES = {
   about: 'About us | Digital Aid Seattle',
   projects: 'Projects | Digital Aid Seattle',
   privacy: 'Privacy policy | Digital Aid Seattle',
-  cadre: 'The Cadre | Digital Aid Seattle',
+  team: 'The Team | Digital Aid Seattle',
 }
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 

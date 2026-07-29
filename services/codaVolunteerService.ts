@@ -12,6 +12,15 @@ import { CodaRow, CodaService } from './codaService';
 const CODA_DOC_ID = "24QYb2RP0g";
 const TABLE_ID = 'grid-4vzF6VuaPV';
 
+// Coda returns the 'Linkedin URL' column as a rich WebPage object ({ url }) or a
+// plain string. Normalize to a URL string, adding a scheme when one is missing.
+function extractLinkedIn(value: any): string {
+    if (!value) return ''
+    const raw = (typeof value === 'string' ? value : value.url ?? '').replaceAll('```', '').trim()
+    if (!raw) return ''
+    return /^https?:\/\//i.test(raw) ? raw : `https://${raw}`
+}
+
 function coda2Entity(row: CodaRow): Volunteer {
     const entity = {
         id: row.id,
@@ -20,6 +29,7 @@ function coda2Entity(row: CodaRow): Volunteer {
         url: row.values['Pic'] ? row.values['Pic'][0].url : '',
         cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
         status: CodaService.removeBackTicks(row.values['Status']),
+        linkedIn: extractLinkedIn(row.values['Linkedin URL']),
     } as Volunteer;
     return entity;
 }

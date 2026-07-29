@@ -100,6 +100,7 @@ export const designColor = {
   white: neutralPalette[100],
   black: '#00211F',
   background: neutralPalette[97],
+  linkedInBlue: '#0A66C2',
   green: {
     main: greenPalette[17],
     light: greenPalette[30],
