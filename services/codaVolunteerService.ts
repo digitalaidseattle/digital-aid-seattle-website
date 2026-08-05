@@ -22,16 +22,22 @@ function extractLinkedIn(value: any): string {
 }
 
 function coda2Entity(row: CodaRow): Volunteer {
-    const entity = {
-        id: row.id,
-        name: CodaService.removeBackTicks(row.values['Name']),
-        role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
-        url: row.values['Pic'] ? row.values['Pic'][0].url : '',
-        cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
-        status: CodaService.removeBackTicks(row.values['Status']),
-        linkedIn: extractLinkedIn(row.values['Linkedin URL']),
-    } as Volunteer;
-    return entity;
+    try {
+        const entity = {
+            id: row.id,
+            name: CodaService.removeBackTicks(row.values['Name']),
+            role: row.values['Position'] ? row.values['Position'].replaceAll('```', '') : '',
+            url: (row.values['Pic'] && row.values['Pic'].length > 0) ? row.values['Pic'][0].url : '',
+            cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
+            status: CodaService.removeBackTicks(row.values['Status']),
+            linkedIn: extractLinkedIn(row.values['Linkedin URL']),
+        } as Volunteer;
+        return entity;
+
+    } catch (err) {
+        console.log(row)
+        throw err
+    }
 }
 
 class CodaVolunteerService extends CodaService<Volunteer> {
