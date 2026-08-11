@@ -60,10 +60,9 @@ const CardProject = ({ project }: CardProjectProps) => {
               alt={project.title + " logo"}
               sx={{
                 objectFit: 'contain',
-                width: { md: '7rem', lg: '100%' },
+                width: { xs: '7rem', lg: '100%' },
                 aspectRatio: '1 / 1',
                 borderRadius: '8px',
-                display: { xs: 'none', md: 'block' },
                 backgroundColor: 'white',
               }}
             />
