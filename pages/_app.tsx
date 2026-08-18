@@ -28,7 +28,8 @@ const TAG_NAMES = {
   privacy: 'Privacy policy | Digital Aid Seattle',
   team: 'The Team | Digital Aid Seattle',
 }
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "").split(",");
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
@@ -78,6 +79,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <Analytics />
         <GoogleAnalytics gaId={GA_ID} />
+        {GA_CAMPAIGN_IDS.map(ID => <GoogleAnalytics key={ID.trim()} gaId={ID.trim()} />)}
       </ThemeProvider>
     </>
   )
