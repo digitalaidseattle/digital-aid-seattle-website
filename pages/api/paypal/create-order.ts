@@ -1,56 +1,54 @@
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET
-const PAYPAL_BASE_URL = process.env.PAYPAL_BASE_URL ?? 'https://api-m.paypal.com'
-
-const getPayPalAccessToken = async () => {
-  if (!PAYPAL_CLIENT_ID || !PAYPAL_SECRET) {
-    throw new Error('PayPal client credentials are not configured.')
-  }
-
-  const basicAuth = Buffer.from(
-    `${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`
-  ).toString('base64')
-
-  const tokenResponse = await fetch(`${PAYPAL_BASE_URL}/v1/oauth2/token`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-    }),
-  })
-
-  if (!tokenResponse.ok) {
-    throw new Error('Unable to authenticate with PayPal.')
-  }
-
-  const tokenData = await tokenResponse.json()
-  return tokenData.access_token as string
+const getPayPalBase = () => {
+  const env = process.env.PAYPAL_ENV ?? 'sandbox'
+  return env === 'live' ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com'
 }
 
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
+async function getAccessToken() {
+  const clientId = process.env.PAYPAL_CLIENT_ID
+  const secret = process.env.PAYPAL_CLIENT_SECRET
+
+  if (!clientId || !secret) {
+    throw new Error('PayPal credentials not configured on server.')
+  }
+
+  const tokenUrl = `${getPayPalBase()}/v1/oauth2/token`
+  const res = await fetch(tokenUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${clientId}:${secret}`).toString('base64')}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: 'grant_type=client_credentials',
+  })
+
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`Unable to fetch PayPal access token: ${err}`)
+  }
+
+  const data = await res.json()
+  return data.access_token
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
+    res.setHeader('Allow', 'POST')
+    return res.status(405).end('Method Not Allowed')
   }
 
   try {
-    const { amount = 10, currency = 'USD', donationLabel = 'Digital Aid Seattle donation' } = req.body ?? {}
-    const numericAmount = Number(amount)
+    const { amount, currency = 'USD', donationLabel } = req.body
 
-    if (!Number.isFinite(numericAmount) || numericAmount < 10) {
-      return res.status(400).json({ error: 'A donation amount of at least $10 is required.' })
+    if (!amount) {
+      return res.status(400).json({ error: 'Missing amount' })
     }
 
-    const accessToken = await getPayPalAccessToken()
+    const accessToken = await getAccessToken()
 
-    const orderResponse = await fetch(`${PAYPAL_BASE_URL}/v2/checkout/orders`, {
+    const createUrl = `${getPayPalBase()}/v2/checkout/orders`
+    const createRes = await fetch(createUrl, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -62,36 +60,23 @@ export default async function handler(
           {
             amount: {
               currency_code: currency,
-              value: numericAmount.toFixed(2),
+              value: Number(amount).toFixed(2),
             },
-            description: donationLabel,
-            custom_id: 'digital-aid-seattle-donation',
+            description: donationLabel ?? 'Donation',
           },
         ],
-        application_context: {
-          brand_name: 'Digital Aid Seattle',
-          shipping_preference: 'NO_SHIPPING',
-          user_action: 'PAY_NOW',
-          return_url: `${req.headers.origin ?? 'https://www.digitalaidseattle.org'}/donate`,
-          cancel_url: `${req.headers.origin ?? 'https://www.digitalaidseattle.org'}/donate`,
-        },
       }),
     })
 
-    const orderData = await orderResponse.json()
+    const createData = await createRes.json()
 
-    if (!orderResponse.ok) {
-      return res.status(500).json({
-        error: orderData?.error?.message ?? 'Unable to create PayPal order.',
-      })
+    if (!createRes.ok) {
+      return res.status(500).json({ error: createData })
     }
 
-    return res.status(200).json({
-      orderId: orderData.id,
-    })
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : 'Unable to create PayPal order.'
-    return res.status(500).json({ error: message })
+    return res.status(200).json({ orderId: createData.id })
+  } catch (err: any) {
+    console.error('create-order error', err)
+    return res.status(500).json({ error: err.message ?? String(err) })
   }
 }
