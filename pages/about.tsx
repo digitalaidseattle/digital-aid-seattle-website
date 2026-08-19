@@ -39,16 +39,10 @@ import { designColor } from 'theme/theme'
 
 import MastheadWithImage from 'components/MastheadWithImage'
 import AboutUsImage from '../assets/aboutUs.png'
-import AppleLogo from '../assets/aboutUsIcons/apple.svg'
 import GeneticsIcon from '../assets/aboutUsIcons/genetics.svg'
-import GoogleLogo from '../assets/aboutUsIcons/google.svg'
 import HCIIcon from '../assets/aboutUsIcons/hci.svg'
-import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.svg'
-import NOAALogo from '../assets/aboutUsIcons/noaa.svg'
 import NonProfitManagementIcon from '../assets/aboutUsIcons/non_profit_management.svg'
 import PhysicsIcon from '../assets/aboutUsIcons/physics.svg'
-import StarbucksLogo from '../assets/aboutUsIcons/starbucks.svg'
-import VerizonLogo from '../assets/aboutUsIcons/verizon.svg'
 import { useEffect, useState } from 'react'
 import { pageCopyService } from 'services/PageCopyService'
 import { useRouter } from 'next/router'
@@ -74,7 +68,6 @@ const LABELS = {
 
   OUR_EXPERIENCE_LBL: 'Our experience',
   OUR_EXPERIENCE_TXT: 'Digital Aid Seattle’s team brings together highly skilled and committed volunteers with deep experience across tech and management, dedicated to serving the greater Seattle area.',
-  COMPANIES_TXT: 'We’ve worked in tech and management for companies like:',
   EXPERIENCE_TXT: 'We collectively hold experience in:',
   DEGREES_TXT: 'We have graduate and post-graduate degrees in:'
 }
@@ -255,24 +248,6 @@ const OurExperienceSection = () => {
         display="block"
         component="h3"
       >
-        {LABELS.COMPANIES_TXT}
-      </Typography>
-      <Grid container spacing={2} component="ul">
-        {companiesList.map((item) => (
-          <Grid item xs={6} md={4} key={item.label}>
-            <ListItemWithIcon
-              listIcon={item.icon}
-              listText={!isMediumOrSmallerScreen && item.label}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Typography
-        variant="titleMedium"
-        align="center"
-        display="block"
-        component="h3"
-      >
         {LABELS.EXPERIENCE_TXT}
       </Typography>
       <Grid container spacing={2} component="ul">
@@ -308,33 +283,6 @@ const OurExperienceSection = () => {
     </AboutUsSection>
   )
 }
-
-const companiesList = [
-  {
-    label: 'Apple',
-    icon: <img src={AppleLogo.src} alt="Apple logo" width="40px" />,
-  },
-  {
-    label: 'Google',
-    icon: <img src={GoogleLogo.src} alt="Google logo" width="40px" />,
-  },
-  {
-    label: 'Verizon',
-    icon: <img src={VerizonLogo.src} alt="Verizon logo" width="40px" />,
-  },
-  {
-    label: 'Microsoft',
-    icon: <img src={MicrosoftLogo.src} alt="Microsoft logo" width="40px" />,
-  },
-  {
-    label: 'Starbucks',
-    icon: <img src={StarbucksLogo.src} alt="Starbucks logo" width="40px" />,
-  },
-  {
-    label: 'NOAA',
-    icon: <img src={NOAALogo.src} alt="NOAA logo" width="40px" />,
-  },
-]
 
 const experienceContent = [
   {
