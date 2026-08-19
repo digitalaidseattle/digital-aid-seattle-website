@@ -91,7 +91,7 @@ const CardOne = ({
       }}
     >
       {cardHref && <CardActionArea onClick={() => router.push(cardHref)}>{content}</CardActionArea>}
-      {!cardHref && <CardContent>{content}</CardContent>}
+      {!cardHref && <CardContent sx={{ flexGrow: 1 }}>{content}</CardContent>}
     </Card>
   )
 }
