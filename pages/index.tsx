@@ -363,10 +363,10 @@ const WhyDASSection: React.FC = () => {
     }}
     maxWidth={'880px'}
   >
-    <Typography variant="headlineLarge" component="h2">
+    <Typography variant="headlineLarge" component="h2" textAlign={'center'}>
       {LABELS.WHY_DAS_LABEL}
     </Typography>
-    <Typography variant='labelLarge'>
+    <Typography variant='labelLarge' textAlign={'center'}>
       {LABELS.WHY_DAS_SUBTITLE_LABEL}
     </Typography>
     <Typography textAlign={'center'} >
@@ -443,7 +443,7 @@ const HowItWorksSection: React.FC = () => {
         cardStyles={cardStyles}
       />
     </CardGridContainer>
-    <Typography variant='labelLarge'>
+    <Typography variant='labelLarge' textAlign={'center'}>
       {LABELS.HOW_SUBTITLE_LABEL}
     </Typography>
     <Button
@@ -548,13 +548,13 @@ const AlliesSection: React.FC = () => {
       <Typography variant="headlineLarge" component="h2">
         {LABELS.ALLIES_LABEL}
       </Typography>
-      <Stack direction={'row'} spacing={4} >
+      <Stack direction={'row'} spacing={4} useFlexGap flexWrap="wrap" justifyContent="center" >
         {allies.map((item, index) => (
           <Avatar
             key={`logo-${index}`}
             alt={item.label}
             src={item.icon}
-            sx={{ width: 124, height: 124 }} />
+            sx={{ width: 80, height: 80 }} />
         ))}
       </Stack>
     </Stack>
