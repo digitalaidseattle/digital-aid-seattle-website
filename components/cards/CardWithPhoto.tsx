@@ -55,7 +55,7 @@ const CardWithPhoto = ({
         sx={
           linkedInPlacement === 'below'
             ? { alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }
-            : { verticalAlign: 'middle' }
+            : { verticalAlign: '0.15em' }
         }
       >
         <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
@@ -67,7 +67,7 @@ const CardWithPhoto = ({
           color: designColor.linkedInBlue,
           ...(linkedInPlacement === 'below'
             ? { alignSelf: 'flex-start', marginTop: 'auto' }
-            : { verticalAlign: 'middle' }),
+            : { verticalAlign: '0.15em' }),
         }}
         fontSize="medium"
       />
