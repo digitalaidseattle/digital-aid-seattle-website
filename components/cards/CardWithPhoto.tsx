@@ -16,6 +16,8 @@ type CardWithPhotoProps = {
   subtitle?: string
   // undefined -> no LinkedIn icon; '' -> static icon (no link); url -> clickable icon
   linkedInUrl?: string
+  // 'below' (default) keeps the icon at the card bottom; 'inline' places it beside the title
+  linkedInPlacement?: 'below' | 'inline'
   titleSx?: Record<string, any>
   subtitleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
@@ -32,6 +34,7 @@ const CardWithPhoto = ({
   alt = '',
   subtitle,
   linkedInUrl,
+  linkedInPlacement = 'below',
   titleSx,
   subtitleSx,
   descriptionSx,
@@ -39,6 +42,36 @@ const CardWithPhoto = ({
   onClick,
 }: CardWithPhotoProps) => {
   const src = image || fallbackImage
+
+  const linkedInIcon = linkedInUrl !== undefined &&
+    (linkedInUrl ? (
+      <Link
+        href={linkedInUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="LinkedIn"
+        aria-label={`${title}'s LinkedIn profile, which opens in a new window.`}
+        onClick={(e) => e.stopPropagation()}
+        sx={
+          linkedInPlacement === 'below'
+            ? { alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }
+            : { verticalAlign: 'middle' }
+        }
+      >
+        <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
+      </Link>
+    ) : (
+      <LinkedIn
+        titleAccess={`${title} on LinkedIn`}
+        sx={{
+          color: designColor.linkedInBlue,
+          ...(linkedInPlacement === 'below'
+            ? { alignSelf: 'flex-start', marginTop: 'auto' }
+            : { verticalAlign: 'middle' }),
+        }}
+        fontSize="medium"
+      />
+    ))
 
   return (
     <Card
@@ -80,6 +113,12 @@ const CardWithPhoto = ({
       >
         <Typography variant="titleMedium" sx={titleSx}>
           {title}
+          {linkedInPlacement === 'inline' && linkedInIcon && (
+            <>
+              {' '}
+              {linkedInIcon}
+            </>
+          )}
         </Typography>
         {subtitle && (
           <Typography
@@ -96,30 +135,7 @@ const CardWithPhoto = ({
             {description}
           </Typography>
         )}
-        {linkedInUrl !== undefined &&
-          (linkedInUrl ? (
-            <Link
-              href={linkedInUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
-              aria-label={`${title}'s LinkedIn profile, which opens in a new window.`}
-              onClick={(e) => e.stopPropagation()}
-              sx={{ alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }}
-            >
-              <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
-            </Link>
-          ) : (
-            <LinkedIn
-              titleAccess={`${title} on LinkedIn`}
-              sx={{
-                color: designColor.linkedInBlue,
-                alignSelf: 'flex-start',
-                marginTop: 'auto',
-              }}
-              fontSize="medium"
-            />
-          ))}
+        {linkedInPlacement === 'below' && linkedInIcon}
       </CardContent>
     </Card>
   )
