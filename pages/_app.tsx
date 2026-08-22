@@ -29,7 +29,10 @@ const TAG_NAMES = {
   team: 'The Team | Digital Aid Seattle',
 }
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
-const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "").split(",");
+const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
+  .split(",")
+  .map(id => id.trim())
+  .filter(id => id.length > 0);
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
