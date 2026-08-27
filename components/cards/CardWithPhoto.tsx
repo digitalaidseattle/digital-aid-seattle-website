@@ -14,10 +14,8 @@ type CardWithPhotoProps = {
   imageWidth?: number
   alt?: string
   subtitle?: string
-  // undefined -> no LinkedIn icon; '' -> static icon (no link); url -> clickable icon
+  // undefined -> no LinkedIn slot; '' -> slot reserved but empty; url -> clickable icon
   linkedInUrl?: string
-  // 'below' (default) keeps the icon at the card bottom; 'inline' places it beside the title
-  linkedInPlacement?: 'below' | 'inline'
   titleSx?: Record<string, any>
   subtitleSx?: Record<string, any>
   descriptionSx?: Record<string, any>
@@ -34,7 +32,6 @@ const CardWithPhoto = ({
   alt = '',
   subtitle,
   linkedInUrl,
-  linkedInPlacement = 'below',
   titleSx,
   subtitleSx,
   descriptionSx,
@@ -52,23 +49,14 @@ const CardWithPhoto = ({
         title="LinkedIn"
         aria-label={`${title}'s LinkedIn profile, which opens in a new window.`}
         onClick={(e) => e.stopPropagation()}
-        sx={
-          linkedInPlacement === 'below'
-            ? { alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }
-            : { verticalAlign: '0.15em' }
-        }
+        sx={{ alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }}
       >
         <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
       </Link>
     ) : (
+      // Hidden icon holds the slot so cards without a LinkedIn link keep the same height.
       <LinkedIn
-        titleAccess={`${title} on LinkedIn`}
-        sx={{
-          color: designColor.linkedInBlue,
-          ...(linkedInPlacement === 'below'
-            ? { alignSelf: 'flex-start', marginTop: 'auto' }
-            : { verticalAlign: '0.15em' }),
-        }}
+        sx={{ alignSelf: 'flex-start', marginTop: 'auto', visibility: 'hidden' }}
         fontSize="medium"
       />
     ))
@@ -113,12 +101,6 @@ const CardWithPhoto = ({
       >
         <Typography variant="titleMedium" sx={titleSx}>
           {title}
-          {linkedInPlacement === 'inline' && linkedInIcon && (
-            <>
-              {' '}
-              {linkedInIcon}
-            </>
-          )}
         </Typography>
         {subtitle && (
           <Typography
@@ -135,7 +117,7 @@ const CardWithPhoto = ({
             {description}
           </Typography>
         )}
-        {linkedInPlacement === 'below' && linkedInIcon}
+        {linkedInIcon}
       </CardContent>
     </Card>
   )

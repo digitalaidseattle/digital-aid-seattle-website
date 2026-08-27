@@ -3,7 +3,7 @@
  */
 import { useContext, useEffect, useState } from 'react'
 
-import { Box, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from '@mui/material'
+import { Box, Stack, useTheme } from '@mui/material'
 
 import CardWithPhoto from 'components/cards/CardWithPhoto'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -17,7 +17,6 @@ import {
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
-import { designColor } from 'theme/theme'
 import { DASProject, Volunteer } from 'types'
 import NoPhotoPerson from '../assets/no-photo-person.svg'
 import ProjectImage from '../assets/project-image.png'
@@ -36,7 +35,7 @@ type MemberItem = {
   name: string
   role?: string
   image?: string
-  linkedInUrl?: string
+  linkedInUrl: string
 }
 
 const norm = (name: string) => name.trim().toLowerCase()
@@ -47,11 +46,7 @@ function sortByFirstName<T extends { name: string }>(arr: T[]): T[] {
   )
 }
 
-const MemberGridSection = (props: {
-  title: string
-  members: MemberItem[]
-  linkedInPlacement: 'below' | 'inline'
-}) => {
+const MemberGridSection = (props: { title: string; members: MemberItem[] }) => {
   return (
     props.members.length > 0 && (
       <ProjectSection>
@@ -84,73 +79,12 @@ const MemberGridSection = (props: {
                 fallbackImage={NoPhotoPerson.src}
                 alt={`headshot of ${member.name}`}
                 linkedInUrl={member.linkedInUrl}
-                linkedInPlacement={props.linkedInPlacement}
               />
             </Box>
           ))}
         </Box>
       </ProjectSection>
     )
-  )
-}
-
-const VariantToggle = (props: {
-  variant: 'A' | 'B'
-  onChange: (variant: 'A' | 'B') => void
-}) => {
-  return (
-    <Box
-      sx={{
-        position: 'fixed',
-        bottom: '1.5rem',
-        right: '1.5rem',
-        zIndex: 1200,
-        backgroundColor: 'background.paper',
-        boxShadow:
-          '0px 4px 8px 2px rgba(52, 61, 62, 0.04), 0px 2px 4px rgba(52, 61, 62, 0.04)',
-        padding: '0.5rem',
-        borderRadius: '4px',
-        border: '2px solid #EAF1F1',
-      }}
-    >
-      <Typography
-        variant="labelSmall"
-        sx={{ display: 'block', textAlign: 'center', marginBottom: '0.25rem' }}
-      >
-        LinkedIn icon
-      </Typography>
-      <ToggleButtonGroup
-        value={props.variant}
-        exclusive
-        onChange={(_, value) => value !== null && props.onChange(value)}
-        aria-label="LinkedIn icon placement variant"
-        sx={{
-          '& .MuiToggleButton-root': {
-            color: 'text.primary',
-            '&.Mui-selected': {
-              backgroundColor: designColor.green.main,
-              color: designColor.white,
-              '&:hover': {
-                backgroundColor: designColor.green.main,
-              },
-            },
-          },
-        }}
-      >
-        <ToggleButton value="A" aria-label="Variant A: LinkedIn icon below name">
-          A
-          <Typography variant="labelSmall" component="span" color="inherit" sx={{ marginLeft: '0.25rem' }}>
-            below
-          </Typography>
-        </ToggleButton>
-        <ToggleButton value="B" aria-label="Variant B: LinkedIn icon inline with name">
-          B
-          <Typography variant="labelSmall" component="span" color="inherit" sx={{ marginLeft: '0.25rem' }}>
-            beside
-          </Typography>
-        </ToggleButton>
-      </ToggleButtonGroup>
-    </Box>
   )
 }
 
@@ -164,7 +98,6 @@ const TeamPage = () => {
   const [board, setBoard] = useState<Volunteer[]>([])
   const [cadre, setCadre] = useState<Volunteer[]>([])
   const [contributors, setContributors] = useState<Volunteer[]>([])
-  const [variant, setVariant] = useState<'A' | 'B'>('A')
 
   useEffect(() => {
     if (!initialized) {
@@ -221,28 +154,24 @@ const TeamPage = () => {
     name: v.name,
     role: v.role,
     image: v.url,
-    linkedInUrl: v.linkedIn || undefined,
+    linkedInUrl: v.showLinkedIn ? v.linkedIn : '',
   })
 
   function getBody() {
-    const linkedInPlacement = variant === 'A' ? 'below' : 'inline'
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack gap={{ xs: '64px', lg: '80px' }} maxWidth="880px" margin="0 auto">
           <MemberGridSection
             title={LABELS.BOARD_LBL}
             members={board.map(toMemberItem)}
-            linkedInPlacement={linkedInPlacement}
           />
           <MemberGridSection
             title={LABELS.CADRE_LBL}
             members={cadre.map(toMemberItem)}
-            linkedInPlacement={linkedInPlacement}
           />
           <MemberGridSection
             title={LABELS.CONTRIBUTORS_LBL}
             members={contributors.map(toMemberItem)}
-            linkedInPlacement={linkedInPlacement}
           />
         </Stack>
       </SectionContainer>
@@ -263,7 +192,6 @@ const TeamPage = () => {
         />
         {project ? getBody() : <></>}
         <ProjectFooterSection />
-        <VariantToggle variant={variant} onChange={setVariant} />
       </Box>
     </BlockComponent>
   )

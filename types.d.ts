@@ -38,6 +38,7 @@ type Volunteer = Entity & {
   url: string,
   cadreContributor: string[],
   linkedIn: string,
+  showLinkedIn: boolean,
 }
 
 type DASPartner = Entity & {

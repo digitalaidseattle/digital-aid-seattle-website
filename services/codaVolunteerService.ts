@@ -14,7 +14,7 @@ const TABLE_ID = 'grid-4vzF6VuaPV';
 
 // Coda returns the 'Linkedin URL' column as a rich WebPage object ({ url }) or a
 // plain string. Normalize to a URL string, adding a scheme when one is missing.
-function extractLinkedIn(value: any): string {
+function extractLinkedInUrl(value: any): string {
     if (!value) return ''
     const raw = (typeof value === 'string' ? value : value.url ?? '').replaceAll('```', '').trim()
     if (!raw) return ''
@@ -30,7 +30,9 @@ function coda2Entity(row: CodaRow): Volunteer {
             url: (row.values['Pic'] && row.values['Pic'].length > 0) ? row.values['Pic'][0].url : '',
             cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
             status: CodaService.removeBackTicks(row.values['Status']),
-            linkedIn: extractLinkedIn(row.values['Linkedin URL']),
+            linkedIn: extractLinkedInUrl(row.values['Linkedin URL']),
+            // Opt-in: only an explicitly ticked checkbox publishes the URL.
+            showLinkedIn: row.values['Show My LinkedIn on DAS Website'] === true,
         } as Volunteer;
         return entity;
 
