@@ -28,6 +28,8 @@ type TeamMember = {
   role: string
   image: Image
   url: string
+  linkedIn?: string
+  showLinkedIn?: boolean
 }
 
 type Volunteer = Entity & {
