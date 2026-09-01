@@ -31,7 +31,7 @@ function coda2Entity(row: CodaRow): Volunteer {
             cadreContributor: row.values['Cadre or Contributor'] ? row.values['Cadre or Contributor'].map((s: any) => s.replaceAll('```', '')) : [],
             status: CodaService.removeBackTicks(row.values['Status']),
             linkedIn: extractLinkedInUrl(row.values['Linkedin URL']),
-            showLinkedIn: row.values['Show My LinkedIn on DAS Website'] !== false, // Unticked checkbox is an opt-out; a missing column defaults to showing it
+            showLinkedIn: row.values['Show My LinkedIn on DAS Website'] === true, // Opt-in: only a ticked checkbox shows the icon; unticked or missing column hides it
         } as Volunteer;
         return entity;
 
