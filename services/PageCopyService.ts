@@ -24,8 +24,12 @@ class PageCopyService {
             .then(pageCopies => {
                 Object.keys(label).forEach(key => {
                     const blurb = pageCopies.find(pc => pc.key === key)
-                    if (blurb) {
-                        label[key] = blurb.copy
+                    // Only overwrite when the label exists and is currently empty/undefined
+                    if (blurb && Object.prototype.hasOwnProperty.call(label, key)) {
+                        const current = label[key]
+                        if (current === '' || current === undefined || current === null) {
+                            label[key] = blurb.copy
+                        }
                     }
                 })
 

@@ -5,9 +5,16 @@
 import {
   Box,
   Button,
+  Checkbox,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
   Stack,
   SxProps,
+  TextField,
   Typography,
   useMediaQuery,
   useTheme,
@@ -20,7 +27,7 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import { useRouter } from 'next/router'
-import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import PaypalImage from '../assets/paypal.png'
 import DonateImage from '../assets/donate.png'
 import VenmoImage from '../assets/venmo.png'
@@ -45,9 +52,17 @@ const LABELS = {
   DONATE_TITLE: 'Donate now',
   DONATE_BTN: 'Download the check donation form',
   IMPACT_TITLE: 'What people say about us',
-  DONATE_WITH: 'Donate with',
   MAILING_INSTRUCTIONS:
-    "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
+    "We're currently accepting your tax deductible donations by mail and directly through PayPal (monthly) and Venmo. You can mail the form and your check to us at the following address:",
+}
+
+const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? ''
+const PAYPAL_DONATION_URL = process.env.NEXT_PUBLIC_PAYPAL_DONATION_URL ?? ''
+const PAYPAL_RECURRING_DONATION_URL = process.env.NEXT_PUBLIC_PAYPAL_RECURRING_DONATION_URL ?? ''
+const VENMO_DONATION_URL = process.env.NEXT_PUBLIC_VENMO_DONATION_URL ?? 'https://venmo.com/DASeattle'
+
+const openDonationLink = (url: string) => {
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
 
 const ADDRESS = {
@@ -94,12 +109,13 @@ const Arrow: React.FC<ArrowProps> = ({ ariaLabel, sx, children, onClick }) => {
 
 const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
   return (
     <Arrow
       sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Next slide'
-      onClick={onClick}>
+      ariaLabel="Next slide"
+      onClick={onClick}
+    >
       <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
@@ -111,29 +127,31 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <Arrow
       sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Previous slide'
-      onClick={onClick}>
+      ariaLabel="Previous slide"
+      onClick={onClick}
+    >
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
 }
 
-const DonateLayoutSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+const DonateLayoutSection: React.FC<{ backgroundColor: string; children: ReactNode }> = ({ backgroundColor, children }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
 
-  return (<SectionContainer backgroundColor={backgroundColor}>
-    <Stack
-      gap={{ xs: '64px', md: '80px' }}
-      sx={{
-        textAlign: 'center',
-      }}
-      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
-      maxWidth={'880px'}
-    >
-      {children}
-    </Stack>
-  </SectionContainer>
+  return (
+    <SectionContainer backgroundColor={backgroundColor}>
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+        }}
+        width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
+        maxWidth={'880px'}
+      >
+        {children}
+      </Stack>
+    </SectionContainer>
   )
 }
 
@@ -210,6 +228,108 @@ const DonatePage = () => {
   const { data: supportUs } = useFeature('support-us')
   const router = useRouter()
   const [initialized, setInitialized] = useState<boolean>(false)
+  const [isPayPalDialogOpen, setIsPayPalDialogOpen] = useState(false)
+  const [donationFrequency, setDonationFrequency] = useState<'one-time' | 'monthly'>('monthly')
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(10)
+  const [customAmount, setCustomAmount] = useState('')
+  const [coverFees, setCoverFees] = useState(true)
+  const [isPayPalSdkLoading, setIsPayPalSdkLoading] = useState(false)
+  const [isPayPalSdkReady, setIsPayPalSdkReady] = useState(false)
+  const [paypalError, setPaypalError] = useState('')
+  const paypalButtonContainerRef = useRef<HTMLDivElement | null>(null)
+
+  const donationAmounts = [10, 20, 25, 35, 50]
+    const donationAmount = Number(customAmount) || selectedAmount || 0
+    const totalDonationAmount = (donationAmount + (coverFees ? 1.88 : 0)).toFixed(2)
+    const canContinue = donationAmount >= 10
+
+  const buildPayPalDonationUrl = () => {
+    const donationUrl = PAYPAL_RECURRING_DONATION_URL || PAYPAL_DONATION_URL
+
+    if (!donationUrl) {
+      return ''
+    }
+
+    let hostedButtonId = ''
+
+    try {
+      const parsedDonationUrl = new URL(donationUrl)
+      hostedButtonId =
+        parsedDonationUrl.searchParams.get('hosted_button_id') ??
+        parsedDonationUrl.pathname.match(/\/ncp\/payment\/([^/?]+)/)?.[1] ??
+        ''
+    } catch {
+      return ''
+    }
+
+    if (!hostedButtonId) {
+      return ''
+    }
+
+    const normalizedAmount = Math.max(donationAmount, 10).toFixed(2)
+    const params = new URLSearchParams({
+      cmd: donationFrequency === 'monthly' ? '_xclick-subscriptions' : '_xclick',
+      hosted_button_id: hostedButtonId,
+      currency_code: 'USD',
+      no_note: '1',
+    })
+
+    if (donationFrequency === 'monthly') {
+      params.set('a3', normalizedAmount)
+      params.set('p3', '1')
+      params.set('t3', 'M')
+      params.set('src', '1')
+      params.set('sra', '1')
+    } else {
+      params.set('amount', normalizedAmount)
+    }
+
+    if (coverFees) {
+      params.set('item_name', 'Donation with fee coverage')
+    }
+
+    return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`
+  }
+
+  const loadPayPalButtons = async () => {
+    if (!PAYPAL_CLIENT_ID || typeof window === 'undefined') {
+      return
+    }
+
+    setPaypalError('')
+    setIsPayPalSdkLoading(true)
+
+    if ((window as any).paypal?.Buttons) {
+      setIsPayPalSdkReady(true)
+      setIsPayPalSdkLoading(false)
+      return
+    }
+
+    const existingScript = document.querySelector(
+      `script[src*="https://www.paypal.com/sdk/js"]`
+    )
+
+    if (existingScript) {
+      existingScript.addEventListener('load', () => {
+        setIsPayPalSdkReady(true)
+        setIsPayPalSdkLoading(false)
+      })
+      return
+    }
+
+    const script = document.createElement('script')
+    script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&components=buttons`
+    script.async = true
+    script.onload = () => {
+      setIsPayPalSdkReady(true)
+      setIsPayPalSdkLoading(false)
+    }
+    script.onerror = () => {
+      setPaypalError('Unable to load PayPal checkout.')
+      setIsPayPalSdkLoading(false)
+    }
+    document.body.appendChild(script)
+  }
 
   useEffect(() => {
     if (!initialized) {
@@ -218,6 +338,83 @@ const DonatePage = () => {
         .then(() => setInitialized(true))
     }
   }, [initialized])
+
+  useEffect(() => {
+    if (!isPayPalDialogOpen || !PAYPAL_CLIENT_ID) {
+      return
+    }
+
+    loadPayPalButtons()
+  }, [isPayPalDialogOpen])
+
+  useEffect(() => {
+    if (!isPayPalDialogOpen || !isPayPalSdkReady || !paypalButtonContainerRef.current) {
+      return
+    }
+
+    const paypalButtons = (window as any).paypal?.Buttons
+
+    if (!paypalButtons) {
+      return
+    }
+
+    const buttons = paypalButtons({
+      createOrder: async () => {
+        const response = await fetch('/api/paypal/create-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            amount: Number(totalDonationAmount),
+            currency: 'USD',
+            donationLabel: 'Digital Aid Seattle donation',
+          }),
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.error ?? 'Unable to create PayPal order.')
+        }
+
+        return data.orderId
+      },
+      onApprove: async (data: { orderID: string }) => {
+        const captureResponse = await fetch('/api/paypal/capture-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ orderId: data.orderID }),
+        })
+
+        const captureData = await captureResponse.json()
+
+        if (!captureResponse.ok) {
+          throw new Error(captureData.error ?? 'Unable to capture PayPal order.')
+        }
+
+        setIsPayPalDialogOpen(false)
+        window.alert('Thank you for your donation to Digital Aid Seattle!')
+      },
+      onError: (error: unknown) => {
+        setPaypalError(
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong while processing your PayPal donation.'
+        )
+      },
+    })
+
+    buttons.render(paypalButtonContainerRef.current)
+
+    return () => {
+      if (typeof buttons.close === 'function') {
+        buttons.close()
+      }
+    }
+  }, [isPayPalDialogOpen, isPayPalSdkReady, totalDonationAmount])
 
   useEffect(() => {
     if (supportUs !== undefined && supportUs === false) {
@@ -327,14 +524,12 @@ const DonatePage = () => {
             <Typography variant="bodyLarge">or donate through</Typography>
             <Button
               variant="outlined"
-              onClick={() =>
-                window.open('https://venmo.com/DASeattle', '_blank')
-              }
+              onClick={() => openDonationLink(VENMO_DONATION_URL)}
               sx={{
                 backgroundColor: '#FFFFFF',
               }}
+              aria-label="Venmo"
             >
-              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={VenmoImage.src}
@@ -344,21 +539,16 @@ const DonatePage = () => {
             </Button>
             <Button
               variant="outlined"
-              onClick={() =>
-                window.open(
-                  'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
-                  '_blank'
-                )
-              }
+              onClick={() => setIsPayPalDialogOpen(true)}
               sx={{
                 backgroundColor: '#FFB02E',
               }}
+              aria-label="PayPal"
             >
-              {LABELS.DONATE_WITH}
               <img
                 style={{ marginLeft: '1rem' }}
                 src={PaypalImage.src}
-                alt="Paypal wordmark"
+                alt="PayPal wordmark"
                 width="95px"
               />
             </Button>
@@ -385,6 +575,156 @@ const DonatePage = () => {
           <WhatPeopleSaySection theme={theme} />
         </Container>
       </BlockComponent>
+
+      <Dialog
+        open={isPayPalDialogOpen}
+        onClose={() => setIsPayPalDialogOpen(false)}
+        aria-labelledby="paypal-donation-dialog-title"
+        maxWidth={false}
+        fullWidth
+        sx={{
+          '& .MuiDialog-paper': {
+            width: { xs: '95%', md: 880 },
+            maxWidth: 880,
+            borderRadius: 2,
+            margin: '0 auto',
+          },
+        }}
+      >
+        <DialogTitle id="paypal-donation-dialog-title">Donate now</DialogTitle>
+        <DialogContent dividers>
+          <Box sx={{ display: 'flex', gap: 3, flexDirection: { xs: 'column', md: 'row' } }}>
+            <Box sx={{ flex: 2 }}>
+              <Stack spacing={3} sx={{ py: 1 }}>
+                <Box>
+                  <Typography variant="overline" color="text.secondary">
+                    Frequency
+                  </Typography>
+                  <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
+                    <Button
+                      variant={donationFrequency === 'one-time' ? 'contained' : 'outlined'}
+                      onClick={() => setDonationFrequency('one-time')}
+                    >
+                      One Time
+                    </Button>
+                    <Button
+                      variant={donationFrequency === 'monthly' ? 'contained' : 'outlined'}
+                      onClick={() => setDonationFrequency('monthly')}
+                    >
+                      Monthly
+                    </Button>
+                  </Stack>
+                </Box>
+
+                <Box>
+                  <Typography variant="overline" color="text.secondary">
+                    {donationFrequency === 'monthly' ? 'Monthly amount' : 'One time amount'}
+                  </Typography>
+                  <Stack direction="row" spacing={1} sx={{ mt: 1, flexWrap: 'wrap', gap: 1 }}>
+                    {donationAmounts.map((amount) => (
+                      <Button
+                        key={amount}
+                        variant={selectedAmount === amount && !customAmount ? 'contained' : 'outlined'}
+                        onClick={() => {
+                          setSelectedAmount(amount)
+                          setCustomAmount('')
+                        }}
+                      >
+                        {`$${amount}`}
+                      </Button>
+                    ))}
+                  </Stack>
+                </Box>
+
+                <TextField
+                  label="Enter amount"
+                  type="number"
+                  value={customAmount}
+                  onChange={(event) => {
+                    setCustomAmount(event.target.value)
+                    setSelectedAmount(null)
+                  }}
+                  inputProps={{ min: 10, step: 1 }}
+                  helperText="$10 is the minimum online donation. All donations are tax deductible."
+                />
+
+                {PAYPAL_CLIENT_ID ? (
+                  <Box>
+                    <Typography variant="overline" color="text.secondary">
+                      PayPal checkout
+                    </Typography>
+                    <Box
+                      ref={paypalButtonContainerRef}
+                      sx={{ minHeight: '56px', mt: 1 }}
+                    />
+                    {isPayPalSdkLoading && (
+                      <Typography variant="body2" color="text.secondary">
+                        Loading PayPal checkout...
+                      </Typography>
+                    )}
+                    {paypalError && (
+                      <Typography variant="body2" color="error.main">
+                        {paypalError}
+                      </Typography>
+                    )}
+                  </Box>
+                ) : null}
+
+                <Box>
+                  <Typography variant="overline" color="text.secondary">
+                    100+
+                  </Typography>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={coverFees}
+                        onChange={(event) => setCoverFees(event.target.checked)}
+                      />
+                    }
+                    label="Please add $1.88 to cover processing fees and other expenses associated with my donation."
+                  />
+                </Box>
+
+                <Typography variant="body2" color="text.secondary">
+                  Your donation helps Digital Aid Seattle expand access to digital tools and support community-led programs.
+                </Typography>
+              </Stack>
+            </Box>
+
+            <Box sx={{ flex: 1, backgroundColor: 'background.paper', borderRadius: 2, p: 3, minWidth: 240 }}>
+              <Typography variant="subtitle2" color="text.secondary">Summary</Typography>
+              <Typography variant="h5" sx={{ mt: 1 }}>${totalDonationAmount}</Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                {donationFrequency === 'monthly' ? 'Monthly donation' : 'One-time donation'}
+              </Typography>
+
+              <Box sx={{ mt: 3 }}>
+                
+              </Box>
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'space-between', px: 3, pb: 2 }}>
+          <Typography variant="body2" color="text.secondary">
+            Empowering our community, one project at a time!
+          </Typography>
+          <Button
+            onClick={() => {
+              const query = new URLSearchParams({
+                amount: totalDonationAmount.toString(),
+                frequency: donationFrequency,
+                coverFees: coverFees ? '1' : '0',
+              }).toString()
+              setIsPayPalDialogOpen(false)
+              router.push(`/donate/checkout?${query}`)
+            }}
+            variant="contained"
+            disabled={!canContinue}
+          >
+            Continue
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
