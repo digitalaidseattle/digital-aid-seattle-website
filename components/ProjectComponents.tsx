@@ -357,7 +357,7 @@ const ProjectTeamSection = (props: { title: string, members?: TeamMember[] }) =>
                 image={url}
                 fallbackImage={NoPhotoPerson.src}
                 alt={`headshot of ${person.name}`}
-                linkedInUrl={person.showLinkedIn ? person.linkedIn : ''}
+                linkedInUrl={person.showLinkedIn ? person.linkedIn ?? '' : ''}
               />
             </Box>
           })}
