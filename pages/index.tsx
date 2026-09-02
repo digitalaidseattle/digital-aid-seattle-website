@@ -356,10 +356,10 @@ const WhyDASSection: React.FC = () => {
     }}
     maxWidth={'880px'}
   >
-    <Typography variant="headlineLarge" component="h2">
+    <Typography variant="headlineLarge" component="h2" textAlign={'center'}>
       {LABELS.WHY_DAS_LABEL}
     </Typography>
-    <Typography variant='labelLarge'>
+    <Typography variant='labelLarge' textAlign={'center'}>
       {LABELS.WHY_DAS_SUBTITLE_LABEL}
     </Typography>
     <Typography textAlign={'center'} >
