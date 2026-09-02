@@ -37,10 +37,9 @@ const LABELS = {
   WHY_DAS_SUBTITLE_LABEL: 'We believe in equitable technology',
   WHY_DAS_TEXT: 'Community organizations are the heartbeat of Seattle, yet too often lack the tools that drive efficiency, fundraising, and outreach. Digital Aid Seattle levels the playing field by delivering pro bono, scalable tech solutions built by local volunteers from U.S. top companies.',
   HOW_LABEL: 'How it works?',
-  HOW_SUBTITLE_LABEL: 'If you’re a Washington-based, nonprofit organization, let’s talk.',
-  PROJECT_TITLE: '2 Projects Deployed with 4+ Underway',
+  PROJECT_TITLE: '2 Projects Deployed with 8+ Underway',
   PROJECT_TEXT: 'Websites, databases, mobile apps, and dashboards built for local nonprofits since 2023.',
-  VOLUNTEERS_TITLE: '92 Volunteers',
+  VOLUNTEERS_TITLE: '100+ Volunteers',
   VOLUNTEERS_TEXT: 'Skilled professionals lending expertise so you don’t have to stretch your budget.',
   VALUE_TITLE: '$936,000 in Value',
   VALUE_TEXT: 'Pro-bono services that allow you to reallocate scarce funds back into programs.',
@@ -437,17 +436,6 @@ const HowItWorksSection: React.FC = () => {
         cardStyles={cardStyles}
       />
     </CardGridContainer>
-    <Typography variant='labelLarge' textAlign={'center'}>
-      {LABELS.HOW_SUBTITLE_LABEL}
-    </Typography>
-    <Button
-      variant="contained"
-      color="primary"
-      size="small"
-      onClick={() => router.push('/partners')}
-    >
-      {LABELS.PARTNER_BTN}
-    </Button>
   </Stack>)
 }
 
