@@ -14,9 +14,9 @@ import {
   withBasicLayout,
 } from 'components/layouts'
 import {
+  ProjectFooterSection,
   ProjectSection,
   ProjectSubheader,
-  ProjectFooterSection,
 } from 'components/ProjectComponents'
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
