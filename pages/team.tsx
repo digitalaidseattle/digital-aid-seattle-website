@@ -3,17 +3,17 @@
  */
 import { useContext, useEffect, useState } from 'react'
 
-import { Box, Stack, useTheme } from '@mui/material'
+import { Box, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 
 import CardWithPhoto from 'components/cards/CardWithPhoto'
+import MastheadWithImage from 'components/MastheadWithImage'
 import SectionContainer from 'components/layout/SectionContainer'
-import { BlockComponent, LoadingContext, withBasicLayout } from 'components/layouts'
 import {
-  ProjectFooterSection,
-  ProjectHeaderSection,
-  ProjectSection,
-  ProjectSubheader,
-} from 'components/ProjectComponents'
+  BlockComponent,
+  LoadingContext,
+  withBasicLayout,
+} from 'components/layouts'
+import { ProjectSection, ProjectSubheader } from 'components/ProjectComponents'
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
@@ -23,6 +23,7 @@ import ProjectImage from '../assets/project-image.png'
 
 const LABELS = {
   HERO_LBL: 'The Team',
+  HERO_TXT: 'Meet the current Digital Aid Seattle team',
   BOARD_LBL: 'Board of Directors',
   CADRE_LBL: 'Cadre',
   CONTRIBUTORS_LBL: 'Contributors',
@@ -42,7 +43,9 @@ const norm = (name: string) => name.trim().toLowerCase()
 
 function sortByFirstName<T extends { name: string }>(arr: T[]): T[] {
   return [...arr].sort((a, b) =>
-    a.name.trim().localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
+    a.name
+      .trim()
+      .localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
   )
 }
 
@@ -138,7 +141,9 @@ const TeamPage = () => {
         const aCeo = isCeo(a)
         const bCeo = isCeo(b)
         if (aCeo !== bCeo) return aCeo ? -1 : 1
-        return a.name.trim().localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
+        return a.name
+          .trim()
+          .localeCompare(b.name.trim(), undefined, { sensitivity: 'base' })
       })
       setBoard(sortedBoard)
       setCadre(sortByFirstName(cadreVols))
@@ -164,8 +169,15 @@ const TeamPage = () => {
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack gap={{ xs: '64px', lg: '80px' }} maxWidth="880px" margin="0 auto">
-          <MemberGridSection title={LABELS.BOARD_LBL} members={board.map(toBoardItem)} />
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
+        >
+          <MemberGridSection
+            title={LABELS.BOARD_LBL}
+            members={board.map(toBoardItem)}
+          />
           <MemberGridSection
             title={LABELS.CADRE_LBL}
             members={cadre.map(toMemberItem)}
@@ -179,6 +191,8 @@ const TeamPage = () => {
     )
   }
 
+  const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
+
   return (
     <BlockComponent block={!project}>
       <Box
@@ -186,13 +200,29 @@ const TeamPage = () => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <ProjectHeaderSection
-          project={project}
-          hideStatus={true}
-          hideBreadcrumbs={true}
-        />
+        <MastheadWithImage
+          imageSrc={project?.imageSrc}
+          imageText="Team page graphic"
+        >
+          <>
+            <Typography
+              variant={extraSmallScreen ? 'displayMedium' : 'displayLarge'}
+              sx={{ color: theme.palette.primary.contrastText }}
+              component="h1"
+            >
+              {LABELS.HERO_LBL}
+            </Typography>
+            <Typography
+              variant="headlineLarge"
+              sx={{
+                color: theme.palette.primary.contrastText,
+              }}
+            >
+              {LABELS.HERO_TXT}
+            </Typography>
+          </>
+        </MastheadWithImage>
         {project ? getBody() : <></>}
-        <ProjectFooterSection />
       </Box>
     </BlockComponent>
   )
