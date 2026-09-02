@@ -13,7 +13,11 @@ import {
   LoadingContext,
   withBasicLayout,
 } from 'components/layouts'
-import { ProjectSection, ProjectSubheader } from 'components/ProjectComponents'
+import {
+  ProjectSection,
+  ProjectSubheader,
+  ProjectFooterSection,
+} from 'components/ProjectComponents'
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
@@ -223,6 +227,7 @@ const TeamPage = () => {
           </>
         </MastheadWithImage>
         {project ? getBody() : <></>}
+        <ProjectFooterSection />
       </Box>
     </BlockComponent>
   )
