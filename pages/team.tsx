@@ -21,9 +21,9 @@ import {
 import { useVolunteers } from 'components/useVolunteers'
 import { boardMembers } from 'data/boardMembers'
 import { pageCopyService } from 'services/PageCopyService'
-import { DASProject, Volunteer } from 'types'
+import { Volunteer } from 'types'
 import NoPhotoPerson from '../assets/no-photo-person.svg'
-import ProjectImage from '../assets/project-image.png'
+import TeamImage from '../assets/team.png'
 
 const LABELS = {
   HERO_LBL: 'The Team',
@@ -100,7 +100,6 @@ const TeamPage = () => {
   const { data: volunteers, loading: volunteersLoading } = useVolunteers()
   const { setLoading } = useContext(LoadingContext)
 
-  const [project, setProject] = useState<DASProject>()
   const [initialized, setInitialized] = useState<boolean>(false)
   const [board, setBoard] = useState<Volunteer[]>([])
   const [cadre, setCadre] = useState<Volunteer[]>([])
@@ -109,10 +108,6 @@ const TeamPage = () => {
   useEffect(() => {
     if (!initialized) {
       pageCopyService.updateCopy(LABELS, 'team').then(() => {
-        setProject({
-          imageSrc: ProjectImage.src,
-          title: LABELS.HERO_LBL,
-        } as DASProject)
         setInitialized(true)
       })
     }
@@ -169,7 +164,11 @@ const TeamPage = () => {
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
-        <Stack gap={{ xs: '64px', lg: '80px' }} maxWidth="880px" margin="0 auto">
+        <Stack
+          gap={{ xs: '64px', lg: '80px' }}
+          maxWidth="880px"
+          margin="0 auto"
+        >
           <MemberGridSection
             title={LABELS.BOARD_LBL}
             members={board.map(toMemberItem)}
@@ -190,14 +189,14 @@ const TeamPage = () => {
   const extraSmallScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
   return (
-    <BlockComponent block={!project}>
+    <BlockComponent block={!initialized}>
       <Box
         sx={{
           backgroundColor: theme.palette.background.default,
         }}
       >
         <MastheadWithImage
-          imageSrc={project?.imageSrc}
+          imageSrc={TeamImage.src}
           imageText="Team page graphic"
         >
           <>
@@ -218,7 +217,7 @@ const TeamPage = () => {
             </Typography>
           </>
         </MastheadWithImage>
-        {project ? getBody() : <></>}
+        {initialized ? getBody() : <></>}
         <ProjectFooterSection />
       </Box>
     </BlockComponent>
