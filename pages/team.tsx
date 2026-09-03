@@ -35,7 +35,7 @@ type MemberItem = {
   name: string
   role?: string
   image?: string
-  linkedInUrl?: string
+  linkedInUrl: string
 }
 
 const norm = (name: string) => name.trim().toLowerCase()
@@ -154,18 +154,17 @@ const TeamPage = () => {
     name: v.name,
     role: v.role,
     image: v.url,
-  })
-
-  const toBoardItem = (v: Volunteer): MemberItem => ({
-    ...toMemberItem(v),
-    linkedInUrl: v.linkedIn,
+    linkedInUrl: v.showLinkedIn ? v.linkedIn : '',
   })
 
   function getBody() {
     return (
       <SectionContainer backgroundColor={theme.palette.background.default}>
         <Stack gap={{ xs: '64px', lg: '80px' }} maxWidth="880px" margin="0 auto">
-          <MemberGridSection title={LABELS.BOARD_LBL} members={board.map(toBoardItem)} />
+          <MemberGridSection
+            title={LABELS.BOARD_LBL}
+            members={board.map(toMemberItem)}
+          />
           <MemberGridSection
             title={LABELS.CADRE_LBL}
             members={cadre.map(toMemberItem)}

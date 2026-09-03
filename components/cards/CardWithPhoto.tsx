@@ -14,7 +14,7 @@ type CardWithPhotoProps = {
   imageWidth?: number
   alt?: string
   subtitle?: string
-  // undefined -> no LinkedIn icon; '' -> static icon (no link); url -> clickable icon
+  // undefined -> no LinkedIn slot; '' -> slot reserved but empty; url -> clickable icon
   linkedInUrl?: string
   titleSx?: Record<string, any>
   subtitleSx?: Record<string, any>
@@ -39,6 +39,27 @@ const CardWithPhoto = ({
   onClick,
 }: CardWithPhotoProps) => {
   const src = image || fallbackImage
+
+  const linkedInIcon = linkedInUrl !== undefined &&
+    (linkedInUrl ? (
+      <Link
+        href={linkedInUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="LinkedIn"
+        aria-label={`${title}'s LinkedIn profile, which opens in a new window.`}
+        onClick={(e) => e.stopPropagation()}
+        sx={{ alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }}
+      >
+        <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
+      </Link>
+    ) : (
+      // Hidden icon holds the slot so cards without a LinkedIn link keep the same height.
+      <LinkedIn
+        sx={{ alignSelf: 'flex-start', marginTop: 'auto', visibility: 'hidden' }}
+        fontSize="medium"
+      />
+    ))
 
   return (
     <Card
@@ -96,30 +117,7 @@ const CardWithPhoto = ({
             {description}
           </Typography>
         )}
-        {linkedInUrl !== undefined &&
-          (linkedInUrl ? (
-            <Link
-              href={linkedInUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
-              aria-label={`${title}'s LinkedIn profile, which opens in a new window.`}
-              onClick={(e) => e.stopPropagation()}
-              sx={{ alignSelf: 'flex-start', marginTop: 'auto', lineHeight: 0 }}
-            >
-              <LinkedIn sx={{ color: designColor.linkedInBlue }} fontSize="medium" />
-            </Link>
-          ) : (
-            <LinkedIn
-              titleAccess={`${title} on LinkedIn`}
-              sx={{
-                color: designColor.linkedInBlue,
-                alignSelf: 'flex-start',
-                marginTop: 'auto',
-              }}
-              fontSize="medium"
-            />
-          ))}
+        {linkedInIcon}
       </CardContent>
     </Card>
   )
