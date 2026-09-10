@@ -29,6 +29,7 @@ const TAG_NAMES = {
   team: 'The Team | Digital Aid Seattle',
 }
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+
 const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
   .split(",")
   .map(id => id.trim())
@@ -82,7 +83,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <Analytics />
         <GoogleAnalytics gaId={GA_ID} />
-        {GA_CAMPAIGN_IDS.map(ID => <GoogleAnalytics key={ID.trim()} gaId={ID.trim()} />)}
+        {GA_CAMPAIGN_IDS.length > 0 && (
+          <script id="ga-campaign-ids">
+            {GA_CAMPAIGN_IDS.map(id => `gtag('config','${id}');`).join('')}
+          </script>
+        )}
       </ThemeProvider>
     </>
   )
