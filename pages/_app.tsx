@@ -85,6 +85,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <GoogleAnalytics gaId={GA_ID} />
         {GA_CAMPAIGN_IDS.length > 0 && (
           <script id="ga-campaign-ids">
+            gtag('js', new Date());
             {GA_CAMPAIGN_IDS.map(id => `gtag('config','${id}');`).join('')}
           </script>
         )}
