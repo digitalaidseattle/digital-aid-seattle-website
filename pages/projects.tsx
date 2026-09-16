@@ -38,16 +38,15 @@ const LABELS = {
   LOADING: 'Loading projects'
 }
 
-const PROJECT_STATUS_ORDER: Record<string, number> = {
-  Active: 0,
-  'Under Evaluation': 1
+const PROJECT_STATUS_ORDER = ['Active', 'Under Evaluation']
+
+const statusRank = (status: string) => {
+  const index = PROJECT_STATUS_ORDER.indexOf(status)
+  return index === -1 ? PROJECT_STATUS_ORDER.length : index
 }
 
-const sortProjectsByStatus = (projects: DASProject[]) =>
-  [...projects].sort((a, b) =>
-    (PROJECT_STATUS_ORDER[a.status] ?? Number.MAX_SAFE_INTEGER)
-    - (PROJECT_STATUS_ORDER[b.status] ?? Number.MAX_SAFE_INTEGER)
-  )
+const sortProjectsByStatus = (a: DASProject, b: DASProject) =>
+  statusRank(a.status) - statusRank(b.status)
 
 const ProjectsPage = () => {
   const theme = useTheme()
@@ -92,9 +91,11 @@ const ProjectsPage = () => {
   useEffect(() => {
     const displayedStatuses = filterStatuses.length === 0
       ? DEFAULT_STATUSES : filterStatuses
-    const filtered = projects
-      .filter(p => displayedStatuses.includes(p.status))
-    setDisplayedProjects(sortProjectsByStatus(filtered))
+    setDisplayedProjects(
+      projects
+        .filter(p => displayedStatuses.includes(p.status))
+        .sort(sortProjectsByStatus)
+    )
   }, [filterStatuses, projects, DEFAULT_STATUSES]);
 
   const toggleStatus = (status: string) => {
