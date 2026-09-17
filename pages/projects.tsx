@@ -38,6 +38,16 @@ const LABELS = {
   LOADING: 'Loading projects'
 }
 
+const PROJECT_STATUS_ORDER = ['Active', 'Under Evaluation']
+
+const statusRank = (status: string) => {
+  const index = PROJECT_STATUS_ORDER.indexOf(status)
+  return index === -1 ? PROJECT_STATUS_ORDER.length : index
+}
+
+const sortProjectsByStatus = (a: DASProject, b: DASProject) =>
+  statusRank(a.status) - statusRank(b.status)
+
 const ProjectsPage = () => {
   const theme = useTheme()
   const isSmallScreen = useMediaQuery('(max-width:600px)')
@@ -81,9 +91,11 @@ const ProjectsPage = () => {
   useEffect(() => {
     const displayedStatuses = filterStatuses.length === 0
       ? DEFAULT_STATUSES : filterStatuses
-    const filtered = projects
-      .filter(p => displayedStatuses.includes(p.status))
-    setDisplayedProjects(filtered)
+    setDisplayedProjects(
+      projects
+        .filter(p => displayedStatuses.includes(p.status))
+        .sort(sortProjectsByStatus)
+    )
   }, [filterStatuses, projects, DEFAULT_STATUSES]);
 
   const toggleStatus = (status: string) => {
