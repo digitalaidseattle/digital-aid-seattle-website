@@ -1,4 +1,3 @@
-import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
@@ -9,24 +8,12 @@ const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
 
 export function ConversionTracker() {
 
-  const params = useSearchParams();
-
   useEffect(() => {
-    const campaignId = params.get('utm_id');
-
-    if (campaignId && window.gtag) {
-      window.gtag('event', 'campaign_visit', {
-        campaign_id: campaignId,
-      });
+    if (GA_CAMPAIGN_IDS.length > 0 && window.gtag) {
+      GA_CAMPAIGN_IDS.forEach(id => window.gtag('config', id));
     }
-  }, [params]);
+  }, []);
 
-  return <>
-    {GA_CAMPAIGN_IDS.length > 0 && (
-      <script id="ga-campaign-ids">
-        {GA_CAMPAIGN_IDS.map(id => `gtag('config','${id}');`).join('')}
-      </script>
-    )}
-  </>
+  return null;
 
 }
