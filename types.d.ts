@@ -28,6 +28,8 @@ type TeamMember = {
   role: string
   image: Image
   url: string
+  linkedIn?: string
+  showLinkedIn?: boolean
 }
 
 type Volunteer = Entity & {
@@ -38,6 +40,7 @@ type Volunteer = Entity & {
   url: string,
   cadreContributor: string[],
   linkedIn: string,
+  showLinkedIn: boolean,
 }
 
 type DASPartner = Entity & {

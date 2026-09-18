@@ -12,14 +12,18 @@ import { ReactNode } from 'react'
 type MobileMenuProps = {
   children: ReactNode;
   yTranslate: string;
+  open: boolean;
 }
 
-const MobileMenu = ({ children, yTranslate }: MobileMenuProps) => {
+const MobileMenu = ({ children, yTranslate, open }: MobileMenuProps) => {
   const theme = useTheme()
 
   return (
   <List 
     aria-label="navigation"
+    // Closed, the menu is only moved off-screen, so it stays focusable without this.
+    aria-hidden={!open}
+    inert={!open}
     sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -31,7 +35,7 @@ const MobileMenu = ({ children, yTranslate }: MobileMenuProps) => {
       backgroundColor: theme.palette.primary.main,
       borderBottom: `2px solid ${theme.palette.text.primary}`,
       transform: `translateY(${yTranslate})`,
-      transition: 'all 0.66s ease',
+      transition: 'transform 0.25s ease',
   }}>
       {children}
     </List>

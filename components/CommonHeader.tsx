@@ -29,16 +29,11 @@ const DEFAULT_MENU_ITEMS = [
 ]
 
 const lookup = (supportUs: any): any[] => {
-  if (supportUs.status === 'fetched') {
-    const items = DEFAULT_MENU_ITEMS.slice()
-    if (supportUs.data) {
-      items.push({ label: 'Donate', path: '/donate', style: 'secondary', pages: ['donate'] })
-    }
-    return items;
+  const items = DEFAULT_MENU_ITEMS.slice()
+  if (supportUs.status === 'fetched' && supportUs.data) {
+    items.push({ label: 'Donate', path: '/donate', style: 'secondary', pages: ['donate'] })
   }
-  else {
-    return [];
-  }
+  return items;
 }
 
 const CommonHeader = () => {
@@ -102,6 +97,10 @@ const CommonHeader = () => {
           className="link"
           style={{
             color: theme.palette.primary.contrastText,
+            textUnderlineOffset: '0.5rem',
+            textDecoration: isCurrent(menuItem)
+              ? 'underline'
+              : 'none'
           }}
           href={menuItem.path}
         >
@@ -178,7 +177,7 @@ const CommonHeader = () => {
         {/* mobile slide-out menu */}
         {smallScreen &&
           <Box sx={{ position: 'relative', zIndex: -1 }}>
-            <MobileMenu yTranslate={showMobileMenu ? '0' : '-500px'}>
+            <MobileMenu yTranslate={showMobileMenu ? '0' : '-100%'} open={showMobileMenu}>
               {menuItems.map((menuItem, idx) =>
                 mobileMenuItem(menuItem, idx)
               )}

@@ -1,7 +1,7 @@
 import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined'
 import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined'
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import { Avatar, Box, Button, Stack, Typography, useTheme } from '@mui/material'
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CardOne from 'components/cards/CardOne'
 import SectionContainer from 'components/layout/SectionContainer'
@@ -14,11 +14,6 @@ import HeroImage from '../public/images/SeattleSkyline.jpg'
 import { useEffect, useState } from 'react'
 import { pageCopyService } from 'services/PageCopyService'
 
-import GoogleLogo from '../assets/aboutUsIcons/google.svg';
-import MicrosoftLogo from '../assets/aboutUsIcons/microsoft.svg';
-import SlalomLogo from '../assets/aboutUsIcons/slalom.png';
-import CityOfSeattleLogo from '../assets/aboutUsIcons/cityofseattle.png';
-import AWSLogo from '../assets/aboutUsIcons/aws.png';
 import { useRouter } from 'next/router';
 
 // TODO consider moving into Sanity
@@ -42,16 +37,14 @@ const LABELS = {
   WHY_DAS_SUBTITLE_LABEL: 'We believe in equitable technology',
   WHY_DAS_TEXT: 'Community organizations are the heartbeat of Seattle, yet too often lack the tools that drive efficiency, fundraising, and outreach. Digital Aid Seattle levels the playing field by delivering pro bono, scalable tech solutions built by local volunteers from U.S. top companies.',
   HOW_LABEL: 'How it works?',
-  HOW_SUBTITLE_LABEL: 'If you’re a Washington-based, nonprofit organization, let’s talk.',
-  PROJECT_TITLE: '2 Projects Deployed with 4+ Underway',
+  PROJECT_TITLE: '2 Projects Deployed with 8+ Underway',
   PROJECT_TEXT: 'Websites, databases, mobile apps, and dashboards built for local nonprofits since 2023.',
-  VOLUNTEERS_TITLE: '92 Volunteers',
+  VOLUNTEERS_TITLE: '100+ Volunteers',
   VOLUNTEERS_TEXT: 'Skilled professionals lending expertise so you don’t have to stretch your budget.',
   VALUE_TITLE: '$936,000 in Value',
   VALUE_TEXT: 'Pro-bono services that allow you to reallocate scarce funds back into programs.',
   IMPACT_LABEL: 'Our impact',
-  LEARN_MORE_BTN: 'Learn more',
-  ALLIES_LABEL: 'Our allies'
+  LEARN_MORE_BTN: 'Learn more'
 }
 
 const HeroSection: React.FC = () => {
@@ -363,10 +356,10 @@ const WhyDASSection: React.FC = () => {
     }}
     maxWidth={'880px'}
   >
-    <Typography variant="headlineLarge" component="h2">
+    <Typography variant="headlineLarge" component="h2" textAlign={'center'}>
       {LABELS.WHY_DAS_LABEL}
     </Typography>
-    <Typography variant='labelLarge'>
+    <Typography variant='labelLarge' textAlign={'center'}>
       {LABELS.WHY_DAS_SUBTITLE_LABEL}
     </Typography>
     <Typography textAlign={'center'} >
@@ -443,17 +436,6 @@ const HowItWorksSection: React.FC = () => {
         cardStyles={cardStyles}
       />
     </CardGridContainer>
-    <Typography variant='labelLarge'>
-      {LABELS.HOW_SUBTITLE_LABEL}
-    </Typography>
-    <Button
-      variant="contained"
-      color="primary"
-      size="small"
-      onClick={() => router.push('/partners')}
-    >
-      {LABELS.PARTNER_BTN}
-    </Button>
   </Stack>)
 }
 
@@ -511,56 +493,6 @@ const ImpactSection: React.FC = () => {
   );
 }
 
-const allies = [
-  {
-    label: 'google',
-    icon: GoogleLogo.src,
-  },
-  {
-    label: 'Microsoft',
-    icon: MicrosoftLogo.src,
-  },
-  {
-    label: 'Slalom',
-    icon: SlalomLogo.src,
-  },
-  {
-    label: 'City Of Seattle',
-    icon: CityOfSeattleLogo.src,
-  },
-  {
-    label: 'Amazon Web Services',
-    icon: AWSLogo.src,
-  },
-]
-
-const AlliesSection: React.FC = () => {
-  return (
-    <Stack
-      sx={{
-        gap: { xs: 3, lg: 10 },
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginBottom: { sm: 4, lg: 10 },
-      }}
-      maxWidth={'880px'}
-    >
-      <Typography variant="headlineLarge" component="h2">
-        {LABELS.ALLIES_LABEL}
-      </Typography>
-      <Stack direction={'row'} spacing={4} >
-        {allies.map((item, index) => (
-          <Avatar
-            key={`logo-${index}`}
-            alt={item.label}
-            src={item.icon}
-            sx={{ width: 124, height: 124 }} />
-        ))}
-      </Stack>
-    </Stack>
-  );
-}
-
 const Home = () => {
   const theme = useTheme()
   const palette = theme.palette
@@ -588,9 +520,6 @@ const Home = () => {
       </SectionContainer>
       <SectionContainer backgroundColor={palette.background.default}>
         <ImpactSection />
-      </SectionContainer>
-      <SectionContainer backgroundColor={palette.background.paper}>
-        <AlliesSection />
       </SectionContainer>
     </>
   )
