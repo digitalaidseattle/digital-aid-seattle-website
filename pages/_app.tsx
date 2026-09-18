@@ -1,6 +1,5 @@
 
 import { ThemeProvider } from '@mui/material'
-import { Analytics } from '@vercel/analytics/react'
 import { AppProps } from 'next/app'
 import { usePathname } from 'next/navigation'
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -15,6 +14,7 @@ import { eventsService } from '../services/EventsService'
 import { CodaRoleService } from 'services/codaRoleService'
 import 'styles/global.css'
 import 'styles/preflight.css'
+import { ConversionTracker } from 'components/ConversionTracker';
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
@@ -28,7 +28,7 @@ const TAG_NAMES = {
   privacy: 'Privacy policy | Digital Aid Seattle',
   team: 'The Team | Digital Aid Seattle',
 }
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
@@ -76,8 +76,8 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
-        <Analytics />
         <GoogleAnalytics gaId={GA_ID} />
+        <ConversionTracker />
       </ThemeProvider>
     </>
   )
