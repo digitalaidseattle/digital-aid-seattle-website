@@ -1,3 +1,4 @@
+import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect } from "react";
 
 const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
@@ -9,8 +10,8 @@ const GA_CAMPAIGN_IDS = (process.env.NEXT_PUBLIC_GA_CAMPAIGN_IDS ?? "")
 export function ConversionTracker() {
 
   useEffect(() => {
-    if (GA_CAMPAIGN_IDS.length > 0 && window.gtag) {
-      GA_CAMPAIGN_IDS.forEach(id => window.gtag('config', id));
+    if (GA_CAMPAIGN_IDS.length > 0) {
+      GA_CAMPAIGN_IDS.forEach(id => sendGAEvent('config', id));
     }
   }, []);
 
