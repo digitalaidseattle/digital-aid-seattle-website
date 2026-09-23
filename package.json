@@ -26,7 +26,6 @@
     "@sanity/orderable-document-list": "^1.1.0",
     "@sanity/vision": "^3.1.4",
     "@types/material-ui": "^0.21.18",
-    "@vercel/analytics": "^1.6.1",
     "@vercel/node": "^3.2.29",
     "dayjs": "^1.11.21",
     "next": "^16.2.10",

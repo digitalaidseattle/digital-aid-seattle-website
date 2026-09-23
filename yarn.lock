@@ -4146,11 +4146,6 @@
   resolved "https://registry.yarnpkg.com/@unrs/resolver-binding-win32-x64-msvc/-/resolver-binding-win32-x64-msvc-1.12.2.tgz#72da0da48d72b1e87831b9c0308931d3f4669027"
   integrity sha512-nAB74NfSNKknqQ1RrYj6uz8FcXEomu/MATJZxh/x+BArzN2U3JbOYC0APYzUIGhVY3m5hRxA8VPNdPBoG8txlA==
 
-"@vercel/analytics@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.npmjs.org/@vercel/analytics/-/analytics-1.6.1.tgz"
-  integrity sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==
-
 "@vercel/build-utils@8.7.0":
   version "8.7.0"
   resolved "https://registry.npmjs.org/@vercel/build-utils/-/build-utils-8.7.0.tgz"
