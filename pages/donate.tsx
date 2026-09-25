@@ -94,12 +94,13 @@ const Arrow: React.FC<ArrowProps> = ({ ariaLabel, sx, children, onClick }) => {
 
 const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
   return (
     <Arrow
       sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Next slide'
-      onClick={onClick}>
+      ariaLabel="Next slide"
+      onClick={onClick}
+    >
       <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
@@ -111,29 +112,36 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <Arrow
       sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Previous slide'
-      onClick={onClick}>
+      ariaLabel="Previous slide"
+      onClick={onClick}
+    >
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
 }
 
-const DonateLayoutSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+const DonateLayoutSection: React.FC<{
+  backgroundColor: string
+  children: ReactNode
+}> = ({ backgroundColor, children }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
 
-  return (<SectionContainer backgroundColor={backgroundColor}>
-    <Stack
-      gap={{ xs: '64px', md: '80px' }}
-      sx={{
-        textAlign: 'center',
-      }}
-      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
-      maxWidth={'880px'}
-    >
-      {children}
-    </Stack>
-  </SectionContainer>
+  return (
+    <SectionContainer backgroundColor={backgroundColor}>
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+        }}
+        width={
+          isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg
+        }
+        maxWidth={'880px'}
+      >
+        {children}
+      </Stack>
+    </SectionContainer>
   )
 }
 
@@ -162,7 +170,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
     slidesToShow: 2,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "0px",
+    centerPadding: '0px',
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -171,10 +179,10 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
         breakpoint: theme.breakpoints.values.lg,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   return (
@@ -201,7 +209,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
           </Box>
         ))}
       </Slider>
-    </DonateLayoutSection >
+    </DonateLayoutSection>
   )
 }
 
@@ -346,7 +354,7 @@ const DonatePage = () => {
               variant="outlined"
               onClick={() =>
                 window.open(
-                  'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
+                  'https://www.sandbox.paypal.com/donate/?hosted_button_id=BA79TUVEVNNNN',
                   '_blank'
                 )
               }
