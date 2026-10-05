@@ -47,7 +47,7 @@ const LABELS = {
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
   MAILING_INSTRUCTIONS:
-    "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
+    "We're currently accepting your tax deductible donations by mail or through one of our payment processors.",
 }
 
 const ADDRESS = {
@@ -298,7 +298,8 @@ const DonatePage = () => {
         >
           <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
             <Typography variant="bodyLarge">
-              {LABELS.MAILING_INSTRUCTIONS}
+              You can mail the form and your check to us at the following
+              address:
               <br />
               <br />
               {ADDRESS.title}
