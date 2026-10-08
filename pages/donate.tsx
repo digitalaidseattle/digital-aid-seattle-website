@@ -355,7 +355,7 @@ const DonatePage = () => {
               variant="outlined"
               onClick={() =>
                 window.open(
-                  'https://www.sandbox.paypal.com/donate/?hosted_button_id=BA79TUVEVNNNN',
+                  'https://www.paypal.com/donate/?hosted_button_id=XXXBSFN2ZKTXW',
                   '_blank'
                 )
               }
