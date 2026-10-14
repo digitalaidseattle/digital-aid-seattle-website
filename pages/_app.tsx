@@ -1,20 +1,18 @@
 
-import { ThemeProvider } from '@mui/material'
-import { AppProps } from 'next/app'
-import { usePathname } from 'next/navigation'
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { ThemeProvider } from '@mui/material';
+import { AppProps } from 'next/app';
+import { usePathname } from 'next/navigation';
 
-import { useEffect, useState } from 'react'
-import { theme } from 'theme/theme'
+import { useEffect, useState } from 'react';
+import { theme } from 'theme/theme';
 
-import { Seo } from 'components/seo'
-import { CodaVentureService } from 'services/codaVentureService'
-import { eventsService } from '../services/EventsService'
+import { Seo } from 'components/seo';
+import { CodaVentureService } from 'services/codaVentureService';
+import { eventsService } from '../services/EventsService';
 
-import { CodaRoleService } from 'services/codaRoleService'
-import 'styles/global.css'
-import 'styles/preflight.css'
-import { ConversionTracker } from 'components/ConversionTracker';
+import { CodaRoleService } from 'services/codaRoleService';
+import 'styles/global.css';
+import 'styles/preflight.css';
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
