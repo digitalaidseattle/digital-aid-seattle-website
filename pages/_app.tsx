@@ -76,8 +76,8 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
-        <GoogleAnalytics gaId={GA_ID} />
-        <ConversionTracker />
+        {/* <GoogleAnalytics gaId={GA_ID} />
+        <ConversionTracker /> */}
       </ThemeProvider>
     </>
   )
