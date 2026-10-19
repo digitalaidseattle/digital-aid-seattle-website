@@ -47,7 +47,7 @@ const LABELS = {
   IMPACT_TITLE: 'What people say about us',
   DONATE_WITH: 'Donate with',
   MAILING_INSTRUCTIONS:
-    "We're currently accepting your tax deductible donations by mail and directly through Venmo. You can mail the form and your check to us at the following address:",
+    "We're currently accepting your tax deductible donations by mail or through one of our payment processors.",
 }
 
 const ADDRESS = {
@@ -94,12 +94,13 @@ const Arrow: React.FC<ArrowProps> = ({ ariaLabel, sx, children, onClick }) => {
 
 const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
   return (
     <Arrow
       sx={{ right: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Next slide'
-      onClick={onClick}>
+      ariaLabel="Next slide"
+      onClick={onClick}
+    >
       <ChevronRightIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
@@ -111,29 +112,36 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <Arrow
       sx={{ left: isMobile ? 'calc(50% - 180px)' : 'calc(50% - 480px)' }}
-      ariaLabel='Previous slide'
-      onClick={onClick}>
+      ariaLabel="Previous slide"
+      onClick={onClick}
+    >
       <ChevronLeftIcon fontSize={isMobile ? 'small' : 'medium'} />
     </Arrow>
   )
 }
 
-const DonateLayoutSection: React.FC<{ backgroundColor: string, children: ReactNode }> = ({ backgroundColor, children }) => {
+const DonateLayoutSection: React.FC<{
+  backgroundColor: string
+  children: ReactNode
+}> = ({ backgroundColor, children }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'))
 
-  return (<SectionContainer backgroundColor={backgroundColor}>
-    <Stack
-      gap={{ xs: '64px', md: '80px' }}
-      sx={{
-        textAlign: 'center',
-      }}
-      width={isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg}
-      maxWidth={'880px'}
-    >
-      {children}
-    </Stack>
-  </SectionContainer>
+  return (
+    <SectionContainer backgroundColor={backgroundColor}>
+      <Stack
+        gap={{ xs: '64px', md: '80px' }}
+        sx={{
+          textAlign: 'center',
+        }}
+        width={
+          isMobile ? theme.breakpoints.values.sm : theme.breakpoints.values.lg
+        }
+        maxWidth={'880px'}
+      >
+        {children}
+      </Stack>
+    </SectionContainer>
   )
 }
 
@@ -162,7 +170,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
     slidesToShow: 2,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "0px",
+    centerPadding: '0px',
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -171,10 +179,10 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
         breakpoint: theme.breakpoints.values.lg,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   return (
@@ -201,7 +209,7 @@ const WhatPeopleSaySection: React.FC<{ theme: any }> = ({ theme }) => {
           </Box>
         ))}
       </Slider>
-    </DonateLayoutSection >
+    </DonateLayoutSection>
   )
 }
 
@@ -290,7 +298,8 @@ const DonatePage = () => {
         >
           <Stack gap="1rem" textAlign="left" sx={{ width: '100%' }}>
             <Typography variant="bodyLarge">
-              {LABELS.MAILING_INSTRUCTIONS}
+              You can mail the form and your check to us at the following
+              address:
               <br />
               <br />
               {ADDRESS.title}
@@ -346,7 +355,7 @@ const DonatePage = () => {
               variant="outlined"
               onClick={() =>
                 window.open(
-                  'https://www.paypal.com/ncp/payment/DKSC68ZSN3EWJ',
+                  'https://www.paypal.com/donate/?hosted_button_id=XXXBSFN2ZKTXW',
                   '_blank'
                 )
               }
