@@ -1,7 +1,15 @@
 /* eslint-disable jsx-a11y/alt-text  */
 /* eslint-disable @next/next/no-img-element */
 
-import { Box, Container, Grid, Stack, styled, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  styled,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import Link from 'next/link'
 
 import { Facebook, GitHub, Instagram, LinkedIn } from '@mui/icons-material'
@@ -9,6 +17,7 @@ import { useFeature } from 'services/FeatureService'
 import { ReactNode } from 'react'
 import OSLogo from '../assets/darkThemeLogo.svg'
 import EmailFormContainer from './email-form/EmailFormContainer'
+import { useCookieConsent } from 'hooks/useCookieConsent'
 
 const SubText = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.contrastText,
@@ -49,7 +58,7 @@ const GridItem = ({ md, children }: GridItemProps) =>
   )
 
 const LinkSubItem = (props: { url: string; name: string }) => {
-  const theme = useTheme();
+  const theme = useTheme()
   return (
     <Link
       style={{
@@ -78,11 +87,30 @@ const LogoBox = () => {
 const AboutBox = () => {
   const { data: faq } = useFeature('faq')
   const { data: newsletter } = useFeature('newsletter')
+  const { reset } = useCookieConsent()
 
   return (
     <Box>
       <FooterItemTitle>About Us</FooterItemTitle>
       <LinkSubItem url="/privacy" name="Privacy Policy" />
+      <Typography
+        component="button"
+        className="link"
+        onClick={reset}
+        sx={{
+          background: 'none',
+          border: 0,
+          color: (theme) => theme.palette.primary.contrastText,
+          cursor: 'pointer',
+          fontFamily: 'inherit',
+          fontSize: '1rem',
+          marginTop: '1rem',
+          padding: 0,
+          textDecoration: 'none',
+        }}
+      >
+        Cookie settings
+      </Typography>
       {faq && <LinkSubItem url="/faq" name="FAQ" />}
       {newsletter && <LinkSubItem url="/newsletters" name="Newsletters" />}
     </Box>
@@ -114,7 +142,7 @@ const WorkWithUsBox = () => {
 
 const CopyrightBox = () => {
   const currentYear = new Date().getFullYear()
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Stack gap="1rem">
@@ -153,7 +181,7 @@ const SocialMediaBox = () => {
 }
 
 const linkedInLink = () => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Link
@@ -172,7 +200,7 @@ const linkedInLink = () => {
 }
 
 const githubLink = () => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Link
@@ -191,7 +219,7 @@ const githubLink = () => {
 }
 
 const facebookLink = () => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Link
@@ -210,7 +238,7 @@ const facebookLink = () => {
 }
 
 const instagramLink = () => {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <Link
