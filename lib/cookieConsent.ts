@@ -104,13 +104,17 @@ export const queueDeniedConsentUpdate = () => {
   queueConsent('update', 'denied')
 }
 
-// Cookie names and domains stay empty until the required Preview audit identifies
-// first-party Google cookies that this site is permitted to delete.
-const auditedGoogleCookieNames: string[] = []
+const GOOGLE_COOKIE_ALLOWLIST = [
+  { name: '_ga', domain: '.digitalaidseattle.org', path: '/' },
+  { name: '_ga_YZL6BVC5N9', domain: '.digitalaidseattle.org', path: '/' },
+  { name: '_gcl_au', domain: '.digitalaidseattle.org', path: '/' },
+] as const
 
 export const clearAuditedGoogleCookies = () => {
-  auditedGoogleCookieNames.forEach((name) => {
-    document.cookie = `${name}=; Max-Age=0; Path=/`
+  if (typeof document === 'undefined') return
+
+  GOOGLE_COOKIE_ALLOWLIST.forEach(({ name, domain, path }) => {
+    document.cookie = `${name}=; Domain=${domain}; Path=${path}; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
   })
 }
 

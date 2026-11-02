@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@mui/material'
 import { AppProps } from 'next/app'
 import { usePathname } from 'next/navigation'
-import { GoogleAnalytics } from '@next/third-parties/google'
 
 import { useEffect, useState } from 'react'
 import { theme } from 'theme/theme'
@@ -13,7 +12,6 @@ import { CookieConsentProvider, useCookieConsent } from 'hooks/useCookieConsent'
 import { CodaVentureService } from 'services/codaVentureService'
 import { eventsService } from '../services/EventsService'
 
-import { ConversionTracker } from 'components/ConversionTracker'
 import { CodaRoleService } from 'services/codaRoleService'
 import 'styles/global.css'
 import 'styles/preflight.css'

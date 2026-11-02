@@ -1,6 +1,35 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
-import { CONSENT_STORAGE_KEY, readStoredConsent } from './cookieConsent'
+import {
+  clearAuditedGoogleCookies,
+  CONSENT_STORAGE_KEY,
+  readStoredConsent,
+} from './cookieConsent'
+
+const cookieWrites: string[] = []
+
+afterEach(() => {
+  cookieWrites.length = 0
+  delete (document as unknown as Record<string, unknown>).cookie
+})
+
+describe('clearAuditedGoogleCookies', () => {
+  it('expires only the production-audited Google cookies with their exact domain and path', () => {
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      set: (value: string) => cookieWrites.push(value),
+    })
+
+    clearAuditedGoogleCookies()
+
+    expect(cookieWrites).toEqual([
+      '_ga=; Domain=.digitalaidseattle.org; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+      '_ga_YZL6BVC5N9=; Domain=.digitalaidseattle.org; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+      '_gcl_au=; Domain=.digitalaidseattle.org; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+    ])
+    expect(cookieWrites.join(';')).not.toContain('csrf_token')
+  })
+})
 
 describe('readStoredConsent', () => {
   it('restores a current accepted preference', () => {

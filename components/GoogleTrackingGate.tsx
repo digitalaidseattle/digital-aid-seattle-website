@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useCookieConsent } from 'hooks/useCookieConsent'
 import { ConversionTracker } from './ConversionTracker'
 
-// Keep false until Marketing has confirmed all deployed Google destinations and purposes.
 export const GOOGLE_TRACKING_ENABLED = true
 
 export const GoogleTrackingGate = ({
@@ -13,9 +12,10 @@ export const GoogleTrackingGate = ({
   trackingEnabled?: boolean
 }) => {
   const { consent, markTrackingTagLoaded } = useCookieConsent()
-  const gaId = process.env.NEXT_PUBLIC_GA_ID
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? ''
+
   const canLoadTracking =
-    trackingEnabled && consent === 'accepted' && Boolean(gaId)
+    trackingEnabled && consent === 'accepted' && Boolean(GA_ID)
 
   useEffect(() => {
     if (canLoadTracking) markTrackingTagLoaded()
@@ -25,7 +25,7 @@ export const GoogleTrackingGate = ({
 
   return (
     <>
-      <GoogleAnalytics gaId={gaId} />
+      <GoogleAnalytics gaId={GA_ID} />
       <ConversionTracker />
     </>
   )
