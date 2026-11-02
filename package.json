@@ -7,6 +7,8 @@
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "yarn run format && yarn run lint -- --fix",
     "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "type-check": "tsc --noEmit"
   },
   "prettier": {
@@ -41,6 +43,10 @@
     "styled-components": "^6.4.3"
   },
   "devDependencies": {
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
     "@types/react": "^18.3.12",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
@@ -49,9 +55,11 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^8.0.0",
+    "jsdom": "26.1.0",
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.5.22",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "3.2.4"
   },
   "engines": {
     "node": ">=20.11"

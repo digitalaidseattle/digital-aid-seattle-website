@@ -1,18 +1,22 @@
+import { ThemeProvider } from '@mui/material'
+import { AppProps } from 'next/app'
+import { usePathname } from 'next/navigation'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
-import { ThemeProvider } from '@mui/material';
-import { AppProps } from 'next/app';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react'
+import { theme } from 'theme/theme'
 
-import { useEffect, useState } from 'react';
-import { theme } from 'theme/theme';
+import { Seo } from 'components/seo'
+import { CookieConsentBanner } from 'components/CookieConsentBanner'
+import { GoogleTrackingGate } from 'components/GoogleTrackingGate'
+import { CookieConsentProvider, useCookieConsent } from 'hooks/useCookieConsent'
+import { CodaVentureService } from 'services/codaVentureService'
+import { eventsService } from '../services/EventsService'
 
-import { Seo } from 'components/seo';
-import { CodaVentureService } from 'services/codaVentureService';
-import { eventsService } from '../services/EventsService';
-
-import { CodaRoleService } from 'services/codaRoleService';
-import 'styles/global.css';
-import 'styles/preflight.css';
+import { ConversionTracker } from 'components/ConversionTracker'
+import { CodaRoleService } from 'services/codaRoleService'
+import 'styles/global.css'
+import 'styles/preflight.css'
 
 const DEFAULT_TAG =
   'Free tech solutions for Puget Sound nonprofits | Digital Aid Seattle'
@@ -26,21 +30,29 @@ const TAG_NAMES = {
   privacy: 'Privacy policy | Digital Aid Seattle',
   team: 'The Team | Digital Aid Seattle',
 }
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ''
+
+const ConsentFeatures = () => {
+  const { accept, consent, isInitialized, reject } = useCookieConsent()
+
+  if (!isInitialized || consent !== 'unknown') return null
+
+  return <CookieConsentBanner onAccept={accept} onReject={reject} />
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   const pathName = usePathname()
 
-  const ventureService = CodaVentureService.getInstance();
-  const roleService = CodaRoleService.getInstance();
+  const ventureService = CodaVentureService.getInstance()
+  const roleService = CodaRoleService.getInstance()
 
-  const [title, setTitle] = useState(DEFAULT_TAG);
+  const [title, setTitle] = useState(DEFAULT_TAG)
 
   useEffect(() => {
     const lookupTitle = async (pathName: string) => {
-      let pageName = null;
-      let path = [];
-      let id = null;
+      let pageName = null
+      let path = []
+      let id = null
       if (pathName) {
         path = pathName.split('/')
         pageName = path[path.length - 2]
@@ -48,7 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }
       switch (pageName) {
         case 'project':
-          const p = id ? await ventureService.getById(id) : null;
+          const p = id ? await ventureService.getById(id) : null
           return p ? p.title.concat(' | Digital Aid Seattle') : DEFAULT_TAG
         case 'volunteer':
           const r = await roleService.getRoleDetailsByName(id)
@@ -72,11 +84,15 @@ export default function App({ Component, pageProps }: AppProps) {
         description="Digital Aid Seattle partners with other nonprofits to amplify their impact and to uplift communities through the power of technology."
         canonical="https://www.digitalaidseattle.org"
       />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-        {/* <GoogleAnalytics gaId={GA_ID} />
-        <ConversionTracker /> */}
-      </ThemeProvider>
+      <CookieConsentProvider>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+          <ConsentFeatures />
+          <GoogleTrackingGate />
+          {/* <GoogleAnalytics gaId={GA_ID} />
+          <ConversionTracker /> */}
+        </ThemeProvider>
+      </CookieConsentProvider>
     </>
   )
 }
