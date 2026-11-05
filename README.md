@@ -85,7 +85,7 @@ The website is built using **Next.js**, a React-based framework for server-side 
    - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/digitalaidseattle/digital-aid-seattle-website) to approve staged changes to production.
    - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.digitalaidseattle.org/studio)
    - Superhuman: Must have access to the DAS Superhuman workspace in order to edit forms and the data shown on the site.
-3. Get issue from the [DAS Jira board](https://digital-aid-seattle.atlassian.net/jira/software/projects/DW/summary).
+3. Get issue from [DAS GitHub Projects](https://github.com/orgs/digitalaidseattle/projects).
 4. Create a branch with the following convention: username/feature-name
 
    ```bash
