@@ -19,9 +19,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "node_modules/@types/airtable"
-    ],
     "plugins": [
       {
         "name": "next"

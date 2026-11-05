@@ -26,7 +26,7 @@ This website is for organizations that want to [learn more about partnering with
 
 The website is built using **Next.js**, a React-based framework for server-side rendering and static site generation. Learn more about Next.js [here](https://nextjs.org/docs/getting-started).
 
-**Airtable** is integrated to create forms for volunteers and partners to sign up, providing a database for storing and managing their information. Explore Airtable's documentation [here](https://airtable.com/developers).
+**Superhuman** (formerly Coda) holds the volunteer roles, projects, partners and volunteers shown on the site, and hosts the volunteer and partner sign-up forms. See the API documentation [here](https://coda.io/developers/apis/v1).
 
 **Sanity.io** serves as the content management system (CMS), providing a flexible and customizable platform for team members to manage and publish content. Check out Sanity.io's documentation [here](https://www.sanity.io/docs).
 
@@ -34,7 +34,7 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 ## System Requirements
 
-1. [Node.js](https://nodejs.org/en/)
+1. [Node.js](https://nodejs.org/en/) 20.11 or newer (see .nvmrc)
 
 ## Local Environment Setup
 
@@ -55,30 +55,13 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 ### Configure Environmental Variables
 
-1. Create .env.local file:
+1. Copy the example file:
 
    ```bash
-   touch .env.local
+   cp .env.local.example .env.local
    ```
 
-2. Paste the following into this file and save:
-
-   ```.env
-   # Defaults, used by ./intro-template and can be deleted if the component is removed
-   NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER="sanity-io"
-   NEXT_PUBLIC_VERCEL_GIT_PROVIDER="github"
-   NEXT_PUBLIC_VERCEL_GIT_REPO_SLUG="template-nextjs-clean"
-
-   # Required, find them on https://manage.sanity.io
-   NEXT_PUBLIC_SANITY_PROJECT_ID=
-   NEXT_PUBLIC_SANITY_DATASET=
-
-   # see https://www.sanity.io/docs/api-versioning for how versioning works
-   NEXT_PUBLIC_SANITY_API_VERSION="2022-11-28"
-
-   # Required for making form requests.
-   AIRTABLE_API_KEY=
-   ```
+2. Fill in the values in .env.local and save. Ask the team for any keys you need.
 
 ### Run locally
 
@@ -92,7 +75,7 @@ The website is built using **Next.js**, a React-based framework for server-side 
 
 3. In order to work on Sanity components, request to be added to Sanity.io as an administrator, and then populate the respective fields in the .env.local file.
 
-4. In order to work on Airtable forms, request access to Airtable and create a personal access token
+4. In order to work on roles, projects, partners or volunteers, request access to the DAS Superhuman workspace and create an API token.
 
 ## Contributing
 
@@ -101,8 +84,8 @@ The website is built using **Next.js**, a React-based framework for server-side 
    - Github: Must be member of [Digital Aid Seattle Github Org](https://github.com/digitalaidseattle) in order to push changes to the repo.
    - Vercel: Must be a member of [Digital Aid Seattle Group on Vercel](https://vercel.com/digitalaidseattle/digital-aid-seattle-website) to approve staged changes to production.
    - Sanity.io: Must be added as administrator in order to edit content managed by Sanity.io [The Digital Aid Seattle Sanity Dashboard can be accessed here](https://www.digitalaidseattle.org/studio)
-   - Airtable: Must have shared access to the group Airtable account in order edit Airtable forms.
-3. Get issue from group Asana board.
+   - Superhuman: Must have access to the DAS Superhuman workspace in order to edit forms and the data shown on the site.
+3. Get issue from the [DAS Jira board](https://digital-aid-seattle.atlassian.net/jira/software/projects/DW/summary).
 4. Create a branch with the following convention: username/feature-name
 
    ```bash
@@ -125,10 +108,3 @@ The website is built using **Next.js**, a React-based framework for server-side 
    ```
 
 8. Create pull request and ask for review
-
-## Notes
-
-### Working With Airtable
-
-- [Airtable API Reference](https://airtable.com/developers/web/api/introduction)
-- For work with specific fields, see the [custom API guide for our workspace](https://airtable.com/apprZrgVYuYaUHuhk/api/docs#curl/introduction)
