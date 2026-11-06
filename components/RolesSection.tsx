@@ -41,7 +41,7 @@ import { Section, Subheader } from './style-utils'
 import { Check } from '@mui/icons-material'
 import Link from 'next/link'
 
-// TODO: standardize roles between sanity and coda
+// TODO: standardize roles between sanity and Superhuman (Coda)
 const rolesMap = {
   "account-manager": { role: 'account manager', icon: <AccountTreeOutlinedIcon />, },
   "accountant": { role: 'accountant', icon: <CalculateOutlinedIcon />, },
