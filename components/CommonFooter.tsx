@@ -263,7 +263,7 @@ const CommonFooterLargeScreen = () => {
       <Box
         sx={{
           paddingY: '5rem',
-          height: '28rem',
+          height: '30.5rem',
         }}
       >
         <Grid container spacing={4}>
