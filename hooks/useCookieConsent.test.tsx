@@ -10,6 +10,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { CONSENT_STORAGE_KEY } from 'lib/cookieConsent'
 import { CookieConsentProvider, useCookieConsent } from './useCookieConsent'
 
+let originalCookieDescriptor: PropertyDescriptor | undefined
+
 const Controls = () => {
   const {
     accept,
@@ -37,6 +39,12 @@ afterEach(() => {
   localStorage.clear()
   delete window.dataLayer
   delete window.__dasConsentDefaultsQueued
+  if (originalCookieDescriptor) {
+    Object.defineProperty(document, 'cookie', originalCookieDescriptor)
+  } else {
+    delete (document as unknown as Record<string, unknown>).cookie
+  }
+  originalCookieDescriptor = undefined
 })
 
 describe('CookieConsentProvider', () => {
@@ -85,6 +93,48 @@ describe('CookieConsentProvider', () => {
           Object.prototype.toString.call(entry) === '[object Arguments]'
       )
     ).toBe(true)
+  })
+
+  it('expires audited Google cookies when consent is rejected', async () => {
+    const cookieWrites: string[] = []
+    originalCookieDescriptor = Object.getOwnPropertyDescriptor(
+      document,
+      'cookie'
+    )
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+      set: (value: string) => cookieWrites.push(value),
+    })
+
+    render(
+      <CookieConsentProvider>
+        <Controls />
+      </CookieConsentProvider>
+    )
+
+    await screen.findByText('unknown')
+    fireEvent.click(screen.getByRole('button', { name: 'reject' }))
+
+    expect(screen.getByText('rejected')).toBeInTheDocument()
+    expect(cookieWrites).toHaveLength(3)
+    expect(cookieWrites.map((write) => write.split('=')[0])).toEqual([
+      '_ga',
+      '_ga_YZL6BVC5N9',
+      '_gcl_au',
+    ])
+    expect(cookieWrites).not.toEqual(
+      expect.arrayContaining([expect.stringMatching(/^csrf_token=/)])
+    )
+
+    cookieWrites.forEach((write) => {
+      expect(write).toContain('Domain=.digitalaidseattle.org')
+      expect(write).toContain('Path=/')
+      expect(write).toContain('Max-Age=0')
+
+      const expires = write.match(/Expires=([^;]+)/)?.[1]
+      expect(expires).toBeDefined()
+      expect(new Date(expires ?? '').getTime()).toBeLessThan(Date.now())
+    })
   })
 
   it('clears saved consent and returns to unknown on reset', async () => {

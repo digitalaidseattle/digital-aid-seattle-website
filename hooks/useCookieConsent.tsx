@@ -71,6 +71,7 @@ export const CookieConsentProvider = ({
     saveConsent('rejected')
     queueDeniedConsentDefaults()
     queueDeniedConsentUpdate()
+    clearAuditedGoogleCookies()
     setConsent('rejected')
   }
 
