@@ -67,12 +67,16 @@ export const CookieConsentBanner = ({
           </Typography>
         </Stack>
         <Stack
-          direction={{ xs: 'column', sm: 'row', md: 'row' }}
+          direction="column"
           gap={{ xs: '0.75rem', md: '1.25rem' }}
-          alignItems={{ xs: 'stretch', sm: 'center' }}
+          alignItems="stretch"
           sx={{
             mr: { md: '1rem' },
             transform: { md: 'translateY(6px)' },
+            '@media (min-width: 400px)': {
+              alignItems: 'center',
+              flexDirection: 'row',
+            },
           }}
         >
           <Button
